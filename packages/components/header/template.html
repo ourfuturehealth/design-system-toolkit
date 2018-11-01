@@ -1,23 +1,4 @@
-# Header
-
-Find out more about the header component and when to use it in the [NHS digital service manual](https://beta.nhs.uk/service-manual/).
-
-## Dependencies
-
-For this component to work, you need to make sure you include the required JavaScript. Include the 
-compiled JavaScript for all components `nhsuk.min.js` in your project.
-
-Also, if using the autosuggestion functionality that the NHS.UK site uses then the typeahead JavaScript is required, which has a dependency on jQuery which must also be included.
-
-## Examples
-
-### Header with navigation links and search form
-
-[Preview the header with navigation links and search form]()
-
-### HTML markup
-
-```html
+<!-- Header with navigation links and search form -->
 <header class="nhsuk-header" role="banner">
   <div class="nhsuk-width-container nhsuk-header__container">
 
@@ -112,49 +93,10 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
     </ul>
   </nav>
 </header>
-```
 
-### Nunjucks macro
 
-```
-{% from 'components/header/macro.njk' import header %}
 
-{{ header({
-    "showNav": "true",
-    "showSearch": "true",
-    "primaryLinks": [
-      {
-        "url"  : "https://www.nhs.uk/conditions",
-        "label" : "Health A-Z"
-      },
-      {
-        'url' : 'https://www.nhs.uk/live-well/',
-        'label' : 'Live Well'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/conditions/social-care-and-support/',
-        'label' : 'Care and support'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/news/',
-        'label' : 'Health news'
-      },
-      {
-        'url' : 'https://www.nhs.uk/service-search',
-        'label' : 'Services near you'
-      }
-    ]
-  })
-}}
-```
-
-### Header with navigation links
-
-[Preview the header with navigation links]()
-
-### HTML markup
-
-```html
+<!-- Header with navigation links -->
 <header class="nhsuk-header" role="banner">
   <div class="nhsuk-width-container nhsuk-header__container">
 
@@ -220,49 +162,10 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
     </ul>
   </nav>
 </header>
-```
 
-### Nunjucks macro
 
-```
-{% from 'components/header/macro.njk' import header %}
 
-{{ header({
-    "showNav": "true",
-    "showSearch": "false",
-    "primaryLinks": [
-      {
-        "url"  : "https://www.nhs.uk/conditions",
-        "label" : "Health A-Z"
-      },
-      {
-        'url' : 'https://www.nhs.uk/live-well/',
-        'label' : 'Live Well'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/conditions/social-care-and-support/',
-        'label' : 'Care and support'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/news/',
-        'label' : 'Health news'
-      },
-      {
-        'url' : 'https://www.nhs.uk/service-search',
-        'label' : 'Services near you'
-      }
-    ]
-  })
-}}
-```
-
-### Header with search form
-
-[Preview the header with search form]()
-
-### HTML markup
-
-```HTML
+<!-- Header with search form -->
 <header class="nhsuk-header" role="banner">
   <div class="nhsuk-width-container nhsuk-header__container">
 
@@ -287,7 +190,7 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
         <button class="nhsuk-header__search-toggle" aria-controls="search" aria-label="Open search">
           <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"></path>
-            Search
+            <image class="nhsuk-icon__search nhsuk-icon__search--fallback" src="/assets/icons/fallback/icon-search-blue.png" xlink:href=""></image>
           </svg>
           <span class="visually-hidden">Search</span>
         </button>
@@ -298,7 +201,7 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
             <button type="submit" class="nhsuk-search__submit">
               <svg class="nhsuk-icon nhsuk-icon__search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M19.71 18.29l-4.11-4.1a7 7 0 1 0-1.41 1.41l4.1 4.11a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 10a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"></path>
-                Search
+                <text aria-hidden="true">Search</text>
               </svg>
               <span class="visually-hidden">Search</span>
             </button>
@@ -314,49 +217,10 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
     </div>
   </div>
 </header>
-```
 
-### Nunjucks macro
 
-```
-{% from 'components/header/macro.njk' import header %}
 
-{{ header({
-    "showNav": "false",
-    "showSearch": "true",
-    "primaryLinks": [
-      {
-        "url"  : "https://www.nhs.uk/conditions",
-        "label" : "Health A-Z"
-      },
-      {
-        'url' : 'https://www.nhs.uk/live-well/',
-        'label' : 'Live Well'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/conditions/social-care-and-support/',
-        'label' : 'Care and support'
-      },
-      {
-        'url'  : 'https://www.nhs.uk/news/',
-        'label' : 'Health news'
-      },
-      {
-        'url' : 'https://www.nhs.uk/service-search',
-        'label' : 'Services near you'
-      }
-    ]
-  })
-}}
-```
-
-### Header with logo only
-
-[Preview the header with logo only]()
-
-### HTML markup
-
-```HTML
+<!--  Header with logo only -->
 <header class="nhsuk-header" role="banner">
   <div class="nhsuk-width-container nhsuk-header__container">
     <div class="nhsuk-header__logo">
@@ -372,37 +236,3 @@ Also, if using the autosuggestion functionality that the NHS.UK site uses then t
     </div>
   </div>
 </header>
-```
-
-### Nunjucks macro
-
-```
-{% from 'components/header/macro.njk' import header %}
-
-{{ header({
-  "showNav": "false",
-  "showSearch": "false",
-  "primaryLinks": [
-    {
-      "url"  : "https://www.nhs.uk/conditions",
-      "label" : "Health A-Z"
-    },
-    {
-      'url' : 'https://www.nhs.uk/live-well/',
-      'label' : 'Live Well'
-    },
-    {
-      'url'  : 'https://www.nhs.uk/conditions/social-care-and-support/',
-      'label' : 'Care and support'
-    },
-    {
-      'url'  : 'https://www.nhs.uk/news/',
-      'label' : 'Health news'
-    },
-    {
-      'url' : 'https://www.nhs.uk/service-search',
-      'label' : 'Services near you'
-    }
-  ]
-}) }}
-```
