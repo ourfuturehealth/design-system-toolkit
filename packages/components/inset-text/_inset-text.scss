@@ -17,7 +17,8 @@
   @include nhsuk-responsive-margin(7, 'top');
   @include nhsuk-responsive-padding(4);
 
-  border-left: $nhsuk-border-width-inset-text solid $color_nhsuk-blue;
+  background-color: $color_nhsuk-white;
+  border-left: $nhsuk-border-width-inset-text solid $color_ofh-blue;
 
   @include mq($media-type: print) {
     border-color: $nhsuk-print-text-color;

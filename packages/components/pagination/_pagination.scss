@@ -124,6 +124,7 @@
 
 .nhsuk-pagination__title {
   @include nhsuk-typography-responsive(24);
+  color: $color_nhsuk-dark-blue;
 
   display: block;
 

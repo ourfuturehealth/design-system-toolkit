@@ -138,6 +138,7 @@ h6,
   @include nhsuk-typography-responsive(24);
 
   display: block;
+  font-family: $serif-font;
   margin-top: 0;
 
   @include nhsuk-responsive-margin(5, 'bottom');
@@ -145,6 +146,7 @@ h6,
 
 .nhsuk-body-l {
   @extend %nhsuk-body-l;
+  line-height: 1.6;
 }
 
 %nhsuk-body-m {
