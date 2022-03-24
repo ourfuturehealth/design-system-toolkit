@@ -4,8 +4,8 @@
 
 .nhsuk-tag {
   @include nhsuk-font($size: 16, $weight: bold, $line-height: 1);
-  background-color: shade($color_nhsuk-blue, 10%);
-  border: 1px solid shade($color_nhsuk-blue, 10%);
+  background-color: shade($color_ofh_primary, 10%);
+  border: 1px solid shade($color_ofh_primary, 10%);
   color: $color_nhsuk-white;
   display: inline-block;
   outline: 2px solid transparent;
@@ -45,9 +45,9 @@
 }
 
 .nhsuk-tag--blue {
-  background-color: tint($color_nhsuk-blue, 80%);
-  border-color: shade($color_nhsuk-blue, 30%);
-  color: shade($color_nhsuk-blue, 30%);
+  background-color: tint($color_ofh_primary, 80%);
+  border-color: shade($color_ofh_primary, 30%);
+  color: shade($color_ofh_primary, 30%);
 }
 
 .nhsuk-tag--purple {

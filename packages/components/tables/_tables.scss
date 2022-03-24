@@ -56,7 +56,7 @@
 }
 
 .nhsuk-table__heading-tab {
-  @include heading-label($color_nhsuk-blue, $color_nhsuk-white);
+  @include heading-label($color_ofh_primary, $color_nhsuk-white);
 }
 
 /* Responsive table

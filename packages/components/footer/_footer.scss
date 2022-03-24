@@ -7,9 +7,18 @@
   @include print-hide();
   @include nhsuk-responsive-padding(5, bottom);
   @include nhsuk-responsive-padding(5, top);
+  @include nhsuk-font(14);
 
   background-color: $color_nhsuk-grey-4;
-  border-top: nhsuk-spacing(1) solid $color_nhsuk-blue;
+  border-top: nhsuk-spacing(1) solid $color_ofh_primary;
+}
+
+.footer-text {
+  float: left;
+  p {
+    @include nhsuk-font(16);
+    margin: 0;
+  }
 }
 
 .nhsuk-footer__list {
@@ -36,10 +45,10 @@
 }
 
 .nhsuk-footer__list-item-link {
-  color: $nhsuk-secondary-text-color;
+  color: $color_nhsuk-dark-blue;
 
   &:visited {
-    color: $nhsuk-secondary-text-color;
+    color: $color_nhsuk-dark-blue;
   }
 
   &:hover {
@@ -50,7 +59,7 @@
 .nhsuk-footer__copyright {
   @include nhsuk-font(16);
 
-  color: $nhsuk-secondary-text-color;
+  color: $color-nhsuk-black;
   margin-bottom: 0;
 
   @include mq($from: desktop) {
