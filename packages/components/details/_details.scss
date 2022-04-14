@@ -8,7 +8,7 @@
  * Original code taken from GDS (Government Digital Service)
  * https://github.com/alphagov/govuk-frontend
  *
- * 1. Style the summary to look like a link...
+ * 1. N/A
  * 2. Make the focus outline shrink-wrap the text content of the summary
  * 3. Absolutely position the marker against this element
  * 3. Allow for absolutely positioned marker and align with disclosed text
@@ -26,7 +26,6 @@
 }
 
 .nhsuk-details__summary {
-  color: $color_nhsuk-blue; /* [1] */
   cursor: pointer;
   display: inline-block; /* [2] */
   padding-left: nhsuk-spacing(4);
@@ -144,7 +143,7 @@ $expander-border-hover-color: $color_nhsuk-grey-3;
   }
 
   .nhsuk-details__summary-text {
-    color: $color_nhsuk-blue;
+    color: $color_ofh_primary;
     cursor: pointer;
     display: inline-block;
     padding: nhsuk-spacing(1) nhsuk-spacing(1) nhsuk-spacing(1) 38px;

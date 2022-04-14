@@ -166,7 +166,7 @@ nhsuk-u-[grid-size]
 
 ### Reading width
 
-Add a maximum width to large pieces of content, to improve readability. 
+Add a maximum width to large pieces of content, to improve readability.
 
 ```html
 <div class="nhsuk-u-reading-width">
@@ -282,7 +282,7 @@ large-desktop: 990px
 ### Primary
 
 ```scss
-$color_nhsuk-blue: #005eb8;
+$color_ofh_primary: #005eb8;
 $color_nhsuk-white: #ffffff;
 $color_nhsuk-black: #212b32;
 $color_nhsuk-green: #007f3b;

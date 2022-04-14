@@ -60,15 +60,15 @@ $button-shadow-size: 4px;
 
   &:focus {
     background: $nhsuk-focus-color;
-    box-shadow: 0 $button-shadow-size 0 $nhsuk-focus-text-color;
-    color: $nhsuk-focus-text-color;
+    box-shadow: 0 $button-shadow-size 0 $nhsuk-button-text-color;
+    color: $color_nhsuk-dark-blue;
     outline: $nhsuk-focus-width solid transparent;
 
     &:visited {
       color: $nhsuk-focus-text-color;
 
       &:active {
-        color: $color_nhsuk-white;
+        color: $color_nhsuk-dark-blue;
       }
 
     }
@@ -117,22 +117,24 @@ $button-shadow-size: 4px;
 .nhsuk-button--secondary {
   background-color: $nhsuk-secondary-button-color;
   box-shadow: 0 $button-shadow-size 0 $nhsuk-secondary-button-shadow-color;
+  color: $nhsuk-button-secondary-text-color;
 
   &:hover {
     background-color: darken($nhsuk-secondary-button-color, 10%);
+    color: $nhsuk-button-secondary-text-color;
   }
 
   &:focus {
     background: $nhsuk-focus-color;
     box-shadow: 0 $button-shadow-size 0 $nhsuk-focus-text-color;
-    color: $nhsuk-focus-text-color;
+    color: $color_nhsuk-dark-blue;
     outline: $nhsuk-focus-width solid transparent;
   }
 
   &:active {
     background: $nhsuk-secondary-button-active-color;
     box-shadow: none;
-    color: $nhsuk-button-text-color;
+    color: $nhsuk-button-secondary-text-color;
     top: $button-shadow-size;
   }
 
@@ -155,7 +157,7 @@ $button-shadow-size: 4px;
   &:focus {
     background: $nhsuk-focus-color;
     box-shadow: 0 $button-shadow-size 0 $nhsuk-focus-text-color;
-    color: $nhsuk-focus-text-color;
+    color: $nhsuk-button-secondary-text-color;
     outline: $nhsuk-focus-width solid transparent;
   }
 
@@ -170,12 +172,12 @@ $button-shadow-size: 4px;
     color: $nhsuk-reverse-button-text-color;
 
     &:active {
-      color: $color_nhsuk-white;
+      color: $nhsuk-button-text-color;
     }
   }
 
   &.nhsuk-button--disabled {
-    background-color: $nhsuk-reverse-button-color;
+    background-color: $color_ofh_primary;
 
     &:focus {
       background-color: $nhsuk-reverse-button-color;

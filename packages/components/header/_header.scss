@@ -23,33 +23,43 @@
  * 4. Remove inner border on buttons for Firefox, see
  *    https://github.com/necolas/normalize.css/issues/393
  * 5. Proprietary extension so form field looks the same in Safari
- * 6. Custom margin to move menu toggle past the search toggle button
+ * 6. N/A
  * 7. Custom border value between expanded search and expanded menu if both open at the same time
  * 8. Don't display the link address for the logo anchor, see
  *     core/elements/_links.scss
  * 9. Use non variable colour to follow NHS England guidelines on logo colour
- * 10. Remove random top margin in Safari
+ * 10. N/A
  * 11. Align close icon with nav item arrow icons
  * 12. Add nhsuk-spacing(9) to align right and left main nav with header
  */
 
 .nhsuk-header {
   @include clearfix();
-  background-color: $color_nhsuk-blue;
+  background-color: $color_ofh_primary;
 }
 
 .nhsuk-header__container {
   @include clearfix();
-  padding: 20px 0;
+  height: 120px;
+  padding: 0;
+  position: relative;
 
-  @include mq($until: tablet) {
-    margin: 0;
-    padding: nhsuk-spacing(3);
+  @include mq($until: large-desktop) {
+    height: 80px;
+    margin-left: 0;
+    margin-right: nhsuk-spacing(5);
+  }
+
+  .nhsuk-grid-row {
+    margin-top: 20px;
+    position: absolute;
+    right: 0%;
   }
 }
 
 .nhsuk-header__logo {
   float: left;
+  height: 100%;
 
   @include mq($until: tablet) {
     position: relative;
@@ -60,12 +70,12 @@
     fill: $color_nhsuk-white;
 
     @include mq($media-type: print) {
-      fill: $color_nhsuk-blue;
+      fill: $color_ofh_primary;
     }
   }
 
   .nhsuk-logo__text {
-    fill: $color_nhsuk-blue;
+    fill: $color_ofh_primary;
 
     @include mq($media-type: print) {
       fill: $color_nhsuk-white;
@@ -403,22 +413,24 @@
 .nhsuk-header__menu-toggle {
   @include toggle-button();
 
+  border-color: $color_nhsuk-dark-blue;
+  color: $color_nhsuk-dark-blue;
   display: block;
   font-size: 16px;
   font-weight: 400;
   line-height: $nhsuk-base-line-height;
-  margin-right: 0; /* [6] */
+  margin-right: -16px;
   padding: 7px nhsuk-spacing(3);
   position: relative;
   text-decoration: none;
   z-index: 1;
 
   @include mq($until: tablet) {
-    right: 48px;
+    margin-top: 20px;
   }
 
   @include mq($from: tablet, $until: large-desktop) {
-    margin-top: 0; /* [10] */
+    margin-top: 20px;
   }
 
   @include mq($from: large-desktop) {
@@ -451,6 +463,8 @@
   background-color: $color_nhsuk-white;
   clear: both;
   display: none;
+  max-width: none;
+  min-height: 52px;
   overflow: hidden;
 
   &.js-show {
@@ -459,6 +473,7 @@
     @include mq($until: large-desktop) {
       border-bottom: nhsuk-spacing(1) solid $color_nhsuk-grey-5; /* [7] */
       border-top: nhsuk-spacing(1) solid $color_nhsuk-grey-5; /* [7] */
+      color: $color_nhsuk-dark-blue;
 
       .nhsuk-width-container {
         margin: 0 nhsuk-spacing(3);
@@ -473,7 +488,7 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $color_nhsuk-blue;
+    background-color: $color_nhsuk-dark-blue;
     display: block;
     margin: 0 auto;
     max-width: $nhsuk-page-width + nhsuk-spacing(9); /* [12] */
@@ -540,7 +555,7 @@
   @include nhsuk-font(16);
   border-bottom: nhsuk-spacing(1) solid transparent;
   border-top: nhsuk-spacing(1) solid transparent;
-  color: $color_nhsuk-blue;
+  color: $color_nhsuk-dark-blue;
   display: block;
   padding: 12px nhsuk-spacing(3);
   text-decoration: none;
@@ -558,7 +573,7 @@
   }
 
   &:visited {
-    color: $color_nhsuk-blue;
+    color: $color_nhsuk-dark-blue;
 
     @include mq($from: large-desktop) {
       color: $color_nhsuk-white;
@@ -567,7 +582,7 @@
 
   &:hover {
     box-shadow: none;
-    color: $color_nhsuk-blue;
+    color: $color_nhsuk-dark-blue;
     text-decoration: underline;
 
     @include mq($from: large-desktop) {
@@ -575,7 +590,7 @@
     }
 
     .nhsuk-icon__chevron-right {
-      fill: $color_nhsuk-blue;
+      fill: $color_ofh_primary;
     }
 
   }
@@ -591,7 +606,6 @@
     text-decoration: none;
 
     &:hover {
-      background-color: $nhsuk-focus-color;
       color: $nhsuk-focus-text-color;
 
       .nhsuk-icon__chevron-right {
@@ -600,7 +614,6 @@
     }
 
     &:visited {
-      background-color: $nhsuk-focus-color;
       color: $nhsuk-focus-text-color;
     }
   }
@@ -663,7 +676,7 @@
 }
 
 .nhsuk-header__link--service {
-  height: auto;
+  height: 100%;
   margin-bottom: -(nhsuk-spacing(1));
   text-decoration: none;
   width: auto;
@@ -700,6 +713,10 @@
 
   }
 
+}
+
+.nhsuk-header__link--service > * {
+  height: 100%;
 }
 
 .nhsuk-header__service-name {
@@ -746,7 +763,7 @@
 .nhsuk-header--organisation {
 
   .nhsuk-header__link {
-    height: auto;
+    height: 100%;
     text-decoration: none;
     width: auto;
 
@@ -794,7 +811,7 @@
   }
 
   .nhsuk-header__navigation {
-    max-width: 100%;
+    max-width: none;
   }
 
 }
@@ -837,7 +854,7 @@
   line-height: 21px;
 
   @include mq($media-type: print) {
-    color: $color_nhsuk-blue;
+    color: $color_ofh_primary;
   }
 
   @media (max-width: 450px) {
@@ -852,19 +869,7 @@
 }
 
 .nhsuk-org-logo {
-  border: 0;
-  max-height: 100px;
-  max-width: 280px;
-
-  @media (max-width: 450px) {
-    max-width: 150px;
-  }
-}
-
-.nhsuk-org-logo[src $= '.svg'] {
-  height: auto;
-  max-width: 220px;
-  width: 100%;
+  height: 100%;
 }
 
 // Header (white)
@@ -874,7 +879,7 @@
 
   .nhsuk-logo {
     .nhsuk-logo__background {
-      fill: $color_nhsuk-blue;
+      fill: $color_ofh_primary;
     }
 
     .nhsuk-logo__text {
@@ -896,7 +901,7 @@
   }
 
   .nhsuk-search__submit {
-    background-color: $color_nhsuk-blue;
+    background-color: $color_ofh_primary;
 
     .nhsuk-icon__search {
       fill: $color_nhsuk-white;
@@ -930,20 +935,22 @@
 
   .nhsuk-header__search-toggle,
   .nhsuk-header__menu-toggle {
-    border-color: $color_nhsuk-blue;
-    color: $color_nhsuk-blue;
+    border-color: $color_nhsuk-dark-blue;
+    color: $color_nhsuk-dark-blue;
 
     .nhsuk-icon {
-      fill: $color_nhsuk-blue;
+      fill: $color_ofh_primary;
     }
 
     &.is-active,
     &:hover {
-      border-color: $color_shade_nhsuk-blue-20;
-      color: $color_nhsuk-white;
+      background-color: $color_ofh_primary;
+      border-color: $color_nhsuk-dark-blue;
+      box-shadow: none;
+      color: $color_nhsuk-dark-blue;
 
       .nhsuk-icon {
-        fill: $color_nhsuk-white;
+        fill: $color_nhsuk-dark-blue;
       }
     }
 
@@ -967,7 +974,7 @@
   }
 
   .nhsuk-organisation-descriptor {
-    color: $color_nhsuk-blue;
+    color: $color_ofh_primary;
   }
 
   .nhsuk-header__transactional-service-name--link {
@@ -995,10 +1002,10 @@
     }
 
     .nhsuk-header__navigation-link {
-      color: $color_nhsuk-blue;
+      color: $color_ofh_primary;
 
       &:visited {
-        color: $color_nhsuk-blue;
+        color: $color_ofh_primary;
       }
 
       &:focus {

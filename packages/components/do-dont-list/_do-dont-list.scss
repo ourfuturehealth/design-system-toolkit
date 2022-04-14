@@ -15,6 +15,6 @@
 }
 
 .nhsuk-do-dont-list__label {
-  @include heading-label($color_nhsuk-blue, $color_nhsuk-white); /* [2] */
-  @include print-color($nhsuk-print-text-color);
+  @include heading-label($color_ofh_primary, $color_nhsuk-white); /* [2] */
+  @include print-color($color_nhsuk-dark-blue);
 }
