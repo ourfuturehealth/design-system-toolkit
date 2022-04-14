@@ -13,7 +13,7 @@
 .nhsuk-hero {
   @include print-color($nhsuk-print-text-color);
 
-  background-color: $color_nhsuk-blue;
+  background-color: $color_ofh_primary;
   color: $color_nhsuk-white;
   position: relative; /* [1] */
 
@@ -92,7 +92,7 @@
 .nhsuk-hero--image-description {
 
   .nhsuk-hero-content {
-    background-color: $color_nhsuk-blue;
+    background-color: $color_ofh_primary;
     color: $color_nhsuk-white;
     margin-bottom: 24px;
     padding: nhsuk-spacing(4);
@@ -116,7 +116,7 @@
 
       &:before,
       &:after {
-        border: solid 32px $color_nhsuk-blue; /* [8] */
+        border: solid 32px $color_ofh_primary; /* [8] */
         content: '';
         display: block;
         height: 0;

@@ -149,7 +149,7 @@ $card-border-hover-color: $color_nhsuk-grey-3;
 }
 
 .nhsuk-card__heading--feature {
-  background: $color_nhsuk-blue;
+  background: $color_ofh_primary;
   color: $color_nhsuk-white;
   display: inline-block;
   left: - (nhsuk-spacing(4) + $card-border-width); /* [5] */
@@ -177,7 +177,7 @@ $card-border-hover-color: $color_nhsuk-grey-3;
 
 .nhsuk-card--care {
   @include nhsuk-responsive-margin(7, 'top');
-  @include care-card($color_nhsuk-blue, $color_nhsuk-white, 4px); /* [8] */
+  @include care-card($color_ofh-blue, $color_nhsuk-white, 4px); /* [8] */
 }
 
 .nhsuk-card--care__heading-container {
@@ -214,7 +214,7 @@ $card-border-hover-color: $color_nhsuk-grey-3;
 
   &:before,
   &:after {
-    border: solid 32px $color_nhsuk-blue; /* [9] */
+    border: solid 32px $color_ofh-blue; /* [9] */
     content: '';
     display: block;
     height: 0;

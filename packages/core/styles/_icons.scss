@@ -12,19 +12,19 @@
 // Default icon colours
 
 .nhsuk-icon__search {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 .nhsuk-icon__chevron-left {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 .nhsuk-icon__chevron-right {
-  fill: $color_nhsuk-blue;
+  fill: $color_nhsuk-dark-blue;
 }
 
 .nhsuk-icon__close {
-  fill: $color_nhsuk-blue;
+  fill: $color_nhsuk-dark-blue;;
 }
 
 .nhsuk-icon__cross {
@@ -36,11 +36,11 @@
 }
 
 .nhsuk-icon__arrow-right {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 .nhsuk-icon__arrow-left {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 .nhsuk-icon__arrow-right-circle {
@@ -48,7 +48,7 @@
 }
 
 .nhsuk-icon__chevron-down {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
@@ -60,7 +60,7 @@
 }
 
 .nhsuk-icon__chevron-up {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
   path {
     fill: $color_nhsuk-white;
   }
@@ -73,11 +73,11 @@
 }
 
 .nhsuk-icon__plus {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 .nhsuk-icon__minus {
-  fill: $color_nhsuk-blue;
+  fill: $color_ofh_primary;
 }
 
 // Icon size adjustments

@@ -21,7 +21,7 @@
   @include nhsuk-font(22);
 
   display: inline-block; /* [1] */
-  font-weight: $nhsuk-font-bold;
+  font-weight: $nhsuk-font-very-bold;
   padding-left: 38px; /* [2] */
   position: relative; /* [3] */
   text-decoration: none; /* [4] */
@@ -59,7 +59,7 @@
   .nhsuk-icon__arrow-right-circle {
     @include print-color($nhsuk-print-text-color);
 
-    fill: $color_nhsuk-green;
+    fill: $color_ofh_primary;
     height: 36px;
     left: -3px;
     position: absolute;
