@@ -6,7 +6,7 @@ Find out more about the hint component and when to use it in the [NHS digital se
 
 ## Quick start example
 
-[Preview the hint component](https://nhsuk.github.io/nhsuk-frontend/components/hint/index.html)
+[Preview the hint component](https://ourfuturehealth.github.io/design-system-toolkit/components/hint/index.html)
 
 ### HTML markup
 

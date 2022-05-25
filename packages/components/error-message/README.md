@@ -5,13 +5,13 @@ Find out more about the error message component and when to use it in the [NHS d
 
 ## Quick start example
 
-[Preview the error message component](https://nhsuk.github.io/nhsuk-frontend/components/error-message/index.html)
+[Preview the error message component](https://ourfuturehealth.github.io/design-system-toolkit/components/error-message/index.html)
 
 ### HTML markup
 
 ```html
 <span class="nhsuk-error-message">
-  <span class="nhsuk-u-visually-hidden">Error:</span> 
+  <span class="nhsuk-u-visually-hidden">Error:</span>
   Error message about full name goes here
 </span>
 ```

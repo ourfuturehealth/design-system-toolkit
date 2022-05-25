@@ -8,7 +8,7 @@ Find out more about the footer component and when to use it in the [NHS digital 
 
 ### Footer
 
-[Preview the footer component](https://nhsuk.github.io/nhsuk-frontend/components/footer/index.html)
+[Preview the footer component](https://ourfuturehealth.github.io/design-system-toolkit/components/footer/index.html)
 
 #### HTML markup
 

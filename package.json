@@ -1,7 +1,7 @@
 {
-  "name": "nhsuk-frontend",
+  "name": "ofh-design-system-toolkit",
   "version": "6.1.0",
-  "description": "NHS.UK frontend contains the code you need to start building user interfaces for NHS websites and services.",
+  "description": "OFH design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "scripts": {
     "prepare": "gulp bundle",
     "build": "gulp build",
@@ -69,11 +69,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nhsuk/nhsuk-frontend.git"
+    "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git"
   },
-  "homepage": "https://nhsuk.github.io/nhsuk-frontend/",
-  "bugs": {
-    "url": "https://github.com/nhsuk/nhsuk-frontend/issues"
-  },
+  "homepage": "https://ourfuturehealth.github.io/design-system-toolkit/",
   "license": "MIT"
 }
