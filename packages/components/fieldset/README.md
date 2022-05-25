@@ -8,7 +8,7 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 
 ### Fieldset
 
-[Preview the fieldset component](https://nhsuk.github.io/nhsuk-frontend/components/fieldset/index.html)
+[Preview the fieldset component](https://ourfuturehealth.github.io/design-system-toolkit/components/fieldset/index.html)
 
 #### HTML markup
 
@@ -36,7 +36,7 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 
 ### Fieldset as page heading
 
-[Preview the fieldset as page heading component](https://nhsuk.github.io/nhsuk-frontend/components/fieldset/page-heading.html)
+[Preview the fieldset as page heading component](https://ourfuturehealth.github.io/design-system-toolkit/components/fieldset/page-heading.html)
 
 #### HTML markup
 
@@ -68,7 +68,7 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 
 ### Fieldset with input fields
 
-[Preview the fieldset component with input fields](https://nhsuk.github.io/nhsuk-frontend/components/fieldset/with-inputs.html)
+[Preview the fieldset component with input fields](https://ourfuturehealth.github.io/design-system-toolkit/components/fieldset/with-inputs.html)
 
 
 #### HTML markup

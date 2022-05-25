@@ -4,7 +4,7 @@
 
 ### Hero with heading and content
 
-[Preview the hero with heading and content component](https://nhsuk.github.io/nhsuk-frontend/components/hero/index.html)
+[Preview the hero with heading and content component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/index.html)
 
 #### HTML markup
 
@@ -38,7 +38,7 @@
 
 ### Hero with image, heading and content
 
-[Preview the hero with image, heading and content component](https://nhsuk.github.io/nhsuk-frontend/components/hero/hero-image-content.html)
+[Preview the hero with image, heading and content component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/hero-image-content.html)
 
 #### HTML markup
 
@@ -76,7 +76,7 @@
 
 ### Hero with image only
 
-[Preview the hero with image only component](https://nhsuk.github.io/nhsuk-frontend/components/hero/hero-image.html)
+[Preview the hero with image only component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/hero-image.html)
 
 #### HTML markup
 

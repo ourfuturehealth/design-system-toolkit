@@ -12,7 +12,7 @@ For this component to be accessible and compatible with older browsers, include 
 
 ### Details
 
-[Preview the details component](https://nhsuk.github.io/nhsuk-frontend/components/details/index.html)
+[Preview the details component](https://ourfuturehealth.github.io/design-system-toolkit/components/details/index.html)
 
 #### HTML markup
 
@@ -64,7 +64,7 @@ For this component to be accessible and compatible with older browsers, include 
 
 ### Expander
 
-[Preview the expander component](https://nhsuk.github.io/nhsuk-frontend/components/details/expander.html)
+[Preview the expander component](https://ourfuturehealth.github.io/design-system-toolkit/components/details/expander.html)
 
 #### Guidance
 
@@ -172,7 +172,7 @@ Find out more about the expander component and when to use it in the [NHS digita
 
 ### Expander group
 
-[Preview the expander group component](https://nhsuk.github.io/nhsuk-frontend/components/details/expander-group.html)
+[Preview the expander group component](https://ourfuturehealth.github.io/design-system-toolkit/components/details/expander-group.html)
 
 #### HTML markup
 

@@ -6,7 +6,7 @@ Find out more about the inset text component and when to use it in the [NHS digi
 
 ## Quick start example
 
-[Preview the inset text component](https://nhsuk.github.io/nhsuk-frontend/components/inset-text/index.html)
+[Preview the inset text component](https://ourfuturehealth.github.io/design-system-toolkit/components/inset-text/index.html)
 
 ### HTML markup
 

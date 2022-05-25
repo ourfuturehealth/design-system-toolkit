@@ -1,6 +1,6 @@
 # Installing using compiled files
 
-When installing NHS.UK frontend using compiled files, you are using compiled and minified versions of the stylesheet and JavaScript.
+When installing OFH design system toolkit using compiled files, you are using compiled and minified versions of the stylesheet and JavaScript.
 
 This means that you will not be able to:
 
@@ -14,7 +14,7 @@ If you require any of this functionality, you should [install using npm](/docs/i
 
 1. Download the compiled files
 
-    [Download the latest CSS, JavaScript and assets from GitHub (zip file)](https://github.com/nhsuk/nhsuk-frontend/releases)
+    [Download the latest CSS, JavaScript and assets from GitHub (zip file)](https://github.com/ourfuturehealth/design-system-toolkit/releases)
 
 2. Include resources
 
@@ -52,6 +52,6 @@ If you require any of this functionality, you should [install using npm](/docs/i
       <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
       ```
 
-  4. Create pages using NHS.UK frontend
+  4. Create pages using OFH design system toolkit
 
       You can now create pages using the [Design system on the NHS digital service manual](https://service-manual.nhs.uk/design-system).

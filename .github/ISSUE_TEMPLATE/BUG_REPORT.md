@@ -17,7 +17,7 @@ Use the following headings as a guide.
 ## What is the issue?
 
 <!-- Provide a detailed description of what the issue is, including what you
-expected to happen as well as what actually happened. 
+expected to happen as well as what actually happened.
 -->
 
 ## What steps are required to reproduce the issue?
@@ -36,7 +36,7 @@ Include the following as a minimum e.g.
 * Browser: Google Chrome
 * Browser version: 59.0.3071.109
 *
-* NHS.UK frontend package version: 1.0.0
+* OFH design system toolkit package version: 1.0.0
 * Node version: v10.15.0
 * npm version: 6.5.0
 -->
@@ -45,7 +45,7 @@ Include the following as a minimum e.g.
 * Operating System:
 * Browser:
 * Browser version:
-* NHS.UK frontend package version:
+* OFH design system toolkit package version:
 * Node version:
 * npm version:
 

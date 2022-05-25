@@ -8,7 +8,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 ### Button
 
-[Preview the button component](https://nhsuk.github.io/nhsuk-frontend/components/button/index.html)
+[Preview the button component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/index.html)
 
 #### HTML markup
 
@@ -32,7 +32,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 ### Button as a link
 
-[Preview the button as a link component](https://nhsuk.github.io/nhsuk-frontend/components/button/link.html)
+[Preview the button as a link component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/link.html)
 
 #### HTML markup
 
@@ -57,7 +57,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 ### Button disabled
 
-[Preview the button disabled component](https://nhsuk.github.io/nhsuk-frontend/components/button/disabled.html)
+[Preview the button disabled component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/disabled.html)
 
 #### HTML markup
 
@@ -82,7 +82,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 ### Button secondary
 
-[Preview the button secondary component](https://nhsuk.github.io/nhsuk-frontend/components/button/secondary.html)
+[Preview the button secondary component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/secondary.html)
 
 #### HTML markup
 
@@ -107,7 +107,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 ### Button reverse
 
-[Preview the button reverse component](https://nhsuk.github.io/nhsuk-frontend/components/button/reverse.html)
+[Preview the button reverse component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/reverse.html)
 
 #### HTML markup
 

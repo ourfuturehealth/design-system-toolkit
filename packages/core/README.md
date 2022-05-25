@@ -1,6 +1,6 @@
 # Core
 
-Core contains all the building blocks (page layout and the responsive grid) and fundamental styles (such as colours and typography) needed for NHS websites and services. These styles are required for all of the components to work.
+Core contains all the building blocks (page layout and the responsive grid) and fundamental styles (such as colours and typography) needed for Our Future Health websites and services. These styles are required for all of the components to work.
 
 Core also is the home of powerful `sass` features such as variables, mixins, functions and maps.
 
