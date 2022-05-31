@@ -4,7 +4,7 @@
 
 ### Summary list
 
-[Preview the summary list component](https://nhsuk.github.io/nhsuk-frontend/components/summary-list/index.html)
+[Preview the summary list component](https://ourfuturehealth.github.io/design-system-toolkit/components/summary-list/index.html)
 
 #### HTML markup
 
@@ -155,7 +155,7 @@
 
 ### Summary list without actions
 
-[Preview the summary list without actions component](https://nhsuk.github.io/nhsuk-frontend/components/summary-list/without-actions.html)
+[Preview the summary list without actions component](https://ourfuturehealth.github.io/design-system-toolkit/components/summary-list/without-actions.html)
 
 #### HTML markup
 
@@ -246,7 +246,7 @@
 
 ### Summary list without border
 
-[Preview the summary list without border component](https://nhsuk.github.io/nhsuk-frontend/components/summary-list/without-border.html)
+[Preview the summary list without border component](https://ourfuturehealth.github.io/design-system-toolkit/components/summary-list/without-border.html)
 
 #### HTML markup
 

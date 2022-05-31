@@ -6,7 +6,7 @@ Find out more about the action link component and when to use it in the [NHS dig
 
 ## Quick start example
 
-[Preview the action link component](https://nhsuk.github.io/nhsuk-frontend/components/action-link/index.html)
+[Preview the action link component](https://ourfuturehealth.github.io/design-system-toolkit/components/action-link/index.html)
 
 ### HTML markup
 

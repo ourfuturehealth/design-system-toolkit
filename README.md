@@ -1,20 +1,20 @@
-# NHS.UK frontend
+# OFH design system toolkit
 
-NHS.UK frontend contains the code you need to start building user interfaces for NHS websites and services.
+OFH design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.
 
 ## Guidance
 
-Visit the [NHS digital service manual](https://service-manual.nhs.uk/) for examples of components and guidance for when to use them. If we haven’t yet published guidance on the component you want, please [email us](mailto:service-manual@nhs.net) or get in touch on the [NHS digital service manual Slack workspace](https://join.slack.com/t/nhs-service-manual/shared_invite/enQtNTIyOTEyNjU3NDkyLTk4NDQ3YzkwYzk1Njk5YjAxYTI5YTVkZmUxMGQ0ZjA3NjMyM2ZkNjBlMWMxODVjZjYzNzg1ZmU4MWY1NmE2YzE).
+Visit the [NHS digital service manual](https://service-manual.nhs.uk/) for examples of components and guidance for when to use them.
 
-## How to install NHS.UK frontend
+## How to install OFH design system toolkit
 
 ### 1. Install with package managers
 
-We recommend that you [install NHS.UK frontend using node package manager (npm)](/docs/installation/installing-with-npm.md).
+We recommend that you [install OFH design system toolkit using node package manager (npm)](/docs/installation/installing-with-npm.md).
 
 ### 2. Install by using compiled files
 
-You can also [install NHS.UK frontend using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
+You can also [install OFH design system toolkit using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
 
 ## Browsers and assistive technology
 
@@ -22,15 +22,11 @@ Visit our [support for browsers and assistive technology](/docs/contributing/bro
 
 ## Contribute
 
-Read our [contributing guidelines](CONTRIBUTING.md) to contribute to NHS.UK frontend.
+Read our [contributing guidelines](CONTRIBUTING.md) to contribute to OFH design system toolkit.
 
 ## Development environment
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/nhsuk/nhsuk-frontend)
-
-## Get in touch
-
-NHS.UK frontend is maintained by NHS Digital. [Email us](mailto:service-manual@nhs.net), open a [GitHub issue](https://github.com/nhsuk/nhsuk-frontend/issues/new) or get in touch on the [NHS digital service manual Slack workspace](https://join.slack.com/t/nhs-service-manual/shared_invite/enQtNTIyOTEyNjU3NDkyLTk4NDQ3YzkwYzk1Njk5YjAxYTI5YTVkZmUxMGQ0ZjA3NjMyM2ZkNjBlMWMxODVjZjYzNzg1ZmU4MWY1NmE2YzE).
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ourfuturehealth/design-system-toolkit)
 
 ## Licence
 

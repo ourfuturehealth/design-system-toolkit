@@ -138,7 +138,7 @@ function cssFolder() {
 
 function createZip() {
   return gulp.src(['dist/css/*.min.css', 'dist/js/*.min.js', 'dist/assets/**', '!dist/js/nhsuk.min.js'], { base: 'dist' })
-    .pipe(zip(`nhsuk-frontend-${version}.zip`))
+    .pipe(zip(`ofh-design-system-toolkit-${version}.zip`))
     .pipe(gulp.dest('dist'));
 }
 

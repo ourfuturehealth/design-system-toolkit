@@ -6,7 +6,7 @@ Find out more about the back link component and when to use it in the [NHS digit
 
 ## Quick start example
 
-[Preview the back link component](https://nhsuk.github.io/nhsuk-frontend/components/back-link/index.html)
+[Preview the back link component](https://ourfuturehealth.github.io/design-system-toolkit/components/back-link/index.html)
 
 ### HTML markup
 

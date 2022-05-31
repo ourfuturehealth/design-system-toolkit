@@ -8,7 +8,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes
 
-[Preview the checkboxes component](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/index.html)
+[Preview the checkboxes component](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/index.html)
 
 #### HTML markup
 
@@ -82,7 +82,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with hint text
 
-[Preview the checkboxes with hint text component](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/hint.html)
+[Preview the checkboxes with hint text component](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/hint.html)
 
 #### HTML markup
 
@@ -157,7 +157,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with disabled item
 
-[Preview the checkboxes with disabled item component](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/disabled.html)
+[Preview the checkboxes with disabled item component](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/disabled.html)
 
 #### HTML markup
 
@@ -215,7 +215,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with legend as page heading
 
-[Preview the checkboxes with legend as page heading component](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/page-heading.html)
+[Preview the checkboxes with legend as page heading component](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/page-heading.html)
 
 #### HTML markup
 
@@ -292,7 +292,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with error message
 
-[Preview the checkboxes with error message component](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/error.html)
+[Preview the checkboxes with error message component](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/error.html)
 
 #### HTML markup
 
@@ -365,7 +365,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with conditional content
 
-[Preview the checkboxes with conditional content](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/conditional.html)
+[Preview the checkboxes with conditional content](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/conditional.html)
 
 #### HTML markup
 
@@ -386,7 +386,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
         <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-1">
           Email
         </label>
-      </div>  
+      </div>
       <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-1">
         <div class="nhsuk-form-group">
           <label class="nhsuk-label" for="email">
@@ -466,7 +466,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
     }
   }) }}
 {% endset -%}
-  
+
 {{ checkboxes({
   "idPrefix": "contact",
   "name": "contact",
@@ -510,7 +510,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 
 ### Checkboxes with "none of the above" option
 
-[Preview the checkboxes with "none of the above" option](https://nhsuk.github.io/nhsuk-frontend/components/checkboxes/none-of-the-above.html)
+[Preview the checkboxes with "none of the above" option](https://ourfuturehealth.github.io/design-system-toolkit/components/checkboxes/none-of-the-above.html)
 
 #### HTML markup
 
@@ -614,7 +614,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
     }
   }) }}
 {% endset -%}
-  
+
 {{ checkboxes({
   "idPrefix": "contact",
   "name": "contact",
@@ -678,9 +678,9 @@ The checkboxes Nunjucks macro takes the following arguments:
 
 | Name                      | Type     | Required  | Description             |
 | --------------------------|----------|-----------|-------------------------|
-| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/fieldset) component. |
-| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/hint) component. |
-| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/error-message) component. |
+| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/fieldset) component. |
+| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
+| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/error-message) component. |
 | **idPrefix**        | string   | No        | String to prefix id for each checkbox item if no id is specified on each item. If`idPrefix` is not passed, fallback to using the name attribute instead. |
 | **name**            | string	 | Yes       | Name attribute for each checkbox item. |
 | **items**           | array    | Yes       | Array of checkbox items objects. |
@@ -688,7 +688,7 @@ The checkboxes Nunjucks macro takes the following arguments:
 | **items[].id**     | string  | No        | Specific id attribute for the checkbox item. If omitted, then `idPrefix` string will be applied.|
 | **items[].name**   | string  | Yes        | Specific name for the checkbox item. If omitted, then component global `name` string will be applied. |
 | **items[].value**  | string   | Yes        | Value for the checkbox input. |
-| **items[].hint**   | object   | No        | Provide optional hint to each checkbox item. See [hint](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/hint) component. |
+| **items[].hint**   | object   | No        | Provide optional hint to each checkbox item. See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
 | **items[].divider** | string   | No        | Optional divider text to separate checkbox items, for example the text "or". |
 | **items[].checked** | boolean   | No        | If true, checkbox will be checked. |
 | **items[].conditional** | boolean   | No        | If true, content provided will be revealed when the item is checked. |

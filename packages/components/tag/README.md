@@ -6,7 +6,7 @@ Find out more about the tag component and when to use it in the [NHS digital ser
 
 ## Quick start example
 
-[Preview the tag component](https://nhsuk.github.io/nhsuk-frontend/components/tag/index.html)
+[Preview the tag component](https://ourfuturehealth.github.io/design-system-toolkit/components/tag/index.html)
 
 ### Default tag
 

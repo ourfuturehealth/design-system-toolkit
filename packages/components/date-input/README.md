@@ -10,7 +10,7 @@ Note: The `pattern` attribute is not valid HTML for inputs where the type attrib
 
 ### Date input
 
-[Preview the date input component](https://nhsuk.github.io/nhsuk-frontend/components/date-input/index.html)
+[Preview the date input component](https://ourfuturehealth.github.io/design-system-toolkit/components/date-input/index.html)
 
 #### HTML markup
 
@@ -90,7 +90,7 @@ Note: The `pattern` attribute is not valid HTML for inputs where the type attrib
 
 ### Date input with autocomplete attribute
 
-[Preview the date input with autocomplete attribute component](https://nhsuk.github.io/nhsuk-frontend/components/date-input/autocomplete.html)
+[Preview the date input with autocomplete attribute component](https://ourfuturehealth.github.io/design-system-toolkit/components/date-input/autocomplete.html)
 
 #### Guidance
 
@@ -177,7 +177,7 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 
 ### Date input with errors
 
-[Preview the date input with errors component](https://nhsuk.github.io/nhsuk-frontend/components/date-input/multiple-errors.html)
+[Preview the date input with errors component](https://ourfuturehealth.github.io/design-system-toolkit/components/date-input/multiple-errors.html)
 
 #### HTML markup
 
@@ -262,7 +262,7 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 
 ### Date input with error on single input
 
-[Preview the date input with error on single input component](https://nhsuk.github.io/nhsuk-frontend/components/date-input/error.html)
+[Preview the date input with error on single input component](https://ourfuturehealth.github.io/design-system-toolkit/components/date-input/error.html)
 
 #### HTML markup
 
@@ -359,9 +359,9 @@ The date input Nunjucks macro takes the following arguments:
 | **items[].name**         | array    | Yes       | Item-specific name attribute. |
 | **items[].value**        | string   | No        | Optional item-specific value attribute. If provided, it will be used as the initial value of the input. |
 | **items[].label**        | string   | No        | Optional item-specific label text. If provided, this will be used instead of the items[].name. |
-| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/hint) component. |
-| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/error-message) component. |
-| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/components/fieldset) component. |
+| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
+| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/error-message) component. |
+| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/fieldset) component. |
 | **autocomplete**          | string   | No        | Attribute to [identify input purpose](https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html), for instance "postal-code" or "username". See [Autofilling form controls: the autocomplete attribute](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill) for the full list of attributes that can be used. |
 | **pattern**               | string   | No        | Attribute to [provide a regular expression pattern](https://www.w3.org/TR/html51/sec-forms.html#the-pattern-attribute), used to match allowed character combinations for the input value. |
 | **classes**               | string   | No        | Optional additional classes to add to the date-input container. Separate each class with a space. |
