@@ -1,6 +1,6 @@
 # Browser support
 
-NHS.UK frontend browser support is shown in the table below.
+OFH design system toolkit browser support is shown in the table below.
 
 | Operating system | Browser                              | Support   |
 |----------------- |--------------------------------------|-----------|
@@ -24,7 +24,7 @@ We no longer support older versions of Internet Explorer. This is due to the ver
 
 # Assistive technology support
 
-We test the NHS.UK frontend with the following assistive technology:
+We test the OFH design system toolkit with the following assistive technology:
 
 | Software                 | Type               | Browser                             |
 |--------------------------|--------------------|-------------------------------------|

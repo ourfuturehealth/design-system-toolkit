@@ -5,7 +5,7 @@ Find out more about the do and don't list component and when to use it in the [N
 
 ## Quick start example
 
-[Preview the do and don't list component](https://nhsuk.github.io/nhsuk-frontend/components/do-dont-list/index.html)
+[Preview the do and don't list component](https://ourfuturehealth.github.io/design-system-toolkit/components/do-dont-list/index.html)
 
 ### HTML markup
 

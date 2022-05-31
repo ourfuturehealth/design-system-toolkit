@@ -6,7 +6,7 @@ Find out more about the contents list component and when to use it in the [NHS d
 
 ## Quick start example
 
-[Preview the contents list component](https://nhsuk.github.io/nhsuk-frontend/components/contents-list/index.html)
+[Preview the contents list component](https://ourfuturehealth.github.io/design-system-toolkit/components/contents-list/index.html)
 
 ### HTML markup
 

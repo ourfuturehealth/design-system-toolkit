@@ -3,7 +3,7 @@ const TEST_URL = `http://${TEST_HOST}:3000/components`;
 
 module.exports = {
   dockerCommandTemplate: 'docker run --rm --network=host --mount type=bind,source="{cwd}",target=/src backstopjs/backstopjs:{version} {backstopCommand} {args}',
-  id: 'nhsuk-frontend',
+  id: 'ofh-design-system-toolkit',
   viewports: [
     {
       label: 'iPhone 5/SE',

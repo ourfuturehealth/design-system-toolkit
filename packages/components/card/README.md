@@ -8,7 +8,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Basic card
 
-[Preview the basic card component](https://nhsuk.github.io/nhsuk-frontend/components/card/basic-card.html)
+[Preview the basic card component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/basic-card.html)
 
 #### HTML markup
 
@@ -35,7 +35,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Clickable card
 
-[Preview the clickable card component](https://nhsuk.github.io/nhsuk-frontend/components/card/clickable-card.html)
+[Preview the clickable card component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/clickable-card.html)
 
 #### HTML markup
 
@@ -68,7 +68,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Card with an image
 
-[Preview the card with an image component](https://nhsuk.github.io/nhsuk-frontend/components/card/card-with-image.html)
+[Preview the card with an image component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/card-with-image.html)
 
 #### HTML markup
 
@@ -103,7 +103,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Card group
 
-[Preview the card group component](https://nhsuk.github.io/nhsuk-frontend/components/card/card-group.html)
+[Preview the card group component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/card-group.html)
 
 #### HTML markup
 
@@ -350,7 +350,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Feature
 
-[Preview the feature card component](https://nhsuk.github.io/nhsuk-frontend/components/card/feature-card.html)
+[Preview the feature card component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/feature-card.html)
 
 #### HTML markup
 
@@ -381,7 +381,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Care card non-urgent (blue)
 
-[Preview the care card non-urgent (blue) component](https://nhsuk.github.io/nhsuk-frontend/components/card/care-card-non-urgent.html)
+[Preview the care card non-urgent (blue) component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/care-card-non-urgent.html)
 
 #### HTML markup
 
@@ -430,7 +430,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Care card urgent (red)
 
-[Preview care card urgent (red) component](https://nhsuk.github.io/nhsuk-frontend/components/card/care-card-urgent.html)
+[Preview care card urgent (red) component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/care-card-urgent.html)
 
 #### HTML markup
 
@@ -479,7 +479,7 @@ Find out more about the card component and when to use it in the [NHS digital se
 
 ### Care card emergency (red and black)
 
-[Preview care card emergency (red and black) component](https://nhsuk.github.io/nhsuk-frontend/components/card/care-card-emergency.html)
+[Preview care card emergency (red and black) component](https://ourfuturehealth.github.io/design-system-toolkit/components/card/care-card-emergency.html)
 
 #### HTML markup
 

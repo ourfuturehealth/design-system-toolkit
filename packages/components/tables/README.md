@@ -8,7 +8,7 @@ Find out more about the table component and when to use it in the [NHS digital s
 
 ### Simple table
 
-[Preview the table component](https://nhsuk.github.io/nhsuk-frontend/components/tables/index.html)
+[Preview the table component](https://ourfuturehealth.github.io/design-system-toolkit/components/tables/index.html)
 
 #### HTML markup
 
@@ -90,7 +90,7 @@ Find out more about the table component and when to use it in the [NHS digital s
 
 ### Table panel
 
-[Preview the table panel component](https://nhsuk.github.io/nhsuk-frontend/components/tables/tables-panel.html)
+[Preview the table panel component](https://ourfuturehealth.github.io/design-system-toolkit/components/tables/tables-panel.html)
 
 #### HTML markup
 
@@ -176,7 +176,7 @@ Find out more about the table component and when to use it in the [NHS digital s
 
 ### Responsive table
 
-[Preview the responsive table component](https://nhsuk.github.io/nhsuk-frontend/components/tables/responsive-table.html)
+[Preview the responsive table component](https://ourfuturehealth.github.io/design-system-toolkit/components/tables/responsive-table.html)
 
 #### HTML markup
 
@@ -314,7 +314,7 @@ The table Nunjucks macro takes the following arguments:
 | **rows.[].format**     | string     | No        | Specify format of a cell. Currently we only use "numeric". |
 | **rows.[].colspan**    | number     | No        | Specify how many columns a cell extends. |
 | **rows.[].rowspan**    | number     | No        | Specify how many rows a cell extends. |
-| **panel**              | boolean    | No        | If set to true, the table is rendered inside a [panel with a label](https://nhsuk.github.io/nhsuk-frontend/components/panel-with-label.html). |
+| **panel**              | boolean    | No        | If set to true, the table is rendered inside a [panel with a label](https://ourfuturehealth.github.io/design-system-toolkit/components/panel-with-label.html). |
 | **panelClasses**       | string     | No        | Optional additional classes to add to the panel containing the table. Separate each class with a space. |
 | **heading**            | string     | No        | Heading/label of the panel if the panel argument is set to true. |
 | **headingLevel** 	     | integer    | No 	      | Optional heading level for the heading. Default: 3. |

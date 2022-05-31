@@ -50,7 +50,7 @@ use a different prefix, for example `.app-` or the initials of your department.
 
 ### Block Element Modifier (BEM)
 
-NHS.UK frontend uses the Block Element Modifier (BEM) methodology when naming
+OFH design system toolkit uses the Block Element Modifier (BEM) methodology when naming
 CSS classes. This is designed to help developers understand how the different
 classes relate to each other.
 
@@ -86,7 +86,7 @@ For example:
 ### Nesting
 
 Break elements and modifiers outside of blocks rather than nesting using a
-parent selector `&`. 
+parent selector `&`.
 
 Nesting pseudo elements like `:before` and `:hover` is ok.
 
@@ -130,16 +130,16 @@ Avoid including multiple elements when naming classes.
 
 Create separate selectors rather using an `&` in the middle of a selector.
 
-This enables the NHSUK styles to be used inside other applications, where, for example, an ID is being used to isolate a section of a page to style separately from the rest of an application; e.g. 
+This enables the NHSUK styles to be used inside other applications, where, for example, an ID is being used to isolate a section of a page to style separately from the rest of an application; e.g.
 ```scss
 div#nhsuk-ers {
 ...
-@import 'node_modules/nhsuk-frontend/packages/core/all'; 
+@import 'node_modules/ofh-design-system-toolkit/packages/core/all';
 ...
 }
-``` 
+```
 
-Bad: 
+Bad:
 
 ```scss
 .nhsuk-checkboxes__conditional {
@@ -151,7 +151,7 @@ Bad:
 }
 ```
 
-Good: 
+Good:
 
 ```scss
 .nhsuk-checkboxes__conditional {
@@ -193,10 +193,10 @@ This makes it easier to keep track of different contexts.
 
 ### Code comments
 
-All scss files should have comments (with intent rather than implementation). Line comments should all go within 
+All scss files should have comments (with intent rather than implementation). Line comments should all go within
 the top block comment and then a reference to the number should go next to the line of code.
 
-Example: 
+Example:
 
 ```scss
 /* ==========================================================================
@@ -227,7 +227,7 @@ We're still writing our JavaScript style guide, as we're only just figuring it o
 
 ## Nunjucks
 
-We have chosen as Nunjucks as the templating language for NHS.UK frontend components. We expose those templates as reusable chunks of code: macros. Developers import macros into their application, call them as per documentation and provide data to its arguments.
+We have chosen as Nunjucks as the templating language for OFH design system toolkit components. We expose those templates as reusable chunks of code: macros. Developers import macros into their application, call them as per documentation and provide data to its arguments.
 
 To provide a level of consistency for developers we have standardised argument names, their expected input, use and placement. There are expectations, and  if so they are documented accordingly.
 
@@ -286,7 +286,7 @@ Care card emergency (red and black) example:
 
 ## Components
 
-You can find NHS.UK frontend components in `packages/components`.
+You can find OFH design system toolkit components in `packages/components`.
 
 Components must use the `.nhsuk-` namespace.
 
