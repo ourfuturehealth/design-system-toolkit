@@ -18,7 +18,7 @@ You can also [install OFH design system toolkit using our compiled files](/docs/
 
 ## How to make a new release
 
-1. Create a new branch for the release, off the latest `master` branch, and name it `release-v{version_number}`.
+1. Create a new branch for the release, off the latest `main` branch, and name it `release-v{version_number}`.
 1. Update the [CHANGELOG.md](CHANGELOG.md) and ensure it reflects everything that is being released in the new version.
     - This mainly involves converting the "Unreleased" section (at the top) to a new version section (remember to add a date) and adding a new "Unreleased" section for the next version.
     - The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).

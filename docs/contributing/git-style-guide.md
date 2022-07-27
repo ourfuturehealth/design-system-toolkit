@@ -39,7 +39,7 @@ If including a link to a ticket make sure it is publicly viewable.
 ## Branching and merging
 
 You may often choose to work on a particular feature on a "feature branch"
-rather than directly on `master`. Indeed, given how cheap branches are in Git,
+rather than directly on `main`. Indeed, given how cheap branches are in Git,
 this is [positively encouraged](http://git-scm.com/book/en/Git-Branching-Basic-Branching-and-Merging).
 
 You are encouraged to make liberal use of Git's [history rewriting
@@ -47,7 +47,7 @@ features](http://git-scm.com/book/en/Git-Tools-Rewriting-History) while working
 locally, in order to arrange your commits into appropriate logical chunks that
 will make sense to your fellow developers. In particular, you may find
 `git rebase --interactive` very useful. You are also encouraged to avoid merge
-commits and use `git rebase master` instead. However, you should not rewrite commits that have been pushed unless you:
+commits and use `git rebase main` instead. However, you should not rewrite commits that have been pushed unless you:
 
   * are **very sure** that no-one else will be affected by you rewriting the
     branch history
@@ -62,12 +62,12 @@ The smaller commits should still be logical chunks, but this will give context
 for a more specific change and make git tools like `annotate` and `log` more
 useful.
 
-When merging from a feature branch to master (or any other mainline development
+When merging from a feature branch to main (or any other mainline development
 branch), in particular one that has previously been shared with colleagues, you
 should use `git merge`'s `--no-ff` option to preserve evidence of your feature
 branch in the repository history. This advice may be freely ignored for smaller
 local feature branches for which a fast-forward merge will look like any other
-routine development work on `master`.
+routine development work on `main`.
 
 If working on a ticket/issue, make a new branch for each one.
 
@@ -91,7 +91,7 @@ to the remote. So you do this:
 $ git push -f
 ```
 
-If anyone has committed anything to master[^1] since you last pulled -- and if
+If anyone has committed anything to main[^1] since you last pulled -- and if
 you've been working on the branch for any length of time this is pretty likely
 -- you will blow their changes away, because without arguments git will force
 push *all* remote-tracking branches.
