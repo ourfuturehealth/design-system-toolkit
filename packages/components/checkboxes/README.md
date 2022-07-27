@@ -678,9 +678,9 @@ The checkboxes Nunjucks macro takes the following arguments:
 
 | Name                      | Type     | Required  | Description             |
 | --------------------------|----------|-----------|-------------------------|
-| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/fieldset) component. |
-| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
-| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/error-message) component. |
+| **fieldset**              | object   | No        | Arguments for the fieldset component (e.g. legend). See [fieldset](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/fieldset) component. |
+| **hint**                  | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/hint) component. |
+| **errorMessage**          | object   | No        | Arguments for the error message component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/error-message) component. |
 | **idPrefix**        | string   | No        | String to prefix id for each checkbox item if no id is specified on each item. If`idPrefix` is not passed, fallback to using the name attribute instead. |
 | **name**            | string	 | Yes       | Name attribute for each checkbox item. |
 | **items**           | array    | Yes       | Array of checkbox items objects. |
@@ -688,7 +688,7 @@ The checkboxes Nunjucks macro takes the following arguments:
 | **items[].id**     | string  | No        | Specific id attribute for the checkbox item. If omitted, then `idPrefix` string will be applied.|
 | **items[].name**   | string  | Yes        | Specific name for the checkbox item. If omitted, then component global `name` string will be applied. |
 | **items[].value**  | string   | Yes        | Value for the checkbox input. |
-| **items[].hint**   | object   | No        | Provide optional hint to each checkbox item. See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
+| **items[].hint**   | object   | No        | Provide optional hint to each checkbox item. See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/hint) component. |
 | **items[].divider** | string   | No        | Optional divider text to separate checkbox items, for example the text "or". |
 | **items[].checked** | boolean   | No        | If true, checkbox will be checked. |
 | **items[].conditional** | boolean   | No        | If true, content provided will be revealed when the item is checked. |

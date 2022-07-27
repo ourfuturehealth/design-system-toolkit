@@ -132,9 +132,9 @@ The select Nunjucks macro takes the following arguments:
 | **item.selected**   | boolean  | No        | Sets the option as the selected. |
 | **item.disabled**   | boolean  | No        | Sets the option item as disabled. |
 | **item.attributes** | object   | No        | Any extra HTML attributes (for example data attributes) to the select option tag. |
-| **label**           | object   | Yes       | Optional label text or HTML by specifying value for either text or html keys. See [label](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/label) component. |
-| **hint**            | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/hint) component. |
-| **errorMessage**    | object   | No        | Arguments for the errorMessage component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/master/packages/components/error-message) component. |
+| **label**           | object   | Yes       | Optional label text or HTML by specifying value for either text or html keys. See [label](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/label) component. |
+| **hint**            | object   | No        | Arguments for the hint component (e.g. text). See [hint](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/hint) component. |
+| **errorMessage**    | object   | No        | Arguments for the errorMessage component (e.g. text). See [error message](https://github.com/ourfuturehealth/design-system-toolkit/tree/main/packages/components/error-message) component. |
 | **classes**         | string   | No        | Optional additional classes to add to the select component. Separate each class with a space. |
 | **attributes**      | object   | No        | Any extra HTML attributes (for example data attributes) to add to the select component. |
 
