@@ -30,6 +30,7 @@ sass.compiler = require('sass');
 function compileCSS() {
   return gulp.src(['packages/nhsuk.scss'])
     .pipe(sass())
+    .pipe(rename('ofh-design-system-toolkit.css'))
     .pipe(gulp.dest('dist/'))
     .on('error', (err) => {
       console.log(err);
@@ -54,7 +55,7 @@ function minifyCSS() {
  * JavaScript tasks
  */
 
-/* Use Webpack to build and minify the NHS.UK components JS. */
+/* Use Webpack to build and minify the OFH components JS. */
 function webpackJS() {
   return gulp.src('./packages/nhsuk.js')
     .pipe(webpack({
@@ -72,7 +73,7 @@ function webpackJS() {
         ],
       },
       output: {
-        filename: 'nhsuk.js',
+        filename: 'ofh-design-system-toolkit.js',
       },
       target: 'web',
     }))
@@ -123,7 +124,7 @@ function assets() {
 
 /* Copy JS files into their relevant folders */
 function jsFolder() {
-  return gulp.src('dist/*.min.js', '!dist/js/nhsuk.min.js')
+  return gulp.src('dist/*.min.js', '!dist/js/ofh-design-system-toolkit.min.js')
     .pipe(clean())
     .pipe(gulp.dest('dist/js/'));
 }
@@ -137,7 +138,7 @@ function cssFolder() {
 }
 
 function createZip() {
-  return gulp.src(['dist/css/*.min.css', 'dist/js/*.min.js', 'dist/assets/**', '!dist/js/nhsuk.min.js'], { base: 'dist' })
+  return gulp.src(['dist/css/*.min.css', 'dist/js/*.min.js', 'dist/assets/**', '!dist/js/ofh-design-system-toolkit.min.js'], { base: 'dist' })
     .pipe(zip(`ofh-design-system-toolkit-${version}.zip`))
     .pipe(gulp.dest('dist'));
 }
