@@ -37,7 +37,7 @@ tests/backstop/html_report/*
 dist/
 
 ## Duplicated the above for .npmignore
-dist/nhsuk.css
-dist/nhsuk.js
-dist/nhsuk-*.min.css
-dist/nhsuk-*.min.js
+dist/ofh-design-system-toolkit.css
+dist/ofh-design-system-toolkit.js
+dist/ofh-design-system-toolkit-*.min.css
+dist/ofh-design-system-toolkit-*.min.js
