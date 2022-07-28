@@ -73,12 +73,12 @@ Include the `node_modules/ofh-design-system-toolkit/dist/nhsuk.min.js` script in
 You might wish to copy the file into your project or reference it straight from node_modules.
 
 ```html
-    <script src="path-to-assets/nhsuk.min.js" defer></script>
+    <script src="path-to-assets/ofh-design-system-toolkit.min.js" defer></script>
   </head>
 ```
 
 ```html
-    <script src="node_modules/ofh-design-system-toolkit/dist/nhsuk.min.js" defer></script>
+    <script src="node_modules/ofh-design-system-toolkit/dist/ofh-design-system-toolkit.min.js" defer></script>
   </head>
 ```
 

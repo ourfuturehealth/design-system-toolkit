@@ -6,6 +6,10 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+### Changed
+
+- Output asset files renamed to `ofh-design-system-toolkit.*`.
+
 ## [v2.0.0-alpha.0] - 2022-07-20
 
 Initial alpha (but not released as an NPM package, yet).
