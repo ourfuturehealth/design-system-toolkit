@@ -16,37 +16,131 @@
 
 /* stylelint-disable color-no-hex */
 
+/*
+- Value matches Figma
+- TODO: Rename to $color_ofh-yellow
+*/
 $color_ofh_primary: #FFC62C;
+
+/*
+- TODO: Doesn't exist in Figma
+*/
 $color_ofh-white: #ffffff;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-black: #212b32;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-green: #00A08A;
+
+/*
+- Value matches Figma
+- TODO: Why is it named $ofh-purple-temporary-visited in Figma?
+*/
 $color_ofh-purple: #330072;
+
+/*
+- Value matches Figma
+- TODO: Why is it named $ofh-purple-temporary-hover in Figma?
+*/
 $color_ofh-dark-pink: #7C2855;
+
+/*
+- Value matches Figma
+- TODO: Decide on a new name that doesn't clash with $color_ofh-red (in Figma, but not yet included here)
+*/
 $color_ofh-red: #d5281b;
+
+/*
+- Value matches Figma
+- TODO: Why is it named $ofh-yellow-temporary-focus in Figma?
+- TODO: Decide on a new name ($color_ofh_primary should be renamed to $color_ofh-yellow)
+*/
 $color_ofh-yellow: #ffeb3b;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-blue: #108BE2;
+
+/*
+- TODO: Update value to match value in Figma for $ofh-light-blue
+*/
 $color_ofh-light-blue: #DCE8F0;
+
+/*
+- TODO: Doesn't exist in Figma - where has this colour come from?
+- Only used in one place (below): $nhsuk-button-hover-color: $color_ofh-dark-yellow;
+*/
 $color_ofh-dark-yellow: #e6b228;
+
+
+/*
+- Value matches Figma
+- TODO: Rename to $color_ofh-navy
+*/
 $color_ofh-dark-blue: #011D4B;
 
 //
 // Secondary colours
 //
 
+/*
+- TODO: Unused. Can we remove this?
+*/
 $color_ofh-pale-yellow: #fff9c4;
+
+/*
+- TODO: Used for tag component, but doesn't exist in Figma.
+*/
 $color_ofh-warm-yellow: #ffb81C;
+
+/*
+- TODO: Unused. Can we remove this?
+*/
 $color_ofh-orange: #ED8B00;
+
+/*
+- TODO: Used for tag component, but doesn't exist in Figma.
+*/
 $color_ofh-aqua-green: #00A499;
+
+/*
+- TODO: Used for tag component, but doesn't exist in Figma.
+*/
 $color_ofh-pink: #AE2573;
 
 //
 // Greyscale
 //
 
+/*
+- Value matches Figma
+*/
 $color_ofh-grey-1: #425563;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-grey-2: #768692;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-grey-3: #aeb7bd;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-grey-4: #d8dde0;
+
+/*
+- Value matches Figma
+*/
 $color_ofh-grey-5: #F4F4F4;
 
 /* stylelint-enable color-no-hex */
@@ -56,6 +150,9 @@ $color_ofh-grey-5: #F4F4F4;
 // Used to create drop/box shadows e.g. for search suggestions dropdown
 //
 
+/*
+- TODO: Need to discuss this with design team.
+*/
 $color_ofh-grey-1-rgb: rgb(66, 84, 98);
 $alpha-transparency-50: .5;
 
@@ -87,6 +184,10 @@ $alpha-transparency-50: .5;
 // 6. used for primary button and action link icon :active states
 //
 
+/*
+- TODO: We should probably review these with the design team.
+*/
+
 $color_tint_ofh-black-10: tint($color_ofh-black, 10%); // [1] //
 
 $color_shade_ofh-blue-20: shade($color_ofh_primary, 20%); // [2] //
@@ -102,6 +203,10 @@ $color_transparent_ofh-blue-50: rgba($color_shade_ofh-blue-50, .1);
 //
 // Colour aliases
 //
+
+/*
+- TODO: Review these aliases when we've updated all the colours above.
+*/
 
 // Text
 $ofh-text-color: $color_ofh-black;
