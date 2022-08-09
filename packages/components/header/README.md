@@ -7,7 +7,7 @@ Find out more about the header component and when to use it in the [NHS digital 
 ## Dependencies
 
 For this component to work, you need to make sure you include the required JavaScript. You can either include the
-compiled JavaScript for all components `nhsuk.min.js` or the individual component JavaScript `header.js`.
+compiled JavaScript for all components `ofh-design-system-toolkit.min.js` or the individual component JavaScript `header.js`.
 
 ## Quick start examples
 

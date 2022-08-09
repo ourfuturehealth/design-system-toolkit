@@ -10,6 +10,7 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 - Output asset files renamed to `ofh-design-system-toolkit.*`.
 - All favicons and logos updated to latest Our Future Health branding.
+- Renamed the JS and SCSS source entry files to `ofh.*` (note: the build still outputs the compiled files as `ofh-design-system-toolkit.*`).
 
 ## [v2.0.0-alpha.0] - 2022-07-20
 

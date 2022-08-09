@@ -28,7 +28,7 @@ sass.compiler = require('sass');
 
 /* Build the CSS from source */
 function compileCSS() {
-  return gulp.src(['packages/nhsuk.scss'])
+  return gulp.src(['packages/ofh.scss'])
     .pipe(sass())
     .pipe(rename('ofh-design-system-toolkit.css'))
     .pipe(gulp.dest('dist/'))
@@ -57,7 +57,7 @@ function minifyCSS() {
 
 /* Use Webpack to build and minify the OFH components JS. */
 function webpackJS() {
-  return gulp.src('./packages/nhsuk.js')
+  return gulp.src('./packages/ofh.js')
     .pipe(webpack({
       mode: 'production',
       module: {

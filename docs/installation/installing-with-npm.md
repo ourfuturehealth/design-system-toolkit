@@ -39,7 +39,7 @@ To build the stylesheet you will need a pipeline set up to compile [Sass](https:
 You need to import the OFH design system toolkit styles into the main Sass file in your project. You should place the below code before your own Sass rules (or Sass imports).
 
 ```SCSS
-@import 'node_modules/ofh-design-system-toolkit/packages/nhsuk';
+@import 'node_modules/ofh-design-system-toolkit/packages/ofh';
 ```
 
 Alternatively you can import each of the individual components separately, meaning you can import just the components that you are using.
@@ -66,7 +66,7 @@ document.body.className = ((document.body.className) ? document.body.className +
 
 ### Option 1: Include compiled JavaScript
 
-Include the `node_modules/ofh-design-system-toolkit/dist/nhsuk.min.js` script in the `<head>` of your page using the `defer` attribute.
+Include the `node_modules/ofh-design-system-toolkit/dist/ofh-design-system-toolkit.min.js` script in the `<head>` of your page using the `defer` attribute.
 
 > The defer attribute is used for performance benefits as the browser loads the JavaScript file as soon as possible, due to it being in the `<head>`, but will not run until after the page has loaded.
 
