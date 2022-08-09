@@ -41,19 +41,19 @@
     text: params.errorMessage.text
   }) | indent(2) | trim }}
 {% endif %}
-  <div class="nhsuk-radios
-  {%- if params.classes %} {{ params.classes }}{% endif %} {%- if isConditional %} nhsuk-radios--conditional{% endif -%}"
+  <div class="ofh-radios
+  {%- if params.classes %} {{ params.classes }}{% endif %} {%- if isConditional %} ofh-radios--conditional{% endif -%}"
   {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
     {%- for item in params.items %}
     {%- set id = item.id if item.id else idPrefix + "-" + loop.index %}
     {% set conditionalId = "conditional-" + id %}
     {%- if item.divider %}
-    <div class="nhsuk-radios__divider">{{ item.divider }}</div>
+    <div class="ofh-radios__divider">{{ item.divider }}</div>
     {%- else %}
     {%- set hasHint = true if item.hint.text or item.hint.html %}
     {%- set itemHintId = id + '-item-hint' %}
-    <div class="nhsuk-radios__item">
-      <input class="nhsuk-radios__input" id="{{ id }}" name="{{ params.name }}" type="radio" value="{{ item.value }}"
+    <div class="ofh-radios__item">
+      <input class="ofh-radios__input" id="{{ id }}" name="{{ params.name }}" type="radio" value="{{ item.value }}"
       {{-" checked" if item.checked }}
       {{-" disabled" if item.disabled }}
       {%- if item.conditional.html %} aria-controls="{{ conditionalId }}" aria-expanded="{{"true" if item.checked else "false"}}"{% endif -%}
@@ -62,14 +62,14 @@
       {{ label({
         html: item.html,
         text: item.text,
-        classes: 'nhsuk-radios__label' + (' ' + item.label.classes if item.label.classes),
+        classes: 'ofh-radios__label' + (' ' + item.label.classes if item.label.classes),
         attributes: item.label.attributes,
         for: id
       }) | indent(6) | trim }}
       {%- if hasHint %}
       {{ hint({
         id: itemHintId,
-        classes: 'nhsuk-radios__hint',
+        classes: 'ofh-radios__hint',
         attributes: item.hint.attributes,
         html: item.hint.html,
         text: item.hint.text
@@ -77,7 +77,7 @@
       {%- endif %}
     </div>
     {% if item.conditional.html %}
-    <div class="nhsuk-radios__conditional{% if not item.checked %} nhsuk-radios__conditional--hidden{% endif %}" id="{{ conditionalId }}">
+    <div class="ofh-radios__conditional{% if not item.checked %} ofh-radios__conditional--hidden{% endif %}" id="{{ conditionalId }}">
       {{ item.conditional.html | safe }}
     </div>
     {% endif %}
@@ -86,7 +86,7 @@
   </div>
 {% endset -%}
 
-<div class="nhsuk-form-group {%- if params.errorMessage %} nhsuk-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
+<div class="ofh-form-group {%- if params.errorMessage %} ofh-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
 {% if params.fieldset %}
   {% call fieldset({
     describedBy: describedBy,

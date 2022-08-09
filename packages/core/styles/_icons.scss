@@ -4,50 +4,50 @@
 
 // Default icon size
 
-.nhsuk-icon {
-  height: $nhsuk-icon-size;
-  width: $nhsuk-icon-size;
+.ofh-icon {
+  height: $ofh-icon-size;
+  width: $ofh-icon-size;
 }
 
 // Default icon colours
 
-.nhsuk-icon__search {
+.ofh-icon__search {
   fill: $color_ofh_primary;
 }
 
-.nhsuk-icon__chevron-left {
+.ofh-icon__chevron-left {
   fill: $color_ofh_primary;
 }
 
-.nhsuk-icon__chevron-right {
-  fill: $color_nhsuk-dark-blue;
+.ofh-icon__chevron-right {
+  fill: $color_ofh-dark-blue;
 }
 
-.nhsuk-icon__close {
-  fill: $color_nhsuk-dark-blue;;
+.ofh-icon__close {
+  fill: $color_ofh-dark-blue;;
 }
 
-.nhsuk-icon__cross {
-  fill: $color_nhsuk-red;
+.ofh-icon__cross {
+  fill: $color_ofh-red;
 }
 
-.nhsuk-icon__tick {
-  stroke: $color_nhsuk-green;
+.ofh-icon__tick {
+  stroke: $color_ofh-green;
 }
 
-.nhsuk-icon__arrow-right {
+.ofh-icon__arrow-right {
   fill: $color_ofh_primary;
 }
 
-.nhsuk-icon__arrow-left {
+.ofh-icon__arrow-left {
   fill: $color_ofh_primary;
 }
 
-.nhsuk-icon__arrow-right-circle {
-  fill: $color_nhsuk-green;
+.ofh-icon__arrow-right-circle {
+  fill: $color_ofh-green;
 }
 
-.nhsuk-icon__chevron-down {
+.ofh-icon__chevron-down {
   fill: $color_ofh_primary;
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -55,49 +55,49 @@
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
   path {
-    fill: $color_nhsuk-white;
+    fill: $color_ofh-white;
   }
 }
 
-.nhsuk-icon__chevron-up {
+.ofh-icon__chevron-up {
   fill: $color_ofh_primary;
   path {
-    fill: $color_nhsuk-white;
+    fill: $color_ofh-white;
   }
 }
 
-.nhsuk-icon__emdash {
+.ofh-icon__emdash {
   path {
-    fill: $color_nhsuk-grey-3;
+    fill: $color_ofh-grey-3;
   }
 }
 
-.nhsuk-icon__plus {
+.ofh-icon__plus {
   fill: $color_ofh_primary;
 }
 
-.nhsuk-icon__minus {
+.ofh-icon__minus {
   fill: $color_ofh_primary;
 }
 
 // Icon size adjustments
 
-.nhsuk-icon--size-25 {
-  height: $nhsuk-icon-size * 1.25;
-  width: $nhsuk-icon-size * 1.25;
+.ofh-icon--size-25 {
+  height: $ofh-icon-size * 1.25;
+  width: $ofh-icon-size * 1.25;
 }
 
-.nhsuk-icon--size-50 {
-  height: $nhsuk-icon-size * 1.5;
-  width: $nhsuk-icon-size * 1.5;
+.ofh-icon--size-50 {
+  height: $ofh-icon-size * 1.5;
+  width: $ofh-icon-size * 1.5;
 }
 
-.nhsuk-icon--size-75 {
-  height: $nhsuk-icon-size * 1.75;
-  width: $nhsuk-icon-size * 1.75;
+.ofh-icon--size-75 {
+  height: $ofh-icon-size * 1.75;
+  width: $ofh-icon-size * 1.75;
 }
 
-.nhsuk-icon--size-100 {
-  height: $nhsuk-icon-size * 2;
-  width: $nhsuk-icon-size * 2;
+.ofh-icon--size-100 {
+  height: $ofh-icon-size * 2;
+  width: $ofh-icon-size * 2;
 }

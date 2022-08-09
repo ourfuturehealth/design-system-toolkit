@@ -2,31 +2,31 @@
    COMPONENTS / #FOOTER
    ========================================================================== */
 
-.nhsuk-footer {
+.ofh-footer {
   @include clearfix();
   @include print-hide();
-  @include nhsuk-responsive-padding(5, bottom);
-  @include nhsuk-responsive-padding(5, top);
-  @include nhsuk-font(14);
+  @include ofh-responsive-padding(5, bottom);
+  @include ofh-responsive-padding(5, top);
+  @include ofh-font(14);
 
-  background-color: $color_nhsuk-grey-4;
-  border-top: nhsuk-spacing(1) solid $color_ofh_primary;
+  background-color: $color_ofh-grey-4;
+  border-top: ofh-spacing(1) solid $color_ofh_primary;
 }
 
 .footer-text {
   float: left;
   p {
-    @include nhsuk-font(16);
+    @include ofh-font(16);
     margin: 0;
   }
 }
 
-.nhsuk-footer__list {
-  @include nhsuk-responsive-padding(4, bottom);
+.ofh-footer__list {
+  @include ofh-responsive-padding(4, bottom);
 
   list-style-type: none;
   margin: 0;
-  padding-left: nhsuk-spacing(0);
+  padding-left: ofh-spacing(0);
 
   @include mq($from: desktop) {
     float: left;
@@ -35,31 +35,31 @@
   }
 }
 
-.nhsuk-footer__list-item {
-  @include nhsuk-font(16);
+.ofh-footer__list-item {
+  @include ofh-font(16);
 
   @include mq($from: desktop) {
     float: left;
-    margin-right: nhsuk-spacing(5);
+    margin-right: ofh-spacing(5);
   }
 }
 
-.nhsuk-footer__list-item-link {
-  color: $color_nhsuk-dark-blue;
+.ofh-footer__list-item-link {
+  color: $color_ofh-dark-blue;
 
   &:visited {
-    color: $color_nhsuk-dark-blue;
+    color: $color_ofh-dark-blue;
   }
 
   &:hover {
-    color: $nhsuk-text-color;
+    color: $ofh-text-color;
   }
 }
 
-.nhsuk-footer__copyright {
-  @include nhsuk-font(16);
+.ofh-footer__copyright {
+  @include ofh-font(16);
 
-  color: $color-nhsuk-black;
+  color: $color-ofh-black;
   margin-bottom: 0;
 
   @include mq($from: desktop) {

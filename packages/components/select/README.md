@@ -13,11 +13,11 @@ Find out more about the select component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="select-1">
+<div class="ofh-form-group">
+  <label class="ofh-label" for="select-1">
     Label text goes here
   </label>
-  <select class="nhsuk-select" id="select-1" name="select-1">
+  <select class="ofh-select" id="select-1" name="select-1">
     <option value="1">OFH design system toolkit option 1</option>
     <option value="2" selected>OFH design system toolkit option 2</option>
     <option value="3" disabled>OFH design system toolkit option 3</option>
@@ -64,17 +64,17 @@ Find out more about the select component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group nhsuk-form-group--error">
-  <label class="nhsuk-label" for="select-2">
+<div class="ofh-form-group ofh-form-group--error">
+  <label class="ofh-label" for="select-2">
   Label text goes here
   </label>
-  <div class="nhsuk-hint" id="select-2-hint">
+  <div class="ofh-hint" id="select-2-hint">
   Hint text goes here
   </div>
-  <span id="select-2-error" class="nhsuk-error-message">
+  <span id="select-2-error" class="ofh-error-message">
   Error message goes here
   </span>
-  <select class="nhsuk-select nhsuk-select--error" id="select-2" name="select-2" aria-describedby="select-2-hint select-2-error">
+  <select class="ofh-select ofh-select--error" id="select-2" name="select-2" aria-describedby="select-2-hint select-2-error">
     <option value="1">OFH design system toolkit option 1</option>
     <option value="2">OFH design system toolkit option 2</option>
     <option value="3">OFH design system toolkit option 3</option>

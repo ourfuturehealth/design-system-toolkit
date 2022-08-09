@@ -9,19 +9,19 @@
  *    readability.
  */
 
-.nhsuk-inset-text {
+.ofh-inset-text {
   @include top-and-bottom(); /* [1] */
   @include reading-width(); /* [2] */
 
-  @include nhsuk-responsive-margin(7, 'bottom');
-  @include nhsuk-responsive-margin(7, 'top');
-  @include nhsuk-responsive-padding(4);
+  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-padding(4);
 
-  background-color: $color_nhsuk-white;
-  border-left: $nhsuk-border-width-inset-text solid $color_ofh-blue;
+  background-color: $color_ofh-white;
+  border-left: $ofh-border-width-inset-text solid $color_ofh-blue;
 
   @include mq($media-type: print) {
-    border-color: $nhsuk-print-text-color;
+    border-color: $ofh-print-text-color;
   }
 
 }

@@ -22,7 +22,7 @@ Ensure the correct `id` value has been added to your main content for the skip l
 ### HTML markup
 
 ```html
-<a class="nhsuk-skip-link" href="#maincontent">Skip to main content</a>
+<a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
 ```
 
 ### Nunjucks macro

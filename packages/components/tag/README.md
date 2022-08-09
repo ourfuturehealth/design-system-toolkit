@@ -13,7 +13,7 @@ Find out more about the tag component and when to use it in the [NHS digital ser
 #### HTML markup
 
 ```html
-<strong class="nhsuk-tag">
+<strong class="ofh-tag">
   Active
 </strong>
 ```
@@ -35,7 +35,7 @@ See the full list of tag colours on the [NHS digital service manual](https://ser
 #### HTML markup
 
 ```html
-<strong class="nhsuk-tag nhsuk-tag--grey">
+<strong class="ofh-tag ofh-tag--grey">
   Inactive
 </strong>
 ```

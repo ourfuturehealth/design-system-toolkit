@@ -7,18 +7,18 @@
  * https://github.com/alphagov/govuk-frontend
  * Force element widths on all screen sizes
  *
- * Usage: class="nhsuk-u-width-full"
+ * Usage: class="ofh-u-width-full"
  */
 
 // Utility classes are allowed to use !important;
 // so we disable stylelint for that rule
 /* stylelint-disable declaration-no-important */
 
-.nhsuk-u-width-full {
+.ofh-u-width-full {
   width: 100% !important;
 }
 
-.nhsuk-u-width-three-quarters {
+.ofh-u-width-three-quarters {
   width: 100% !important;
 
   @include mq($from: tablet) {
@@ -26,7 +26,7 @@
   }
 }
 
-.nhsuk-u-width-two-thirds {
+.ofh-u-width-two-thirds {
   width: 100% !important;
 
   @include mq($from: tablet) {
@@ -34,7 +34,7 @@
   }
 }
 
-.nhsuk-u-width-one-half {
+.ofh-u-width-one-half {
   width: 100% !important;
 
   @include mq($from: tablet) {
@@ -42,7 +42,7 @@
   }
 }
 
-.nhsuk-u-width-one-third {
+.ofh-u-width-one-third {
   width: 100% !important;
 
   @include mq($from: tablet) {
@@ -50,7 +50,7 @@
   }
 }
 
-.nhsuk-u-width-one-quarter {
+.ofh-u-width-one-quarter {
   width: 100% !important;
 
   @include mq($from: tablet) {

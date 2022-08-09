@@ -21,11 +21,11 @@ $_spacing-directions: (
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 //
 // @example scss
-//   .nhsuk-u-margin-0 {
+//   .ofh-u-margin-0 {
 //      margin: 0;
 //   }
 //
-//  .nhsuk-u-margin-top-1 {
+//  .ofh-u-margin-top-1 {
 //     margin-top: [whatever spacing point 1 is...]
 //   }
 //
@@ -33,26 +33,26 @@ $_spacing-directions: (
 //    override that affects all directions...
 // 2. ... and then an override for each individual direction
 
-@mixin _nhsuk-generate-spacing-overrides($property) {
+@mixin _ofh-generate-spacing-overrides($property) {
   // [1] //
-  @each $scale-point, $scale-map in $nhsuk-spacing-responsive-scale {
+  @each $scale-point, $scale-map in $ofh-spacing-responsive-scale {
 
-    .nhsuk-u-#{$property}-#{$scale-point} {
+    .ofh-u-#{$property}-#{$scale-point} {
 
-      @include _nhsuk-responsive-spacing($scale-point, $property, 'all', true);
+      @include _ofh-responsive-spacing($scale-point, $property, 'all', true);
     }
 
     // [2] //
     @each $direction in $_spacing-directions {
 
-      .nhsuk-u-#{$property}-#{$direction}-#{$scale-point} {
-        @include _nhsuk-responsive-spacing($scale-point, $property, $direction, true);
+      .ofh-u-#{$property}-#{$direction}-#{$scale-point} {
+        @include _ofh-responsive-spacing($scale-point, $property, $direction, true);
       }
     }
   }
 }
 
 @include govuk-exports('govuk/overrides/spacing') {
-  @include _nhsuk-generate-spacing-overrides('margin');
-  @include _nhsuk-generate-spacing-overrides('padding');
+  @include _ofh-generate-spacing-overrides('margin');
+  @include _ofh-generate-spacing-overrides('padding');
 }

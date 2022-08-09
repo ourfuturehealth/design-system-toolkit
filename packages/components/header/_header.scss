@@ -30,15 +30,15 @@
  * 9. Use non variable colour to follow NHS England guidelines on logo colour
  * 10. N/A
  * 11. Align close icon with nav item arrow icons
- * 12. Add nhsuk-spacing(9) to align right and left main nav with header
+ * 12. Add ofh-spacing(9) to align right and left main nav with header
  */
 
-.nhsuk-header {
+.ofh-header {
   @include clearfix();
   background-color: $color_ofh_primary;
 }
 
-.nhsuk-header__container {
+.ofh-header__container {
   @include clearfix();
   height: 120px;
   padding: 0;
@@ -47,17 +47,17 @@
   @include mq($until: large-desktop) {
     height: 80px;
     margin-left: 0;
-    margin-right: nhsuk-spacing(5);
+    margin-right: ofh-spacing(5);
   }
 
-  .nhsuk-grid-row {
+  .ofh-grid-row {
     margin-top: 20px;
     position: absolute;
     right: 0%;
   }
 }
 
-.nhsuk-header__logo {
+.ofh-header__logo {
   float: left;
   height: 100%;
 
@@ -66,19 +66,19 @@
     z-index: 1;
   }
 
-  .nhsuk-logo__background {
-    fill: $color_nhsuk-white;
+  .ofh-logo__background {
+    fill: $color_ofh-white;
 
     @include mq($media-type: print) {
       fill: $color_ofh_primary;
     }
   }
 
-  .nhsuk-logo__text {
+  .ofh-logo__text {
     fill: $color_ofh_primary;
 
     @include mq($media-type: print) {
-      fill: $color_nhsuk-white;
+      fill: $color_ofh-white;
     }
   }
 
@@ -86,8 +86,8 @@
     padding-left: 0;
   }
 
-  .nhsuk-logo {
-    @include nhsuk-logo-size; /* [1] */
+  .ofh-logo {
+    @include ofh-logo-size; /* [1] */
     border: 0;
   }
 
@@ -101,21 +101,21 @@
 
 }
 
-.nhsuk-header__link {
-  @include nhsuk-logo-size; /* [1] */
+.ofh-header__link {
+  @include ofh-logo-size; /* [1] */
   display: block;
 
   &:hover {
-    .nhsuk-logo {
-      box-shadow: 0 0 0 $nhsuk-focus-width $color_shade_nhsuk-blue-35;
+    .ofh-logo {
+      box-shadow: 0 0 0 $ofh-focus-width $color_shade_ofh-blue-35;
     }
   }
 
   &:focus {
     box-shadow: none;
 
-    .nhsuk-logo {
-      box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color, 0 $nhsuk-focus-width 0 $nhsuk-focus-width $nhsuk-focus-text-color;
+    .ofh-logo {
+      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
     }
   }
 
@@ -132,14 +132,14 @@
   }
 }
 
-.nhsuk-header__content {
+.ofh-header__content {
   @include clearfix();
   @include print-hide();
 
   position: relative;
 
   &.js-show {
-    border-bottom: nhsuk-spacing(1) solid $color_nhsuk-grey-5; /* [7] */
+    border-bottom: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
   }
 
   @include mq($from: tablet) {
@@ -153,7 +153,7 @@
 
 }
 
-.nhsuk-header__search {
+.ofh-header__search {
   @include clearfix();
 
   position: relative;
@@ -161,28 +161,28 @@
 
   @include mq($from: tablet) {
     float: left;
-    margin-left: nhsuk-spacing(2);
+    margin-left: ofh-spacing(2);
   }
 
 }
 
-.nhsuk-header__search-toggle {
+.ofh-header__search-toggle {
   @include toggle-button();
-  min-height: nhsuk-spacing(6); /* [2] */
-  padding: nhsuk-spacing(1) nhsuk-spacing(2) 0;
+  min-height: ofh-spacing(6); /* [2] */
+  padding: ofh-spacing(1) ofh-spacing(2) 0;
   position: absolute;
   right: 0;
   top: 0;
 
-  .nhsuk-icon__search {
-    fill: $color_nhsuk-white;
+  .ofh-icon__search {
+    fill: $color_ofh-white;
     height: 21px; /* [3] */
     width: 21px; /* [3] */
   }
 
   &:focus {
-    @include nhsuk-focused-button();
-    box-shadow: 0 0 0 2px $nhsuk-focus-color, 0 $nhsuk-focus-width 0 2px $nhsuk-focus-text-color;
+    @include ofh-focused-button();
+    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
   @include mq($from: tablet) {
@@ -190,19 +190,19 @@
   }
 }
 
-.nhsuk-header__search-form {
+.ofh-header__search-form {
   height: 100%;
   overflow: visible;
 
   @include mq($until: tablet) {
-    background-color: $color_nhsuk-white;
+    background-color: $color_ofh-white;
     display: flex;
-    padding: nhsuk-spacing(3);
+    padding: ofh-spacing(3);
     width: 100%;
   }
 }
 
-.nhsuk-header__search-wrap {
+.ofh-header__search-wrap {
   @include mq($until: tablet) {
     display: none;
 
@@ -223,38 +223,38 @@
   }
 }
 
-.nhsuk-search__input {
+.ofh-search__input {
   -webkit-appearance: listbox; /* [5] */
-  border-bottom-left-radius: $nhsuk-border-radius;
+  border-bottom-left-radius: $ofh-border-radius;
   border-bottom-right-radius: 0;
-  border-top-left-radius: $nhsuk-border-radius;
+  border-top-left-radius: $ofh-border-radius;
   border-top-right-radius: 0;
-  padding: 0 nhsuk-spacing(3);
+  padding: 0 ofh-spacing(3);
   &:focus {
-    border: 4px solid $nhsuk-focus-text-color;
-    box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color;
-    outline: $nhsuk-focus-width solid transparent;
-    outline-offset: $nhsuk-focus-width;
+    border: 4px solid $ofh-focus-text-color;
+    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
+    outline: $ofh-focus-width solid transparent;
+    outline-offset: $ofh-focus-width;
     padding: 0 9px;
   }
   &::placeholder {
-    color: $color_nhsuk-grey-1;
-    font-size: $nhsuk-base-font-size;
+    color: $color_ofh-grey-1;
+    font-size: $ofh-base-font-size;
   }
   &:-ms-input-placeholder {
-    color: $color_nhsuk-grey-1;
-    font-size: $nhsuk-base-font-size;
+    color: $color_ofh-grey-1;
+    font-size: $ofh-base-font-size;
   }
   &::-webkit-input-placeholder {
-    color: $color_nhsuk-grey-1;
-    font-size: $nhsuk-base-font-size;
+    color: $color_ofh-grey-1;
+    font-size: $ofh-base-font-size;
   }
 
   @include mq($until: tablet) {
-    border-bottom: 1px solid $color_nhsuk-grey-3;
-    border-left: 1px solid $color_nhsuk-grey-3;
+    border-bottom: 1px solid $color_ofh-grey-3;
+    border-left: 1px solid $color_ofh-grey-3;
     border-right: 0;
-    border-top: 1px solid $color_nhsuk-grey-3;
+    border-top: 1px solid $color_ofh-grey-3;
     flex-grow: 2;
     -ms-flex-positive: 2;
     font-size: inherit;
@@ -266,9 +266,9 @@
   }
 
   @include mq($from: tablet) {
-    border: 1px solid $color_nhsuk-white;
-    font-size: $nhsuk-base-font-size;
-    height: nhsuk-spacing(6); /* [2] */
+    border: 1px solid $color_ofh-white;
+    font-size: $ofh-base-font-size;
+    height: ofh-spacing(6); /* [2] */
     width: 200px; /* [2] */
   }
 
@@ -277,12 +277,12 @@
   }
 }
 
-.nhsuk-search__submit {
+.ofh-search__submit {
   border: 0;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: $nhsuk-border-radius;
+  border-bottom-right-radius: $ofh-border-radius;
   border-top-left-radius: 0;
-  border-top-right-radius: $nhsuk-border-radius;
+  border-top-right-radius: $ofh-border-radius;
   float: right;
   font-size: inherit;
   line-height: inherit;
@@ -298,88 +298,88 @@
   }
 
   @include mq($until: tablet) {
-    background-color: $color_nhsuk-green;
+    background-color: $color_ofh-green;
     height: 52px; /* [2] */
     margin: 0;
-    padding: nhsuk-spacing(2) nhsuk-spacing(2) 0;
+    padding: ofh-spacing(2) ofh-spacing(2) 0;
 
-    .nhsuk-icon__search {
-      fill: $color_nhsuk-white;
+    .ofh-icon__search {
+      fill: $color_ofh-white;
       height: 38px; /* [3] */
       width: 38px; /* [3] */
     }
 
     &:hover {
-      background-color: $nhsuk-button-hover-color;
+      background-color: $ofh-button-hover-color;
     }
 
     &:focus {
-      background-color: $nhsuk-focus-color;
-      box-shadow: 0 -4px $nhsuk-focus-color, 0 $nhsuk-focus-width $nhsuk-focus-text-color;
-      outline: $nhsuk-focus-width solid transparent;
-      outline-offset: $nhsuk-focus-width;
+      background-color: $ofh-focus-color;
+      box-shadow: 0 -4px $ofh-focus-color, 0 $ofh-focus-width $ofh-focus-text-color;
+      outline: $ofh-focus-width solid transparent;
+      outline-offset: $ofh-focus-width;
 
       &:hover {
-        background-color: $nhsuk-focus-color;
+        background-color: $ofh-focus-color;
 
-        .nhsuk-icon {
-          fill: $nhsuk-focus-text-color;
+        .ofh-icon {
+          fill: $ofh-focus-text-color;
         }
       }
 
-      .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon {
+        fill: $ofh-focus-text-color;
       }
     }
   }
 
   @include mq($from: tablet) {
-    background-color: $color_nhsuk-grey-5;
+    background-color: $color_ofh-grey-5;
     display: block;
-    height: nhsuk-spacing(6); /* [2] */
+    height: ofh-spacing(6); /* [2] */
     width: 44px; /* [2] */
 
-    .nhsuk-icon__search {
+    .ofh-icon__search {
       height: 27px; /* [3] */
       width: 27px; /* [3] */
     }
 
     &:hover {
-      background-color: $color_shade_nhsuk-blue-35;
-      border: 1px solid $color_nhsuk-white;
+      background-color: $color_shade_ofh-blue-35;
+      border: 1px solid $color_ofh-white;
 
-      .nhsuk-icon__search {
-        fill: $color_nhsuk-white;
+      .ofh-icon__search {
+        fill: $color_ofh-white;
       }
     }
 
     &:focus {
-      @include nhsuk-focused-button();
-      box-shadow: 0 -2px $nhsuk-focus-color, 0 $nhsuk-focus-width $nhsuk-focus-text-color;
+      @include ofh-focused-button();
+      box-shadow: 0 -2px $ofh-focus-color, 0 $ofh-focus-width $ofh-focus-text-color;
     }
 
     &:active {
-      background-color: $color_shade_nhsuk-blue-50;
+      background-color: $color_shade_ofh-blue-50;
       border: 0;
 
-      .nhsuk-icon__search {
-        fill: $color_nhsuk-white;
+      .ofh-icon__search {
+        fill: $color_ofh-white;
       }
     }
   }
 }
 
-.nhsuk-search__close {
+.ofh-search__close {
   @include mq($until: tablet) {
     @include close-button();
 
-    margin-left: nhsuk-spacing(2);
-    margin-right: - nhsuk-spacing(2); /* [11] */
-    margin-top: nhsuk-spacing(2);
+    margin-left: ofh-spacing(2);
+    margin-right: - ofh-spacing(2); /* [11] */
+    margin-top: ofh-spacing(2);
 
     &:focus {
-      .nhsuk-icon__close {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon__close {
+        fill: $ofh-focus-text-color;
       }
     }
   }
@@ -389,11 +389,11 @@
   }
 }
 
-.nhsuk-search__input--withdropdown {
+.ofh-search__input--withdropdown {
   border-bottom-left-radius: 0;
 }
 
-.nhsuk-search__submit--withdropdown {
+.ofh-search__submit--withdropdown {
   border-bottom-right-radius: 0;
 }
 
@@ -402,7 +402,7 @@
  * Appears below the header strip
    ====================================================================== */
 
-.nhsuk-header__menu {
+.ofh-header__menu {
   float: right;
 
   @include mq($from: tablet) {
@@ -410,17 +410,17 @@
   }
 }
 
-.nhsuk-header__menu-toggle {
+.ofh-header__menu-toggle {
   @include toggle-button();
 
-  border-color: $color_nhsuk-dark-blue;
-  color: $color_nhsuk-dark-blue;
+  border-color: $color_ofh-dark-blue;
+  color: $color_ofh-dark-blue;
   display: block;
   font-size: 16px;
   font-weight: 400;
-  line-height: $nhsuk-base-line-height;
+  line-height: $ofh-base-line-height;
   margin-right: -16px;
-  padding: 7px nhsuk-spacing(3);
+  padding: 7px ofh-spacing(3);
   position: relative;
   text-decoration: none;
   z-index: 1;
@@ -438,9 +438,9 @@
   }
 
   &:focus {
-    @include nhsuk-focused-button;
+    @include ofh-focused-button;
 
-    box-shadow: 0 0 0 2px $nhsuk-focus-color, 0 $nhsuk-focus-width 0 2px $nhsuk-focus-text-color;
+    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
 }
@@ -448,8 +448,8 @@
 /* 'only' modifier for when there is only the menu in the header, no search
    ====================================================================== */
 
-.nhsuk-header__menu--only {
-  .nhsuk-header__menu-toggle {
+.ofh-header__menu--only {
+  .ofh-header__menu-toggle {
     @include mq($until: tablet) {
       position: relative;
       right: auto;
@@ -458,9 +458,9 @@
   }
 }
 
-.nhsuk-header__navigation {
+.ofh-header__navigation {
   @include print-hide();
-  background-color: $color_nhsuk-white;
+  background-color: $color_ofh-white;
   clear: both;
   display: none;
   max-width: none;
@@ -471,34 +471,34 @@
     display: block;
 
     @include mq($until: large-desktop) {
-      border-bottom: nhsuk-spacing(1) solid $color_nhsuk-grey-5; /* [7] */
-      border-top: nhsuk-spacing(1) solid $color_nhsuk-grey-5; /* [7] */
-      color: $color_nhsuk-dark-blue;
+      border-bottom: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
+      border-top: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
+      color: $color_ofh-dark-blue;
 
-      .nhsuk-width-container {
-        margin: 0 nhsuk-spacing(3);
+      .ofh-width-container {
+        margin: 0 ofh-spacing(3);
       }
     }
 
     @include mq($until: desktop) {
-      .nhsuk-width-container {
+      .ofh-width-container {
         margin: 0;
       }
     }
   }
 
   @include mq($from: large-desktop) {
-    background-color: $color_nhsuk-dark-blue;
+    background-color: $color_ofh-dark-blue;
     display: block;
     margin: 0 auto;
-    max-width: $nhsuk-page-width + nhsuk-spacing(9); /* [12] */
+    max-width: $ofh-page-width + ofh-spacing(9); /* [12] */
   }
 }
 
-.nhsuk-header__navigation-title {
-  font-weight: $nhsuk-font-bold;
+.ofh-header__navigation-title {
+  font-weight: $ofh-font-bold;
   margin-bottom: 0;
-  padding: nhsuk-spacing(3);
+  padding: ofh-spacing(3);
   position: relative;
 
   @include mq($from: large-desktop) {
@@ -506,28 +506,28 @@
   }
 }
 
-.nhsuk-header__navigation-close {
+.ofh-header__navigation-close {
   @include close-button();
   overflow: hidden;
   position: absolute;
-  right: nhsuk-spacing(2);
-  top: nhsuk-spacing(2);
+  right: ofh-spacing(2);
+  top: ofh-spacing(2);
   white-space: nowrap;
 
   &:focus {
-    .nhsuk-icon__close {
-      fill: $nhsuk-focus-text-color;
+    .ofh-icon__close {
+      fill: $ofh-focus-text-color;
     }
   }
 }
 
-.nhsuk-header__navigation-list {
+.ofh-header__navigation-list {
   list-style: none;
   margin: 0;
   padding-left: 0;
 
   @include mq($from: large-desktop) {
-    border-top: 1px solid $nhsuk-secondary-border-color;
+    border-top: 1px solid $ofh-secondary-border-color;
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -535,8 +535,8 @@
   }
 }
 
-.nhsuk-header__navigation-item {
-  border-top: 1px solid $color_nhsuk-grey-5;
+.ofh-header__navigation-item {
+  border-top: 1px solid $color_ofh-grey-5;
   margin-bottom: 0;
   position: relative;
 
@@ -545,51 +545,51 @@
     margin: 0;
     text-align: center;
 
-    .nhsuk-icon__chevron-right {
+    .ofh-icon__chevron-right {
       display: none;
     }
   }
 }
 
-.nhsuk-header__navigation-link {
-  @include nhsuk-font(16);
-  border-bottom: nhsuk-spacing(1) solid transparent;
-  border-top: nhsuk-spacing(1) solid transparent;
-  color: $color_nhsuk-dark-blue;
+.ofh-header__navigation-link {
+  @include ofh-font(16);
+  border-bottom: ofh-spacing(1) solid transparent;
+  border-top: ofh-spacing(1) solid transparent;
+  color: $color_ofh-dark-blue;
   display: block;
-  padding: 12px nhsuk-spacing(3);
+  padding: 12px ofh-spacing(3);
   text-decoration: none;
 
   @include mq($from: large-desktop) {
-    color: $color_nhsuk-white;
+    color: $color_ofh-white;
     line-height: normal;
   }
 
-  .nhsuk-icon__chevron-right {
-    fill: $color_nhsuk-grey-3;
+  .ofh-icon__chevron-right {
+    fill: $color_ofh-grey-3;
     position: absolute;
-    right: nhsuk-spacing(1);
+    right: ofh-spacing(1);
     top: 11px;
   }
 
   &:visited {
-    color: $color_nhsuk-dark-blue;
+    color: $color_ofh-dark-blue;
 
     @include mq($from: large-desktop) {
-      color: $color_nhsuk-white;
+      color: $color_ofh-white;
     }
   }
 
   &:hover {
     box-shadow: none;
-    color: $color_nhsuk-dark-blue;
+    color: $color_ofh-dark-blue;
     text-decoration: underline;
 
     @include mq($from: large-desktop) {
-      color: $color_nhsuk-white;
+      color: $color_ofh-white;
     }
 
-    .nhsuk-icon__chevron-right {
+    .ofh-icon__chevron-right {
       fill: $color_ofh_primary;
     }
 
@@ -597,35 +597,35 @@
 
   &:active,
   &:focus {
-    background-color: $nhsuk-focus-color;
-    border-bottom: $nhsuk-focus-width solid $nhsuk-focus-text-color;
+    background-color: $ofh-focus-color;
+    border-bottom: $ofh-focus-width solid $ofh-focus-text-color;
     box-shadow: none;
-    color: $nhsuk-focus-text-color;
-    outline: $nhsuk-focus-width solid transparent;
-    outline-offset: $nhsuk-focus-width;
+    color: $ofh-focus-text-color;
+    outline: $ofh-focus-width solid transparent;
+    outline-offset: $ofh-focus-width;
     text-decoration: none;
 
     &:hover {
-      color: $nhsuk-focus-text-color;
+      color: $ofh-focus-text-color;
 
-      .nhsuk-icon__chevron-right {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon__chevron-right {
+        fill: $ofh-focus-text-color;
       }
     }
 
     &:visited {
-      color: $nhsuk-focus-text-color;
+      color: $ofh-focus-text-color;
     }
   }
 }
 
-.nhsuk-header__navigation-item--for-mobile {
+.ofh-header__navigation-item--for-mobile {
   @include mq($from: large-desktop) {
     display: none;
   }
 }
 
-.nhsuk-header__navigation-list--small {
+.ofh-header__navigation-list--small {
   @include mq($from: large-desktop) {
     justify-content: flex-start;
   }
@@ -636,21 +636,21 @@
  * Transactional Header with service name
 **/
 
-.nhsuk-header__transactional-service-name {
+.ofh-header__transactional-service-name {
   float: left;
-  padding-left: nhsuk-spacing(3);
+  padding-left: ofh-spacing(3);
   padding-top: 3px;
 
   @include mq($until: large-desktop) {
     padding-left: 0;
-    padding-top: nhsuk-spacing(2);
+    padding-top: ofh-spacing(2);
     width: 100%;
   }
 }
 
-.nhsuk-header__transactional-service-name--link {
-  @include nhsuk-link-style-white;
-  @include nhsuk-font(19);
+.ofh-header__transactional-service-name--link {
+  @include ofh-link-style-white;
+  @include ofh-font(19);
   text-decoration: none;
 
   &:hover {
@@ -658,26 +658,26 @@
   }
 }
 
-.nhsuk-header--transactional {
+.ofh-header--transactional {
 
-  .nhsuk-header__link {
-    @include nhsuk-logo-size-small;
+  .ofh-header__link {
+    @include ofh-logo-size-small;
     display: block;
   }
 
-  .nhsuk-logo {
-    @include nhsuk-logo-size-small;
+  .ofh-logo {
+    @include ofh-logo-size-small;
   }
 
-  .nhsuk-header__transactional-service-name {
+  .ofh-header__transactional-service-name {
     float: left;
   }
 
 }
 
-.nhsuk-header__link--service {
+.ofh-header__link--service {
   height: 100%;
-  margin-bottom: -(nhsuk-spacing(1));
+  margin-bottom: -(ofh-spacing(1));
   text-decoration: none;
   width: auto;
 
@@ -692,22 +692,22 @@
   &:hover {
     background: none;
 
-    .nhsuk-header__service-name {
+    .ofh-header__service-name {
       text-decoration: underline;
     }
 
   }
 
   &:focus {
-    background: $nhsuk-focus-color;
-    box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color, 0 $nhsuk-focus-width 0 $nhsuk-focus-width $nhsuk-focus-text-color;
+    background: $ofh-focus-color;
+    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
 
-    .nhsuk-header__service-name {
-      color: $nhsuk-focus-text-color;
+    .ofh-header__service-name {
+      color: $ofh-focus-text-color;
       text-decoration: none;
     }
 
-    .nhsuk-logo {
+    .ofh-logo {
       box-shadow: none;
     }
 
@@ -715,20 +715,20 @@
 
 }
 
-.nhsuk-header__link--service > * {
+.ofh-header__link--service > * {
   height: 100%;
 }
 
-.nhsuk-header__service-name {
-  @include nhsuk-font(19);
+.ofh-header__service-name {
+  @include ofh-font(19);
 
-  color: $color_nhsuk-white;
+  color: $color_ofh-white;
   display: block;
   padding-left: 0;
   padding-right: 0;
 
   @include mq($from: large-desktop) {
-    padding-left: nhsuk-spacing(3);
+    padding-left: ofh-spacing(3);
   }
 
   @include mq($until: large-desktop) {
@@ -737,12 +737,12 @@
 
 }
 
-.nhsuk-header__logo--only {
+.ofh-header__logo--only {
   max-width: 100%;
 
   @include mq($from: tablet) {
 
-    .nhsuk-header__link--service {
+    .ofh-header__link--service {
       align-items: center;
       display: flex;
       -ms-flex-align: center;
@@ -750,8 +750,8 @@
       width: auto;
     }
 
-    .nhsuk-header__service-name {
-      padding-left: nhsuk-spacing(3);
+    .ofh-header__service-name {
+      padding-left: ofh-spacing(3);
     }
   }
 }
@@ -760,32 +760,32 @@
  * Organisational header
 **/
 
-.nhsuk-header--organisation {
+.ofh-header--organisation {
 
-  .nhsuk-header__link {
+  .ofh-header__link {
     height: 100%;
     text-decoration: none;
     width: auto;
 
     &:hover {
-      color: $color_nhsuk-white;
+      color: $color_ofh-white;
       text-decoration: underline;
 
-      .nhsuk-logo {
+      .ofh-logo {
         box-shadow: none;
       }
     }
 
     &:focus {
-      background: $nhsuk-focus-color;
-      box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color, 0 $nhsuk-focus-width 0 $nhsuk-focus-width $nhsuk-focus-text-color;
+      background: $ofh-focus-color;
+      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
 
-      .nhsuk-organisation-name,
-      .nhsuk-organisation-descriptor {
-        color: $nhsuk-focus-text-color;
+      .ofh-organisation-name,
+      .ofh-organisation-descriptor {
+        color: $ofh-focus-text-color;
       }
 
-      .nhsuk-logo {
+      .ofh-logo {
         box-shadow: none;
       }
 
@@ -795,7 +795,7 @@
     }
   }
 
-  .nhsuk-header__logo .nhsuk-logo {
+  .ofh-header__logo .ofh-logo {
     height: 32px;
     width: 80px;
 
@@ -810,14 +810,14 @@
     }
   }
 
-  .nhsuk-header__navigation {
+  .ofh-header__navigation {
     max-width: none;
   }
 
 }
 
-.nhsuk-organisation-name {
-  color: $color_nhsuk-white;
+.ofh-organisation-name {
+  color: $color_ofh-white;
   display: block;
   font-size: 22px;
   font-weight: bold;
@@ -826,7 +826,7 @@
   margin-top: -2px;
 
   @include mq($media-type: print) {
-    color: $nhsuk-print-text-color;
+    color: $ofh-print-text-color;
   }
 
   @media (max-width: 450px) {
@@ -840,14 +840,14 @@
     line-height: 13px;
   }
 
-  .nhsuk-organisation-name-split {
+  .ofh-organisation-name-split {
     display: block;
   }
 
 }
 
-.nhsuk-organisation-descriptor {
-  color: $color_nhsuk-white;
+.ofh-organisation-descriptor {
+  color: $color_ofh-white;
   display: block;
   font-size: 15px;
   font-weight: bold;
@@ -868,140 +868,140 @@
   }
 }
 
-.nhsuk-org-logo {
+.ofh-org-logo {
   height: 100%;
 }
 
 // Header (white)
 
-.nhsuk-header--white {
-  background-color: $color_nhsuk-white;
+.ofh-header--white {
+  background-color: $color_ofh-white;
 
-  .nhsuk-logo {
-    .nhsuk-logo__background {
+  .ofh-logo {
+    .ofh-logo__background {
       fill: $color_ofh_primary;
     }
 
-    .nhsuk-logo__text {
-      fill: $color_nhsuk-white;
+    .ofh-logo__text {
+      fill: $color_ofh-white;
     }
   }
 
-  .nhsuk-header__link {
+  .ofh-header__link {
 
     &:hover {
-      color: $nhsuk-text-color;
+      color: $ofh-text-color;
       text-decoration: underline;
 
-      .nhsuk-organisation-descriptor {
-        color: $nhsuk-text-color;
+      .ofh-organisation-descriptor {
+        color: $ofh-text-color;
       }
     }
 
   }
 
-  .nhsuk-search__submit {
+  .ofh-search__submit {
     background-color: $color_ofh_primary;
 
-    .nhsuk-icon__search {
-      fill: $color_nhsuk-white;
+    .ofh-icon__search {
+      fill: $color_ofh-white;
     }
 
     &:hover {
-      background-color: $color_shade_nhsuk-blue-20;
-      border-color: $color_shade_nhsuk-blue-20;
+      background-color: $color_shade_ofh-blue-20;
+      border-color: $color_shade_ofh-blue-20;
     }
 
     &:focus {
-      background-color: $nhsuk-focus-color;
+      background-color: $ofh-focus-color;
 
-      .nhsuk-icon__search {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon__search {
+        fill: $ofh-focus-text-color;
       }
     }
   }
 
-  .nhsuk-search__input {
-    border: 1px solid $color_nhsuk-grey-3;
+  .ofh-search__input {
+    border: 1px solid $color_ofh-grey-3;
 
     &:focus {
-      border: 2px solid $nhsuk-focus-text-color;
+      border: 2px solid $ofh-focus-text-color;
 
       @include mq($until: tablet) {
-        border: $nhsuk-focus-width solid $nhsuk-focus-text-color;
+        border: $ofh-focus-width solid $ofh-focus-text-color;
       }
     }
   }
 
-  .nhsuk-header__search-toggle,
-  .nhsuk-header__menu-toggle {
-    border-color: $color_nhsuk-dark-blue;
-    color: $color_nhsuk-dark-blue;
+  .ofh-header__search-toggle,
+  .ofh-header__menu-toggle {
+    border-color: $color_ofh-dark-blue;
+    color: $color_ofh-dark-blue;
 
-    .nhsuk-icon {
+    .ofh-icon {
       fill: $color_ofh_primary;
     }
 
     &.is-active,
     &:hover {
       background-color: $color_ofh_primary;
-      border-color: $color_nhsuk-dark-blue;
+      border-color: $color_ofh-dark-blue;
       box-shadow: none;
-      color: $color_nhsuk-dark-blue;
+      color: $color_ofh-dark-blue;
 
-      .nhsuk-icon {
-        fill: $color_nhsuk-dark-blue;
+      .ofh-icon {
+        fill: $color_ofh-dark-blue;
       }
     }
 
     &:focus {
-      color: $nhsuk-focus-text-color;
+      color: $ofh-focus-text-color;
 
-      .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon {
+        fill: $ofh-focus-text-color;
       }
     }
   }
 
-  .nhsuk-header__search-form {
+  .ofh-header__search-form {
     @include mq($until: tablet) {
       padding-top: 0;
     }
   }
 
-  .nhsuk-organisation-name {
+  .ofh-organisation-name {
     color: #000; /* [9] */  /* stylelint-disable-line color-no-hex */
   }
 
-  .nhsuk-organisation-descriptor {
+  .ofh-organisation-descriptor {
     color: $color_ofh_primary;
   }
 
-  .nhsuk-header__transactional-service-name--link {
-    color: $color_nhsuk-black;
+  .ofh-header__transactional-service-name--link {
+    color: $color_ofh-black;
   }
 
-  .nhsuk-header__navigation-list {
+  .ofh-header__navigation-list {
     border-top: 0;
   }
 
-  .nhsuk-header__service-name {
-    color: $nhsuk-text-color;
+  .ofh-header__service-name {
+    color: $ofh-text-color;
   }
 
 }
 
 // Navigation (white)
 
-.nhsuk-header--white-nav {
-  .nhsuk-header__navigation {
-    background-color: $color_nhsuk-white;
+.ofh-header--white-nav {
+  .ofh-header__navigation {
+    background-color: $color_ofh-white;
 
-    .nhsuk-header__navigation-list {
-      border-top: 1px solid $color_nhsuk-grey-5;
+    .ofh-header__navigation-list {
+      border-top: 1px solid $color_ofh-grey-5;
     }
 
-    .nhsuk-header__navigation-link {
+    .ofh-header__navigation-link {
       color: $color_ofh_primary;
 
       &:visited {
@@ -1009,10 +1009,10 @@
       }
 
       &:focus {
-        color: $nhsuk-focus-text-color;
+        color: $ofh-focus-text-color;
 
         &:hover {
-          background: $nhsuk-focus-color;
+          background: $ofh-focus-color;
         }
       }
     }

@@ -5,36 +5,36 @@
 //
 // Default link styling
 //
-// Usage: @include nhsuk-link-style-default;
+// Usage: @include ofh-link-style-default;
 //
 
-@mixin nhsuk-link-style-default {
+@mixin ofh-link-style-default {
 
-  color: $nhsuk-link-color;
+  color: $ofh-link-color;
 
   &:visited {
-    color: $nhsuk-link-visited-color;
+    color: $ofh-link-visited-color;
   }
 
   &:hover {
-    color: $nhsuk-link-hover-color;
+    color: $ofh-link-hover-color;
     text-decoration: none;
   }
 
   &:focus {
-    @include nhsuk-focused-text();
+    @include ofh-focused-text();
 
     &:hover {
       text-decoration: none;
     }
 
     &:visited {
-      color: $nhsuk-focus-text-color;
+      color: $ofh-focus-text-color;
     }
   }
 
   &:active {
-    color: $nhsuk-link-active-color;
+    color: $ofh-link-active-color;
   }
 
 }
@@ -42,31 +42,31 @@
 //
 // White link styling, used in the footer.
 //
-// Usage: @include nhsuk-link-style-white;
+// Usage: @include ofh-link-style-white;
 //
 
-@mixin nhsuk-link-style-white {
+@mixin ofh-link-style-white {
 
-  color: $color_nhsuk-white;
+  color: $color_ofh-white;
 
   &:visited {
-    color: $color_nhsuk-white;
+    color: $color_ofh-white;
   }
 
   &:hover {
-    color: $color_nhsuk-white;
+    color: $color_ofh-white;
     text-decoration: none;
   }
 
   &:focus {
-    color: $nhsuk-focus-text-color;
-    outline: $nhsuk-focus-width solid transparent;
-    outline-offset: $nhsuk-focus-width;
+    color: $ofh-focus-text-color;
+    outline: $ofh-focus-width solid transparent;
+    outline-offset: $ofh-focus-width;
     text-decoration: none;
   }
 
   &:active {
-    color: $nhsuk-link-active-color;
+    color: $ofh-link-active-color;
   }
 
 }
@@ -74,10 +74,10 @@
 //
 // Default link hover only styling
 //
-// Usage: @include nhsuk-link-style-hover;
+// Usage: @include ofh-link-style-hover;
 //
 
-@mixin nhsuk-link-style-hover {
+@mixin ofh-link-style-hover {
   &:hover {
     text-decoration: none;
   }
@@ -93,33 +93,33 @@
 /// that you’ve visited it before is not important.
 ///
 /// If you use this mixin in a component you must also include the
-/// nhsuk-link-style-default mixin in order to get the focus state.
+/// ofh-link-style-default mixin in order to get the focus state.
 ///
 /// @example scss
-///   .nhsuk-component__link {
-///     @include nhsuk-link-style-default;
-///     @include nhsuk-link-style-no-visited-state;
+///   .ofh-component__link {
+///     @include ofh-link-style-default;
+///     @include ofh-link-style-no-visited-state;
 ///   }
 ///
 
-@mixin nhsuk-link-style-no-visited-state {
+@mixin ofh-link-style-no-visited-state {
   &:link {
-    color: $nhsuk-link-color;
+    color: $ofh-link-color;
   }
 
   &:visited {
-    color: $nhsuk-link-color;
+    color: $ofh-link-color;
   }
 
   &:hover {
-    color: $nhsuk-link-hover-color;
+    color: $ofh-link-hover-color;
   }
 
   &:active {
-    color: $nhsuk-link-active-color;
+    color: $ofh-link-active-color;
   }
 
   &:focus {
-    color: $nhsuk-focus-text-color;
+    color: $ofh-focus-text-color;
   }
 }

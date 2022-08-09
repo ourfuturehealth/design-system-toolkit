@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## Importing assets (optional)
 
-If you want to import assets such as the NHS logo, favicons and SVG icons, you might wish to copy the files into your project folders from the `node_modules/ofh-design-system-toolkit/assets/` directory or you can reference them straight from the `node_modules` folder.
+If you want to import assets such as the Our Future Health logo, favicons and SVG icons, you might wish to copy the files into your project folders from the `node_modules/ofh-design-system-toolkit/assets/` directory or you can reference them straight from the `node_modules` folder.
 
 ```html
 <link rel="shortcut icon" href="path-to-assets/favicons/favicon.ico" type="image/x-icon">

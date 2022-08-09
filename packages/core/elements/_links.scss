@@ -4,7 +4,7 @@
 
 /**
  * Our basic `<a>` elements only need very minimal styling.
- * It uses the @mixin nhsuk-link-style-default within tools/links.
+ * It uses the @mixin ofh-link-style-default within tools/links.
  * Anything more opinionated (e.g. buttons, calls-to-action, etc.) will need a
  * class defining in the Components layer.
  *
@@ -13,11 +13,11 @@
  */
 
 a {
-  @include nhsuk-link-style-default;
+  @include ofh-link-style-default;
 
   @include mq($media-type: print) {
     &:after {
-      color: $color_nhsuk-black;
+      color: $color_ofh-black;
       content: ' (Link: ' attr(href) ')'; /* [1] */
       font-size: 14pt; /* [2] */
     }
@@ -25,6 +25,6 @@ a {
 
 }
 
-.nhsuk-link--no-visited-state {
-  @include nhsuk-link-style-no-visited-state;
+.ofh-link--no-visited-state {
+  @include ofh-link-style-no-visited-state;
 }

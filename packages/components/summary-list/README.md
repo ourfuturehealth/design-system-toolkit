@@ -9,63 +9,63 @@
 #### HTML markup
 
 ```html
-<dl class="nhsuk-summary-list">
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+<dl class="ofh-summary-list">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Name
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       Sarah Philips
     </dd>
-    <dd class="nhsuk-summary-list__actions">
+    <dd class="ofh-summary-list__actions">
       <a href="#">
         Change
-        <span class="nhsuk-u-visually-hidden"> name</span>
+        <span class="ofh-u-visually-hidden"> name</span>
       </a>
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Date of birth
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       5 January 1978
     </dd>
-    <dd class="nhsuk-summary-list__actions">
+    <dd class="ofh-summary-list__actions">
       <a href="#">
         Change
-        <span class="nhsuk-u-visually-hidden"> date of birth</span>
+        <span class="ofh-u-visually-hidden"> date of birth</span>
       </a>
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact information
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       72 Guild Street
       <br>London
       <br>SE23 6FH
     </dd>
-    <dd class="nhsuk-summary-list__actions">
+    <dd class="ofh-summary-list__actions">
       <a href="#">
         Change
-        <span class="nhsuk-u-visually-hidden"> contact information</span>
+        <span class="ofh-u-visually-hidden"> contact information</span>
       </a>
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact details
     </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p class="nhsuk-body">07700 900457</p>
-      <p class="nhsuk-body">sarah.phillips@example.com</p>
+    <dd class="ofh-summary-list__value">
+      <p class="ofh-body">07700 900457</p>
+      <p class="ofh-body">sarah.phillips@example.com</p>
     </dd>
-    <dd class="nhsuk-summary-list__actions">
+    <dd class="ofh-summary-list__actions">
       <a href="#">
         Change
-        <span class="nhsuk-u-visually-hidden"> contact details</span>
+        <span class="ofh-u-visually-hidden"> contact details</span>
       </a>
     </dd>
   </div>
@@ -160,40 +160,40 @@
 #### HTML markup
 
 ```html
-<dl class="nhsuk-summary-list">
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+<dl class="ofh-summary-list">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Name
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       Sarah Philips
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Date of birth
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       5 January 1978
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact information
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       72 Guild Street
       <br>London
       <br>SE23 6FH
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact details
     </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p class="nhsuk-body">07700 900457</p>
-      <p class="nhsuk-body">sarah.phillips@example.com</p>
+    <dd class="ofh-summary-list__value">
+      <p class="ofh-body">07700 900457</p>
+      <p class="ofh-body">sarah.phillips@example.com</p>
     </dd>
   </div>
 </dl>
@@ -251,40 +251,40 @@
 #### HTML markup
 
 ```html
-<dl class="nhsuk-summary-list nhsuk-summary-list--no-border">
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+<dl class="ofh-summary-list ofh-summary-list--no-border">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Name
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       Sarah Philips
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Date of birth
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       5 January 1978
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact information
     </dt>
-    <dd class="nhsuk-summary-list__value">
+    <dd class="ofh-summary-list__value">
       72 Guild Street
       <br>London
       <br>SE23 6FH
     </dd>
   </div>
-  <div class="nhsuk-summary-list__row">
-    <dt class="nhsuk-summary-list__key">
+  <div class="ofh-summary-list__row">
+    <dt class="ofh-summary-list__key">
       Contact details
     </dt>
-    <dd class="nhsuk-summary-list__value">
-      <p class="nhsuk-body">07700 900457</p>
-      <p class="nhsuk-body">sarah.phillips@example.com</p>
+    <dd class="ofh-summary-list__value">
+      <p class="ofh-body">07700 900457</p>
+      <p class="ofh-body">sarah.phillips@example.com</p>
     </dd>
   </div>
 </dl>
@@ -296,7 +296,7 @@
 {% from "components/summary-list/macro.njk" import summaryList %}
 
 {{ summaryList({
-  classes: 'nhsuk-summary-list--no-border',
+  classes: 'ofh-summary-list--no-border',
   rows: [
     {
       key: {

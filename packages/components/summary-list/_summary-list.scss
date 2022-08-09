@@ -12,8 +12,8 @@
  * 4. Fallback for older browsers only
  */
 
-.nhsuk-summary-list {
-  @include nhsuk-font($size: 19);
+.ofh-summary-list {
+  @include ofh-font($size: 19);
 
   @include mq($from: tablet) {
     display: table;
@@ -22,36 +22,36 @@
   }
 
   margin: 0; /* [2] */
-  @include nhsuk-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
-.nhsuk-summary-list__row {
+.ofh-summary-list__row {
   @include mq($until: tablet) {
-    border-bottom: 1px solid $nhsuk-border-color;
-    margin-bottom: nhsuk-spacing(3);
+    border-bottom: 1px solid $ofh-border-color;
+    margin-bottom: ofh-spacing(3);
   }
   @include mq($from: tablet) {
     display: table-row;
   }
 }
 
-.nhsuk-summary-list__key,
-.nhsuk-summary-list__value,
-.nhsuk-summary-list__actions {
+.ofh-summary-list__key,
+.ofh-summary-list__value,
+.ofh-summary-list__actions {
   margin: 0; /* [2] */
   vertical-align: top;
 
   @include mq($from: tablet) {
-    border-bottom: 1px solid $nhsuk-border-color;
+    border-bottom: 1px solid $ofh-border-color;
     display: table-cell;
-    padding-bottom: nhsuk-spacing(2);
-    padding-right: nhsuk-spacing(4);
-    padding-top: nhsuk-spacing(2);
+    padding-bottom: ofh-spacing(2);
+    padding-right: ofh-spacing(4);
+    padding-top: ofh-spacing(2);
   }
 }
 
-.nhsuk-summary-list__actions {
-  margin-bottom: nhsuk-spacing(3);
+.ofh-summary-list__actions {
+  margin-bottom: ofh-spacing(3);
 
   @include mq($from: tablet) {
     padding-right: 0;
@@ -60,67 +60,67 @@
   }
 }
 
-.nhsuk-summary-list__key,
-.nhsuk-summary-list__value {
+.ofh-summary-list__key,
+.ofh-summary-list__value {
   /* [3] */
   overflow-wrap: break-word;
   word-wrap: break-word; /* [4] */
 }
 
-.nhsuk-summary-list__key {
-  @include nhsuk-typography-weight-bold;
+.ofh-summary-list__key {
+  @include ofh-typography-weight-bold;
 
-  margin-bottom: nhsuk-spacing(1);
+  margin-bottom: ofh-spacing(1);
 
   @include mq($from: tablet) {
     width: 30%;
   }
 }
 
-.nhsuk-summary-list__value {
+.ofh-summary-list__value {
   @include mq($until: tablet) {
-    margin-bottom: nhsuk-spacing(3);
+    margin-bottom: ofh-spacing(3);
   }
   @include mq($from: tablet) {
     width: 50%;
   }
 }
 
-.nhsuk-summary-list__value > p {
-  margin-bottom: nhsuk-spacing(2);
+.ofh-summary-list__value > p {
+  margin-bottom: ofh-spacing(2);
 }
 
-.nhsuk-summary-list__value > :last-child {
+.ofh-summary-list__value > :last-child {
   margin-bottom: 0;
 }
 
-.nhsuk-summary-list__actions-list {
+.ofh-summary-list__actions-list {
   margin: 0; /* [2] */
   padding: 0; /* [2] */
   width: 100%;
 }
 
-.nhsuk-summary-list__actions-list-item {
+.ofh-summary-list__actions-list-item {
   display: inline;
-  margin-right: nhsuk-spacing(2);
-  padding-right: nhsuk-spacing(2);
+  margin-right: ofh-spacing(2);
+  padding-right: ofh-spacing(2);
 }
 
-.nhsuk-summary-list__actions-list-item:not(:last-child) {
-  border-right: 1px solid $nhsuk-border-color;
+.ofh-summary-list__actions-list-item:not(:last-child) {
+  border-right: 1px solid $ofh-border-color;
 }
 
-.nhsuk-summary-list__actions-list-item:last-child {
+.ofh-summary-list__actions-list-item:last-child {
   border: 0;
   margin-right: 0;
   padding-right: 0;
 }
 
-.nhsuk-summary-list--no-border {
-  .nhsuk-summary-list__key,
-  .nhsuk-summary-list__value,
-  .nhsuk-summary-list__actions,
-  .nhsuk-summary-list__row {
+.ofh-summary-list--no-border {
+  .ofh-summary-list__key,
+  .ofh-summary-list__value,
+  .ofh-summary-list__actions,
+  .ofh-summary-list__row {
     border: 0;
   }
 }
