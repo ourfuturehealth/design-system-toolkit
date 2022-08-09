@@ -2,7 +2,7 @@
 
 ## Requirements
 
-To run OFH design system toolkit locally you'll need to:
+To run Our Future Health design system toolkit locally you'll need to:
 * [set up git](https://help.github.com/articles/set-up-git/)
 * [install Node.js](https://nodejs.org/en/)
 We recommend to use the [long-term support (LTS) version of Nodejs](https://nodejs.org/en/download/), rather than the latest beta version.

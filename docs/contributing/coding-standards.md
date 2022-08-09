@@ -50,7 +50,7 @@ use a different prefix, for example `.app-` or the initials of your department.
 
 ### Block Element Modifier (BEM)
 
-OFH design system toolkit uses the Block Element Modifier (BEM) methodology when naming
+Our Future Health design system toolkit uses the Block Element Modifier (BEM) methodology when naming
 CSS classes. This is designed to help developers understand how the different
 classes relate to each other.
 
@@ -227,7 +227,7 @@ We're still writing our JavaScript style guide, as we're only just figuring it o
 
 ## Nunjucks
 
-We have chosen as Nunjucks as the templating language for OFH design system toolkit components. We expose those templates as reusable chunks of code: macros. Developers import macros into their application, call them as per documentation and provide data to its arguments.
+We have chosen as Nunjucks as the templating language for Our Future Health design system toolkit components. We expose those templates as reusable chunks of code: macros. Developers import macros into their application, call them as per documentation and provide data to its arguments.
 
 To provide a level of consistency for developers we have standardised argument names, their expected input, use and placement. There are expectations, and  if so they are documented accordingly.
 
@@ -286,7 +286,7 @@ Care card emergency (red and black) example:
 
 ## Components
 
-You can find OFH design system toolkit components in `packages/components`.
+You can find Our Future Health design system toolkit components in `packages/components`.
 
 Components must use the `.ofh-` namespace.
 

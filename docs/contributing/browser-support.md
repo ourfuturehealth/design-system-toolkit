@@ -1,6 +1,6 @@
 # Browser support
 
-OFH design system toolkit browser support is shown in the table below.
+Our Future Health design system toolkit browser support is shown in the table below.
 
 | Operating system | Browser                              | Support   |
 |----------------- |--------------------------------------|-----------|
@@ -24,7 +24,7 @@ We no longer support older versions of Internet Explorer. This is due to the ver
 
 # Assistive technology support
 
-We test the OFH design system toolkit with the following assistive technology:
+We test the Our Future Health design system toolkit with the following assistive technology:
 
 | Software                 | Type               | Browser                             |
 |--------------------------|--------------------|-------------------------------------|

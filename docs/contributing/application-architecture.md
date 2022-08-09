@@ -26,7 +26,7 @@ The application generates static HTML pages to preview components, with each com
 
 `packages/`
 
-  OFH design system toolkit individual components files, such as all the stylesheet (scss) files, HTML templates (nunjucks), READMEs and assets.
+  Our Future Health design system toolkit individual components files, such as all the stylesheet (scss) files, HTML templates (nunjucks), READMEs and assets.
 
 `tasks/`
 

@@ -18,9 +18,9 @@ Find out more about the select component and when to use it in the [NHS digital 
     Label text goes here
   </label>
   <select class="ofh-select" id="select-1" name="select-1">
-    <option value="1">OFH design system toolkit option 1</option>
-    <option value="2" selected>OFH design system toolkit option 2</option>
-    <option value="3" disabled>OFH design system toolkit option 3</option>
+    <option value="1">Our Future Health design system toolkit option 1</option>
+    <option value="2" selected>Our Future Health design system toolkit option 2</option>
+    <option value="3" disabled>Our Future Health design system toolkit option 3</option>
   </select>
 </div>
 ```
@@ -39,16 +39,16 @@ Find out more about the select component and when to use it in the [NHS digital 
   "items": [
     {
       "value": 1,
-      "text": "OFH design system toolkit option 1"
+      "text": "Our Future Health design system toolkit option 1"
     },
     {
       "value": 2,
-      "text": "OFH design system toolkit option 2",
+      "text": "Our Future Health design system toolkit option 2",
       "selected": true
     },
     {
       "value": 3,
-      "text": "OFH design system toolkit option 3",
+      "text": "Our Future Health design system toolkit option 3",
       "disabled": true
     }
   ]
@@ -75,9 +75,9 @@ Find out more about the select component and when to use it in the [NHS digital 
   Error message goes here
   </span>
   <select class="ofh-select ofh-select--error" id="select-2" name="select-2" aria-describedby="select-2-hint select-2-error">
-    <option value="1">OFH design system toolkit option 1</option>
-    <option value="2">OFH design system toolkit option 2</option>
-    <option value="3">OFH design system toolkit option 3</option>
+    <option value="1">Our Future Health design system toolkit option 1</option>
+    <option value="2">Our Future Health design system toolkit option 2</option>
+    <option value="3">Our Future Health design system toolkit option 3</option>
   </select>
 </div>
 ```
@@ -102,15 +102,15 @@ Find out more about the select component and when to use it in the [NHS digital 
   "items": [
     {
       "value": 1,
-      "text": "OFH design system toolkit option 1"
+      "text": "Our Future Health design system toolkit option 1"
     },
     {
       "value": 2,
-      "text": "OFH design system toolkit option 2"
+      "text": "Our Future Health design system toolkit option 2"
     },
     {
       "value": 3,
-      "text": "OFH design system toolkit option 3"
+      "text": "Our Future Health design system toolkit option 3"
     }
   ]
 }) }}
