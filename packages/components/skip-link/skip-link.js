@@ -1,5 +1,5 @@
 /*
- * NHS.UK skip link.
+ * Our Future Health skip link.
  *
  * When using VoiceOver on iOS, focus remains on the skip link anchor
  * when elected so the next focusable element is not at the jumped to area.
@@ -8,7 +8,7 @@
 export default () => {
   // Assign required DOM elements
   const heading = document.querySelector('h1');
-  const skipLink = document.querySelector('.nhsuk-skip-link');
+  const skipLink = document.querySelector('.ofh-skip-link');
 
   const addEvents = () => {
     // Add tabindex = -1 and apply focus to heading on skip link click

@@ -9,7 +9,7 @@
 // https://github.com/alphagov/govuk-frontend
 //
 
-$nhsuk-spacing-points: (
+$ofh-spacing-points: (
   0: 0,
   1: 4px,
   2: 8px,
@@ -33,14 +33,14 @@ $nhsuk-spacing-points: (
 // You can define different behaviour on tablet and desktop. The 'null'
 // breakpoint is for mobile.
 //
-// Access responsive spacing with `nhsuk-responsive-margin` or
-// `nhsuk-responsive-padding` mixins.
+// Access responsive spacing with `ofh-responsive-margin` or
+// `ofh-responsive-padding` mixins.
 //
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
 //
 
-$nhsuk-spacing-responsive-scale: (
+$ofh-spacing-responsive-scale: (
   0: (
     null: 0,
     tablet: 0

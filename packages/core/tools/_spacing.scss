@@ -14,15 +14,15 @@
 //
 // @example scss
 //  .foo {
-//    padding: nhsuk-spacing(5);
-//    top: nhsuk-spacing(2) !important; // if `!important` is required
+//    padding: ofh-spacing(5);
+//    top: ofh-spacing(2) !important; // if `!important` is required
 //   }
 //
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
 //
 
-@function nhsuk-spacing($spacing-point) {
+@function ofh-spacing($spacing-point) {
 
   $actual-input-type: type-of($spacing-point);
   @if $actual-input-type != 'number' {
@@ -30,11 +30,11 @@
     + '#{$actual-input-type}.'; /* stylelint-disable-line indentation */
   }
 
-  @if not map-has-key($nhsuk-spacing-points, $spacing-point) {
+  @if not map-has-key($ofh-spacing-points, $spacing-point) {
     @error 'Unknown spacing variable `#{$spacing-point}`. Make sure you are using a point from the spacing scale in `_settings/spacing.scss`.';
   }
 
-  @return map-get($nhsuk-spacing-points, $spacing-point);
+  @return map-get($ofh-spacing-points, $spacing-point);
 }
 
 // Responsive spacing
@@ -45,8 +45,8 @@
 // by fetching a 'spacing map' from the responsive spacing scale, which defines
 // different spacing values at different breakpoints.
 //
-// To generate responsive spacing, use 'nhsuk-responsive-margin' or
-// 'nhsuk-responsive-padding' mixins
+// To generate responsive spacing, use 'ofh-responsive-margin' or
+// 'ofh-responsive-padding' mixins
 //
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 //  scale, corresponds to a map of breakpoints and spacing values
@@ -58,8 +58,8 @@
 //
 // @example scss
 //  .foo {
-//    padding: nhsuk-spacing(5);
-//    top: nhsuk-spacing(2) !important; // if `!important` is required
+//    padding: ofh-spacing(5);
+//    top: ofh-spacing(2) !important; // if `!important` is required
 //   }
 //
 // 1. Make sure that the return value from `_settings/spacing.scss` is a map.
@@ -70,19 +70,19 @@
 // https://github.com/alphagov/govuk-frontend
 //
 
-@mixin _nhsuk-responsive-spacing($responsive-spacing-point, $property, $direction: 'all', $important: false, $adjustment: false) {
+@mixin _ofh-responsive-spacing($responsive-spacing-point, $property, $direction: 'all', $important: false, $adjustment: false) {
 
   $actual-input-type: type-of($responsive-spacing-point);
   @if $actual-input-type != 'number' {
     @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}.';
   }
 
-  @if not map-has-key($nhsuk-spacing-responsive-scale, $responsive-spacing-point) {
+  @if not map-has-key($ofh-spacing-responsive-scale, $responsive-spacing-point) {
     @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the '
     + 'responsive spacing scale in `_settings/spacing.scss`.'; /* stylelint-disable-line indentation */
   }
 
-  $scale-map: map-get($nhsuk-spacing-responsive-scale, $responsive-spacing-point); // [1] //
+  $scale-map: map-get($ofh-spacing-responsive-scale, $responsive-spacing-point); // [1] //
   $actual-map-type: type-of($scale-map);
   @if $actual-map-type != 'map' {
     @error 'Expected a number (integer), but got a '
@@ -120,9 +120,9 @@
 //
 // Adds responsive margin by fetching a 'spacing map' from the responsive
 // spacing scale, which defines different spacing values at different
-// breakpoints. Wrapper for the `_nhsuk-responsive-spacing` mixin.
+// breakpoints. Wrapper for the `_ofh-responsive-spacing` mixin.
 //
-// @see {mixin} _nhsuk-responsive-spacing
+// @see {mixin} _ofh-responsive-spacing
 //
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 // scale, corresponds to a map of breakpoints and spacing values
@@ -133,15 +133,15 @@
 //
 // @example scss
 //   .foo {
-//      @include nhsuk-responsive-margin(6, 'left', $adjustment: 1px);
+//      @include ofh-responsive-margin(6, 'left', $adjustment: 1px);
 //   }
 //
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
 //
 
-@mixin nhsuk-responsive-margin($responsive-spacing-point, $direction: 'all', $important: false, $adjustment: false) {
-  @include _nhsuk-responsive-spacing($responsive-spacing-point, 'margin', $direction, $important, $adjustment);
+@mixin ofh-responsive-margin($responsive-spacing-point, $direction: 'all', $important: false, $adjustment: false) {
+  @include _ofh-responsive-spacing($responsive-spacing-point, 'margin', $direction, $important, $adjustment);
 }
 
 // Responsive padding
@@ -150,9 +150,9 @@
 //
 // Adds responsive padding by fetching a 'spacing map' from the responsive
 // spacing scale, which defines different spacing values at different
-// breakpoints. Wrapper for the `_nhsuk-responsive-spacing` mixin.
+// breakpoints. Wrapper for the `_ofh-responsive-spacing` mixin.
 //
-// @see {mixin} _nhsuk-responsive-spacing
+// @see {mixin} _ofh-responsive-spacing
 //
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 //   scale, corresponds to a map of breakpoints and spacing values
@@ -163,13 +163,13 @@
 //
 // @example scss
 //   .foo {
-//      @include nhsuk-responsive-padding(6, 'left', $adjustment: 1px);
+//      @include ofh-responsive-padding(6, 'left', $adjustment: 1px);
 //   }
 //
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
 //
 
-@mixin nhsuk-responsive-padding($responsive-spacing-point, $direction: 'all', $important: false, $adjustment: false) {
-  @include _nhsuk-responsive-spacing($responsive-spacing-point, 'padding', $direction, $important, $adjustment);
+@mixin ofh-responsive-padding($responsive-spacing-point, $direction: 'all', $important: false, $adjustment: false) {
+  @include _ofh-responsive-spacing($responsive-spacing-point, 'padding', $direction, $important, $adjustment);
 }

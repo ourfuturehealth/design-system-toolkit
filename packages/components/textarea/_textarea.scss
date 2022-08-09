@@ -2,24 +2,24 @@
    COMPONENTS/ #TEXTAREA
    ========================================================================== */
 
-.nhsuk-textarea {
-  @include nhsuk-font(19);
+.ofh-textarea {
+  @include ofh-font(19);
 
   -webkit-appearance: none;
-  border: $nhsuk-border-width-form-element solid $nhsuk-form-border-color;
+  border: $ofh-border-width-form-element solid $ofh-form-border-color;
   border-radius: 0;
   box-sizing: border-box;
   display: block;
   min-height: 40px;
-  padding: nhsuk-spacing(1);
+  padding: ofh-spacing(1);
   resize: vertical;
   width: 100%;
 
   &:focus {
-    @include nhsuk-focused-input;
+    @include ofh-focused-input;
   }
 }
 
-.nhsuk-textarea--error {
-  border: $nhsuk-border-width-form-element-error solid $nhsuk-error-color;
+.ofh-textarea--error {
+  border: $ofh-border-width-form-element-error solid $ofh-error-color;
 }

@@ -7,71 +7,71 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$nhsuk-radios-size: nhsuk-spacing(6);
-$nhsuk-radios-label-padding-left-right: 12px;
+$ofh-radios-size: ofh-spacing(6);
+$ofh-radios-label-padding-left-right: 12px;
 // When the default focus width is used on a curved edge it looks visually smaller.
 // So for the circular radios we bump the default to make it look visually consistent.
-$nhsuk-radios-focus-width: $nhsuk-focus-width + 1px;
+$ofh-radios-focus-width: $ofh-focus-width + 1px;
 
-.nhsuk-radios__item {
-  @include nhsuk-font(19);
+.ofh-radios__item {
+  @include ofh-font(19);
 
   clear: left;
   display: block;
-  margin-bottom: nhsuk-spacing(2);
-  min-height: $nhsuk-radios-size;
-  padding: 0 0 0 $nhsuk-radios-size;
+  margin-bottom: ofh-spacing(2);
+  min-height: $ofh-radios-size;
+  padding: 0 0 0 $ofh-radios-size;
   position: relative;
 }
 
-.nhsuk-radios__item:last-child,
-.nhsuk-radios__item:last-of-type {
+.ofh-radios__item:last-child,
+.ofh-radios__item:last-of-type {
   margin-bottom: 0;
 }
 
-.nhsuk-radios__input {
+.ofh-radios__input {
   cursor: pointer;
-  height: $nhsuk-radios-size;
+  height: $ofh-radios-size;
   left: 0;
   margin: 0;
   opacity: 0;
   position: absolute;
   top: 0;
-  width: $nhsuk-radios-size;
+  width: $ofh-radios-size;
   z-index: 1;
 }
 
-.nhsuk-radios__label {
+.ofh-radios__label {
   cursor: pointer;
   display: inline-block;
   margin-bottom: 0;
-  padding: 8px $nhsuk-radios-label-padding-left-right nhsuk-spacing(1);
+  padding: 8px $ofh-radios-label-padding-left-right ofh-spacing(1);
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation; /* 1 */
 }
 
-.nhsuk-radios__hint {
+.ofh-radios__hint {
   display: block;
-  padding-left: $nhsuk-radios-label-padding-left-right;
-  padding-right: $nhsuk-radios-label-padding-left-right;
+  padding-left: $ofh-radios-label-padding-left-right;
+  padding-right: $ofh-radios-label-padding-left-right;
 }
 
-.nhsuk-radios__input + .nhsuk-radios__label::before {
-  background: $nhsuk-form-element-background-color;
-  border: $nhsuk-border-width-form-element solid $nhsuk-form-border-color;
+.ofh-radios__input + .ofh-radios__label::before {
+  background: $ofh-form-element-background-color;
+  border: $ofh-border-width-form-element solid $ofh-form-border-color;
   border-radius: 50%;
   box-sizing: border-box;
   content: '';
-  height: $nhsuk-radios-size;
+  height: $ofh-radios-size;
   left: 0;
   position: absolute;
   top: 0;
-  width: $nhsuk-radios-size;
+  width: $ofh-radios-size;
 }
 
-.nhsuk-radios__input + .nhsuk-radios__label::after {
-  background: $nhsuk-form-border-color;
-  border: 10px solid $nhsuk-text-color;
+.ofh-radios__input + .ofh-radios__label::after {
+  background: $ofh-form-border-color;
+  border: 10px solid $ofh-text-color;
   border-radius: 50%;
   content: '';
   height: 0;
@@ -90,24 +90,24 @@ $nhsuk-radios-focus-width: $nhsuk-focus-width + 1px;
  *    https://accessibility.blog.gov.uk/2017/03/27/how-users-change-colours-on-websites/
  */
 
-.nhsuk-radios__input:focus + .nhsuk-radios__label::before {
-  @include nhsuk-focused-radio();
+.ofh-radios__input:focus + .ofh-radios__label::before {
+  @include ofh-focused-radio();
 }
 
 /* Selected state */
 
-.nhsuk-radios__input:checked + .nhsuk-radios__label::after {
+.ofh-radios__input:checked + .ofh-radios__label::after {
   opacity: 1;
 }
 
 /* Disabled state */
 
-.nhsuk-radios__input:disabled,
-.nhsuk-radios__input:disabled + .nhsuk-radios__label {
+.ofh-radios__input:disabled,
+.ofh-radios__input:disabled + .ofh-radios__label {
   cursor: default;
 }
 
-.nhsuk-radios__input:disabled + .nhsuk-radios__label {
+.ofh-radios__input:disabled + .ofh-radios__label {
   opacity: .5;
 }
 
@@ -117,19 +117,19 @@ $nhsuk-radios-focus-width: $nhsuk-focus-width + 1px;
  * 1. Prevent inline modifier being used with conditional reveals
  */
 
-.nhsuk-radios--inline {
+.ofh-radios--inline {
   @include mq ($from: tablet) {
     @include clearfix;
 
-    .nhsuk-radios__item {
+    .ofh-radios__item {
       clear: none;
       float: left;
-      margin-right: nhsuk-spacing(4);
+      margin-right: ofh-spacing(4);
     }
   }
 
-  &.nhsuk-radios--conditional { /* 1 */
-    .nhsuk-radios__item {
+  &.ofh-radios--conditional { /* 1 */
+    .ofh-radios__item {
       float: none;
       margin-right: 0;
     }
@@ -138,29 +138,29 @@ $nhsuk-radios-focus-width: $nhsuk-focus-width + 1px;
 
 /* Divider variant */
 
-.nhsuk-radios__divider {
-  $nhsuk-divider-size: $nhsuk-radios-size !default;
-  @include nhsuk-font(19);
+.ofh-radios__divider {
+  $ofh-divider-size: $ofh-radios-size !default;
+  @include ofh-font(19);
 
-  color: $nhsuk-text-color;
-  margin-bottom: nhsuk-spacing(2);
+  color: $ofh-text-color;
+  margin-bottom: ofh-spacing(2);
   text-align: center;
-  width: $nhsuk-divider-size;
+  width: $ofh-divider-size;
 }
 
 /* Conditional */
 
-$conditional-border-width: $nhsuk-border-width-mobile;
+$conditional-border-width: $ofh-border-width-mobile;
 // Calculate the amount of padding needed to keep the border centered against the radios.
-$conditional-border-padding: ($nhsuk-radios-size / 2) - ($conditional-border-width / 2);
+$conditional-border-padding: ($ofh-radios-size / 2) - ($conditional-border-width / 2);
 // Move the border centered with the radios
 $conditional-margin-left: $conditional-border-padding;
 // Move the contents of the conditional inline with the label
-$conditional-padding-left: $conditional-border-padding + $nhsuk-radios-label-padding-left-right;
+$conditional-padding-left: $conditional-border-padding + $ofh-radios-label-padding-left-right;
 
-.nhsuk-radios__conditional {
-  @include nhsuk-responsive-margin(4, 'bottom');
-  border-left: $conditional-border-width solid $nhsuk-form-border-color;
+.ofh-radios__conditional {
+  @include ofh-responsive-margin(4, 'bottom');
+  border-left: $conditional-border-width solid $ofh-form-border-color;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;
 
@@ -169,6 +169,6 @@ $conditional-padding-left: $conditional-border-padding + $nhsuk-radios-label-pad
   }
 }
 
-.js-enabled .nhsuk-radios__conditional--hidden {
+.js-enabled .ofh-radios__conditional--hidden {
   display: none;
 }

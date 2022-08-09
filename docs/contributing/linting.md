@@ -35,7 +35,7 @@ Bad:
 Good:
 ```
 .selector {
-  color: $colour_nhsuk-blue;
+  color: $colour_ofh-blue;
 }
 ```
 
@@ -78,7 +78,7 @@ Bad:
 
 Good:
 ```
-.nhsuk-wrapper {
+.ofh-wrapper {
   ...
 }
 ```
@@ -117,7 +117,7 @@ a {
 
 Bad:
 ```
-.nhsuk-breadcrumb {
+.ofh-breadcrumb {
   ...
   &__item {
     ...
@@ -127,11 +127,11 @@ Bad:
 
 Good:
 ```
-.nhsuk-breadcrumb {
+.ofh-breadcrumb {
   ...
 }
 
-.nhsuk-breadcrumb__item {
+.ofh-breadcrumb__item {
   ...
 }
 ```
@@ -268,14 +268,14 @@ Good:
 Bad:
 ```
 @mixin FONT_STACK() {
-  font-family: $nhsuk-font-stack;
+  font-family: $ofh-font-stack;
 }
 ```
 
 Good:
 ```
 @mixin font-stack() {
-  font-family: $nhsuk-font-stack;
+  font-family: $ofh-font-stack;
 }
 ```
 

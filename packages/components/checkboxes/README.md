@@ -13,30 +13,30 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <fieldset class="nhsuk-fieldset" aria-describedby="nationality-hint">
-    <legend class="nhsuk-fieldset__legend">
+<div class="ofh-form-group">
+  <fieldset class="ofh-fieldset" aria-describedby="nationality-hint">
+    <legend class="ofh-fieldset__legend">
       What is your nationality?
     </legend>
-    <div class="nhsuk-hint" id="nationality-hint">
+    <div class="ofh-hint" id="nationality-hint">
     If you have more than 1 nationality, select all options that are relevant to you.
     </div>
-    <div class="nhsuk-checkboxes">
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-1">
+    <div class="ofh-checkboxes">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british">
+        <label class="ofh-label ofh-checkboxes__label" for="nationality-1">
         British
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="nationality-2" name="nationality" type="checkbox" value="irish">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-2">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="nationality-2" name="nationality" type="checkbox" value="irish">
+        <label class="ofh-label ofh-checkboxes__label" for="nationality-2">
         Irish
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="nationality-3" name="nationality" type="checkbox" value="other">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="nationality-3">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="nationality-3" name="nationality" type="checkbox" value="other">
+        <label class="ofh-label ofh-checkboxes__label" for="nationality-3">
         citizen of another country
         </label>
       </div>
@@ -87,29 +87,29 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <fieldset class="nhsuk-fieldset">
-    <legend class="nhsuk-fieldset__legend">
-      <h1 class="nhsuk-fieldset__heading">
+<div class="ofh-form-group">
+  <fieldset class="ofh-fieldset">
+    <legend class="ofh-fieldset__legend">
+      <h1 class="ofh-fieldset__heading">
         How do you want to sign in?
       </h1>
     </legend>
-    <div class="nhsuk-checkboxes">
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="government-gateway" name="gateway" type="checkbox" value="gov-gateway" aria-describedby="government-gateway-item-hint">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="government-gateway">
+    <div class="ofh-checkboxes">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="government-gateway" name="gateway" type="checkbox" value="gov-gateway" aria-describedby="government-gateway-item-hint">
+        <label class="ofh-label ofh-checkboxes__label" for="government-gateway">
         Sign in with Government Gateway
         </label>
-        <div class="nhsuk-hint nhsuk-checkboxes__hint" id="government-gateway-item-hint">
+        <div class="ofh-hint ofh-checkboxes__hint" id="government-gateway-item-hint">
         You’ll have a user ID if you’ve registered for Self Assessment or filed a tax return online before.
         </div>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="nhsuk-login" name="verify" type="checkbox" value="nhsuk-verify" aria-describedby="nhsuk-login-item-hint">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="nhsuk-login">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="ofh-login" name="verify" type="checkbox" value="ofh-verify" aria-describedby="ofh-login-item-hint">
+        <label class="ofh-label ofh-checkboxes__label" for="ofh-login">
         Sign in with NHS.UK login
         </label>
-        <div class="nhsuk-hint nhsuk-checkboxes__hint" id="nhsuk-login-item-hint">
+        <div class="ofh-hint ofh-checkboxes__hint" id="ofh-login-item-hint">
         You’ll have an account if you’ve already proved your identity with either Barclays, CitizenSafe, Digidentity, Experian, Post Office, Royal Mail or SecureIdentity.
         </div>
       </div>
@@ -142,8 +142,8 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
     },
     {
       "name": "verify",
-      "id": "nhsuk-login",
-      "value": "nhsuk-verify",
+      "id": "ofh-login",
+      "value": "ofh-verify",
       "text": "Sign in with NHS.UK login",
       "hint": {
         "text": "You’ll have an account if you’ve already proved your identity with either Barclays, CitizenSafe, Digidentity, Experian, Post Office, Royal Mail or SecureIdentity."
@@ -162,23 +162,23 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <div class="nhsuk-checkboxes">
-    <div class="nhsuk-checkboxes__item">
-      <input class="nhsuk-checkboxes__input" id="colours-1" name="colours" type="checkbox" value="red">
-      <label class="nhsuk-label nhsuk-checkboxes__label" for="colours-1">
+<div class="ofh-form-group">
+  <div class="ofh-checkboxes">
+    <div class="ofh-checkboxes__item">
+      <input class="ofh-checkboxes__input" id="colours-1" name="colours" type="checkbox" value="red">
+      <label class="ofh-label ofh-checkboxes__label" for="colours-1">
       Red
       </label>
     </div>
-    <div class="nhsuk-checkboxes__item">
-      <input class="nhsuk-checkboxes__input" id="colours-2" name="colours" type="checkbox" value="green">
-      <label class="nhsuk-label nhsuk-checkboxes__label" for="colours-2">
+    <div class="ofh-checkboxes__item">
+      <input class="ofh-checkboxes__input" id="colours-2" name="colours" type="checkbox" value="green">
+      <label class="ofh-label ofh-checkboxes__label" for="colours-2">
       Green
       </label>
     </div>
-    <div class="nhsuk-checkboxes__item">
-      <input class="nhsuk-checkboxes__input" id="colours-3" name="colours" type="checkbox" value="blue" disabled>
-      <label class="nhsuk-label nhsuk-checkboxes__label" for="colours-3">
+    <div class="ofh-checkboxes__item">
+      <input class="ofh-checkboxes__input" id="colours-3" name="colours" type="checkbox" value="blue" disabled>
+      <label class="ofh-label ofh-checkboxes__label" for="colours-3">
       Blue
       </label>
     </div>
@@ -220,32 +220,32 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <fieldset class="nhsuk-fieldset" aria-describedby="waste-hint">
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-      <h1 class="nhsuk-fieldset__heading">
+<div class="ofh-form-group">
+  <fieldset class="ofh-fieldset" aria-describedby="waste-hint">
+    <legend class="ofh-fieldset__legend ofh-fieldset__legend--l">
+      <h1 class="ofh-fieldset__heading">
         Which types of waste do you transport regularly?
       </h1>
     </legend>
-    <div class="nhsuk-hint" id="waste-hint">
+    <div class="ofh-hint" id="waste-hint">
     Select all that apply
     </div>
-    <div class="nhsuk-checkboxes">
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-1" name="waste" type="checkbox" value="animal">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-1">
+    <div class="ofh-checkboxes">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-1" name="waste" type="checkbox" value="animal">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-1">
         Waste from animal carcasses
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-2">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-2">
         Waste from mines or quarries
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-3">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-3">
         Farm or agricultural waste
         </label>
       </div>
@@ -264,7 +264,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   "fieldset": {
     "legend": {
       "text": "Which types of waste do you transport regularly?",
-      "classes": "nhsuk-fieldset__legend--l",
+      "classes": "ofh-fieldset__legend--l",
       "isPageHeading": true
     }
   },
@@ -297,30 +297,30 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group nhsuk-form-group--error">
-  <fieldset class="nhsuk-fieldset" aria-describedby="waste-error">
-    <legend class="nhsuk-fieldset__legend">
+<div class="ofh-form-group ofh-form-group--error">
+  <fieldset class="ofh-fieldset" aria-describedby="waste-error">
+    <legend class="ofh-fieldset__legend">
       Which types of waste do you transport regularly?
     </legend>
-    <span id="waste-error" class="nhsuk-error-message">
+    <span id="waste-error" class="ofh-error-message">
     Please select an option
     </span>
-    <div class="nhsuk-checkboxes">
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-1" name="waste" type="checkbox" value="animal">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-1">
+    <div class="ofh-checkboxes">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-1" name="waste" type="checkbox" value="animal">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-1">
         Waste from animal carcasses
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-2">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-2" name="waste" type="checkbox" value="mines">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-2">
         Waste from mines or quarries
         </label>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="waste-3">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="waste-3" name="waste" type="checkbox" value="farm">
+        <label class="ofh-label ofh-checkboxes__label" for="waste-3">
         Farm or agricultural waste
         </label>
       </div>
@@ -370,57 +370,57 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-      <h1 class="nhsuk-fieldset__heading">
+<div class="ofh-form-group">
+  <fieldset class="ofh-fieldset" aria-describedby="contact-hint">
+    <legend class="ofh-fieldset__legend ofh-fieldset__legend--l">
+      <h1 class="ofh-fieldset__heading">
         How would you prefer to be contacted?
       </h1>
     </legend>
-    <div class="nhsuk-hint" id="contact-hint">
+    <div class="ofh-hint" id="contact-hint">
       Select all options that are relevant to you.
     </div>
-    <div class="nhsuk-checkboxes nhsuk-checkboxes--conditional">
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-1" name="contact" type="checkbox" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-1">
+    <div class="ofh-checkboxes ofh-checkboxes--conditional">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-1" name="contact" type="checkbox" value="email" aria-controls="conditional-contact-1" aria-expanded="false">
+        <label class="ofh-label ofh-checkboxes__label" for="contact-1">
           Email
         </label>
       </div>
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-1">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="email">
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-1">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="email">
             Email address
           </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="email" name="email" type="text">
+          <input class="ofh-input ofh-u-width-two-thirds" id="email" name="email" type="text">
         </div>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-2">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-2" name="contact" type="checkbox" value="phone" aria-controls="conditional-contact-2" aria-expanded="false">
+        <label class="ofh-label ofh-checkboxes__label" for="contact-2">
           Phone
         </label>
       </div>
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-2">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="phone">
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-2">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="phone">
             Phone number
           </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="phone" name="phone" type="text">
+          <input class="ofh-input ofh-u-width-two-thirds" id="phone" name="phone" type="text">
         </div>
       </div>
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text" aria-controls="conditional-contact-3" aria-expanded="false">
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-3">
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-3" name="contact" type="checkbox" value="text" aria-controls="conditional-contact-3" aria-expanded="false">
+        <label class="ofh-label ofh-checkboxes__label" for="contact-3">
           Text message
         </label>
       </div>
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-3">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="mobile">
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-3">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="mobile">
             Mobile phone number
           </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="mobile" name="mobile" type="text">
+          <input class="ofh-input ofh-u-width-two-thirds" id="mobile" name="mobile" type="text">
         </div>
       </div>
     </div>
@@ -438,7 +438,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "email",
     name: "email",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Email address"
     }
@@ -449,7 +449,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "phone",
     name: "phone",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Phone number"
     }
@@ -460,7 +460,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "mobile",
     name: "mobile",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Mobile phone number"
     }
@@ -473,7 +473,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   "fieldset": {
     "legend": {
       "text": "How would you prefer to be contacted?",
-      "classes": "nhsuk-fieldset__legend--l",
+      "classes": "ofh-fieldset__legend--l",
       "isPageHeading": "true"
     }
   },
@@ -515,61 +515,61 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
-    <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
-      <h1 class="nhsuk-fieldset__heading">
+<div class="ofh-form-group">
+  <fieldset class="ofh-fieldset" aria-describedby="contact-hint">
+    <legend class="ofh-fieldset__legend ofh-fieldset__legend--l">
+      <h1 class="ofh-fieldset__heading">
         How would you prefer to be contacted?
       </h1>
     </legend>
 
-    <div class="nhsuk-hint" id="contact-hint">
+    <div class="ofh-hint" id="contact-hint">
       Select all options that are relevant to you.
     </div>
 
-    <div class="nhsuk-checkboxes nhsuk-checkboxes--conditional">
-      <div class="nhsuk-checkboxes__item">
+    <div class="ofh-checkboxes ofh-checkboxes--conditional">
+      <div class="ofh-checkboxes__item">
         <input
-          class="nhsuk-checkboxes__input" id="contact-1" name="email" type="checkbox" value="email" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-1" aria-expanded="false" />
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-1">Email</label>
+          class="ofh-checkboxes__input" id="contact-1" name="email" type="checkbox" value="email" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-1" aria-expanded="false" />
+        <label class="ofh-label ofh-checkboxes__label" for="contact-1">Email</label>
       </div>
 
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-1">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="email"> Email address </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="email" name="email" type="text" />
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-1">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="email"> Email address </label>
+          <input class="ofh-input ofh-u-width-two-thirds" id="email" name="email" type="text" />
         </div>
       </div>
 
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-2" name="phone" type="checkbox" value="phone" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-2" aria-expanded="false" />
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-2">Phone</label>
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-2" name="phone" type="checkbox" value="phone" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-2" aria-expanded="false" />
+        <label class="ofh-label ofh-checkboxes__label" for="contact-2">Phone</label>
       </div>
 
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-2">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="phone"> Phone number </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="phone" name="phone" type="text" />
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-2">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="phone"> Phone number </label>
+          <input class="ofh-input ofh-u-width-two-thirds" id="phone" name="phone" type="text" />
         </div>
       </div>
 
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-3" name="text" type="checkbox" value="text" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-3" aria-expanded="false" />
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-3">Text message</label>
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-3" name="text" type="checkbox" value="text" data-checkbox-exclusive-group="communication-preferences" aria-controls="conditional-contact-3" aria-expanded="false" />
+        <label class="ofh-label ofh-checkboxes__label" for="contact-3">Text message</label>
       </div>
 
-      <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-contact-3">
-        <div class="nhsuk-form-group">
-          <label class="nhsuk-label" for="mobile"> Mobile phone number </label>
-          <input class="nhsuk-input nhsuk-u-width-two-thirds" id="mobile" name="mobile" type="text" />
+      <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-contact-3">
+        <div class="ofh-form-group">
+          <label class="ofh-label" for="mobile"> Mobile phone number </label>
+          <input class="ofh-input ofh-u-width-two-thirds" id="mobile" name="mobile" type="text" />
         </div>
       </div>
 
-      <div class="nhsuk-checkboxes__divider">or</div>
+      <div class="ofh-checkboxes__divider">or</div>
 
-      <div class="nhsuk-checkboxes__item">
-        <input class="nhsuk-checkboxes__input" id="contact-5" name="none" type="checkbox" value="none" data-checkbox-exclusive data-checkbox-exclusive-group="communication-preferences" />
-        <label class="nhsuk-label nhsuk-checkboxes__label" for="contact-5">None of the above</label>
+      <div class="ofh-checkboxes__item">
+        <input class="ofh-checkboxes__input" id="contact-5" name="none" type="checkbox" value="none" data-checkbox-exclusive data-checkbox-exclusive-group="communication-preferences" />
+        <label class="ofh-label ofh-checkboxes__label" for="contact-5">None of the above</label>
       </div>
     </div>
   </fieldset>
@@ -586,7 +586,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "email",
     name: "email",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Email address"
     }
@@ -597,7 +597,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "phone",
     name: "phone",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Phone number"
     }
@@ -608,7 +608,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   {{ input({
     id: "mobile",
     name: "mobile",
-    classes: "nhsuk-u-width-two-thirds",
+    classes: "ofh-u-width-two-thirds",
     label: {
       text: "Mobile phone number"
     }
@@ -621,7 +621,7 @@ Find out more about the checkboxes component and when to use it in the [NHS digi
   "fieldset": {
     "legend": {
       "text": "How would you prefer to be contacted?",
-      "classes": "nhsuk-fieldset__legend--l",
+      "classes": "ofh-fieldset__legend--l",
       "isPageHeading": "true"
     }
   },

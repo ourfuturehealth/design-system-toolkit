@@ -9,13 +9,13 @@
 #### HTML markup
 
 ```html
-<section class="nhsuk-hero">
-  <div class="nhsuk-width-container nhsuk-hero--border">
-    <div class="nhsuk-grid-row">
-      <div class="nhsuk-grid-column-two-thirds">
-        <div class="nhsuk-hero__wrapper">
-          <h1 class="nhsuk-u-margin-bottom-3">We’re here for you</h1>
-          <p class="nhsuk-body-l nhsuk-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
+<section class="ofh-hero">
+  <div class="ofh-width-container ofh-hero--border">
+    <div class="ofh-grid-row">
+      <div class="ofh-grid-column-two-thirds">
+        <div class="ofh-hero__wrapper">
+          <h1 class="ofh-u-margin-bottom-3">We’re here for you</h1>
+          <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
         </div>
       </div>
     </div>
@@ -43,15 +43,15 @@
 #### HTML markup
 
 ```html
-<section class="nhsuk-hero nhsuk-hero--image nhsuk-hero--image-description" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
-  <div class="nhsuk-hero__overlay">
-    <div class="nhsuk-width-container">
-      <div class="nhsuk-grid-row">
-        <div class="nhsuk-grid-column-two-thirds">
-          <div class="nhsuk-hero-content">
-            <h1 class="nhsuk-u-margin-bottom-3">We’re here for you</h1>
-            <p class="nhsuk-body-l nhsuk-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
-            <span class="nhsuk-hero__arrow" aria-hidden="true"></span>
+<section class="ofh-hero ofh-hero--image ofh-hero--image-description" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
+  <div class="ofh-hero__overlay">
+    <div class="ofh-width-container">
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          <div class="ofh-hero-content">
+            <h1 class="ofh-u-margin-bottom-3">We’re here for you</h1>
+            <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
+            <span class="ofh-hero__arrow" aria-hidden="true"></span>
           </div>
         </div>
       </div>
@@ -81,8 +81,8 @@
 #### HTML markup
 
 ```html
-<section class="nhsuk-hero nhsuk-hero--image" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
-  <div class="nhsuk-hero__overlay">
+<section class="ofh-hero ofh-hero--image" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
+  <div class="ofh-hero__overlay">
   </div>
 </section>
 ```

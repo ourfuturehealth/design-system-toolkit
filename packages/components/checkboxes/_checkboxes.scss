@@ -7,69 +7,69 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$nhsuk-checkboxes-size: nhsuk-spacing(6);
-$nhsuk-checkboxes-label-padding-left-right: 12px;
+$ofh-checkboxes-size: ofh-spacing(6);
+$ofh-checkboxes-label-padding-left-right: 12px;
 
-.nhsuk-checkboxes__item {
-  @include nhsuk-font(19);
+.ofh-checkboxes__item {
+  @include ofh-font(19);
 
   clear: left;
   display: block;
-  margin-bottom: nhsuk-spacing(2);
-  min-height: $nhsuk-checkboxes-size;
-  padding: 0 0 0 $nhsuk-checkboxes-size;
+  margin-bottom: ofh-spacing(2);
+  min-height: $ofh-checkboxes-size;
+  padding: 0 0 0 $ofh-checkboxes-size;
   position: relative;
 }
 
-.nhsuk-checkboxes__item:last-child,
-.nhsuk-checkboxes__item:last-of-type {
+.ofh-checkboxes__item:last-child,
+.ofh-checkboxes__item:last-of-type {
   margin-bottom: 0;
 }
 
-.nhsuk-checkboxes__input {
+.ofh-checkboxes__input {
   cursor: pointer;
-  height: $nhsuk-checkboxes-size;
+  height: $ofh-checkboxes-size;
   left: 0;
   margin: 0;
   opacity: 0;
   position: absolute;
   top: 0;
-  width: $nhsuk-checkboxes-size;
+  width: $ofh-checkboxes-size;
   z-index: 1;
 }
 
-.nhsuk-checkboxes__label {
+.ofh-checkboxes__label {
   cursor: pointer;
   display: inline-block;
   margin-bottom: 0;
-  padding: 8px $nhsuk-checkboxes-label-padding-left-right nhsuk-spacing(1);
+  padding: 8px $ofh-checkboxes-label-padding-left-right ofh-spacing(1);
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation;
 }
 
-.nhsuk-checkboxes__hint {
+.ofh-checkboxes__hint {
   display: block;
-  padding-left: $nhsuk-checkboxes-label-padding-left-right;
-  padding-right: $nhsuk-checkboxes-label-padding-left-right;
+  padding-left: $ofh-checkboxes-label-padding-left-right;
+  padding-right: $ofh-checkboxes-label-padding-left-right;
 }
 
-.nhsuk-checkboxes__input + .nhsuk-checkboxes__label::before {
-  background: $nhsuk-form-element-background-color;
-  border: $nhsuk-border-width-form-element solid $nhsuk-form-border-color;
+.ofh-checkboxes__input + .ofh-checkboxes__label::before {
+  background: $ofh-form-element-background-color;
+  border: $ofh-border-width-form-element solid $ofh-form-border-color;
   box-sizing: border-box;
   content: '';
-  height: $nhsuk-checkboxes-size;
+  height: $ofh-checkboxes-size;
   left: 0;
   position: absolute;
   top: 0;
-  width: $nhsuk-checkboxes-size;
+  width: $ofh-checkboxes-size;
 }
 
-.nhsuk-checkboxes__input + .nhsuk-checkboxes__label::after {
+.ofh-checkboxes__input + .ofh-checkboxes__label::after {
   background: transparent;
   border: solid;
   border-top-color: transparent;
-  border-width: 0 0 $nhsuk-border-width $nhsuk-border-width;
+  border-width: 0 0 $ofh-border-width $ofh-border-width;
   content: '';
   height: 10px;
   left: 10px;
@@ -90,37 +90,37 @@ $nhsuk-checkboxes-label-padding-left-right: 12px;
  *    https://accessibility.blog.gov.uk/2017/03/27/how-users-change-colours-on-websites/
  */
 
-.nhsuk-checkboxes__input:focus + .nhsuk-checkboxes__label::before {
-  @include nhsuk-focused-checkbox();
+.ofh-checkboxes__input:focus + .ofh-checkboxes__label::before {
+  @include ofh-focused-checkbox();
 }
 
 /* Selected state */
 
-.nhsuk-checkboxes__input:checked + .nhsuk-checkboxes__label::after {
+.ofh-checkboxes__input:checked + .ofh-checkboxes__label::after {
   opacity: 1;
 }
 
 /* Disabled state */
 
-.nhsuk-checkboxes__input:disabled,
-.nhsuk-checkboxes__input:disabled + .nhsuk-checkboxes__label {
+.ofh-checkboxes__input:disabled,
+.ofh-checkboxes__input:disabled + .ofh-checkboxes__label {
   cursor: default;
 }
 
-.nhsuk-checkboxes__input:disabled + .nhsuk-checkboxes__label {
+.ofh-checkboxes__input:disabled + .ofh-checkboxes__label {
   opacity: .5;
 }
 
 /* Divider variant */
 
-.nhsuk-checkboxes__divider {
-  $nhsuk-divider-size: $nhsuk-checkboxes-size !default;
-  @include nhsuk-font(19);
+.ofh-checkboxes__divider {
+  $ofh-divider-size: $ofh-checkboxes-size !default;
+  @include ofh-font(19);
 
-  color: $nhsuk-text-color;
-  margin-bottom: nhsuk-spacing(2);
+  color: $ofh-text-color;
+  margin-bottom: ofh-spacing(2);
   text-align: center;
-  width: $nhsuk-divider-size;
+  width: $ofh-divider-size;
 }
 
 
@@ -133,14 +133,14 @@ $nhsuk-checkboxes-label-padding-left-right: 12px;
  * 3. Move the contents of the conditional inline with the label.
  */
 
-$conditional-border-width: $nhsuk-border-width-mobile;
-$conditional-border-padding: ($nhsuk-checkboxes-size / 2) - ($conditional-border-width / 2); /* 1 */
+$conditional-border-width: $ofh-border-width-mobile;
+$conditional-border-padding: ($ofh-checkboxes-size / 2) - ($conditional-border-width / 2); /* 1 */
 $conditional-margin-left: $conditional-border-padding; /* 2 */
-$conditional-padding-left: $conditional-border-padding + $nhsuk-checkboxes-label-padding-left-right; /* 3 */
+$conditional-padding-left: $conditional-border-padding + $ofh-checkboxes-label-padding-left-right; /* 3 */
 
-.nhsuk-checkboxes__conditional {
-  @include nhsuk-responsive-margin(4, 'bottom');
-  border-left: $conditional-border-width solid $nhsuk-form-border-color;
+.ofh-checkboxes__conditional {
+  @include ofh-responsive-margin(4, 'bottom');
+  border-left: $conditional-border-width solid $ofh-form-border-color;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;
 
@@ -149,6 +149,6 @@ $conditional-padding-left: $conditional-border-padding + $nhsuk-checkboxes-label
   }
 }
 
-.js-enabled .nhsuk-checkboxes__conditional--hidden {
+.js-enabled .ofh-checkboxes__conditional--hidden {
   display: none;
 }

@@ -7,7 +7,7 @@
  */
 
 table {
-  @include nhsuk-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(7, 'bottom');
 
   border-spacing: 0;
   vertical-align: top;
@@ -21,18 +21,18 @@ table {
 
 thead {
   th {
-    border-bottom: $nhsuk-border-table-header-width solid $nhsuk-border-color;
+    border-bottom: $ofh-border-table-header-width solid $ofh-border-color;
   }
 }
 
 th,
 td {
-  @include nhsuk-typography-responsive(19);
-  @include nhsuk-responsive-padding(3, 'bottom');
-  @include nhsuk-responsive-padding(4, 'right');
-  @include nhsuk-responsive-padding(3, 'top');
+  @include ofh-typography-responsive(19);
+  @include ofh-responsive-padding(3, 'bottom');
+  @include ofh-responsive-padding(4, 'right');
+  @include ofh-responsive-padding(3, 'top');
 
-  border-bottom: $nhsuk-border-table-cell-width solid $nhsuk-border-color;
+  border-bottom: $ofh-border-table-cell-width solid $ofh-border-color;
   text-align: left;
   vertical-align: top;
 
@@ -42,10 +42,10 @@ td {
 }
 
 th {
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
 }
 
 caption {
-  @include nhsuk-font($size: 22, $weight: bold);
+  @include ofh-font($size: 22, $weight: bold);
   text-align: left;
 }

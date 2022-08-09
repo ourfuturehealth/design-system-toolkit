@@ -41,7 +41,7 @@ Classes make for great reusable components, so they come first. Ids are more spe
 
 ### Class naming convention
 
-All class names start with a `.nhsuk-` namespace to reduce the likelihood of
+All class names start with a `.ofh-` namespace to reduce the likelihood of
 conflicting with existing classes in your application. It also helps to identify
 where the styling for a particular element is coming from.
 
@@ -61,9 +61,9 @@ The naming convention follows this pattern:
 .block__element {}
 .block--modifier {}
 
-.nhsuk-card              // Block - the root of a component
-.nhsuk-card__heading     // Element - a part of the block
-.nhsuk-card--clickable   // Modifier - a variant of the block
+.ofh-card              // Block - the root of a component
+.ofh-card__heading     // Element - a part of the block
+.ofh-card--clickable   // Modifier - a variant of the block
 ```
 
 It uses double hyphens (`--`) and underscores (`__`) so that the block, element
@@ -72,9 +72,9 @@ or modifiers themselves can be hyphen delimited without causing ambiguity.
 For example:
 
 ```scss
-.nhsuk-a-z-nav
-.nhsuk-a-z-nav__link
-.nhsuk-a-z-nav__link--disabled
+.ofh-a-z-nav
+.ofh-a-z-nav__link
+.ofh-a-z-nav__link--disabled
 ```
 
 #### BEM further reading:
@@ -96,7 +96,7 @@ given class name. It also discourages excessive nesting.
 Bad:
 
 ```scss
-.nhsuk-contents-list {
+.ofh-contents-list {
   ...
   &__item {
     ...
@@ -110,11 +110,11 @@ Bad:
 Good:
 
 ```scss
-.nhsuk-contents-list {
+.ofh-contents-list {
   ...
 }
 
-.nhsuk-contents-list__item {
+.ofh-contents-list__item {
   ...
   &:before {
     ...
@@ -130,9 +130,9 @@ Avoid including multiple elements when naming classes.
 
 Create separate selectors rather using an `&` in the middle of a selector.
 
-This enables the NHSUK styles to be used inside other applications, where, for example, an ID is being used to isolate a section of a page to style separately from the rest of an application; e.g.
+This enables the Our Future Health styles to be used inside other applications, where, for example, an ID is being used to isolate a section of a page to style separately from the rest of an application; e.g.
 ```scss
-div#nhsuk-ers {
+div#ofh-ers {
 ...
 @import 'node_modules/ofh-design-system-toolkit/packages/core/all';
 ...
@@ -142,7 +142,7 @@ div#nhsuk-ers {
 Bad:
 
 ```scss
-.nhsuk-checkboxes__conditional {
+.ofh-checkboxes__conditional {
   ...
   .js-enabled &--hidden {
     ...
@@ -154,11 +154,11 @@ Bad:
 Good:
 
 ```scss
-.nhsuk-checkboxes__conditional {
+.ofh-checkboxes__conditional {
   ...
 }
 
-.js-enabled .nhsuk-checkboxes__conditional--hidden {
+.js-enabled .ofh-checkboxes__conditional--hidden {
   ...
 }
 ```
@@ -180,11 +180,11 @@ other components.
 
 Keep all of the variants of a component in the same place.
 
-`.nhsuk-error-summary` modifies the `.nhsuk-list` component.
+`.ofh-error-summary` modifies the `.ofh-list` component.
 
 Component modifiers use an extra class, scoped to the component:
 
-`.nhsuk-error-summary__list`
+`.ofh-error-summary__list`
 
 This class is part of the component, rather than a parent of a component.
 
@@ -273,13 +273,13 @@ When a component has multiple visual presentations, such as the care cards, we m
 Care card urgent (red) example:
 
 ```html
-<div class="nhsuk-card nhsuk-card--care nhsuk-card--care--urgent">
+<div class="ofh-card ofh-card--care ofh-card--care--urgent">
 ```
 
 Care card emergency (red and black) example:
 
 ```html
-<div class="nhsuk-card nhsuk-card--care nhsuk-card--care--emergency">
+<div class="ofh-card ofh-card--care ofh-card--care--emergency">
 ```
 
 ---
@@ -288,9 +288,9 @@ Care card emergency (red and black) example:
 
 You can find OFH design system toolkit components in `packages/components`.
 
-Components must use the `.nhsuk-` namespace.
+Components must use the `.ofh-` namespace.
 
-For example, `.nhsuk-card`.
+For example, `.ofh-card`.
 
 ### Writing SCSS for components
 

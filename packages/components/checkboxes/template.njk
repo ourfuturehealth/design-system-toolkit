@@ -41,7 +41,7 @@
     text: params.errorMessage.text
   }) | indent(2) | trim }}
 {% endif %}
-  <div class="nhsuk-checkboxes {%- if params.classes %} {{ params.classes }}{% endif %} {%- if isConditional %} nhsuk-checkboxes--conditional{% endif -%}"
+  <div class="ofh-checkboxes {%- if params.classes %} {{ params.classes }}{% endif %} {%- if isConditional %} ofh-checkboxes--conditional{% endif -%}"
     {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
     {% for item in params.items %}
     {% set id = item.id if item.id else idPrefix + "-" + loop.index %}
@@ -50,10 +50,10 @@
     {% set hasHint = true if item.hint.text or item.hint.html %}
     {% set itemHintId = id + '-item-hint' %}
 	  {%- if item.divider %}
-    <div class="nhsuk-checkboxes__divider">{{ item.divider }}</div>
+    <div class="ofh-checkboxes__divider">{{ item.divider }}</div>
     {%- else %}
-    <div class="nhsuk-checkboxes__item">
-      <input class="nhsuk-checkboxes__input" id="{{ id }}" name="{{ name }}" type="checkbox" value="{{ item.value }}"
+    <div class="ofh-checkboxes__item">
+      <input class="ofh-checkboxes__input" id="{{ id }}" name="{{ name }}" type="checkbox" value="{{ item.value }}"
       {{-" checked" if item.checked }}
       {{-" disabled" if item.disabled }}
       {%- if item.exclusive %} data-checkbox-exclusive{% endif -%}
@@ -64,14 +64,14 @@
       {{ label({
         html: item.html,
         text: item.text,
-        classes: 'nhsuk-checkboxes__label' + (' ' + item.label.classes if item.label.classes),
+        classes: 'ofh-checkboxes__label' + (' ' + item.label.classes if item.label.classes),
         attributes: item.label.attributes,
         for: id
       }) | indent(6) | trim }}
       {%- if hasHint %}
       {{ hint({
         id: itemHintId,
-        classes: 'nhsuk-checkboxes__hint',
+        classes: 'ofh-checkboxes__hint',
         attributes: item.hint.attributes,
         html: item.hint.html,
         text: item.hint.text
@@ -79,7 +79,7 @@
       {%- endif %}
     </div>
     {% if item.conditional %}
-    <div class="nhsuk-checkboxes__conditional{% if not item.checked %} nhsuk-checkboxes__conditional--hidden{% endif %}" id="{{ conditionalId }}">
+    <div class="ofh-checkboxes__conditional{% if not item.checked %} ofh-checkboxes__conditional--hidden{% endif %}" id="{{ conditionalId }}">
       {{ item.conditional.html | safe }}
     </div>
     {% endif %}
@@ -88,7 +88,7 @@
   </div>
 {% endset -%}
 
-<div class="nhsuk-form-group {%- if params.errorMessage %} nhsuk-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
+<div class="ofh-form-group {%- if params.errorMessage %} ofh-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
 {% if params.fieldset %}
   {% call fieldset({
     describedBy: describedBy,

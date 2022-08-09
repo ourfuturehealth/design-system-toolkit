@@ -10,67 +10,67 @@
  *    not be set either.
  */
 
-.nhsuk-input {
-  @include nhsuk-font(19);
+.ofh-input {
+  @include ofh-font(19);
 
   -moz-appearance: none; /* 1 */
   -webkit-appearance: none; /* 1 */
   appearance: none; /* 1 */
-  border: $nhsuk-border-width-form-element solid $nhsuk-form-border-color; /* 2 */
+  border: $ofh-border-width-form-element solid $ofh-form-border-color; /* 2 */
   border-radius: 0;
   box-sizing: border-box;
   height: 40px;
   margin-top: 0;
-  padding: nhsuk-spacing(1);
+  padding: ofh-spacing(1);
   width: 100%;
 
   &:focus {
-    @include nhsuk-focused-input;
+    @include ofh-focused-input;
   }
 }
 
-.nhsuk-input::-webkit-outer-spin-button,
-.nhsuk-input::-webkit-inner-spin-button {
+.ofh-input::-webkit-outer-spin-button,
+.ofh-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.nhsuk-input[type="number"] { /* stylelint-disable-line string-quotes */
+.ofh-input[type="number"] { /* stylelint-disable-line string-quotes */
   -moz-appearance: textfield;
 }
 
-.nhsuk-input--error {
-  border: $nhsuk-border-width-form-element-error solid $nhsuk-error-color;
+.ofh-input--error {
+  border: $ofh-border-width-form-element-error solid $ofh-error-color;
 }
 
 // The ex measurements are based on the number of W's that can fit inside the input
 // Extra space is left on the right hand side to allow for the Safari prefill icon
 // Linear regression estimation based on visual tests: y = 1.76 + 1.81x
 
-.nhsuk-input--width-30 {
+.ofh-input--width-30 {
   max-width: 56ex + 3ex;
 }
 
-.nhsuk-input--width-20 {
+.ofh-input--width-20 {
   max-width: 38ex + 3ex;
 }
 
-.nhsuk-input--width-10 {
+.ofh-input--width-10 {
   max-width: 20ex + 3ex;
 }
 
-.nhsuk-input--width-5 {
+.ofh-input--width-5 {
   max-width: 10.8ex;
 }
 
-.nhsuk-input--width-4 {
+.ofh-input--width-4 {
   max-width: 9ex;
 }
 
-.nhsuk-input--width-3 {
+.ofh-input--width-3 {
   max-width: 7.2ex;
 }
 
-.nhsuk-input--width-2 {
+.ofh-input--width-2 {
   max-width: 5.4ex;
 }

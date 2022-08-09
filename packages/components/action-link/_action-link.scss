@@ -13,31 +13,31 @@
  * 6. Text decoration underline used to override default <a> styling.
  */
 
-.nhsuk-action-link {
-  @include nhsuk-responsive-margin(6, 'bottom');
+.ofh-action-link {
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
-.nhsuk-action-link__link {
-  @include nhsuk-font(22);
+.ofh-action-link__link {
+  @include ofh-font(22);
 
   display: inline-block; /* [1] */
-  font-weight: $nhsuk-font-very-bold;
+  font-weight: $ofh-font-very-bold;
   padding-left: 38px; /* [2] */
   position: relative; /* [3] */
   text-decoration: none; /* [4] */
 
   &:hover {
-    .nhsuk-action-link__text {
+    .ofh-action-link__text {
       text-decoration: underline; /* [6] */
     }
   }
 
   &:focus {
-    @include nhsuk-focused-text();
+    @include ofh-focused-text();
 
     &:hover {
-      .nhsuk-action-link__text {
-        color: $nhsuk-focus-text-color;
+      .ofh-action-link__text {
+        color: $ofh-focus-text-color;
         text-decoration: none;
       }
     }
@@ -49,15 +49,15 @@
   }
 
   @include mq($media-type: print) {
-    color: $nhsuk-print-text-color;
+    color: $ofh-print-text-color;
 
     &:visited {
-      color: $nhsuk-print-text-color;
+      color: $ofh-print-text-color;
     }
   }
 
-  .nhsuk-icon__arrow-right-circle {
-    @include print-color($nhsuk-print-text-color);
+  .ofh-icon__arrow-right-circle {
+    @include print-color($ofh-print-text-color);
 
     fill: $color_ofh_primary;
     height: 36px;
