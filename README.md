@@ -1,20 +1,20 @@
-# OFH design system toolkit
+# Our Future Health design system toolkit
 
-OFH design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.
+Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.
 
 ## Guidance
 
 Visit the [NHS digital service manual](https://service-manual.nhs.uk/) for examples of components and guidance for when to use them.
 
-## How to install OFH design system toolkit
+## How to install Our Future Health design system toolkit
 
 ### 1. Install with package managers
 
-We recommend that you [install OFH design system toolkit using node package manager (npm)](/docs/installation/installing-with-npm.md).
+We recommend that you [install Our Future Health design system toolkit using node package manager (npm)](/docs/installation/installing-with-npm.md).
 
 ### 2. Install by using compiled files
 
-You can also [install OFH design system toolkit using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
+You can also [install Our Future Health design system toolkit using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
 
 ## How to make a new release
 
@@ -36,7 +36,7 @@ Visit our [support for browsers and assistive technology](/docs/contributing/bro
 
 ## Contribute
 
-Read our [contributing guidelines](CONTRIBUTING.md) to contribute to OFH design system toolkit.
+Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future Health design system toolkit.
 
 ## Development environment
 

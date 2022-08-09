@@ -55,7 +55,7 @@ function minifyCSS() {
  * JavaScript tasks
  */
 
-/* Use Webpack to build and minify the OFH components JS. */
+/* Use Webpack to build and minify the Our Future Health components JS. */
 function webpackJS() {
   return gulp.src('./packages/ofh.js')
     .pipe(webpack({

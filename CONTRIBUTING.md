@@ -1,6 +1,6 @@
-# Contributing to OFH design system toolkit
+# Contributing to Our Future Health design system toolkit
 
-Thank you for your interest in contributing to OFH design system toolkit, we really appreciate it. There are a number
+Thank you for your interest in contributing to Our Future Health design system toolkit, we really appreciate it. There are a number
 of ways that you can contribute – reporting bugs, fixing bugs, suggesting new components or writing documentation.
 
 We've compiled a list of contributing guidance to make it easier for you to contribute and to make sure you follow our guidelines for the project.
