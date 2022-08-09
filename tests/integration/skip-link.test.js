@@ -68,7 +68,7 @@ describe('NHS.UK skiplink', () => {
     });
   });
 
-  describe('Is initialised by nhsuk.js', () => {
+  describe('Is initialised by ofh.js', () => {
 
   });
 });
