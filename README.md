@@ -1,7 +1,7 @@
 # Our Future Health design system toolkit
 
 > **Note** <br>
-> This toolkit is based on the [NHS.UK frontend](https://github.com/nhsuk/nhsuk-frontend), forked as of early 2022, and has been adapted for Our Future Health needs (which includes a rename of the prefix for all CSS classes to `ofh-`).
+> This toolkit is based on the [NHS.UK frontend](https://github.com/nhsuk/nhsuk-frontend), forked as of early 2022, and adapted for Our Future Health needs (which includes a rename of the prefix for all CSS classes to `ofh-`).
 >
 > We are indebted to the original work carried out by NHS Digital and GDS.
 
