@@ -13,7 +13,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<button class="nhsuk-button" type="submit">
+<button class="ofh-button" type="submit">
   Save and continue
 </button>
 ```
@@ -37,7 +37,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<a href="/" class="nhsuk-button" draggable="false">
+<a href="/" class="ofh-button" draggable="false">
   Link button
 </a>
 ```
@@ -62,7 +62,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<button class="nhsuk-button nhsuk-button--disabled" type="submit" disabled="disabled" aria-disabled="true">
+<button class="ofh-button ofh-button--disabled" type="submit" disabled="disabled" aria-disabled="true">
   Disabled button
 </button>
 ```
@@ -87,7 +87,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<button class="nhsuk-button nhsuk-button--secondary" type="submit">
+<button class="ofh-button ofh-button--secondary" type="submit">
   Find my location
 </button>
 ```
@@ -99,7 +99,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 {{ button({
   "text": "Find my location",
-  "classes": "nhsuk-button--secondary"
+  "classes": "ofh-button--secondary"
 }) }}
 ```
 
@@ -112,7 +112,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 #### HTML markup
 
 ```html
-<button class="nhsuk-button nhsuk-button--reverse" type="submit">
+<button class="ofh-button ofh-button--reverse" type="submit">
   Save and continue
 </button>
 ```
@@ -124,7 +124,7 @@ Find out more about the button component and when to use it in the [NHS digital 
 
 {{ button({
   "text": "Save and continue",
-  "classes": "nhsuk-button--reverse"
+  "classes": "ofh-button--reverse"
 }) }}
 ```
 

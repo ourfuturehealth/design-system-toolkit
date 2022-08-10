@@ -7,7 +7,7 @@
 //
 // @example scss
 //  .foo {
-//   @extend %nhsuk-section-break--xl;
+//   @extend %ofh-section-break--xl;
 //  }
 
 /**
@@ -18,52 +18,52 @@
  * https://github.com/alphagov/govuk-frontend
  */
 
-%nhsuk-section-break {
+%ofh-section-break {
   border: 0;
   margin: 0;
 }
 
-.nhsuk-section-break {
-  @extend %nhsuk-section-break;
+.ofh-section-break {
+  @extend %ofh-section-break;
 }
 
-%nhsuk-section-break--xl {
-  @include nhsuk-responsive-margin(8, 'top');
-  @include nhsuk-responsive-margin(8, 'bottom');
+%ofh-section-break--xl {
+  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(8, 'bottom');
 }
 
-.nhsuk-section-break--xl {
-  @extend %nhsuk-section-break--xl;
+.ofh-section-break--xl {
+  @extend %ofh-section-break--xl;
 }
 
-%nhsuk-section-break--l {
-  @include nhsuk-responsive-margin(6, 'top');
-  @include nhsuk-responsive-margin(6, 'bottom');
+%ofh-section-break--l {
+  @include ofh-responsive-margin(6, 'top');
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
-.nhsuk-section-break--l {
-  @extend %nhsuk-section-break--l;
+.ofh-section-break--l {
+  @extend %ofh-section-break--l;
 }
 
-%nhsuk-section-break--m {
-  @include nhsuk-responsive-margin(4, 'top');
-  @include nhsuk-responsive-margin(4, 'bottom');
+%ofh-section-break--m {
+  @include ofh-responsive-margin(4, 'top');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
-.nhsuk-section-break--m {
-  @extend %nhsuk-section-break--m;
+.ofh-section-break--m {
+  @extend %ofh-section-break--m;
 }
 
-%nhsuk-section-break--visible {
-  border-bottom: 1px solid $nhsuk-border-color;
+%ofh-section-break--visible {
+  border-bottom: 1px solid $ofh-border-color;
 }
 
-.nhsuk-section-break--visible {
-  @extend %nhsuk-section-break--visible;
+.ofh-section-break--visible {
+  @extend %ofh-section-break--visible;
 }
 
 hr { /* [1] */
-  @extend %nhsuk-section-break;
-  @extend %nhsuk-section-break--l;
-  @extend %nhsuk-section-break--visible;
+  @extend %ofh-section-break;
+  @extend %ofh-section-break--l;
+  @extend %ofh-section-break--visible;
 }

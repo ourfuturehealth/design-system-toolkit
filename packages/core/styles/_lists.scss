@@ -7,7 +7,7 @@
 //
 // @example scss
 //  .foo {
-//   @extend %nhsuk-section-break--xl;
+//   @extend %ofh-section-break--xl;
 //  }
 
 /**
@@ -16,57 +16,57 @@
  * 3. 'Random number' used to align icon and text.
  */
 
-%nhsuk-list {
-  @include nhsuk-typography-responsive(19);
-  @include nhsuk-responsive-margin(4, 'bottom');
+%ofh-list {
+  @include ofh-typography-responsive(19);
+  @include ofh-responsive-margin(4, 'bottom');
 
   list-style-type: none;
   margin-top: 0;
   padding-left: 0;
 }
 
-%nhsuk-list > li {
-  @include nhsuk-responsive-margin(2, 'bottom');
+%ofh-list > li {
+  @include ofh-responsive-margin(2, 'bottom');
 
   &:last-child {
     margin-bottom: 0;
   }
 }
 
-%nhsuk-list--bullet {
+%ofh-list--bullet {
   list-style-type: disc;
   padding-left: 20px; /* [1] */
 }
 
-.nhsuk-list--bullet {
-  @extend %nhsuk-list--bullet;
+.ofh-list--bullet {
+  @extend %ofh-list--bullet;
 }
 
-%nhsuk-list--number {
+%ofh-list--number {
   list-style-type: decimal;
   padding-left: 20px; /* [1] */
 }
 
-.nhsuk-list--number {
-  @extend %nhsuk-list--number;
+.ofh-list--number {
+  @extend %ofh-list--number;
 }
 
-.nhsuk-list {
-  @extend %nhsuk-list;
+.ofh-list {
+  @extend %ofh-list;
 }
 
 ul {
-  @extend %nhsuk-list;
-  @extend %nhsuk-list--bullet;
+  @extend %ofh-list;
+  @extend %ofh-list--bullet;
 }
 
 ol {
-  @extend %nhsuk-list;
-  @extend %nhsuk-list--number;
+  @extend %ofh-list;
+  @extend %ofh-list--number;
 }
 
-.nhsuk-list--tick,
-.nhsuk-list--cross {
+.ofh-list--tick,
+.ofh-list--cross {
   list-style: none;
   margin-top: 0;
   padding-left: 40px; /* [2] */

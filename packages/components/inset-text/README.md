@@ -11,8 +11,8 @@ Find out more about the inset text component and when to use it in the [NHS digi
 ### HTML markup
 
 ```html
-<div class="nhsuk-inset-text">
-  <span class="nhsuk-u-visually-hidden">Information: </span>
+<div class="ofh-inset-text">
+  <span class="ofh-u-visually-hidden">Information: </span>
   <p>You can report any suspected side effect to the <a href="https://yellowcard.mhra.gov.uk/" title="External website">UK safety scheme</a>.</p>
 </div>
 ```

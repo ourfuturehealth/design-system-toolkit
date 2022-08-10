@@ -7,57 +7,57 @@
  * 2. Override default link styling to use error colour
  */
 
-.nhsuk-error-summary {
-  @include nhsuk-responsive-padding(4);
-  @include nhsuk-responsive-margin(8, 'bottom');
+.ofh-error-summary {
+  @include ofh-responsive-padding(4);
+  @include ofh-responsive-margin(8, 'bottom');
 
-  border: $nhsuk-border-width-mobile solid $nhsuk-error-color;
+  border: $ofh-border-width-mobile solid $ofh-error-color;
 
   @include govuk-media-query($from: tablet) {
-    border: $nhsuk-border-width solid $nhsuk-error-color;
+    border: $ofh-border-width solid $ofh-error-color;
   }
 
   &:focus {
-    border: $nhsuk-focus-width solid $nhsuk-focus-text-color;
-    box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color;
-    outline: $nhsuk-focus-width solid transparent;
+    border: $ofh-focus-width solid $ofh-focus-text-color;
+    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
+    outline: $ofh-focus-width solid transparent;
   }
 }
 
-.nhsuk-error-summary__title {
-  @include nhsuk-font(24, $weight: bold);
+.ofh-error-summary__title {
+  @include ofh-font(24, $weight: bold);
 
   margin-top: 0;
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
-.nhsuk-error-summary__body {
-  @include nhsuk-font(19);
+.ofh-error-summary__body {
+  @include ofh-font(19);
 
   p {
     margin-top: 0;
-    @include nhsuk-responsive-margin(4, 'bottom');
+    @include ofh-responsive-margin(4, 'bottom');
   }
 }
 
-.nhsuk-error-summary__list { /* 1 */
+.ofh-error-summary__list { /* 1 */
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.nhsuk-error-summary__list a {
-  @include nhsuk-typography-weight-bold;
+.ofh-error-summary__list a {
+  @include ofh-typography-weight-bold;
 
   /* 2 */
   &:link,
   &:visited,
   &:hover,
   &:active {
-    color: $nhsuk-error-color;
+    color: $ofh-error-color;
   }
 
   &:focus {
-    @include nhsuk-focused-text();
+    @include ofh-focused-text();
   }
 
 }

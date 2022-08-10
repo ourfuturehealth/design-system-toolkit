@@ -9,7 +9,7 @@ Find out more about the skip link component and when to use it in the [NHS digit
 There is an [in-page link bug in VoiceOver on iOS](https://bugs.webkit.org/show_bug.cgi?id=179011) whereby focus remains on the skip link anchor rather than
 the next focusable element of the jumped to content.
 
-This can be fixed by either including the compiled JavaScript for all components `nhsuk.min.js` or the individual component JavaScript `skip-link.js`.
+This can be fixed by either including the compiled JavaScript for all components `ofh-design-system-toolkit.min.js` or the individual component JavaScript `skip-link.js`.
 
 The fix focuses on the first `H1` on the page if one exists. If one does not exist, then the default action for in-page links will take place.
 
@@ -22,7 +22,7 @@ Ensure the correct `id` value has been added to your main content for the skip l
 ### HTML markup
 
 ```html
-<a class="nhsuk-skip-link" href="#maincontent">Skip to main content</a>
+<a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
 ```
 
 ### Nunjucks macro

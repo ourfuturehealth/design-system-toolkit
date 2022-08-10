@@ -15,22 +15,22 @@
  */
 
 html {
-  background-color: $color_nhsuk-grey-4;
-  font-family: $nhsuk-font, $nhsuk-font-fallback;
+  background-color: $color_ofh-grey-4;
+  font-family: $ofh-font, $ofh-font-fallback;
   overflow-y: scroll; /* [1] */
 }
 
 body {
-  background-color: $color_nhsuk-grey-5;
-  color: $nhsuk-text-color;
-  font-size: $nhsuk-base-font-size;
+  background-color: $color_ofh-grey-5;
+  color: $ofh-text-color;
+  font-size: $ofh-base-font-size;
   -moz-osx-font-smoothing: grayscale; /* [2] */
   -webkit-font-smoothing: antialiased; /* [2] */
-  line-height: _nhsuk-line-height($nhsuk-base-line-height, $nhsuk-base-font-size);
+  line-height: _ofh-line-height($ofh-base-line-height, $ofh-base-font-size);
   margin: 0; /* [3] */
   min-height: 100%; /* [4] */
 
   .heading-caption {
-    color: $color_nhsuk-grey-2;
+    color: $color_ofh-grey-2;
   }
 }

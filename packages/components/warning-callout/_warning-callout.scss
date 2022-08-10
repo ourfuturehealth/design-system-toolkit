@@ -7,10 +7,10 @@
  * 2. Uses @mixin heading-label from tools/_mixins.
  */
 
-.nhsuk-warning-callout {
-  @include panel-with-label($color_ofh-light-blue, $nhsuk-text-color, $color_ofh-blue); /* [1] */
+.ofh-warning-callout {
+  @include panel-with-label($color_ofh-light-blue, $ofh-text-color, $color_ofh-blue); /* [1] */
 }
 
-.nhsuk-warning-callout__label {
-  @include heading-label($color_ofh-blue, $color_nhsuk-white); /* [2] */
+.ofh-warning-callout__label {
+  @include heading-label($color_ofh-blue, $color_ofh-white); /* [2] */
 }

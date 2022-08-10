@@ -1,9 +1,9 @@
 import MenuToggle from './menuToggle';
 
 // Mock HTML
-const toggleButtonHtml = '<button class="nhsuk-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false">Menu</button>';
-const closeButtonHtml = '<button class="nhsuk-header__navigation-close" id="close-menu"><span class="nhsuk-u-visually-hidden">Close menu</span></button>';
-const navHtml = '<nav class="nhsuk-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation" aria-labelledby="label-navigation"></nav>';
+const toggleButtonHtml = '<button class="ofh-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false">Menu</button>';
+const closeButtonHtml = '<button class="ofh-header__navigation-close" id="close-menu"><span class="ofh-u-visually-hidden">Close menu</span></button>';
+const navHtml = '<nav class="ofh-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation" aria-labelledby="label-navigation"></nav>';
 
 // DOM Elements to be set
 let toggleButton;
@@ -13,13 +13,13 @@ let nav;
 // Helper to set DOM Elements
 const initTest = (html) => {
   document.body.innerHTML = html || toggleButtonHtml + closeButtonHtml + navHtml;
-  toggleButton = document.querySelector('.nhsuk-header__menu-toggle');
-  closeButton = document.querySelector('.nhsuk-header__navigation-close');
-  nav = document.querySelector('.nhsuk-header__navigation');
+  toggleButton = document.querySelector('.ofh-header__menu-toggle');
+  closeButton = document.querySelector('.ofh-header__navigation-close');
+  nav = document.querySelector('.ofh-header__navigation');
   MenuToggle();
 };
 
-describe('NHS.UK menuToggle()', () => {
+describe('Our Future Health menuToggle()', () => {
   describe('does not throw an error', () => {
     it('if no elements exists', () => {
       MenuToggle();

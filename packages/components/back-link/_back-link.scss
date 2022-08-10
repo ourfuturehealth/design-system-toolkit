@@ -8,19 +8,19 @@
  * 3. Align the icon with the middle of the text.
  */
 
-.nhsuk-back-link {
-  margin-bottom: nhsuk-spacing(3);
+.ofh-back-link {
+  margin-bottom: ofh-spacing(3);
 }
 
-.nhsuk-back-link__link {
-  @include nhsuk-typography-responsive(16);
+.ofh-back-link__link {
+  @include ofh-typography-responsive(16);
 
   display: inline-block;
   padding-left: 16px; /* 1 */
   position: relative;
   text-decoration: none;
 
-  .nhsuk-icon__chevron-left {
+  .ofh-icon__chevron-left {
     height: 24px;
     left: -8px; /* 2 */
     position: absolute;
@@ -29,21 +29,21 @@
   }
 
   &:visited {
-    color: $nhsuk-link-color;
+    color: $ofh-link-color;
   }
 
   &:hover {
-    color: $nhsuk-link-hover-color;
+    color: $ofh-link-hover-color;
     text-decoration: underline;
 
-    .nhsuk-icon__chevron-left {
-      fill: $nhsuk-link-hover-color;
+    .ofh-icon__chevron-left {
+      fill: $ofh-link-hover-color;
     }
   }
 
   &:focus {
-    .nhsuk-icon__chevron-left {
-      fill: $nhsuk-focus-text-color;
+    .ofh-icon__chevron-left {
+      fill: $ofh-focus-text-color;
     }
   }
 

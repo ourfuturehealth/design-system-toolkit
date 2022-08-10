@@ -9,84 +9,84 @@
  *    to understand in print context.
  */
 
-.nhsuk-pagination {
-  @include nhsuk-responsive-margin(7, 'top');
-  @include nhsuk-responsive-margin(7, 'bottom');
+.ofh-pagination {
+  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(7, 'bottom');
 }
 
 
-.nhsuk-pagination__list {
+.ofh-pagination__list {
   @include clearfix();
 }
 
-.nhsuk-pagination-item--previous {
+.ofh-pagination-item--previous {
   float: left;
   text-align: left;
   width: 50%;
 
-  .nhsuk-icon {
+  .ofh-icon {
     left: -6px;
   }
 
-  .nhsuk-pagination__title {
-    padding-left: nhsuk-spacing(5); /* [1] */
+  .ofh-pagination__title {
+    padding-left: ofh-spacing(5); /* [1] */
   }
 
 }
 
-.nhsuk-pagination-item--next {
+.ofh-pagination-item--next {
   float: right;
   text-align: right;
   width: 50%;
 
-  .nhsuk-icon {
+  .ofh-icon {
     right: -6px;
   }
 
-  .nhsuk-pagination__title {
-    padding-right: nhsuk-spacing(5); /* [1] */
+  .ofh-pagination__title {
+    padding-right: ofh-spacing(5); /* [1] */
   }
 
 }
 
-.nhsuk-pagination__link {
+.ofh-pagination__link {
   display: block;
   position: relative;
   text-decoration: none;
   width: 100%;
 
   @include mq($media-type: print) {
-    color: $color_nhsuk-black;
+    color: $color_ofh-black;
   }
 
-  .nhsuk-icon {
+  .ofh-icon {
     position: absolute;
     top: -2px;
 
     @include mq($media-type: print) {
-      color: $color_nhsuk-black;
+      color: $color_ofh-black;
       margin-top: 0;
     }
 
   }
 
   &:hover {
-    color: $nhsuk-link-hover-color;
+    color: $ofh-link-hover-color;
 
-    .nhsuk-icon {
-      fill: $nhsuk-link-hover-color;
+    .ofh-icon {
+      fill: $ofh-link-hover-color;
     }
 
-    .nhsuk-pagination__page {
+    .ofh-pagination__page {
       text-decoration: none;
     }
 
   }
 
   &:focus {
-    @include nhsuk-focused-text;
+    @include ofh-focused-text;
 
-    .nhsuk-pagination__page {
+    .ofh-pagination__page {
       text-decoration: none;
     }
 
@@ -94,27 +94,27 @@
     &:hover,
     &:active {
 
-      .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon {
+        fill: $ofh-focus-text-color;
       }
     }
   }
 
   &:visited {
 
-    .nhsuk-icon {
-      fill: $nhsuk-link-visited-color;
+    .ofh-icon {
+      fill: $ofh-link-visited-color;
     }
 
     &:hover {
-      .nhsuk-icon {
-        fill: $nhsuk-link-hover-color;
+      .ofh-icon {
+        fill: $ofh-link-hover-color;
       }
     }
 
     &:focus {
-      .nhsuk-icon {
-        fill: $nhsuk-focus-text-color;
+      .ofh-icon {
+        fill: $ofh-focus-text-color;
       }
     }
 
@@ -122,9 +122,9 @@
 
 }
 
-.nhsuk-pagination__title {
-  @include nhsuk-typography-responsive(24);
-  color: $color_nhsuk-dark-blue;
+.ofh-pagination__title {
+  @include ofh-typography-responsive(24);
+  color: $color_ofh-dark-blue;
 
   display: block;
 
@@ -136,8 +136,8 @@
 
 }
 
-.nhsuk-pagination__page {
-  @include nhsuk-typography-responsive(16);
+.ofh-pagination__page {
+  @include ofh-typography-responsive(16);
 
   display: block;
   text-decoration: underline;

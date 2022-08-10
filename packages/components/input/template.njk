@@ -5,8 +5,8 @@
 {#- a record of other elements that we need to associate with the input using
    aria-describedby – for example hints or error messages -#}
 {% set describedBy = "" %}
-<div class="nhsuk-form-group
-{%- if params.errorMessage %} nhsuk-form-group--error{% endif %}
+<div class="ofh-form-group
+{%- if params.errorMessage %} ofh-form-group--error{% endif %}
 {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
   {{ label({
     html: params.label.html,
@@ -37,9 +37,9 @@
     text: params.errorMessage.text
   }) | indent(2) | trim -}}
 {% endif %}
-  <input class="nhsuk-input
+  <input class="ofh-input
   {%- if params.classes %} {{ params.classes }}{% endif %}
-  {%- if params.errorMessage %} nhsuk-input--error{% endif %}" id="{{ params.id }}" name="{{ params.name }}" type="{{ params.type | default('text') }}"
+  {%- if params.errorMessage %} ofh-input--error{% endif %}" id="{{ params.id }}" name="{{ params.name }}" type="{{ params.type | default('text') }}"
   {%- if (params.spellcheck === false) or (params.spellcheck === true) %} spellcheck="{{ params.spellcheck }}"{% endif %}
   {%- if params.value %} value="{{ params.value}}"{% endif %}
   {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %}

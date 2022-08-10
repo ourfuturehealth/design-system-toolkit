@@ -8,8 +8,8 @@
  * 1. Margin is removed so there isn't double spacing.
  */
 
-.nhsuk-table-container {
-  @include nhsuk-responsive-margin(7, 'bottom');
+.ofh-table-container {
+  @include ofh-responsive-margin(7, 'bottom');
 
   display: block;
   -webkit-overflow-scrolling: touch;
@@ -17,7 +17,7 @@
   overflow-x: auto;
   width: 100%;
 
-  .nhsuk-table {
+  .ofh-table {
     margin: 0; /* [1] */
   }
 }
@@ -29,9 +29,9 @@
  * Table row hover is used to aid readability for users.
  */
 
-.nhsuk-table__row {
+.ofh-table__row {
   &:hover {
-    background-color: $color_nhsuk-grey-5;
+    background-color: $color_ofh-grey-5;
   }
 }
 
@@ -42,21 +42,21 @@
  * 1. Margin is removed so there isn't double spacing.
  */
 
-.nhsuk-table__panel-with-heading-tab {
+.ofh-table__panel-with-heading-tab {
   @include panel-with-label(
-    $color_nhsuk-white,
-    $nhsuk-text-color,
-    $color_nhsuk-grey-4
+    $color_ofh-white,
+    $ofh-text-color,
+    $color_ofh-grey-4
   );
 
-  .nhsuk-table-container,
-  .nhsuk-table {
+  .ofh-table-container,
+  .ofh-table {
     margin: 0; /* [1] */
   }
 }
 
-.nhsuk-table__heading-tab {
-  @include heading-label($color_ofh_primary, $color_nhsuk-white);
+.ofh-table__heading-tab {
+  @include heading-label($color_ofh_primary, $color_ofh-white);
 }
 
 /* Responsive table
@@ -75,7 +75,7 @@
  * 10. Adding a display block value due to IE 11 not having full flex support
  */
 
-.nhsuk-table-responsive {
+.ofh-table-responsive {
   margin-bottom: 0;
   width: 100%;
 
@@ -87,10 +87,10 @@
     }
   }
 
-  .nhsuk-table__body {
-    .nhsuk-table-responsive__heading {
-      font-weight: $nhsuk-font-bold;
-      padding-right: nhsuk-spacing(3);
+  .ofh-table__body {
+    .ofh-table-responsive__heading {
+      font-weight: $ofh-font-bold;
+      padding-right: ofh-spacing(3);
       text-align: left; /* [8] */
 
       @include mq($from: desktop) {
@@ -98,9 +98,9 @@
       }
     }
 
-    .nhsuk-table__row {
+    .ofh-table__row {
       display: block; /* [3] */
-      margin-bottom: nhsuk-spacing(4);
+      margin-bottom: ofh-spacing(4);
 
       &:last-child {
         margin-bottom: 0;
@@ -134,7 +134,7 @@
           padding-right: 0;
           text-align: right; /* [7] */
           &:last-child {
-            border-bottom: 3px solid $color_nhsuk-grey-4;
+            border-bottom: 3px solid $color_ofh-grey-4;
           }
         }
       }
@@ -149,7 +149,7 @@
  * Right aligns table cells for numeric tables.
  */
 
-.nhsuk-table__header--numeric,
-.nhsuk-table__cell--numeric {
+.ofh-table__header--numeric,
+.ofh-table__cell--numeric {
   text-align: right;
 }

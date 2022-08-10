@@ -6,40 +6,40 @@ describe('Checkboxes module', () => {
       Checkboxes();
     });
     it('if there are no conditional checkboxes inside the container', () => {
-      document.body.innerHTML = '<div class="nhsuk-checkboxes"></div>';
+      document.body.innerHTML = '<div class="ofh-checkboxes"></div>';
       Checkboxes();
     });
   });
 
   describe('displays conditional content', () => {
     it('when checking the input', () => {
-      document.body.innerHTML = `<form><div class="nhsuk-checkboxes">
-            <input class="nhsuk-checkboxes__input" id="input-1" type="checkbox" aria-controls="conditional-1" aria-expanded="false" />
-            <div class="nhsuk-checkboxes__conditional--hidden" id="conditional-1">Test</div>
+      document.body.innerHTML = `<form><div class="ofh-checkboxes">
+            <input class="ofh-checkboxes__input" id="input-1" type="checkbox" aria-controls="conditional-1" aria-expanded="false" />
+            <div class="ofh-checkboxes__conditional--hidden" id="conditional-1">Test</div>
             </div></form>`;
       const input = document.querySelector('#input-1');
       const conditional = document.querySelector('#conditional-1');
       Checkboxes();
       input.click();
-      expect(conditional.classList.contains('nhsuk-checkboxes__conditional--hidden')).toEqual(false);
+      expect(conditional.classList.contains('ofh-checkboxes__conditional--hidden')).toEqual(false);
       expect(input.getAttribute('aria-expanded')).toEqual('true');
     });
   });
 
   describe('hides conditional content', () => {
     it('when unchecking the input', () => {
-      document.body.innerHTML = `<form><div class="nhsuk-checkboxes">
-            <input class="nhsuk-checkboxes__input" id="input-1" type="checkbox" aria-controls="conditional-1" aria-expanded="false" />
-            <div class="nhsuk-checkboxes__conditional nhsuk-checkboxes__conditional--hidden" id="conditional-1">Test</div>
+      document.body.innerHTML = `<form><div class="ofh-checkboxes">
+            <input class="ofh-checkboxes__input" id="input-1" type="checkbox" aria-controls="conditional-1" aria-expanded="false" />
+            <div class="ofh-checkboxes__conditional ofh-checkboxes__conditional--hidden" id="conditional-1">Test</div>
             </div></form>`;
       const input = document.querySelector('#input-1');
       const conditional = document.querySelector('#conditional-1');
       Checkboxes();
       input.click();
-      expect(conditional.classList.contains('nhsuk-checkboxes__conditional--hidden')).toEqual(false);
+      expect(conditional.classList.contains('ofh-checkboxes__conditional--hidden')).toEqual(false);
       expect(input.getAttribute('aria-expanded')).toEqual('true');
       input.click();
-      expect(conditional.classList.contains('nhsuk-checkboxes__conditional--hidden')).toEqual(true);
+      expect(conditional.classList.contains('ofh-checkboxes__conditional--hidden')).toEqual(true);
       expect(input.getAttribute('aria-expanded')).toEqual('false');
     });
   });

@@ -9,7 +9,7 @@
 #### HTML markup
 
 ```html
-<label class="nhsuk-label">
+<label class="ofh-label">
   National Insurance number
 </label>
 ```
@@ -33,7 +33,7 @@
 #### HTML markup
 
 ```html
-<label class="nhsuk-label nhsuk-label--s">
+<label class="ofh-label ofh-label--s">
   National Insurance number
 </label>
 ```
@@ -44,7 +44,7 @@
 {% from 'components/label/macro.njk' import label %}
 
 {{ label({
-  "classes": "nhsuk-label--s",
+  "classes": "ofh-label--s",
   "text": "National Insurance number"
 }) }}
 ```
@@ -58,8 +58,8 @@
 #### HTML markup
 
 ```html
-<h1 class="nhsuk-label-wrapper">
-  <label class="nhsuk-label nhsuk-label--xl">
+<h1 class="ofh-label-wrapper">
+  <label class="ofh-label ofh-label--xl">
     National Insurance number
   </label>
 </h1>
@@ -72,7 +72,7 @@
 
 {{ label({
   "text": "National Insurance number",
-  "classes": "nhsuk-label--xl",
+  "classes": "ofh-label--xl",
   "isPageHeading": true
 }) }}
 ```

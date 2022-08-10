@@ -6,77 +6,77 @@
 // Fonts
 //
 
-$nhsuk-font: 'Source Sans Pro', sans-serif;
+$ofh-font: 'Source Sans Pro', sans-serif;
 $serif-font: 'Source Serif Pro';
-$nhsuk-font-fallback: Arial, Sans-serif !default;
-$nhsuk-font-family-print: sans-serif !default;
-$nhsuk-font-bold: 600 !default;
-$nhsuk-font-normal: 400 !default;
-$nhsuk-font-light: $nhsuk-font-normal !default;
+$ofh-font-fallback: Arial, Sans-serif !default;
+$ofh-font-family-print: sans-serif !default;
+$ofh-font-bold: 600 !default;
+$ofh-font-normal: 400 !default;
+$ofh-font-light: $ofh-font-normal !default;
 
 //
 // Font sizing and spacing
 //
 
-$nhsuk-base-font-size: 16px !default;
-$nhsuk-base-line-height: 24px !default;
+$ofh-base-font-size: 16px !default;
+$ofh-base-line-height: 24px !default;
 
 //
 // Icon default sizing
 //
 
-$nhsuk-icon-size: 34px !default;
+$ofh-icon-size: 34px !default;
 
 //
 // Grid spacing
 //
 
-$nhsuk-page-width: 960px;
-$nhsuk-gutter: 32px;
-$nhsuk-gutter-half: $nhsuk-gutter / 2;
+$ofh-page-width: 960px;
+$ofh-gutter: 32px;
+$ofh-gutter-half: $ofh-gutter / 2;
 
 //
 // Border sizes
 //
 
-$nhsuk-border-width-inset-text: 8px !default;
-$nhsuk-care-card-triangle-border: 16px !default;
-$nhsuk-hero-content-triangle-border: 16px !default;
-$nhsuk-hero-border: 1px !default;
-$nhsuk-border-table-header-width: 2px !default;
-$nhsuk-border-table-cell-width: 1px !default;
+$ofh-border-width-inset-text: 8px !default;
+$ofh-care-card-triangle-border: 16px !default;
+$ofh-hero-content-triangle-border: 16px !default;
+$ofh-hero-border: 1px !default;
+$ofh-border-table-header-width: 2px !default;
+$ofh-border-table-cell-width: 1px !default;
 
 //
 // Border radius
 //
 
-$nhsuk-border-radius: 4px !default;
+$ofh-border-radius: 4px !default;
 
 //
 // Box shadow
 //
 
-$nhsuk-box-shadow-spread: 4px !default;
-$nhsuk-box-shadow-blur: 4px !default;
-$nhsuk-box-shadow-link: 4px !default;
-$nhsuk-box-details: 8px !default;
-$nhsuk-box-expander: 4px !default;
-$nhsuk-box-shadow-pagination: 16px !default;
-$nhsuk-box-shadow-link: 4px !default;
+$ofh-box-shadow-spread: 4px !default;
+$ofh-box-shadow-blur: 4px !default;
+$ofh-box-shadow-link: 4px !default;
+$ofh-box-details: 8px !default;
+$ofh-box-expander: 4px !default;
+$ofh-box-shadow-pagination: 16px !default;
+$ofh-box-shadow-link: 4px !default;
 
 //
 // Header spacing
 //
 
-$nhsuk-header-spacing: 20px;
+$ofh-header-spacing: 20px;
 
 //
 // Form elements
 //
 
-$nhsuk-border-width-form-element: 2px !default;
-$nhsuk-border-width-form-element-error: 4px !default;
-$nhsuk-focus-width: 4px !default;
-$nhsuk-border-width: 4px !default;
-$nhsuk-border-width-mobile: 4px !default;
-$nhsuk-border-width-form-group-error: $nhsuk-border-width !default;
+$ofh-border-width-form-element: 2px !default;
+$ofh-border-width-form-element-error: 4px !default;
+$ofh-focus-width: 4px !default;
+$ofh-border-width: 4px !default;
+$ofh-border-width-mobile: 4px !default;
+$ofh-border-width-form-group-error: $ofh-border-width !default;

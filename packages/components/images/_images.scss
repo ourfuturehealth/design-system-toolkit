@@ -6,18 +6,18 @@
  * 1. Overrides default browser margin values.
  * 2. Makes the image width two thirds of its container for desktop.
  * 3. Avoid image printing full width of a page.
- * 4. Removes top margin from subsequent nhsuk-image.
+ * 4. Removes top margin from subsequent ofh-image.
  */
 
-.nhsuk-image {
-  background-color: $color_nhsuk-white;
-  border-bottom: 1px solid $color_nhsuk-grey-4;
+.ofh-image {
+  background-color: $color_ofh-white;
+  border-bottom: 1px solid $color_ofh-grey-4;
 
   margin-left: 0; /* [1] */
   margin-right: 0; /* [1] */
 
-  @include nhsuk-responsive-margin(6, 'bottom');
-  @include nhsuk-responsive-margin(6, 'top');
+  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(6, 'top');
 
   @include mq($from: desktop) {
     width: 66.66667%; /* [2] */
@@ -27,19 +27,19 @@
     width: 50%; /* [3] */
   }
 
-  & + .nhsuk-image {
-    @include nhsuk-responsive-margin(0, 'top'); /* [4] */
+  & + .ofh-image {
+    @include ofh-responsive-margin(0, 'top'); /* [4] */
   }
 
 }
 
-.nhsuk-image__img {
+.ofh-image__img {
   display: block;
   width: 100%;
 }
 
-.nhsuk-image__caption {
-  @include nhsuk-typography-responsive(16);
+.ofh-image__caption {
+  @include ofh-typography-responsive(16);
 
-  padding: nhsuk-spacing(3);
+  padding: ofh-spacing(3);
 }
