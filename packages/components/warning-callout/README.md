@@ -13,9 +13,9 @@ Find out more about the warning callout component and when to use it in the [NHS
 #### HTML markup
 
 ```html
-<div class="nhsuk-warning-callout">
-  <h3 class="nhsuk-warning-callout__label">
-    Important<span class="nhsuk-u-visually-hidden">:</span>
+<div class="ofh-warning-callout">
+  <h3 class="ofh-warning-callout__label">
+    Important<span class="ofh-u-visually-hidden">:</span>
   </h3>
   <p>If you develop symptoms of anaphylaxis, such as difficulty breathing, you should inject yourself in the outer thigh before seeking emergency medical help.</p>
 </div>
@@ -41,10 +41,10 @@ If you’re using Nunjucks macros in production be aware that using `html` argum
 #### HTML markup
 
 ```html
-<div class="nhsuk-warning-callout">
-  <h3 class="nhsuk-warning-callout__label">
+<div class="ofh-warning-callout">
+  <h3 class="ofh-warning-callout__label">
     <span role="text">
-      <span class="nhsuk-u-visually-hidden">Important: </span>
+      <span class="ofh-u-visually-hidden">Important: </span>
       School, nursery or work
     </span>
   </h3>

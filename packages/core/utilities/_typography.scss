@@ -9,15 +9,15 @@
  * Font size and line height
  *
  * Generate typography override classes for each responsive font map in the
- * typography scale eg .nhsuk-u-font-size-48
+ * typography scale eg .ofh-u-font-size-48
  *
  * Original code taken from GDS (Government Digital Service)
  * https://github.com/alphagov/govuk-frontend
  */
 
-@each $size in map-keys($nhsuk-typography-scale) {
-  .nhsuk-u-font-size-#{$size} {
-    @include nhsuk-typography-responsive($size, $important: true);
+@each $size in map-keys($ofh-typography-scale) {
+  .ofh-u-font-size-#{$size} {
+    @include ofh-typography-responsive($size, $important: true);
   }
 }
 
@@ -26,25 +26,25 @@
 
 /**
  * Generate font weight override classes for normal and bold
- * eg .nhsuk-u-font-weight-normal
+ * eg .ofh-u-font-weight-normal
  */
 
-.nhsuk-u-font-weight-normal {
-  @include nhsuk-typography-weight-normal($important: true);
+.ofh-u-font-weight-normal {
+  @include ofh-typography-weight-normal($important: true);
 }
 
-.nhsuk-u-font-weight-bold {
-  @include nhsuk-typography-weight-bold($important: true);
+.ofh-u-font-weight-bold {
+  @include ofh-typography-weight-bold($important: true);
 }
 
 /* Colours
    ========================================================================== */
 
 /**
- * Secondary text colour $nhsuk-secondary-text-color
- * eg <p class="nhsuk-u-secondary-text-color">Published on: 15 March 2018</p>
+ * Secondary text colour $ofh-secondary-text-color
+ * eg <p class="ofh-u-secondary-text-color">Published on: 15 March 2018</p>
  */
 
-.nhsuk-u-secondary-text-color {
-  color: $nhsuk-secondary-text-color !important; /* stylelint-disable-line declaration-no-important */
+.ofh-u-secondary-text-color {
+  color: $ofh-secondary-text-color !important; /* stylelint-disable-line declaration-no-important */
 }

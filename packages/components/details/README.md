@@ -17,13 +17,13 @@ For this component to be accessible and compatible with older browsers, include 
 #### HTML markup
 
 ```html
-<details class="nhsuk-details">
-  <summary class="nhsuk-details__summary">
-    <span class="nhsuk-details__summary-text">
+<details class="ofh-details">
+  <summary class="ofh-details__summary">
+    <span class="ofh-details__summary-text">
     Where can I find my NHS number?
     </span>
   </summary>
-  <div class="nhsuk-details__text">
+  <div class="ofh-details__text">
     <p>An NHS number is a 10 digit number, like 485 777 3456.</p>
     <p>You can find your NHS number on any document sent to you by the NHS. This may include:</p>
     <ul>
@@ -73,13 +73,13 @@ Find out more about the expander component and when to use it in the [NHS digita
 #### HTML markup
 
 ```html
-<details class="nhsuk-details nhsuk-expander">
-  <summary class="nhsuk-details__summary">
-    <span class="nhsuk-details__summary-text">
+<details class="ofh-details ofh-expander">
+  <summary class="ofh-details__summary">
+    <span class="ofh-details__summary-text">
     Opening times
     </span>
   </summary>
-  <div class="nhsuk-details__text">
+  <div class="ofh-details__text">
     <table>
       <tbody>
         <tr>
@@ -126,7 +126,7 @@ Find out more about the expander component and when to use it in the [NHS digita
 {% from 'components/details/macro.njk' import details %}
 
 {{ details({
-  "classes": "nhsuk-expander",
+  "classes": "ofh-expander",
   "text": "Opening times",
   "HTML": "
   <table>
@@ -177,14 +177,14 @@ Find out more about the expander component and when to use it in the [NHS digita
 #### HTML markup
 
 ```html
-<div class="nhsuk-expander-group">
-  <details class="nhsuk-details nhsuk-expander">
-    <summary class="nhsuk-details__summary">
-      <span class="nhsuk-details__summary-text">
+<div class="ofh-expander-group">
+  <details class="ofh-details ofh-expander">
+    <summary class="ofh-details__summary">
+      <span class="ofh-details__summary-text">
       How to measure your blood glucose levels
       </span>
     </summary>
-    <div class="nhsuk-details__text">
+    <div class="ofh-details__text">
       <p>Testing your blood at home is quick and easy, although it can be uncomfortable. It does get better.</p>
       <p>You would have been given:</p>
       <ul>
@@ -195,13 +195,13 @@ Find out more about the expander component and when to use it in the [NHS digita
       </ul>
     </div>
   </details>
-  <details class="nhsuk-details nhsuk-expander">
-    <summary class="nhsuk-details__summary">
-      <span class="nhsuk-details__summary-text">
+  <details class="ofh-details ofh-expander">
+    <summary class="ofh-details__summary">
+      <span class="ofh-details__summary-text">
       When to check your blood glucose level
       </span>
     </summary>
-    <div class="nhsuk-details__text">
+    <div class="ofh-details__text">
       <p>Try to check your blood:</p>
       <ul>
         <li>before meals</li>
@@ -219,9 +219,9 @@ Find out more about the expander component and when to use it in the [NHS digita
 ```
 {% from 'components/details/macro.njk' import details %}
 
-<div class="nhsuk-expander-group">
+<div class="ofh-expander-group">
   {{ details({
-    "classes": "nhsuk-expander",
+    "classes": "ofh-expander",
     "text": "How to measure your blood glucose levels",
     "HTML": "
     <p>Testing your blood at home is quick and easy, although it can be uncomfortable. It does get better.</p>
@@ -235,7 +235,7 @@ Find out more about the expander component and when to use it in the [NHS digita
     "
   }) }}
   {{ details({
-    "classes": "nhsuk-expander",
+    "classes": "ofh-expander",
     "text": "When to check your blood glucose level",
     "HTML": "
     <p>Try to check your blood:</p>

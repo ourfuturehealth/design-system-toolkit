@@ -1,24 +1,24 @@
 /* ==========================================================================
    COMPONENTS/ #STATUS-FLAG
    ========================================================================== */
-.nhsuk-status-flag {
-  @include nhsuk-responsive-padding(4);
-  @include nhsuk-responsive-margin(8, 'bottom');
-  border: $nhsuk-border-width-mobile solid $color_ofh-blue;
+.ofh-status-flag {
+  @include ofh-responsive-padding(4);
+  @include ofh-responsive-margin(8, 'bottom');
+  border: $ofh-border-width-mobile solid $color_ofh-blue;
   @include govuk-media-query($from: tablet) {
-    border: $nhsuk-border-width solid $color_ofh-blue;
+    border: $ofh-border-width solid $color_ofh-blue;
   }
   &:focus {
-    border: $nhsuk-focus-width solid $nhsuk-focus-text-color;
-    box-shadow: 0 0 0 $nhsuk-focus-width $nhsuk-focus-color;
-    outline: $nhsuk-focus-width solid transparent;
+    border: $ofh-focus-width solid $ofh-focus-text-color;
+    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
+    outline: $ofh-focus-width solid transparent;
   }
 }
-.nhsuk-status-flag__title {
-  @include nhsuk-font(24, $weight: bold);
+.ofh-status-flag__title {
+  @include ofh-font(24, $weight: bold);
   margin-top: 0;
 }
-.nhsuk-status-flag__body {
-  @include nhsuk-font(19);
+.ofh-status-flag__body {
+  @include ofh-font(19);
 }
 

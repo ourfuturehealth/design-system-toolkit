@@ -11,7 +11,7 @@ Find out more about the hint component and when to use it in the [NHS digital se
 ### HTML markup
 
 ```html
-<div class="nhsuk-hint">
+<div class="ofh-hint">
   It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
 </div>
 ```

@@ -11,14 +11,14 @@ Find out more about the breadcrumb component and when to use it in the [NHS digi
 ### HTML markup
 
 ```html
-<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
-  <div class="nhsuk-width-container">
-    <ol class="nhsuk-breadcrumb__list">
-      <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/level-one">Level one</a></li>
-      <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/level-one/level-two">Level two</a></li>
-      <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="/level-one/level-two/level-three">Level three</a></li>
+<nav class="ofh-breadcrumb" aria-label="Breadcrumb">
+  <div class="ofh-width-container">
+    <ol class="ofh-breadcrumb__list">
+      <li class="ofh-breadcrumb__item"><a class="ofh-breadcrumb__link" href="/level-one">Level one</a></li>
+      <li class="ofh-breadcrumb__item"><a class="ofh-breadcrumb__link" href="/level-one/level-two">Level two</a></li>
+      <li class="ofh-breadcrumb__item"><a class="ofh-breadcrumb__link" href="/level-one/level-two/level-three">Level three</a></li>
     </ol>
-    <p class="nhsuk-breadcrumb__back"><a class="nhsuk-breadcrumb__backlink" href="/level-one/level-two/level-three">Back to Level three</a></p>
+    <p class="ofh-breadcrumb__back"><a class="ofh-breadcrumb__backlink" href="/level-one/level-two/level-three">Back to Level three</a></p>
   </div>
 </nav>
 ```

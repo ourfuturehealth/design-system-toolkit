@@ -9,176 +9,176 @@
 //
 // @example scss
 //  .foo {
-//   @extend %nhsuk-heading-xl;
+//   @extend %ofh-heading-xl;
 //  }
 
-%nhsuk-heading-xl {
-  @include nhsuk-typography-responsive(48);
+%ofh-heading-xl {
+  @include ofh-typography-responsive(48);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(7, 'bottom');
 }
 
 h1,
-.nhsuk-heading-xl {
-  @extend %nhsuk-heading-xl;
+.ofh-heading-xl {
+  @extend %ofh-heading-xl;
 }
 
-%nhsuk-heading-l {
-  @include nhsuk-typography-responsive(32);
+%ofh-heading-l {
+  @include ofh-typography-responsive(32);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 h2,
-.nhsuk-heading-l {
-  @extend %nhsuk-heading-l;
+.ofh-heading-l {
+  @extend %ofh-heading-l;
 }
 
-%nhsuk-heading-m {
-  @include nhsuk-typography-responsive(24);
+%ofh-heading-m {
+  @include ofh-typography-responsive(24);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 h3,
-.nhsuk-heading-m {
-  @extend %nhsuk-heading-m;
+.ofh-heading-m {
+  @extend %ofh-heading-m;
 }
 
-%nhsuk-heading-s {
-  @include nhsuk-typography-responsive(22);
+%ofh-heading-s {
+  @include ofh-typography-responsive(22);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 h4,
-.nhsuk-heading-s {
-  @extend %nhsuk-heading-s;
+.ofh-heading-s {
+  @extend %ofh-heading-s;
 }
 
-%nhsuk-heading-xs {
-  @include nhsuk-typography-responsive(19);
+%ofh-heading-xs {
+  @include ofh-typography-responsive(19);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 h5,
-.nhsuk-heading-xs {
-  @extend %nhsuk-heading-xs;
+.ofh-heading-xs {
+  @extend %ofh-heading-xs;
 }
 
-%nhsuk-heading-xxs {
-  @include nhsuk-typography-responsive(19);
+%ofh-heading-xxs {
+  @include ofh-typography-responsive(19);
 
   display: block;
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 h6,
-.nhsuk-heading-xxs {
-  @extend %nhsuk-heading-xxs;
+.ofh-heading-xxs {
+  @extend %ofh-heading-xxs;
 }
 
 /* Captions to be used inside headings */
 
-.nhsuk-caption-xl {
-  @include nhsuk-font(32);
+.ofh-caption-xl {
+  @include ofh-font(32);
 
-  color: $nhsuk-secondary-text-color;
+  color: $ofh-secondary-text-color;
   display: block;
-  margin-bottom: nhsuk-spacing(1);
+  margin-bottom: ofh-spacing(1);
 }
 
-.nhsuk-caption-l {
-  @include nhsuk-font(24);
+.ofh-caption-l {
+  @include ofh-font(24);
 
-  color: $nhsuk-secondary-text-color;
+  color: $ofh-secondary-text-color;
   display: block;
-  margin-bottom: nhsuk-spacing(1);
+  margin-bottom: ofh-spacing(1);
 }
 
-.nhsuk-caption-m {
-  @include nhsuk-font(19);
+.ofh-caption-m {
+  @include ofh-font(19);
 
-  color: $nhsuk-secondary-text-color;
+  color: $ofh-secondary-text-color;
   display: block;
 }
 
-.nhsuk-caption--bottom {
-  margin-bottom: nhsuk-spacing(0);
-  margin-top: nhsuk-spacing(1);
+.ofh-caption--bottom {
+  margin-bottom: ofh-spacing(0);
+  margin-top: ofh-spacing(1);
 }
 
 /* Body (paragraphs) */
 
-%nhsuk-body-l {
-  @include nhsuk-typography-responsive(24);
+%ofh-body-l {
+  @include ofh-typography-responsive(24);
 
   display: block;
   font-family: $serif-font;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
-.nhsuk-body-l {
-  @extend %nhsuk-body-l;
+.ofh-body-l {
+  @extend %ofh-body-l;
   line-height: 1.6;
 }
 
-%nhsuk-body-m {
-  @include nhsuk-typography-responsive(19);
+%ofh-body-m {
+  @include ofh-typography-responsive(19);
 
   display: block;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 p,
-.nhsuk-body-m {
-  @extend %nhsuk-body-m;
+.ofh-body-m {
+  @extend %ofh-body-m;
   color: inherit;
 }
 
-%nhsuk-body-s {
-  @include nhsuk-typography-responsive(16);
+%ofh-body-s {
+  @include ofh-typography-responsive(16);
 
   display: block;
   margin-top: 0;
 
-  @include nhsuk-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
-.nhsuk-body-s {
-  @extend %nhsuk-body-s;
+.ofh-body-s {
+  @extend %ofh-body-s;
 }
 
 address {
-  @extend %nhsuk-body-m;
+  @extend %ofh-body-m;
 
   font-style: normal;
 }
@@ -190,25 +190,25 @@ address {
  * 2. Reduces the spacing between the page heading and the lede text
  */
 
-.nhsuk-lede-text {
-  @include nhsuk-font(24);
-  @include nhsuk-responsive-margin(7, 'bottom');
+.ofh-lede-text {
+  @include ofh-font(24);
+  @include ofh-responsive-margin(7, 'bottom');
   /* [1] */
   p,
   ul {
-    @include nhsuk-font(24);
+    @include ofh-font(24);
   }
 }
 
-.nhsuk-lede-text--small {
-  @include nhsuk-font(19);
-  @include nhsuk-responsive-margin(5, 'bottom');
+.ofh-lede-text--small {
+  @include ofh-font(19);
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
 /* [2] */
-h1 + .nhsuk-lede-text,
-h1 + .nhsuk-lede-text--small {
-  margin-top: - nhsuk-spacing(2);
+h1 + .ofh-lede-text,
+h1 + .ofh-lede-text--small {
+  margin-top: - ofh-spacing(2);
 }
 
 /**
@@ -222,35 +222,35 @@ h1 + .nhsuk-lede-text--small {
  * https://github.com/alphagov/nhsuk-frontend
  */
 
-%nhsuk-body-l  + %nhsuk-heading-l {
-  padding-top: nhsuk-spacing(1);
+%ofh-body-l  + %ofh-heading-l {
+  padding-top: ofh-spacing(1);
 
   @include mq($from: tablet) {
-    padding-top: nhsuk-spacing(2);
+    padding-top: ofh-spacing(2);
   }
 }
 
-%nhsuk-body-m  + %nhsuk-heading-l,
-%nhsuk-body-s  + %nhsuk-heading-l,
-%nhsuk-list + %nhsuk-heading-l {
-  @include nhsuk-responsive-padding(4, 'top');
+%ofh-body-m  + %ofh-heading-l,
+%ofh-body-s  + %ofh-heading-l,
+%ofh-list + %ofh-heading-l {
+  @include ofh-responsive-padding(4, 'top');
 }
 
-%nhsuk-body-m + %nhsuk-heading-m,
-%nhsuk-body-s + %nhsuk-heading-m,
-%nhsuk-list + %nhsuk-heading-m,
-%nhsuk-body-m + %nhsuk-heading-s,
-%nhsuk-body-s + %nhsuk-heading-s,
-%nhsuk-list + %nhsuk-heading-s {
-  padding-top: nhsuk-spacing(1);
+%ofh-body-m + %ofh-heading-m,
+%ofh-body-s + %ofh-heading-m,
+%ofh-list + %ofh-heading-m,
+%ofh-body-m + %ofh-heading-s,
+%ofh-body-s + %ofh-heading-s,
+%ofh-list + %ofh-heading-s {
+  padding-top: ofh-spacing(1);
 
   @include mq($from: tablet) {
-    padding-top: nhsuk-spacing(2);
+    padding-top: ofh-spacing(2);
   }
 }
 
 /* [1] */
-.nhsuk-lede-text + %nhsuk-heading-l {
+.ofh-lede-text + %ofh-heading-l {
   padding-top: 0;
 }
 
@@ -258,5 +258,5 @@ h1 + .nhsuk-lede-text--small {
 
 strong,
 b {
-  font-weight: $nhsuk-font-bold;
+  font-weight: $ofh-font-bold;
 }

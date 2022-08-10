@@ -22,17 +22,17 @@ export default () => {
   */
   const initDetails = (element, index) => {
     // Set details element as polyfilled to prevent duplicate events being added
-    element.setAttribute('nhsuk-polyfilled', 'true');
+    element.setAttribute('ofh-polyfilled', 'true');
 
     // Give details element an ID if it doesn't already have one
-    if (!element.id) element.setAttribute('id', `nhsuk-details${index}`);
+    if (!element.id) element.setAttribute('id', `ofh-details${index}`);
 
     // Set content element and give it an ID if it doesn't already have one
-    const content = document.querySelector(`#${element.id} .nhsuk-details__text`);
-    if (!content.id) content.setAttribute('id', `nhsuk-details__text${index}`);
+    const content = document.querySelector(`#${element.id} .ofh-details__text`);
+    if (!content.id) content.setAttribute('id', `ofh-details__text${index}`);
 
     // Set summary element
-    const summary = document.querySelector(`#${element.id} .nhsuk-details__summary`);
+    const summary = document.querySelector(`#${element.id} .ofh-details__summary`);
 
     // Set initial summary aria attributes
     summary.setAttribute('role', 'button');
@@ -75,7 +75,7 @@ export default () => {
   // Initialise details for any new details element
   if (allDetails.length) {
     allDetails.forEach((element, index) => {
-      if (!element.hasAttribute('nhsuk-polyfilled')) initDetails(element, index);
+      if (!element.hasAttribute('ofh-polyfilled')) initDetails(element, index);
     });
   }
 };

@@ -7,20 +7,20 @@
  * 2. until the link gains focus from keyboard tabbing.
  */
 
-.nhsuk-skip-link {
+.ofh-skip-link {
   left: -9999px; /* [1] */
-  padding: nhsuk-spacing(2);
+  padding: ofh-spacing(2);
   position: absolute;
 
   &:active,
   &:focus {
-    left: nhsuk-spacing(3); /* [2] */
-    top: nhsuk-spacing(3);
+    left: ofh-spacing(3); /* [2] */
+    top: ofh-spacing(3);
     z-index: 2;
   }
 
   &:visited {
-    color: $color_nhsuk-black;
+    color: $color_ofh-black;
   }
 
 }

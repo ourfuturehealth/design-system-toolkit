@@ -106,7 +106,7 @@ function handleClick(event) {
 
 export default ({ focusOnPageLoad = true } = {}) => {
   // Error summary component
-  const errorSummary = document.querySelector('.nhsuk-error-summary');
+  const errorSummary = document.querySelector('.ofh-error-summary');
 
   if (errorSummary) {
     // Focus error summary component if it exists

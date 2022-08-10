@@ -1,9 +1,9 @@
 import SearchToggle from '../../packages/components/header/searchToggle';
 
-const toggleButtonHtml = '<button class="nhsuk-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search" aria-expanded="false"><span class="nhsuk-u-visually-hidden">Search</span></button>';
-const closeButtonHtml = '<button class="nhsuk-search__close" id="close-search"><span class="nhsuk-u-visually-hidden">Close search</span></button>';
-const searchContainerHtml = '<div class="nhsuk-header__search-wrap" id="wrap-search"></div>';
-const menuSearchContainerHtml = '<div class="nhsuk-header__content" id="content-header"></div>';
+const toggleButtonHtml = '<button class="ofh-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search" aria-expanded="false"><span class="ofh-u-visually-hidden">Search</span></button>';
+const closeButtonHtml = '<button class="ofh-search__close" id="close-search"><span class="ofh-u-visually-hidden">Close search</span></button>';
+const searchContainerHtml = '<div class="ofh-header__search-wrap" id="wrap-search"></div>';
+const menuSearchContainerHtml = '<div class="ofh-header__content" id="content-header"></div>';
 
 // DOM Elements to be set
 let toggleButton;
@@ -22,7 +22,7 @@ const initTest = (html) => {
   SearchToggle();
 };
 
-describe('NHS.UK menuToggle()', () => {
+describe('Our Future Health menuToggle()', () => {
   describe('Does not throw an error', () => {
     it('if no document exists', () => {
       SearchToggle();

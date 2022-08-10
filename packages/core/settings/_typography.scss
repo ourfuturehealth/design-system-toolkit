@@ -28,7 +28,7 @@
 // https://github.com/alphagov/govuk-frontend
 ///
 
-$nhsuk-typography-scale: (
+$ofh-typography-scale: (
   64: (
     null: (
       font-size: 48px,
@@ -150,12 +150,12 @@ $nhsuk-typography-scale: (
 // Font weight for normal typography
 //
 
-$nhsuk-font-normal: 400 !default;
+$ofh-font-normal: 400 !default;
 
 //
 // Font weight for bold typography
 //
 
-$nhsuk-font-bold: 600 !default;
+$ofh-font-bold: 600 !default;
 
-$nhsuk-font-very-bold: 700 !default;
+$ofh-font-very-bold: 700 !default;

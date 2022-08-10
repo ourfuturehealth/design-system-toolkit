@@ -17,11 +17,11 @@
 // https://github.com/alphagov/govuk-frontend
 //
 
-@mixin nhsuk-text-color {
-  color: $nhsuk-text-color;
+@mixin ofh-text-color {
+  color: $ofh-text-color;
 
   @include govuk-media-query($media-type: print) {
-    color: $nhsuk-print-text-color;
+    color: $ofh-print-text-color;
   }
 }
 
@@ -33,8 +33,8 @@
 //   `!important`. Generally Used to create override classes.
 //
 
-@mixin nhsuk-typography-weight-normal($important: false) {
-  font-weight: $nhsuk-font-normal iff($important, !important);
+@mixin ofh-typography-weight-normal($important: false) {
+  font-weight: $ofh-font-normal iff($important, !important);
 }
 
 // Bold font weight
@@ -45,8 +45,8 @@
 //   `!important`. Generally Used to create override classes.
 //
 
-@mixin nhsuk-typography-weight-bold($important: false) {
-  font-weight: $nhsuk-font-bold iff($important, !important);
+@mixin ofh-typography-weight-bold($important: false) {
+  font-weight: $ofh-font-bold iff($important, !important);
 }
 
 // Line height
@@ -62,7 +62,7 @@
 // @return {Number} The line height as either a relative value or unmodified
 //
 
-@function _nhsuk-line-height($line-height, $font-size) {
+@function _ofh-line-height($line-height, $font-size) {
   @if not unitless($line-height) and unit($line-height) == unit($font-size) {
     // Explicitly rounding to 5 decimal places to match the node-sass/libsass default precision.
     // This is expanded to 10 in dart-sass and results in significant line height differences
@@ -100,11 +100,11 @@
 //
 // @example scss
 //  .foo {
-//    @include nhsuk-typography-responsive(19);
+//    @include ofh-typography-responsive(19);
 //   }
 //
 //  .foo {
-//    @include nhsuk-typography-responsive(32, $important: true);
+//    @include ofh-typography-responsive(32, $important: true);
 //   }
 //
 // @param {Map} $font-map - Font map
@@ -118,19 +118,19 @@
 //    are used in calculations
 //
 
-@mixin nhsuk-typography-responsive($size, $override-line-height: false, $important: false) {
+@mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
 
-  @if not map-has-key($nhsuk-typography-scale, $size) {
+  @if not map-has-key($ofh-typography-scale, $size) {
     @error 'Unknown font size `#{$size}` - expected a point from the typography scale.';
   }
 
-  $font-map: map-get($nhsuk-typography-scale, $size);
+  $font-map: map-get($ofh-typography-scale, $size);
 
   @each $breakpoint, $breakpoint-map in $font-map {
     $font-size: map-get($breakpoint-map, 'font-size');
-    $font-size-rem: nhsuk-px-to-rem($font-size);
+    $font-size-rem: ofh-px-to-rem($font-size);
 
-    $line-height: _nhsuk-line-height($line-height: if($override-line-height, $override-line-height, map-get($breakpoint-map, 'line-height')), $font-size: $font-size);
+    $line-height: _ofh-line-height($line-height: if($override-line-height, $override-line-height, map-get($breakpoint-map, 'line-height')), $font-size: $font-size);
 
     // [1] //
     $font-size: $font-size iff($important, !important);
@@ -162,11 +162,11 @@
 //
 // @example scss
 //  .foo {
-//    @include nhsuk-font(19);
+//    @include ofh-font(19);
 //   }
 //
 //  .foo {
-//    @include nhsuk-font(32, $weight: bold);
+//    @include ofh-font(32, $weight: bold);
 //   }
 //
 // @param {Number} $size - Size of the font as it would appear on desktop -
@@ -175,15 +175,15 @@
 // @param {Number} $line-height [false] - Line-height, if overriding the default
 //
 
-@mixin nhsuk-font($size, $weight: normal, $line-height: false) {
+@mixin ofh-font($size, $weight: normal, $line-height: false) {
 
   @if $weight == normal {
-    @include nhsuk-typography-weight-normal;
+    @include ofh-typography-weight-normal;
   } @else if $weight == bold {
-    @include nhsuk-typography-weight-bold;
+    @include ofh-typography-weight-bold;
   }
 
   @if $size {
-    @include nhsuk-typography-responsive($size, $override-line-height: $line-height);
+    @include ofh-typography-responsive($size, $override-line-height: $line-height);
   }
 }

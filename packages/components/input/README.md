@@ -13,11 +13,11 @@ Find out more about the input component and when to use it in the [NHS digital s
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="input-example">
+<div class="ofh-form-group">
+  <label class="ofh-label" for="input-example">
     National Insurance number
   </label>
-  <input class="nhsuk-input" id="input-example" name="test-name" type="text">
+  <input class="ofh-input" id="input-example" name="test-name" type="text">
 </div>
 ```
 
@@ -48,11 +48,11 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="input-with-autocomplete-attribute">
+<div class="ofh-form-group">
+  <label class="ofh-label" for="input-with-autocomplete-attribute">
   Postcode
   </label>
-  <input class="nhsuk-input" id="input-with-autocomplete-attribute" name="postcode" type="text" autocomplete="postal-code">
+  <input class="ofh-input" id="input-with-autocomplete-attribute" name="postcode" type="text" autocomplete="postal-code">
 </div>
 ```
 
@@ -80,14 +80,14 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="input-with-hint-text">
+<div class="ofh-form-group">
+  <label class="ofh-label" for="input-with-hint-text">
   National insurance number
   </label>
-  <div class="nhsuk-hint" id="input-with-hint-text-hint">
+  <div class="ofh-hint" id="input-with-hint-text-hint">
   It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
   </div>
-  <input class="nhsuk-input" id="input-with-hint-text" name="test-name-2" type="text" aria-describedby="input-with-hint-text-hint">
+  <input class="ofh-input" id="input-with-hint-text" name="test-name-2" type="text" aria-describedby="input-with-hint-text-hint">
 </div>
 ```
 
@@ -117,17 +117,17 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group nhsuk-form-group--error">
-  <label class="nhsuk-label" for="input-with-error-message">
+<div class="ofh-form-group ofh-form-group--error">
+  <label class="ofh-label" for="input-with-error-message">
   National Insurance number
   </label>
-  <div class="nhsuk-hint" id="input-with-error-message-hint">
+  <div class="ofh-hint" id="input-with-error-message-hint">
   It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
   </div>
-  <span id="input-with-error-message-error" class="nhsuk-error-message">
+  <span id="input-with-error-message-error" class="ofh-error-message">
   Error message goes here
   </span>
-  <input class="nhsuk-input nhsuk-input--error" id="input-with-error-message" name="test-name-3" type="text" aria-describedby="input-with-error-message-hint input-with-error-message-error">
+  <input class="ofh-input ofh-input--error" id="input-with-error-message" name="test-name-3" type="text" aria-describedby="input-with-error-message-hint input-with-error-message-error">
 </div>
 ```
 
@@ -160,14 +160,14 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
 #### HTML markup
 
 ```html
-<div class="nhsuk-form-group">
-  <label class="nhsuk-label" for="input-width-10">
+<div class="ofh-form-group">
+  <label class="ofh-label" for="input-width-10">
   National insurance number
   </label>
-  <div class="nhsuk-hint" id="input-width-10-hint">
+  <div class="ofh-hint" id="input-width-10-hint">
   It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’.
   </div>
-  <input class="nhsuk-input nhsuk-input--width-10" id="input-width-10" name="test-width-10" type="text" aria-describedby="input-width-10-hint">
+  <input class="ofh-input ofh-input--width-10" id="input-width-10" name="test-width-10" type="text" aria-describedby="input-width-10-hint">
 </div>
 ```
 
@@ -185,7 +185,7 @@ See [Autofilling form controls: the autocomplete attribute](https://html.spec.wh
   },
   "id": "input-width-10",
   "name": "test-width-10",
-  "classes": "nhsuk-input--width-10"
+  "classes": "ofh-input--width-10"
 }) }}
 ```
 

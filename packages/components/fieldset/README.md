@@ -13,8 +13,8 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 #### HTML markup
 
 ```html
-<fieldset class="nhsuk-fieldset">
-  <legend class="nhsuk-fieldset__legend">
+<fieldset class="ofh-fieldset">
+  <legend class="ofh-fieldset__legend">
     What is your address?
   </legend>
 </fieldset>
@@ -41,9 +41,9 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 #### HTML markup
 
 ```html
-<fieldset class="nhsuk-fieldset">
-  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--xl">
-    <h1 class="nhsuk-fieldset__heading">
+<fieldset class="ofh-fieldset">
+  <legend class="ofh-fieldset__legend ofh-fieldset__legend--xl">
+    <h1 class="ofh-fieldset__heading">
       What is your address?
     </h1>
   </legend>
@@ -58,7 +58,7 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 {{ fieldset({
   "legend": {
     "text": "What is your address?",
-    "classes": "nhsuk-fieldset__legend--xl",
+    "classes": "ofh-fieldset__legend--xl",
     "isPageHeading": true
   }
 }) }}
@@ -74,35 +74,35 @@ Find out more about the fieldset component and when to use it in the [NHS digita
 #### HTML markup
 
 ```html
-<fieldset class="nhsuk-fieldset">
-  <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--xl">
-    <h1 class="nhsuk-fieldset__heading">
+<fieldset class="ofh-fieldset">
+  <legend class="ofh-fieldset__legend ofh-fieldset__legend--xl">
+    <h1 class="ofh-fieldset__heading">
       What is your address?
     </h1>
   </legend>
-  <div class="nhsuk-form-group">
-    <label class="nhsuk-label" for="input-address1">
+  <div class="ofh-form-group">
+    <label class="ofh-label" for="input-address1">
       Address line 1
     </label>
-    <input class="nhsuk-input" id="input-address1" name="address1" type="text">
+    <input class="ofh-input" id="input-address1" name="address1" type="text">
   </div>
-  <div class="nhsuk-form-group">
-    <label class="nhsuk-label" for="input-address2">
+  <div class="ofh-form-group">
+    <label class="ofh-label" for="input-address2">
       Address line 2
     </label>
-    <input class="nhsuk-input" id="input-address2" name="address2" type="text">
+    <input class="ofh-input" id="input-address2" name="address2" type="text">
   </div>
-  <div class="nhsuk-form-group">
-    <label class="nhsuk-label" for="input-town-city">
+  <div class="ofh-form-group">
+    <label class="ofh-label" for="input-town-city">
       Town or city
     </label>
-    <input class="nhsuk-input" id="input-town-city" name="town" type="text">
+    <input class="ofh-input" id="input-town-city" name="town" type="text">
   </div>
-  <div class="nhsuk-form-group">
-    <label class="nhsuk-label" for="input-county">
+  <div class="ofh-form-group">
+    <label class="ofh-label" for="input-county">
       County
     </label>
-    <input class="nhsuk-input" id="input-county" name="county" type="text">
+    <input class="ofh-input" id="input-county" name="county" type="text">
   </div>
 </fieldset>
 
@@ -119,7 +119,7 @@ To add input fields inside the fieldset, use the `call` block.
 {% call fieldset({
   legend: {
     text: "What is your address?",
-    "classes": "nhsuk-fieldset__legend--xl",
+    "classes": "ofh-fieldset__legend--xl",
     "isPageHeading": true
   }
 }) %}
