@@ -6,6 +6,8 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v2.0.0-alpha.2] - 2022-08-10
+
 ### Fixed
 
 - Fix the path for the Our Future Health logo on the docs/examples site.
