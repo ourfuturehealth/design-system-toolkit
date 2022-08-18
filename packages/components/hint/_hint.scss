@@ -25,6 +25,13 @@
   margin-bottom: ofh-spacing(2);
 }
 
+// Reduces visual spacing of label when there is a hint
+
+.ofh-label--l + .ofh-hint,
+.ofh-label--xl + .ofh-hint {
+  margin-top: -(ofh-spacing(1));
+}
+
 // Reduces margin-bottom of hint when used after the default legend (no class)
 // or ofh-fieldset__legend--s for better vertical alignment.
 
