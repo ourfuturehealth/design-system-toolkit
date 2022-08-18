@@ -16,9 +16,8 @@
 
   display: block;
   font-weight: $ofh-font-bold;
+  margin-bottom: ofh-spacing(3);
   margin-top: 0;
-
-  @include ofh-responsive-margin(7, 'bottom');
 }
 
 .ofh-label--l {
@@ -26,9 +25,8 @@
 
   display: block;
   font-weight: $ofh-font-bold;
+  margin-bottom: ofh-spacing(3);
   margin-top: 0;
-
-  @include ofh-responsive-margin(4, 'bottom');
 }
 
 .ofh-label--m {
@@ -36,9 +34,8 @@
 
   display: block;
   font-weight: $ofh-font-bold;
+  margin-bottom: ofh-spacing(2);
   margin-top: 0;
-
-  @include ofh-responsive-margin(4, 'bottom');
 }
 
 .ofh-label--s {
@@ -46,9 +43,8 @@
 
   display: block;
   font-weight: $ofh-font-bold;
+  margin-bottom: ofh-spacing(1);
   margin-top: 0;
-
-  @include ofh-responsive-margin(4, 'bottom');
 }
 
 // When the label is nested inside a heading, override the heading so that it
