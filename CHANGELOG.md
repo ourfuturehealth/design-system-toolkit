@@ -6,6 +6,11 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+### Changed
+
+- Updated **label** bottom margin (on all variants) to use non-responsive units and match the **legend** component more closely.
+- Added a negative top margin to **hint** components when placed after a **label** `l` or `xl` variant.
+
 ## [v2.0.0-alpha.2] - 2022-08-10
 
 ### Fixed
