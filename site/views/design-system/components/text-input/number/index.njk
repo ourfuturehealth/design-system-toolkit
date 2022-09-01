@@ -1,0 +1,11 @@
+{% from 'components/input/macro.njk' import input %}
+
+{{ input({
+  "label": {
+    "text": "What is your NHS number?"
+  },
+  id: "example-with-hint-text",
+  name: "example-with-hint-text",
+  classes: "nhsuk-input--width-10",
+  inputmode: "numeric"
+}) }}

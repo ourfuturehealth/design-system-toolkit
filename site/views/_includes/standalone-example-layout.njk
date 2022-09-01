@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" style="{{ html_style }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+
+    <title>{{ pageTitle }} - Our Future Health design system toolkit</title>
+
+    <link href="{{ baseUrl }}/nhsuk-frontend/ofh-design-system-toolkit.css" rel="stylesheet">
+
+    <script src="{{ baseUrl }}/nhsuk-frontend/ofh-design-system-toolkit.js" defer></script>
+
+    <link rel="shortcut icon" href="{{ baseUrl }}/nhsuk-frontend/assets/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ baseUrl }}/nhsuk-frontend/assets/favicons/apple-touch-icon-180x180.png">
+    <link rel="mask-icon" href="{{ baseUrl }}/nhsuk-frontend/assets/favicons/favicon.svg" color="#FFC62C">
+    <link rel="icon" sizes="192x192" href="{{ baseUrl }}/nhsuk-frontend/assets/favicons/favicon-192x192.png">
+
+    <meta property="og:url" content="https://ourfuturehealth.github.io/design-system-toolkit/">
+    <meta property="og:title" content="Our Future Health design system toolkit">
+    <meta property="og:description" content="Code you need to start building accessible user interfaces for Our Future Health websites and services.">
+    <meta property="og:type" content="website">
+    <meta
+      property="og:image"
+      content="{{ baseUrl }}/nhsuk-frontend/assets/logos/ofh-marque_lge.png"
+    />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Our Future Health" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ukfuturehealth">
+    <meta name="twitter:creator" content="@ukfuturehealth">
+  </head>
+
+  <body class="{{ body_class }}">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+      {% block body %}{% endblock %}
+  </body>
+</html>

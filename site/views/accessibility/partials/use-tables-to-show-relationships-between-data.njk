@@ -1,0 +1,41 @@
+<h2 id="use-tables-to-show-relationships-between-data">Use tables to show relationships between data</h2>
+<p class="ofh-body-s">For: <a href="/accessibility/content">Content</a></p>
+<p>Tables make it easier for users to understand logical relationships between bits of data or information.</p>
+<p>Only use tables when there is a relationship between the "header" cells and the "data" cells in the grid. Assistive technologies announce the header with the data it refers to.</p>
+
+<details class="ofh-details">
+  <summary class="ofh-details__summary">
+    <span class="ofh-details__summary-text">
+      Example of good table layout
+    </span>
+  </summary>
+  <div class="ofh-details__text">
+    <p>Here is an example from the <a href="/design-system/components/table">tables component</a> in the service manual.</p>
+    <div class="ofh-table-responsive">
+      <table class="ofh-table">
+        <caption class="ofh-table__caption">Skin symptoms and possible causes</caption>
+        <thead class="ofh-table__head">
+          <tr class="ofh-table__row">
+          <th class="ofh-table__header" scope="col">Skin symptoms</th>
+          <th class="ofh-table__header" scope="col">Possible cause</th>
+          </tr>
+        </thead>
+        <tbody class="ofh-table__body">
+          <tr class="ofh-table__row">
+          <td class="ofh-table__cell">Blisters on lips or around the mouth</td>
+          <td class="ofh-table__cell">cold sores</td>
+          </tr>
+          <tr class="ofh-table__row">
+          <td class="ofh-table__cell">Itchy, dry, cracked, sore</td>
+          <td class="ofh-table__cell">eczema</td>
+          </tr>
+          <tr class="ofh-table__row">
+          <td class="ofh-table__cell">Itchy blisters</td>
+          <td class="ofh-table__cell">shingles, chickenpox</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Screen readers would read out the last row as: "Skin symptoms: itchy blisters. Possible cause: shingles, chickenpox".</p>
+  </div>
+</details>

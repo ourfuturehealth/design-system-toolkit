@@ -1,0 +1,13 @@
+---
+pagination:
+    data: design-examples
+    size: 1
+    alias: example
+permalink: "{{ example.permalink }}"
+---
+{# Data provided by _data/design-examples.js #}
+
+{% set item = example.item %}
+{% set templatePath = example.templatePath %}
+
+{% extends example.layout %}

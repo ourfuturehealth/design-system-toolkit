@@ -1,0 +1,46 @@
+{% extends "layout.njk" %}
+
+{% block breadcrumb %}
+  {{ breadcrumb({
+    items: [
+      {
+        href: "/",
+        text: "Home"
+      },
+      {
+        href: "/content",
+        text: "Content style guide"
+      }
+    ],
+    href: "/content/how-to-write-good-questions-for-forms",
+    text: "How to write good questions for forms"
+  }) }}
+{% endblock %}
+
+{% block body %}
+
+  <div class="ofh-grid-row">
+    <div class="ofh-grid-column-full app-component-reading-width">
+
+      <h1>
+        {%- if pageSection %}
+        <span class="ofh-caption-l">
+          {{pageSection}}
+          <span class="ofh-u-visually-hidden"> - </span>
+        </span>
+        {% else %}
+        {% endif %}
+        {{pageTitle}}
+      </h1>
+
+      {% include "./write-good-questions-nav.njk" %}
+
+      <p class="ofh-body-l">{{pageDescription}}</p>
+
+      {% block bodyContent %}
+      {% endblock %}
+
+    </div>
+  </div>
+
+{% endblock %}

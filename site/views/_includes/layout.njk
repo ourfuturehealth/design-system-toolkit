@@ -1,0 +1,127 @@
+{% set disableSearch = true %}
+{%- from 'components/header/macro.njk' import header %}
+{%- from 'components/footer/macro.njk' import footer %}
+{%- from 'components/skip-link/macro.njk' import skipLink %}
+{%- from 'components/action-link/macro.njk' import actionLink %}
+{%- from 'components/breadcrumb/macro.njk' import breadcrumb %}
+{%- from 'components/contents-list/macro.njk' import contentsList %}
+{%- from 'components/details/macro.njk' import details %}
+{%- from 'components/header/macro.njk' import header %}
+{%- from 'components/hero/macro.njk' import hero %}
+{%- from 'components/footer/macro.njk' import footer %}
+{%- from 'components/do-dont-list/macro.njk' import list %}
+{%- from 'components/images/macro.njk' import image %}
+{%- from 'components/inset-text/macro.njk' import insetText %}
+{%- from 'components/pagination/macro.njk' import pagination %}
+{%- from 'components/skip-link/macro.njk' import skipLink %}
+{%- from 'components/tables/macro.njk' import table %}
+{%- from 'components/warning-callout/macro.njk' import warningCallout %}
+{%- from 'components/back-link/macro.njk' import backLink %}
+{%- from 'components/button/macro.njk' import button %}
+{%- from 'components/checkboxes/macro.njk' import checkboxes %}
+{%- from 'components/date-input/macro.njk' import dateInput %}
+{%- from 'components/error-message/macro.njk' import errorMessage %}
+{%- from 'components/error-summary/macro.njk' import errorSummary %}
+{%- from 'components/fieldset/macro.njk' import fieldset %}
+{%- from 'components/hint/macro.njk' import hint %}
+{%- from 'components/input/macro.njk' import input %}
+{%- from 'components/label/macro.njk' import label %}
+{%- from 'components/radios/macro.njk' import radios %}
+{%- from 'components/select/macro.njk' import select %}
+{%- from 'components/summary-list/macro.njk' import summaryList %}
+{%- from 'components/textarea/macro.njk' import textarea %}
+{%- from 'design-example.njk' import designExample with context %}
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% if pageDescription %}{{pageDescription}}{% else %}Design and build digital services for Our Future Health. Things you need to make consistent, usable services that put people first.{% endif %}" />
+    {%- block extraMeta %}{% endblock %}
+
+    <title>{% if pageTitle %}{{ pageTitle }} - Our Future Health design system{% else %}Our Future Health design system{% endif %}</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    <script src="/js/main.min.js" defer></script>
+
+    <!-- Cookie consent -->
+    {# TODO: Remove this and source script? #}
+    {# <script src="/js/cookies.min.js" data-policy-url="/cookie-policy" defer></script> #}
+
+    <!-- Adobe Analytics -->
+    {% if adobeTrackingUrl %}
+      <!-- Data Layer -->
+      {% include "_digital-data.njk" %}
+      <script src="{{ adobeTrackingUrl }}" type="text/plain" data-cookieconsent="statistics" async></script>
+    {% endif %}
+
+    <!-- Verify domain with Google -->
+    <meta name="google-site-verification" content="Prj4LS7KX0amTkqVrOlnEyldVIjzJqbnXgPL1zbHocM" />
+
+    <link href="https://www.nhs.uk/" rel="preconnect">
+    <link href="https://assets.nhs.uk/" rel="preconnect" crossorigin>
+
+    <link rel="shortcut icon" href="/nhsuk-frontend/assets/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/nhsuk-frontend/assets/favicons/apple-touch-icon-180x180.png">
+    <link rel="mask-icon" href="/nhsuk-frontend/assets/favicons/favicon.svg" color="#005eb8">
+    <link rel="icon" sizes="192x192" href="/nhsuk-frontend/assets/favicons/favicon-192x192.png">
+    <meta name="msapplication-TileImage" content="/nhsuk-frontend/assets/favicons/mediumtile-144x144.png">
+    <meta name="msapplication-TileColor" content="#005eb8">
+    <meta name="msapplication-square70x70logo" content="/nhsuk-frontend/assets/favicons/smalltile-70x70.png">
+    <meta name="msapplication-square150x150logo" content="/nhsuk-frontend/assets/favicons/mediumtile-150x150.png">
+    <meta name="msapplication-wide310x150logo" content="/nhsuk-frontend/assets/favicons/widetile-310x150.png">
+    <meta name="msapplication-square310x310logo" content="/nhsuk-frontend/assets/favicons/largetile-310x310.png">
+
+    <meta property="og:url" content="{{ BASE_URL }}"/>
+    <meta property="og:site_name" content="nhs.uk"/>
+    <meta property="og:title" content="{% if pageTitle %}{{ pageTitle }} - NHS digital service manual{% else %}NHS digital service manual{% endif %}"/>
+    <meta property="og:description" content="{% if pageDescription %}{{pageDescription}}{% else %}Design and build digital services for Our Future Health. Things you need to make consistent, usable services that put people first.{% endif %}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_GB"/>
+    <meta property="og:image" content="{% if BASE_URL %}{{ BASE_URL }}{% endif %}{% if pageSection %}/assets/open-graph_{{pageSection | lower | replace(" ", "_") | replace("'", "")}}.png{% else %}/assets/open-graph.png{% endif %}" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@nhsuk">
+    <meta name="twitter:creator" content="@nhsuk">
+    <meta name="twitter:image:alt" content="nhs.uk">
+
+  </head>
+
+  <body>
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
+
+    {# TODO: This was using _header-prototype.njk hardcoded header, no use of the header component macro #}
+    {% include "_header.njk" %}
+
+    {% block breadcrumb %}
+      {{ breadcrumb({
+        href: "/",
+        text: "Home",
+        classes: "app-breadcrumb"
+      }) }}
+    {% endblock %}
+
+    {% block outerBody %}{% endblock %}
+
+    {%- if beta %}
+    {% include "_beta-banner.njk" %}
+    {% endif %}
+
+    {% if pageLayout != "Homepage" %}
+    <div class="ofh-width-container app-width-container">
+      <main class="ofh-main-wrapper app-main-wrapper" id="maincontent" role="main">
+        {% block body %}{% endblock %}
+      </main>
+    </div>
+
+    {% endif %}
+
+    {% include "_footer.njk" %}
+
+    {% block pageScripts %}{% endblock %}
+  </body>
+
+</html>
