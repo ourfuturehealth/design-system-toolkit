@@ -1,0 +1,301 @@
+// sass-lint:disable border-zero no-color-hex
+
+.code-snippet {
+  background-color: $color_ofh-grey-5;
+
+  .js-hidden {
+    display: none;
+  }
+
+  .app-link {
+
+    &--copy {
+      border-bottom-color: $ofh-button-color;
+      box-shadow: 0 2px 0 $ofh-button-color;
+      margin-bottom: 16px;
+      padding: 2px 8px;
+      position: absolute;
+      right: 16px;
+      text-transform: none;
+      top: 16px;
+
+      &:hover {
+        background-color: $color_ofh-grey-5;
+      }
+
+      &:focus {
+        @include ofh-focused-text;
+        border-color: $ofh-focus-color;
+      }
+    }
+
+    &--close {
+      background-color: transparent;
+      border: 0;
+      bottom: 16px;
+      color: $color_ofh-blue;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 16px;
+      position: static;
+      right: 16px;
+      text-decoration: underline;
+      z-index: 1;
+
+      &:hover {
+        color: $ofh-link-hover-color;
+        text-decoration: none;
+      }
+
+      &:focus {
+        @include ofh-focused-text;
+
+        &:hover {
+          color: $ofh-focus-text-color;
+        }
+      }
+
+      @include mq($from: tablet) {
+        bottom: 24px;
+        right: 24px;
+      }
+
+      svg {
+        fill: $color_ofh-blue;
+        height: 16px;
+        margin: 5px 5px 0 0;
+        transform: rotate(-90deg);
+        width: 16px;
+      }
+    }
+  }
+
+  &__preformatted {
+    align-items: flex-end;
+    border-bottom: 1px solid $color_ofh-grey-3;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    @include mq($from: tablet) {
+      padding: 24px;
+    }
+  }
+}
+
+.app-tabs {
+  background: $color_ofh-white;
+  border: 1px solid $color_ofh-grey-3;
+  border-bottom: 0;
+  $root: &;
+  display: none;
+
+  @include mq($from: tablet) {
+    display: block;
+  }
+
+  &__item {
+    background-color: transparent;
+    margin: 0;
+
+    a {
+      border: 0;
+      font-weight: normal;
+      margin: 0;
+      padding: 8px 16px;
+      text-decoration: underline;
+
+      @include mq($from: tablet) {
+        padding: 12px 24px;
+      }
+
+      &:hover {
+        color: $ofh-link-hover-color;
+        outline: 0;
+        text-decoration: none;
+      }
+
+      &:focus {
+        background-color: $ofh-focus-color;
+        box-shadow: 0 $ofh-focus-width $ofh-focus-text-color;
+        color: $ofh-focus-text-color;
+        outline: $ofh-focus-width solid transparent;
+        text-decoration: none;
+      }
+
+    }
+
+    &--current {
+      a {
+        text-decoration: none;
+
+        @include mq($from: tablet) {
+          box-shadow: 0 $button-shadow-size 0 $color_ofh-blue;
+        }
+
+        &:hover {
+          color: $ofh-link-color;
+        }
+
+        &:focus {
+          &:hover {
+            color: $ofh-focus-text-color;
+          }
+        }
+
+      }
+    }
+
+    &--mobile {
+      background-color: $color_ofh-white;
+      border: 1px solid $color_ofh-grey-3;
+      border-width: 1px 0;
+      display: block;
+      margin: -1px 0;
+
+      @include mq($from: tablet) {
+        display: none;
+      }
+
+      }
+    }
+
+  &__container {
+    background-color: $color_ofh-white;
+    border: 1px solid $color_ofh-grey-3;
+    border-bottom: 0;
+    margin-top: 0;
+
+    pre {
+      align-self: stretch;
+      background-color: $color_ofh-white;
+      padding: 0;
+    }
+
+  }
+}
+
+// Highlight JS overrides
+
+$color-syntax--body: #28333b;
+$color-syntax--comment: #757575;
+$color-syntax--keyword: #990155;
+$color-syntax--var: #527a00;
+$color-syntax--string: #025eb8;
+$color-syntax--selector: #330072;
+
+.hljs {
+  background-color: $color_ofh-white;
+  color: $color-syntax--body;
+  overflow-x: scroll;
+  padding: 0;
+
+  @include mq($from: tablet) {
+    // Fixes issue with overflowing <code> el. 71.5vw = width of column. 121px = total width of padding/borders.
+    max-width: calc(71.5vw - 121px);
+  }
+
+  @include mq($from: 1024px) {
+    max-width: 586px;
+  }
+
+  .hljs-comment,
+  .hljs-quote {
+    color: $color-syntax--comment;
+    font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: $color-syntax--keyword;
+    font-weight: normal;
+  }
+
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr { //sass-lint:disable-line force-element-nesting
+    color: $color-syntax--var;
+  }
+
+  .hljs-string,
+  .hljs-doctag {
+    color: $color-syntax--string;
+  }
+
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: $color-syntax--keyword;
+    font-weight: normal;
+  }
+
+  .hljs-subst {
+    font-weight: normal;
+  }
+
+  .hljs-type,
+  .hljs-class .hljs-title { //sass-lint:disable-line force-element-nesting
+    color: $color-syntax--var;
+    font-weight: normal;
+  }
+
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: $color-syntax--keyword;
+    font-weight: normal;
+  }
+
+  .hljs-regexp,
+  .hljs-link {
+    color: $color-syntax--var;
+  }
+
+  .hljs-symbol,
+  .hljs-bullet {
+    color: $color-syntax--keyword;
+  }
+
+  .hljs-built_in, //sass-lint:disable-line class-name-format
+  .hljs-builtin-name {
+    color: $color-syntax--string;
+  }
+
+  .hljs-meta {
+    color: $color-syntax--comment;
+    font-weight: normal;
+  }
+
+  // language specific customisations
+  &.html {
+    .hljs-tag {
+      color: $color-syntax--comment;
+    }
+  }
+
+  &.css {
+    .hljs-selector-class,
+    .hljs-selector-tag,
+    .hljs-keyword {
+      color: $color-syntax--selector;
+    }
+  }
+
+  &.javascript,
+  &.python {
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: $color-syntax--string;
+    }
+  }
+
+  &.json {
+    .hljs-attr {
+      color: $color-syntax--keyword;
+    }
+  }
+}

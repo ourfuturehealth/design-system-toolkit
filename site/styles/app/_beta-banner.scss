@@ -1,0 +1,24 @@
+/* ==========================================================================
+   #BETA-BANNER
+   ========================================================================== */
+
+.app-beta__container {
+  border-bottom: 1px solid $ofh-border-color;
+  padding: ofh-spacing(2) 0;
+}
+
+.app-beta__content {
+  display: table;
+  margin-bottom: 0;
+
+  .app-beta__tag {
+    display: block;
+    margin-right: ofh-spacing(2);
+  }
+}
+
+.app-beta__text {
+  @include ofh-font($size: 16, $line-height: 1.2);
+  display: table-cell;
+  vertical-align: baseline;
+}

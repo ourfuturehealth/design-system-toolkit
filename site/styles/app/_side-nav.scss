@@ -1,0 +1,94 @@
+/* ==========================================================================
+   #SIDE-NAV
+   ========================================================================== */
+
+.app-side-nav__heading {
+  @include ofh-font(19, $line-height: 1.25, $weight: bold);
+  color: $ofh-secondary-text-color;
+  margin-bottom: 12px;
+  padding-top: 4px;
+
+  @include mq($until: desktop) {
+    @include ofh-font(24, $line-height: 1.25, $weight: bold);
+    color: $ofh-text-color;
+  }
+}
+
+.app-side-nav__back {
+  border-bottom: 1px solid $ofh-border-color;
+  padding-bottom: ofh-spacing(3);
+}
+
+.app-side-nav__list {
+  @include ofh-font(16, $line-height: 1.3);
+  margin-bottom: 0;
+
+  @include mq($until: desktop) {
+    @include ofh-font(19, $line-height: 1.3);
+    margin-bottom: ofh-spacing(2);
+  }
+}
+
+.app-side-nav__item {
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+.app-side-nav__item--current {
+  border-left: 4px solid $color_ofh-blue;
+  margin-left: -12px;
+  padding-left: 8px;
+
+  .app-side-nav__link {
+    font-weight: $ofh-font-bold;
+  }
+}
+
+.app-side-nav__link {
+  text-decoration: none;
+
+  @include mq($until: desktop) {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: $color_ofh-blue;
+  }
+
+  &:hover {
+    color: $ofh-link-hover-color;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    &:hover,
+    &:visited {
+      color: $ofh-focus-text-color;
+    }
+  }
+}
+
+.app-side-nav__list--nested {
+  @include ofh-responsive-margin(2, 'bottom');
+  @include ofh-responsive-margin(3, 'top');
+
+  .app-side-nav__item {
+    @include ofh-font(16, $line-height: 1.3);
+    list-style: none;
+  }
+
+  .app-side-nav__link {
+    font-weight: 400;
+  }
+}
+
+.app-side-nav__list--nested .app-side-nav__item::before {
+  color: $color_ofh-grey-3;
+  content: '—';
+  margin-left: -20px;
+  margin-right: 4px;
+}
+
+.app-index-navigation {
+  @include ofh-responsive-padding(4, 'top');
+}

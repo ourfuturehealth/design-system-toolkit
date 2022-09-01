@@ -1,0 +1,64 @@
+// Highlight code within body copy
+li code,
+p code,
+td code {
+  background-color: $color_ofh-white;
+  color: #d14; // sass-lint:disable-line no-color-hex no-color-literals
+  padding: 2px ofh-spacing(2);
+  word-break: break-word;
+}
+
+// Highlight code in a block
+.app-pre {
+  @include ofh-responsive-margin(4, 'bottom');
+
+  background: $color_ofh-white;
+  border: 1px solid $ofh-border-color;
+  margin-top: 0;
+  overflow: auto;
+  padding: ofh-spacing(3);
+  position: relative;
+
+  & + h2 {
+    @include ofh-responsive-padding(4, 'top');
+  }
+
+  & + h3 {
+    @include ofh-responsive-padding(2, 'top');
+  }
+}
+
+// Design example code snippet overrides
+.code-snippet__preformatted {
+  align-items: flex-end;
+  border-bottom: 1px solid $color_ofh-grey-4;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.hljs {
+  background-color: $color_ofh-white;
+  color: $color_ofh-black;
+  display: block;
+  overflow-x: scroll;
+  padding: 0;
+}
+
+.hljs.css .hljs-selector-class,
+.hljs.css .hljs-selector-tag,
+.hljs.css .hljs-keyword {
+  color: $color_ofh-purple;
+}
+
+.app-tabs__container pre {
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  background-color: $color_ofh-white;
+  padding: 0;
+}
+
+.code-snippet__macro {
+  width: 100%;
+}

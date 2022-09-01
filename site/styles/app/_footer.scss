@@ -1,0 +1,27 @@
+/* ==========================================================================
+   #FOOTER
+   ========================================================================== */
+
+/**
+ * Custom features for the service manual footer
+ */
+
+.app-ogl-footer {
+  background-color: $color_ofh-grey-4;
+}
+
+.app-ogl-footer--text {
+  @include ofh-font(16);
+  @include ofh-responsive-padding(5, 'bottom');
+
+  color: $color_ofh-grey-1;
+  margin-bottom: 0;
+  padding-bottom: ofh-spacing(4);
+
+  svg {
+    margin-right: ofh-spacing(2);
+    position: relative;
+    top: 2px;
+  }
+
+}
