@@ -10,7 +10,7 @@ npm install
 
 ```bash
 # Build and serve the documentation site
-npm run docs:start
+npm run docs:dev
 ```
 
 ## Structure

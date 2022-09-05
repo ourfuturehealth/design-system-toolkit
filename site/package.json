@@ -2,15 +2,16 @@
   "name": "ofh-design-system-documentation",
   "private": true,
   "scripts": {
-    "predocs:start": "npm run build --prefix ../ && mkdir -p dist",
-    "docs:start": "concurrently 'npm:docs:watch:css' 'npm:docs:watch:js' 'npm:docs:serve'",
-    "docs:watch:css": "npm run docs:build:css && npm run docs:build:css -- -w",
-    "docs:watch:js": "npm run docs:build:js -- -w",
-    "docs:build": "npm run docs:build:css && npm run docs:build:js",
-    "docs:build:css": "node-sass --recursive --output-style compressed styles/ -o dist/css/",
+    "docs:dev": "npm run docs:build:toolkit && npm run docs:clean && npm run docs:watch",
+    "docs:clean": "rm -rf dist/ && mkdir -p dist",
+    "docs:watch": "concurrently -n toolkit:watch 'npm run watch --prefix ../' 'npm:docs:watch:css' 'npm:docs:watch:js' 'npm:docs:serve'",
+    "docs:watch:css": "npm run docs:build:css -- --watch",
+    "docs:watch:js": "npm run docs:build:js -- --watch",
+    "docs:build": "npm run docs:build:toolkit && npm run docs:build:css && npm run docs:build:js",
+    "docs:build:toolkit": "npm run clean --prefix ../ && npm run build --prefix ../",
+    "docs:build:css": "sass --style compressed --load-path ../packages/ styles/:dist/css/",
     "docs:build:js": "webpack",
-    "docs:serve": "npx @11ty/eleventy --serve",
-    "docs:clean": "rm -rf dist/"
+    "docs:serve": "npx @11ty/eleventy --serve"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2",
@@ -22,7 +23,6 @@
     "highlight.js": "^11.6.0",
     "iframe-resizer": "^4.3.2",
     "js-beautify": "^1.14.6",
-    "node-sass": "^7.0.1",
     "nunjucks": "^3.2.3",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
