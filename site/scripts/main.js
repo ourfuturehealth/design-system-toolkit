@@ -1,5 +1,5 @@
 /* eslint-disable no-new */
-// NHS.UK frontend components
+// Design system toolkit components
 import MenuToggle from '../../packages/components/header/menuToggle';
 import SearchToggle from '../../packages/components/header/searchToggle';
 import SkipLink from '../../packages/components/skip-link/skip-link';
@@ -10,10 +10,10 @@ import Card from '../../packages/components/card/card';
 
 // import AutoComplete from './autocomplete/autoCompleteConfig';
 
-// NHS.UK frontend polyfills
+// Toolkit polyfills
 import '../../packages/polyfills';
 
-// NHS digital service manual components
+// Documentation site example components
 import DesignExample from './design-example';
 
 // TODO: Remove this?
@@ -24,7 +24,7 @@ import DesignExample from './design-example';
 //   suggestion,
 // } from './search';
 
-// Initialise NHS.UK frontend components
+// Initialise toolkit components
 
 // TODO: Remove this?
 // AutoComplete({
@@ -47,7 +47,7 @@ Checkboxes();
 Radios();
 Card();
 
-// Initialise NHS digital service manual components
+// Initialise documentation site components
 
 // Design examples
 document.querySelectorAll(DesignExample.selector()).forEach((el) => {
