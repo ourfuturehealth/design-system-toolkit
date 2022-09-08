@@ -8,12 +8,12 @@ module.exports = function (eleventyConfig) {
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `site/views/_includes/standalone-example-layout.njk`.
-  eleventyConfig.addPassthroughCopy({ "../dist": "nhsuk-frontend" });
+  eleventyConfig.addPassthroughCopy({ "../dist": "ofh-design-system-toolkit" });
 
   // Toolkit image assets.
   // We're copying these directly from their source so they're watched
   // by Eleventy in development and trigger a hot reload when assets change.
-  eleventyConfig.addPassthroughCopy({ "../packages/assets": "nhsuk-frontend/assets" });
+  eleventyConfig.addPassthroughCopy({ "../packages/assets": "ofh-design-system-toolkit/assets" });
 
   // Prevent the output of toolkit CSS and JS assets in watch mode
   // triggering multiple rebuilds of the docs site.
