@@ -1,0 +1,7 @@
+{% block outerContent %}{% endblock %}
+<div class="ofh-width-container">
+  {% block beforeContent %}{% endblock %}
+  <main class="ofh-main-wrapper{% if mainClasses %} {{ mainClasses }}{% endif %}" id="maincontent" role="main">
+    {% block content %}{% endblock %}
+  </main>
+</div>

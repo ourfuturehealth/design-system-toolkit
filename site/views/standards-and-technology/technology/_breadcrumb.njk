@@ -1,0 +1,13 @@
+{%- from 'components/breadcrumb/macro.njk' import breadcrumb %}
+{{ breadcrumb({
+  items: [
+    {
+      href: "/",
+      text: "Home"
+    },
+    {
+      href: "/standards-and-technology",
+      text: "Standards and technology"
+    }
+  ]
+}) }}

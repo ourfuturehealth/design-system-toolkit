@@ -1,0 +1,64 @@
+{% extends "layout.njk" %}
+
+{% block body %}
+<div class="ofh-grid-row">
+  <div class="ofh-grid-column-full app-component-reading-width">
+
+    <div class="app-pane">
+
+        <div class="app-pane__side-bar">
+          {% block sideNav %}
+            {% include "./_side-nav.njk" %}
+          {% endblock %}
+        </div>
+
+        <div class="app-pane__main-content">
+
+          <h1 class="app-page-heading">
+            {%- if landingPage or pageTitle == "Community" or pageTitle == "NHS standards and technical policy" %}
+            {% else %}
+            <span class="ofh-caption-l">
+              {%- if subSection %}
+                {%- if theme %}
+                {{theme}}
+                {% else %}
+                {{subSection}}
+                {% endif %}
+              {% else %}
+              {{pageSection}}
+              {% endif %}
+              <span class="ofh-u-visually-hidden"> - </span>
+            </span>
+            {% endif %}
+            {{pageTitle}}
+          </h1>
+
+          {%- if hideDescription %}
+          {% else %}
+            <p class="ofh-lede-text app-lede-text">{{pageDescription}}</p>
+          {% endif %}
+
+          {% block bodyContent %}
+          {% endblock %}
+
+          {% block contactPanel %}
+            {% if hideContact != "true" %}
+              {% if subSection === "Styles" or subSection === "Components" or subSection === "Patterns" or pageSection === "Content style guide" or pageSection === "Accessibility" or pageSection === "Standards and technology" %}
+                {% include "./_contact-panel.njk" %}
+              {% endif %}
+              {% else %}
+            {% endif %}
+          {% endblock %}
+
+          {% block afterContact %}
+          {% endblock %}
+
+          {%- if dateUpdated %}
+            <p class="ofh-body-s ofh-u-secondary-text-color ofh-u-margin-top-5 ofh-u-margin-bottom-0">Updated: {{dateUpdated}}</p>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

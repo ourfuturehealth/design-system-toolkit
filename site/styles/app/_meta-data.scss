@@ -1,0 +1,23 @@
+// Added meta data for a promo (date)
+.app-meta-data {
+  @include ofh-font($size: 16);
+
+  color: $ofh-secondary-text-color;
+
+  + .app-meta-data {
+    margin-top: - ofh-spacing(3);
+  }
+
+  @include mq($from: tablet) {
+    margin-bottom: ofh-spacing(3);
+
+    + .app-meta-data {
+      margin-top: - ofh-spacing(3);
+  }
+  }
+}
+
+.app-meta-data--strong {
+  color: $ofh-text-color;
+  font-weight: 600;
+}

@@ -6,6 +6,10 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+### Added
+
+- Design system documentation site (statically generated with [Eleventy](https://eleventy.dev)). The site is based on the [NHS.UK digital service manual](https://github.com/nhsuk/nhsuk-service-manual/).
+
 ### Changed
 
 - Updated **label** bottom margin (on all variants) to use non-responsive units and match the **legend** component more closely.

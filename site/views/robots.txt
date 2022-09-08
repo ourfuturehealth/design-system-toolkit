@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://service-manual.nhs.uk/sitemap.xml
