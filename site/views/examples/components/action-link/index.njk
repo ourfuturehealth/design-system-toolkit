@@ -1,0 +1,23 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Action link' %}
+{% from 'components/action-link/macro.njk' import actionLink %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ actionLink({
+            "text": "Find a minor injuries unit",
+            "href": "https://www.nhs.uk/service-search/minor-injuries-unit/locationsearch/551"
+          }) }}
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

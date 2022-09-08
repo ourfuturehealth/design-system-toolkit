@@ -1,0 +1,56 @@
+/* ==========================================================================
+   #APP READING WIDTH
+   ========================================================================== */
+
+/**
+ * Constrains text on a full width page
+ */
+
+@include mq($from: desktop) {
+  .app-component-reading-width {
+
+    h1 {
+      max-width: 14.5em;
+    }
+
+    h2 {
+      max-width: 22em;
+    }
+
+    h3,
+    .ofh-lede-text,
+    .ofh-body-l {
+      max-width: 29em;
+    }
+
+    h4 {
+      max-width: 32em;
+    }
+
+    p,
+    ul,
+    ol,
+    .ofh-details {
+      max-width: 37em;
+    }
+
+    .ofh-body-s {
+      max-width: 47em;
+    }
+
+    .app-example,
+    .ofh-table,
+    .app-colour-list,
+    .app-example--image,
+    .app-pre,
+    .ofh-image__img {
+      max-width: 44em;
+    }
+
+    .app-tabs,
+    .ofh-pagination__list {
+      max-width: 100%;
+    }
+
+  }
+}

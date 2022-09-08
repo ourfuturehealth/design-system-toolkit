@@ -1,0 +1,251 @@
+// Our Future Health design system toolkit
+@import '../../packages/ofh';
+
+// App specific styles
+@import 'app/app';
+
+// Design examples
+@import 'design-example/design-example';
+
+/////////////////
+// FRONTEND FIXES + UPDATES
+/////////////////
+
+// ADDED TO FRONTEND - AWAITING RELEASE
+// REMOVE ONCE RELEASED
+
+// Breadcrumb hotfix
+// To not have a visited state for back link
+.ofh-breadcrumb__backlink:visited {
+  color: $ofh-link-color;
+}
+
+// Breadcrumb hotfix
+// To not have a visited state for breadcrumb link
+.ofh-breadcrumb__link:visited {
+  color: $color_ofh-blue;
+}
+
+// Breadcrumb hotfix
+// To change color on hover when visited
+.ofh-breadcrumb__link:hover {
+  color: $ofh-link-hover-color;
+}
+
+// Back link hotfix
+// To change color on hover when visited
+.ofh-back-link__link:hover {
+  color: $ofh-link-hover-color;
+}
+
+// Pagination hotfix for icon colour on focus & hover
+.ofh-pagination__link:visited:focus .ofh-icon {
+  fill: $ofh-focus-text-color;
+}
+
+// NEED ADDING TO THE FRONTEND
+
+/**
+ * Hotfix for an issue with nested list spacing in
+ * the NHS.UK frontend library
+ *
+ * https://github.com/nhsuk/nhsuk-frontend/issues/430
+ */
+
+.ofh-u-nested-list {
+  margin-bottom: 0;
+}
+
+.ofh-u-nested-list > li {
+  @include ofh-responsive-margin(2, 'top');
+}
+
+// Nowrap hotfix
+.ofh-u-nowrap {
+  white-space: nowrap;
+}
+
+// Frontend override
+// Should be refactored into the frontend
+// The font weight should be 400 by default
+.ofh-body-m,
+.ofh-body-s {
+  font-weight: 400;
+}
+
+// Lede text + lede text
+.ofh-lede-text + .ofh-lede-text {
+  margin-top: - ofh-spacing(3);
+}
+
+h1 + .ofh-lede-text {
+  margin-top: 0;
+}
+
+// Table bug hot fix
+.ofh-table__cell.ofh-body-s {
+  display: table-cell;
+}
+
+// TODO: Discuss this header height hotfix
+// @see https://github.com/ourfuturehealth/design-system-toolkit/commit/acc18e79c8fafae4af2f476788752d739948f74f#diff-b16ec771d18987b0b48ad573bd95a603e844e9c8b1052672c06bf4f6d93b87caL41-R45
+// Hotfix header height
+.ofh-header__container {
+  padding: 20px 0;
+  position: initial !important;
+  height: auto !important;
+}
+
+// Hotfix menu item icon colour on hover/focus
+.ofh-header__navigation-link:hover .ofh-icon__chevron-right {
+  fill: $color_ofh-white;
+}
+
+.ofh-header__navigation-link:focus .ofh-icon__chevron-right {
+  fill: $ofh-focus-text-color;
+}
+
+// HEADER + MAIN NAV
+
+// Remove main nav hover background colour on desktop
+@include mq($from: large-desktop) {
+  .ofh-header__navigation-link {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+// Main nav active state
+.app-header__navigation-item__item--current {
+  @include mq($from: large-desktop) {
+    box-shadow: inset 0 -4px 0 $color_ofh-grey-4;
+  }
+
+  .ofh-header__navigation-link {
+    font-weight: $ofh-font-bold;
+  }
+}
+
+// Removal of table cell element top and bottom margins
+// Remove bottom margin from a <p>
+.ofh-table__cell {
+  @include top-and-bottom;
+}
+
+// Header menu button alignment for Safari
+.ofh-header__menu-toggle {
+  @include mq($from: tablet, $until: large-desktop) {
+    margin-top: 0;
+  }
+}
+
+// The 'What's new' box in the home page hero
+.app-latest-update {
+  padding-bottom: ofh-spacing(8);
+  padding-top: ofh-spacing(8);
+
+  @include mq($until: desktop) {
+    padding-bottom: ofh-spacing(6);
+    padding-top: 0;
+  }
+}
+
+// Custom style for home page hero card
+.app-card--transparent {
+  background: transparent;
+  border: 2px solid $ofh-secondary-border-color;
+  color: $color_ofh-white;
+
+  a {
+    color: $color_ofh-white;
+
+    &:hover,
+    &:visited {
+      color: $color_ofh-grey-5;
+    }
+
+    &:focus {
+      color: $ofh-focus-text-color;
+    }
+
+  }
+}
+
+// Card video
+
+.app-card__video {
+  height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+
+  iframe,
+  object,
+  embed {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+// Custom style for the home page hero
+// Reducing the padding on smaller screens
+.app-hero__wrapper {
+  @include mq($until: desktop) {
+    padding-bottom: ofh-spacing(5);
+    padding-top: ofh-spacing(5);
+  }
+}
+
+// Page template annotation
+
+.app-annotate-block {
+  margin-bottom: ofh-spacing(4);
+  outline: 2px dashed $color_ofh-grey-1;
+  padding: ofh-spacing(3);
+  padding-top: ofh-spacing(7);
+  position: relative;
+}
+
+.app-annotate-block__label {
+  border-bottom: 2px dashed $color_ofh-grey-1;
+  border-right: 2px dashed $color_ofh-grey-1;
+  left: 0;
+  padding: ofh-spacing(1) ofh-spacing(2);
+  position: absolute;
+  top: 0;
+}
+
+.app-annotate-block + .ofh-main-wrapper {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+// Team pictures used for lists
+
+.app-team-pictures-list {
+  @include ofh-responsive-padding(0, 'left');
+
+  img {
+    @include ofh-responsive-margin(3, 'right');
+
+    border: 2px solid transparent;
+    border-radius: 30px;
+    display: inline-block;
+    height: 40px;
+    line-height: 1;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 40px;
+  }
+
+  li {
+    list-style: none;
+  }
+
+}

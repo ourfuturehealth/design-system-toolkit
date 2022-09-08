@@ -8,12 +8,6 @@ const zip = require('gulp-zip');
 const webpack = require('webpack-stream');
 const { version } = require('./package.json');
 
-/**
- * Import gulp tasks used for creating
- * our website pages.
- */
-require('./tasks/docs.js');
-
 /* Remove all compiled files */
 function cleanDist() {
   return gulp.src('dist', { allowEmpty: true })
@@ -149,7 +143,7 @@ function createZip() {
 
 /* Recompile CSS, JS and docs when there are any changes */
 function watch() {
-  gulp.watch(['packages/**/*', 'app/**/*'], gulp.series(['build', 'docs:build']));
+  gulp.watch(['packages/**/*'], gulp.series(['build']));
 }
 
 gulp.task('clean', cleanDist);
@@ -178,12 +172,3 @@ gulp.task('zip', gulp.series([
 ]));
 
 gulp.task('watch', watch);
-
-/**
- * The default task is to build everything, serve the docs and watch for changes
- */
-gulp.task('default', gulp.series([
-  cleanDist,
-  'build',
-  gulp.parallel(['docs:serve', watch]),
-]));

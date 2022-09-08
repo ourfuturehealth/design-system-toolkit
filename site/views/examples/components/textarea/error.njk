@@ -1,0 +1,29 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Textarea with error message' %}
+{% from 'components/textarea/macro.njk' import textarea %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ textarea({
+            "name": "no-ni-reason",
+            "id": "no-ni-reason",
+            "label": {
+              "text": "Why can't you provide a National Insurance number?"
+            },
+            "errorMessage": {
+              "text": "You must provide an explanation"
+            }
+          }) }}
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

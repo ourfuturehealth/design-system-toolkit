@@ -1,0 +1,16 @@
+{%- from 'components/breadcrumb/macro.njk' import breadcrumb %}
+{{ breadcrumb({
+  items: [
+    {
+      href: "/",
+      text: "Home"
+    },
+    {
+      href: "/content",
+      text: "Content style guide"
+    }
+  ],
+  href: "/content/how-to-write-good-questions-for-forms",
+  text: "How to write good questions for forms",
+  classes: "app-breadcrumb"
+}) }}

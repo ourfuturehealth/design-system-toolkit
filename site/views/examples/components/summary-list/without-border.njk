@@ -1,0 +1,58 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Summary list without border' %}
+{% from "components/summary-list/macro.njk" import summaryList %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+
+          {{ summaryList({
+            classes: 'ofh-summary-list--no-border',
+            rows: [
+              {
+                key: {
+                  text: "Name"
+                },
+                value: {
+                  text: "Sarah Philips"
+                }
+              },
+              {
+                key: {
+                  text: "Date of birth"
+                },
+                value: {
+                  text: "5 January 1978"
+                }
+              },
+              {
+                key: {
+                  text: "Contact information"
+                },
+                value: {
+                  html: "72 Guild Street<br>London<br>SE23 6FH"
+                }
+              },
+              {
+                key: {
+                  text: "Contact details"
+                },
+                value: {
+                  html: '<p>07700 900457</p><p>sarah.philips@example.com</p>'
+                }
+              }
+            ]
+          }) }}
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Input with width modifier' %}
+{% from 'components/input/macro.njk' import input %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ input({
+            "label": {
+              "text": "National insurance number"
+            },
+            "hint": {
+              "text": "It’s on your National Insurance card, benefit letter, payslip or P60\. For example, ‘QQ 12 34 56 C’."
+            },
+            "id": "input-width-10",
+            "name": "test-width-10",
+            "classes": "ofh-input--width-10"
+          }) }}
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

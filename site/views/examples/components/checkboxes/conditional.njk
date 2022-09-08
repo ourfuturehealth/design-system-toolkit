@@ -1,0 +1,92 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Checkboxes with conditional content' %}
+{% from 'components/checkboxes/macro.njk' import checkboxes %}
+{% from 'components/input/macro.njk' import input %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% set emailHtml %}
+  {{ input({
+    id: "email",
+    name: "email",
+    classes: "ofh-u-width-two-thirds",
+    label: {
+      text: "Email address"
+    }
+  }) }}
+{% endset -%}
+
+{% set phoneHtml %}
+  {{ input({
+    id: "phone",
+    name: "phone",
+    classes: "ofh-u-width-two-thirds",
+    label: {
+      text: "Phone number"
+    }
+  }) }}
+{% endset -%}
+
+{% set mobileHtml %}
+  {{ input({
+    id: "mobile",
+    name: "mobile",
+    classes: "ofh-u-width-two-thirds",
+    label: {
+      text: "Mobile phone number"
+    }
+  }) }}
+{% endset -%}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          <form>
+            {{ checkboxes({
+              "idPrefix": "contact",
+              "name": "contact",
+              "fieldset": {
+                "legend": {
+                  "text": "How would you prefer to be contacted?",
+                  "classes": "ofh-fieldset__legend--l",
+                  "isPageHeading": "true"
+                }
+              },
+              "hint": {
+                "text": "Select all options that are relevant to you."
+              },
+              "items": [
+                {
+                  "value": "email",
+                  "text": "Email",
+                  "conditional": {
+                    "html": emailHtml
+                  }
+                },
+                {
+                  "value": "phone",
+                  "text": "Phone",
+                  "conditional": {
+                    "html": phoneHtml
+                  }
+                },
+                {
+                  "value": "text",
+                  "text": "Text message",
+                  "conditional": {
+                    "html": mobileHtml
+                  }
+                }
+              ]
+            }) }}
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

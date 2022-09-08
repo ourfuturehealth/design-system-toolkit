@@ -1,0 +1,24 @@
+/* ==========================================================================
+   #HOMEPAGE
+   ========================================================================== */
+
+/**
+ * Custom style for the homepage
+ */
+
+.ofh-section {
+  @include ofh-responsive-padding(6, 'bottom');
+  @include ofh-responsive-padding(6, 'top');
+
+  @include mq($until: desktop) {
+
+    .ofh-grid-column-one-half:last-child {
+      padding-top: ofh-spacing(3);
+    }
+
+  }
+}
+
+.ofh-section--white {
+  background-color: $color_ofh-white;
+}

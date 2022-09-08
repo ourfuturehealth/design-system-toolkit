@@ -1,0 +1,71 @@
+@import 'govuk/main';
+@import 'code-embed';
+@import 'code-snippet';
+
+.design-example {
+  $root: &;
+  margin-bottom: ofh-spacing(6);
+  position: relative;
+  width: 100%;
+
+  @include mq($until: tablet) {
+    margin-bottom: ofh-spacing(5);
+  }
+
+  &__pop-out {
+    @include ofh-font(16);
+    border: 1px solid $color_ofh-grey-3;
+    border-bottom: 0;
+    display: block;
+    outline: 2px solid transparent;
+    padding: 8px 16px;
+    position: relative;
+    width: 100%;
+
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:focus {
+      background-color: $ofh-focus-color;
+      box-shadow: 0 $ofh-focus-width $ofh-focus-text-color;
+      color: $ofh-focus-text-color;
+      outline: $ofh-focus-width solid transparent;
+      text-decoration: none;
+
+      &:hover {
+        color: $ofh-focus-text-color;
+      }
+    }
+
+  }
+}
+
+p + .design-example {
+  @include ofh-responsive-padding(3, 'top');
+}
+
+.ofh-lede-text + .design-example {
+  @include ofh-responsive-padding(0, 'top');
+}
+
+.design-example-frame {
+  border: 0;
+}
+
+.app-code-snippet__macro {
+  width: 100%;
+}
+
+.app-tabs__container pre {
+  background-color: $color_ofh-grey-5;
+}
+
+.app-code-snippet__container {
+  background-color: $color_ofh-grey-5;
+  padding: ofh-spacing(3);
+  padding-top: ofh-spacing(8);
+  position: relative;
+  width: 100%;
+}
