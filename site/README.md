@@ -1,5 +1,9 @@
 # Design System Documentation
 
+> **Note** <br>
+> This documentation site is based on the [NHS.UK digital service manual](https://github.com/nhsuk/nhsuk-service-manual/),
+> which we have incorporated into our design system toolkit as a statically generated site.
+
 ## Setup
 
 ```bash
