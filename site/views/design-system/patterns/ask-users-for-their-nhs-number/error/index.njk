@@ -5,8 +5,8 @@
 {% from 'components/error-summary/macro.njk' import errorSummary %}
 
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+  <div class="ofh-grid-row">
+    <div class="ofh-grid-column-two-thirds">
 
       {{ errorSummary({
         "titleText": "There is a problem",
@@ -21,18 +21,18 @@
       {{ input({
         label: {
           text: "What is your NHS number?",
-          classes: "nhsuk-label--l",
+          classes: "ofh-label--l",
           isPageHeading: true
         },
         hint: {
-          html: "Your NHS number is a 10 digit number that you find on any letter the NHS has sent you. For example, <span class=\"nhsuk-u-nowrap\">485 777 3456</span>."
+          html: "Your NHS number is a 10 digit number that you find on any letter the NHS has sent you. For example, <span class=\"ofh-u-nowrap\">485 777 3456</span>."
         },
         errorMessage: {
           "text": "Your NHS number is too long"
         },
         id: "nhs-number",
         name: "nhs-number",
-        classes: "nhsuk-input--width-10",
+        classes: "ofh-input--width-10",
         inputmode: "numeric"
       }) }}
 
