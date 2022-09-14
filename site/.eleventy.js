@@ -1,8 +1,6 @@
 const highlightjs = require('highlight.js');
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addGlobalData("baseUrl", process.env.BASE_URL || "");
-
   // Documentation assets e.g. images, PDFs.
   eleventyConfig.addPassthroughCopy("assets");
 
