@@ -13,6 +13,8 @@ module.exports = function (eleventyConfig) {
   // by Eleventy in development and trigger a hot reload when assets change.
   eleventyConfig.addPassthroughCopy({ "../packages/assets": "ofh-design-system-toolkit/assets" });
 
+  eleventyConfig.addPassthroughCopy({ "node_modules/iframe-resizer/": "iframe-resizer" });
+
   // Prevent the output of toolkit CSS and JS assets in watch mode
   // triggering multiple rebuilds of the docs site.
   eleventyConfig.setWatchThrottleWaitTime(1000);
