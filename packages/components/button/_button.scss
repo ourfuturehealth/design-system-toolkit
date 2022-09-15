@@ -61,14 +61,14 @@ $button-shadow-size: 4px;
   &:focus {
     background: $ofh-focus-color;
     box-shadow: 0 $button-shadow-size 0 $ofh-button-text-color;
-    color: $color_ofh-dark-blue;
+    color: $color_ofh-brand-dark-blue;
     outline: $ofh-focus-width solid transparent;
 
     &:visited {
       color: $ofh-focus-text-color;
 
       &:active {
-        color: $color_ofh-dark-blue;
+        color: $color_ofh-brand-dark-blue;
       }
 
     }
@@ -127,7 +127,7 @@ $button-shadow-size: 4px;
   &:focus {
     background: $ofh-focus-color;
     box-shadow: 0 $button-shadow-size 0 $ofh-focus-text-color;
-    color: $color_ofh-dark-blue;
+    color: $color_ofh-brand-dark-blue;
     outline: $ofh-focus-width solid transparent;
   }
 
@@ -164,7 +164,7 @@ $button-shadow-size: 4px;
   &:active {
     background: $ofh-reverse-button-active-color;
     box-shadow: none;
-    color: $color_ofh-white;
+    color: $color_ofh-brand-white;
     top: $button-shadow-size;
   }
 
@@ -177,7 +177,7 @@ $button-shadow-size: 4px;
   }
 
   &.ofh-button--disabled {
-    background-color: $color_ofh_primary;
+    background-color: $color_ofh-brand-yellow;
 
     &:focus {
       background-color: $ofh-reverse-button-color;

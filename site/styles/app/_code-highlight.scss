@@ -2,7 +2,7 @@
 li code,
 p code,
 td code {
-  background-color: $color_ofh-white;
+  background-color: $color_ofh-brand-white;
   color: #d14; // sass-lint:disable-line no-color-hex no-color-literals
   padding: 2px ofh-spacing(2);
   word-break: break-word;
@@ -12,7 +12,7 @@ td code {
 .app-pre {
   @include ofh-responsive-margin(4, 'bottom');
 
-  background: $color_ofh-white;
+  background: $color_ofh-brand-white;
   border: 1px solid $ofh-border-color;
   margin-top: 0;
   overflow: auto;
@@ -38,7 +38,7 @@ td code {
 }
 
 .hljs {
-  background-color: $color_ofh-white;
+  background-color: $color_ofh-brand-white;
   color: $color_ofh-black;
   display: block;
   overflow-x: scroll;
@@ -48,6 +48,7 @@ td code {
 .hljs.css .hljs-selector-class,
 .hljs.css .hljs-selector-tag,
 .hljs.css .hljs-keyword {
+  // TODO: Replace - not in Figma design toolkit.
   color: $color_ofh-purple;
 }
 
@@ -55,7 +56,7 @@ td code {
   -ms-flex-item-align: stretch;
   -ms-grid-row-align: stretch;
   align-self: stretch;
-  background-color: $color_ofh-white;
+  background-color: $color_ofh-brand-white;
   padding: 0;
 }
 

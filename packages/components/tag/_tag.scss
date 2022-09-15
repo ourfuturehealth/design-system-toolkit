@@ -2,11 +2,25 @@
    #TAG
    ========================================================================== */
 
+//
+// These colours are only used in this component.
+//
+// TODO: They don't exist in the Figma design toolkit,
+// so should be removed and this component should use
+// colours from packages/core/settings/_colours.scss.
+//
+
+/* stylelint-disable color-no-hex */
+
+$color_ofh-warm-yellow: #ffb81C;
+$color_ofh-pink: #AE2573;
+$color_ofh-aqua-green: #00A499;
+
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
-  background-color: shade($color_ofh_primary, 10%);
-  border: 1px solid shade($color_ofh_primary, 10%);
-  color: $color_ofh-white;
+  background-color: shade($color_ofh-brand-yellow, 10%);
+  border: 1px solid shade($color_ofh-brand-yellow, 10%);
+  color: $color_ofh-brand-white;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
@@ -21,7 +35,7 @@
   ========================================================================== */
 
 .ofh-tag--white {
-  background-color: $color_ofh-white;
+  background-color: $color_ofh-brand-white;
   border-color: $color_ofh-black;
   color: $color_ofh-black;
 }
@@ -33,9 +47,9 @@
 }
 
 .ofh-tag--green {
-  background-color: tint($color_ofh-green, 80%);
-  border-color: shade($color_ofh-green, 40%);
-  color: shade($color_ofh-green, 40%);
+  background-color: tint($color_ofh-brand-green, 80%);
+  border-color: shade($color_ofh-brand-green, 40%);
+  color: shade($color_ofh-brand-green, 40%);
 }
 
 .ofh-tag--aqua-green {
@@ -45,9 +59,9 @@
 }
 
 .ofh-tag--blue {
-  background-color: tint($color_ofh_primary, 80%);
-  border-color: shade($color_ofh_primary, 30%);
-  color: shade($color_ofh_primary, 30%);
+  background-color: tint($color_ofh-brand-yellow, 80%);
+  border-color: shade($color_ofh-brand-yellow, 30%);
+  color: shade($color_ofh-brand-yellow, 30%);
 }
 
 .ofh-tag--purple {
@@ -63,9 +77,9 @@
 }
 
 .ofh-tag--red {
-  background-color: tint($color_ofh-red, 80%);
-  border-color: shade($color_ofh-red, 50%);
-  color: shade($color_ofh-red, 50%);
+  background-color: tint($color_ofh-brand-red, 80%);
+  border-color: shade($color_ofh-brand-red, 50%);
+  color: shade($color_ofh-brand-red, 50%);
 }
 
 .ofh-tag--orange {
@@ -75,9 +89,9 @@
 }
 
 .ofh-tag--yellow {
-  background-color: tint($color_ofh-yellow, 50%);
-  border-color: shade($color_ofh-yellow, 70%);
-  color: shade($color_ofh-yellow, 70%);
+  background-color: tint($color_ofh-brand-yellow, 50%);
+  border-color: shade($color_ofh-brand-yellow, 70%);
+  color: shade($color_ofh-brand-yellow, 70%);
 }
 
 /* Remove tag border

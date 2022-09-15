@@ -47,14 +47,14 @@
 
 @mixin ofh-link-style-white {
 
-  color: $color_ofh-white;
+  color: $color_ofh-brand-white;
 
   &:visited {
-    color: $color_ofh-white;
+    color: $color_ofh-brand-white;
   }
 
   &:hover {
-    color: $color_ofh-white;
+    color: $color_ofh-brand-white;
     text-decoration: none;
   }
 

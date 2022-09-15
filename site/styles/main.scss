@@ -23,7 +23,7 @@
 // Breadcrumb hotfix
 // To not have a visited state for breadcrumb link
 .ofh-breadcrumb__link:visited {
-  color: $color_ofh-blue;
+  color: $color_ofh-brand-blue;
 }
 
 // Breadcrumb hotfix
@@ -98,7 +98,7 @@ h1 + .ofh-lede-text {
 
 // Hotfix menu item icon colour on hover/focus
 .ofh-header__navigation-link:hover .ofh-icon__chevron-right {
-  fill: $color_ofh-white;
+  fill: $color_ofh-brand-white;
 }
 
 .ofh-header__navigation-link:focus .ofh-icon__chevron-right {
@@ -155,10 +155,10 @@ h1 + .ofh-lede-text {
 .app-card--transparent {
   background: transparent;
   border: 2px solid $ofh-secondary-border-color;
-  color: $color_ofh-white;
+  color: $color_ofh-brand-white;
 
   a {
-    color: $color_ofh-white;
+    color: $color_ofh-brand-white;
 
     &:hover,
     &:visited {

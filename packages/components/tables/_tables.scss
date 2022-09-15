@@ -44,7 +44,7 @@
 
 .ofh-table__panel-with-heading-tab {
   @include panel-with-label(
-    $color_ofh-white,
+    $color_ofh-brand-white,
     $ofh-text-color,
     $color_ofh-grey-4
   );
@@ -56,7 +56,7 @@
 }
 
 .ofh-table__heading-tab {
-  @include heading-label($color_ofh_primary, $color_ofh-white);
+  @include heading-label($color_ofh-brand-yellow, $color_ofh-brand-white);
 }
 
 /* Responsive table

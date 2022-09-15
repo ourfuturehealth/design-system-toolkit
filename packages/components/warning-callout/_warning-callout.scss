@@ -8,9 +8,9 @@
  */
 
 .ofh-warning-callout {
-  @include panel-with-label($color_ofh-light-blue, $ofh-text-color, $color_ofh-blue); /* [1] */
+  @include panel-with-label($color_ofh-brand-light-blue, $ofh-text-color, $color_ofh-brand-blue); /* [1] */
 }
 
 .ofh-warning-callout__label {
-  @include heading-label($color_ofh-blue, $color_ofh-white); /* [2] */
+  @include heading-label($color_ofh-brand-blue, $color_ofh-brand-white); /* [2] */
 }
