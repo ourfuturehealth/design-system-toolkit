@@ -35,7 +35,7 @@
 }
 
 .app-side-nav__item--current {
-  border-left: 4px solid $color_ofh-blue;
+  border-left: 4px solid $color_ofh-brand-blue;
   margin-left: -12px;
   padding-left: 8px;
 
@@ -52,7 +52,7 @@
   }
 
   &:visited {
-    color: $color_ofh-blue;
+    color: $color_ofh-brand-blue;
   }
 
   &:hover {

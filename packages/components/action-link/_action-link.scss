@@ -59,7 +59,7 @@
   .ofh-icon__arrow-right-circle {
     @include print-color($ofh-print-text-color);
 
-    fill: $color_ofh_primary;
+    fill: $color_ofh-brand-yellow;
     height: 36px;
     left: -3px;
     position: absolute;

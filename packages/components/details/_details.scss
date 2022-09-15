@@ -101,7 +101,7 @@ $expander-border-color: $color_ofh-grey-4;
 $expander-border-hover-color: $color_ofh-grey-3;
 
 .ofh-expander {
-  background-color: $color_ofh-white;
+  background-color: $color_ofh-brand-white;
   border: $expander-border-width solid $expander-border-color;
   border-bottom-width: $expander-border-bottom-width;
 
@@ -110,7 +110,7 @@ $expander-border-hover-color: $color_ofh-grey-3;
   }
 
   .ofh-details__summary {
-    background-color: $color_ofh-white;
+    background-color: $color_ofh-brand-white;
     border-top: $ofh-focus-width solid transparent;
     display: block;
     padding: ofh-spacing(4) - $ofh-focus-width ofh-spacing(4) ofh-spacing(4);
@@ -143,7 +143,7 @@ $expander-border-hover-color: $color_ofh-grey-3;
   }
 
   .ofh-details__summary-text {
-    color: $color_ofh_primary;
+    color: $color_ofh-brand-yellow;
     cursor: pointer;
     display: inline-block;
     padding: ofh-spacing(1) ofh-spacing(1) ofh-spacing(1) 38px;

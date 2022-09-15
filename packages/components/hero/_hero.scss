@@ -13,8 +13,8 @@
 .ofh-hero {
   @include print-color($ofh-print-text-color);
 
-  background-color: $color_ofh_primary;
-  color: $color_ofh-white;
+  background-color: $color_ofh-brand-yellow;
+  color: $color_ofh-brand-white;
   position: relative; /* [1] */
 
   .ofh-hero--border { /* [2] */
@@ -92,8 +92,8 @@
 .ofh-hero--image-description {
 
   .ofh-hero-content {
-    background-color: $color_ofh_primary;
-    color: $color_ofh-white;
+    background-color: $color_ofh-brand-yellow;
+    color: $color_ofh-brand-white;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
     position: relative;
@@ -116,7 +116,7 @@
 
       &:before,
       &:after {
-        border: solid 32px $color_ofh_primary; /* [8] */
+        border: solid 32px $color_ofh-brand-yellow; /* [8] */
         content: '';
         display: block;
         height: 0;

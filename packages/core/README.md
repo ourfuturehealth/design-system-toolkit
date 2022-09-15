@@ -278,12 +278,12 @@ large-desktop: 990px
 ### Primary
 
 ```scss
-$color_ofh_primary: #005eb8;
-$color_ofh-white: #ffffff;
+$color_ofh-brand-yellow: #005eb8;
+$color_ofh-brand-white: #ffffff;
 $color_ofh-black: #212b32;
-$color_ofh-green: #007f3b;
-$color_ofh-red: #da291c;
-$color_ofh-yellow: #ffeb3b;
+$color_ofh-brand-green: #007f3b;
+$color_ofh-brand-red: #da291c;
+$color_ofh-brand-yellow: #ffeb3b;
 $color_ofh-purple: #330072;
 ```
 

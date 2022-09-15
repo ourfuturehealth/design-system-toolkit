@@ -16,33 +16,45 @@
 
 /* stylelint-disable color-no-hex */
 
-$color_ofh_primary: #FFC62C;
-$color_ofh-white: #ffffff;
-$color_ofh-black: #212b32;
-$color_ofh-green: #00A08A;
-$color_ofh-purple: #330072;
+//
+// Our Future Health brand colours
+//
+
+$color_ofh-brand-dark-blue: #011D4B;
+$color_ofh-brand-blue: #108BE2;
+$color_ofh-brand-light-blue: #A4E7E2;
+$color_ofh-brand-green: #00A08A;
+$color_ofh-brand-light-green: #A2F5AC;
+$color_ofh-brand-yellow: #FFC62C;
+$color_ofh-brand-orange: #FF7800;
+$color_ofh-brand-red: #F34848;
+$color_ofh-brand-white: #FFFFFF;
+$color_ofh-brand-black: #000000;
+
+//
+// TODO: Colours that need reviewing / removing.
+//
+
+// TODO: This is $ofh-text-colour in the Figma design toolkit.
+// Components that are using this colour for text should
+// probably be using $ofh-text-color instead.
+$color_ofh-black: #1B1B1B;
+
+// TODO: Re-review these, can probably be removed once
+// colour use cases are updated.
 $color_ofh-dark-pink: #7C2855;
-$color_ofh-red: #d5281b;
-$color_ofh-yellow: #ffeb3b;
-$color_ofh-blue: #108BE2;
-$color_ofh-light-blue: #DCE8F0;
 $color_ofh-dark-yellow: #e6b228;
-$color_ofh-dark-blue: #011D4B;
 
-//
-// Secondary colours
-//
-
-$color_ofh-pale-yellow: #fff9c4;
-$color_ofh-warm-yellow: #ffb81C;
-$color_ofh-orange: #ED8B00;
-$color_ofh-aqua-green: #00A499;
-$color_ofh-pink: #AE2573;
+// TODO: Change code highlighting colour: site/styles/app/_code-highlight.scss
+// TODO: Used in tags component: packages/components/tag/_tag.scss
+// TODO: Duplicated as $ofh-link-visited-color below.
+$color_ofh-purple: #330072;
 
 //
 // Greyscale
 //
 
+// TODO: Remove/replace - not in Figma design toolkit.
 $color_ofh-grey-1: #425563;
 $color_ofh-grey-2: #768692;
 $color_ofh-grey-3: #aeb7bd;
@@ -56,6 +68,8 @@ $color_ofh-grey-5: #F4F4F4;
 // Used to create drop/box shadows e.g. for search suggestions dropdown
 //
 
+// TODO: Remove/replace - not in Figma design toolkit.
+
 $color_ofh-grey-1-rgb: rgb(66, 84, 98);
 $alpha-transparency-50: .5;
 
@@ -65,8 +79,10 @@ $alpha-transparency-50: .5;
 // Usage: tint(color, percentage)
 //        tint($color_ofh-black, 10%)
 //        shade(color, percentage)
-//        shade($color_ofh_primary, 50%)
+//        shade($color_ofh-brand-yellow, 50%)
 //
+
+// TODO: Remove/replace - not in Figma design toolkit.
 
 @function tint($color, $percentage) {
   @return mix(white, $color, $percentage);
@@ -79,6 +95,8 @@ $alpha-transparency-50: .5;
 //
 // Primary colour variations
 //
+// TODO: Update these / replace them
+//
 // 1. used for link :active states
 // 2. used for .is-active state on main navigation
 // 3. used for :hover states on main navigation
@@ -87,43 +105,59 @@ $alpha-transparency-50: .5;
 // 6. used for primary button and action link icon :active states
 //
 
+// TODO: Remove, not in use
 $color_tint_ofh-black-10: tint($color_ofh-black, 10%); // [1] //
-
-$color_shade_ofh-blue-20: shade($color_ofh_primary, 20%); // [2] //
-$color_shade_ofh-blue-35: shade($color_ofh_primary, 35%); // [3] //
-$color_shade_ofh-blue-50: shade($color_ofh_primary, 50%); // [4] //
-
-$color_shade_ofh-green-35: shade($color_ofh-green, 35%); // [5] //
-$color_shade_ofh-green-50: shade($color_ofh-green, 50%); // [6] //
-
-$color_transparent_ofh-white-20: rgba($color_ofh-white, .2);
+// TODO: Used in header component: packages/components/header/_header.scss
+$color_shade_ofh-blue-20: shade($color_ofh-brand-yellow, 20%); // [2] //
+// TODO: Used in header component: packages/components/header/_header.scss
+// TODO: Used in mixins: packages/core/tools/_mixins.scss
+$color_shade_ofh-blue-35: shade($color_ofh-brand-yellow, 35%); // [3] //
+// TODO: Used in header component: packages/components/header/_header.scss
+// TODO: Used in mixins: packages/core/tools/_mixins.scss
+$color_shade_ofh-blue-50: shade($color_ofh-brand-yellow, 50%); // [4] //
+// TODO: Remove, not in use
+$color_shade_ofh-green-35: shade($color_ofh-brand-green, 35%); // [5] //
+// TODO: Remove, not in use
+$color_shade_ofh-green-50: shade($color_ofh-brand-green, 50%); // [6] //
+// TODO: Aliased to $ofh-secondary-border-color
+$color_transparent_ofh-white-20: rgba($color_ofh-brand-white, .2);
+// TODO: Used by hero component: packages/components/hero/_hero.scss
 $color_transparent_ofh-blue-50: rgba($color_shade_ofh-blue-50, .1);
 
 //
-// Colour aliases
+// Functional UI colours
 //
 
 // Text
-$ofh-text-color: $color_ofh-black;
-$ofh-secondary-text-color: $color_ofh-grey-1;
+$ofh-text-color: #1B1B1B;
+// TODO: Named $ofh-hint-text-colour in Figma design toolkit.
+$ofh-secondary-text-color: #494949;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-print-text-color: $color_ofh-black;
+// TODO: Figma design toolkit colours not added here: $ofh-text-brand-dark-blue-colour, $ofh-text-white-colour
 
 // Links
-$ofh-link-color: $color_ofh-dark-blue;
-$ofh-link-hover-color: $color_ofh-dark-pink;
-$ofh-link-active-color: shade($ofh-link-color, 50%);
-$ofh-link-visited-color: $color_ofh-purple;
+$ofh-link-color: #0053B3;
+$ofh-link-hover-color: #002D61;
+$ofh-link-active-color: #001F42;
+$ofh-link-visited-color: #330072;
+// TODO: Figma design toolkit colours not added here: $ofh-link-white-colour
 
 // Focus
-$ofh-focus-color: $color_ofh-yellow;
-$ofh-focus-text-color: $color_ofh-dark-blue;
+$ofh-focus-color: #0053B3;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
+$ofh-focus-text-color: $color_ofh-brand-dark-blue;
+// TODO: Figma design toolkit colours not added here: $ofh-focus-white-colour
 
-// Border
-$ofh-border-color: $color_ofh-grey-4;
+// Border - TODO: Update to match Figma design toolkit.
+$ofh-border-color: #D1D1D1;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-border-black-color: rgb(0, 0, 0);
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-secondary-border-color: $color_transparent_ofh-white-20;
+// TODO: Figma design toolkit colours not added here: $ofh-input-border-colour, $ofh-input-border-active-colour
 
-// Box shadow
+// Box shadow - TODO: Couldn't find colours for these in Figma design toolkit.
 $ofh-box-shadow: rgba(33, 43, 50, .16);
 $ofh-box-shadow-color: $color_ofh-grey-1-rgb;
 
@@ -131,29 +165,43 @@ $ofh-box-shadow-color: $color_ofh-grey-1-rgb;
 // Forms
 //
 
-$ofh-error-color: $color_ofh-red;
+$ofh-error-color: #B60000;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-form-border-color: $color_ofh-grey-1;
-$ofh-form-element-background-color: $color_ofh-white;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
+$ofh-form-element-background-color: $color_ofh-brand-white;
 
 //
 // Buttons
 //
+// TODO: These colour names need reviewing to align with the Figma design toolkit.
+//
+// - $ofh-button = $ofh-button-yellow
+// - $ofh-reverse-button = $ofh-button-white
+//
+// TODO: $ofh-button-dark-blue from the Figma design toolkit hasn't been added here yet.
 
-$ofh-button-color: $color_ofh_primary;
-$ofh-button-hover-color: $color_ofh-dark-yellow;
-$ofh-button-active-color: $color_ofh_primary;
-$ofh-button-shadow-color: $color_ofh-dark-blue;
+$ofh-button-color: $color_ofh-brand-yellow;
+$ofh-button-hover-color: #DAA106;
+$ofh-button-active-color: #BF8C02;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
+$ofh-button-shadow-color: $color_ofh-brand-dark-blue;
 
-$ofh-secondary-button-color: $color_ofh-grey-1;
-$ofh-secondary-button-hover-color: shade($ofh-secondary-button-color, 20%);
-$ofh-secondary-button-active-color: shade($ofh-secondary-button-color, 50%);
+$ofh-secondary-button-color: #0053B3;
+$ofh-secondary-button-hover-color: #002D61;
+$ofh-secondary-button-active-color: #001F42;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-secondary-button-shadow-color: shade($ofh-secondary-button-color, 50%);
 
-$ofh-reverse-button-color: $color_ofh-white;
-$ofh-reverse-button-hover-color: shade($ofh-reverse-button-color, 20%);
-$ofh-reverse-button-active-color: $color-ofh-black;
+$ofh-reverse-button-color: $color_ofh-brand-white;
+$ofh-reverse-button-hover-color: #E8E8E8;
+$ofh-reverse-button-active-color: #D1D1D1;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-reverse-button-shadow-color: $color-ofh-black;
 
-$ofh-button-text-color: $color_ofh-dark-blue;
-$ofh-button-secondary-text-color: $color_ofh-white;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
+$ofh-button-text-color: $color_ofh-brand-dark-blue;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
+$ofh-button-secondary-text-color: $color_ofh-brand-white;
+// TODO: Not sure what this should be - couldn't find in Figma design toolkit.
 $ofh-reverse-button-text-color: $color_ofh-black;

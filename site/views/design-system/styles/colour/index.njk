@@ -26,8 +26,8 @@
 
 
   <h2 id="main-colours">Main colours</h2>
-  <p class="rich-text">If you are using <a href="/design-system/production">NHS.UK frontend (FIXME)</a> or the <a href="/design-system/prototyping">NHS.UK prototype kit (FIXME)</a>, use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> provided rather than copying the hexadecimal (hex) colour values. For example, use <code>$ofh-text-color</code> rather than <code>#212b32</code>. This means that your service will always use the most recent colour palette whenever you update.</p>
-  <p class="rich-text">Only use the variables in the context they’re designed for. In all other cases, you should reference the <a href="#colour-palette">colour palette</a> directly. For example, if you wanted to use red to represent some data in a graph you should use <code>$color_ofh-red</code> rather than <code>$ofh-error-color</code>.</p>
+  <p class="rich-text">If you are using <a href="/design-system/production">NHS.UK frontend (FIXME)</a> or the <a href="/design-system/prototyping">NHS.UK prototype kit</a>, use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> provided rather than copying the hexadecimal (hex) colour values. For example, use <code>$ofh-text-color</code> rather than <code>#212b32</code>. This means that your service will always use the most recent colour palette whenever you update.</p>
+  <p class="rich-text">Only use the variables in the context they’re designed for. In all other cases, you should reference the <a href="#colour-palette">colour palette</a> directly. For example, if you wanted to use red to represent some data in a graph you should use <code>$color_ofh-brand-red</code> rather than <code>$ofh-error-color</code>.</p>
 
   <table class="app-colour-list" summary="Table of main colours">
     <tbody>
@@ -207,10 +207,10 @@
     <li>the <a href="https://www.bdadyslexia.org.uk/employer/dyslexia-style-guide-2018-creating-dyslexia-friendly-content">British Dyslexia Association</a> recommends dark text on a light, but not white, background</li>
     <li>components with important information, like callouts, stand out</li>
   </ul>
-  <p class="rich-text"><code>$color_ofh-white</code> is used to make important information stand out and for alternating backgrounds, for example on <a href="https://www.nhs.uk/">the NHS website home page</a>.</p>
+  <p class="rich-text"><code>$color_ofh-brand-white</code> is used to make important information stand out and for alternating backgrounds, for example on <a href="https://www.nhs.uk/">the NHS website home page</a>.</p>
 
   <h2 id="colour-palette">Colour palette</h2>
-  <p class="rich-text">Avoid using the palette colours if there is a Sass variable that is designed for your context. For example, if you are styling the error state of a component you should use the <code>$ofh-error-color</code> Sass variable rather than <code>$color_ofh-red</code>.</p>
+  <p class="rich-text">Avoid using the palette colours if there is a Sass variable that is designed for your context. For example, if you are styling the error state of a component you should use the <code>$ofh-error-color</code> Sass variable rather than <code>$color_ofh-brand-red</code>.</p>
 
   <table class="app-colour-list" summary="Table of the full colour palette">
     <tbody>
@@ -218,7 +218,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#005eb8"></span>
-          <code>$color_ofh-blue</code>
+          <code>$color_ofh-brand-blue</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           #005eb8
@@ -228,7 +228,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#007f3b"></span>
-          <code>$color_ofh-green</code>
+          <code>$color_ofh-brand-green</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           #007f3b
@@ -238,7 +238,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#ffeb3b"></span>
-          <code>$color_ofh-yellow</code>
+          <code>$color_ofh-brand-yellow</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           #ffeb3b
@@ -258,7 +258,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#d5281b"></span>
-          <code>$color_ofh-red</code>
+          <code>$color_ofh-brand-red</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           #d5281b
@@ -338,7 +338,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#ffffff"></span>
-          <code>$color_ofh-white</code>
+          <code>$color_ofh-brand-white</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           #ffffff
