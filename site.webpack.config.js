@@ -4,7 +4,7 @@ module.exports = {
   entry: {
     // TODO: Remove this?
     // cookies: './scripts/cookie-consent.js',
-    main: './scripts/main.js',
+    main: path.resolve(__dirname, 'site/scripts/main.js'),
   },
   mode: 'production',
   module: {
@@ -20,7 +20,7 @@ module.exports = {
   },
   output: {
     filename: '[name].min.js',
-    path: path.resolve(__dirname, 'dist/js/'),
+    path: path.resolve(__dirname, 'site/dist/js/'),
   },
   watchOptions: {
     ignored: /node_modules/,
