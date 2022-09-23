@@ -4,14 +4,14 @@
 {% call fieldset({
   legend: {
     "text": "What is your address?",
-    "classes": "nhsuk-fieldset__legend--l",
+    "classes": "ofh-fieldset__legend--l",
     "isPageHeading": true
   }
 }) %}
 
   {{ input({
     label: {
-      "html": 'Building and street <span class="nhsuk-u-visually-hidden">line 1 of 2</span>'
+      "html": 'Building and street <span class="ofh-u-visually-hidden">line 1 of 2</span>'
     },
     "id": "address-line-1",
     "name": "address-line-1"
@@ -19,7 +19,7 @@
 
   {{ input({
     label: {
-      "html": '<span class="nhsuk-u-visually-hidden">Building and street line 2 of 2</span>'
+      "html": '<span class="ofh-u-visually-hidden">Building and street line 2 of 2</span>'
     },
     "id": "address-line-2",
     "name": "address-line-2"
@@ -29,7 +29,7 @@
     label: {
       "text": "Town or city"
     },
-    "classes": "nhsuk-u-width-two-thirds",
+    "classes": "ofh-u-width-two-thirds",
     "id": "address-town",
     "name": "address-town"
   }) }}
@@ -38,7 +38,7 @@
     label: {
       "text": "County"
     },
-    "classes": "nhsuk-u-width-two-thirds",
+    "classes": "ofh-u-width-two-thirds",
     "id": "address-county",
     "name": "address-county"
   }) }}
@@ -47,7 +47,7 @@
     label: {
       "text": "Postcode"
     },
-    "classes": "nhsuk-input--width-10",
+    "classes": "ofh-input--width-10",
     "id": "address-postcode",
     "name": "address-postcode"
   }) }}

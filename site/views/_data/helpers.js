@@ -9,9 +9,11 @@ const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(viewsPath));
 // This helper function takes a path of a file and
 // returns the contents as string
 function getFileContents(filepath) {
+  const absoluteFilepath = path.join(__dirname, '../../', filepath);
+
   let fileContents;
   try {
-    fileContents = fs.readFileSync(filepath);
+    fileContents = fs.readFileSync(absoluteFilepath);
   } catch (err) {
     if (err.code === 'ENOENT') {
       // eslint-disable-next-line no-console
