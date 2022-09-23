@@ -37,7 +37,7 @@
     "@babel/core": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "babel-loader": "^8.2.5",
-    "backstopjs": "^5.4.4",
+    "backstopjs": "^6.1.1",
     "concurrently": "^7.4.0",
     "eslint": "^7.32.0",
     "eslint-config-nhsuk": "^1.0.0",
