@@ -58,15 +58,15 @@ jobs:
           asset_name: ofh-design-system-toolkit-${{ steps.get_version.outputs.VERSION }}.zip
           asset_content_type: application/zip
 
-      - name: Build GitHub pages
-        run: npm run build-gh-pages
+      - name: Build documentation site
+        run: npm run build
 
       - name: Deploy GitHub pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: ./dist/app
+          FOLDER: ./site/dist
           CLEAN: true
 
       # - name: Publish NPM package

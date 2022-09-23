@@ -9,13 +9,13 @@
   {{ backLink({
     "href": "#",
     "text": "Go back",
-    "classes": "nhsuk-u-margin-bottom-0 nhsuk-u-margin-top-4"
+    "classes": "ofh-u-margin-bottom-0 ofh-u-margin-top-4"
   }) }}
 {% endblock %}
 
 {% block content %}
-  <div class="nhsuk-grid-row">
-    <div class="nhsuk-grid-column-two-thirds">
+  <div class="ofh-grid-row">
+    <div class="ofh-grid-column-two-thirds">
       <form>
 
         {{ errorSummary({
@@ -33,7 +33,7 @@
           "fieldset": {
             "legend": {
               "text": "What is your date of birth?",
-              "classes": "nhsuk-fieldset__legend--l",
+              "classes": "ofh-fieldset__legend--l",
               "isPageHeading": true
             }
           },
@@ -46,17 +46,17 @@
           "items": [
             {
               "name": "day",
-              "classes": "nhsuk-input--width-2",
+              "classes": "ofh-input--width-2",
               value: 15
             },
             {
               "name": "month",
-              "classes": "nhsuk-input--width-2",
+              "classes": "ofh-input--width-2",
               value: 3
             },
             {
               "name": "year",
-              "classes": "nhsuk-input--width-4 nhsuk-input--error"
+              "classes": "ofh-input--width-4 ofh-input--error"
             }
           ]
         }) }}

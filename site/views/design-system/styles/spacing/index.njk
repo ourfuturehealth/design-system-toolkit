@@ -14,17 +14,17 @@
 {% block sideNav %}
 <nav class="app-side-nav">
 
-  <ul class="nhsuk-list app-side-nav__list">
+  <ul class="ofh-list app-side-nav__list">
 
-    <div class="nhsuk-back-link app-u-hide-mobile app-side-nav__back nhsuk-u-margin-bottom-4">
-      <a class="nhsuk-back-link__link" href="/design-system">
-      <svg class="nhsuk-icon nhsuk-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-4">
+      <a class="ofh-back-link__link" href="/design-system">
+      <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
       </svg>
       Design system</a>
     </div>
 
-    <h2 class="app-side-nav__heading">Styles <span class="nhsuk-u-visually-hidden">navigation</span></h2>
+    <h2 class="app-side-nav__heading">Styles <span class="ofh-u-visually-hidden">navigation</span></h2>
 
     <li class="app-side-nav__item"><a class="app-side-nav__link" href="/design-system/styles/colour">Colour</a></li>
 
@@ -211,12 +211,12 @@
 
   <h3 id="using-the-override-classes">Using the override classes</h3>
   <p>The spacing override classes are structured to allow you to apply any size of the scale, using margin or padding in any direction.</p>
-  <p class="rich-text">For example, <code>nhsuk-u-margin-9</code> will set a margin of 64px on large screens and 56px on small screens.</p>
+  <p class="rich-text">For example, <code>ofh-u-margin-9</code> will set a margin of 64px on large screens and 56px on small screens.</p>
   <p class="rich-text">To add padding use <code>-padding</code> instead of <code>-margin</code>.</p>
   <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set margin-top, <code>-padding-right</code> will set padding-right. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
-  <p class="rich-text">The last part of the class represents the spacing unit value you want to apply. For example, in <code>nhsuk-u-margin-9</code>, the <code>-9</code> represents 9 on the spacing scale.</p>
+  <p class="rich-text">The last part of the class represents the spacing unit value you want to apply. For example, in <code>ofh-u-margin-9</code>, the <code>-9</code> represents 9 on the spacing scale.</p>
 
-  <h3 id="spacing-examples" class="nhsuk-u-padding-top-3">Examples</h3>
+  <h3 id="spacing-examples" class="ofh-u-padding-top-3">Examples</h3>
 
   {{ designExample({
     group: "styles",
@@ -237,23 +237,23 @@
 
   <h3 id="using-the-static-spacing-function">Using the static spacing function</h3>
   <p>If you want to use static values that will not change based on breakpoints you can reference the static spacing scale function like this:</p>
-  <p class="rich-text"><code>padding-top: nhsuk-spacing(6)</code></p>
+  <p class="rich-text"><code>padding-top: ofh-spacing(6)</code></p>
 
   <h3 id="using-the-responsive-spacing-mixin">Using the responsive spacing mixin</h3>
   <p>If you want to use the responsive spacing scale you can reference the mixin.</p>
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text">use <code>@include nhsuk-responsive-margin(6, "bottom");</code> for 40px margin-bottom on large screens and 32px on small screens</p></li>
-    <li><p class="rich-text">use <code>@include nhsuk-responsive-padding(6);</code> for 40px padding on all sides on large screens and 32px on small screens</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-margin(6, "bottom");</code> for 40px margin-bottom on large screens and 32px on small screens</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-padding(6);</code> for 40px padding on all sides on large screens and 32px on small screens</p></li>
   </ul>
 
   <h2 id="width-override-classes">Width override classes</h2>
   <p>If you need to constrain the width of an element independently of the <a href="/design-system/styles/layout">grid system</a>, you can use width override classes.</p>
-  <p class="rich-text">As with the spacing override classes, the width override classes start with <code>nhsuk-u-</code>. The second part of the class name indicates the width on larger screen sizes.
+  <p class="rich-text">As with the spacing override classes, the width override classes start with <code>ofh-u-</code>. The second part of the class name indicates the width on larger screen sizes.
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text"><code>nhsuk-u-width-one-half</code>  will apply a width of 50% and</p></li>
-    <li><p class="rich-text"><code>nhsuk-u-width-two-thirds</code> will apply a width of 66.66%.</p></li>
+    <li><p class="rich-text"><code>ofh-u-width-one-half</code>  will apply a width of 50% and</p></li>
+    <li><p class="rich-text"><code>ofh-u-width-two-thirds</code> will apply a width of 66.66%.</p></li>
   </ul>
 
   {{ designExample({
