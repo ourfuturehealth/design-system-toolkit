@@ -6,11 +6,11 @@
  *
  * [
  *   {
- *     item: 'skip-link',
- *     layout: 'design-example-wrapper.njk',
- *     permalink: 'design-example/components/skip-link/default/',
- *     templatePath: '../design-system/components/skip-link/default/index.njk'
- *   }
+ *     group: 'components',
+ *     item: 'radios',
+ *     layout: { name: 'default', template: 'design-example-wrapper.njk' },
+ *     type: 'conditional'
+ *   },
  *   ...
  * ]
  */
@@ -20,23 +20,21 @@ const glob = require('glob');
 
 const isNotNull = (value) => value !== null;
 
-function exampleToRender({ group, item, type }) {
-  // TODO: Move part of this path into the design wrapper templates
-  const templatePath = `../design-system/${group}/${item}/${type}/index.njk`;
-
-  return {
-    item,
-    layout: 'design-example-wrapper.njk',
-    permalink: `design-example/${group}/${item}/${type}/`,
-    templatePath,
+function exampleToRender(layout) {
+  return function createExampleSettings({ group, item, type }) {
+    return {
+      group,
+      item,
+      layout,
+      type,
+    };
   };
 }
 
 const designSystemTemplatesPath = path.join(__dirname, '../design-system/');
 const exampleTemplatesGlobPattern = path.join(designSystemTemplatesPath, '*/**/index.njk');
 
-// TODO: Render each example x each wrapper template
-module.exports = glob.sync(exampleTemplatesGlobPattern)
+const examples = glob.sync(exampleTemplatesGlobPattern)
   .map((examplePath) => {
     const cleanPath = examplePath
       .replace(designSystemTemplatesPath, '')
@@ -54,23 +52,14 @@ module.exports = glob.sync(exampleTemplatesGlobPattern)
 
     return null;
   })
-  .filter(isNotNull)
-  .map(exampleToRender);
+  .filter(isNotNull);
 
-// ----
+const layouts = [
+  { name: 'default', template: 'design-example-wrapper.njk' },
+  { name: 'fullpage', template: 'design-example-wrapper-full.njk' },
+  { name: 'blankpage', template: 'design-example-wrapper-blank.njk' },
+];
 
-// TODO: Have fullpage and blankpage as part of file name, not query string
-//       Will need to modify the design-example.njk macro
-// const req = { query: {} };
-// const displayFullPage = req.query.fullpage === 'true';
-// const blankPage = req.query.blankpage === 'true';
+const examplesToRender = layouts.flatMap((layout) => examples.map(exampleToRender(layout)));
 
-// Wrap the example HTML in a basic html base template.
-// These live under views/_includes/
-// let layout = 'design-example-wrapper.njk';
-// if (displayFullPage) {
-//   layout = 'design-example-wrapper-full.njk';
-// }
-// if (blankPage) {
-//   layout = 'design-example-wrapper-blank.njk';
-// }
+module.exports = examplesToRender;

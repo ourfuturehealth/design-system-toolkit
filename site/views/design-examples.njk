@@ -3,11 +3,12 @@ pagination:
     data: design-examples
     size: 1
     alias: example
-permalink: "{{ example.permalink }}"
+permalink: "design-example/{{ example.group }}/{{ example.item }}/{{ example.type }}/layout-{{ example.layout.name }}/"
 ---
 {# Data provided by _data/design-examples.js #}
 
 {% set item = example.item %}
-{% set templatePath = example.templatePath %}
+{# `templatePath` is relative to `site/views/_includes/` #}
+{% set templatePath = "../design-system/" + example.group + "/" + example.item + "/" + example.type + "/index.njk" %}
 
-{% extends example.layout %}
+{% extends example.layout.template %}
