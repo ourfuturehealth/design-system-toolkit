@@ -2,8 +2,6 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    // TODO: Remove this?
-    // cookies: './scripts/cookie-consent.js',
     main: path.resolve(__dirname, 'site/scripts/main.js'),
   },
   mode: 'production',

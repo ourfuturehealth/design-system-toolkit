@@ -2,7 +2,14 @@
 {% macro designExample(params) %}
   {% set examplePath = "views/design-system/" + params.group + "/" + params.item + "/" + params.type + "/index.njk" %}
   {% set exampleArguments = "views/design-system/" + params.group + "/" + params.item + "/" + "macro-options.json" %}
-  {% set standaloneURL = "/design-example/" + params.group + "/" + params.item + "/" + params.type + "?fullpage=" + params.fullpage + "&blankpage=" + params.blankpage %}
+  {% if params.fullpage %}
+    {% set layout = "fullpage" %}
+  {% elif params.blankpage %}
+    {% set layout = "blankpage" %}
+  {% else %}
+    {% set layout = "default" %}
+  {% endif %}
+  {% set standaloneURL = "/design-example/" + params.group + "/" + params.item + "/" + params.type + "/layout-" + layout + "/" %}
 
   {# `showExample` and `showCode` is true, unless explicitly turned off with params #}
   {% set showExample = params.showExample !== false %}
