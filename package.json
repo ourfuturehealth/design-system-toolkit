@@ -3,12 +3,11 @@
   "version": "2.0.0-alpha.2",
   "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "scripts": {
-    "prepare": "gulp bundle",
     "test": "npm run lint && npm run jest:ci",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "lint:js": "eslint -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
     "lint:css": "stylelint -f verbose --config ./tests/linters/.stylelintrc.yml 'packages/**/*.scss'",
-    "lint:html": "htmlhint --config ./tests/linters/.htmlhintrc ./dist/app/components/**/*.html",
+    "lint:html": "npm run site:build && htmlhint --config ./tests/linters/.htmlhintrc ./site/dist/**/*.html",
     "backstop:ref": "concurrently \"npm start\" \"wait-on http://localhost:3000 && backstop --config=./tests/backstop/backstop.js reference --docker\"",
     "backstop:test": "concurrently \"npm start\" \"wait-on http://localhost:3000 && backstop --config=./tests/backstop/backstop.js test --docker\"",
     "backstop:ci": "start-server-and-test start http://0.0.0.0:3000 backstop:citest",
