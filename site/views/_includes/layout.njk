@@ -1,4 +1,3 @@
-{% set disableSearch = true %}
 {%- from 'components/header/macro.njk' import header %}
 {%- from 'components/footer/macro.njk' import footer %}
 {%- from 'components/skip-link/macro.njk' import skipLink %}
@@ -52,7 +51,6 @@
     <meta name="msapplication-TileImage" content="/ofh-design-system-toolkit/assets/favicons/favicon-270x270.png">
     <meta name="msapplication-TileColor" content="#FFC62C">
 
-    {# TODO: Update this #}
     <meta property="og:url" content="https://ourfuturehealth.github.io/design-system-toolkit/"/>
     <meta property="og:title" content="{% if pageTitle %}{{ pageTitle }} - Our Future Health design system{% else %}Our Future Health design system{% endif %}"/>
     <meta property="og:description" content="{% if pageDescription %}{{pageDescription}}{% else %}Things you need to start building accessible user interfaces for Our Future Health websites and services.{% endif %}"/>
