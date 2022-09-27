@@ -1,83 +1,39 @@
 {% from 'components/header/macro.njk' import header %}
 
-{%- if disableSearch %}
-  {{ header({
-    "homeHref": "/",
-    "ariaLabel": "Our Future Health design system homepage",
-    "service": {
-      "name": "Digital service manual",
-      "longName": "true"
+{{ header({
+  "homeHref": "/",
+  "ariaLabel": "Our Future Health design system homepage",
+  "service": {
+    "name": "Digital service manual",
+    "longName": "true"
+  },
+  "organisation": {
+    "name": "Our Future Health",
+    "logoURL": "/ofh-design-system-toolkit/assets/logos/ofh-logo-marque.svg"
+  },
+  "showNav": "true",
+  "showSearch": "false",
+  "primaryLinks": [
+    {
+      "url"  : "/standards-and-technology",
+      "label" : "Standards and technology"
     },
-    "organisation": {
-      "name": "Our Future Health",
-      "logoURL": "/ofh-design-system-toolkit/assets/logos/ofh-logo-marque.svg"
+    {
+      'url' : '/design-system',
+      'label' : 'Design system'
     },
-    "showNav": "true",
-    "showSearch": "false",
-    "searchAction": "/search/",
-    "searchInputName": "search-field",
-    "primaryLinks": [
-      {
-        "url"  : "/standards-and-technology",
-        "label" : "Standards and technology"
-      },
-      {
-        'url' : '/design-system',
-        'label' : 'Design system'
-      },
-      {
-        'url'  : '/content',
-        'label' : 'Content style guide'
-      },
-      {
-        'url'  : '/accessibility',
-        'label' : 'Accessibility'
-      },
-      {
-        'url' : '/community-and-contribution',
-        'label' : 'Community and contribution'
-      }
-    ]
-    })
-  }}
-{% else %}
-  {{ header({
-    "homeHref": "/",
-    "ariaLabel": "Our Future Health design system homepage",
-    "service": {
-      "name": "Digital service manual",
-      "longName": "true"
+    {
+      'url'  : '/content',
+      'label' : 'Content style guide'
     },
-    "organisation": {
-      "name": "Our Future Health",
-      "logoURL": "/ofh-design-system-toolkit/assets/logos/ofh-logo-marque.svg"
+    {
+      'url'  : '/accessibility',
+      'label' : 'Accessibility'
     },
-    "showNav": "true",
-    "showSearch": "true",
-    "searchAction": "/search/",
-    "searchInputName": "search-field",
-    "primaryLinks": [
-      {
-        "url"  : "/standards-and-technology",
-        "label" : "Standards and technology"
-      },
-      {
-        'url' : '/design-system',
-        'label' : 'Design system'
-      },
-      {
-        'url'  : '/content',
-        'label' : 'Content style guide'
-      },
-      {
-        'url'  : '/accessibility',
-        'label' : 'Accessibility'
-      },
-      {
-        'url' : '/community-and-contribution',
-        'label' : 'Community and contribution'
-      }
-    ]
-    })
-  }}
-{% endif %}
+    {
+      'url' : '/community-and-contribution',
+      'label' : 'Community and contribution'
+    }
+  ]
+  })
+}}
