@@ -10,12 +10,12 @@
   <url>
     <loc>https://service-manual.nhs.uk/design-system/design-principles</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/components</loc>
   </url>
@@ -25,22 +25,22 @@
   <url>
     <loc>https://service-manual.nhs.uk/design-system/prototyping</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility-statement</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/sitemap</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/terms-and-conditions</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/privacy</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/assets/NHS_design_principles.pdf</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility/what-all-NHS-services-need-to-do</loc>
   </url>
   <url>
@@ -69,8 +69,8 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/accessibility/testing</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content/standard-for-creating-health-content</loc>
   </url>
   <url>
@@ -96,7 +96,7 @@
   </url>
     <url>
     <loc>https://service-manual.nhs.uk/content/links</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/styles/colour</loc>
   </url>
@@ -226,7 +226,7 @@
   <url>
     <loc>https://service-manual.nhs.uk/design-system/styles/focus-state</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content/health-literacy/</loc>
   </url>
   <url>
@@ -273,8 +273,8 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/content/how-to-write-good-questions-for-forms/test-your-questions</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/service-manual-team</loc>
-  </url>
+  </url> -->
 </urlset>
