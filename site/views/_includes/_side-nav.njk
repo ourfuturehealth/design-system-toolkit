@@ -1,16 +1,6 @@
-{% set dsPrinciples = [
-  { title: "Design principles", url: "/design-system/design-principles" }
-] %}
-
-{% set dsCode = [
-  { title: "Prototyping", url: "/design-system/prototyping" },
-  { title: "Production code", url: "/design-system/production" }
-] %}
-
 {% set dsDesign = [
-  { title: "Styles", url: "/design-system/styles" },
-  { title: "Components", url: "/design-system/components" },
-  { title: "Patterns", url: "/design-system/patterns" }
+  { title: "Foundation styles", url: "/design-system/styles" },
+  { title: "Components", url: "/design-system/components" }
 ] %}
 
 {% set accessibilityEveryone = [
@@ -126,22 +116,7 @@
 
 <nav class="app-side-nav">
 
-  {%- if pageSection == "Design system" and subSection != "Styles" and subSection != "Components" and subSection != "Patterns" %}
-    <h2 class="app-side-nav__heading">Principles</h2>
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in dsPrinciples %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-
-    <h2 class="app-side-nav__heading">Setup</h2>
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in dsCode %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-
-    <h2 class="app-side-nav__heading">Design</h2>
+  {%- if pageSection == "Design system" and subSection != "Foundation styles" and subSection != "Components" and subSection != "Patterns" %}
     <ul class="ofh-list app-side-nav__list">
     {% for item in dsDesign %}
       <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
@@ -149,7 +124,7 @@
     </ul>
   {% endif %}
 
-  {%- if subSection == "Styles" %}
+  {%- if subSection == "Foundation styles" %}
     {{ backLink({
       "href": "/design-system",
       "text": "Design system",

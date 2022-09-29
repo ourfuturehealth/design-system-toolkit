@@ -7,9 +7,6 @@
   <url>
     <loc>https://service-manual.nhs.uk/</loc>
   </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/design-principles</loc>
-  </url>
   <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility</loc>
   </url> -->
@@ -18,12 +15,6 @@
   </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/components</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/production</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/prototyping</loc>
   </url>
   <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility-statement</loc>
@@ -205,7 +196,7 @@
   <url>
     <loc>https://service-manual.nhs.uk/design-system/components/warning-callout</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/design-system/patterns/a-to-z</loc>
   </url>
   <url>
@@ -222,7 +213,7 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/design-system/patterns/reassure-users-that-a-page-is-up-to-date</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/styles/focus-state</loc>
   </url>
