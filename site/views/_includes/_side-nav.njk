@@ -124,12 +124,6 @@
   { title: "Start page", url: "/design-system/patterns/start-page" }
 ] %}
 
-{% set whatsNew = [
-  { title: "Updates", url: "/whats-new/updates" },
-  { title: "Blog posts", url: "/whats-new/blog-posts" },
-  { title: "Show and tells", url: "/whats-new/show-and-tells" }
-] %}
-
 <nav class="app-side-nav">
 
   {%- if pageSection == "Design system" and subSection != "Styles" and subSection != "Components" and subSection != "Patterns" %}
@@ -279,14 +273,6 @@
     <h2 class="app-side-nav__heading">Health literacy <span class="ofh-u-visually-hidden">navigation</span></h2>
     <ul class="ofh-list app-side-nav__list">
     {% for item in healthLiteracy %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-
-  {%- if pageSection == "What's new" %}
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in whatsNew %}
       <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
     </ul>
