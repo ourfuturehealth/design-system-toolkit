@@ -1,14 +1,3 @@
-{% set serviceStandard = [
-  { title: "NHS service standard", url: "/standards-and-technology/service-standard" },
-  { title: "About the NHS service standard", url: "/standards-and-technology/about-the-service-standard" }
-] %}
-
-{% set technicalSpecifications = [
-  { title: "About technology", url: "/standards-and-technology/technology/about-technology" },
-  { title: "NHS login", url: "/standards-and-technology/technology/NHS-login" },
-  { title: "Personal Demographics Service (PDS)", url: "/standards-and-technology/technology/personal-demographics-service-PDS" }
-] %}
-
 {% set dsPrinciples = [
   { title: "Design principles", url: "/design-system/design-principles" }
 ] %}
@@ -135,13 +124,6 @@
   { title: "Start page", url: "/design-system/patterns/start-page" }
 ] %}
 
-{% set community = [
-  { title: "Backlog of components and patterns", url: "/community-and-contribution/backlog-of-components-and-patterns" },
-  { title: "Propose a component or pattern", url: "/community-and-contribution/propose-component-pattern" },
-  { title: "Develop a component or pattern", url: "/community-and-contribution/develop-component-pattern" },
-  { title: "Contribution criteria", url: "/community-and-contribution/contribution-criteria" }
-] %}
-
 {% set whatsNew = [
   { title: "Updates", url: "/whats-new/updates" },
   { title: "Blog posts", url: "/whats-new/blog-posts" },
@@ -149,24 +131,6 @@
 ] %}
 
 <nav class="app-side-nav">
-
-  {%- if pageSection == "Standards and technology" %}
-    <h2 class="app-side-nav__heading">NHS service standard</h2>
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in serviceStandard %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-
-    <h2 class="app-side-nav__heading">Technology</h2>
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in technicalSpecifications %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-
-  {% endif %}
-
 
   {%- if pageSection == "Design system" and subSection != "Styles" and subSection != "Components" and subSection != "Patterns" %}
     <h2 class="app-side-nav__heading">Principles</h2>
@@ -315,14 +279,6 @@
     <h2 class="app-side-nav__heading">Health literacy <span class="ofh-u-visually-hidden">navigation</span></h2>
     <ul class="ofh-list app-side-nav__list">
     {% for item in healthLiteracy %}
-      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-
-  {%- if pageSection == "Community and contribution" %}
-    <ul class="ofh-list app-side-nav__list">
-    {% for item in community %}
       <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
     </ul>
