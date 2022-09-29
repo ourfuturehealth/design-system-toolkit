@@ -93,6 +93,10 @@
     {% include "_beta-banner.njk" %}
     {% endif %}
 
+    {%- if unpublished %}
+    {% include "_is-unpublished-banner.njk" %}
+    {% endif %}
+
     {% if pageLayout != "Homepage" %}
     <div class="ofh-width-container app-width-container">
       <main class="ofh-main-wrapper app-main-wrapper" id="maincontent" role="main">
