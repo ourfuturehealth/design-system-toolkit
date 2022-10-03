@@ -1,0 +1,8 @@
+[build]
+  publish = "site/dist"
+  command = "npm run build"
+
+[[redirects]]
+  from = "/*"
+  to = "/page-not-found/index.html"
+  status = 404
