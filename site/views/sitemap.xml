@@ -7,109 +7,31 @@
   <url>
     <loc>https://service-manual.nhs.uk/</loc>
   </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/about-the-service-standard</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/1-understand-users-and-their-needs-context-health-and-care</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/2-and-3-work-towards-solving-a-whole-problem-and-provide-a-joined-up-experience</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/4-make-the-service-simple-to-use</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/5-make-sure-everyone-can-use-the-service</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/6-create-a-team-that-includes-multidisciplinary-skills-and-perspectives</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/7-use-agile-ways-of-working</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/8-iterate-and-improve-frequently</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/9-respect-and-protect-users-confidentiality-and-privacy</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/10-define-what-success-looks-like-and-be-open-about-how-your-service-is-performing</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/11-choose-the-right-tools-and-technology</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/12-make-new-source-code-open</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/13-use-and-contribute-to-open-standards-common-components-and-patterns</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/14-operate-a-reliable-service</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/15-support-a-culture-of-care</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/16-make-your-service-clinically-safe</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/service-standard-points/17-make-your-service-interoperable</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/technology/about-technology</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/technology/NHS-login</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/standards-and-technology/technology/personal-demographics-service-PDS</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/design-principles</loc>
-  </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/components</loc>
   </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/production</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/design-system/prototyping</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/community-and-contribution</loc>
-  </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility-statement</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/sitemap</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/terms-and-conditions</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/privacy</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/assets/NHS_design_principles.pdf</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/accessibility/what-all-NHS-services-need-to-do</loc>
   </url>
   <url>
@@ -138,8 +60,8 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/accessibility/testing</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content/standard-for-creating-health-content</loc>
   </url>
   <url>
@@ -165,7 +87,7 @@
   </url>
     <url>
     <loc>https://service-manual.nhs.uk/content/links</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/styles/colour</loc>
   </url>
@@ -274,7 +196,7 @@
   <url>
     <loc>https://service-manual.nhs.uk/design-system/components/warning-callout</loc>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/design-system/patterns/a-to-z</loc>
   </url>
   <url>
@@ -291,20 +213,11 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/design-system/patterns/reassure-users-that-a-page-is-up-to-date</loc>
-  </url>
+  </url> -->
   <url>
     <loc>https://service-manual.nhs.uk/design-system/styles/focus-state</loc>
   </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/community-and-contribution/contribution-criteria</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/community-and-contribution/propose-component-pattern</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/community-and-contribution/develop-component-pattern</loc>
-  </url>
-  <url>
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/content/health-literacy/</loc>
   </url>
   <url>
@@ -351,11 +264,8 @@
   </url>
   <url>
     <loc>https://service-manual.nhs.uk/content/how-to-write-good-questions-for-forms/test-your-questions</loc>
-  </url>
-  <url>
-    <loc>https://service-manual.nhs.uk/get-in-touch</loc>
-  </url>
-  <url>
+  </url> -->
+  <!-- <url>
     <loc>https://service-manual.nhs.uk/service-manual-team</loc>
-  </url>
+  </url> -->
 </urlset>
