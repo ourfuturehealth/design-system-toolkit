@@ -27,6 +27,6 @@ $mq-breakpoints: (
   tablet:  641px,
   desktop: 769px,
   large-desktop: 990px
-);
+) !default;
 
 $mq-static-breakpoint: desktop; // [2] //
