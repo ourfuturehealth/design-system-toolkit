@@ -56,7 +56,7 @@
   width: 100%;
 
   @include mq($media-type: print) {
-    color: $color_ofh-black;
+    color: $ofh-text-black-color;
   }
 
   .ofh-icon {
@@ -64,7 +64,7 @@
     top: -2px;
 
     @include mq($media-type: print) {
-      color: $color_ofh-black;
+      color: $ofh-text-black-color;
       margin-top: 0;
     }
 

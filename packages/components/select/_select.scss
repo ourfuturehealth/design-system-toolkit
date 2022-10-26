@@ -20,7 +20,7 @@
 .ofh-select option:checked,
 .ofh-select:focus::-ms-value {
   background-color: $color_ofh-brand-yellow;
-  color: $color_ofh-brand-white;
+  color: $ofh-text-white-color;
 }
 
 .ofh-select--error {

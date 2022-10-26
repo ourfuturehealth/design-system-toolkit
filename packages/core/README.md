@@ -279,7 +279,7 @@ large-desktop: 990px
 
 ```scss
 $color_ofh-brand-yellow: #005eb8;
-$color_ofh-brand-white: #ffffff;
+$color_ofh-white: #ffffff;
 $color_ofh-black: #212b32;
 $color_ofh-brand-green: #007f3b;
 $color_ofh-brand-red: #da291c;

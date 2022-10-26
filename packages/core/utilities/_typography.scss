@@ -41,10 +41,10 @@
    ========================================================================== */
 
 /**
- * Secondary text colour $ofh-secondary-text-color
+ * Secondary text colour $ofh-text-grey-color
  * eg <p class="ofh-u-secondary-text-color">Published on: 15 March 2018</p>
  */
 
 .ofh-u-secondary-text-color {
-  color: $ofh-secondary-text-color !important; /* stylelint-disable-line declaration-no-important */
+  color: $ofh-text-grey-color !important; /* stylelint-disable-line declaration-no-important */
 }

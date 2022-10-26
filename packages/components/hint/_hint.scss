@@ -6,7 +6,7 @@
 .ofh-hint {
   @include ofh-font(19);
 
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
   display: block;
   margin-bottom: ofh-spacing(3);
 }

@@ -164,7 +164,7 @@ $button-shadow-size: 4px;
   &:active {
     background: $ofh-reverse-button-active-color;
     box-shadow: none;
-    color: $color_ofh-brand-white;
+    color: $ofh-text-white-color;
     top: $button-shadow-size;
   }
 

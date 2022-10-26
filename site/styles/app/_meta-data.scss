@@ -2,7 +2,7 @@
 .app-meta-data {
   @include ofh-font($size: 16);
 
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
 
   + .app-meta-data {
     margin-top: - ofh-spacing(3);
@@ -18,6 +18,6 @@
 }
 
 .app-meta-data--strong {
-  color: $ofh-text-color;
+  color: $ofh-text-black-color;
   font-weight: 600;
 }

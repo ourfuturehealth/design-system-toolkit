@@ -49,15 +49,15 @@
   }
 
   @include mq($media-type: print) {
-    color: $ofh-print-text-color;
+    color: $ofh-text-black-color;
 
     &:visited {
-      color: $ofh-print-text-color;
+      color: $ofh-text-black-color;
     }
   }
 
   .ofh-icon__arrow-right-circle {
-    @include print-color($ofh-print-text-color);
+    @include print-color($ofh-text-black-color);
 
     fill: $color_ofh-brand-yellow;
     height: 36px;

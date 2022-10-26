@@ -27,7 +27,7 @@
 
 $card-border-width: 1px;
 $card-border-bottom-width: ofh-spacing(1);
-$card-background: $color_ofh-brand-white;
+$card-background: $color_ofh-white;
 $card-border-color: $color_ofh-grey-4;
 $card-border-hover-color: $color_ofh-grey-3;
 
@@ -151,7 +151,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 
 .ofh-card__heading--feature {
   background: $color_ofh-brand-yellow;
-  color: $color_ofh-brand-white;
+  color: $ofh-text-white-color;
   display: inline-block;
   left: - (ofh-spacing(4) + $card-border-width); /* [5] */
   margin-bottom: ofh-spacing(2);
@@ -178,7 +178,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 
 .ofh-card--care {
   @include ofh-responsive-margin(7, 'top');
-  @include care-card($color_ofh-brand-blue, $color_ofh-brand-white, 4px); /* [8] */
+  @include care-card($color_ofh-brand-blue, $color_ofh-white, 4px); /* [8] */
 }
 
 .ofh-card--care__heading-container {
@@ -192,7 +192,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 
 .ofh-card--care__heading {
   @include ofh-font(24, $weight: bold);
-  @include print-color($ofh-print-text-color);
+  @include print-color($ofh-text-black-color);
 
   margin: 0;
   padding-top: 0; /* [13] */
@@ -228,7 +228,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 }
 
 .ofh-card--care--urgent {
-  @include care-card($color_ofh-brand-red, $color_ofh-brand-white, 6px);
+  @include care-card($color_ofh-brand-red, $color_ofh-white, 6px);
 
   .ofh-card--care__arrow {
     &:before,
@@ -240,7 +240,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 }
 
 .ofh-card--care--emergency {
-  @include care-card($color_ofh-brand-red, $color_ofh-brand-white, 8px);
+  @include care-card($color_ofh-brand-red, $color_ofh-white, 8px);
 
   .ofh-card--care__arrow {
     &:before,
@@ -252,11 +252,11 @@ $card-border-hover-color: $color_ofh-grey-3;
   .ofh-card__content {
     background-color: $color_ofh-black;
     border: 0;
-    color: $color_ofh-brand-white;
+    color: $ofh-text-white-color;
     position: static; /* [15] */
 
     a {
-      color: $color_ofh-brand-white; /* [16] */
+      color: $ofh-text-white-color; /* [16] */
 
       &:focus {
         color: $color_ofh-black; /* [16] */
@@ -268,21 +268,21 @@ $card-border-hover-color: $color_ofh-grey-3;
 
   .ofh-details,
   .ofh-details__summary {
-    color: $color_ofh-brand-white;
+    color: $ofh-text-white-color;
   }
 
   .ofh-details__summary {
     &:hover {
-      color: $color_ofh-brand-white;
+      color: $ofh-text-white-color;
     }
     &:focus {
-      color: $color_ofh-black;
+      color: $ofh-text-black-color;
     }
   }
 
   .ofh-action-link__link {
     .ofh-icon__arrow-right-circle {
-      fill: $color_ofh-brand-white; /* [14] */
+      fill: $color_ofh-white; /* [14] */
     }
   }
 
