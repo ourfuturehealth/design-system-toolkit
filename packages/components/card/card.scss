@@ -27,13 +27,14 @@
 
 $card-border-width: 1px;
 $card-border-bottom-width: ofh-spacing(1);
+$card-background: $color_ofh-brand-white;
 $card-border-color: $color_ofh-grey-4;
 $card-border-hover-color: $color_ofh-grey-3;
 
 .ofh-card {
   @include ofh-responsive-margin(7, 'bottom');
 
-  background: $color_ofh-brand-white;
+  background: $card-background;
   border: $card-border-width solid $card-border-color;
   position: relative; /* [1] */
   width: 100%;
