@@ -98,7 +98,7 @@ h1 + .ofh-lede-text {
 
 // Hotfix menu item icon colour on hover/focus
 .ofh-header__navigation-link:hover .ofh-icon__chevron-right {
-  fill: $color_ofh-brand-white;
+  fill: $color_ofh-white;
 }
 
 .ofh-header__navigation-link:focus .ofh-icon__chevron-right {
@@ -154,11 +154,10 @@ h1 + .ofh-lede-text {
 // Custom style for home page hero card
 .app-card--transparent {
   background: transparent;
-  border: 2px solid $ofh-secondary-border-color;
-  color: $color_ofh-brand-white;
+  color: $ofh-text-white-color;
 
   a {
-    color: $color_ofh-brand-white;
+    color: $ofh-text-white-color;
 
     &:hover,
     &:visited {
@@ -252,5 +251,5 @@ h1 + .ofh-lede-text {
 
 // FIXME: this should probably be done / addressed directly in the Hero component.
 .ofh-hero h1 {
-  color: $ofh-text-color;
+  color: $ofh-text-black-color;
 }

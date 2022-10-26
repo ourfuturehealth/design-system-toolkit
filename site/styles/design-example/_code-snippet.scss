@@ -84,7 +84,7 @@
 }
 
 .app-tabs {
-  background: $color_ofh-brand-white;
+  background: $color_ofh-white;
   border: 1px solid $color_ofh-grey-3;
   border-bottom: 0;
   $root: &;
@@ -147,7 +147,7 @@
     }
 
     &--mobile {
-      background-color: $color_ofh-brand-white;
+      background-color: $color_ofh-white;
       border: 1px solid $color_ofh-grey-3;
       border-width: 1px 0;
       display: block;
@@ -161,14 +161,14 @@
     }
 
   &__container {
-    background-color: $color_ofh-brand-white;
+    background-color: $color_ofh-white;
     border: 1px solid $color_ofh-grey-3;
     border-bottom: 0;
     margin-top: 0;
 
     pre {
       align-self: stretch;
-      background-color: $color_ofh-brand-white;
+      background-color: $color_ofh-white;
       padding: 0;
     }
 
@@ -185,7 +185,7 @@ $color-syntax--string: #025eb8;
 $color-syntax--selector: #330072;
 
 .hljs {
-  background-color: $color_ofh-brand-white;
+  background-color: $color_ofh-white;
   color: $color-syntax--body;
   overflow-x: scroll;
   padding: 0;

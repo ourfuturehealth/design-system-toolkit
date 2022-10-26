@@ -17,11 +17,11 @@
   @include ofh-responsive-margin(7, 'top');
   @include ofh-responsive-padding(4);
 
-  background-color: $color_ofh-brand-white;
+  background-color: $color_ofh-white;
   border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
 
   @include mq($media-type: print) {
-    border-color: $ofh-print-text-color;
+    border-color: $ofh-text-black-color;
   }
 
 }

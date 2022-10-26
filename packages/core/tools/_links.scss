@@ -42,19 +42,19 @@
 //
 // White link styling, used in the footer.
 //
-// Usage: @include ofh-link-style-white;
+// Usage: @include ofh-link-style-light;
 //
 
-@mixin ofh-link-style-white {
+@mixin ofh-link-style-light {
 
-  color: $color_ofh-brand-white;
+  color: $color_ofh-white;
 
   &:visited {
-    color: $color_ofh-brand-white;
+    color: $ofh-link-light-visited-colour;
   }
 
   &:hover {
-    color: $color_ofh-brand-white;
+    color: $ofh-link-light-hover-colour;
     text-decoration: none;
   }
 
@@ -66,7 +66,7 @@
   }
 
   &:active {
-    color: $ofh-link-active-color;
+    color: $ofh-link-light-active-colour;
   }
 
 }

@@ -12,15 +12,17 @@
 
 /* stylelint-disable color-no-hex */
 
+// TODO: remove these when we do the tags revamp
 $color_ofh-warm-yellow: #ffb81C;
 $color_ofh-pink: #AE2573;
 $color_ofh-aqua-green: #00A499;
+$color_ofh-purple: #330072;
 
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
   background-color: shade($color_ofh-brand-yellow, 10%);
   border: 1px solid shade($color_ofh-brand-yellow, 10%);
-  color: $color_ofh-brand-white;
+  color: $color_ofh-white;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
@@ -35,7 +37,7 @@ $color_ofh-aqua-green: #00A499;
   ========================================================================== */
 
 .ofh-tag--white {
-  background-color: $color_ofh-brand-white;
+  background-color: $color_ofh-white;
   border-color: $color_ofh-black;
   color: $color_ofh-black;
 }
