@@ -35,7 +35,7 @@
 
 .ofh-header {
   @include clearfix();
-  background-color: $color_ofh_primary;
+  background-color: $color_ofh-brand-yellow;
 }
 
 .ofh-header__container {
@@ -70,12 +70,12 @@
     fill: $color_ofh-white;
 
     @include mq($media-type: print) {
-      fill: $color_ofh_primary;
+      fill: $color_ofh-brand-yellow;
     }
   }
 
   .ofh-logo__text {
-    fill: $color_ofh_primary;
+    fill: $color_ofh-brand-yellow;
 
     @include mq($media-type: print) {
       fill: $color_ofh-white;
@@ -298,7 +298,7 @@
   }
 
   @include mq($until: tablet) {
-    background-color: $color_ofh-green;
+    background-color: $color_ofh-brand-green;
     height: 52px; /* [2] */
     margin: 0;
     padding: ofh-spacing(2) ofh-spacing(2) 0;
@@ -413,8 +413,8 @@
 .ofh-header__menu-toggle {
   @include toggle-button();
 
-  border-color: $color_ofh-dark-blue;
-  color: $color_ofh-dark-blue;
+  border-color: $color_ofh-brand-dark-blue;
+  color: $color_ofh-brand-dark-blue;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -473,7 +473,7 @@
     @include mq($until: large-desktop) {
       border-bottom: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
       border-top: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
-      color: $color_ofh-dark-blue;
+      color: $color_ofh-brand-dark-blue;
 
       .ofh-width-container {
         margin: 0 ofh-spacing(3);
@@ -488,7 +488,7 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $color_ofh-dark-blue;
+    background-color: $color_ofh-brand-dark-blue;
     display: block;
     margin: 0 auto;
     max-width: $ofh-page-width + ofh-spacing(9); /* [12] */
@@ -527,7 +527,6 @@
   padding-left: 0;
 
   @include mq($from: large-desktop) {
-    border-top: 1px solid $ofh-secondary-border-color;
     display: flex;
     justify-content: space-between;
     padding: 0;
@@ -555,13 +554,13 @@
   @include ofh-font(16);
   border-bottom: ofh-spacing(1) solid transparent;
   border-top: ofh-spacing(1) solid transparent;
-  color: $color_ofh-dark-blue;
+  color: $color_ofh-brand-dark-blue;
   display: block;
   padding: 12px ofh-spacing(3);
   text-decoration: none;
 
   @include mq($from: large-desktop) {
-    color: $color_ofh-white;
+    color: $ofh-text-white-color;
     line-height: normal;
   }
 
@@ -573,24 +572,24 @@
   }
 
   &:visited {
-    color: $color_ofh-dark-blue;
+    color: $color_ofh-brand-dark-blue;
 
     @include mq($from: large-desktop) {
-      color: $color_ofh-white;
+      color: $ofh-text-white-color;
     }
   }
 
   &:hover {
     box-shadow: none;
-    color: $color_ofh-dark-blue;
+    color: $color_ofh-brand-dark-blue;
     text-decoration: underline;
 
     @include mq($from: large-desktop) {
-      color: $color_ofh-white;
+      color: $ofh-text-white-color;
     }
 
     .ofh-icon__chevron-right {
-      fill: $color_ofh_primary;
+      fill: $color_ofh-brand-yellow;
     }
 
   }
@@ -649,7 +648,7 @@
 }
 
 .ofh-header__transactional-service-name--link {
-  @include ofh-link-style-white;
+  @include ofh-link-style-light;
   @include ofh-font(19);
   text-decoration: none;
 
@@ -722,7 +721,7 @@
 .ofh-header__service-name {
   @include ofh-font(19);
 
-  color: $color_ofh-white;
+  color: $ofh-text-white-color;
   display: block;
   padding-left: 0;
   padding-right: 0;
@@ -768,7 +767,7 @@
     width: auto;
 
     &:hover {
-      color: $color_ofh-white;
+      color: $ofh-text-white-color;
       text-decoration: underline;
 
       .ofh-logo {
@@ -817,7 +816,7 @@
 }
 
 .ofh-organisation-name {
-  color: $color_ofh-white;
+  color: $ofh-text-white-color;
   display: block;
   font-size: 22px;
   font-weight: bold;
@@ -826,7 +825,7 @@
   margin-top: -2px;
 
   @include mq($media-type: print) {
-    color: $ofh-print-text-color;
+    color: $ofh-text-black-color;
   }
 
   @media (max-width: 450px) {
@@ -847,14 +846,14 @@
 }
 
 .ofh-organisation-descriptor {
-  color: $color_ofh-white;
+  color: $ofh-text-white-color;
   display: block;
   font-size: 15px;
   font-weight: bold;
   line-height: 21px;
 
   @include mq($media-type: print) {
-    color: $color_ofh_primary;
+    color: $color_ofh-brand-yellow;
   }
 
   @media (max-width: 450px) {
@@ -879,7 +878,7 @@
 
   .ofh-logo {
     .ofh-logo__background {
-      fill: $color_ofh_primary;
+      fill: $color_ofh-brand-yellow;
     }
 
     .ofh-logo__text {
@@ -890,18 +889,18 @@
   .ofh-header__link {
 
     &:hover {
-      color: $ofh-text-color;
+      color: $ofh-text-black-color;
       text-decoration: underline;
 
       .ofh-organisation-descriptor {
-        color: $ofh-text-color;
+        color: $ofh-text-black-color;
       }
     }
 
   }
 
   .ofh-search__submit {
-    background-color: $color_ofh_primary;
+    background-color: $color_ofh-brand-yellow;
 
     .ofh-icon__search {
       fill: $color_ofh-white;
@@ -935,22 +934,22 @@
 
   .ofh-header__search-toggle,
   .ofh-header__menu-toggle {
-    border-color: $color_ofh-dark-blue;
-    color: $color_ofh-dark-blue;
+    border-color: $color_ofh-brand-dark-blue;
+    color: $color_ofh-brand-dark-blue;
 
     .ofh-icon {
-      fill: $color_ofh_primary;
+      fill: $color_ofh-brand-yellow;
     }
 
     &.is-active,
     &:hover {
-      background-color: $color_ofh_primary;
-      border-color: $color_ofh-dark-blue;
+      background-color: $color_ofh-brand-yellow;
+      border-color: $color_ofh-brand-dark-blue;
       box-shadow: none;
-      color: $color_ofh-dark-blue;
+      color: $color_ofh-brand-dark-blue;
 
       .ofh-icon {
-        fill: $color_ofh-dark-blue;
+        fill: $color_ofh-brand-dark-blue;
       }
     }
 
@@ -974,11 +973,11 @@
   }
 
   .ofh-organisation-descriptor {
-    color: $color_ofh_primary;
+    color: $color_ofh-brand-yellow;
   }
 
   .ofh-header__transactional-service-name--link {
-    color: $color_ofh-black;
+    color: $ofh-text-black-color;
   }
 
   .ofh-header__navigation-list {
@@ -986,7 +985,7 @@
   }
 
   .ofh-header__service-name {
-    color: $ofh-text-color;
+    color: $ofh-text-black-color;
   }
 
 }
@@ -1002,10 +1001,10 @@
     }
 
     .ofh-header__navigation-link {
-      color: $color_ofh_primary;
+      color: $color_ofh-brand-yellow;
 
       &:visited {
-        color: $color_ofh_primary;
+        color: $color_ofh-brand-yellow;
       }
 
       &:focus {

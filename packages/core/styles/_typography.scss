@@ -107,7 +107,7 @@ h6,
 .ofh-caption-xl {
   @include ofh-font(32);
 
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
   display: block;
   margin-bottom: ofh-spacing(1);
 }
@@ -115,7 +115,7 @@ h6,
 .ofh-caption-l {
   @include ofh-font(24);
 
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
   display: block;
   margin-bottom: ofh-spacing(1);
 }
@@ -123,7 +123,7 @@ h6,
 .ofh-caption-m {
   @include ofh-font(19);
 
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
   display: block;
 }
 

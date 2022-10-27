@@ -71,7 +71,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 
 .ofh-radios__input + .ofh-radios__label::after {
   background: $ofh-form-border-color;
-  border: 10px solid $ofh-text-color;
+  border: 10px solid $ofh-text-black-color;
   border-radius: 50%;
   content: '';
   height: 0;
@@ -142,7 +142,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
   $ofh-divider-size: $ofh-radios-size !default;
   @include ofh-font(19);
 
-  color: $ofh-text-color;
+  color: $ofh-text-black-color;
   margin-bottom: ofh-spacing(2);
   text-align: center;
   width: $ofh-divider-size;

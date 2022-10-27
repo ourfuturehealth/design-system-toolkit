@@ -4,13 +4,13 @@
 
 .app-side-nav__heading {
   @include ofh-font(19, $line-height: 1.25, $weight: bold);
-  color: $ofh-secondary-text-color;
+  color: $ofh-text-grey-color;
   margin-bottom: 12px;
   padding-top: 4px;
 
   @include mq($until: desktop) {
     @include ofh-font(24, $line-height: 1.25, $weight: bold);
-    color: $ofh-text-color;
+    color: $ofh-text-black-color;
   }
 }
 
@@ -35,7 +35,7 @@
 }
 
 .app-side-nav__item--current {
-  border-left: 4px solid $color_ofh-blue;
+  border-left: 4px solid $color_ofh-brand-blue;
   margin-left: -12px;
   padding-left: 8px;
 
@@ -52,7 +52,7 @@
   }
 
   &:visited {
-    color: $color_ofh-blue;
+    color: $color_ofh-brand-blue;
   }
 
   &:hover {

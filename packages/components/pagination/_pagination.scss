@@ -56,7 +56,7 @@
   width: 100%;
 
   @include mq($media-type: print) {
-    color: $color_ofh-black;
+    color: $ofh-text-black-color;
   }
 
   .ofh-icon {
@@ -64,7 +64,7 @@
     top: -2px;
 
     @include mq($media-type: print) {
-      color: $color_ofh-black;
+      color: $ofh-text-black-color;
       margin-top: 0;
     }
 
@@ -124,7 +124,7 @@
 
 .ofh-pagination__title {
   @include ofh-typography-responsive(24);
-  color: $color_ofh-dark-blue;
+  color: $color_ofh-brand-dark-blue;
 
   display: block;
 

@@ -12,43 +12,43 @@
 // Default icon colours
 
 .ofh-icon__search {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 .ofh-icon__chevron-left {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 .ofh-icon__chevron-right {
-  fill: $color_ofh-dark-blue;
+  fill: $color_ofh-brand-dark-blue;
 }
 
 .ofh-icon__close {
-  fill: $color_ofh-dark-blue;;
+  fill: $color_ofh-brand-dark-blue;;
 }
 
 .ofh-icon__cross {
-  fill: $color_ofh-red;
+  fill: $color_ofh-brand-red;
 }
 
 .ofh-icon__tick {
-  stroke: $color_ofh-green;
+  stroke: $color_ofh-brand-green;
 }
 
 .ofh-icon__arrow-right {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 .ofh-icon__arrow-left {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 .ofh-icon__arrow-right-circle {
-  fill: $color_ofh-green;
+  fill: $color_ofh-brand-green;
 }
 
 .ofh-icon__chevron-down {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
@@ -60,7 +60,7 @@
 }
 
 .ofh-icon__chevron-up {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
   path {
     fill: $color_ofh-white;
   }
@@ -73,11 +73,11 @@
 }
 
 .ofh-icon__plus {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 .ofh-icon__minus {
-  fill: $color_ofh_primary;
+  fill: $color_ofh-brand-yellow;
 }
 
 // Icon size adjustments
