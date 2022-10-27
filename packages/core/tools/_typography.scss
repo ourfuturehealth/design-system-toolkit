@@ -18,10 +18,10 @@
 //
 
 @mixin ofh-text-color {
-  color: $ofh-text-color;
+  color: $ofh-text-black-color;
 
   @include govuk-media-query($media-type: print) {
-    color: $ofh-print-text-color;
+    color: $ofh-text-black-color;
   }
 }
 

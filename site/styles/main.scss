@@ -23,7 +23,7 @@
 // Breadcrumb hotfix
 // To not have a visited state for breadcrumb link
 .ofh-breadcrumb__link:visited {
-  color: $color_ofh-blue;
+  color: $color_ofh-brand-blue;
 }
 
 // Breadcrumb hotfix
@@ -154,11 +154,10 @@ h1 + .ofh-lede-text {
 // Custom style for home page hero card
 .app-card--transparent {
   background: transparent;
-  border: 2px solid $ofh-secondary-border-color;
-  color: $color_ofh-white;
+  color: $ofh-text-white-color;
 
   a {
-    color: $color_ofh-white;
+    color: $ofh-text-white-color;
 
     &:hover,
     &:visited {
@@ -252,5 +251,5 @@ h1 + .ofh-lede-text {
 
 // FIXME: this should probably be done / addressed directly in the Hero component.
 .ofh-hero h1 {
-  color: $ofh-text-color;
+  color: $ofh-text-black-color;
 }

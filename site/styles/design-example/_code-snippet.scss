@@ -33,7 +33,7 @@
       background-color: transparent;
       border: 0;
       bottom: 16px;
-      color: $color_ofh-blue;
+      color: $color_ofh-brand-blue;
       cursor: pointer;
       font-size: 16px;
       margin-top: 16px;
@@ -61,7 +61,7 @@
       }
 
       svg {
-        fill: $color_ofh-blue;
+        fill: $color_ofh-brand-blue;
         height: 16px;
         margin: 5px 5px 0 0;
         transform: rotate(-90deg);
@@ -130,7 +130,7 @@
         text-decoration: none;
 
         @include mq($from: tablet) {
-          box-shadow: 0 $button-shadow-size 0 $color_ofh-blue;
+          box-shadow: 0 $button-shadow-size 0 $color_ofh-brand-blue;
         }
 
         &:hover {

@@ -39,7 +39,7 @@ td code {
 
 .hljs {
   background-color: $color_ofh-white;
-  color: $color_ofh-black;
+  color: $ofh-text-black-color;
   display: block;
   overflow-x: scroll;
   padding: 0;
@@ -48,7 +48,7 @@ td code {
 .hljs.css .hljs-selector-class,
 .hljs.css .hljs-selector-tag,
 .hljs.css .hljs-keyword {
-  color: $color_ofh-purple;
+  color: #330072;
 }
 
 .app-tabs__container pre {

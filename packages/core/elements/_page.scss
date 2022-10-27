@@ -15,14 +15,14 @@
  */
 
 html {
-  background-color: $color_ofh-grey-4;
+  background-color: $background-bounce-color;
   font-family: $ofh-font, $ofh-font-fallback;
   overflow-y: scroll; /* [1] */
 }
 
 body {
-  background-color: $color_ofh-grey-5;
-  color: $ofh-text-color;
+  background-color: $background-color;
+  color: $ofh-text-black-color;
   font-size: $ofh-base-font-size;
   -moz-osx-font-smoothing: grayscale; /* [2] */
   -webkit-font-smoothing: antialiased; /* [2] */

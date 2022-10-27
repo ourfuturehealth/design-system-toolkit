@@ -7,19 +7,14 @@
  *
  * 1. Position relative to support the description
  *    appearing over the image.
- * 2. Adds a border between the header and hero, if required
  */
 
 .ofh-hero {
-  @include print-color($ofh-print-text-color);
+  @include print-color($ofh-text-black-color);
 
-  background-color: $color_ofh_primary;
-  color: $color_ofh-white;
+  background-color: $color_ofh-brand-yellow;
+  color: $ofh-text-white-color;
   position: relative; /* [1] */
-
-  .ofh-hero--border { /* [2] */
-    border-top: $ofh-hero-border solid $ofh-secondary-border-color;
-  }
 }
 
 .ofh-hero__wrapper {
@@ -92,8 +87,8 @@
 .ofh-hero--image-description {
 
   .ofh-hero-content {
-    background-color: $color_ofh_primary;
-    color: $color_ofh-white;
+    background-color: $color_ofh-brand-yellow;
+    color: $ofh-text-white-color;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
     position: relative;
@@ -116,7 +111,7 @@
 
       &:before,
       &:after {
-        border: solid 32px $color_ofh_primary; /* [8] */
+        border: solid 32px $color_ofh-brand-yellow; /* [8] */
         content: '';
         display: block;
         height: 0;
@@ -148,7 +143,7 @@
     }
 
     @include mq($media-type: print) {
-      color: $color_ofh-black;
+      color: $ofh-text-black-color;
       max-width: 100%;
       padding: 0;
     }

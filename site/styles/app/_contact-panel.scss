@@ -5,7 +5,7 @@
 .app-contact-panel {
   @include ofh-responsive-margin(6, 'top');
 
-  border-top: 2px solid $color_ofh-blue;
+  border-top: 2px solid $color_ofh-brand-blue;
 }
 
 .app-contact-panel__heading {

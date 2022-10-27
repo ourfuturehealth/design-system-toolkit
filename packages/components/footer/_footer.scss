@@ -10,7 +10,7 @@
   @include ofh-font(14);
 
   background-color: $color_ofh-grey-4;
-  border-top: ofh-spacing(1) solid $color_ofh_primary;
+  border-top: ofh-spacing(1) solid $color_ofh-brand-yellow;
 }
 
 .footer-text {
@@ -45,14 +45,14 @@
 }
 
 .ofh-footer__list-item-link {
-  color: $color_ofh-dark-blue;
+  color: $color_ofh-brand-dark-blue;
 
   &:visited {
-    color: $color_ofh-dark-blue;
+    color: $color_ofh-brand-dark-blue;
   }
 
   &:hover {
-    color: $ofh-text-color;
+    color: $ofh-text-black-color;
   }
 }
 

@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-related-nav {
-  border-top: 2px solid $color_ofh-blue;
+  border-top: 2px solid $color_ofh-brand-blue;
 
   @include mq($until: desktop) {
     margin-top: ofh-spacing(7);
