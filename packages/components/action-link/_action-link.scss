@@ -21,7 +21,7 @@
   @include ofh-font(22);
 
   display: inline-block; /* [1] */
-  font-weight: $ofh-font-very-bold;
+  font-weight: $ofh-font-bold;
   padding-left: 38px; /* [2] */
   position: relative; /* [3] */
   text-decoration: none; /* [4] */
@@ -41,7 +41,6 @@
         text-decoration: none;
       }
     }
-
   }
 
   @include mq($until: tablet) {

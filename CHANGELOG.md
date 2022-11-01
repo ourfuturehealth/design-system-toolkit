@@ -16,6 +16,8 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 - Added a negative top margin to **hint** components when placed after a **label** `l` or `xl` variant.
 - New colours.
 - Updated breadcrumb link and chevron colours to use a separate set of colours than regular links + updated docs.
+- Updated the action link font weight and made the arrow in the icon use the brand dark blue colour.
+  - As part of this, removed the `icon-arrow-right-circle.svg` icon as we've now deviated from it and it's not needed as a separate file.
 
 ## [v2.0.0-alpha.2] - 2022-08-10
 
