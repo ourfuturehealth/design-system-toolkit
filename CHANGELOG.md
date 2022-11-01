@@ -14,6 +14,8 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 - Updated **label** bottom margin (on all variants) to use non-responsive units and match the **legend** component more closely.
 - Added a negative top margin to **hint** components when placed after a **label** `l` or `xl` variant.
+- New colours.
+- Updated breadcrumb link and chevron colours to use a separate set of colours than regular links + updated docs.
 
 ## [v2.0.0-alpha.2] - 2022-08-10
 
