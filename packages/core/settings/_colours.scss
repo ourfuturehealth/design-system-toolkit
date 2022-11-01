@@ -122,20 +122,17 @@ $ofh-focus-text-color: $color_ofh-brand-dark-blue;
 // TODO: This was in new colours in Figma so added here, but not used anywhere yet.
 $ofh-focus-white-color: #FFFFFF;
 
-// Border
-$ofh-border-color: #D1D1D1;
-// TODO: Figma colours not added here: $ofh-input-border-color, $ofh-input-border-active-color – maybe should be part of Forms, below?
-
-//
-// Forms
-//
-
+// Contextual colours
 $ofh-error-color: #B60000;
 $ofh-success-color: #00725F;
-// TODO: defined as `$ofh-input-border-color` in Figma.
-$ofh-form-border-color: $color_ofh-grey-1;
-// TODO: Not defined in Figma.
-$ofh-form-element-background-color: $color_ofh-white;
+
+// Border
+$ofh-border-color: #D1D1D1;
+
+// Forms
+$ofh-input-border-color: $color_ofh-grey-1;
+$ofh-input-element-background-color: $color_ofh-white;
+// TODO: We'll add $ofh-input-border-active-color when we do the focus work.
 
 //
 // Buttons

@@ -57,8 +57,8 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 }
 
 .ofh-radios__input + .ofh-radios__label::before {
-  background: $ofh-form-element-background-color;
-  border: $ofh-border-width-form-element solid $ofh-form-border-color;
+  background: $ofh-input-element-background-color;
+  border: $ofh-border-width-form-element solid $ofh-input-border-color;
   border-radius: 50%;
   box-sizing: border-box;
   content: '';
@@ -70,7 +70,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 }
 
 .ofh-radios__input + .ofh-radios__label::after {
-  background: $ofh-form-border-color;
+  background: $ofh-input-border-color;
   border: 10px solid $ofh-text-black-color;
   border-radius: 50%;
   content: '';
@@ -160,7 +160,7 @@ $conditional-padding-left: $conditional-border-padding + $ofh-radios-label-paddi
 
 .ofh-radios__conditional {
   @include ofh-responsive-margin(4, 'bottom');
-  border-left: $conditional-border-width solid $ofh-form-border-color;
+  border-left: $conditional-border-width solid $ofh-input-border-color;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;
 
