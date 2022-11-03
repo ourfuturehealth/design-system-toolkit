@@ -5,7 +5,7 @@
 .ofh-select {
   @include ofh-font(19);
 
-  border: $ofh-border-width-form-element solid $ofh-form-border-color;
+  border: $ofh-border-width-form-element solid $ofh-input-border-color;
   box-sizing: border-box;
   height: 40px;
   max-width: 100%;

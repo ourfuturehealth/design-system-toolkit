@@ -6,7 +6,7 @@
   @include ofh-font(19);
 
   -webkit-appearance: none;
-  border: $ofh-border-width-form-element solid $ofh-form-border-color;
+  border: $ofh-border-width-form-element solid $ofh-input-border-color;
   border-radius: 0;
   box-sizing: border-box;
   display: block;

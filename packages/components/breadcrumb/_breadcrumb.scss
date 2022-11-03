@@ -17,12 +17,11 @@
 .ofh-breadcrumb {
   @include print-hide();
 
-  background-color: $color_ofh-white;
   padding-bottom: 12px; /* [1] */
   padding-top: 12px; /* [1] */
 
   .ofh-icon__chevron-right {
-    fill: $color_ofh-grey-3;
+    fill: $color_ofh-grey-1;
     height: 18px;
     position: relative;
     top: 5px;
@@ -62,7 +61,7 @@
   margin-bottom: 0;
 
   &:not(:last-child):after {
-    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-right' xmlns='http://www.w3.org/2000/svg' fill='%23aeb7bd' height='18' width='18' viewBox='0 0 24 24' aria-hidden='true'%3E%3Cpath d='M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z'%3E%3C/path%3E%3C/svg%3E") right 0 top 4px no-repeat;
+    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-right' xmlns='http://www.w3.org/2000/svg' fill='%23494949' height='18' width='18' viewBox='0 0 24 24' aria-hidden='true'%3E%3Cpath d='M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z'%3E%3C/path%3E%3C/svg%3E") right 0 top 4px no-repeat;
     content: '';
     display: inline-block;
     height: 18px;
@@ -73,19 +72,24 @@
 }
 
 .ofh-breadcrumb__link {
+  color: $ofh-breadcrumb-link-color;
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-breadcrumb-link-visited-color;
 
     &:hover {
-      color: $ofh-link-hover-color;
+      color: $ofh-breadcrumb-link-hover-color;
     }
   }
 
   &:focus {
     &:hover {
-      color: $ofh-focus-text-color;
+      color: $ofh-breadcrumb-link-hover-color;
     }
+  }
+
+  &:active {
+    color: $ofh-breadcrumb-link-active-color;
   }
 }
 
@@ -100,7 +104,7 @@
   }
 
   &:before {
-    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-left' xmlns='http://www.w3.org/2000/svg' fill='%23005eb8' height='24' width='24' viewBox='8 0 24 24' aria-hidden='true'%3E%3Cpath d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-left' xmlns='http://www.w3.org/2000/svg' fill='%23494949' height='24' width='24' viewBox='8 0 24 24' aria-hidden='true'%3E%3Cpath d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
     content: '';
     display: inline-block;
     height: 18px;
@@ -112,11 +116,23 @@
 }
 
 .ofh-breadcrumb__backlink {
+  color: $ofh-breadcrumb-link-color;
+
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-breadcrumb-link-visited-color;
 
     &:hover {
-      color: $ofh-link-hover-color;
+      color: $ofh-breadcrumb-link-hover-color;
     }
+  }
+
+  &:focus {
+    &:hover {
+      color: $ofh-breadcrumb-link-hover-color;
+    }
+  }
+
+  &:active {
+    color: $ofh-breadcrumb-link-active-color;
   }
 }

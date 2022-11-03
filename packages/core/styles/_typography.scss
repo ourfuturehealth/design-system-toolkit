@@ -138,7 +138,6 @@ h6,
   @include ofh-typography-responsive(24);
 
   display: block;
-  font-family: $serif-font;
   margin-top: 0;
 
   @include ofh-responsive-margin(5, 'bottom');
@@ -194,6 +193,9 @@ address {
   @include ofh-font(24);
   @include ofh-responsive-margin(7, 'bottom');
   /* [1] */
+
+  font-family: $serif-font;
+
   p,
   ul {
     @include ofh-font(24);

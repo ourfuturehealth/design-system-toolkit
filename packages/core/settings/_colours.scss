@@ -103,10 +103,16 @@ $ofh-link-color: #0053B3;
 $ofh-link-hover-color: #002D61;
 $ofh-link-visited-color: #330072;
 $ofh-link-active-color: #001F42;
-$ofh-link-light-colour: #FFFFFF;
-$ofh-link-light-hover-colour: #F4F4F4;
-$ofh-link-light-visited-colour: #D8B7DE;
-$ofh-link-light-active-colour: #001F42;
+$ofh-link-light-color: #FFFFFF;
+$ofh-link-light-hover-color: #F4F4F4;
+$ofh-link-light-visited-color: #D8B7DE;
+$ofh-link-light-active-color: #001F42;
+
+// Breadcrumb links have their own colours
+$ofh-breadcrumb-link-color: $color_ofh-brand-dark-blue;
+$ofh-breadcrumb-link-hover-color: #002D61;
+$ofh-breadcrumb-link-visited-color: #330072;
+$ofh-breadcrumb-link-active-color: #001F42;
 
 // Focus
 // TODO: Will be revised in upcoming focus outline work.
@@ -114,22 +120,19 @@ $ofh-focus-color: #FFEB3B;
 // TODO: Not defined in Figma.
 $ofh-focus-text-color: $color_ofh-brand-dark-blue;
 // TODO: This was in new colours in Figma so added here, but not used anywhere yet.
-$ofh-focus-white-colour: #FFFFFF;
+$ofh-focus-white-color: #FFFFFF;
+
+// Contextual colours
+$ofh-error-color: #B60000;
+$ofh-success-color: #00725F;
 
 // Border
 $ofh-border-color: #D1D1D1;
-// TODO: Figma colours not added here: $ofh-input-border-colour, $ofh-input-border-active-colour – maybe should be part of Forms, below?
 
-//
 // Forms
-//
-
-$ofh-error-color: #B60000;
-$ofh-success-colour: #00725F;
-// TODO: defined as `$ofh-input-border-colour` in Figma.
-$ofh-form-border-color: $color_ofh-grey-1;
-// TODO: Not defined in Figma.
-$ofh-form-element-background-color: $color_ofh-white;
+$ofh-input-border-color: $color_ofh-grey-1;
+$ofh-input-element-background-color: $color_ofh-white;
+// TODO: We'll add $ofh-input-border-active-color when we do the focus work.
 
 //
 // Buttons
