@@ -20,6 +20,7 @@
 .ofh-action-link__link {
   @include ofh-font(22);
 
+  color: $color_ofh-brand-dark-blue;
   display: inline-block; /* [1] */
   font-weight: $ofh-font-bold;
   padding-left: 38px; /* [2] */
