@@ -50,11 +50,11 @@
   color: $color_ofh-white;
 
   &:visited {
-    color: $ofh-link-light-visited-colour;
+    color: $ofh-link-light-visited-color;
   }
 
   &:hover {
-    color: $ofh-link-light-hover-colour;
+    color: $ofh-link-light-hover-color;
     text-decoration: none;
   }
 
@@ -66,7 +66,7 @@
   }
 
   &:active {
-    color: $ofh-link-light-active-colour;
+    color: $ofh-link-light-active-color;
   }
 
 }
