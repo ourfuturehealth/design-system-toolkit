@@ -19,6 +19,7 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 - Updated the action link font weight and made the arrow in the icon use the brand dark blue colour.
   - As part of this, removed the `icon-arrow-right-circle.svg` icon as we've now deviated from it and it's not needed as a separate file.
 - Removed the serif font from `ofh-body-l` class and moved it into the existing `ofh-lede-text` class.
+- Removed the explicit line height for the `.ofh-body-l` class, thus falling back to the default responsive typography styling.
 
 ## [v2.0.0-alpha.2] - 2022-08-10
 
