@@ -134,7 +134,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
  */
 
 $conditional-border-width: $ofh-border-width-mobile;
-$conditional-border-padding: ($ofh-checkboxes-size / 2) - ($conditional-border-width / 2); /* 1 */
+$conditional-border-padding: ($ofh-checkboxes-size * .5) - ($conditional-border-width * .5); /* 1 */
 $conditional-margin-left: $conditional-border-padding; /* 2 */
 $conditional-padding-left: $conditional-border-padding + $ofh-checkboxes-label-padding-left-right; /* 3 */
 
