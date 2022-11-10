@@ -33,7 +33,7 @@ $ofh-icon-size: 34px !default;
 
 $ofh-page-width: 960px;
 $ofh-gutter: 32px;
-$ofh-gutter-half: $ofh-gutter / 2;
+$ofh-gutter-half: $ofh-gutter * .5;
 
 //
 // Border sizes
