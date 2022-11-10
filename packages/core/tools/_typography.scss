@@ -2,6 +2,8 @@
 // TOOLS / #TYPOGRAPHY
 // ==========================================================================
 
+@use 'sass:math';
+
 //
 // These mixins allow us to quickly and consistently generate common text
 // patterns such as colours and font-weight
@@ -68,7 +70,7 @@
     // This is expanded to 10 in dart-sass and results in significant line height differences
     // Therefore by rounding it here we achieve consistent rendering across node-sass and dart-sass
     $ten-to-the-power-five: 100000;
-    $line-height: round(($line-height / $font-size) * $ten-to-the-power-five) / $ten-to-the-power-five;
+    $line-height: math.div(round(math.div($line-height, $font-size) * $ten-to-the-power-five), $ten-to-the-power-five);
   }
 
   @return $line-height;

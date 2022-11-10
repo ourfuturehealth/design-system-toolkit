@@ -2,6 +2,8 @@
 // TOOLS / #FUNCTIONS
 // ==========================================================================
 
+@use 'sass:math';
+
 // Convert pixels to em
 // ==========================================================================
 
@@ -20,7 +22,7 @@
   @if (unitless($context-font-size)) {
     $context-font-size: $context-font-size * 1px;
   }
-  @return $value / $context-font-size * 1em;
+  @return math.div($value, $context-font-size) * 1em;
 }
 
 // Convert pixels to rem
@@ -39,5 +41,5 @@
     $value: $value * 1px;
   }
 
-  @return $value / $ofh-base-font-size * 1rem;
+  @return math.div($value, $ofh-base-font-size) * 1rem;
 }
