@@ -29,10 +29,6 @@ bower_components
 .DS_Store
 Thumbs.db
 
-# BackstopJS
-tests/backstop/bitmaps_test/*
-tests/backstop/html_report/*
-
 # Compiled files
 dist/
 
