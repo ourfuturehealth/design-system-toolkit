@@ -1,5 +1,8 @@
 # Git style guide
 
+> **Warning**<br>
+> This documentation is out-of-date and needs reviewing and updating.
+
 There are many articles about best practices for git workflow. These are our preferred practices for:
 
 - [Commits and messages](#commits-and-messages)

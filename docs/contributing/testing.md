@@ -1,5 +1,7 @@
-
 # Testing
+
+> **Warning**<br>
+> This documentation is out-of-date and needs reviewing and updating.
 
 ## Screen resolution testing
 
