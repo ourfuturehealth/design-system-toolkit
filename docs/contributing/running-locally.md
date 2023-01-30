@@ -1,5 +1,8 @@
 # Running the application locally
 
+> **Warning**<br>
+> This documentation is out-of-date and needs reviewing and updating.
+
 ## Requirements
 
 To run Our Future Health design system toolkit locally you'll need to:
