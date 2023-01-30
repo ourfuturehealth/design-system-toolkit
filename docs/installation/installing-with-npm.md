@@ -18,11 +18,15 @@ To use Our Future Health design system toolkit in your projects with npm you mus
 
 ## Installation
 
-Install the Our Future Health design system toolkit package into your project:
+At the moment, we don't publish an npm package for the design system toolkit. Instead, you can pull in the dependency in your `package.json` via Git, by adding the following in your `"dependencies"` (or `"devDependencies"`):
 
 ```
-npm install ofh-design-system-toolkit --save
+"ofh-design-system-toolkit": "https://github.com/ourfuturehealth/design-system-toolkit#main"
 ```
+
+Then run `npm install`.
+
+Whilst in alpha, you can directly depend on the `main` branch, but make sure you pin to a specific Git commmit hash in your lockfile (running `npm install` should do this for you).
 
 ## Configuration
 
@@ -34,22 +38,22 @@ You will need to import a couple of things into your project before you can star
 
 ## Importing styles
 
-To build the stylesheet you will need a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS. We recommend using [gulp](https://gulpjs.com/) and [gulp-sass](https://www.npmjs.com/package/gulp-sass) however you can use any tools that you are familiar with.
+To build the stylesheet you will need a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS. We recommend using the [sass](https://www.npmjs.com/package/sass) npm package, however you can use any tools that you are familiar with.
 
 You need to import the Our Future Health design system toolkit styles into the main Sass file in your project. You should place the below code before your own Sass rules (or Sass imports).
 
 ```SCSS
-@import 'node_modules/ofh-design-system-toolkit/packages/ofh';
+@import 'PATH/TO/node_modules/ofh-design-system-toolkit/packages/ofh';
 ```
 
 Alternatively you can import each of the individual components separately, meaning you can import just the components that you are using.
 
 ```SCSS
 // Core (required)
-@import 'node_modules/ofh-design-system-toolkit/packages/core/all';
+@import 'PATH/TO/node_modules/ofh-design-system-toolkit/packages/core/all';
 
 // Individual component (optional)
-@import 'node_modules/ofh-design-system-toolkit/packages/components/action-link/action-link';
+@import 'PATH/TO/node_modules/ofh-design-system-toolkit/packages/components/action-link/action-link';
 ```
 
 ## Importing JavaScript
@@ -97,7 +101,7 @@ import Radios from './components/radios/radios';
 import SkipLink from './components/skip-link/skip-link';
 
 // Polyfills
-import '../node_modules/ofh-design-system-toolkit/packages/polyfills';
+import 'PATH/TO//node_modules/ofh-design-system-toolkit/packages/polyfills';
 
 // Initialize components
 document.addEventListener('DOMContentLoaded', () => {
@@ -126,4 +130,4 @@ If you want to import assets such as the Our Future Health logo, favicons and SV
 
 ## Thanks to the Government Digital Service (GDS)
 
-This documentation has been taken from [Installing GOV.UK Frontend with node package manager (NPM)](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md) with a few minor adaptations.
+This documentation has been taken from [Installing GOV.UK Frontend with node package manager (NPM)](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md) with a few major adaptations.
