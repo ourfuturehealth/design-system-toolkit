@@ -1,5 +1,8 @@
 # Coding standards
 
+> **Warning**<br>
+> This documentation is out-of-date and needs reviewing and updating.
+
 - [HTML](#html)
 - [SCSS](#scss)
 - [JavaScript](#javascript)

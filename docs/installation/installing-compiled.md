@@ -50,4 +50,4 @@ If you require any of this functionality, you should [install using npm](/docs/i
 
   4. Create pages using Our Future Health design system toolkit
 
-      You can now create pages using the [Design system on the NHS digital service manual](https://service-manual.nhs.uk/design-system).
+      See <https://designsystem.ourfuturehealth.org.uk/> for docs.

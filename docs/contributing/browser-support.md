@@ -1,5 +1,8 @@
 # Browser support
 
+> **Warning**<br>
+> This documentation is out-of-date and needs reviewing and updating.
+
 Our Future Health design system toolkit browser support is shown in the table below.
 
 | Operating system | Browser                              | Support   |
