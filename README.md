@@ -9,7 +9,7 @@ Our Future Health design system toolkit contains the code you need to start buil
 
 ## Guidance
 
-Visit the [NHS digital service manual](https://service-manual.nhs.uk/) for examples of components and guidance for when to use them.
+Visit the [design system docs website](https://designsystem.ourfuturehealth.org.uk/) for examples of components and guidance for when to use them.
 
 ## How to install Our Future Health design system toolkit
 
@@ -47,18 +47,22 @@ Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future 
 
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ourfuturehealth/design-system-toolkit)
 
-## Design system website
+## Design system docs website
 
 > **Note** <br>
-> This website is based on the [NHS.UK digital service manual](https://github.com/nhsuk/nhsuk-service-manual/),
+> The docs website is based on the [NHS.UK digital service manual](https://github.com/nhsuk/nhsuk-service-manual/),
 > which we have incorporated into our design system toolkit as a statically generated site.
 
-The content of the design system website is under review and will be iterated
+You can find the code for the docs website under the `site/` folder. More details on this below.
+
+This is deployed using Netlify to <https://designsystem.ourfuturehealth.org.uk/>, on every merge to the `main` branch.
+
+The content of this docs website is under review and will be iterated
 on continuously whilst the design system toolkit is still in alpha.
 
 ### Development
 
-To build the toolkit and site in watch mode, and also serve the site
+To build the toolkit and site in watch mode, and also serve the docs website
 (with hot reload), run the command:
 
 ```bash
@@ -67,7 +71,7 @@ npm run dev
 
 ### Code structure
 
-The design system website codebase lives in the [`site/`](site/) directory.
+The design system docs website codebase lives in the [`site/`](site/) directory.
 The site uses [Nunjucks](https://mozilla.github.io/nunjucks/) templates and
 is built using the [Eleventy](https://www.11ty.dev/) static site generator.
 
