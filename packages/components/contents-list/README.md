@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the contents list component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/contents-list).
+Find out more about the contents list component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/contents-list).
 
 ## Quick start example
 
