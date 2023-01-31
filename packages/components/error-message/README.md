@@ -1,7 +1,7 @@
 # Error message
 
 ## Guidance
-Find out more about the error message component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/error-message).
+Find out more about the error message component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/error-message).
 
 ## Quick start example
 

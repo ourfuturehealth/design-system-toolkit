@@ -1,7 +1,7 @@
 # Do and don't list
 
 ## Guidance
-Find out more about the do and don't list component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/do-and-dont-lists).
+Find out more about the do and don't list component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/do-and-dont-lists).
 
 ## Quick start example
 

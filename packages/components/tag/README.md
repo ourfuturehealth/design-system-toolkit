@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the tag component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/tag).
+Find out more about the tag component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/tag).
 
 ## Quick start example
 
@@ -30,7 +30,7 @@ Find out more about the tag component and when to use it in the [NHS digital ser
 
 ### Additional tag colours
 
-See the full list of tag colours on the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/tag).
+See the full list of tag colours on the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/tag).
 
 #### HTML markup
 
