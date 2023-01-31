@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the card component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/card).
+Find out more about the card component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/card).
 
 ## Quick start examples
 

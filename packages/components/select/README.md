@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the select component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/select).
+Find out more about the select component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/select).
 
 ## Quick start examples
 

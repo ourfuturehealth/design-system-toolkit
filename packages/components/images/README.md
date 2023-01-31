@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the images component and when to use it in the [NHS digital service manual](https://service-manual.nhs.uk/design-system/components/images).
+Find out more about the images component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/images).
 
 ## Quick start example
 
