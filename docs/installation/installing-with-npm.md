@@ -92,16 +92,16 @@ If you're using a transpiler or bundler such as [Babel](https://babeljs.io/) or 
 
 ```javascript
 // Components
-import Card from './components/card/card';
-import Checkboxes from './components/checkboxes/checkboxes';
-import Details from './components/details/details';
-import ErrorSummary from './components/error-summary/error-summary';
-import Header from './components/header/header';
-import Radios from './components/radios/radios';
-import SkipLink from './components/skip-link/skip-link';
+import Card from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/card/card';
+import Checkboxes from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/checkboxes/checkboxes';
+import Details from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/details/details';
+import ErrorSummary from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/error-summary/error-summary';
+import Header from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/header/header';
+import Radios from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/radios/radios';
+import SkipLink from 'PATH/TO/node_modules/ofh-design-system-toolkit/components/skip-link/skip-link';
 
 // Polyfills
-import 'PATH/TO//node_modules/ofh-design-system-toolkit/packages/polyfills';
+import 'PATH/TO/node_modules/ofh-design-system-toolkit/packages/polyfills';
 
 // Initialize components
 document.addEventListener('DOMContentLoaded', () => {
