@@ -1,6 +1,11 @@
 const highlightjs = require('highlight.js');
 
 module.exports = function configuration(eleventyConfig) {
+  // Watch the site CSS and JS builds so they trigger a hot reload when they change.
+  eleventyConfig.setUseGitIgnore(false);
+  eleventyConfig.addWatchTarget('site/dist/css/');
+  eleventyConfig.addWatchTarget('site/dist/js/');
+
   // Documentation assets e.g. images, PDFs.
   eleventyConfig.addPassthroughCopy({ 'site/assets': 'assets' });
 
