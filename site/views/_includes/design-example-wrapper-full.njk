@@ -24,7 +24,7 @@
   <body class="app-example-wrapper--full-page">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    {% from 'components/header/macro.njk' import header %}
+    {% from 'packages/components/header/macro.njk' import header %}
 
     {{ header({
         "showNav": "false",
@@ -34,7 +34,7 @@
 
     {% include templatePath %}
 
-    {% from 'components/footer/macro.njk' import footer %}
+    {% from 'packages/components/footer/macro.njk' import footer %}
 
     {{ footer({
     })}}
