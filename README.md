@@ -81,10 +81,7 @@ There are a few things to highlight about the structure of the site:
 website are configured as npm run scripts in [`package.json`](./package.json).
 These run scripts are all prefixed with `site:`. Run the command `npm run`
 in your terminal to see all available npm run scripts.
-- **Use of Nunjucks macros from toolkit components** - `site/views/_includes/components/`
-is a symlink to the [`packages/components/`](./packages/components/) directory.
-This allows the website to directly import and use Nunjuck macros from
-toolkit components.
+- **Use of Nunjucks macros from toolkit components** - the component Nunjuck macros are imported into the site templates directly from the [`packages/components/`](./packages/components/) directory (which is the source of truth for toolkit components). This is possible because Eleventy adds the root directory to the lookup path for Nunjucks.
 - **Use of toolkit assets and artifacts** - The Eleventy configuration
 ([`site.eleventy.config.js`](site.eleventy.config.js)) handles the copying of
 the `dist/` and `packages/assets/` directories into the generated website.

@@ -3,8 +3,16 @@ const path = require('node:path');
 const beautify = require('js-beautify').html;
 const nunjucks = require('nunjucks');
 
-const viewsPath = path.join(__dirname, '../_includes/');
-const env = new nunjucks.Environment(new nunjucks.FileSystemLoader(viewsPath));
+const includesPath = path.join(__dirname, '../_includes/');
+const rootPath = path.join(__dirname, '../../../');
+const env = new nunjucks.Environment(
+  new nunjucks.FileSystemLoader(
+    [
+      includesPath,
+      rootPath,
+    ]
+  )
+);
 
 // This helper function takes a path of a file and
 // returns the contents as string
