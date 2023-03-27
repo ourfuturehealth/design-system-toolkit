@@ -13,6 +13,9 @@ Visit the [design system docs website](https://designsystem.ourfuturehealth.org.
 
 ## How to install Our Future Health design system toolkit
 
+**Note**
+If you're looking to migrate an existing repo from OFH's V1 design system, see [this guide](https://ourfuturehealth.atlassian.net/wiki/spaces/DS/pages/277250064/Implementing+Design+System+V2).
+
 ### 1. Install with package managers
 
 We recommend that you [install Our Future Health design system toolkit using node package manager (npm)](/docs/installation/installing-with-npm.md).
