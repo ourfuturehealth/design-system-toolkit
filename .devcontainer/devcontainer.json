@@ -1,0 +1,33 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "hostRequirements": {
+    "cpus": 2
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "16"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ronnidc.nunjucks"]
+    },
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "site/views/index.njk"
+      ]
+    }
+  },
+  "updateContentCommand": "npm install",
+  "postAttachCommand": {
+    "server": "npm run dev"
+  },
+  "portsAttributes": {
+    "8080": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    }
+  },
+  "forwardPorts": [8080]
+}
