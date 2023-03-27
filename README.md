@@ -46,10 +46,6 @@ Visit our [support for browsers and assistive technology](/docs/contributing/bro
 
 Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future Health design system toolkit.
 
-## Development environment
-
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/ourfuturehealth/design-system-toolkit)
-
 ## Design system docs website
 
 > **Note** <br>
