@@ -1,6 +1,6 @@
 {
   "name": "ofh-design-system-toolkit",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0-alpha.3",
   "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "scripts": {
     "prepare": "gulp bundle",
