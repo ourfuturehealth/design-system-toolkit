@@ -150,9 +150,9 @@ $ofh-button-active-color: #BF8C02;
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-shadow-color: $color_ofh-brand-dark-blue;
 
-$ofh-secondary-button-color: #0053B3;
-$ofh-secondary-button-hover-color: #002D61;
-$ofh-secondary-button-active-color: #001F42;
+$ofh-secondary-button-color: #425563;
+$ofh-secondary-button-hover-color: shade($ofh-secondary-button-color, 20%);
+$ofh-secondary-button-active-color: shade($ofh-secondary-button-color, 50%);
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-secondary-button-shadow-color: shade($ofh-secondary-button-color, 50%);
 
