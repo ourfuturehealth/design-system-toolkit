@@ -2,8 +2,10 @@
 {% set pageDescription = "Our fonts and typographic styles, and how to apply them." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "January 2022" %}
+{% set dateUpdated = "April 2023" %}
 {% set backlog_issue_id = "1" %}
+{% set hideContact = "true" %}
+
 
 {% extends "app-layout.njk" %}
 
@@ -41,6 +43,7 @@
     <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/design-system/styles/typography">Typography</a>
       <ul class="app-side-nav__list app-side-nav__list--nested">
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#font">Font</a></li>
+        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#typescale">Typescale</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#headings">Headings</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#paragraphs">Paragraphs</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#font-override-classes">Font override classes</a></li>
@@ -60,17 +63,20 @@
 
   <h2 id="font">Font</h2>
 
-  <h3>Frutiger</h3>
-  <p>Frutiger has been the NHS brand font since 1999. We use the web font for consistency between online and offline materials.</p>
-  <p>NHS Digital has a licence for the Frutiger webfont that any services on the nhs.uk domain can use. The web font is hosted on nhs.uk and  referenced in the NHS.UK frontend.</p>
-  <p>If you have a service that is on another domain, you will have to buy your own Frutiger webfont licence.</p>
-  <p>If you’re not sure whether you should be using Frutiger, you can email the service manual team at <a href="mailto:service-manual@nhs.net">service-manual@nhs.net</a>.</p>
+  <h3>Source Sans Pro</h3>
+  <p>Source Sans Pro is our primary typeface and should be used for all text content across our digital products and services.</p>
 
   <h3>Fallback font</h3>
-  <p>Default to Arial when Frutiger isn't available.</p>
-  <p class="rich-text"><code>font-family: “Frutiger W01”, Arial, sans-serif;</code></p>
+  <p>You can default to Arial when Source Sans Pro is not available.</p>
+  <p class="rich-text"><code>font-family: “Source Sans Pro”, Arial, sans-serif;</code></p>
+
+  <h2 id="typescale">Typescale</h2>
+  <p>The default font size depends on the device the user is using. The typescale is larger on devices that are above 641 pixels screen width – large devices such as desktop and most tablets. It is smaller on devices that are below 641 pixels screen width – small devices such as phones.</p>
 
   <h2 id="headings">Headings</h2>
+  <p>Write all headings in sentence case.</p>
+  <p>Style headings consistently to create a clear content structure throughout your service and a clear content hierarchy on a page.</p>
+  <p>Heading levels have meaning, especially for screen reader users and search engines. Using correct heading structure improves SEO and helps people using assistive technology to navigate through a page.</p>
 
   {{ designExample({
     group: "styles",
@@ -82,7 +88,8 @@
   <h2 id="paragraphs">Paragraphs</h2>
 
   <h3 id="body">Body</h3>
-  <p>The default paragraph font size is 19px on large screens and 16px on small screens.</p>
+  <p>The default paragraph font size is 19px on desktop and most tablets and 16px on phones.</p>
+  <p>You can also add classes to create a lead paragraph or smaller body copy to convey content hierarchy in your page.</p>
 
   {{ designExample({
     group: "styles",
@@ -91,10 +98,9 @@
     htmlOnly: true
   }) }}
 
-  <p>You can also add classes to create a lead paragraph or smaller body copy to convey hierarchy in your page.</p>
 
   <h3 id="lead-paragraph">Lead paragraph</h3>
-  <p>A lead paragraph is an introductory paragraph that you can use at the top of a page to summarise the content. Lead paragraphs use 24px type on desktop and should only be used once per page if needed.</p>
+  <p>A lead paragraph is an introductory paragraph that you can use at the top of a page to summarise the content. Lead paragraphs use 24px type on desktop and tablet and 20px on phones. You should only use them once per page.</p>
 
   {{ designExample({
     group: "styles",
@@ -104,8 +110,8 @@
   }) }}
 
   <h3 id="body-small">Body small</h3>
-  <p class="rich-text">You can use the <code>ofh-body-s</code> class sparingly to make your paragraph font size smaller: 16px on larger screens and 14px on smaller screens.</p>
-  <p>The majority of your body copy should use the standard 19px paragraph size.</p>
+  <p class="rich-text">You can use the <code>ofh-body-s</code> class sparingly to make your paragraph font size smaller.</p>
+  <p>Small body text uses 16px on desktop and tablet and 14px on phones.</p>
 
   {{ designExample({
     group: "styles",
@@ -115,10 +121,10 @@
   }) }}
 
   <h2 id="font-override-classes">Font override classes</h2>
-  <p>You might need to set the font size or font weight of an element outside of the predefined heading and paragraph classes. For this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
+  <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>The full NHS.UK typography scale goes from 14px up to 64px on large screens. You can add these font size override classes to any other typographic class or element and they will change the font size.</p>
+  <p>Our full typography scale goes from 14px to 64px on desktop and tablet. You can add these font size override classes to any other typographic class or element, and they will change the font size.</p>
 
   {{ designExample({
     group: "styles",
@@ -128,7 +134,8 @@
   }) }}
 
   <h3 id="font-weight">Font weight</h3>
-  <p>As with the font size, you can add a font weight override class to any other typographic class or element to change the font weight to regular or bold weight.</p>
+  <p>You can add a font weight override class to any other typographic class or element to change the font weight to regular or bold weight.</p>
+  <p>Use bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse of bold will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
 
   {{ designExample({
     group: "styles",
@@ -138,7 +145,8 @@
   }) }}
 
   <h2 id="links">Links</h2>
-  <p>Links are blue and underlined by default with a <a href="/design-system/styles/focus-state">styled focus state</a> for people who use keyboards or other devices to navigate through a page.</p>
+  <p>Use links within text to help users navigate to specific content or to new pages.</p>
+  <p>Links in body text are blue and underlined by default. On hover, the underline is removed.</p>
   <p>If your link is at the end of a sentence or paragraph, make sure that the linked text does not include the full stop.</p>
 
   {{ designExample({
@@ -148,7 +156,7 @@
     htmlOnly: true
   }) }}
 
-  <p>If it's not helpful to distinguish between visited and unvisited states, for example when linking to pages with frequently-changing content, such as the dashboard for an admin interface, use the <code>ofh-link--no-visited-state</code> modifier class.</p>
+  <p>Use the <code>ofh-link--no-visited-state</code> modifier class where it is not helpful to distinguish between visited and unvisited states. For example, you can use it when linking to pages with frequently changing content, such as the dashboard for an admin interface.</p>
 
   {{ designExample({
     group: "styles",
@@ -168,7 +176,7 @@
   }) }}
 
   <h3 id="bulleted-lists">Bulleted lists</h3>
-  <p>Introduce bulleted lists with a lead-in line ending in a colon. Start each item with a lowercase letter, and do not use a full stop at the end.</p>
+  <p>Introduce bulleted lists with a lead-in line ending in a colon. Start each item with a lowercase letter. Do not use commas or semicolons at the end of each line and do not use a full stop at the end.</p>
 
   {{ designExample({
     group: "styles",
@@ -200,13 +208,13 @@
   }) }}
 
   <h2 id="text-alignment">Text alignment</h2>
-  <p>Left-align text in English. Text is left-aligned by default.</p>
-  <p>The straight edge of left-aligned text helps people who use screen magnifiers. It saves them having to search around the screen for the next line or item. People who use magnifiers may miss things that are not left-aligned.</p>
-  <p>Some people with cognitive differences have difficulty with blocks of text that are justified (aligned to left and right margins).</p>
-  <p>Only centre-align or fully justify text if you can show a clear clinical or user need.</p>
+  <p>Text is left-aligned by default.</p>
+  <p>The straight edge of left-aligned text helps people who magnify their screen. It saves them having to search around the screen for the next line or item. They may miss things that are not left-aligned.</p>
+  <p>Some people with cognitive differences have difficulty with blocks of text that are ‘justified’ – so that they are aligned to both the left and right margins. Justifying text creates wider spaces between words, which can make the text harder to read.</p>
+  <p>Only centre-align or fully justify text if you can show a clear user need.</p>
 
   <h3 id="text-alignment-override-classes">Text alignment override classes</h3>
-  <p>For translations into languages that run right to left (like Arabic), right-align instead. You need to use the text alignment override class in your HTML to right-align text.</p>
+  <p>If you need to align text to the right, you can use the text alignment override class <code>ofh-u-text-align-right</code>.</p>
   <p>Here is an example of Arabic.</p>
 
   {{ designExample({
@@ -216,7 +224,5 @@
     htmlOnly: true
   }) }}
 
-  <h2 id="research">Research</h2>
-  <p>We've tested our typography with lots of users including, for example, people with dyslexia and colour blindness.</p>
 
 {% endblock %}
