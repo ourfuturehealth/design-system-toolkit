@@ -14,19 +14,17 @@
 {% block bodyContent %}
 
   <h2>Using colour</h2>
-  <p>Our brand colours help people recognise and trust that our services come from the NHS.</p>
-  <p>We also use colour to help users prioritise and differentiate information - for example we use:</p>
-  <ul>
-    <li>yellow for our <a href="/design-system/styles/focus-state">focus state styles</a> and for <a href="/design-system/components/warning-callout">warning callouts</a></li>
-    <li>red for urgent care cards in the pattern to <a href="/design-system/patterns/help-users-decide-when-and-where-to-get-care">help users decide when and where to get care</a></li>
-  </ul>
+  <p>Our brand colours help people recognise that they're using an Our Future Health service.</p>
+  <p>We also use colour to help users prioritise and differentiate information - for example we use
+yellow for our <a href="/design-system/styles/focus-state">focus state styles</a> and for <a href="/design-system/components/warning-callout">warning callouts</a>
+  </p>
 
   <h2 id="colour-contrast">Colour contrast</h2>
   <p>Our text and background colours are designed to meet accessibility needs. We meet at least level AA for contrast and aim for level AAA as far as possible. Read more about <a href="/design-system/styles/colour#accessibility">accessibility and colour on this page</a>.</p>
 
 
   <h2 id="main-colours">Main colours</h2>
-  <p class="rich-text">If you are using <a href="/design-system/production">NHS.UK frontend (FIXME)</a> or the <a href="/design-system/prototyping">NHS.UK prototype kit</a>, use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> provided rather than copying the hexadecimal (hex) colour values. For example, use <code>$ofh-text-black-color</code> rather than <code>#212b32</code>. This means that your service will always use the most recent colour palette whenever you update.</p>
+  <p class="rich-text">If you are using the <a href="https://github.com/ourfuturehealth/design-system-toolkit">Design System Toolkit</a> or the <a href="/design-system/prototyping">NHS.UK prototype kit</a>, use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> provided rather than copying the hexadecimal (hex) colour values. For example, use <code>$ofh-text-black-color</code> rather than <code>#212b32</code>. This means that your service will always use the most recent colour palette whenever you update.</p>
   <p class="rich-text">Only use the variables in the context they’re designed for. In all other cases, you should reference the <a href="#colour-palette">colour palette</a> directly. For example, if you wanted to use red to represent some data in a graph you should use <code>$color_ofh-brand-red</code> rather than <code>$ofh-error-color</code>.</p>
 
   <table class="app-colour-list" summary="Table of main colours">
@@ -358,9 +356,6 @@
     </tbody>
   </table>
 
-  <h2 id="extended-colours">Extended colours</h2>
-  <p>The NHS Identity Guidelines have an <a href="https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/">extended colour palette</a>. We haven't tested these colours yet for digital use.</p>
-
   <h2 id="accessibility">Accessibility</h2>
   <p> Make sure that what the colour is "saying" is available in other ways. Read "<a href="/accessibility/design#do-not-rely-on-colour-or-position-alone">Do not rely on colour or position alone</a>" in our accessibility guidance.</p>
   <h3>Colour contrast</h3>
@@ -397,6 +392,7 @@
   <h4>Testing tools</h4>
   <p>Use tools like these to check contrast:</p>
   <ul>
+    <li><a href="https://www.getstark.co/">Stark for Figma</a></li>
     <li><a href="https://webaim.org/resources/contrastchecker/">WebAIM's colour contrast checker</a></li>
     <li><a href="https://colororacle.org/">Color Oracle (free colour blindness simulator)</a></li>
   </ul>
