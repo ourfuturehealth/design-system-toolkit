@@ -78,3 +78,11 @@ exports.getHTMLCode = (filepath) => {
 // This helper function takes json data from a file path and returns it as an object
 // to be rendered in a Nunjucks template
 exports.getJSONCode = (filepath) => JSON.parse(getFileContents(filepath));
+
+
+// Gets today's date (as {month} {year} for inserting as a string into the dateUpdated page variable )
+exports.getModifiedDate = () => {
+  const date = new Date();
+  const modifiedDate = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+  return modifiedDate;
+};
