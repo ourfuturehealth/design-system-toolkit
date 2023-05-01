@@ -15,7 +15,7 @@
 .ofh-back-link__link {
   @include ofh-typography-responsive(16);
 
-  color: $ofh-breadcrumb-link-color;
+  color: $ofh-link-color;
   display: inline-block;
   padding-left: 16px; /* 1 */
   position: relative;
@@ -25,20 +25,21 @@
     height: 24px;
     left: -8px; /* 2 */
     position: absolute;
-    top: -1px; /* 3 */
+    top: 0px; /* 3 */
     width: 24px;
+    fill: $ofh-link-color;
   }
 
   &:visited {
-    color: $ofh-breadcrumb-link-color;
+    color: $ofh-link-color;
   }
 
   &:hover {
-    color: $ofh-breadcrumb-link-hover-color;
+    color: $ofh-link-hover-color;
     text-decoration: underline;
 
     .ofh-icon__chevron-left {
-      fill: $ofh-breadcrumb-link-hover-color;
+      fill: $ofh-link-hover-color;
     }
   }
 
