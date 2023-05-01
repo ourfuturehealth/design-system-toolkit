@@ -22,12 +22,13 @@
   text-decoration: none;
 
   .ofh-icon__chevron-left {
+    fill: $ofh-link-color;
     height: 24px;
     left: -8px; /* 2 */
     position: absolute;
-    top: 0px; /* 3 */
+    top: 0; /* 3 */
     width: 24px;
-    fill: $ofh-link-color;
+    
   }
 
   &:visited {
