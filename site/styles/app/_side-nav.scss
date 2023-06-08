@@ -1,6 +1,11 @@
 /* ==========================================================================
    #SIDE-NAV
    ========================================================================== */
+.app-side-nav {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
 
 .app-side-nav__heading {
   @include ofh-font(19, $line-height: 1.25, $weight: bold);
