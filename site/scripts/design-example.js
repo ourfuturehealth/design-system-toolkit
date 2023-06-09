@@ -64,18 +64,45 @@ class DesignExample {
         });
     }
 
-    // Follows approach from https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
-    handleCopyClick(e) {
-        e.preventDefault();
+    // Display a brief notification text then revert to the elements original HTML content
+    inlineNotify(el, text) {
+        const originalInnerHtml = el.innerHTML;
+        el.innerText = text;
+        setTimeout(() => el.innerHTML = originalInnerHtml, 2500);
+    }
+
+    // If clipboard API isn't available fallback to deprecated execCommand method
+    fallbackCopyToClipboard(e, str) {
         const el = document.createElement('textarea');
-        const str = this.node.querySelector('.code-snippet__preformatted:not(.js-hidden) code');
-        el.value = str.innerText;
+        el.value = str;
         document.body.appendChild(el);
         el.select();
-        document.execCommand('copy');
+
+        try {
+            document.execCommand('copy');
+            this.inlineNotify(e.target,'Copied');
+        } catch {
+            this.inlineNotify(e.target, 'Error');
+        }
+
+        // Set focus back onto the clicked button
+        e.target.focus();
+
         document.body.removeChild(el);
-        e.target.innerText = 'Copied';
-        setTimeout(() => e.target.innerText = 'Copy code', 2500);
+    }
+
+    // Use clipboard API to copy text to clipboard, if not available fallback to execCommand
+    handleCopyClick(e) {
+        e.preventDefault();
+        const str = this.node.querySelector('.code-snippet__preformatted:not(.js-hidden) code').innerText;
+        if(!navigator.clipboard) {
+            this.fallbackCopyToClipboard(e, str);
+        }
+        navigator.clipboard.writeText(`${str}`).then(() => {
+            this.inlineNotify(e.target, 'Copied');
+          }, (err) => {
+            this.inlineNotify(e.target, 'Error');
+          });        
     }
 
     showEl(el) {
