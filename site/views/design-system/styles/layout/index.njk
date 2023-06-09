@@ -2,7 +2,8 @@
 {% set pageDescription = "Structure your page content and elements." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "April 2023" %}
+{% set dateUpdated = "May 2023" %}
+
 {% set backlog_issue_id = "3" %}
 {% set hideContact = "true" %}
 
@@ -71,10 +72,14 @@
   </ul>
 
   <h2 id="containers">Containers</h2>
-  <p>To set up your layout, you will need to create 2 wrappers. The first wrapper is a container which sets the maximum width of the content but does not add any vertical margin or padding.</p>
-  <p>You can choose from a fixed-width container (960px) or a fluid-width container (which spans the entire width of the viewport).</p>
+  <p>To set up your layout, you will need to use a container which sets the maximum width of the content.</p>
+  <p>You can choose from either of these:</p>
+  <ul>
+    <li>fixed-width container – up to 960px</li>
+    <li>fluid-width container – spans the entire width of the viewport </li>
+  </ul>
 
-  <h3>Container</h3>
+  <h3>Fixed-width container</h3>
   <p class="rich-text">Use <code>.ofh-width-container</code> for a container with a maximum width of 960px.</p>
 
   {{ designExample({
@@ -85,8 +90,8 @@
     showExample: false
   }) }}
 
-  <h3>Fluid container</h3>
-  <p class="rich-text">Use <code>.ofh-width-container-fluid</code> for a full width container, spanning the entire width of the viewport.</p>
+  <h3>Fluid-width container</h3>
+  <p class="rich-text">Use <code>.ofh-width-container-fluid</code> for a container spanning the entire width of the viewport.</p>
 
   {{ designExample({
     group: "styles",
@@ -97,7 +102,7 @@
   }) }}
 
   <h2 id="main-content">Main content</h2>
-  <p class="rich-text">The second wrapper is a <code>main</code> element with the class <code>.ofh-main-wrapper</code>, which gives responsive padding to the top and bottom of the page and will be the wrapper for the main content of the page.</p>
+  <p class="rich-text">To add vertical margin or padding to your layout, you will need a <code>main</code> element with the class <code>.ofh-main-wrapper</code>. This gives responsive padding to the top and bottom of the page and will be the wrapper for the main content of the page.</p>
   <p class="rich-text">There should be only one <code>main</code> element and it should have a unique id of <code>maincontent</code>, which allows keyboard-only users to skip to the main content on a page with the <a href="/design-system/components/skip-link">skip link component</a>.</p>
 
   {{ designExample({
