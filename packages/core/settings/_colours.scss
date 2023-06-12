@@ -96,6 +96,7 @@ $background-bounce-color: $color_ofh-grey-5;
 // Text
 $ofh-text-black-color: $color_ofh-black;
 $ofh-text-grey-color: $color_ofh-grey-1;
+$ofh-text-blue-color: $color_ofh-brand-dark-blue;
 $ofh-text-white-color: $color_ofh-white;
 
 // Links
@@ -132,7 +133,8 @@ $ofh-border-color: #D1D1D1;
 // Forms
 $ofh-input-border-color: $color_ofh-grey-1;
 $ofh-input-element-background-color: $color_ofh-white;
-// TODO: We'll add $ofh-input-border-active-color when we do the focus work.
+$ofh-input-border-active-color: $color_ofh-black;
+$ofh-input-background-color: $color_ofh-white;
 
 //
 // Buttons

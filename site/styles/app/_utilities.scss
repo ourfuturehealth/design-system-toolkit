@@ -1,6 +1,10 @@
 /* ==========================================================================
    #UTILITIES
    ========================================================================== */
+// Enable smooth scroll for in page #links
+html {
+  scroll-behavior: smooth;
+}
 
 .app-u-border-top {
   border-top: 2px solid $color_ofh-brand-blue;
