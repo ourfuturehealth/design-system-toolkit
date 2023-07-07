@@ -51,7 +51,7 @@
     "minimist": "^1.2.8",
     "nunjucks": "^3.2.4",
     "sass": "^1.60.0",
-    "stylelint": "^13.13.1",
+    "stylelint": "^15.10.1",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
     "wait-on": "^7.0.1",
