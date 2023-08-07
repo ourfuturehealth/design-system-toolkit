@@ -96,6 +96,11 @@ $color_ofh-purple: #330072;
   color: shade($color_ofh-brand-yellow, 70%);
 }
 
+.ofh-tag--navy {
+  background-color: $color_ofh-brand-blue-1;
+  color: $color_ofh-white;
+}
+
 /* Remove tag border
   ========================================================================== */
 
