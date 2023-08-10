@@ -20,8 +20,8 @@ $color_ofh-purple: #330072;
 
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
-  background-color: shade($color_ofh-brand-yellow, 10%);
-  border: 1px solid shade($color_ofh-brand-yellow, 10%);
+  background-color: $color_ofh-brand-blue-1;
+  border: 0;
   color: $color_ofh-white;
   display: inline-block;
   outline: 2px solid transparent;
@@ -94,12 +94,6 @@ $color_ofh-purple: #330072;
   background-color: tint($color_ofh-brand-yellow, 50%);
   border-color: shade($color_ofh-brand-yellow, 70%);
   color: shade($color_ofh-brand-yellow, 70%);
-}
-
-.ofh-tag--navy {
-  background-color: $color_ofh-brand-blue-1;
-  border: 0;
-  color: $color_ofh-white;
 }
 
 /* Remove tag border
