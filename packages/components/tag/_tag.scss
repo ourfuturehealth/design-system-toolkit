@@ -2,26 +2,11 @@
    #TAG
    ========================================================================== */
 
-//
-// These colours are only used in this component.
-//
-// TODO: They don't exist in the Figma design toolkit,
-// so should be removed and this component should use
-// colours from packages/core/settings/_colours.scss.
-//
-
 /* stylelint-disable color-no-hex */
-
-// TODO: remove these when we do the tags revamp
-$color_ofh-warm-yellow: #ffb81C;
-$color_ofh-pink: #AE2573;
-$color_ofh-aqua-green: #00A499;
-$color_ofh-purple: #330072;
 
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
   background-color: $color_ofh-brand-blue-1;
-  border: 0;
   color: $color_ofh-white;
   display: inline-block;
   outline: 2px solid transparent;
@@ -32,9 +17,9 @@ $color_ofh-purple: #330072;
   padding-top: 3px;
   text-decoration: none;
 }
+
 @media (min-width: 40.0625em){
 .ofh-tag {
-    font-size: 16px;
     font-size: 1rem;
     line-height: 1;
     padding-bottom: 6px;
@@ -49,6 +34,8 @@ $color_ofh-purple: #330072;
 
 .ofh-tag--grey {
   background-color: $color_ofh-grey-5;
+  border: 1px solid;
+  border-color: $color_ofh-grey-3;
   color: $color_ofh-grey-1;
 }
 
