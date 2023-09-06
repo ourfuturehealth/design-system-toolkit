@@ -11,10 +11,10 @@
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  padding-bottom: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 3px;
+  padding-bottom: ofh-spacing(1);
+  padding-left: ofh-spacing(2);
+  padding-right: ofh-spacing(2);
+  padding-top: ofh-spacing(1);
   text-decoration: none;
 }
 
@@ -22,10 +22,6 @@
   .ofh-tag {
     font-size: 1rem;
     line-height: 1;
-    padding-bottom: 6px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 4px;
   }
 }
 /* Colour variants
@@ -34,9 +30,9 @@
 
 .ofh-tag--grey {
   background-color: $color_ofh-grey-5;
-  border: 1px solid;
-  border-color: $color_ofh-grey-3;
   color: $color_ofh-grey-1;
+  outline: 1px solid $color_ofh-grey-3;
+  outline-offset: -1px;
 }
 
 .ofh-tag--green {
