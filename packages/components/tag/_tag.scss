@@ -2,26 +2,11 @@
    #TAG
    ========================================================================== */
 
-//
-// These colours are only used in this component.
-//
-// TODO: They don't exist in the Figma design toolkit,
-// so should be removed and this component should use
-// colours from packages/core/settings/_colours.scss.
-//
-
 /* stylelint-disable color-no-hex */
-
-// TODO: remove these when we do the tags revamp
-$color_ofh-warm-yellow: #ffb81C;
-$color_ofh-pink: #AE2573;
-$color_ofh-aqua-green: #00A499;
-$color_ofh-purple: #330072;
 
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
-  background-color: shade($color_ofh-brand-yellow, 10%);
-  border: 1px solid shade($color_ofh-brand-yellow, 10%);
+  background-color: $color_ofh-brand-blue-1;
   color: $color_ofh-white;
   display: inline-block;
   outline: 2px solid transparent;
@@ -33,72 +18,39 @@ $color_ofh-purple: #330072;
   text-decoration: none;
 }
 
+@media (min-width: 40.0625em) {
+  .ofh-tag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
 /* Colour variants
   ========================================================================== */
 
-.ofh-tag--white {
-  background-color: $color_ofh-white;
-  border-color: $color_ofh-black;
-  color: $color_ofh-black;
-}
 
 .ofh-tag--grey {
-  background-color: tint($color_ofh-grey-1, 80%);
-  border-color: shade($color_ofh-grey-1, 30%);
-  color: shade($color_ofh-grey-1, 30%);
+  background-color: $color_ofh-grey-5;
+  color: $color_ofh-grey-1;
+  outline: 1px solid $color_ofh-grey-3;
+  outline-offset: -1px;
 }
 
 .ofh-tag--green {
   background-color: tint($color_ofh-brand-green, 80%);
-  border-color: shade($color_ofh-brand-green, 40%);
-  color: shade($color_ofh-brand-green, 40%);
-}
-
-.ofh-tag--aqua-green {
-  background-color: tint($color_ofh-aqua-green, 80%);
-  border-color: shade($color_ofh-aqua-green, 50%);
-  color: shade($color_ofh-aqua-green, 50%);
+  color: $color_ofh-brand-green-1;
 }
 
 .ofh-tag--blue {
-  background-color: tint($color_ofh-brand-yellow, 80%);
-  border-color: shade($color_ofh-brand-yellow, 30%);
-  color: shade($color_ofh-brand-yellow, 30%);
-}
-
-.ofh-tag--purple {
-  background-color: tint($color_ofh-purple, 80%);
-  border-color: shade($color_ofh-purple, 30%);
-  color: shade($color_ofh-purple, 30%);
-}
-
-.ofh-tag--pink {
-  background-color: tint($color_ofh-pink, 80%);
-  border-color: shade($color_ofh-pink, 50%);
-  color: shade($color_ofh-pink, 50%);
+  background-color: tint($color_ofh-brand-blue, 80%);
+  color: $color_ofh-brand-blue-1;
 }
 
 .ofh-tag--red {
   background-color: tint($color_ofh-brand-red, 80%);
-  border-color: shade($color_ofh-brand-red, 50%);
-  color: shade($color_ofh-brand-red, 50%);
-}
-
-.ofh-tag--orange {
-  background-color: tint($color_ofh-warm-yellow, 50%);
-  border-color: shade($color_ofh-warm-yellow, 70%);
-  color: shade($color_ofh-warm-yellow, 70%);
+  color: $color_ofh-brand-red-1;
 }
 
 .ofh-tag--yellow {
-  background-color: tint($color_ofh-brand-yellow, 50%);
-  border-color: shade($color_ofh-brand-yellow, 70%);
-  color: shade($color_ofh-brand-yellow, 70%);
-}
-
-/* Remove tag border
-  ========================================================================== */
-
-.ofh-tag--no-border {
-  border: 0;
+  background-color: tint($color_ofh-brand-yellow, 70%);
+  color: $color_ofh-brand-orange-1;
 }
