@@ -6,6 +6,12 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v2.0.0-alpha.4] - 2023-09-19
+
+### Changed
+
+- Update **tag** components to use new colours and spacing
+
 ## [v2.0.0-alpha.3] - 2022-03-28
 
 ### Added
