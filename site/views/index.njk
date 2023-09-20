@@ -8,8 +8,9 @@
 {% block outerBody %}
 
 <main id="maincontent" role="main">
+<!-- These are commented out as I'm currently tinkering to get a handle on putting through pull requests, but feel free to delete at any time. -Simon -->
 
-  <section class="ofh-hero">
+  {# <section class="ofh-hero">
     <div class="ofh-width-container app-width-container ofh-hero--border">
       <div class="ofh-grid-row">
         <div class="ofh-grid-column-two-thirds">
@@ -19,11 +20,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> #}
 
   <section class="ofh-section">
     <div class="ofh-width-container app-width-container">
-      <ul class="ofh-grid-row ofh-card-group">
+      <h1>Our Future Health Design System</h1>
+      {# <ul class="ofh-grid-row ofh-card-group">
         <li class="ofh-grid-column-one-third ofh-card-group__item">
           <div class="ofh-card ofh-card--clickable">
             <div class="ofh-card__content">
@@ -45,14 +47,19 @@
             </div>
           </div>
         </li>
-      </ul>
-
-      <hr />
+      </ul> #}
 
       <div class="ofh-grid-row">
-        <div class="ofh-grid-column-two-thirds">
+        
+        <div class="ofh-grid-column-one-third">
           <h2>Quick links</h2>
           <ul>
+            <li>
+              <a href="/design-system/styles">Foundation styles</a>
+            </li>
+            <li>
+              <a href="/design-system/components">Components</a>
+            </li>
             <li>
               <a href="/design-system/styles/colour">Colours</a>
             </li>
@@ -66,6 +73,41 @@
               <a href="/examples/components/typography"> Über typography examples page</a>
             </li>
           </ul>
+          <h2>External links</h2>
+          <ul>
+            <li>
+              <a href="https://service-manual.nhs.uk/design-system">NHS Design System</a>
+            </li>
+          </ul>
+        </div>
+        <div class="ofh-grid-column-two-thirds">
+          {% from 'packages/components/card/macro.njk' import card %}
+
+          {{ card({
+            "href": "get-started/",
+            "clickable": "true",
+            "heading": "Getting started",
+            "headingLevel": "3",
+            "descriptionHtml": "<p class=\"ofh-card__description\">The code you need to start building user interfaces for Our Future Health websites and services.</p>"
+          }) }}
+
+          {# <h2>Getting started</h2>
+          <p><a href="get-started/"></a></p>
+          <p>The code you need to start building user interfaces for Our Future Health websites and services.</p> #}
+          <h2>Our design system consists of 3 major components</h2>
+          <h3>1. UI and design toolkit</h3>
+          <p><a href="">View in figma (permission needed)</a></p>
+          <p>The UI tookit version of the design system exists within Figma, and is the primary tool that we use to quickly create and edit prototypes. Tokens (formerly variables but we’re transitioning) are stored within Figma. These values are also visually represented to serve as both a visual guide and a reference for how to implement within figma itself.</p>
+          <h3>2. Dev toolkit</h3>
+          <p><a href="https://github.com/ourfuturehealth/design-system-toolkit">View in github</a></p>
+          <p>The mirror of the UI toolkit, but for development, is the FE toolkit. A repo in github, anyone working with Our Future Health products can request access to integrate it into their builds. This allows for products to be semi-automatically aligned with the latest changes within the UI and FE toolkits. More documentation is available on how to implement this, here.</p>
+          <h3>3. Documentation site (this site)</h3>
+          <p>This site serves to assist design, dev, and product in how to properly use the design system and the components and tokens. It’s also available.</p>
+          <h3>4. Bonus: Jira and Confluence</h3>
+          <p>We also have a Jira and confluence. Jira is used to help track status of changes to design system components and the overall design system itself, while Confluence is an interstitial place for us to work on drafts and track changes before publishing to the documentation site.
+          </p>
+          <h2>Accessibility considerations</h2>
+          <p>All products must reach at least <a href="https://www.w3.org/TR/WCAG21/">WCAG 2.1 AA-compliance</a>. Accordingly, so must our design system and its components.</p>
         </div>
       </div>
     </div>
