@@ -6,6 +6,28 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v2.0.0-alpha.4] - 2023-09-19
+
+### Added
+
+- Added **extended colour palette** to dev toolkit and docs site
+- Added **external link icon**
+
+### Changed
+
+- Update **tag** components to use new colours and spacing
+- Updated **colour palette** in dev toolkit and docs site
+- Removed content related to NHS Service Manual GitHub
+- Content updates to **Layout, Typography and Spacing pages**
+- Make side nav sticky on docs site
+- Bump nunjucks from 3.2.3 to 3.2.4
+
+### Fixed
+
+- Fixed bugs with copy to clipboard function in design examples
+- Fix docs site container size
+- Updated colors for side nav links and back link in docs site
+
 ## [v2.0.0-alpha.3] - 2022-03-28
 
 ### Added
