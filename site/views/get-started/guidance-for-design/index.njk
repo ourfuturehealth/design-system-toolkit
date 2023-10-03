@@ -1,0 +1,44 @@
+{% set pageTitle = "Guidance for design" %}
+{% set pageDescription = "What you need to design for Our Future Health websites and services" %}
+{% set dateUpdated = "October 2024" %}
+{% set pageSection = "Get Started" %}
+{% set subSection = "Getting started" %}
+
+{% from 'packages/components/inset-text/macro.njk' import insetText %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "./_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <h2 id="use-figma-to-create-prototypes">Use Figma to create prototypes that align with the design system</h2>
+  <p>Our <a href="https://www.figma.com/file/nxk6i2mSprkAZmUNhjnkYY/OFH-design-system?type=design&node-id=127%3A4305&mode=design&t=JDPVSvVqPLDN7qkP-1">design system components and foundational styles exist as a project within our org Figma</a>. The easiest way to start creating prototypes is to use to build-in components and styles functionality.</p>
+  <p>If you are an internal Our Future Health employee, you should have been granted access to figma as a part of your onboarding. Please email it@ourfuturehealth.org.uk to request access if you do not have it.</p>
+
+  <h2 id="component-style-does-not-exist-within-ds">What to do if none of the existing components suit your needs</h2>
+  <p>If you're sure that none of the existing components are suitable (double-check!), you may need to design your own.</p>
+
+  {{ insetText({
+  "HTML": "<p>Check if a suitable component is in the <a href=\"https://service-manual.nhs.uk/design-system\" title=\"External website\">NHS Design System</a>. As we've forked our design system from it, the code is likely still in the dev toolkit and can be quickly adapted.</p>"
+}) }}
+
+  <p>The process for creating a new component is product-team led. The component should be built and tested on the specific product, following foundational styles for the Our Future Health design system.</p>
+
+  <h3>Check in with the Our Future Health design team to guide you through the steps</h3>
+
+  <p>The easiest starting point for a new component is to look at other design systems that are based on GOV.UK's. These will be easier to adapt to our own, and will have already been tested at scale for usability and accessibility.</p>
+  <p>Ones we frequently refer to are:</p>
+  <ul>
+    <li><a href="https://design-system.service.gov.uk/">GOV.UK design system</a></li>
+    <li><a href="https://service-manual.nhs.uk/community-and-contribution/backlog-of-components-and-patterns">NHS design system component backlog</a></li>
+  </ul>
+  <p>The design team at Our Future Health can guide you through the rest of the process.</p>
+
+<div class="app-index-navigation app-u-hide-desktop">
+  {% include "_side-nav.njk" %}
+</div>
+
+{% endblock %}
