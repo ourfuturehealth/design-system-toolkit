@@ -7,12 +7,19 @@
 {% set backlog_issue_id = "16" %}
 
 {% extends "app-layout.njk" %}
+{% from 'packages/components/warning-callout/macro.njk' import warningCallout %}
+
 
 {% block breadcrumb %}
   {% include "../_breadcrumb.njk" %}
 {% endblock %}
 
 {% block bodyContent %}
+
+{{ warningCallout({
+  "heading": "We do not use the headers below in our products",
+  "HTML": "<p>We are currently implementing headers on a product-by-product basis. You can see we have not updated the headers due to the inclusion of an NHS logo on all the headers below.</p><p>While we update the headers component, we recommend viewing either the appropriate figma files or the live products to see how headers have been implemented.</p>"
+}) }}
 
   {{ designExample({
     group: "components",
