@@ -1,18 +1,25 @@
 {% set pageTitle = "Patterns" %}
-{% set pageDescription = "Patterns are tested and agreed solutions to common needs. You can reuse them across NHS services to make them more consistent." %}
+{% set pageDescription = "Patterns are tested and agreed solutions to common needs. You can reuse them across Our Future Health products and services to make them more consistent." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Patterns" %}
 {% set theme = "Design" %}
 {% set hideContact = "true" %}
-{% set unpublished = true %}
+{% set unpublished = false %}
 
 {% extends "app-layout.njk" %}
+{% from 'packages/components/warning-callout/macro.njk' import warningCallout %}
 
 {% block breadcrumb %}
   {% include "./_breadcrumb.njk" %}
 {% endblock %}
 
 {% block bodyContent %}
+
+
+{{ warningCallout({
+  "heading": "We don't currently have many patterns in-use",
+  "HTML": "<p>We will add more as we design and develop them.</p>"
+}) }}
 
   <p>We have 2 types of patterns:</p>
   <ul>
