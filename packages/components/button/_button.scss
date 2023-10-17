@@ -121,7 +121,6 @@ $button-shadow-size: 4px;
 
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
-    color: $ofh-button-secondary-text-color;
   }
 
   &:focus {
@@ -141,6 +140,25 @@ $button-shadow-size: 4px;
   &.ofh-button--disabled {
     background-color: $ofh-secondary-button-color;
   }
+
+  &:visited {
+    color: white;
+  }
+
+}
+
+.ofh-button--secondary, .ofh-button--secondary:link {
+  
+  &:hover {
+    background-color: darken($ofh-secondary-button-color, 10%);
+    color: white !important;
+    background-color: #2e3b44;
+  }
+
+}
+
+.ofh-text-white, .ofh-text-white:visited {
+  color: white;
 
 }
 
