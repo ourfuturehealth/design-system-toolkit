@@ -142,9 +142,8 @@ $button-shadow-size: 4px;
   }
 
   &:visited {
-    color: white;
+    color: $color_ofh-white;
   }
-
 }
 
 .ofh-button--secondary, .ofh-button--secondary:link {
