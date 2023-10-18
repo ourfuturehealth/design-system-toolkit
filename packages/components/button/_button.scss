@@ -121,6 +121,7 @@ $button-shadow-size: 4px;
 
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
+    color: $color_ofh-white;
   }
 
   &:focus {
@@ -144,20 +145,11 @@ $button-shadow-size: 4px;
   &:visited {
     color: $color_ofh-white;
   }
-}
-
-.ofh-button--secondary {
-  
-  &:hover {
-    background-color: darken($ofh-secondary-button-color, 10%);
-    color: $color_ofh-white;
-    background-color: #2e3b44;
-  }
 
 }
 
 .ofh-text-white, .ofh-text-white:visited {
-  color: white;
+  color: $color_ofh-white;
 
 }
 
