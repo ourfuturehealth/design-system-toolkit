@@ -150,7 +150,7 @@ $button-shadow-size: 4px;
   
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
-    color: white !important;
+    color: $color_ofh-white;
     background-color: #2e3b44;
   }
 
