@@ -146,7 +146,7 @@ $button-shadow-size: 4px;
   }
 }
 
-.ofh-button--secondary, .ofh-button--secondary:link {
+.ofh-button--secondary {
   
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
