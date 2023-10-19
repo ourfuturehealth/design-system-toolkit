@@ -119,6 +119,14 @@ $button-shadow-size: 4px;
   box-shadow: 0 $button-shadow-size 0 $ofh-secondary-button-shadow-color;
   color: $ofh-button-secondary-text-color;
 
+  &:link {
+    color: $color_ofh-white;
+
+    &:active {
+      color: $color_ofh-white;
+    }
+  }
+  
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
     color: $color_ofh-white;
@@ -136,14 +144,6 @@ $button-shadow-size: 4px;
     box-shadow: none;
     color: $ofh-button-secondary-text-color;
     top: $button-shadow-size;
-  }
-
-    &:link {
-    color: $color_ofh-white;
-
-    &:active {
-      color: $color_ofh-white;
-    }
   }
 
   &.ofh-button--disabled {
