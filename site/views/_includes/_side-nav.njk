@@ -1,6 +1,7 @@
 {% set dsDesign = [
   { title: "Foundation styles", url: "/design-system/styles" },
-  { title: "Components", url: "/design-system/components" }
+  { title: "Components", url: "/design-system/components" },
+  { title: "Patterns", url: "/design-system/patterns"}
 ] %}
 
 {% set accessibilityEveryone = [
@@ -115,16 +116,21 @@
   { title: "Textarea", url: "/design-system/components/textarea" }
 ] %}
 
-{% set askUsers = [
+{# Old Patterns for Tasks and Page types #}
+{# {% set askUsers = [
   { title: "Ask users for their NHS number", url: "/design-system/patterns/ask-users-for-their-nhs-number" },
   { title: "Help users decide when and where to get care (care cards)", url: "/design-system/patterns/help-users-decide-when-and-where-to-get-care" },
   { title: "Reassure users that a page is up to date", url: "/design-system/patterns/reassure-users-that-a-page-is-up-to-date" }
-] %}
+] %} #}
 
 {% set pages = [
   { title: "A to Z page", url: "/design-system/patterns/a-to-z-page" },
   { title: "Mini-hub", url: "/design-system/patterns/mini-hub" },
   { title: "Start page", url: "/design-system/patterns/start-page" }
+] %}
+
+{% set askUsers = [
+  { title: "Reassure users that a page is up to date", url: "/design-system/patterns/reassure-users-that-a-page-is-up-to-date" }
 ] %}
 
 {% set getStarted = [
@@ -212,12 +218,13 @@
     {% endfor %}
     </ul>
 
+    {# Removing the page types from patterns
     <h2 class="app-side-nav__heading">Page types</h2>
     <ul class="ofh-list app-side-nav__list">
     {% for item in pages %}
       <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
-    </ul>
+    </ul> #}
   {% endif %}
 
   {%- if pageSection == "Accessibility" %}
