@@ -38,6 +38,28 @@ $card-border-hover-color: $color_ofh-grey-3;
   border: $card-border-width solid $card-border-color;
   position: relative; /* [1] */
   width: 100%;
+
+  &.ofh-card__with-icon {
+    > .ofh-card__content {
+      display: flex;
+      height: 100%;
+
+      > div {
+        :last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      > :first-child {
+        flex-grow: 2;
+      }
+
+      > :last-child {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
 }
 
 .ofh-card__img {

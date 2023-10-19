@@ -1,0 +1,12 @@
+{% from 'packages/components/card/macro.njk' import card %}
+
+{% call card({
+    "heading": "Congratulations",
+    "headingLevel": "3",
+    "descriptionHtml": "<p class=\"ofh-card__description\">You've completed all your tasks</p>",
+    "classes": "ofh-card__with-icon"
+}) -%}
+    <svg class="ofh-icon ofh-icon__tick" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" height="34" width="34">
+        <path stroke-width="4" stroke-linecap="round" stroke="#007f3b" d="M18.4 7.8l-8.5 8.4L5.6 12"></path>
+    </svg>
+{%- endcall %}

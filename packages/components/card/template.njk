@@ -4,14 +4,16 @@
 {%- if params.clickable %} ofh-card--clickable{% endif %}
 {%- if params.type %} ofh-card--care ofh-card--care--{{ params.type }}{% endif %}
 {%- if params.feature %} ofh-card--feature{% endif %}
-{%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+{%- if params.classes %} {{ params.classes }}{% endif %}
+{%- if withIcon %} ofh-card__with-icon{% endif %}"
+{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
 {%- if params.imgURL %}
   <img class="ofh-card__img" src="{{ params.imgURL }}" alt="{{ params.imgALT }}">
 {%- endif %}
   <div class="{%- if not params.type %}ofh-card__content
               {%- if params.feature %} ofh-card__content--feature{% endif %}
               {%- else %}ofh-card--care__heading-container{% endif %}">
+  <div>
     {%- if params.headingHtml %}
       {{ params.headingHtml | safe }}
     {%- else %}
@@ -33,10 +35,12 @@
   {%- if params.type %}
     <span class="ofh-card--care__arrow" aria-hidden="true"></span>
   </div>
+  </div>
   {% endif %}
   {%- endif %}
   {%- if params.type %}
   <div class="ofh-card__content">
+    <div>
 {%- endif %}
 {%- if params.descriptionHtml %}
   {{ params.descriptionHtml | safe }}
@@ -47,4 +51,10 @@
 {%- else %}
 {%- endif %}
   </div>
-</div>
+  {% if caller %}
+    <div class="ofh-u-padding-left-5">
+      {{ caller() }}
+    </div>
+  {% endif %}
+  </div>
+  </div>
