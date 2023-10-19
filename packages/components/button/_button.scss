@@ -138,6 +138,14 @@ $button-shadow-size: 4px;
     top: $button-shadow-size;
   }
 
+    &:link {
+    color: $color_ofh-white;
+
+    &:active {
+      color: $color_ofh-white;
+    }
+  }
+
   &.ofh-button--disabled {
     background-color: $ofh-secondary-button-color;
   }
