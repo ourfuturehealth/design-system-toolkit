@@ -119,9 +119,17 @@ $button-shadow-size: 4px;
   box-shadow: 0 $button-shadow-size 0 $ofh-secondary-button-shadow-color;
   color: $ofh-button-secondary-text-color;
 
+  &:link {
+    color: $color_ofh-white;
+
+    &:active {
+      color: $color_ofh-white;
+    }
+  }
+
   &:hover {
     background-color: darken($ofh-secondary-button-color, 10%);
-    color: $ofh-button-secondary-text-color;
+    color: $color_ofh-white;
   }
 
   &:focus {
@@ -141,6 +149,15 @@ $button-shadow-size: 4px;
   &.ofh-button--disabled {
     background-color: $ofh-secondary-button-color;
   }
+
+  &:visited {
+    color: $color_ofh-white;
+  }
+
+}
+
+.ofh-text-white .ofh-text-white:visited {
+  color: $color_ofh-white;
 
 }
 
