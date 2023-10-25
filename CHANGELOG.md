@@ -6,6 +6,11 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v2.0.0-alpha.5] - 2023-10-25
+
+### Added
+- Added **card with icon** variation of card component
+
 ## [v2.0.0-alpha.4] - 2023-09-19
 
 ### Added
