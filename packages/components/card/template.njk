@@ -4,47 +4,58 @@
 {%- if params.clickable %} ofh-card--clickable{% endif %}
 {%- if params.type %} ofh-card--care ofh-card--care--{{ params.type }}{% endif %}
 {%- if params.feature %} ofh-card--feature{% endif %}
-{%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+{%- if params.classes %} {{ params.classes }}{% endif %}
+{%- if withIcon %} ofh-card__with-icon{% endif %}"
+{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
 {%- if params.imgURL %}
   <img class="ofh-card__img" src="{{ params.imgURL }}" alt="{{ params.imgALT }}">
 {%- endif %}
-  <div class="{%- if not params.type %}ofh-card__content
+<div class="{%- if not params.type %}ofh-card__content
               {%- if params.feature %} ofh-card__content--feature{% endif %}
               {%- else %}ofh-card--care__heading-container{% endif %}">
+  <div>
     {%- if params.headingHtml %}
-      {{ params.headingHtml | safe }}
+    {{ params.headingHtml | safe }}
     {%- else %}
-    <h{{ headingLevel }} class="{% if params.type %}ofh-card--care__heading{% else %}ofh-card__heading{% endif %}{% if params.feature %} ofh-card__heading--feature{% endif %} {%- if params.headingClasses %} {{ params.headingClasses }}{% endif %}">
+    <h{{ headingLevel }}
+      class="{% if params.type %}ofh-card--care__heading{% else %}ofh-card__heading{% endif %}{% if params.feature %} ofh-card__heading--feature{% endif %} {%- if params.headingClasses %} {{ params.headingClasses }}{% endif %}">
       {%- if params.href and not params.feature %}
         <a class="ofh-card__link" href="{{ params.href }}">{{ params.heading | safe }}</a>
       {%- else %}
-      {%- if params.type %}
-      <span role="text"><span class="ofh-u-visually-hidden">
+        {%- if params.type %}
+          <span role="text"><span class="ofh-u-visually-hidden">
       {%- if params.type === 'non-urgent' %}Non-urgent advice:
       {%- elseif params.type === 'urgent' %}Urgent advice:
       {%- elseif params.type === 'emergency' %}Immediate action required:
       {%- else %}Non-urgent advice:{% endif %} </span>{{ params.heading }}</span>
-      {%- else %}
-      {{ params.heading }}
-      {% endif %}
+        {%- else %}
+          {{ params.heading }}
+        {% endif %}
       {%- endif %}
     </h{{ headingLevel }}>
-  {%- if params.type %}
+    {%- if params.type %}
     <span class="ofh-card--care__arrow" aria-hidden="true"></span>
   </div>
+</div>
   {% endif %}
   {%- endif %}
   {%- if params.type %}
   <div class="ofh-card__content">
-{%- endif %}
-{%- if params.descriptionHtml %}
-  {{ params.descriptionHtml | safe }}
-{%- elif params.HTML %}
-  {{ params.HTML | safe }}
-{%- elif params.description %}
-  <p class="ofh-card__description">{{ params.description | safe }}</p>
-{%- else %}
-{%- endif %}
+    <div>
+  {%- endif %}
+      {%- if params.descriptionHtml %}
+        {{ params.descriptionHtml | safe }}
+        {%- elif params.HTML %}
+        {{ params.HTML | safe }}
+        {%- elif params.description %}
+        <p class="ofh-card__description">{{ params.description | safe }}</p>
+      {%- else %}
+      {%- endif %}
+    </div>
+    {% if caller %}
+      <div class="ofh-u-padding-left-5">
+        {{ caller() }}
+      </div>
+    {% endif %}
   </div>
 </div>
