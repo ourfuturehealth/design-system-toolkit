@@ -6,6 +6,11 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v2.0.0-alpha.6] - 2023-12-14
+
+### Added
+- Added **black** colour variation to section break typography
+
 ## [v2.0.0-alpha.5] - 2023-10-25
 
 ### Added
