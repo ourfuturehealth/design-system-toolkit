@@ -67,3 +67,7 @@ hr { /* [1] */
   @extend %ofh-section-break--l;
   @extend %ofh-section-break--visible;
 }
+
+.ofh-section-break--black {
+  border-bottom: 1px solid $color_ofh-true-black;
+}
