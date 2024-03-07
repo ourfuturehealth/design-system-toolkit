@@ -12,35 +12,35 @@
 // Default icon colours
 
 .ofh-icon__search {
-  fill: $color_ofh-brand-yellow;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__chevron-left {
-  fill: $color_ofh-brand-dark-blue;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__chevron-right {
-  fill: $color_ofh-brand-dark-blue;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__close {
-  fill: $color_ofh-brand-dark-blue;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__cross {
-  fill: $color_ofh-brand-red;
+  fill: $ofh-error-color;
 }
 
 .ofh-icon__tick {
-  stroke: $color_ofh-brand-green;
+  stroke: $ofh-success-color;
 }
 
 .ofh-icon__arrow-right {
-  fill: $color_ofh-brand-dark-blue;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__arrow-left {
-  fill: $color_ofh-brand-dark-blue;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__chevron-down {
@@ -69,11 +69,11 @@
 }
 
 .ofh-icon__plus {
-  fill: $color_ofh-brand-yellow;
+  fill: $color_ofh-black;
 }
 
 .ofh-icon__minus {
-  fill: $color_ofh-brand-yellow;
+  fill: $color_ofh-black;
 }
 
 // Icon size adjustments
