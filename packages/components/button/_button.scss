@@ -20,6 +20,7 @@ $button-shadow-size: 4px;
   @include ofh-responsive-margin(5, 'bottom', $adjustment: $button-shadow-size);
 
   -webkit-appearance: none;
+  background-color: $color_ofh-white;
   border: $ofh-border-width-form-element solid transparent;
   border-radius: 4px;
   box-sizing: border-box;
@@ -84,11 +85,13 @@ $button-shadow-size: 4px;
 
 .ofh-button--contained {
   background-color: $ofh-button-color-blue;
-  box-shadow: 0px $button-shadow-size $button-shadow-size rgba(0, 0, 0, 0.25);
+  /* stylelint-disable number-leading-zero */
+  box-shadow: 0 $button-shadow-size $button-shadow-size rgba(0, 0, 0, 0.25);
   color: $color_ofh-white;
 
   &:hover {
     background-color: $ofh-button-color-dark-blue;
+    transform: translateY(-4px);
   }
 
   &:focus {
@@ -107,18 +110,15 @@ $button-shadow-size: 4px;
 
 .ofh-button--outlined {
   border: $ofh-border-width-form-element solid $ofh-button-color-blue;
-  background-color: $color_ofh-white;
   color: $ofh-button-color-blue;
 
   &:hover {
     border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
-    background-color: $color_ofh-white;
     color: $ofh-button-color-dark-blue;
   }
 
   &:focus {
     border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
-    background-color: $color_ofh-white;
     color: $ofh-button-color-dark-blue;
     outline: 4px solid $ofh-button-color-blue;
     outline-offset: 4px;
@@ -126,25 +126,24 @@ $button-shadow-size: 4px;
 
   &:active {
     border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
-    background-color: $color_ofh-white;
     color: $ofh-button-color-dark-blue;
   }
 }
 
 .ofh-button--ghost {
-  border: $ofh-border-width-form-element solid $ofh-button-color-blue;
   background-color: transparent;
+  border: $ofh-border-width-form-element solid $ofh-button-color-blue;
   color: $ofh-button-color-blue;
 
   &:hover {
-    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
     background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
     color: $ofh-button-color-dark-blue;
   }
 
   &:focus {
-    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
     background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
     color: $ofh-button-color-dark-blue;
     outline: 4px solid $ofh-button-color-blue;
     outline-offset: 4px;
@@ -161,14 +160,14 @@ $button-shadow-size: 4px;
     color: $color_ofh-white;
 
     &:hover {
-      border: $ofh-border-width-form-element solid $color_ofh-grey-5;
       background-color: transparent;
+      border: $ofh-border-width-form-element solid $color_ofh-grey-5;
       color: $color_ofh-grey-5;
     }
 
     &:focus {
-      border: $ofh-border-width-form-element solid $color_ofh-grey-4;
       background-color: transparent;
+      border: $ofh-border-width-form-element solid $color_ofh-grey-4;
       color: $color_ofh-grey-4;
       outline: 4px solid $color_ofh-white;
       outline-offset: 4px;
@@ -191,9 +190,9 @@ $button-shadow-size: 4px;
   }
 
   &:focus {
-    color: $ofh-button-color-dark-blue;
-    border-radius: 0;
     border: 4px solid $ofh-button-color-blue;
+    border-radius: 0;
+    color: $ofh-button-color-dark-blue;
   }
 
   &:active {
@@ -209,129 +208,13 @@ $button-shadow-size: 4px;
     }
 
     &:focus {
-      color: $color_ofh-grey-4;
-      border-radius: 0;
       border: 4px solid $color_ofh-white;
+      border-radius: 0;
+      color: $color_ofh-grey-4;
     }
 
     &:active {
       color: $color_ofh-grey-4;
     }
   }
-}
-
-.ofh-text-white .ofh-text-white:visited {
-  color: $color_ofh-white;
-
-}
-
-.ofh-button--reverse {
-  background-color: $ofh-reverse-button-color;
-  box-shadow: 0 $button-shadow-size 0 $ofh-reverse-button-shadow-color;
-  color: $ofh-reverse-button-text-color;
-
-  &:hover {
-    background-color: darken($ofh-reverse-button-color, 5%);
-    color: $ofh-reverse-button-text-color;
-  }
-
-  &:focus {
-    background: $ofh-focus-color;
-    box-shadow: 0 $button-shadow-size 0 $ofh-focus-text-color;
-    color: $ofh-button-secondary-text-color;
-    outline: $ofh-focus-width solid transparent;
-  }
-
-  &:active {
-    background: $ofh-reverse-button-active-color;
-    box-shadow: none;
-    color: $ofh-text-white-color;
-    top: $button-shadow-size;
-  }
-
-  &:link {
-    color: $ofh-reverse-button-text-color;
-
-    &:active {
-      color: $ofh-button-text-color;
-    }
-  }
-
-  &.ofh-button--disabled {
-    background-color: $color_ofh-brand-yellow;
-
-    &:focus {
-      background-color: $ofh-reverse-button-color;
-    }
-  }
-
-}
-
-/**
- * Button disabled states
- */
-/* stylelint-disable string-quotes */
-.ofh-button--disabled,
-.ofh-button[disabled="disabled"],
-.ofh-button[disabled] {
-  background-color: $ofh-button-color;
-  opacity: (.5);
-  pointer-events: none;
-
-  &:hover {
-    background-color: $ofh-button-color;
-    cursor: default;
-  }
-
-  &:focus {
-    background-color: $ofh-button-color;
-    outline: none;
-  }
-
-  &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-button-shadow-color; // s0
-    top: 0;
-  }
-
-}
-
-.ofh-button--secondary[disabled="disabled"],
-.ofh-button--secondary[disabled] {
-  background-color: $ofh-secondary-button-color;
-  opacity: (.5);
-
-  &:hover {
-    background-color: $ofh-secondary-button-color;
-    cursor: default;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-secondary-button-shadow-color; // s0
-    top: 0;
-  }
-}
-
-.ofh-button--reverse[disabled="disabled"],
-.ofh-button--reverse[disabled] {
-  background-color: $ofh-reverse-button-color;
-  opacity: (.5);
-
-  &:hover {
-    background-color: $ofh-reverse-button-color;
-    cursor: default;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-reverse-button-shadow-color; // s0
-    top: 0;
-  }
-
 }
