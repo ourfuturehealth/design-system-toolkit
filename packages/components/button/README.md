@@ -13,7 +13,7 @@ Find out more about the button component and when to use it in the [design syste
 #### HTML markup
 
 ```html
-<button class="ofh-button" type="submit">
+<button class="ofh-button ofh-button--contained" type="submit">
   Save and continue
 </button>
 ```
@@ -37,7 +37,7 @@ Find out more about the button component and when to use it in the [design syste
 #### HTML markup
 
 ```html
-<a href="/" class="ofh-button" draggable="false">
+<a href="/" class="ofh-button ofh-button--text" draggable="false">
   Link button
 </a>
 ```
@@ -55,18 +55,6 @@ Find out more about the button component and when to use it in the [design syste
 
 ---
 
-### Button disabled
-
-[Preview the button disabled component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/disabled.html)
-
-#### HTML markup
-
-```html
-<button class="ofh-button ofh-button--disabled" type="submit" disabled="disabled" aria-disabled="true">
-  Disabled button
-</button>
-```
-
 #### Nunjucks macro
 
 ```
@@ -80,18 +68,6 @@ Find out more about the button component and when to use it in the [design syste
 
 ---
 
-### Button secondary
-
-[Preview the button secondary component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/secondary.html)
-
-#### HTML markup
-
-```html
-<button class="ofh-button ofh-button--secondary" type="submit">
-  Find my location
-</button>
-```
-
 #### Nunjucks macro
 
 ```
@@ -99,23 +75,11 @@ Find out more about the button component and when to use it in the [design syste
 
 {{ button({
   "text": "Find my location",
-  "classes": "ofh-button--secondary"
+  "classes": "ofh-button--contained"
 }) }}
 ```
 
 ---
-
-### Button reverse
-
-[Preview the button reverse component](https://ourfuturehealth.github.io/design-system-toolkit/components/button/reverse.html)
-
-#### HTML markup
-
-```html
-<button class="ofh-button ofh-button--reverse" type="submit">
-  Save and continue
-</button>
-```
 
 #### Nunjucks macro
 
@@ -124,7 +88,7 @@ Find out more about the button component and when to use it in the [design syste
 
 {{ button({
   "text": "Save and continue",
-  "classes": "ofh-button--reverse"
+  "classes": "ofh-button--outlined"
 }) }}
 ```
 

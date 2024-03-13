@@ -1,17 +1,6 @@
 /* ==========================================================================
    COMPONENTS/ #BUTTON
    ========================================================================== */
-
-/**
- * 1. Ensure that any global link styles are overridden.
- * 2. Fix unwanted button padding in Firefox.
- * 3. Use a pseudo element to expand the click target area to include the
- *    button's shadow as well, in case users try to click it.
- */
-
-// Because the shadow (s0) is visually 'part of' the button, we need to reduce
-// the height of the button to compensate by adjusting its padding (s1) and
-// increase the bottom margin to include it (s1).
 $button-shadow-size: 4px;
 
 // Base button styles
@@ -52,37 +41,9 @@ $button-shadow-size: 4px;
     border: 0;
     padding: 0;
   }
-
-  &::before {
-    background: transparent;
-    bottom: -($ofh-border-width-form-element + $button-shadow-size);
-    content: '';
-    display: block;
-    left: -$ofh-border-width-form-element;
-    position: absolute;
-    right: -$ofh-border-width-form-element;
-    top: -$ofh-border-width-form-element;
-  }
-
-  //
-  // When the button is active it is shifted down by $button-shadow-size to
-  // denote a 'pressed' state. If the user happened to click at the very top
-  // of the button, their mouse is no longer over the button (because it has
-  // 'moved beneath them') and so the click event is not fired.
-  //
-  // This corrects that by shifting the top of the pseudo element so that it
-  // continues to cover the area that the user originally clicked, which means
-  // the click event is still fired.
-  //
-  &:active::before {
-    top: -($ofh-border-width-form-element + $button-shadow-size);
-  }
 }
 
-/**
- * Button variations
- */
-
+// Button variations
 .ofh-button--contained {
   background-color: $ofh-button-color-blue;
   /* stylelint-disable number-leading-zero */
@@ -112,6 +73,7 @@ $button-shadow-size: 4px;
   border: $ofh-border-width-form-element solid $ofh-button-color-blue;
   color: $ofh-button-color-blue;
 
+  &:active,
   &:hover {
     border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
     color: $ofh-button-color-dark-blue;
@@ -122,11 +84,6 @@ $button-shadow-size: 4px;
     color: $ofh-button-color-dark-blue;
     outline: 4px solid $ofh-button-color-blue;
     outline-offset: 4px;
-  }
-
-  &:active {
-    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
-    color: $ofh-button-color-dark-blue;
   }
 }
 
@@ -135,6 +92,7 @@ $button-shadow-size: 4px;
   border: $ofh-border-width-form-element solid $ofh-button-color-blue;
   color: $ofh-button-color-blue;
 
+  &:active,
   &:hover {
     background-color: transparent;
     border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
@@ -147,12 +105,6 @@ $button-shadow-size: 4px;
     color: $ofh-button-color-dark-blue;
     outline: 4px solid $ofh-button-color-blue;
     outline-offset: 4px;
-  }
-
-  &:active {
-    background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-button-color-dark-blue;
-    color: $ofh-button-color-dark-blue;
   }
 
   &-reverse {
