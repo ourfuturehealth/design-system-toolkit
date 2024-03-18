@@ -1,0 +1,70 @@
+{% from 'packages/components/task-list/macro.njk' import taskList %}
+
+{{ taskList({
+  idPrefix: "company-details",
+  items: [
+    {
+      title: {
+        text: "Company Directors"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Complete",
+          classes: "ofh-tag--green"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Registered company details"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Incomplete",
+          classes: "ofh-tag--blue"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Financial history"
+      },
+      hint: {
+        text: "Include 5 years of the company’s relevant financial information."
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Complete",
+          classes: "ofh-tag--green"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Business plan"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Pending",
+          classes: "ofh-tag--yellow"
+        }
+      }
+    },
+    {
+      title: {
+        text: "References"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Incomplete",
+          classes: "ofh-tag--blue"
+        }
+      }
+    }
+  ]
+}) }}
