@@ -60,6 +60,8 @@
 
   &:active {
     background-color: $ofh-button-color-darker-blue;
+    outline: none;
+    outline-offset: none;
   }
 }
 
@@ -81,6 +83,11 @@
   &:focus {
     outline: 4px solid $ofh-button-color-blue;
     outline-offset: 4px;
+  }
+
+  &:active {
+    outline: none;
+    outline-offset: none;
   }
 }
 
@@ -107,6 +114,11 @@
     outline-offset: 4px;
   }
 
+  &:active {
+    outline: none;
+    outline-offset: none;
+  }
+
   &-reverse {
     background-color: transparent;
     border: $ofh-border-width-form-element solid $color_ofh-white;
@@ -128,6 +140,11 @@
     &:focus {
       outline: 4px solid $color_ofh-white;
       outline-offset: 4px;
+    }
+
+    &:active {
+      outline: none;
+      outline-offset: none;
     }
   }
 }
@@ -153,6 +170,8 @@
 
   &:active {
     color: $ofh-button-color-darker-blue;
+    outline: none;
+    outline-offset: none;
   }
 
   &-reverse {
@@ -176,6 +195,8 @@
 
     &:active {
       color: $color_ofh-grey-4;
+      outline: none;
+      outline-offset: none;
     }
   }
 }
