@@ -2,273 +2,201 @@
    COMPONENTS/ #BUTTON
    ========================================================================== */
 
-/**
- * 1. Ensure that any global link styles are overridden.
- * 2. Fix unwanted button padding in Firefox.
- * 3. Use a pseudo element to expand the click target area to include the
- *    button's shadow as well, in case users try to click it.
- */
-
-// Because the shadow (s0) is visually 'part of' the button, we need to reduce
-// the height of the button to compensate by adjusting its padding (s1) and
-// increase the bottom margin to include it (s1).
-$button-shadow-size: 4px;
-
+// Base button styles
 .ofh-button {
-  @include ofh-font(19);
-  @include ofh-responsive-margin(5, 'bottom', $adjustment: $button-shadow-size); // s1
-
   -webkit-appearance: none;
-  background-color: $ofh-button-color;
+  background-color: $ofh-button-color-white;
   border: $ofh-border-width-form-element solid transparent;
-  border-radius: 4px;
-  box-shadow: 0 $button-shadow-size 0 $ofh-button-shadow-color; // s0
+  border-radius: 8px;
   box-sizing: border-box;
-  color: $ofh-button-text-color;
+  color: $ofh-button-color-white;
   cursor: pointer;
   display: inline-block;
+  font-size: 19px;
   font-weight: 600;
+  line-height: 28px;
   margin-top: 0;
-  padding: 12px ofh-spacing(3); // s2
+  padding: ofh-spacing(3) ofh-spacing(4);
   position: relative;
   text-align: center;
+  text-decoration: underline;
   vertical-align: top;
   width: auto;
 
   @include mq($until: tablet) {
-    padding: ofh-spacing(2) ofh-spacing(3); // s2
+    font-size: 16px;
+    line-height: 24px;
+    padding: 12px ofh-spacing(3); // 12px not defined in $ofh-spacing-points
   }
 
-  /* 2 */
   &:link,
   &:visited,
   &:active,
-  &:hover {
-    color: $ofh-button-text-color;
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 
-  /* 3 */
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
   }
+}
+
+// Button variations
+.ofh-button--contained {
+  background-color: $ofh-button-color-default;
+  color: $ofh-button-color-white;
 
   &:hover {
-    background-color: $ofh-button-hover-color;
+    background-color: $ofh-button-color-hover;
   }
 
   &:focus {
-    background: $ofh-focus-color;
-    box-shadow: 0 $button-shadow-size 0 $ofh-button-text-color;
-    color: $color_ofh-brand-dark-blue;
-    outline: $ofh-focus-width solid transparent;
-
-    &:visited {
-      color: $ofh-focus-text-color;
-
-      &:active {
-        color: $color_ofh-brand-dark-blue;
-      }
-
-    }
+    background-color: $ofh-button-color-active;
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
   }
 
   &:active {
-    background: $ofh-button-active-color;
-    box-shadow: none;
-    color: $ofh-button-text-color;
-    top: $button-shadow-size;
+    background-color: $ofh-button-color-active;
+    outline: none;
+    outline-offset: none;
   }
-
-  /* 4 */
-  &::before {
-    background: transparent;
-    bottom: -($ofh-border-width-form-element + $button-shadow-size);
-    content: '';
-    display: block;
-    left: -$ofh-border-width-form-element;
-    position: absolute;
-    right: -$ofh-border-width-form-element;
-    top: -$ofh-border-width-form-element;
-  }
-
-  //
-  // When the button is active it is shifted down by $button-shadow-size to
-  // denote a 'pressed' state. If the user happened to click at the very top
-  // of the button, their mouse is no longer over the button (because it has
-  // 'moved beneath them') and so the click event is not fired.
-  //
-  // This corrects that by shifting the top of the pseudo element so that it
-  // continues to cover the area that the user originally clicked, which means
-  // the click event is still fired.
-  //
-
-  &:active::before {
-    top: -($ofh-border-width-form-element + $button-shadow-size);
-  }
-
 }
 
-/**
- * Button variations
- */
-
-.ofh-button--secondary {
-  background-color: $ofh-secondary-button-color;
-  box-shadow: 0 $button-shadow-size 0 $ofh-secondary-button-shadow-color;
-  color: $ofh-button-secondary-text-color;
-
-  &:link {
-    color: $color_ofh-white;
-
-    &:active {
-      color: $color_ofh-white;
-    }
-  }
+.ofh-button--outlined {
+  border: $ofh-border-width-form-element solid $ofh-button-color-default;
+  color: $ofh-button-color-default;
 
   &:hover {
-    background-color: darken($ofh-secondary-button-color, 10%);
-    color: $color_ofh-white;
+    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
+    color: $ofh-button-color-hover;
+  }
+
+  &:active,
+  &:focus {
+    border: $ofh-border-width-form-element solid $ofh-button-color-active;
+    color: $ofh-button-color-active;
   }
 
   &:focus {
-    background: $ofh-focus-color;
-    box-shadow: 0 $button-shadow-size 0 $ofh-focus-text-color;
-    color: $color_ofh-brand-dark-blue;
-    outline: $ofh-focus-width solid transparent;
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
   }
 
   &:active {
-    background: $ofh-secondary-button-active-color;
-    box-shadow: none;
-    color: $ofh-button-secondary-text-color;
-    top: $button-shadow-size;
+    outline: none;
+    outline-offset: none;
   }
-
-  &.ofh-button--disabled {
-    background-color: $ofh-secondary-button-color;
-  }
-
-  &:visited {
-    color: $color_ofh-white;
-  }
-
 }
 
-.ofh-text-white .ofh-text-white:visited {
-  color: $color_ofh-white;
-
-}
-
-.ofh-button--reverse {
-  background-color: $ofh-reverse-button-color;
-  box-shadow: 0 $button-shadow-size 0 $ofh-reverse-button-shadow-color;
-  color: $ofh-reverse-button-text-color;
+.ofh-button--ghost {
+  background-color: transparent;
+  border: $ofh-border-width-form-element solid $ofh-button-color-default;
+  color: $ofh-button-color-default;
 
   &:hover {
-    background-color: darken($ofh-reverse-button-color, 5%);
-    color: $ofh-reverse-button-text-color;
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
+    color: $ofh-button-color-hover;
+  }
+
+  &:active,
+  &:focus {
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid$ofh-button-color-active;
+    color: $ofh-button-color-active;
   }
 
   &:focus {
-    background: $ofh-focus-color;
-    box-shadow: 0 $button-shadow-size 0 $ofh-focus-text-color;
-    color: $ofh-button-secondary-text-color;
-    outline: $ofh-focus-width solid transparent;
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
   }
 
   &:active {
-    background: $ofh-reverse-button-active-color;
-    box-shadow: none;
-    color: $ofh-text-white-color;
-    top: $button-shadow-size;
+    outline: none;
+    outline-offset: none;
   }
 
-  &:link {
-    color: $ofh-reverse-button-text-color;
+  &-reverse {
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-white;
+    color: $ofh-button-color-white;
 
-    &:active {
-      color: $ofh-button-text-color;
+    &:hover {
+      background-color: transparent;
+      border: $ofh-border-width-form-element solid $ofh-button-color-white-hover;
+      color: $ofh-button-color-white-hover;
     }
-  }
 
-  &.ofh-button--disabled {
-    background-color: $color_ofh-brand-yellow;
+    &:active,
+    &:focus {
+      background-color: transparent;
+      border: $ofh-border-width-form-element solid $ofh-button-color-white-active;
+      color: $ofh-button-color-white-active;
+    }
 
     &:focus {
-      background-color: $ofh-reverse-button-color;
+      outline: 4px solid $ofh-button-color-white;
+      outline-offset: 4px;
+    }
+
+    &:active {
+      outline: none;
+      outline-offset: none;
     }
   }
-
 }
 
-/**
- * Button disabled states
- */
-/* stylelint-disable string-quotes */
-.ofh-button--disabled,
-.ofh-button[disabled="disabled"],
-.ofh-button[disabled] {
-  background-color: $ofh-button-color;
-  opacity: (.5);
-  pointer-events: none;
+.ofh-button--text {
+  background-color: transparent;
+  color: $ofh-button-color-default;
+  padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
+
+  @include mq($until: tablet) {
+    padding: ofh-spacing(2) ofh-spacing(0);
+  }
 
   &:hover {
-    background-color: $ofh-button-color;
-    cursor: default;
+    color: $ofh-button-color-hover;
   }
 
   &:focus {
-    background-color: $ofh-button-color;
-    outline: none;
+    border-radius: 0;
+    color: $ofh-button-color-active;
+    outline: 4px solid $ofh-button-color-default;
   }
 
   &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-button-shadow-color; // s0
-    top: 0;
-  }
-
-}
-
-.ofh-button--secondary[disabled="disabled"],
-.ofh-button--secondary[disabled] {
-  background-color: $ofh-secondary-button-color;
-  opacity: (.5);
-
-  &:hover {
-    background-color: $ofh-secondary-button-color;
-    cursor: default;
-  }
-
-  &:focus {
+    color: $ofh-button-color-active;
     outline: none;
+    outline-offset: none;
   }
 
-  &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-secondary-button-shadow-color; // s0
-    top: 0;
+  &-reverse {
+    background-color: transparent;
+    color: $ofh-button-color-white;
+    padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
+
+    @include mq($until: tablet) {
+      padding: ofh-spacing(2) ofh-spacing(0);
+    }
+
+    &:hover {
+      color: $ofh-button-color-white-hover;
+    }
+
+    &:focus {
+      border-radius: 0;
+      color: $ofh-button-color-white-active;
+      outline: 4px solid $ofh-button-color-white;
+    }
+
+    &:active {
+      color: $ofh-button-color-white-active;
+      outline: none;
+      outline-offset: none;
+    }
   }
-
-}
-
-.ofh-button--reverse[disabled="disabled"],
-.ofh-button--reverse[disabled] {
-  background-color: $ofh-reverse-button-color;
-  opacity: (.5);
-
-  &:hover {
-    background-color: $ofh-reverse-button-color;
-    cursor: default;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    box-shadow: 0 $button-shadow-size 0 $ofh-reverse-button-shadow-color; // s0
-    top: 0;
-  }
-
 }

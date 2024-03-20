@@ -1,5 +1,5 @@
 {% set html_style = 'background-color: #f0f4f5;' %}
-{% set pageTitle = 'Button reverse' %}
+{% set pageTitle = 'Button contained' %}
 {% from 'packages/components/button/macro.njk' import button %}
 {% extends 'standalone-example-layout.njk' %}
 
@@ -13,7 +13,7 @@
         <div class="ofh-grid-column-two-thirds">
           {{ button({
             "text": "Save and continue",
-            "classes": "ofh-button--reverse"
+            "classes": "ofh-button--contained"
           }) }}
         </div>
       </div>
