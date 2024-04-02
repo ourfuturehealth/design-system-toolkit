@@ -18,6 +18,13 @@ Find out more about the button component and when to use it in the [design syste
 </button>
 ```
 
+Or can be used with link element
+```html
+<a class="ofh-button ofh-button--contained" href="/">
+  Save and continue
+</a>
+```
+
 #### Nunjucks macro
 
 ```

@@ -1,14 +1,16 @@
 /* ==========================================================================
    COMPONENTS/ #BUTTON
    ========================================================================== */
+/* stylelint-disable selector-no-qualifying-type */
 
 // Base button styles
-.ofh-button {
+.ofh-button,
+a.ofh-button {
   -webkit-appearance: none;
   background-color: $ofh-button-color-white;
   border: $ofh-border-width-form-element solid transparent;
   border-radius: 8px;
-  box-sizing: border-box;
+  box-shadow: none;
   color: $ofh-button-color-white;
   cursor: pointer;
   display: inline-block;
@@ -29,7 +31,6 @@
     padding: 12px ofh-spacing(3); // 12px not defined in $ofh-spacing-points
   }
 
-  &:link,
   &:visited,
   &:active,
   &:hover,
@@ -44,7 +45,8 @@
 }
 
 // Button variations
-.ofh-button--contained {
+.ofh-button--contained,
+a.ofh-button.ofh-button--contained {
   background-color: $ofh-button-color-default;
   color: $ofh-button-color-white;
 
@@ -65,7 +67,8 @@
   }
 }
 
-.ofh-button--outlined {
+.ofh-button--outlined,
+a.ofh-button.ofh-button--outlined {
   border: $ofh-border-width-form-element solid $ofh-button-color-default;
   color: $ofh-button-color-default;
 
@@ -91,7 +94,8 @@
   }
 }
 
-.ofh-button--ghost {
+.ofh-button--ghost,
+a.ofh-button.ofh-button--ghost {
   background-color: transparent;
   border: $ofh-border-width-form-element solid $ofh-button-color-default;
   color: $ofh-button-color-default;
@@ -149,7 +153,8 @@
   }
 }
 
-.ofh-button--text {
+.ofh-button--text,
+a.ofh-button.ofh-button--text {
   background-color: transparent;
   color: $ofh-button-color-default;
   padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
