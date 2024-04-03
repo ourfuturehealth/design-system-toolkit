@@ -6,6 +6,11 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.0.0-alpha.0] - 2023-04-03
+
+### Added
+- **Breaking change**: added new button variations, if your app is using the old button variations, you would have to ensure your app is using the latest button variation classes when updating to this version.
+
 ## [v2.0.0-alpha.6] - 2023-12-14
 
 ### Added
