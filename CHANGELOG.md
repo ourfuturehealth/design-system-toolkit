@@ -6,6 +6,12 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.0.0-alpha.1] - 2023-04-03
+
+### Changed
+
+- Updated the underline thickness and spacing on **button** components
+
 ## [v3.0.0-alpha.0] - 2023-04-03
 
 ### Added
