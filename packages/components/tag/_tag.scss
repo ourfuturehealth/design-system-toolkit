@@ -36,21 +36,21 @@
 }
 
 .ofh-tag--green {
-  background-color: tint($color_ofh-brand-green, 80%);
+  background-color: $color_ofh-brand-light-green-5;
   color: $color_ofh-brand-green-1;
 }
 
 .ofh-tag--blue {
-  background-color: tint($color_ofh-brand-blue, 80%);
+  background-color: $color_ofh-brand-blue-5;
   color: $color_ofh-brand-blue-1;
 }
 
 .ofh-tag--red {
-  background-color: tint($color_ofh-brand-red, 80%);
+  background-color: $color_ofh-brand-red-5;
   color: $color_ofh-brand-red-1;
 }
 
 .ofh-tag--yellow {
-  background-color: tint($color_ofh-brand-yellow, 70%);
+  background-color: $color_ofh-brand-yellow-5;
   color: $color_ofh-brand-orange-1;
 }
