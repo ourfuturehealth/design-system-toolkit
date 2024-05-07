@@ -1,6 +1,9 @@
 // Our Future Health design system toolkit
 @import '../../packages/ofh';
 
+// Add custom styling for Doc site components
+@import '../components/header/header';
+
 // App specific styles
 @import 'app/app';
 
