@@ -11,8 +11,12 @@
 {% endif %}
 
 {# Define common attributes that we can use across all element types #}
-{% set commonAttributes %} class="ofh-button ofh-button--contained
-  {%- if params.classes %} {{ params.classes }}{% endif %}
+{% set commonAttributes %} class="ofh-button
+  {%- if params.classes %}
+    {{ params.classes }}
+  {% else %}
+    ofh-button--contained
+  {% endif %}
   {%- if params.disabled %} ofh-button--disabled{% endif %}"
   {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}
 {%- endset -%}
