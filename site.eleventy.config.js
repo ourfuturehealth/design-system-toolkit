@@ -8,6 +8,7 @@ module.exports = function configuration(eleventyConfig) {
 
   // Documentation assets e.g. images, PDFs.
   eleventyConfig.addPassthroughCopy({ 'site/assets': 'assets' });
+  eleventyConfig.addPassthroughCopy({ 'site/components': 'components' });
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `site/views/_includes/standalone-example-layout.njk`.
