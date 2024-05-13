@@ -193,8 +193,6 @@ address {
   @include ofh-responsive-margin(7, 'bottom');
   /* [1] */
 
-  
-
   p,
   ul {
     @include ofh-font(24);
