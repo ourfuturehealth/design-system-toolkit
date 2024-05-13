@@ -3,9 +3,16 @@
 
 // App specific styles
 @import 'app/app';
+@import '../components/header/header';
+@import '../components/inset-text/inset-text';
 
 // Design examples
 @import 'design-example/design-example';
+
+// Main body styling
+.body-ds {
+  background-color: $color_ofh-white;
+}
 
 // HEADER + MAIN NAV
 
