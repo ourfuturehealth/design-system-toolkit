@@ -8,7 +8,6 @@
 {% from 'packages/components/footer/macro.njk' import footer %}
 {% from 'packages/components/do-dont-list/macro.njk' import list %}
 {% from 'packages/components/images/macro.njk' import image %}
-{% from 'packages/components/inset-text/macro.njk' import insetText %}
 {% from 'packages/components/pagination/macro.njk' import pagination %}
 {% from 'packages/components/skip-link/macro.njk' import skipLink %}
 {% from 'packages/components/tables/macro.njk' import table %}
@@ -71,10 +70,6 @@
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
     <a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
-
-    <div class="ofh-width-container">
-      <span class="ofh-heading-m ofh-u-padding-top-2 ofh-u-margin-bottom-2">Everything on this site is under review. Not all references to the NHS have been changed yet.</span>
-    </div>
 
     {% include "_header.njk" %}
 
