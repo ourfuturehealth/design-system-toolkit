@@ -1,0 +1,19 @@
+{% macro footer(params) %}
+<footer role="contentinfo">
+  <div class="ofh-footer-ds
+    {%- if params.classes %} {{ params.classes }}{% endif %}" id="ofh-footer"
+    {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <div class="ofh-width-container">
+      {%- if params.links %}
+      <h2 class="ofh-u-visually-hidden">Support links</h2>
+      <ul class="ofh-footer-ds__list">
+        {%- for item in params.links %}
+        <li class="ofh-footer-ds__list-item"><a class="ofh-footer-ds__list-item-link" href="{{ item.URL }}">{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+      {% endif %}
+      <p class="ofh-footer-ds__copyright">{% if params.copyright %}{{ params.copyright | safe }}{% else %}&copy; Crown copyright{% endif %}</p>
+    </div>
+  </div>
+</footer>
+{% endmacro %}
