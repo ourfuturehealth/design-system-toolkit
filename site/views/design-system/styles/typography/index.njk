@@ -45,6 +45,7 @@
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#font">Font</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#typescale">Typescale</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#headings">Headings</a></li>
+        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#captions">Captions</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#paragraphs">Paragraphs</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#font-override-classes">Font override classes</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#links">Links</a></li>
@@ -77,11 +78,26 @@
   <p>Write all headings in sentence case.</p>
   <p>Style headings consistently to create a clear content structure throughout your service and a clear content hierarchy on a page.</p>
   <p>Heading levels have meaning, especially for screen reader users and search engines. Using correct heading levels improves SEO and helps people using assistive technology to navigate through a page.</p>
+  <h3>Heading overrides</h2>
+  <p>We have 5 different classes that can be used to change the default font-size and spacing of headings. These classes can be used with any heading. Always ensure heading structure is semantically correct.</p>
+
 
   {{ designExample({
     group: "styles",
     item: "typography",
     type: "headings",
+    htmlOnly: true
+  }) }}
+
+  <h2 id="captions">Captions</h2>
+  <p>Sometimes you may need to make it clear that a page is part of a larger section or group. To do this, you can use a heading with a caption</p>
+  <p>We have 3 different sizes of caption, by default captions will display above headings. You can use an additional class to display the caption below headings.</p>
+  <p>Consider whether the caption should be part of the page heading. This will determine whether the span is nested in the heading or not.</p>
+
+  {{ designExample({
+    group: "styles",
+    item: "typography",
+    type: "captions",
     htmlOnly: true
   }) }}
 
@@ -125,8 +141,8 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>Our full typography scale goes from 14px to 64px on desktop and tablet. You can add these font size override classes to any other typographic class or element, and they will change the font size.</p>
-
+  <p>Our full typography scale goes from 14px to 64px. You can add these font size override classes to any other typographic class or element, and they will change the font size.</p>
+  <p>Only use these font size overrides with <code>p</code> tags.
   {{ designExample({
     group: "styles",
     item: "typography",
