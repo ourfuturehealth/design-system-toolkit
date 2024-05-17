@@ -7,14 +7,14 @@
  */
 
 .app-ogl-footer {
-  background-color: $color_ofh-grey-4;
+  background-color: $color_ofh-brand-dark-blue;
 }
 
 .app-ogl-footer--text {
   @include ofh-font(16);
   @include ofh-responsive-padding(5, 'bottom');
 
-  color: $color_ofh-grey-1;
+  color: $color_ofh-white;
   margin-bottom: 0;
   padding-bottom: ofh-spacing(4);
 
