@@ -6,6 +6,8 @@
 // Base button styles
 .ofh-button,
 a.ofh-button {
+  @include ofh-responsive-margin(5, 'bottom');
+
   -webkit-appearance: none;
   background-color: $ofh-button-color-white;
   border: $ofh-border-width-form-element solid transparent;
