@@ -2,8 +2,8 @@
 li code,
 p code,
 td code {
-  background-color: $color_ofh-white;
-  color: #d14; // sass-lint:disable-line no-color-hex no-color-literals
+  background-color: $color_ofh-grey-6;
+  color: #D40202; // sass-lint:disable-line no-color-hex no-color-literals
   padding: 2px ofh-spacing(2);
   word-break: break-word;
 }

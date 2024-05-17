@@ -12,17 +12,16 @@ $button-shadow-size: 4px;
   .app-link {
 
     &--copy {
-      border-bottom-color: $ofh-button-color;
-      box-shadow: 0 2px 0 $ofh-button-color;
+      border-radius: $ofh-border-radius;
       margin-bottom: 16px;
-      padding: 2px 8px;
+      padding: 4px 8px;
       position: absolute;
       right: 16px;
       text-transform: none;
       top: 16px;
 
       &:hover {
-        background-color: $color_ofh-grey-5;
+        background-color: $ofh-link-hover-color;
       }
 
       &:focus {
