@@ -6,6 +6,13 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.0.1-alpha.1] - 2023-05-17
+
+### Changed
+
+- Added back the original default margin bottom spacing on **button** components
+- Updates to the doc site - allowing custom components to be used there without affecting the design system.
+
 ## [v3.0.0-alpha.1] - 2023-04-03
 
 ### Changed
