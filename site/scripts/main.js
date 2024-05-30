@@ -6,6 +6,7 @@ import Details from '../../packages/components/details/details';
 import Checkboxes from '../../packages/components/checkboxes/checkboxes';
 import Radios from '../../packages/components/radios/radios';
 import Card from '../../packages/components/card/card';
+import Button from '../../packages/components/button/button';
 
 // Toolkit polyfills
 import '../../packages/polyfills';
@@ -20,6 +21,7 @@ SkipLink();
 Checkboxes();
 Radios();
 Card();
+Button();
 
 // Initialise documentation site components
 
