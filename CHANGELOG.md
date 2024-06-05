@@ -6,20 +6,27 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
-## [v3.0.1-alpha.1] - 2023-05-17
+## [v3.0.2-alpha.1] - 2024-06-05
+
+### Changed
+
+- Updated `ofh-main-wrapper` styling to ensure the full viewport is used
+- Doc site header and footer updates
+
+## [v3.0.1-alpha.1] - 2024-05-17
 
 ### Changed
 
 - Added back the original default margin bottom spacing on **button** components
 - Updates to the doc site - allowing custom components to be used there without affecting the design system.
 
-## [v3.0.0-alpha.1] - 2023-04-03
+## [v3.0.0-alpha.1] - 2024-04-03
 
 ### Changed
 
 - Updated the underline thickness and spacing on **button** components
 
-## [v3.0.0-alpha.0] - 2023-04-03
+## [v3.0.0-alpha.0] - 2024-04-03
 
 ### Added
 - **Breaking change**: added new button variations, if your app is using the old button variations, you would have to ensure your app is using the latest button variation classes when updating to this version.
