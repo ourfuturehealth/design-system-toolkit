@@ -40,7 +40,17 @@
 @include govuk-exports('govuk/objects/main-wrapper') {
   .ofh-main-wrapper {
     @include govuk-main-wrapper;
+    min-height: calc(100vh - 325px);
+
+    @include mq($until: desktop) {
+      min-height: calc(100vh - 480px);
+    }
+
+    @include mq($until: mobile) {
+      min-height: calc(100vh - 600px);
+    }
   }
+
   .ofh-main-wrapper--l {
     @include govuk-main-wrapper--l;
   }
