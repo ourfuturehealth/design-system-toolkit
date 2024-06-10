@@ -6,6 +6,12 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.0.3-alpha.1] - 2024-06-05
+
+### Changed
+
+- Updated `ofh-date-input__item` styling to include `vertical-align` to prevent date inputs from shifting
+
 ## [v3.0.2-alpha.1] - 2024-06-05
 
 ### Changed
