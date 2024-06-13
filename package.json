@@ -34,7 +34,7 @@
     "eslint": "^8.36.0",
     "eslint-config-nhsuk": "^1.0.0",
     "glob": "^8.1.0",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-rename": "^2.0.0",
