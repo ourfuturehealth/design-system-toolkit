@@ -1,0 +1,19 @@
+name: Kondukto security scan
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Run Kondukto Scan
+        uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
+        with:
+          token: ${{ secrets.KDT_TOKEN }}
+          languages: 'js'
