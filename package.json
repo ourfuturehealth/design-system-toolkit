@@ -55,7 +55,7 @@
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.19.0",
     "wait-on": "^7.0.1",
-    "webpack": "^5.76.3",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.0.1",
     "webpack-stream": "^7.0.0"
   },
