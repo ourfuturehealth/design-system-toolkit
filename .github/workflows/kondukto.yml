@@ -15,5 +15,5 @@ jobs:
       - name: Run Kondukto Scan
         uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
         with:
-          token: ${{ secrets.KDT_TOKEN }}
+          token: ${{ secrets.KONDUKTO_TOKEN }}
           languages: 'js'
