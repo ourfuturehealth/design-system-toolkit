@@ -2,7 +2,9 @@ name: Kondukto security scan
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - feature/PXG-1048-enable-security-scanning-using-kondukto
   workflow_dispatch:
 
 jobs:
