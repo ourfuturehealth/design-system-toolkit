@@ -5,23 +5,23 @@ on:
     branches:
       - main
       - feature/PXG-1048-enable-security-scanning-using-kondukto
-  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Authenticate with GH Access Token
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const token = process.env.GH_ACCESS_TOKEN;
-            console.log('Authenticated successfully!');
+      - name: Authenticate with GH_ACCESS_TOKEN
         env:
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+        run: |
+          echo "${{ secrets.GH_ACCESS_TOKEN }}" | gh auth login --with-token
+          gh auth status
 
       - name: Run Kondukto Scan
         uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
