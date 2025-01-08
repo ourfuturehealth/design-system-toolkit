@@ -7,6 +7,7 @@ import Checkboxes from '../../packages/components/checkboxes/checkboxes';
 import Radios from '../../packages/components/radios/radios';
 import Card from '../../packages/components/card/card';
 import AutoComplete from '../../packages/components/auto-complete/auto-complete';
+import CharacterCount from '../../packages/components/character-count/character-count';
 
 // Toolkit polyfills
 import '../../packages/polyfills';
@@ -22,6 +23,7 @@ Checkboxes();
 Radios();
 Card();
 AutoComplete();
+CharacterCount();
 
 // Initialise documentation site components
 

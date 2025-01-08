@@ -12,8 +12,8 @@
   @include ofh-font($size: 19);
   list-style-type: none;
   margin-top: 0;
-  @include ofh-responsive-margin(6, 'bottom');
   padding: 0;
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
 .ofh-task-list__item {
