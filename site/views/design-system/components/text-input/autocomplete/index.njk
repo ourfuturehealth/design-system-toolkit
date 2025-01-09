@@ -1,0 +1,13 @@
+{% from 'packages/components/input/macro.njk' import input %}
+
+<div class="ofh-js-autocomplete-element">
+  <div class="ofh-form-group">
+   <label class="ofh-label ofh-label--s" for="affiliation_organisation_name">Organisation name</label>
+   <input class="ofh-input" data-field="organisation-name-autocomplete" type="text" name="affiliation[organisation_name]" id="affiliation_organisation_name">
+  </div>
+  <div class="ofh-js-autocomplete-element-suggestions" data-options="organisation_name_options" data-default-value="" data-field-name="affiliation[organisation_name]"></div>
+</div>
+
+<script>
+  window.organisation_name_options = ["Cambrige","Department of Health","KCL","OFH","Oxford","UCL","University of Manchester","University of York"];
+</script>

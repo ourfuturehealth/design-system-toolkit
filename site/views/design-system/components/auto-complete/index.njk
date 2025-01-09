@@ -1,0 +1,23 @@
+{% set pageTitle = "Autocomplete" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Helps users choose answers from a list you provide" %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "January 2025" %}
+{% set backlog_issue_id = "RP-4020" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "auto-complete",
+    type: "default"
+  }) }}
+
+{% endblock %}
