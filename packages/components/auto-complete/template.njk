@@ -1,0 +1,17 @@
+{% from "../input/macro.njk" import input %}
+
+<div class="ofh-js-autocomplete-element">
+  {{ input({
+    "label": {
+      "text": params.label
+    },
+    "id": params.id,
+    "name": params.name,
+    "value": params.value,
+    "errorMessage": params.errorMessage
+  }) }}
+  <div class="ofh-js-autocomplete-element-suggestions" data-default-value="{{params.value}}" data-field-name="{{params.name}}"></div>
+  <script>
+    window.{{params.id}}_options = [{% for param in params.options %} "{{param}}", {% endfor %}]
+  </script>
+</div>

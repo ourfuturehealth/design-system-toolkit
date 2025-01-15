@@ -1,0 +1,9 @@
+{% from 'packages/components/auto-complete/macro.njk' import autoComplete %}
+
+{{ autoComplete({
+  label: "Organisation name",
+  id: "affiliation_organisation_name",
+  name: "affiliation[organisation_name]",
+  value: "",
+  options: ["Cambrige","Department of Health","KCL","OFH","Oxford","UCL","University of York"]
+}) }}

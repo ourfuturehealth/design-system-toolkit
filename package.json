@@ -79,5 +79,8 @@
     "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git"
   },
   "homepage": "https://ourfuturehealth.github.io/design-system-toolkit/",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "accessible-autocomplete": "^3.0.1"
+  }
 }
