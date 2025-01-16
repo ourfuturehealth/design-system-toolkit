@@ -7,6 +7,7 @@ import Header from './components/header/header';
 import Radios from './components/radios/radios';
 import SkipLink from './components/skip-link/skip-link';
 import AutoComplete from './components/auto-complete/auto-complete';
+import CharacterCount from './components/character-count/character-count';
 
 import './polyfills';
 
@@ -20,4 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
   Radios();
   SkipLink();
   AutoComplete();
+  CharacterCount();
 });

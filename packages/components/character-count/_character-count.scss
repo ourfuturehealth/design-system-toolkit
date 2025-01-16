@@ -1,0 +1,17 @@
+.ofh-character-count {
+  @include ofh-responsive-margin(6, 'bottom');
+
+  .ofh-form-group,
+  .ofh-textarea {
+    margin-bottom: ofh-spacing(1);
+  }
+}
+
+.ofh-character-count__message {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.ofh-character-count__message--disabled {
+  visibility: hidden;
+}

@@ -81,6 +81,7 @@
   "homepage": "https://ourfuturehealth.github.io/design-system-toolkit/",
   "license": "MIT",
   "dependencies": {
-    "accessible-autocomplete": "^3.0.1"
+    "accessible-autocomplete": "^3.0.1",
+    "i18n-js": "^4.5.1"
   }
 }
