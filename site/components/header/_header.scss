@@ -115,7 +115,8 @@
     box-shadow: none;
 
     .ofh-logo {
-      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
     }
   }
 
@@ -187,7 +188,8 @@
 
   &:focus {
     @include ofh-focused-button();
-    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
+    outline: $ofh-focus-width solid $ofh-focus-color;
+    outline-offset: $ofh-focus-width;
   }
 
   @include mq($from: tablet) {
@@ -236,9 +238,7 @@
   border-top-right-radius: 0;
   padding: 0 ofh-spacing(3);
   &:focus {
-    border: 4px solid $ofh-focus-text-color;
-    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
-    outline: $ofh-focus-width solid transparent;
+    outline: $ofh-focus-width solid $ofh-focus-color;
     outline-offset: $ofh-focus-width;
     padding: 0 9px;
   }
@@ -319,9 +319,7 @@
     }
 
     &:focus {
-      background-color: $ofh-focus-color;
-      box-shadow: 0 -4px $ofh-focus-color, 0 $ofh-focus-width $ofh-focus-text-color;
-      outline: $ofh-focus-width solid transparent;
+      outline: $ofh-focus-width solid $ofh-focus-color;
       outline-offset: $ofh-focus-width;
 
       &:hover {
@@ -360,7 +358,8 @@
 
     &:focus {
       @include ofh-focused-button();
-      box-shadow: 0 -2px $ofh-focus-color, 0 $ofh-focus-width $ofh-focus-text-color;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
     }
 
     &:active {
@@ -444,8 +443,8 @@
 
   &:focus {
     @include ofh-focused-button;
-
-    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
+    outline: $ofh-focus-width solid $ofh-focus-color;
+    outline-offset: $ofh-focus-width;
   }
 
 }
@@ -601,13 +600,8 @@
 
   &:active,
   &:focus {
-    background-color: $ofh-focus-color;
-    border-bottom: $ofh-focus-width solid $ofh-focus-text-color;
-    box-shadow: none;
-    color: $ofh-focus-text-color;
-    outline: $ofh-focus-width solid transparent;
+    outline: $ofh-focus-width solid $ofh-focus-color;
     outline-offset: $ofh-focus-width;
-    text-decoration: none;
 
     &:hover {
       color: $ofh-focus-text-color;
@@ -700,8 +694,8 @@
   }
 
   &:focus {
-    background: $ofh-focus-color;
-    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
+    outline: $ofh-focus-width solid $ofh-focus-color;
+    outline-offset: $ofh-focus-width;
 
     .ofh-header__service-name {
       color: $ofh-focus-text-color;
@@ -778,8 +772,8 @@
     }
 
     &:focus {
-      background: $ofh-focus-color;
-      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
 
       .ofh-organisation-name,
       .ofh-organisation-descriptor {
@@ -914,7 +908,8 @@
     }
 
     &:focus {
-      background-color: $ofh-focus-color;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
 
       .ofh-icon__search {
         fill: $ofh-focus-text-color;

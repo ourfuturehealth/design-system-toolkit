@@ -776,8 +776,8 @@
     }
 
     &:focus {
-      background: $ofh-focus-color;
-      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color, 0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
 
       .ofh-organisation-name,
       .ofh-organisation-descriptor {
