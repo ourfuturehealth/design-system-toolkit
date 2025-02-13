@@ -49,7 +49,6 @@
 
   &:focus {
     @include ofh-focused-text();
-    outline: $ofh-focus-width solid transparent;
 
     .ofh-icon {
       fill: $ofh-focus-text-color;
