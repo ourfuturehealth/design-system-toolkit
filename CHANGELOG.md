@@ -6,6 +6,13 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.1.0-alpha.1] - 2024-02-13
+
+### Changed
+
+- Added Autocomplete component
+- Added Character count component
+
 ## [v3.0.3-alpha.1] - 2024-06-05
 
 ### Changed
