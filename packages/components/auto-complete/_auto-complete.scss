@@ -35,10 +35,9 @@
 }
 
 .autocomplete__input--focused {
-  border: 2px solid $ofh-focus-text-color;
-  box-shadow: inset 0 0 0 2px;
-  outline: 3px solid $ofh-focus-color;
-  outline-offset: 0;
+  border: $ofh-focus-width solid $ofh-input-border-active-color;
+  outline: $ofh-focus-width solid $ofh-focus-color;
+  outline-offset: $ofh-focus-width;
 }
 
 .autocomplete__input--show-all-values {

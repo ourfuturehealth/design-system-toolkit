@@ -28,11 +28,8 @@
     }
 
     &:focus {
-      background-color: $ofh-focus-color;
-      box-shadow: 0 $ofh-focus-width $ofh-focus-text-color;
-      color: $ofh-focus-text-color;
-      outline: $ofh-focus-width solid transparent;
-      text-decoration: none;
+      outline: $ofh-focus-width solid $ofh-focus-color;
+      outline-offset: $ofh-focus-width;
 
       &:hover {
         color: $ofh-focus-text-color;
