@@ -601,7 +601,7 @@
   &:active,
   &:focus {
     outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline-offset: -$ofh-focus-width;
 
     &:hover {
       color: $ofh-focus-text-color;

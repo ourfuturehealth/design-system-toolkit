@@ -10,8 +10,8 @@
 //
 
 @mixin ofh-focused-text {
-  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
-  outline-offset: $ofh-focus-width;
+  outline: 3px solid $ofh-focus-color; /* 1 */
+  outline-offset: 1px;
   text-decoration: none;
 }
 
