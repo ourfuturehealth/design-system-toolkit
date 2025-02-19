@@ -6,6 +6,12 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
+## [v3.2.0-alpha.1] - 2024-02-19
+
+### Changed
+
+- Updated focus styling of components to use visible outline to improve accessibility.
+
 ## [v3.1.0-alpha.1] - 2024-02-13
 
 ### Changed
