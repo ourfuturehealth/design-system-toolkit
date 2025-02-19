@@ -8,6 +8,7 @@
  */
 
 .ofh-skip-link {
+  background-color: $color_ofh-white;
   left: -9999px; /* [1] */
   padding: ofh-spacing(2);
   position: absolute;
