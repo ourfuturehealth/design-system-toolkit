@@ -439,8 +439,6 @@
 
   &:focus {
     @include ofh-focused-button;
-
-    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
 }
