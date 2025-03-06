@@ -395,8 +395,6 @@
 .ofh-header__menu-toggle {
   @include toggle-button();
 
-  border-color: $color_ofh-brand-dark-blue;
-  color: $color_ofh-brand-dark-blue;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -421,8 +419,6 @@
 
   &:focus {
     @include ofh-focused-button;
-
-    box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
 }
