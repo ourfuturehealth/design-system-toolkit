@@ -270,32 +270,35 @@
 //
 
 @mixin toggle-button() {
-  background-color: transparent;
-  border: 1px solid $color_ofh-white;
+  background-color: $ofh-button-color-white;
+  border: $ofh-border-width-form-element solid $ofh-button-color-default;
+  color: $ofh-button-color-default;
+  font-size: 18px;
   border-radius: $ofh-border-radius;
-  color: $ofh-text-white-color;
-  cursor: pointer;
 
+  cursor: pointer;
 
   &::-moz-focus-inner {
     border: 0; // [1] //
   }
 
   &:hover {
-    background-color: $color_shade_ofh-blue-35;
-    border-color: $color_ofh-grey-5;
+    background-color: $ofh-button-color-white;
+    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
+    color: $ofh-button-color-hover;
     box-shadow: none;
+    text-decoration: underline;
   }
 
   &:focus {
-    border: 1px solid $ofh-focus-color !important; /* stylelint-disable-line declaration-no-important */ /* [2] */
+    @include ofh-focused-button();
   }
 
   &:active,
   &.is-active {
-    background-color: $color_shade_ofh-blue-50;
-    border-color: $color_ofh-grey-5;
-    color: $color_ofh-grey-5;
+    background-color: $ofh-button-color-white;
+    border: $ofh-border-width-form-element solid $ofh-button-color-active;
+    color: $ofh-button-color-active;
   }
 
 }
