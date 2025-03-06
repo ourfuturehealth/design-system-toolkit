@@ -282,103 +282,13 @@
   }
 }
 
-.ofh-search__submit {
-  border: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: $ofh-border-radius;
-  border-top-left-radius: 0;
-  border-top-right-radius: $ofh-border-radius;
-  float: right;
-  font-size: inherit;
-  line-height: inherit;
-  outline: none;
-  padding: 0;
-
-  &::-moz-focus-inner {
-    border: 0; /* [4] */
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  @include mq($until: tablet) {
-    background-color: $color_ofh-brand-green;
-    height: 52px; /* [2] */
-    margin: 0;
-    padding: ofh-spacing(2) ofh-spacing(2) 0;
-
-    .ofh-icon__search {
-      fill: $color_ofh-white;
-      height: 38px; /* [3] */
-      width: 38px; /* [3] */
-    }
-
-    &:hover {
-      background-color: $ofh-button-hover-color;
-    }
-
-    &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
-
-      &:hover {
-        background-color: $ofh-focus-color;
-
-        .ofh-icon {
-          fill: $ofh-focus-text-color;
-        }
-      }
-
-      .ofh-icon {
-        fill: $ofh-focus-text-color;
-      }
-    }
-  }
-
-  @include mq($from: tablet) {
-    background-color: $color_ofh-grey-5;
-    display: block;
-    height: ofh-spacing(6); /* [2] */
-    width: 44px; /* [2] */
-
-    .ofh-icon__search {
-      height: 27px; /* [3] */
-      width: 27px; /* [3] */
-    }
-
-    &:hover {
-      background-color: $color_shade_ofh-blue-35;
-      border: 1px solid $color_ofh-white;
-
-      .ofh-icon__search {
-        fill: $color_ofh-white;
-      }
-    }
-
-    &:focus {
-      @include ofh-focused-button();
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
-    }
-
-    &:active {
-      background-color: $color_shade_ofh-blue-50;
-      border: 0;
-
-      .ofh-icon__search {
-        fill: $color_ofh-white;
-      }
-    }
-  }
-}
-
 .ofh-search__close {
   @include mq($until: tablet) {
     @include close-button();
 
     margin-left: ofh-spacing(2);
-    margin-right: - ofh-spacing(2); /* [11] */
+    margin-right: - ofh-spacing(2);
+    /* [11] */
     margin-top: ofh-spacing(2);
 
     &:focus {
