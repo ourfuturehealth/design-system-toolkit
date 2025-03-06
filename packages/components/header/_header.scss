@@ -872,69 +872,6 @@
 
   }
 
-  .ofh-search__submit {
-    background-color: $color_ofh-brand-yellow;
-
-    .ofh-icon__search {
-      fill: $color_ofh-white;
-    }
-
-    &:hover {
-      background-color: $color_shade_ofh-blue-20;
-      border-color: $color_shade_ofh-blue-20;
-    }
-
-    &:focus {
-      background-color: $ofh-focus-color;
-
-      .ofh-icon__search {
-        fill: $ofh-focus-text-color;
-      }
-    }
-  }
-
-  .ofh-search__input {
-    border: 1px solid $color_ofh-grey-3;
-
-    &:focus {
-      border: 2px solid $ofh-focus-text-color;
-
-      @include mq($until: tablet) {
-        border: $ofh-focus-width solid $ofh-focus-text-color;
-      }
-    }
-  }
-
-  .ofh-header__search-toggle,
-  .ofh-header__menu-toggle {
-    border-color: $color_ofh-brand-dark-blue;
-    color: $color_ofh-brand-dark-blue;
-
-    .ofh-icon {
-      fill: $color_ofh-brand-yellow;
-    }
-
-    &.is-active,
-    &:hover {
-      background-color: $color_ofh-brand-yellow;
-      border-color: $color_ofh-brand-dark-blue;
-      box-shadow: none;
-      color: $color_ofh-brand-dark-blue;
-
-      .ofh-icon {
-        fill: $color_ofh-brand-dark-blue;
-      }
-    }
-
-    &:focus {
-      color: $ofh-focus-text-color;
-
-      .ofh-icon {
-        fill: $ofh-focus-text-color;
-      }
-    }
-  }
-
   .ofh-header__search-form {
     @include mq($until: tablet) {
       padding-top: 0;
