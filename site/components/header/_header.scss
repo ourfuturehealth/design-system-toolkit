@@ -287,8 +287,7 @@
     @include close-button();
 
     margin-left: ofh-spacing(2);
-    margin-right: - ofh-spacing(2);
-    /* [11] */
+    margin-right: - ofh-spacing(2); /* [11] */
     margin-top: ofh-spacing(2);
 
     &:focus {

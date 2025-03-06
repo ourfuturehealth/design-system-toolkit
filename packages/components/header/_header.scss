@@ -168,8 +168,7 @@
 
 .ofh-header__search-toggle {
   @include toggle-button();
-  min-height: ofh-spacing(6);
-  /* [2] */
+  min-height: ofh-spacing(6); /* [2] */
   padding: ofh-spacing(1) ofh-spacing(2) 0;
   position: absolute;
   right: 0;
@@ -177,10 +176,8 @@
 
   .ofh-icon__search {
     fill: $ofh-button-color-default;
-    height: 21px;
-    /* [3] */
-    width: 21px;
-    /* [3] */
+    height: 21px; /* [3] */
+    width: 21px; /* [3] */
   }
 
   &:focus {
@@ -241,17 +238,14 @@
   &:focus {
     @include ofh-focused-input;
   }
-
   &::placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
   }
-
   &:-ms-input-placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
   }
-
   &::-webkit-input-placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
@@ -261,21 +255,17 @@
     flex-grow: 2;
     -ms-flex-positive: 2;
     font-size: inherit;
-    height: 52px;
-    /* [4] */
+    height: 52px; /* [4] */
     margin: 0;
     outline: none;
-    width: 100%;
-    /* [4] */
+    width: 100%; /* [4] */
     z-index: 1;
   }
 
   @include mq($from: tablet) {
     font-size: $ofh-base-font-size;
-    height: ofh-spacing(6);
-    /* [2] */
-    width: 200px;
-    /* [2] */
+    height: ofh-spacing(6); /* [2] */
+    width: 200px; /* [2] */
   }
 
   @include mq($from: desktop) {
@@ -297,8 +287,7 @@
   z-index: 1;
 
   &::-moz-focus-inner {
-    border: 0;
-    /* [4] */
+    border: 0; /* [4] */
   }
 
   &:hover {
@@ -322,31 +311,24 @@
   }
 
   @include mq($until: tablet) {
-    height: 52px;
-    /* [2] */
+    height: 52px; /* [2] */
     margin: 0;
     padding: ofh-spacing(2) ofh-spacing(2) 0;
 
     .ofh-icon__search {
-      height: 38px;
-      /* [3] */
-      width: 38px;
-      /* [3] */
+      height: 38px; /* [3] */
+      width: 38px; /* [3] */
     }
   }
 
   @include mq($from: tablet) {
     display: block;
-    height: ofh-spacing(6);
-    /* [2] */
-    width: 44px;
-    /* [2] */
+    height: ofh-spacing(6); /* [2] */
+    width: 44px; /* [2] */
 
     .ofh-icon__search {
-      height: 27px;
-      /* [3] */
-      width: 27px;
-      /* [3] */
+      height: 27px; /* [3] */
+      width: 27px; /* [3] */
     }
   }
 }

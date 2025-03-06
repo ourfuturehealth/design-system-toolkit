@@ -272,11 +272,10 @@
 @mixin toggle-button() {
   background-color: $ofh-button-color-white;
   border: $ofh-border-width-form-element solid $ofh-button-color-default;
-  color: $ofh-button-color-default;
-  font-size: 18px;
   border-radius: $ofh-border-radius;
-
+  color: $ofh-button-color-default;
   cursor: pointer;
+  font-size: 18px;
 
   &::-moz-focus-inner {
     border: 0; // [1] //
@@ -285,8 +284,8 @@
   &:hover {
     background-color: $ofh-button-color-white;
     border: $ofh-border-width-form-element solid $ofh-button-color-hover;
-    color: $ofh-button-color-hover;
     box-shadow: none;
+    color: $ofh-button-color-hover;
     text-decoration: underline;
   }
 
