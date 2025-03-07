@@ -184,6 +184,7 @@
     @include ofh-focused-button();
   }
 
+  &:active,
   &:hover {
     .ofh-icon__search {
       fill: $color_ofh-brand-dark-blue;
