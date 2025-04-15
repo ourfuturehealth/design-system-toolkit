@@ -111,7 +111,6 @@
     border: 1px solid $ofh-text-black-color;
     page-break-inside: avoid;
   }
-
 }
 
 //
@@ -213,9 +212,7 @@
     &:visited {
       color: $ofh-text-black-color;
     }
-
   }
-
 }
 
 //
@@ -230,7 +227,6 @@
   @include mq($media-type: print) {
     display: none;
   }
-
 }
 
 //
@@ -254,7 +250,6 @@
   @include mq($until: desktop) {
     flex: 0 0 100%;
   }
-
 }
 
 //
@@ -296,7 +291,6 @@
     border-color: $color_ofh-grey-5;
     color: $color_ofh-grey-5;
   }
-
 }
 
 //
@@ -339,7 +333,6 @@
   &:focus {
     @include ofh-focused-text;
   }
-
 }
 
 //

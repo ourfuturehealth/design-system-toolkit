@@ -30,7 +30,6 @@
   .ofh-pagination__title {
     padding-left: ofh-spacing(5); /* [1] */
   }
-
 }
 
 .ofh-pagination-item--next {
@@ -45,7 +44,6 @@
   .ofh-pagination__title {
     padding-right: ofh-spacing(5); /* [1] */
   }
-
 }
 
 .ofh-pagination__link {
@@ -66,7 +64,6 @@
       color: $ofh-text-black-color;
       margin-top: 0;
     }
-
   }
 
   &:hover {
@@ -79,7 +76,6 @@
     .ofh-pagination__page {
       text-decoration: none;
     }
-
   }
 
   &:focus {
@@ -114,9 +110,7 @@
         fill: $ofh-focus-text-color;
       }
     }
-
   }
-
 }
 
 .ofh-pagination__title {
@@ -130,7 +124,6 @@
       content: ' page'; /* [2] */
     }
   }
-
 }
 
 .ofh-pagination__page {

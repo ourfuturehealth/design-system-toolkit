@@ -30,7 +30,6 @@
     @include mq($from: large-desktop) {
       margin: 0 3px 0 5px;
     }
-
   }
 
   .ofh-icon__chevron-left {
@@ -40,7 +39,6 @@
     position: relative;
     width: 24px;
   }
-
 }
 
 .ofh-breadcrumb__list {
@@ -52,7 +50,6 @@
   list-style: none;
   margin: 0;
   padding: 0;
-
 }
 
 .ofh-breadcrumb__item {

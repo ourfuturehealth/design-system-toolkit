@@ -45,7 +45,6 @@
     top: 0;
 
     @include govuk-shape-arrow($direction: right, $base: 14px);
-
   }
 
   &:focus {

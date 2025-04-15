@@ -101,7 +101,6 @@
   @media (max-width: 450px) {
     max-width: 50%;
   }
-
 }
 
 .ofh-header__link {
@@ -152,9 +151,7 @@
     &.js-show {
       border-bottom: 0;
     }
-
   }
-
 }
 
 .ofh-header__search {
@@ -167,7 +164,6 @@
     float: left;
     margin-left: ofh-spacing(2);
   }
-
 }
 
 .ofh-header__search-toggle {
@@ -451,7 +447,6 @@
   &:focus {
     @include ofh-focused-button;
   }
-
 }
 
 /* 'only' modifier for when there is only the menu in the header, no search
@@ -603,7 +598,6 @@
     .ofh-icon__chevron-right {
       fill: $color_ofh-brand-yellow;
     }
-
   }
 
   &:active,
@@ -678,7 +672,6 @@
   .ofh-header__transactional-service-name {
     float: left;
   }
-
 }
 
 .ofh-header__link--service {
@@ -701,7 +694,6 @@
     .ofh-header__service-name {
       text-decoration: underline;
     }
-
   }
 
   &:focus {
@@ -716,9 +708,7 @@
     .ofh-logo {
       box-shadow: none;
     }
-
   }
-
 }
 
 .ofh-header__link--service > * {
@@ -740,7 +730,6 @@
   @include mq($until: large-desktop) {
     max-width: 220px;
   }
-
 }
 
 .ofh-header__logo--only {
@@ -817,7 +806,6 @@
   .ofh-header__navigation {
     max-width: none;
   }
-
 }
 
 .ofh-organisation-name {
@@ -847,7 +835,6 @@
   .ofh-organisation-name-split {
     display: block;
   }
-
 }
 
 .ofh-organisation-descriptor {
@@ -900,7 +887,6 @@
         color: $ofh-text-black-color;
       }
     }
-
   }
 
   .ofh-search__submit {
@@ -991,7 +977,6 @@
   .ofh-header__service-name {
     color: $ofh-text-black-color;
   }
-
 }
 
 // Navigation (white)

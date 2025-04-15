@@ -16,7 +16,6 @@ table {
   @include mq($media-type: print) {
     page-break-inside: avoid;
   }
-
 }
 
 thead {

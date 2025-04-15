@@ -122,7 +122,6 @@
       @media screen and (-ms-high-contrast: active) {
         display: none; /* [13] */
       }
-
     }
 
     @include mq(375px) { /* [15] */

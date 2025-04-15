@@ -102,7 +102,6 @@ $card-border-hover-color: $color_ofh-grey-3;
         color: $ofh-focus-text-color;
       }
     }
-
   }
 
   &:hover {
@@ -244,7 +243,6 @@ $card-border-hover-color: $color_ofh-grey-3;
     transform: rotate(45deg); /* [12] */
     width: 0;
   }
-
 }
 
 .ofh-card--care--urgent {
@@ -256,7 +254,6 @@ $card-border-hover-color: $color_ofh-grey-3;
       border-color: $color_ofh-brand-red;
     }
   }
-
 }
 
 .ofh-card--care--emergency {
@@ -281,9 +278,7 @@ $card-border-hover-color: $color_ofh-grey-3;
       &:focus {
         color: $color_ofh-black; /* [16] */
       }
-
     }
-
   }
 
   .ofh-details,
@@ -306,5 +301,4 @@ $card-border-hover-color: $color_ofh-grey-3;
       fill: $color_ofh-white; /* [14] */
     }
   }
-
 }

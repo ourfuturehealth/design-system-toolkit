@@ -123,7 +123,6 @@ module.exports = {
     "value-keyword-case": null,
     "color-function-notation": null,
     "number-max-precision": null,
-    "block-closing-brace-empty-line-before": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/dollar-variable-empty-line-before": null,
