@@ -132,7 +132,6 @@ module.exports = {
     "alpha-value-notation": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
-    "declaration-block-semicolon-space-before": null,
     "no-invalid-position-at-import-rule": null,
     "scss/dollar-variable-colon-space-after": null
   }
