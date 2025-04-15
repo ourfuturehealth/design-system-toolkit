@@ -121,9 +121,6 @@ module.exports = {
     "selector-no-vendor-prefix": null,
     "value-keyword-case": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
-
-    // Temporary
     "scss/no-global-function-names": null,
-    "max-line-length": null,
   }
 }

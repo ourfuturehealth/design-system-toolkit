@@ -31,7 +31,8 @@
   }
 
   @if not map-has-key($ofh-spacing-points, $spacing-point) {
-    @error 'Unknown spacing variable `#{$spacing-point}`. Make sure you are using a point from the spacing scale in `_settings/spacing.scss`.';
+    @error 'Unknown spacing variable `#{$spacing-point}`. '
+      + 'Make sure you are using a point from the spacing scale in `_settings/spacing.scss`.';
   }
 
   @return map-get($ofh-spacing-points, $spacing-point);
@@ -70,7 +71,13 @@
 // https://github.com/alphagov/govuk-frontend
 //
 
-@mixin _ofh-responsive-spacing($responsive-spacing-point, $property, $direction: 'all', $important: false, $adjustment: false) {
+@mixin _ofh-responsive-spacing(
+  $responsive-spacing-point,
+  $property,
+  $direction: 'all',
+  $important: false,
+  $adjustment: false,
+) {
   $actual-input-type: type-of($responsive-spacing-point);
 
   @if $actual-input-type != 'number' {
@@ -86,8 +93,8 @@
   $actual-map-type: type-of($scale-map);
 
   @if $actual-map-type != 'map' {
-    @error 'Expected a number (integer), but got a '
-    + '#{$actual-map-type}. Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)'; /* stylelint-disable-line indentation */
+    @error 'Expected a number (integer), but got a #{$actual-map-type}. '
+      + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
   }
 
   @each $breakpoint, $breakpoint-value in $scale-map { // [2] //
