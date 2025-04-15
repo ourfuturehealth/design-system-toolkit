@@ -17,6 +17,7 @@
   float: left;
   p {
     @include ofh-font(16);
+
     margin: 0;
   }
 }

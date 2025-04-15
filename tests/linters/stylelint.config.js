@@ -125,7 +125,6 @@ module.exports = {
     "number-max-precision": null,
     "block-closing-brace-empty-line-before": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
-    "declaration-empty-line-before": null,
     "rule-empty-line-before": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/dollar-variable-empty-line-before": null,

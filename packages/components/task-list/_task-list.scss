@@ -10,6 +10,7 @@
 
 .ofh-task-list {
   @include ofh-font($size: 19);
+
   list-style-type: none;
   margin-top: 0;
   padding: 0;

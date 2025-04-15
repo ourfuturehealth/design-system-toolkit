@@ -25,6 +25,7 @@
   @include ofh-responsive-padding(7, 'top');
   @include ofh-responsive-padding(7, 'bottom');
   @include top-and-bottom();
+
   display: block; /* [1] */
 }
 
@@ -40,6 +41,7 @@
 @include govuk-exports('govuk/objects/main-wrapper') {
   .ofh-main-wrapper {
     @include govuk-main-wrapper;
+
     min-height: calc(100vh - 325px);
 
     @include mq($until: desktop) {

@@ -21,6 +21,7 @@
 .ofh-details {
   @include ofh-responsive-margin(4, 'bottom');
   @include ofh-typography-responsive(19);
+
   display: block;
 }
 

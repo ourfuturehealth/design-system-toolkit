@@ -9,7 +9,6 @@
 //
 
 @mixin ofh-link-style-default {
-
   color: $ofh-link-color;
 
   &:visited {
@@ -46,7 +45,6 @@
 //
 
 @mixin ofh-link-style-light {
-
   color: $color_ofh-white;
 
   &:visited {

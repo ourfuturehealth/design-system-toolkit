@@ -35,11 +35,13 @@
 
 .ofh-header {
   @include clearfix();
+
   background-color: $color_ofh-brand-dark-blue;
 }
 
 .ofh-header__container {
   @include clearfix();
+
   height: 120px;
   padding: 0;
   position: relative;
@@ -88,6 +90,7 @@
 
   .ofh-logo {
     @include ofh-logo-size; /* [1] */
+
     border: 0;
   }
 
@@ -103,6 +106,7 @@
 
 .ofh-header__link {
   @include ofh-logo-size; /* [1] */
+
   display: block;
 
   &:hover {
@@ -168,6 +172,7 @@
 
 .ofh-header__search-toggle {
   @include toggle-button();
+
   min-height: ofh-spacing(6); /* [2] */
   padding: ofh-spacing(1) ofh-spacing(2) 0;
   position: absolute;
@@ -182,6 +187,7 @@
 
   &:focus {
     @include ofh-focused-button();
+
     box-shadow: 0 0 0 2px $ofh-focus-color, 0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
@@ -355,6 +361,7 @@
 
     &:focus {
       @include ofh-focused-button();
+
       box-shadow: 0 -2px $ofh-focus-color, 0 $ofh-focus-width $ofh-focus-text-color;
     }
 
@@ -458,6 +465,7 @@
 
 .ofh-header__navigation {
   @include print-hide();
+
   background-color: $color_ofh-white;
   clear: both;
   display: none;
@@ -506,6 +514,7 @@
 
 .ofh-header__navigation-close {
   @include close-button();
+
   overflow: hidden;
   position: absolute;
   right: ofh-spacing(2);
@@ -550,6 +559,7 @@
 
 .ofh-header__navigation-link {
   @include ofh-font(16);
+
   border-bottom: ofh-spacing(1) solid transparent;
   border-top: ofh-spacing(1) solid transparent;
   color: $color_ofh-brand-dark-blue;
@@ -642,6 +652,7 @@
 .ofh-header__transactional-service-name--link {
   @include ofh-link-style-light;
   @include ofh-font(19);
+
   text-decoration: none;
 
   &:hover {
@@ -653,6 +664,7 @@
 
   .ofh-header__link {
     @include ofh-logo-size-small;
+
     display: block;
   }
 

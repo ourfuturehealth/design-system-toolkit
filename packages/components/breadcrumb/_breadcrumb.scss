@@ -57,6 +57,7 @@
 
 .ofh-breadcrumb__item {
   @include ofh-font(16); /* [4] */
+
   display: inline-block;
   margin-bottom: 0;
 
@@ -95,6 +96,7 @@
 
 .ofh-breadcrumb__back {
   @include ofh-font(16); /* [4] */
+
   margin: 0;
   padding-left: ofh-spacing(3);
   position: relative;

@@ -18,7 +18,6 @@
 
 @mixin govuk-width-container {
   margin: 0 $ofh-gutter-half; /* [1] */
-
   max-width: $ofh-page-width; /* [2] */
 
   @include govuk-media-query($from: desktop) {

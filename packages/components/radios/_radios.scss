@@ -160,6 +160,7 @@ $conditional-padding-left: $conditional-border-padding + $ofh-radios-label-paddi
 
 .ofh-radios__conditional {
   @include ofh-responsive-margin(4, 'bottom');
+
   border-left: $conditional-border-width solid $ofh-input-border-color;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;

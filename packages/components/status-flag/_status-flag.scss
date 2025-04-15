@@ -4,6 +4,7 @@
 .ofh-status-flag {
   @include ofh-responsive-padding(4);
   @include ofh-responsive-margin(8, 'bottom');
+
   border: $ofh-border-width-mobile solid $color_ofh-brand-blue;
   @include govuk-media-query($from: tablet) {
     border: $ofh-border-width solid $color_ofh-brand-blue;
@@ -16,6 +17,7 @@
 }
 .ofh-status-flag__title {
   @include ofh-font(24, $weight: bold);
+
   margin-top: 0;
 }
 .ofh-status-flag__body {

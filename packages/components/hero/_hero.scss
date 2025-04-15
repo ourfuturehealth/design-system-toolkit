@@ -133,6 +133,7 @@
     @include mq($from: tablet) {
 
       @include top-and-bottom();
+
       bottom: -48px; /* [8] */
       margin-bottom: 0;
       max-width: 35em; /* [11] */
