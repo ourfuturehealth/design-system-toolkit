@@ -233,8 +233,8 @@ $card-border-hover-color: $color_ofh-grey-3;
     left: 38px; /* [10] */
   }
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     border: solid 32px $color_ofh-brand-blue; /* [9] */
     content: '';
     display: block;
@@ -250,8 +250,8 @@ $card-border-hover-color: $color_ofh-grey-3;
   @include care-card($color_ofh-brand-red, $color_ofh-white, 6px);
 
   .ofh-card--care__arrow {
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       border-color: $color_ofh-brand-red;
     }
   }
@@ -261,8 +261,8 @@ $card-border-hover-color: $color_ofh-grey-3;
   @include care-card($color_ofh-brand-red, $color_ofh-white, 8px);
 
   .ofh-card--care__arrow {
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       border-color: $color_ofh-brand-red;
     }
   }

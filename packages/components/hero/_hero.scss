@@ -107,8 +107,8 @@
         left: 46px; /* [9] */
       }
 
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         border: solid 32px $color_ofh-brand-yellow; /* [8] */
         content: '';
         display: block;

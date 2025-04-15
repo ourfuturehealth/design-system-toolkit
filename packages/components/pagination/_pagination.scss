@@ -120,7 +120,7 @@
   display: block;
 
   @include mq($media-type: print) {
-    &:after {
+    &::after {
       content: ' page'; /* [2] */
     }
   }

@@ -117,7 +117,6 @@ module.exports = {
 
     // Temporary
     "scss/no-global-function-names": null,
-    "selector-pseudo-element-colon-notation": null,
     "color-hex-case": null,
     "max-line-length": null,
     "value-keyword-case": null,
