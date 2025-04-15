@@ -118,13 +118,12 @@ module.exports = {
     "number-max-precision": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
     "color-hex-case": "upper",
+    "selector-no-vendor-prefix": null,
+    "value-keyword-case": null,
+    "scss/function-unquote-no-unquoted-strings-inside": null,
 
     // Temporary
     "scss/no-global-function-names": null,
     "max-line-length": null,
-    "value-keyword-case": null,
-    "scss/function-unquote-no-unquoted-strings-inside": null,
-    "declaration-block-no-redundant-longhand-properties": null,
-    "selector-no-vendor-prefix": null,
   }
 }

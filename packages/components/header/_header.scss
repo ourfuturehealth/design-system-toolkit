@@ -227,10 +227,7 @@
 
 .ofh-search__input {
   -webkit-appearance: listbox; /* [5] */
-  border-bottom-left-radius: $ofh-border-radius;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: $ofh-border-radius;
-  border-top-right-radius: 0;
+  border-radius: $ofh-border-radius 0 0 $ofh-border-radius; /* top-left top-right bottom-right bottom-left */
   padding: 0 ofh-spacing(3);
 
   &:focus {
@@ -285,10 +282,7 @@
 
 .ofh-search__submit {
   border: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: $ofh-border-radius;
-  border-top-left-radius: 0;
-  border-top-right-radius: $ofh-border-radius;
+  border-radius: 0 $ofh-border-radius $ofh-border-radius 0; /* top-left top-right bottom-right bottom-left */
   float: right;
   font-size: inherit;
   line-height: inherit;
