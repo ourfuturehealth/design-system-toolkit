@@ -203,14 +203,12 @@ $ofh-button-active-color: #BF8C02;
 
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-shadow-color: $color_ofh-brand-dark-blue;
-
 $ofh-secondary-button-color: #425563;
 $ofh-secondary-button-hover-color: shade($ofh-secondary-button-color, 20%);
 $ofh-secondary-button-active-color: shade($ofh-secondary-button-color, 50%);
 
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-secondary-button-shadow-color: shade($ofh-secondary-button-color, 50%);
-
 $ofh-reverse-button-color: $color_ofh-white;
 $ofh-reverse-button-hover-color: #E8E8E8;
 $ofh-reverse-button-active-color: #D1D1D1;
@@ -226,7 +224,6 @@ $ofh-button-secondary-text-color: $color_ofh-white;
 
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-reverse-button-text-color: $color_ofh-black;
-
 $ofh-button-color-default: #0053B3;
 $ofh-button-color-hover: #002D61;
 $ofh-button-color-active: #001F42;

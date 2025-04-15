@@ -124,7 +124,6 @@ module.exports = {
     "color-function-notation": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
     "scss/double-slash-comment-whitespace-inside": null,
-    "scss/dollar-variable-empty-line-before": null,
     "scss/at-if-closing-brace-newline-after": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
     "declaration-block-no-redundant-longhand-properties": null,

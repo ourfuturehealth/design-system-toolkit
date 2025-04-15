@@ -23,7 +23,6 @@
 //
 
 @function ofh-spacing($spacing-point) {
-
   $actual-input-type: type-of($spacing-point);
 
   @if $actual-input-type != 'number' {
@@ -72,7 +71,6 @@
 //
 
 @mixin _ofh-responsive-spacing($responsive-spacing-point, $property, $direction: 'all', $important: false, $adjustment: false) {
-
   $actual-input-type: type-of($responsive-spacing-point);
 
   @if $actual-input-type != 'number' {

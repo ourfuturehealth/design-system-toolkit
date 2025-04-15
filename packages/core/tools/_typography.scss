@@ -130,7 +130,6 @@
   @each $breakpoint, $breakpoint-map in $font-map {
     $font-size: map-get($breakpoint-map, 'font-size');
     $font-size-rem: ofh-px-to-rem($font-size);
-
     $line-height: _ofh-line-height($line-height: if($override-line-height, $override-line-height, map-get($breakpoint-map, 'line-height')), $font-size: $font-size);
 
     // [1] //
