@@ -6,6 +6,7 @@
   @include ofh-responsive-margin(8, 'bottom');
 
   border: $ofh-border-width-mobile solid $color_ofh-brand-blue;
+
   @include govuk-media-query($from: tablet) {
     border: $ofh-border-width solid $color_ofh-brand-blue;
   }

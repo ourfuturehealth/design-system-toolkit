@@ -12,7 +12,6 @@
 .ofh-inset-text {
   @include top-and-bottom(); /* [1] */
   @include reading-width(); /* [2] */
-
   @include ofh-responsive-margin(7, 'bottom');
   @include ofh-responsive-margin(7, 'top');
   @include ofh-responsive-padding(4);

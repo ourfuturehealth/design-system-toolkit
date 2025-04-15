@@ -43,7 +43,6 @@
   }
 
   @include mq($from: tablet) {
-
     @media only screen { /* [4] */
       min-height: 320px; /* [5] */
 
@@ -101,6 +100,7 @@
       position: absolute;
       transform: rotate(45deg);
       width: 20px; /* [8] */
+
       @include print-hide();
 
       @include mq($from: tablet) {
@@ -129,7 +129,6 @@
     }
 
     @include mq($from: tablet) {
-
       @include top-and-bottom();
 
       bottom: -48px; /* [8] */

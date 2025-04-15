@@ -118,7 +118,6 @@ module.exports = {
     "scss/no-global-function-names": null,
     "selector-pseudo-element-colon-notation": null,
     "color-hex-case": null,
-    "at-rule-empty-line-before": null,
     "max-line-length": null,
     "value-keyword-case": null,
     "color-function-notation": null,

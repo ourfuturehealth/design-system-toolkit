@@ -226,6 +226,7 @@ $card-border-hover-color: $color_ofh-grey-3;
   position: absolute;
   transform: rotate(45deg);
   width: 20px; /* [9] */
+
   @include print-hide();
 
   @include mq($from: tablet) {

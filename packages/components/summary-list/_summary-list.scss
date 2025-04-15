@@ -22,6 +22,7 @@
   }
 
   margin: 0; /* [2] */
+
   @include ofh-responsive-margin(6, 'bottom');
 }
 
@@ -30,6 +31,7 @@
     border-bottom: 1px solid $ofh-border-color;
     margin-bottom: ofh-spacing(3);
   }
+
   @include mq($from: tablet) {
     display: table-row;
   }
@@ -81,6 +83,7 @@
   @include mq($until: tablet) {
     margin-bottom: ofh-spacing(3);
   }
+
   @include mq($from: tablet) {
     width: 50%;
   }

@@ -96,9 +96,11 @@ $_ofh-grid-widths: (
   .#{$class}-#{$width} {
     box-sizing: border-box;
     padding: 0 $ofh-gutter-half;
+
     @if $at != desktop {
       width: 100%;
     }
+
     @include govuk-media-query($from: $at) {
       float: $float;
       width: grid-width($width);

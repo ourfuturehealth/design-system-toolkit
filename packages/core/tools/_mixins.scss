@@ -98,7 +98,6 @@
 //
 
 @mixin panel($panel-background-color, $panel-text-color) {
-
   @include top-and-bottom();
   @include ofh-responsive-margin(7, 'bottom');
   @include ofh-responsive-margin(7, 'top');
@@ -202,7 +201,6 @@
 //
 
 @mixin print-color($print-color) {
-
   @include mq($media-type: print) {
     color: $print-color;
     fill: $print-color;
@@ -223,7 +221,6 @@
 //
 
 @mixin print-hide() {
-
   @include mq($media-type: print) {
     display: none;
   }

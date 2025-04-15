@@ -115,6 +115,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 
 .ofh-checkboxes__divider {
   $ofh-divider-size: $ofh-checkboxes-size !default;
+
   @include ofh-font(19);
 
   color: $ofh-text-black-color;

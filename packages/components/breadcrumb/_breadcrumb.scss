@@ -42,7 +42,6 @@
 }
 
 .ofh-breadcrumb__list {
-
   @include mq($until: tablet) {
     display: none; /* [3] */
   }
