@@ -228,7 +228,7 @@ $mq-media-type: all !default;
         @if $and { $media-query: '#{$media-query} and #{$and}'; }
 
         // Remove unnecessary media query prefix 'all and '
-        @if ($media-type == 'all' and $media-query != '') {
+        @if $media-type == 'all' and $media-query != '' {
             $media-type: '';
             $media-query: str-slice(unquote($media-query), 6);
         }
@@ -254,11 +254,11 @@ $mq-media-type: all !default;
         $seed: nth($list, ceil(length($list) * .5));
 
         @each $item in $list {
-            @if ($item == $seed) {
+            @if $item == $seed {
                 $equal: append($equal, $item);
-            } @else if ($item < $seed) {
+            } @else if $item < $seed {
                 $less: append($less, $item);
-            } @else if ($item > $seed) {
+            } @else if $item > $seed {
                 $large: append($large, $item);
             }
         }

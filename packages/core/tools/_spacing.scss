@@ -93,7 +93,7 @@
   }
 
   @each $breakpoint, $breakpoint-value in $scale-map { // [2] //
-    @if ($adjustment) {
+    @if $adjustment {
       $breakpoint-value: $breakpoint-value + $adjustment;
     }
 

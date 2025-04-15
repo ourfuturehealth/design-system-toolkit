@@ -114,7 +114,6 @@ module.exports = {
     }],
 
     // Temporary
-    "scss/at-rule-conditional-no-parentheses": null,
     "scss/no-global-function-names": null,
     "selector-pseudo-element-colon-notation": null,
     "color-hex-case": null,
