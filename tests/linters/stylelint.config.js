@@ -129,7 +129,6 @@ module.exports = {
     "rule-empty-line-before": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/dollar-variable-empty-line-before": null,
-    "color-hex-length": null,
     "scss/double-slash-comment-empty-line-before": null,
     "comment-empty-line-before": null,
     "scss/at-if-closing-brace-newline-after": null,

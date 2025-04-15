@@ -32,14 +32,14 @@ $color_ofh-brand-red: #F34848;
 // Greyscale
 //
 $color_ofh-black: #1B1B1B;
-$color_ofh-true-black: #000000;
+$color_ofh-true-black: #000;
 $color_ofh-grey-1: #494949;
 $color_ofh-grey-2: #767676;
 $color_ofh-grey-3: #A4A4A4;
 $color_ofh-grey-4: #D1D1D1;
 $color_ofh-grey-5: #E8E8E8;
 $color_ofh-grey-6: #F4F4F4;
-$color_ofh-white: #FFFFFF;
+$color_ofh-white: #FFF;
 
 //
 // Neutrals
@@ -150,7 +150,7 @@ $ofh-link-color: #0053B3;
 $ofh-link-hover-color: #002D61;
 $ofh-link-visited-color: #330072;
 $ofh-link-active-color: #001F42;
-$ofh-link-light-color: #FFFFFF;
+$ofh-link-light-color: #FFF;
 $ofh-link-light-hover-color: #F4F4F4;
 $ofh-link-light-visited-color: #D8B7DE;
 $ofh-link-light-active-color: #001F42;
@@ -167,7 +167,7 @@ $ofh-focus-color: #0053B3;
 // TODO: Not defined in Figma.
 $ofh-focus-text-color: $color_ofh-brand-dark-blue;
 // TODO: This was in new colours in Figma so added here, but not used anywhere yet.
-$ofh-focus-white-color: #FFFFFF;
+$ofh-focus-white-color: #FFF;
 
 // Contextual colours
 $ofh-error-color: #B60000;
@@ -220,6 +220,6 @@ $ofh-reverse-button-text-color: $color_ofh-black;
 $ofh-button-color-default: #0053B3;
 $ofh-button-color-hover: #002D61;
 $ofh-button-color-active: #001F42;
-$ofh-button-color-white: #FFFFFF;
+$ofh-button-color-white: #FFF;
 $ofh-button-color-white-hover: $color_ofh-grey-5;
 $ofh-button-color-white-active: $color_ofh-grey-4;
