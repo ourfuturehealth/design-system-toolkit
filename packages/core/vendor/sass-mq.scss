@@ -244,7 +244,7 @@ $mq-media-type: all !default;
 /// @param {List} $list - List to sort
 /// @returns {List} Sorted List
 @function _mq-quick-sort($list) {
-    $less:  ();
+    $less: ();
     $equal: ();
     $large: ();
 
