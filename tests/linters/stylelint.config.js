@@ -121,7 +121,6 @@ module.exports = {
     "color-hex-case": null,
     "max-line-length": null,
     "value-keyword-case": null,
-    "color-function-notation": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
