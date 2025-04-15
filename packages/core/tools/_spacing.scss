@@ -95,7 +95,7 @@
       $breakpoint-value: $breakpoint-value + $adjustment;
     }
 
-    @if $breakpoint == null { // [3] //
+    @if not $breakpoint { // [3] //
 
       @if $direction == all {
         #{$property}: $breakpoint-value iff($important, !important);
