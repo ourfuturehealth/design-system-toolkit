@@ -130,7 +130,6 @@ module.exports = {
     "scss/at-if-closing-brace-newline-after": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
     "alpha-value-notation": null,
-    "selector-combinator-space-before": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
     "declaration-block-semicolon-space-before": null,

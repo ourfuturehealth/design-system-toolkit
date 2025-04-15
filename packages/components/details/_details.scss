@@ -204,6 +204,6 @@ $expander-border-hover-color: $color_ofh-grey-3;
   @include ofh-responsive-margin(4, 'bottom');
 }
 
-.ofh-details  + %ofh-heading-l {
+.ofh-details + %ofh-heading-l {
   @include ofh-responsive-padding(4, 'top');
 }
