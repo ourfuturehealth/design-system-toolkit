@@ -236,6 +236,7 @@
   border-top-left-radius: $ofh-border-radius;
   border-top-right-radius: 0;
   padding: 0 ofh-spacing(3);
+
   &:focus {
     border: 4px solid $ofh-focus-text-color;
     box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
@@ -243,14 +244,17 @@
     outline-offset: $ofh-focus-width;
     padding: 0 9px;
   }
+
   &::placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
   }
+
   &:-ms-input-placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
   }
+
   &::-webkit-input-placeholder {
     color: $color_ofh-grey-1;
     font-size: $ofh-base-font-size;
@@ -661,7 +665,6 @@
 }
 
 .ofh-header--transactional {
-
   .ofh-header__link {
     @include ofh-logo-size-small;
 
@@ -744,7 +747,6 @@
   max-width: 100%;
 
   @include mq($from: tablet) {
-
     .ofh-header__link--service {
       align-items: center;
       display: flex;
@@ -764,7 +766,6 @@
 **/
 
 .ofh-header--organisation {
-
   .ofh-header__link {
     height: 100%;
     text-decoration: none;
@@ -891,7 +892,6 @@
   }
 
   .ofh-header__link {
-
     &:hover {
       color: $ofh-text-black-color;
       text-decoration: underline;

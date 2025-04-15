@@ -84,6 +84,7 @@
   & > *:first-child {
     margin-top: 0;
   }
+
   & > *:last-child {
     margin-bottom: 0;
   }
@@ -181,7 +182,6 @@
 //
 
 @mixin care-card($heading-background-color, $heading-text-color, $print-border-size) {
-
   .ofh-card--care__heading-container {
     background-color: $heading-background-color;
     color: $heading-text-color;

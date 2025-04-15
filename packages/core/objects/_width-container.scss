@@ -43,6 +43,7 @@
   .ofh-width-container {
     @include govuk-width-container;
   }
+
   .ofh-width-container-fluid {
     @include ofh-width-container-fluid;
   }

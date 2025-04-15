@@ -153,7 +153,6 @@ $card-border-hover-color: $color_ofh-grey-3;
   }
 
   @include mq($until: desktop) {
-
     .ofh-card {
       margin-bottom: ofh-spacing(3);
     }
@@ -296,6 +295,7 @@ $card-border-hover-color: $color_ofh-grey-3;
     &:hover {
       color: $ofh-text-white-color;
     }
+
     &:focus {
       color: $ofh-text-black-color;
     }

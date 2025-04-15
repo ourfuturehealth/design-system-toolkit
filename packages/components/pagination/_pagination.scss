@@ -92,7 +92,6 @@
     &:visited,
     &:hover,
     &:active {
-
       .ofh-icon {
         fill: $ofh-focus-text-color;
       }
@@ -100,7 +99,6 @@
   }
 
   &:visited {
-
     .ofh-icon {
       fill: $ofh-link-visited-color;
     }
