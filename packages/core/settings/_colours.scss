@@ -118,12 +118,15 @@ $color_ofh-neutral-grey: #F8F8F8;
 
 // Used in header component: packages/components/header/_header.scss
 $color_shade_ofh-blue-20: shade($color_ofh-brand-yellow, 20%);
+
 // Used in header component: packages/components/header/_header.scss
 // Used in mixins: packages/core/tools/_mixins.scss
 $color_shade_ofh-blue-35: shade($color_ofh-brand-yellow, 35%);
+
 // Used in header component: packages/components/header/_header.scss
 // Used in mixins: packages/core/tools/_mixins.scss
 $color_shade_ofh-blue-50: shade($color_ofh-brand-yellow, 50%);
+
 // Used in hero component: packages/components/hero/_hero.scss
 $color_transparent_ofh-blue-50: rgba($color_shade_ofh-blue-50, .1);
 
@@ -164,8 +167,10 @@ $ofh-breadcrumb-link-active-color: #001F42;
 // Focus
 // TODO: Will be revised in upcoming focus outline work.
 $ofh-focus-color: #0053B3;
+
 // TODO: Not defined in Figma.
 $ofh-focus-text-color: $color_ofh-brand-dark-blue;
+
 // TODO: This was in new colours in Figma so added here, but not used anywhere yet.
 $ofh-focus-white-color: #FFF;
 
@@ -195,25 +200,30 @@ $ofh-input-background-color: $color_ofh-white;
 $ofh-button-color: $color_ofh-brand-yellow;
 $ofh-button-hover-color: #DAA106;
 $ofh-button-active-color: #BF8C02;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-shadow-color: $color_ofh-brand-dark-blue;
 
 $ofh-secondary-button-color: #425563;
 $ofh-secondary-button-hover-color: shade($ofh-secondary-button-color, 20%);
 $ofh-secondary-button-active-color: shade($ofh-secondary-button-color, 50%);
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-secondary-button-shadow-color: shade($ofh-secondary-button-color, 50%);
 
 $ofh-reverse-button-color: $color_ofh-white;
 $ofh-reverse-button-hover-color: #E8E8E8;
 $ofh-reverse-button-active-color: #D1D1D1;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-reverse-button-shadow-color: $color-ofh-black;
 
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-text-color: $color_ofh-brand-dark-blue;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-secondary-text-color: $color_ofh-white;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-reverse-button-text-color: $color_ofh-black;
 

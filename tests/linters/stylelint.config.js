@@ -112,6 +112,8 @@ module.exports = {
     "selector-pseudo-element-no-unknown": [true, {
       "ignorePseudoElements": ["input-placeholder"],
     }],
+    "alpha-value-notation": null,
+    "number-max-precision": null,
 
     // Temporary
     "scss/no-global-function-names": null,
@@ -120,14 +122,11 @@ module.exports = {
     "max-line-length": null,
     "value-keyword-case": null,
     "color-function-notation": null,
-    "number-max-precision": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
     "scss/double-slash-comment-whitespace-inside": null,
     "scss/dollar-variable-empty-line-before": null,
-    "scss/double-slash-comment-empty-line-before": null,
     "scss/at-if-closing-brace-newline-after": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
-    "alpha-value-notation": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
   }
