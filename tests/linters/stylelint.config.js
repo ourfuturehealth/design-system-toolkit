@@ -122,7 +122,6 @@ module.exports = {
     "max-line-length": null,
     "value-keyword-case": null,
     "scss/at-mixin-argumentless-call-parentheses": null,
-    "scss/double-slash-comment-whitespace-inside": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
