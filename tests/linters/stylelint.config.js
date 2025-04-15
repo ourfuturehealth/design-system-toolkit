@@ -105,6 +105,8 @@ module.exports = {
     // Final Items
     "declaration-block-trailing-semicolon": "always",
     "no-missing-end-of-source-newline": true,
+
+    // Other
     "no-descending-specificity": null,
     "selector-pseudo-class-no-unknown": [true, {
       "ignorePseudoClasses": ["input-placeholder"],
@@ -114,13 +116,13 @@ module.exports = {
     }],
     "alpha-value-notation": null,
     "number-max-precision": null,
+    "scss/at-mixin-argumentless-call-parentheses": null,
+    "color-hex-case": "upper",
 
     // Temporary
     "scss/no-global-function-names": null,
-    "color-hex-case": null,
     "max-line-length": null,
     "value-keyword-case": null,
-    "scss/at-mixin-argumentless-call-parentheses": null,
     "scss/function-unquote-no-unquoted-strings-inside": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
