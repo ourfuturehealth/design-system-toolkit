@@ -137,7 +137,6 @@ module.exports = {
     "declaration-block-no-redundant-longhand-properties": null,
     "selector-no-vendor-prefix": null,
     "declaration-block-semicolon-space-before": null,
-    "no-empty-first-line": null,
     "scss/at-if-no-null": null,
     "no-invalid-position-at-import-rule": null,
     "no-extra-semicolons": null,
