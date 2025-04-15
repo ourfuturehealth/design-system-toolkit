@@ -25,5 +25,5 @@ $imported-modules: () !default; // [1] //
   @if not index($imported-modules, $name) { // [2] //
     $imported-modules: append($imported-modules, $name) !global; // [3] //
     @content; // [4] //
-  } // [5] //
+  } /* stylelint-disable-line scss/at-if-closing-brace-newline-after */ /* [5] */
 }
