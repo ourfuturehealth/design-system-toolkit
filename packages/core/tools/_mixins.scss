@@ -10,7 +10,7 @@
 //
 
 @mixin clearfix() {
-  &:after {
+  &::after {
     clear: both;
     content: '';
     display: block;
@@ -84,6 +84,7 @@
   & > *:first-child {
     margin-top: 0;
   }
+
   & > *:last-child {
     margin-bottom: 0;
   }
@@ -97,7 +98,6 @@
 //
 
 @mixin panel($panel-background-color, $panel-text-color) {
-
   @include top-and-bottom();
   @include ofh-responsive-margin(7, 'bottom');
   @include ofh-responsive-margin(7, 'top');
@@ -110,7 +110,6 @@
     border: 1px solid $ofh-text-black-color;
     page-break-inside: avoid;
   }
-
 }
 
 //
@@ -181,7 +180,6 @@
 //
 
 @mixin care-card($heading-background-color, $heading-text-color, $print-border-size) {
-
   .ofh-card--care__heading-container {
     background-color: $heading-background-color;
     color: $heading-text-color;
@@ -203,7 +201,6 @@
 //
 
 @mixin print-color($print-color) {
-
   @include mq($media-type: print) {
     color: $print-color;
     fill: $print-color;
@@ -213,9 +210,7 @@
     &:visited {
       color: $ofh-text-black-color;
     }
-
   }
-
 }
 
 //
@@ -226,11 +221,9 @@
 //
 
 @mixin print-hide() {
-
   @include mq($media-type: print) {
     display: none;
   }
-
 }
 
 //
@@ -254,7 +247,6 @@
   @include mq($until: desktop) {
     flex: 0 0 100%;
   }
-
 }
 
 //
@@ -276,7 +268,6 @@
   color: $ofh-text-white-color;
   cursor: pointer;
 
-
   &::-moz-focus-inner {
     border: 0; // [1] //
   }
@@ -297,7 +288,6 @@
     border-color: $color_ofh-grey-5;
     color: $color_ofh-grey-5;
   }
-
 }
 
 //
@@ -340,7 +330,6 @@
   &:focus {
     @include ofh-focused-text;
   }
-
 }
 
 //

@@ -36,21 +36,25 @@
 
 .ofh-fieldset__legend--xl {
   @include ofh-font($size: 48, $weight: bold);
+
   margin-bottom: ofh-spacing(3);
 }
 
 .ofh-fieldset__legend--l {
   @include ofh-font($size: 32, $weight: bold);
+
   margin-bottom: ofh-spacing(3);
 }
 
 .ofh-fieldset__legend--m {
   @include ofh-font($size: 24, $weight: bold);
+
   margin-bottom: ofh-spacing(3);
 }
 
 .ofh-fieldset__legend--s {
   @include ofh-font($size: 19, $weight: bold);
+
   margin-bottom: ofh-spacing(3);
 }
 

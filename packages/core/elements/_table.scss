@@ -16,7 +16,6 @@ table {
   @include mq($media-type: print) {
     page-break-inside: avoid;
   }
-
 }
 
 thead {
@@ -47,5 +46,6 @@ th {
 
 caption {
   @include ofh-font($size: 22, $weight: bold);
+
   text-align: left;
 }

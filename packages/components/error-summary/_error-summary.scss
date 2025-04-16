@@ -28,6 +28,7 @@
   @include ofh-font(24, $weight: bold);
 
   margin-top: 0;
+
   @include ofh-responsive-margin(4, 'bottom');
 }
 
@@ -36,6 +37,7 @@
 
   p {
     margin-top: 0;
+
     @include ofh-responsive-margin(4, 'bottom');
   }
 }
@@ -59,5 +61,4 @@
   &:focus {
     @include ofh-focused-text();
   }
-
 }

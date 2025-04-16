@@ -9,6 +9,7 @@
 
 $ofh-radios-size: ofh-spacing(6);
 $ofh-radios-label-padding-left-right: 12px;
+
 // When the default focus width is used on a curved edge it looks visually smaller.
 // So for the circular radios we bump the default to make it look visually consistent.
 $ofh-radios-focus-width: $ofh-focus-width + 1px;
@@ -140,6 +141,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 
 .ofh-radios__divider {
   $ofh-divider-size: $ofh-radios-size !default;
+
   @include ofh-font(19);
 
   color: $ofh-text-black-color;
@@ -151,15 +153,19 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 /* Conditional */
 
 $conditional-border-width: $ofh-border-width-mobile;
+
 // Calculate the amount of padding needed to keep the border centered against the radios.
 $conditional-border-padding: ($ofh-radios-size * .5) - ($conditional-border-width * .5);
+
 // Move the border centered with the radios
 $conditional-margin-left: $conditional-border-padding;
+
 // Move the contents of the conditional inline with the label
 $conditional-padding-left: $conditional-border-padding + $ofh-radios-label-padding-left-right;
 
 .ofh-radios__conditional {
   @include ofh-responsive-margin(4, 'bottom');
+
   border-left: $conditional-border-width solid $ofh-input-border-color;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;

@@ -121,7 +121,6 @@
 //
 
 @mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
-
   @if not map-has-key($ofh-typography-scale, $size) {
     @error 'Unknown font size `#{$size}` - expected a point from the typography scale.';
   }
@@ -131,15 +130,17 @@
   @each $breakpoint, $breakpoint-map in $font-map {
     $font-size: map-get($breakpoint-map, 'font-size');
     $font-size-rem: ofh-px-to-rem($font-size);
-
-    $line-height: _ofh-line-height($line-height: if($override-line-height, $override-line-height, map-get($breakpoint-map, 'line-height')), $font-size: $font-size);
+    $line-height: _ofh-line-height(
+      $line-height: if($override-line-height, $override-line-height, map-get($breakpoint-map, 'line-height')),
+      $font-size: $font-size
+    );
 
     // [1] //
     $font-size: $font-size iff($important, !important);
     $font-size-rem: $font-size-rem iff($important, !important);
     $line-height: $line-height iff($important, !important);
 
-    @if $breakpoint == null {
+    @if not $breakpoint {
       font-size: $font-size;
       font-size: $font-size-rem;
       line-height: $line-height;
@@ -178,7 +179,6 @@
 //
 
 @mixin ofh-font($size, $weight: normal, $line-height: false) {
-
   @if $weight == normal {
     @include ofh-typography-weight-normal;
   } @else if $weight == bold {

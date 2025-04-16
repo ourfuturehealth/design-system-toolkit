@@ -35,6 +35,7 @@
 @mixin ofh-focused-radio {
   border: $ofh-focus-width solid $ofh-input-border-active-color;
   outline: $ofh-focus-width solid $ofh-focus-color;
+
   /* 1 */
   outline-offset: $ofh-focus-width;
 }

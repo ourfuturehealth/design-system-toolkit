@@ -6,15 +6,13 @@
 
 .ofh-tag {
   @include ofh-font($size: 16, $weight: bold, $line-height: 1);
+
   background-color: $color_ofh-brand-blue-1;
   color: $color_ofh-white;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  padding-bottom: ofh-spacing(1);
-  padding-left: ofh-spacing(2);
-  padding-right: ofh-spacing(2);
-  padding-top: ofh-spacing(1);
+  padding: ofh-spacing(1) ofh-spacing(2) ofh-spacing(1) ofh-spacing(2); /* top right bottom left */
   text-decoration: none;
 }
 
@@ -24,9 +22,9 @@
     line-height: 1;
   }
 }
+
 /* Colour variants
   ========================================================================== */
-
 
 .ofh-tag--grey {
   background-color: $color_ofh-grey-5;

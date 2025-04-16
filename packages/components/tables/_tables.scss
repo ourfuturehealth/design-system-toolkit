@@ -112,6 +112,7 @@
 
       th {
         text-align: right;
+
         @include mq($from: desktop) {
           text-align: left;
         }
@@ -122,6 +123,7 @@
         display: flex;
         justify-content: space-between; /* [5] */
         min-width: 1px; /* [6] */
+
         @media all and (-ms-high-contrast: none) { /* [10] */
           display: block;
         }

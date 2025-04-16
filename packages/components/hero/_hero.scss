@@ -43,7 +43,6 @@
   }
 
   @include mq($from: tablet) {
-
     @media only screen { /* [4] */
       min-height: 320px; /* [5] */
 
@@ -71,7 +70,6 @@
   }
 }
 
-
 /**
  *  Hero component description styles.
  *
@@ -85,7 +83,6 @@
  */
 
 .ofh-hero--image-description {
-
   .ofh-hero-content {
     background-color: $color_ofh-brand-yellow;
     color: $ofh-text-white-color;
@@ -103,14 +100,15 @@
       position: absolute;
       transform: rotate(45deg);
       width: 20px; /* [8] */
+
       @include print-hide();
 
       @include mq($from: tablet) {
         left: 46px; /* [9] */
       }
 
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         border: solid 32px $color_ofh-brand-yellow; /* [8] */
         content: '';
         display: block;
@@ -124,7 +122,6 @@
       @media screen and (-ms-high-contrast: active) {
         display: none; /* [13] */
       }
-
     }
 
     @include mq(375px) { /* [15] */
@@ -132,8 +129,8 @@
     }
 
     @include mq($from: tablet) {
-
       @include top-and-bottom();
+
       bottom: -48px; /* [8] */
       margin-bottom: 0;
       max-width: 35em; /* [11] */
@@ -152,7 +149,7 @@
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;
-      padding: ofh-spacing(5) 0 0 ;
+      padding: ofh-spacing(5) 0 0;
       position: relative;
       top: 0;
     }

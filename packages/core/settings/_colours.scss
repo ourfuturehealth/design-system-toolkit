@@ -32,14 +32,14 @@ $color_ofh-brand-red: #F34848;
 // Greyscale
 //
 $color_ofh-black: #1B1B1B;
-$color_ofh-true-black: #000000;
+$color_ofh-true-black: #000;
 $color_ofh-grey-1: #494949;
 $color_ofh-grey-2: #767676;
 $color_ofh-grey-3: #A4A4A4;
 $color_ofh-grey-4: #D1D1D1;
 $color_ofh-grey-5: #E8E8E8;
 $color_ofh-grey-6: #F4F4F4;
-$color_ofh-white: #FFFFFF;
+$color_ofh-white: #FFF;
 
 //
 // Neutrals
@@ -47,7 +47,6 @@ $color_ofh-white: #FFFFFF;
 $ofh-neutral-blue: #F2F5FA;
 $ofh-neutral-yellow: #F8F5EF;
 $ofh-neutral-grey: #F8F8F8;
-
 
 //
 // Extended colours
@@ -96,7 +95,6 @@ $color_ofh-neutral-blue: #F2F5FA;
 $color_ofh-neutral-yellow: #F8F5EF;
 $color_ofh-neutral-grey: #F8F8F8;
 
-
 //
 // Functions for tint and shade
 //
@@ -120,12 +118,15 @@ $color_ofh-neutral-grey: #F8F8F8;
 
 // Used in header component: packages/components/header/_header.scss
 $color_shade_ofh-blue-20: shade($color_ofh-brand-yellow, 20%);
+
 // Used in header component: packages/components/header/_header.scss
 // Used in mixins: packages/core/tools/_mixins.scss
 $color_shade_ofh-blue-35: shade($color_ofh-brand-yellow, 35%);
+
 // Used in header component: packages/components/header/_header.scss
 // Used in mixins: packages/core/tools/_mixins.scss
 $color_shade_ofh-blue-50: shade($color_ofh-brand-yellow, 50%);
+
 // Used in hero component: packages/components/hero/_hero.scss
 $color_transparent_ofh-blue-50: rgba($color_shade_ofh-blue-50, .1);
 
@@ -152,7 +153,7 @@ $ofh-link-color: #0053B3;
 $ofh-link-hover-color: #002D61;
 $ofh-link-visited-color: #330072;
 $ofh-link-active-color: #001F42;
-$ofh-link-light-color: #FFFFFF;
+$ofh-link-light-color: #FFF;
 $ofh-link-light-hover-color: #F4F4F4;
 $ofh-link-light-visited-color: #D8B7DE;
 $ofh-link-light-active-color: #001F42;
@@ -166,10 +167,12 @@ $ofh-breadcrumb-link-active-color: #001F42;
 // Focus
 // TODO: Will be revised in upcoming focus outline work.
 $ofh-focus-color: #0053B3;
+
 // TODO: Not defined in Figma.
 $ofh-focus-text-color: $color_ofh-brand-dark-blue;
+
 // TODO: This was in new colours in Figma so added here, but not used anywhere yet.
-$ofh-focus-white-color: #FFFFFF;
+$ofh-focus-white-color: #FFF;
 
 // Contextual colours
 $ofh-error-color: #B60000;
@@ -197,32 +200,33 @@ $ofh-input-background-color: $color_ofh-white;
 $ofh-button-color: $color_ofh-brand-yellow;
 $ofh-button-hover-color: #DAA106;
 $ofh-button-active-color: #BF8C02;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-shadow-color: $color_ofh-brand-dark-blue;
-
 $ofh-secondary-button-color: #425563;
 $ofh-secondary-button-hover-color: shade($ofh-secondary-button-color, 20%);
 $ofh-secondary-button-active-color: shade($ofh-secondary-button-color, 50%);
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-secondary-button-shadow-color: shade($ofh-secondary-button-color, 50%);
-
 $ofh-reverse-button-color: $color_ofh-white;
 $ofh-reverse-button-hover-color: #E8E8E8;
 $ofh-reverse-button-active-color: #D1D1D1;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-reverse-button-shadow-color: $color-ofh-black;
 
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-text-color: $color_ofh-brand-dark-blue;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-button-secondary-text-color: $color_ofh-white;
+
 // TODO: Not sure what this should be - couldn't find in Figma.
 $ofh-reverse-button-text-color: $color_ofh-black;
-
-
 $ofh-button-color-default: #0053B3;
 $ofh-button-color-hover: #002D61;
 $ofh-button-color-active: #001F42;
-$ofh-button-color-white: #FFFFFF;
+$ofh-button-color-white: #FFF;
 $ofh-button-color-white-hover: $color_ofh-grey-5;
 $ofh-button-color-white-active: $color_ofh-grey-4;

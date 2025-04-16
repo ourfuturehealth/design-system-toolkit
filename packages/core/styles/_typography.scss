@@ -159,6 +159,7 @@ h6,
 p,
 .ofh-body-m {
   @extend %ofh-body-m;
+
   color: inherit;
 }
 
@@ -191,6 +192,7 @@ address {
 .ofh-lede-text {
   @include ofh-font(24);
   @include ofh-responsive-margin(7, 'bottom');
+
   /* [1] */
 
   p,

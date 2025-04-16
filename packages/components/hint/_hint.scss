@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    COMPONENTS/ #HINT
    ========================================================================== */
@@ -42,7 +41,7 @@
 // This adjustment will not work in browsers that do not support :not().
 // Users with these browsers will see the default size margin (5px larger).
 
-.ofh-fieldset__legend:not(.ofh-fieldset__legend--m):not(.ofh-fieldset__legend--l):not(.ofh-fieldset__legend--xl) + .ofh-hint {
+.ofh-fieldset__legend:not(.ofh-fieldset__legend--m):not(.ofh-fieldset__legend--l):not(.ofh-fieldset__legend--xl) + .ofh-hint { /* stylelint-disable-line max-line-length */
   margin-bottom: ofh-spacing(2);
 }
 

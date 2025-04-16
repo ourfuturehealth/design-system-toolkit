@@ -38,7 +38,6 @@ $_spacing-directions: (
   @each $scale-point, $scale-map in $ofh-spacing-responsive-scale {
 
     .ofh-u-#{$property}-#{$scale-point} {
-
       @include _ofh-responsive-spacing($scale-point, $property, 'all', true);
     }
 
