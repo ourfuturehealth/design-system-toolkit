@@ -10,16 +10,16 @@
 //
 
 $ofh-spacing-points: (
-  0: 0,
-  1: 4px,
-  2: 8px,
-  3: 16px,
-  4: 24px,
-  5: 32px,
-  6: 40px,
-  7: 48px,
-  8: 56px,
-  9: 64px
+  0: $ofh_spacing-0,
+  1: $ofh_spacing-1,
+  2: $ofh_spacing-2,
+  3: $ofh_spacing-3,
+  4: $ofh_spacing-4,
+  5: $ofh_spacing-5,
+  6: $ofh_spacing-6,
+  7: $ofh_spacing-7,
+  8: $ofh_spacing-8,
+  9: $ofh_spacing-9
 ) !default;
 
 // Responsive spacing map
@@ -42,43 +42,43 @@ $ofh-spacing-points: (
 
 $ofh-spacing-responsive-scale: (
   0: (
-    null: 0,
-    tablet: 0
+    null: $ofh_spacing-0,
+    tablet: $ofh_spacing-0
   ),
   1: (
-    null: 4px,
-    tablet: 4px
+    null: $ofh_spacing-1,
+    tablet: $ofh_spacing-1
   ),
   2: (
-    null: 8px,
-    tablet: 8px
+    null: $ofh_spacing-2,
+    tablet: $ofh_spacing-2
   ),
   3: (
-    null: 8px,
-    tablet: 16px
+    null: $ofh_spacing-2,
+    tablet: $ofh_spacing-3
   ),
   4: (
-    null: 16px,
-    tablet: 24px
+    null: $ofh_spacing-3,
+    tablet: $ofh_spacing-4
   ),
   5: (
-    null: 24px,
-    tablet: 32px
+    null: $ofh_spacing-4,
+    tablet: $ofh_spacing-5
   ),
   6: (
-    null: 32px,
-    tablet: 40px
+    null: $ofh_spacing-5,
+    tablet: $ofh_spacing-6
   ),
   7: (
-    null: 40px,
-    tablet: 48px
+    null: $ofh_spacing-6,
+    tablet: $ofh_spacing-7
   ),
   8: (
-    null: 48px,
-    tablet: 56px
+    null: $ofh_spacing-7,
+    tablet: $ofh_spacing-8
   ),
   9: (
-    null: 56px,
-    tablet: 64px
+    null: $ofh_spacing-8,
+    tablet: $ofh_spacing-9
   )
 ) !default;
