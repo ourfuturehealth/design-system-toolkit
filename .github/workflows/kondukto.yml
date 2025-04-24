@@ -12,6 +12,15 @@ env:
 jobs:
   run-scans:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tool:
+          - dependabot
+          - semgrep
+          - osvscannersca
+          - gitleaks
+          - trufflehogsecurity
+          - snyksast
 
     steps:
     - name: Checkout Code
@@ -21,17 +30,12 @@ jobs:
       run: |
         curl -sSL https://cli.kondukto.io | sh
 
-    - name: Scan with Dependabot
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t dependabot -b $TARGET_BRANCH --async
-
-    - name: Scan with Semgrep
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t semgrep -b $TARGET_BRANCH --async
-
-    - name: Scan with OSV
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
-
-    - name: Scan with Gitleaks
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t gitleaks -b $TARGET_BRANCH --async
-
-    - name: Scan with Trufflehog
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t trufflehogsecurity -b $TARGET_BRANCH --async
+    - name: Scan with ${{ matrix.tool }}
+      run: |
+        kdt scan \
+        --host ${{ secrets.KONDUKTO_HOST }} \
+        --token ${{ secrets.KONDUKTO_TOKEN }} \
+        -p ${{ secrets.PROJECT_NAME }} \
+        -t ${{ matrix.tool }} \
+        -b $TARGET_BRANCH \
+        --async
