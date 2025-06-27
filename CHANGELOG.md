@@ -6,13 +6,26 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 
 ## [Unreleased]
 
-## [v3.2.0-alpha.1] - 2024-02-19
+## [v3.3.0-alpha.1] - 2025-06-27
+
+### Changed
+
+- Updated Node version to 22
+- various styling fixes
+- stylelinting
+- removed box shadow of menu toggle focus state
+
+### Security
+
+- fixed moderate security vulnerability in postcss by upgrading stylelint
+
+## [v3.2.0-alpha.1] - 2025-02-19
 
 ### Changed
 
 - Updated focus styling of components to use visible outline to improve accessibility.
 
-## [v3.1.0-alpha.1] - 2024-02-13
+## [v3.1.0-alpha.1] - 2025-02-13
 
 ### Changed
 
