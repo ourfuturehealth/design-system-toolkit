@@ -27,3 +27,7 @@ a {
 .ofh-link--no-visited-state {
   @include ofh-link-style-no-visited-state;
 }
+
+.ofh-link--light {
+  @include ofh-link-style-light;
+}
