@@ -57,7 +57,7 @@
 
   &:focus {
     color: $color_ofh-white;
-    outline: $ofh-focus-width solid transparent;
+    outline: $ofh-focus-width solid $color_ofh-white;
     outline-offset: $ofh-focus-width;
     text-decoration: none;
   }
