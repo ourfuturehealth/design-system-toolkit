@@ -47,7 +47,7 @@
   color: $color_ofh-white;
 
   &:visited {
-    color: $ofh-link-light-visited-color;
+    color: $color_ofh-white;
   }
 
   &:hover {
@@ -55,11 +55,16 @@
     text-decoration: none;
   }
 
-  &:focus {
+  &:focus,
+  &:focus:visited {
     color: $color_ofh-white;
     outline: $ofh-focus-width solid $color_ofh-white;
     outline-offset: $ofh-focus-width;
     text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: $ofh-focus-width solid $color_ofh-white;
   }
 
   &:active {
