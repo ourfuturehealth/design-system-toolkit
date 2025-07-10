@@ -4,7 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
-## [Unreleased]
+## [v3.4.0] - 2025-07-10
+
+### Changed
+
+- Add light variant of link
+- Remove alpha from versioning
 
 ## [v3.3.0-alpha.1] - 2025-06-27
 
