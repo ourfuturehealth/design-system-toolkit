@@ -58,13 +58,13 @@
   &:focus,
   &:focus:visited {
     color: $color_ofh-white;
-    outline: $ofh-focus-width solid $color_ofh-white;
-    outline-offset: $ofh-focus-width;
+    outline: 3px solid $color_ofh-white;
+    outline-offset: 1px;
     text-decoration: none;
   }
 
   &:focus-visible {
-    outline: $ofh-focus-width solid $color_ofh-white;
+    outline: 3px solid $color_ofh-white;
   }
 
   &:active {
