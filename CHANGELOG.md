@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
+## [v3.4.1] - 2025-07-10
+
+### Changed
+
+- Update light variant link's offset
+- Remove prelease tag
+
 ## [v3.4.0] - 2025-07-10
 
 ### Changed
