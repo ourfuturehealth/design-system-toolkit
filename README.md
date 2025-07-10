@@ -35,7 +35,7 @@ You can also [install Our Future Health design system toolkit using our compiled
     - Note that this PR should only contain changes to the `CHANGELOG.md`, `package.json` and `package-lock.json` files. Any actual code/feature changes should first be done in a separate PR, before the release PR.
     - See [this PR](https://github.com/ourfuturehealth/design-system-toolkit/pull/59) for an example.
 1. Immediately after the PR is merged, update your local clone, then create and push a Git tag for the release.
-    - E.g. `git tag -a v2.0.0-alpha.0 -m "v2.0.0-alpha.0" && git push origin --tags`.
+    - E.g. `git tag -a v2.0.0 -m "v2.0.0" && git push origin --tags`.
     - Note the `v` prefix is important as the release workflow will only trigger on tags that are prefixed with this.
 1. When the tag is pushed, the GitHub Actions 'release' workflow will trigger. This will create a named release in the GitHub repo ([docs](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)). Once this GitHub release page has been created, edit it via the GitHub UI and copy/paste the relevant Changelog entries.
     - You can see the release workflow run for the tag by going to: <https://github.com/ourfuturehealth/design-system-toolkit/actions>.
