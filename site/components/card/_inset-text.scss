@@ -12,6 +12,7 @@
  .ofh-inset-text-ds {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
@@ -19,22 +20,7 @@
     background-color: $color_ofh-grey-6;
     border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
     border-radius: $ofh-border-radius;
-  
-    @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
-    }
-  
-  }
 
-  .ofh-inset-text-ds-full-width {
-    @include top-and-bottom(); /* [1] */  
-    @include ofh-responsive-margin(4, 'bottom');
-    @include ofh-responsive-margin(4, 'top');
-    @include ofh-responsive-padding(4);
-  
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
-    border-radius: $ofh-border-radius;
   
     @include mq($media-type: print) {
       border-color: $ofh-text-black-color;
@@ -45,6 +31,7 @@
   .ofh-inset-text-ds--green {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
@@ -62,6 +49,7 @@
   .ofh-inset-text-ds--red {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);

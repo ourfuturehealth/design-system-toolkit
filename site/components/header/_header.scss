@@ -35,7 +35,7 @@
 
 .ofh-header-ds {
   @include clearfix();
-  background-color: $color_ofh-grey-6;
+  background-color: $color_ofh-neutral-yellow;
 }
 
 .ofh-header-ds__container {
@@ -140,7 +140,7 @@
   position: relative;
 
   &.js-show {
-    border-bottom: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
+    border-bottom: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
   }
 
   @include mq($from: tablet) {
@@ -337,7 +337,7 @@
   }
 
   @include mq($from: tablet) {
-    background-color: $color_ofh-grey-5;
+    background-color: $color_ofh-neutral-yellow;
     display: block;
     height: ofh-spacing(6); /* [2] */
     width: 44px; /* [2] */
@@ -475,8 +475,8 @@
     display: block;
 
     @include mq($until: large-desktop) {
-      border-bottom: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
-      border-top: ofh-spacing(1) solid $color_ofh-grey-5; /* [7] */
+      border-bottom: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
+      border-top: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
       color: $ofh-text-black-color;
 
       .ofh-width-container {
@@ -492,7 +492,7 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $color_ofh-grey-6;
+    background-color: $color_ofh-neutral-yellow;
     display: block;
     margin: 0 auto;
     max-width: $ofh-page-width + ofh-spacing(9); /* [12] */
@@ -539,7 +539,7 @@
 }
 
 .ofh-header-ds__navigation-item {
-  border-top: 1px solid $color_ofh-grey-5;
+  border-top: 1px solid $color_ofh-neutral-yellow;
   margin-bottom: 0;
   position: relative;
 
@@ -994,7 +994,7 @@
     background-color: $color_ofh-white;
 
     .ofh-header__navigation-list {
-      border-top: 1px solid $color_ofh-grey-5;
+      border-top: 1px solid $color_ofh-neutral-yellow;
     }
 
     .ofh-header__navigation-link {
