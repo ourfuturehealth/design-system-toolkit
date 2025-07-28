@@ -2,15 +2,15 @@
 {% set pageDescription = "What you need to design for Our Future Health websites and services" %}
 {% set dateUpdated = "October 2024" %}
 {% set pageSection = "Get Started" %}
-{% set subSection = "Getting started" %}
+{% set subSection = "Get started" %}
+{% set hideBreadcrumb = "true" %}
+
 
 {% from 'packages/components/inset-text/macro.njk' import insetText %}
 
 {% extends "app-layout.njk" %}
 
-{% block breadcrumb %}
-  {% include "./_breadcrumb.njk" %}
-{% endblock %}
+{% block breadcrumb %}{% endblock %}
 
 {% block bodyContent %}
 

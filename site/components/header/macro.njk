@@ -14,7 +14,7 @@
 {%- if params.organisation and params.organisation.name %} ofh-header-ds--organisation{% endif %}
 {%- if params.classes %} {{ params.classes }}{% endif %}" role="banner"
 {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-  <div class="ofh-width-container ofh-header-ds__container">
+  <div class="ofh-width-container ofh-header-ds__container app-width-container">
     <div class="ofh-header-ds__logo {%- if showNav == "false" and showSearch == "false"%} ofh-header-ds__logo--only{%- endif %}">
       {%- if params.organisation %}
       <a class="ofh-header-ds__link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}" aria-label="{{ params.organisation.name }} {{ params.organisation.split }} {{ params.organisation.descriptor }} homepage">
