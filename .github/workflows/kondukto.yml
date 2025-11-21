@@ -1,23 +1,21 @@
-name: Kondukto security scan
+name: Scan - Kondukto
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  run-scans:
+  scan:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Checkout the repository
+        uses: actions/checkout@v4
 
-    - name: Run Kondukto Scan
-      uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
-      with:
-        token: ${{ secrets.KONDUKTO_TOKEN }}    # GitHub Organization secret accesible by all repos
-        languages: 'IaC,js'                     # Optional: The primary languages of the repository
-        verbose: 'true'
-        snyk_token: ${{ secrets.SNYK_TOKEN }}
+      - name: Run Kondukto Scan
+        uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
+        with:
+          token: ${{ secrets.KONDUKTO_TOKEN }}    # GitHub Organization secret accesible by all repos
+          languages: 'IaC,js'                     # Optional: The primary languages of the repository
+          verbose: 'true'
+          snyk_token: ${{ secrets.SNYK_TOKEN }}
