@@ -6,32 +6,18 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  TARGET_BRANCH: main
-
 jobs:
   run-scans:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Install KDT CLI
-      run: |
-        curl -sSL https://cli.kondukto.io | sh
-
-    - name: Scan with Dependabot
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t dependabot -b $TARGET_BRANCH --async
-
-    - name: Scan with Semgrep
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t semgrep -b $TARGET_BRANCH --async
-
-    - name: Scan with OSV
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
-
-    - name: Scan with Gitleaks
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t gitleaks -b $TARGET_BRANCH --async
-
-    - name: Scan with Trufflehog
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t trufflehogsecurity -b $TARGET_BRANCH --async
+    - name: Run Kondukto Scan
+      uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
+      with:
+        token: ${{ secrets.KONDUKTO_TOKEN }}    # GitHub Organization secret accesible by all repos
+        languages: 'IaC,js'                     # Optional: The primary languages of the repository
+        verbose: 'true'
+        snyk_token: ${{ secrets.SNYK_TOKEN }}
