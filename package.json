@@ -1,6 +1,6 @@
 {
   "name": "ofh-design-system-toolkit",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "scripts": {
     "prepare": "gulp bundle",
@@ -48,14 +48,12 @@
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "js-beautify": "^1.14.7",
-    "minimist": "^1.2.8",
     "nunjucks": "^3.2.4",
     "sass": "^1.60.0",
     "stylelint": "^14.16.1",
+    "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^4.1.0",
-    "stylelint-config-standard-scss": "^4.0.0",
-    "wait-on": "^7.0.1",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.0.1",
     "webpack-stream": "^7.0.0"
