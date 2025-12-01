@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
+## [v3.4.2] - 2025-11-28
+
+### Removed
+
+- Removed unused dependencies: `minimist`, `wait-on`
+- Removing `wait-on` fixes [high vulnerability](https://github.com/axios/axios/security/advisories/GHSA-4hjh-wcwx-xvwj) from axios subdependency
+
 ## [v3.4.1] - 2025-07-10
 
 ### Changed
