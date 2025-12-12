@@ -20,20 +20,22 @@ jobs:
     - name: Install KDT CLI
       run: |
         curl -sSL https://cli.kondukto.io | sh
+    
+    - name: Run Snyk Scans  
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        HOST: ${{ secrets.KONDUKTO_HOST }}
+        TOKEN: ${{ secrets.KONDUKTO_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+      run: |
+        chmod +x .github/scripts/snyk-scans.sh
+        ./.github/scripts/snyk-scans.sh
 
     - name: List available scanners
       run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
 
     - name: Scan with Dependabot
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t dependabot -b $TARGET_BRANCH --async
-
-    - name: Scan with Snyk
-      uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
-      with:
-        token: ${{ secrets.KONDUKTO_TOKEN }}
-        snyk_token: ${{ secrets.SNYK_TOKEN }}
-        project_name: ${{ secrets.PROJECT_NAME }}
-        branch: ${{ env.TARGET_BRANCH }}
 
     - name: Scan with OSV
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
