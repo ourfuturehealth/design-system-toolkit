@@ -28,7 +28,12 @@ jobs:
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t dependabot -b $TARGET_BRANCH --async
 
     - name: Scan with Snyk
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t snyk_sast,snyk_sca -b $TARGET_BRANCH --async
+      uses: ourfuturehealth/kondukto-scan/.github/actions/kondukto-reusable-action@main
+      with:
+        token: ${{ secrets.KONDUKTO_TOKEN }}
+        snyk_token: ${{ secrets.SNYK_TOKEN }}
+        project_name: ${{ secrets.PROJECT_NAME }}
+        branch: ${{ env.TARGET_BRANCH }}
 
     - name: Scan with OSV
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
