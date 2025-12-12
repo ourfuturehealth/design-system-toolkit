@@ -20,7 +20,7 @@ jobs:
     - name: Install Snyk CLI  
       run: |
         curl -L -o $GITHUB_WORKSPACE/snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
-        $GITHUB_WORKSPACE/snyk
+        chmod +x $GITHUB_WORKSPACE/snyk
     
     - name: Run Snyk Scans  
       env:
