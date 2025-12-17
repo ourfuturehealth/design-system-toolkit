@@ -22,6 +22,10 @@ jobs:
         curl -L -o $GITHUB_WORKSPACE/snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
         chmod +x $GITHUB_WORKSPACE/snyk
     
+    - name: Install KDT CLI
+      run: |
+        curl -sSL https://cli.kondukto.io | sh
+        
     - name: Run Snyk Scans  
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
@@ -30,10 +34,6 @@ jobs:
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
       run: |
         ./.github/scripts/snyk-scans.sh
-    
-    - name: Install KDT CLI
-      run: |
-        curl -sSL https://cli.kondukto.io | sh
 
     - name: List available scanners
       run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
