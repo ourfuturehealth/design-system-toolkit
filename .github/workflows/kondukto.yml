@@ -25,25 +25,15 @@ jobs:
     - name: Install KDT CLI
       run: |
         curl -sSL https://cli.kondukto.io | sh
-
+        
     - name: Run Snyk Scans  
       env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         HOST: ${{ secrets.KONDUKTO_HOST }}
         TOKEN: ${{ secrets.KONDUKTO_TOKEN }}
         PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
-        VERBOSITY: true
       run: |
-        ./.github/scripts/snyk-scans.sh \
-          "$TOKEN" \
-          "$PROJECT_NAME" \
-          "main" \
-          "js" \
-          "" \
-          "" \
-          "$VERBOSITY" \
-          "${{ secrets.SNYK_TOKEN }}" \
-          "" \
-          ""
+        ./.github/scripts/snyk-scans.sh
 
     - name: List available scanners
       run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
