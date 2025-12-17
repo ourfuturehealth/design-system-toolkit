@@ -37,13 +37,8 @@ jobs:
           "$TOKEN" \
           "$PROJECT_NAME" \
           "main" \
-          "js" \
-          "" \
-          "" \
           "$VERBOSITY" \
-          "${{ secrets.SNYK_TOKEN }}" \
-          "" \
-          ""
+          "${{ secrets.SNYK_TOKEN }}"
 
     - name: List available scanners
       run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
