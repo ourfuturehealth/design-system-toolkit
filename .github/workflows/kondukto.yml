@@ -17,15 +17,34 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    - name: Install Snyk CLI  
+      run: |
+        curl -L -o $GITHUB_WORKSPACE/snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
+        chmod +x $GITHUB_WORKSPACE/snyk
+    
     - name: Install KDT CLI
       run: |
         curl -sSL https://cli.kondukto.io | sh
 
+    - name: Run Snyk Scans  
+      env:
+        HOST: ${{ secrets.KONDUKTO_HOST }}
+        TOKEN: ${{ secrets.KONDUKTO_TOKEN }}
+        PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+        VERBOSITY: true
+      run: |
+        ./.github/scripts/snyk-scans.sh \
+          "$TOKEN" \
+          "$PROJECT_NAME" \
+          "main" \
+          "$VERBOSITY" \
+          "${{ secrets.SNYK_TOKEN }}"
+
+    - name: List available scanners
+      run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
+
     - name: Scan with Dependabot
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t dependabot -b $TARGET_BRANCH --async
-
-    - name: Scan with Semgrep
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t semgrep -b $TARGET_BRANCH --async
 
     - name: Scan with OSV
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
