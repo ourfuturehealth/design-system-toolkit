@@ -8,6 +8,7 @@
     "test": "npm run jest:ci",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "lint:js": "eslint -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
+    "lint:js:fix": "eslint --fix -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
     "lint:css": "stylelint -f verbose --config ./tests/linters/stylelint.config.js 'packages/**/*.scss'",
     "lint:html": "htmlhint --config ./tests/linters/.htmlhintrc ./dist/app/components/**/*.html",
     "build-gh-release": "gulp zip",

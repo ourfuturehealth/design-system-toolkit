@@ -13,7 +13,7 @@ export default () => {
    * Update all conditional reveals to match checked state
   */
   const syncAllConditionalReveals = () => {
-    radioInputs.forEach((input) => toggleConditionalInput(input, 'ofh-radios__conditional--hidden'));
+    radioInputs.forEach(input => toggleConditionalInput(input, 'ofh-radios__conditional--hidden'));
   };
 
   // When the page is restored after navigating 'back' in some browsers the
