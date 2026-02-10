@@ -21,6 +21,10 @@ coverage
 node_modules
 bower_components
 
+# Lock files (using pnpm, so ignore npm/yarn lock files)
+package-lock.json
+yarn.lock
+
 # Editors
 .idea
 *.iml
@@ -31,6 +35,30 @@ Thumbs.db
 
 # Compiled files
 dist/
+
+# Build and development artifacts
+.turbo/
+.vite/
+storybook-static/
+.next/
+.cache/
+
+# Package files
+*.tgz
+*.tar.gz
+*.zip
+
+# Testing
+coverage/
+.nyc_output/
+
+# Development files
+*.tsbuildinfo
+.eslintcache
+
+# Temporary files
+*.tmp
+*.temp
 
 ## Duplicated the above for .npmignore
 dist/ofh-design-system-toolkit.css

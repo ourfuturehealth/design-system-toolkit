@@ -4,6 +4,10 @@ module.exports = {
   collectCoverageFrom: [
     'packages/**/*.js',
   ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/packages/react-components/'
+  ],
   globals: {
     window: true,
   },

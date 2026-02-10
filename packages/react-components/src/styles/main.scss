@@ -1,0 +1,33 @@
+// Import your existing NHS-based design system SCSS here
+@import "ofh-design-system-toolkit.css";
+
+// Design tokens (colors, spacing, typography)
+:root {
+  --color-primary: #005eb8;
+  --color-primary-hover: #004a93;
+  --color-secondary: #768692;
+  --color-text: #212b32;
+  --color-background: #ffffff;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  --font-family: "Frutiger W01", Arial, sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+}
+
+// Base styles
+* {
+  box-sizing: border-box;
+}
+
+// Component base classes (will be extended by component modules)
+.component-base {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}

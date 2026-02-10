@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
       "outputs": ["dist/**", "site/dist/**"],
       "dependsOn": ["^build"]
@@ -12,8 +12,22 @@
     "lint": {
       "outputs": []
     },
-    "test": {
+    "test:jest": {
       "outputs": []
+    },
+    "test:vitest": {
+      "outputs": []
+    },
+    "test:vitest:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:all": {
+      "dependsOn": ["test:jest", "test:vitest"]
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
     }
   }
 }
