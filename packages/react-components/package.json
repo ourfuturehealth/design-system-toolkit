@@ -11,7 +11,7 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs.js"
     },
-    "./styles": "./dist/design-system-react.css"
+    "./styles": "./dist/ofh-design-system-react.css"
   },
   "files": [
     "dist",

@@ -25,6 +25,12 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
         },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'ofh-design-system-react.css';
+          }
+          return assetInfo.name || '';
+        },
       },
     },
     sourcemap: true,
