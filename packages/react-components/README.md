@@ -5,13 +5,13 @@ React component library for the OFH Design System.
 ## Installation
 
 ```bash
-npm install @your-org/design-system-react
+npm install @ourfuturehealth/react-components
 ```
 
 ## Usage
 
 ```tsx
-import { Button, TextInput } from '@ourfuturehealth/design-system-react';
+import { Button, TextInput } from '@ourfuturehealth/react-components';
 
 function App() {
   return (

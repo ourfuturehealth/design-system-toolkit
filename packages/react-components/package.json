@@ -2,6 +2,7 @@
   "name": "@ourfuturehealth/react-components",
   "version": "0.0.1",
   "description": "React component library for OFH Design System",
+  "packageManager": "pnpm@10.29.2",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",

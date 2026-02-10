@@ -7,6 +7,48 @@
 
 Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.
 
+## Monorepo Structure
+
+This repository is organized as a monorepo containing:
+
+- **Core toolkit** - SCSS/CSS design system and vanilla JavaScript components
+- **React components** (`packages/react-components/`) - React implementation of the design system
+- **Example consumer app** (`packages/example-react-consumer-app/`) - Demonstration of consuming React components
+
+## Prerequisites
+
+**Required:**
+
+- Node.js 18+
+- **pnpm 10+** (This project uses pnpm workspaces - npm/yarn will not work correctly)
+
+**Install pnpm globally:**
+
+```bash
+npm install -g pnpm
+# or
+curl -fsSL https://get.pnpm.io/install.sh | sh
+```
+
+## Quick Start
+
+```bash
+# Clone and install dependencies
+git clone <repository-url>
+cd design-system-toolkit
+pnpm install
+
+# Development workflows
+pnpm run storybook              # React component documentation
+pnpm run dev:react-library      # React component development
+pnpm run dev:consumer-app       # Example consumer app
+pnpm run dev                    # Original toolkit documentation
+
+# Testing
+pnpm run test:all              # All tests (Jest + Vitest)
+pnpm run build:all             # Build all packages
+```
+
 ## Guidance
 
 Visit the [design system docs website](https://designsystem.ourfuturehealth.org.uk/) for examples of components and guidance for when to use them.
@@ -15,6 +57,15 @@ Visit the [design system docs website](https://designsystem.ourfuturehealth.org.
 
 **Note**
 If you're looking to migrate an existing repo from OFH's V1 design system, see [this guide](https://ourfuturehealth.atlassian.net/wiki/spaces/DS/pages/277250064/Implementing+Design+System+V2).
+
+### React Components
+
+For React applications, use the React component library:
+
+- **Installation guide:** [Consuming React Components](/docs/consuming-react-components.md)
+- **Package:** `@ourfuturehealth/react-components` (GitHub Packages)
+
+### Traditional CSS/JavaScript
 
 ### 1. Install with package managers
 
@@ -28,19 +79,19 @@ You can also [install Our Future Health design system toolkit using our compiled
 
 1. Create a new branch for the release, off the latest `main` branch, and name it `release-v{version_number}`.
 1. Update the [CHANGELOG.md](CHANGELOG.md) and ensure it reflects everything that is being released in the new version.
-    - This mainly involves converting the "Unreleased" section (at the top) to a new version section (remember to add a date) and adding a new "Unreleased" section for the next version.
-    - The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+   - This mainly involves converting the "Unreleased" section (at the top) to a new version section (remember to add a date) and adding a new "Unreleased" section for the next version.
+   - The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 1. Update the `version` field in [package.json](package.json) and run `npm install` (to update the `package-lock.json`).
 1. Submit a new pull request (PR) for the branch (with your changes) and get it reviewed.
-    - Note that this PR should only contain changes to the `CHANGELOG.md`, `package.json` and `package-lock.json` files. Any actual code/feature changes should first be done in a separate PR, before the release PR.
-    - See [this PR](https://github.com/ourfuturehealth/design-system-toolkit/pull/59) for an example.
+   - Note that this PR should only contain changes to the `CHANGELOG.md`, `package.json` and `package-lock.json` files. Any actual code/feature changes should first be done in a separate PR, before the release PR.
+   - See [this PR](https://github.com/ourfuturehealth/design-system-toolkit/pull/59) for an example.
 1. Immediately after the PR is merged, update your local clone, then create and push a Git tag for the release.
-    - E.g. `git tag -a v2.0.0 -m "v2.0.0" && git push origin --tags`.
-    - Note the `v` prefix is important as the release workflow will only trigger on tags that are prefixed with this.
+   - E.g. `git tag -a v2.0.0 -m "v2.0.0" && git push origin --tags`.
+   - Note the `v` prefix is important as the release workflow will only trigger on tags that are prefixed with this.
 1. When the tag is pushed, the GitHub Actions 'release' workflow will trigger. This will create a named release in the GitHub repo ([docs](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)). Once this GitHub release page has been created, edit it via the GitHub UI and copy/paste the relevant Changelog entries.
-    - You can see the release workflow run for the tag by going to: <https://github.com/ourfuturehealth/design-system-toolkit/actions>.
+   - You can see the release workflow run for the tag by going to: <https://github.com/ourfuturehealth/design-system-toolkit/actions>.
 1. Announce this new release in the #design-system-announcements Slack channel.
-    - Make sure to provide a link to the GitHub release page.
+   - Make sure to provide a link to the GitHub release page.
 
 ## Browsers and assistive technology
 
@@ -81,27 +132,27 @@ is built using the [Eleventy](https://www.11ty.dev/) static site generator.
 There are a few things to highlight about the structure of the site:
 
 - **Build and watch scripts** - Commands for building and watching the
-website are configured as npm run scripts in [`package.json`](./package.json).
-These run scripts are all prefixed with `site:`. Run the command `npm run`
-in your terminal to see all available npm run scripts.
+  website are configured as npm run scripts in [`package.json`](./package.json).
+  These run scripts are all prefixed with `site:`. Run the command `npm run`
+  in your terminal to see all available npm run scripts.
 - **Use of Nunjucks macros from toolkit components** - the component Nunjuck macros are imported into the site templates directly from the [`packages/components/`](./packages/components/) directory (which is the source of truth for toolkit components). This is possible because Eleventy adds the root directory to the lookup path for Nunjucks.
 - **Use of toolkit assets and artifacts** - The Eleventy configuration
-([`site.eleventy.config.js`](site.eleventy.config.js)) handles the copying of
-the `dist/` and `packages/assets/` directories into the generated website.
-The assets from these directories are then directly referenced in the site HTML.
+  ([`site.eleventy.config.js`](site.eleventy.config.js)) handles the copying of
+  the `dist/` and `packages/assets/` directories into the generated website.
+  The assets from these directories are then directly referenced in the site HTML.
 - **Component examples** - Isolated component examples live under the
-[`site/views/examples`](./site/views/examples) directory. These pages are ideal
-for testing component changes during development.
+  [`site/views/examples`](./site/views/examples) directory. These pages are ideal
+  for testing component changes during development.
 - **Design examples** - All components, patterns and styles in the toolkit have
-their own rendered design examples. These are HTML pages that are embedded in
-iframes on the website. They can also be viewed standalone.
-  - *Generating design examples* - The design example HTML pages are generated
-  using Eleventy's [Pagination feature](https://www.11ty.dev/docs/pages-from-data/).
-  The data is generated by [`site/views/_data/design-examples.js`](./site/views/_data/design-examples.js)
-  and [`site/views/design-examples.njk`](./site/views/design-examples.njk) iterates
-  over the data to generate the HTML pages.
-  - *Embedding design examples* - The [`designExample`](./site/views/_includes/design-example.njk)
-  Nunjucks macro is used in the website to embed design examples via an iframe.
+  their own rendered design examples. These are HTML pages that are embedded in
+  iframes on the website. They can also be viewed standalone.
+  - _Generating design examples_ - The design example HTML pages are generated
+    using Eleventy's [Pagination feature](https://www.11ty.dev/docs/pages-from-data/).
+    The data is generated by [`site/views/_data/design-examples.js`](./site/views/_data/design-examples.js)
+    and [`site/views/design-examples.njk`](./site/views/design-examples.njk) iterates
+    over the data to generate the HTML pages.
+  - _Embedding design examples_ - The [`designExample`](./site/views/_includes/design-example.njk)
+    Nunjucks macro is used in the website to embed design examples via an iframe.
 
 ## Licence
 
