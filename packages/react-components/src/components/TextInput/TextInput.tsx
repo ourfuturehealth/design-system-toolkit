@@ -49,7 +49,8 @@ export const TextInput: React.FC<TextInputProps> = ({
   id,
   ...props
 }) => {
-  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+  const inputId =
+    id || `input-${crypto.randomUUID().replace(/-/g, '').slice(0, 9)}`;
   const hintId = hint ? `${inputId}-hint` : undefined;
   const errorId = error ? `${inputId}-error` : undefined;
 

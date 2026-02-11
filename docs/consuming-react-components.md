@@ -56,7 +56,7 @@ function App() {
   return (
     <div>
       <TextInput label="Your name" hint="Enter your full name" />
-      <Button variant="primary">Submit</Button>
+      <Button variant="contained">Submit</Button>
     </div>
   );
 }
