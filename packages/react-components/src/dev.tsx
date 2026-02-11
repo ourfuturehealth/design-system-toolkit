@@ -43,6 +43,18 @@ function DevApp() {
           <TextInput label="What is your name?" />
 
           <TextInput
+            label="What is your NHS number?"
+            hint="Your NHS number is a 10 digit number that you find on any letter the NHS has sent you. For example, 485 777 3456."
+            style={{ marginTop: '1rem' }}
+          />
+
+          <TextInput
+            label="Phone number"
+            error="Enter a valid phone number"
+            style={{ marginTop: '1rem' }}
+          />
+
+          <TextInput
             label="20 character width"
             maxLength={20}
             style={{ marginTop: '1rem' }}
@@ -111,18 +123,6 @@ function DevApp() {
           <TextInput
             label="One quarter width"
             width="one-quarter"
-            style={{ marginTop: '1rem' }}
-          />
-
-          <TextInput
-            label="What is your NHS number?"
-            hint="Your NHS number is a 10 digit number that you find on any letter the NHS has sent you. For example, 485 777 3456."
-            style={{ marginTop: '1rem' }}
-          />
-
-          <TextInput
-            label="Phone number"
-            error="Enter a valid phone number"
             style={{ marginTop: '1rem' }}
           />
         </div>
