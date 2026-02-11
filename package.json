@@ -5,8 +5,8 @@
   "packageManager": "pnpm@10.29.2",
   "scripts": {
     "prepare": "gulp bundle",
-    "test": "npm run jest:ci",
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "test": "pnpm run jest:ci",
+    "lint": "pnpm run lint:js && pnpm run lint:css && pnpm run lint:html",
     "lint:js": "eslint -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
     "lint:js:fix": "eslint --fix -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
     "lint:css": "stylelint -f verbose --config ./tests/linters/stylelint.config.js 'packages/**/*.scss'",
@@ -14,25 +14,25 @@
     "build-gh-release": "gulp zip",
     "jest:dev": "jest --watch",
     "jest:ci": "jest",
-    "build": "npm run toolkit:build && npm run site:build",
+    "build": "pnpm run toolkit:build && pnpm run site:build",
     "build:react-library": "turbo run build --filter=@ourfuturehealth/react-components",
-    "build:all": "npm run build && npm run build:react-library",
-    "dev": "npm run toolkit:build && npm run site:clean && concurrently 'npm run toolkit:watch' 'npm:site:watch:css' 'npm:site:watch:js' 'npm:site:watch:eleventy'",
+    "build:all": "pnpm run build && pnpm run build:react-library",
+    "dev": "pnpm run toolkit:build && pnpm run site:clean && concurrently 'pnpm run toolkit:watch' 'pnpm:site:watch:css' 'pnpm:site:watch:js' 'pnpm:site:watch:eleventy'",
     "dev:react-library": "cd packages/react-components && pnpm dev",
     "dev:react-consumer-app": "cd packages/example-react-consumer-app && pnpm dev",
     "test:react-library": "turbo run test:vitest --filter=@ourfuturehealth/react-components",
     "test:react-library:watch": "turbo run test:vitest:watch --filter=@ourfuturehealth/react-components",
-    "test:toolkit": "npm run jest:ci",
+    "test:toolkit": "pnpm run jest:ci",
     "test:all": "turbo run test:all",
     "lint:react": "turbo run lint --filter=@ourfuturehealth/react-components",
     "storybook": "turbo run storybook --filter=@ourfuturehealth/react-components",
     "toolkit:build": "gulp clean && gulp build",
     "toolkit:watch": "gulp watch",
     "site:clean": "rm -rf site/dist/ && mkdir -p site/dist",
-    "site:watch:css": "npm run site:build:css -- --watch",
-    "site:watch:js": "npm run site:build:js -- --watch",
+    "site:watch:css": "pnpm run site:build:css -- --watch",
+    "site:watch:js": "pnpm run site:build:js -- --watch",
     "site:watch:eleventy": "npx @11ty/eleventy --serve --config site.eleventy.config.js",
-    "site:build": "npm run site:clean && npm run site:build:css && npm run site:build:js && npm run site:build:eleventy",
+    "site:build": "pnpm run site:clean && pnpm run site:build:css && pnpm run site:build:js && pnpm run site:build:eleventy",
     "site:build:css": "sass --style compressed --load-path packages/ site/styles/:site/dist/css/",
     "site:build:js": "webpack --config site.webpack.config.js",
     "site:build:eleventy": "npx @11ty/eleventy --config site.eleventy.config.js"
@@ -79,7 +79,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm test"
+      "pre-push": "pnpm run lint && pnpm test"
     }
   },
   "files": [

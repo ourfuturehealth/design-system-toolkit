@@ -81,7 +81,7 @@ You can also [install Our Future Health design system toolkit using our compiled
 1. Update the [CHANGELOG.md](CHANGELOG.md) and ensure it reflects everything that is being released in the new version.
    - This mainly involves converting the "Unreleased" section (at the top) to a new version section (remember to add a date) and adding a new "Unreleased" section for the next version.
    - The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-1. Update the `version` field in [package.json](package.json) and run `npm install` (to update the `package-lock.json`).
+1. Update the `version` field in [package.json](package.json) and run `pnpm install` (to update the `pnpm-lock.yaml`).
 1. Submit a new pull request (PR) for the branch (with your changes) and get it reviewed.
    - Note that this PR should only contain changes to the `CHANGELOG.md`, `package.json` and `package-lock.json` files. Any actual code/feature changes should first be done in a separate PR, before the release PR.
    - See [this PR](https://github.com/ourfuturehealth/design-system-toolkit/pull/59) for an example.
@@ -120,7 +120,7 @@ To build the toolkit and site in watch mode, and also serve the docs website
 (with hot reload), run the command:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 ### Code structure
@@ -132,9 +132,9 @@ is built using the [Eleventy](https://www.11ty.dev/) static site generator.
 There are a few things to highlight about the structure of the site:
 
 - **Build and watch scripts** - Commands for building and watching the
-  website are configured as npm run scripts in [`package.json`](./package.json).
-  These run scripts are all prefixed with `site:`. Run the command `npm run`
-  in your terminal to see all available npm run scripts.
+  website are configured as pnpm run scripts in [`package.json`](./package.json).
+  These run scripts are all prefixed with `site:`. Run the command `pnpm run`
+  in your terminal to see all available pnpm run scripts.
 - **Use of Nunjucks macros from toolkit components** - the component Nunjuck macros are imported into the site templates directly from the [`packages/components/`](./packages/components/) directory (which is the source of truth for toolkit components). This is possible because Eleventy adds the root directory to the lookup path for Nunjucks.
 - **Use of toolkit assets and artifacts** - The Eleventy configuration
   ([`site.eleventy.config.js`](site.eleventy.config.js)) handles the copying of

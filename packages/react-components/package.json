@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:clean": "rm -rf dist && npm run build",
+    "build:clean": "rm -rf dist && pnpm run build",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "test": "vitest",
@@ -30,7 +30,7 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run test:run && npm run build:clean",
+    "prepublishOnly": "pnpm run test:run && pnpm run build:clean",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
