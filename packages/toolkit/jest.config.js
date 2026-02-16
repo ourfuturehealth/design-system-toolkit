@@ -1,9 +1,9 @@
 module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
-    'packages/**/*.js',
-    '!packages/react-components/**', // ignore react library tests, they have their own vitest tests
-    '!packages/example-react-consumer-app/**', // ignore react example consumer app tests, they have their own vitest tests
+    'components/**/*.js',
+    'tests/**/*.js',
+    '!coverage/**',
   ],
   globals: {
     window: true,
@@ -11,8 +11,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: [
     '/node_modules/',
-    '/packages/react-components/',
-    '/packages/example-react-consumer-app/',
+    '/coverage/',
   ],
   verbose: true,
 };
