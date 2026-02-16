@@ -1,0 +1,34 @@
+{
+  "name": "site",
+  "private": true,
+  "scripts": {
+    "build": "pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:eleventy",
+    "clean": "rm -rf dist && mkdir -p dist",
+    "watch": "concurrently \"pnpm:watch:*\"",
+    "watch:css": "sass --watch --style compressed --load-path ./node_modules/toolkit ./styles/:./dist/css/",
+    "watch:js": "webpack --config webpack.config.js --watch",
+    "watch:eleventy": "eleventy --serve --config eleventy.config.js",
+    "build:css": "sass --style compressed --load-path ./node_modules/toolkit ./styles/:./dist/css/",
+    "build:js": "webpack --config webpack.config.js",
+    "build:eleventy": "eleventy --config eleventy.config.js",
+    "lint": "pnpm run lint:html",
+    "lint:html": "htmlhint dist/**/*.html"
+  },
+  "dependencies": {
+    "toolkit": "workspace:*"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.2",
+    "concurrently": "^7.6.0",
+    "highlight.js": "^11.7.0",
+    "iframe-resizer": "^4.3.6",
+    "js-beautify": "^1.14.7",
+    "nunjucks": "^3.2.4",
+    "sass": "^1.60.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.0.1"
+  }
+}
