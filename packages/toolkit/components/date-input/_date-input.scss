@@ -1,0 +1,28 @@
+/* ==========================================================================
+   COMPONENTS/ #DATE-INPUT
+   ========================================================================== */
+
+/**
+ * 1. font-size: 0 removes whitespace caused by inline-block
+ */
+
+.ofh-date-input {
+  @include clearfix;
+
+  font-size: 0; /* 1 */
+}
+
+.ofh-date-input__item {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-right: ofh-spacing(4);
+  vertical-align: baseline;
+}
+
+.ofh-date-input__label {
+  display: block;
+}
+
+.ofh-date-input__input {
+  margin-bottom: 0;
+}

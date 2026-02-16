@@ -1,0 +1,16 @@
+/* ==========================================================================
+   COMPONENTS / #WARNING-CALLOUT
+   ========================================================================== */
+
+/**
+ * 1. Uses @mixin panel-with-label from tools/_mixins.
+ * 2. Uses @mixin heading-label from tools/_mixins.
+ */
+
+.ofh-warning-callout {
+  @include panel-with-label($color_ofh-brand-light-blue, $ofh-text-black-color, $color_ofh-brand-blue); /* [1] */
+}
+
+.ofh-warning-callout__label {
+  @include heading-label($color_ofh-brand-blue, $color_ofh-white); /* [2] */
+}

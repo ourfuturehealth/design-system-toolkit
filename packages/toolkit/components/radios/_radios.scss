@@ -1,0 +1,180 @@
+/* ==========================================================================
+   COMPONENTS/ #RADIOS
+   ========================================================================== */
+
+/**
+ * 1. remove 300ms pause on mobile.
+ * 2. Fix bug in IE11 caused by transform rotate (-45deg).
+ */
+
+$ofh-radios-size: ofh-spacing(6);
+$ofh-radios-label-padding-left-right: 12px;
+
+// When the default focus width is used on a curved edge it looks visually smaller.
+// So for the circular radios we bump the default to make it look visually consistent.
+$ofh-radios-focus-width: $ofh-focus-width + 1px;
+
+.ofh-radios__item {
+  @include ofh-font(19);
+
+  clear: left;
+  display: block;
+  margin-bottom: ofh-spacing(2);
+  min-height: $ofh-radios-size;
+  padding: 0 0 0 $ofh-radios-size;
+  position: relative;
+}
+
+.ofh-radios__item:last-child,
+.ofh-radios__item:last-of-type {
+  margin-bottom: 0;
+}
+
+.ofh-radios__input {
+  cursor: pointer;
+  height: $ofh-radios-size;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: $ofh-radios-size;
+  z-index: 1;
+}
+
+.ofh-radios__label {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 0;
+  padding: 8px $ofh-radios-label-padding-left-right ofh-spacing(1);
+  -ms-touch-action: manipulation; /* 1 */
+  touch-action: manipulation; /* 1 */
+}
+
+.ofh-radios__hint {
+  display: block;
+  padding-left: $ofh-radios-label-padding-left-right;
+  padding-right: $ofh-radios-label-padding-left-right;
+}
+
+.ofh-radios__input + .ofh-radios__label::before {
+  background: $ofh-input-element-background-color;
+  border: $ofh-border-width-form-element solid $ofh-input-border-color;
+  border-radius: 50%;
+  box-sizing: border-box;
+  content: '';
+  height: $ofh-radios-size;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: $ofh-radios-size;
+}
+
+.ofh-radios__input + .ofh-radios__label::after {
+  background: $ofh-input-border-color;
+  border: 10px solid $ofh-text-black-color;
+  border-radius: 50%;
+  content: '';
+  height: 0;
+  left: 10px;
+  opacity: 0;
+  position: absolute;
+  top: 10px;
+  width: 0;
+}
+
+/**
+ * Focus state
+ *
+ * 1. Since box-shadows are removed when users customise their colours
+ *    We set a transparent outline that is shown instead.
+ *    https://accessibility.blog.gov.uk/2017/03/27/how-users-change-colours-on-websites/
+ */
+
+.ofh-radios__input:focus + .ofh-radios__label::before {
+  @include ofh-focused-radio();
+}
+
+/* Selected state */
+
+.ofh-radios__input:checked + .ofh-radios__label::after {
+  opacity: 1;
+}
+
+/* Disabled state */
+
+.ofh-radios__input:disabled,
+.ofh-radios__input:disabled + .ofh-radios__label {
+  cursor: default;
+}
+
+.ofh-radios__input:disabled + .ofh-radios__label {
+  opacity: .5;
+}
+
+/*
+ * Inline variant
+ *
+ * 1. Prevent inline modifier being used with conditional reveals
+ */
+
+.ofh-radios--inline {
+  @include mq ($from: tablet) {
+    @include clearfix;
+
+    .ofh-radios__item {
+      clear: none;
+      float: left;
+      margin-right: ofh-spacing(4);
+    }
+  }
+
+  &.ofh-radios--conditional { /* 1 */
+    .ofh-radios__item {
+      float: none;
+      margin-right: 0;
+    }
+  }
+}
+
+/* Divider variant */
+
+.ofh-radios__divider {
+  $ofh-divider-size: $ofh-radios-size !default;
+
+  @include ofh-font(19);
+
+  color: $ofh-text-black-color;
+  margin-bottom: ofh-spacing(2);
+  text-align: center;
+  width: $ofh-divider-size;
+}
+
+/* Conditional */
+
+$conditional-border-width: $ofh-border-width-mobile;
+
+// Calculate the amount of padding needed to keep the border centered against the radios.
+$conditional-border-padding: ($ofh-radios-size * .5) - ($conditional-border-width * .5);
+
+// Move the border centered with the radios
+$conditional-margin-left: $conditional-border-padding;
+
+// Move the contents of the conditional inline with the label
+$conditional-padding-left: $conditional-border-padding + $ofh-radios-label-padding-left-right;
+
+.ofh-radios__conditional {
+  @include ofh-responsive-margin(4, 'bottom');
+
+  border-left: $conditional-border-width solid $ofh-input-border-color;
+  margin-left: $conditional-margin-left;
+  padding-left: $conditional-padding-left;
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.js-enabled .ofh-radios__conditional--hidden {
+  display: none;
+}

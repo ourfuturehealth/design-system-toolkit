@@ -1,0 +1,54 @@
+/* ==========================================================================
+   #TAG
+   ========================================================================== */
+
+/* stylelint-disable color-no-hex */
+
+.ofh-tag {
+  @include ofh-font($size: 16, $weight: bold, $line-height: 1);
+
+  background-color: $color_ofh-brand-blue-1;
+  color: $color_ofh-white;
+  display: inline-block;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  padding: ofh-spacing(1) ofh-spacing(2) ofh-spacing(1) ofh-spacing(2); /* top right bottom left */
+  text-decoration: none;
+}
+
+@media (min-width: 40.0625em) {
+  .ofh-tag {
+    font-size: 1rem;
+    line-height: 1;
+  }
+}
+
+/* Colour variants
+  ========================================================================== */
+
+.ofh-tag--grey {
+  background-color: $color_ofh-grey-5;
+  color: $color_ofh-grey-1;
+  outline: 1px solid $color_ofh-grey-3;
+  outline-offset: -1px;
+}
+
+.ofh-tag--green {
+  background-color: $color_ofh-brand-green-5;
+  color: $color_ofh-brand-green-1;
+}
+
+.ofh-tag--blue {
+  background-color: $color_ofh-brand-blue-5;
+  color: $color_ofh-brand-blue-1;
+}
+
+.ofh-tag--red {
+  background-color: $color_ofh-brand-red-5;
+  color: $color_ofh-brand-red-1;
+}
+
+.ofh-tag--yellow {
+  background-color: $color_ofh-brand-yellow-5;
+  color: $color_ofh-brand-orange-1;
+}

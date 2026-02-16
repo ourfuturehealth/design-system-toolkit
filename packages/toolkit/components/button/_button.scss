@@ -1,0 +1,211 @@
+/* ==========================================================================
+   COMPONENTS/ #BUTTON
+   ========================================================================== */
+/* stylelint-disable selector-no-qualifying-type */
+
+// Base button styles
+.ofh-button,
+a.ofh-button {
+  @include ofh-responsive-margin(5, 'bottom');
+
+  -webkit-appearance: none;
+  background-color: $ofh-button-color-white;
+  border: $ofh-border-width-form-element solid transparent;
+  border-radius: 8px;
+  box-shadow: none;
+  color: $ofh-button-color-white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 28px;
+  margin-top: 0;
+  padding: ofh-spacing(3) ofh-spacing(4);
+  position: relative;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
+  vertical-align: top;
+  width: auto;
+
+  @include mq($until: tablet) {
+    font-size: 16px;
+    line-height: 24px;
+    padding: 12px ofh-spacing(3); // 12px not defined in $ofh-spacing-points
+  }
+
+  &:visited,
+  &:active,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
+
+// Button variations
+.ofh-button--contained,
+a.ofh-button.ofh-button--contained {
+  background-color: $ofh-button-color-default;
+  color: $ofh-button-color-white;
+
+  &:hover {
+    background-color: $ofh-button-color-hover;
+  }
+
+  &:focus {
+    background-color: $ofh-button-color-active;
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
+  }
+
+  &:active {
+    background-color: $ofh-button-color-active;
+    outline: none;
+    outline-offset: none;
+  }
+}
+
+.ofh-button--outlined,
+a.ofh-button.ofh-button--outlined {
+  border: $ofh-border-width-form-element solid $ofh-button-color-default;
+  color: $ofh-button-color-default;
+
+  &:hover {
+    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
+    color: $ofh-button-color-hover;
+  }
+
+  &:active,
+  &:focus {
+    border: $ofh-border-width-form-element solid $ofh-button-color-active;
+    color: $ofh-button-color-active;
+  }
+
+  &:focus {
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
+  }
+
+  &:active {
+    outline: none;
+    outline-offset: none;
+  }
+}
+
+.ofh-button--ghost,
+a.ofh-button.ofh-button--ghost {
+  background-color: transparent;
+  border: $ofh-border-width-form-element solid $ofh-button-color-default;
+  color: $ofh-button-color-default;
+
+  &:hover {
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
+    color: $ofh-button-color-hover;
+  }
+
+  &:active,
+  &:focus {
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid$ofh-button-color-active;
+    color: $ofh-button-color-active;
+  }
+
+  &:focus {
+    outline: 4px solid $ofh-button-color-default;
+    outline-offset: 4px;
+  }
+
+  &:active {
+    outline: none;
+    outline-offset: none;
+  }
+
+  &-reverse {
+    background-color: transparent;
+    border: $ofh-border-width-form-element solid $ofh-button-color-white;
+    color: $ofh-button-color-white;
+
+    &:hover {
+      background-color: transparent;
+      border: $ofh-border-width-form-element solid $ofh-button-color-white-hover;
+      color: $ofh-button-color-white-hover;
+    }
+
+    &:active,
+    &:focus {
+      background-color: transparent;
+      border: $ofh-border-width-form-element solid $ofh-button-color-white-active;
+      color: $ofh-button-color-white-active;
+    }
+
+    &:focus {
+      outline: 4px solid $ofh-button-color-white;
+      outline-offset: 4px;
+    }
+
+    &:active {
+      outline: none;
+      outline-offset: none;
+    }
+  }
+}
+
+.ofh-button--text,
+a.ofh-button.ofh-button--text {
+  background-color: transparent;
+  color: $ofh-button-color-default;
+  padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
+
+  @include mq($until: tablet) {
+    padding: ofh-spacing(2) ofh-spacing(0);
+  }
+
+  &:hover {
+    color: $ofh-button-color-hover;
+  }
+
+  &:focus {
+    border-radius: 0;
+    color: $ofh-button-color-active;
+    outline: 4px solid $ofh-button-color-default;
+  }
+
+  &:active {
+    color: $ofh-button-color-active;
+    outline: none;
+    outline-offset: none;
+  }
+
+  &-reverse {
+    background-color: transparent;
+    color: $ofh-button-color-white;
+    padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
+
+    @include mq($until: tablet) {
+      padding: ofh-spacing(2) ofh-spacing(0);
+    }
+
+    &:hover {
+      color: $ofh-button-color-white-hover;
+    }
+
+    &:focus {
+      border-radius: 0;
+      color: $ofh-button-color-white-active;
+      outline: 4px solid $ofh-button-color-white;
+    }
+
+    &:active {
+      color: $ofh-button-color-white-active;
+      outline: none;
+      outline-offset: none;
+    }
+  }
+}

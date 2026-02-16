@@ -1,0 +1,72 @@
+/* ==========================================================================
+   COMPONENTS / #FOOTER
+   ========================================================================== */
+
+.ofh-footer {
+  @include clearfix();
+  @include print-hide();
+  @include ofh-responsive-padding(5, bottom);
+  @include ofh-responsive-padding(5, top);
+  @include ofh-font(14);
+
+  background-color: $color_ofh-grey-4;
+  border-top: ofh-spacing(1) solid $color_ofh-brand-yellow;
+}
+
+.footer-text {
+  float: left;
+
+  p {
+    @include ofh-font(16);
+
+    margin: 0;
+  }
+}
+
+.ofh-footer__list {
+  @include ofh-responsive-padding(4, bottom);
+
+  list-style-type: none;
+  margin: 0;
+  padding-left: ofh-spacing(0);
+
+  @include mq($from: desktop) {
+    float: left;
+    padding-bottom: 0;
+    width: 75%;
+  }
+}
+
+.ofh-footer__list-item {
+  @include ofh-font(16);
+
+  @include mq($from: desktop) {
+    float: left;
+    margin-right: ofh-spacing(5);
+  }
+}
+
+.ofh-footer__list-item-link {
+  color: $color_ofh-brand-dark-blue;
+
+  &:visited {
+    color: $color_ofh-brand-dark-blue;
+  }
+
+  &:hover {
+    color: $ofh-text-black-color;
+  }
+}
+
+.ofh-footer__copyright {
+  @include ofh-font(16);
+
+  color: $color-ofh-black;
+  margin-bottom: 0;
+
+  @include mq($from: desktop) {
+    float: right;
+    text-align: right;
+    width: 25%;
+  }
+}

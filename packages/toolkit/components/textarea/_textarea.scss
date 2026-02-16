@@ -1,0 +1,25 @@
+/* ==========================================================================
+   COMPONENTS/ #TEXTAREA
+   ========================================================================== */
+
+.ofh-textarea {
+  @include ofh-font(19);
+
+  -webkit-appearance: none;
+  border: $ofh-border-width-form-element solid $ofh-input-border-color;
+  border-radius: 0;
+  box-sizing: border-box;
+  display: block;
+  min-height: 40px;
+  padding: ofh-spacing(1);
+  resize: vertical;
+  width: 100%;
+
+  &:focus {
+    @include ofh-focused-input;
+  }
+}
+
+.ofh-textarea--error {
+  border: $ofh-border-width-form-element-error solid $ofh-error-color;
+}

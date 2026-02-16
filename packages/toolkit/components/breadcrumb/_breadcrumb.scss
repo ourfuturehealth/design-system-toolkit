@@ -1,0 +1,136 @@
+/* ==========================================================================
+    COMPONENTS / #BREADCRUMB
+   ========================================================================== */
+
+/**
+ * 1. Bespoke spacing numbers used as there is no 12px
+ *    spacing mapped in settings/spacing.
+ * 2. Hide the breadcrumb on print stylesheets.
+ * 3. Don't show the full breadcrumb below tablet size.
+ * 4. Typography sizing mixin, see core/tools/_typography
+ * 5. and core/settings/_typography for size maps.
+ * 5. .. but show a back to index page link.
+ * 6. Remove spacing between back icon and label.
+ * 7. Custom padding for the chevron separator icon.
+ */
+
+.ofh-breadcrumb {
+  @include print-hide();
+
+  padding-bottom: 12px; /* [1] */
+  padding-top: 12px; /* [1] */
+
+  .ofh-icon__chevron-right {
+    fill: $color_ofh-grey-1;
+    height: 18px;
+    position: relative;
+    top: 5px;
+    width: 18px;
+
+    @include mq($from: large-desktop) {
+      margin: 0 3px 0 5px;
+    }
+  }
+
+  .ofh-icon__chevron-left {
+    float: left;
+    height: 24px;
+    left: -8px;
+    position: relative;
+    width: 24px;
+  }
+}
+
+.ofh-breadcrumb__list {
+  @include mq($until: tablet) {
+    display: none; /* [3] */
+  }
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ofh-breadcrumb__item {
+  @include ofh-font(16); /* [4] */
+
+  display: inline-block;
+  margin-bottom: 0;
+
+  &:not(:last-child)::after {
+    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-right' xmlns='http://www.w3.org/2000/svg' fill='%23494949' height='18' width='18' viewBox='0 0 24 24' aria-hidden='true'%3E%3Cpath d='M15.5 12a1 1 0 0 1-.29.71l-5 5a1 1 0 0 1-1.42-1.42l4.3-4.29-4.3-4.29a1 1 0 0 1 1.42-1.42l5 5a1 1 0 0 1 .29.71z'%3E%3C/path%3E%3C/svg%3E") right 0 top 4px no-repeat;
+    content: '';
+    display: inline-block;
+    height: 18px;
+    margin-left: 10px;
+    margin-right: 2px;
+    width: 18px;
+  }
+}
+
+.ofh-breadcrumb__link {
+  color: $ofh-breadcrumb-link-color;
+
+  &:visited {
+    color: $ofh-breadcrumb-link-visited-color;
+
+    &:hover {
+      color: $ofh-breadcrumb-link-hover-color;
+    }
+  }
+
+  &:focus {
+    &:hover {
+      color: $ofh-breadcrumb-link-hover-color;
+    }
+  }
+
+  &:active {
+    color: $ofh-breadcrumb-link-active-color;
+  }
+}
+
+.ofh-breadcrumb__back {
+  @include ofh-font(16); /* [4] */
+
+  margin: 0;
+  padding-left: ofh-spacing(3);
+  position: relative;
+
+  @include mq($from: tablet) {
+    display: none; /* [5] */
+  }
+
+  &::before {
+    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__chevron-left' xmlns='http://www.w3.org/2000/svg' fill='%23494949' height='24' width='24' viewBox='8 0 24 24' aria-hidden='true'%3E%3Cpath d='M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+    content: '';
+    display: inline-block;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 10px;
+  }
+}
+
+.ofh-breadcrumb__backlink {
+  color: $ofh-breadcrumb-link-color;
+
+  &:visited {
+    color: $ofh-breadcrumb-link-visited-color;
+
+    &:hover {
+      color: $ofh-breadcrumb-link-hover-color;
+    }
+  }
+
+  &:focus {
+    &:hover {
+      color: $ofh-breadcrumb-link-hover-color;
+    }
+  }
+
+  &:active {
+    color: $ofh-breadcrumb-link-active-color;
+  }
+}

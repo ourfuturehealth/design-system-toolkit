@@ -1,0 +1,76 @@
+/* ==========================================================================
+   COMPONENTS/ #INPUT
+   ========================================================================== */
+
+/**
+ * 1. Disable inner shadow and remove rounded corners
+ * 2. setting any background-color makes text invisible when changing colours to dark
+ *    backgrounds in Firefox (https://bugzilla.mozilla.org/show_bug.cgi?id=1335476)
+ *    as background-color and color need to always be set together, color should
+ *    not be set either.
+ */
+
+.ofh-input {
+  @include ofh-font(19);
+
+  -moz-appearance: none; /* 1 */
+  -webkit-appearance: none; /* 1 */
+  appearance: none; /* 1 */
+  border: $ofh-border-width-form-element solid $ofh-input-border-color; /* 2 */
+  border-radius: 0;
+  box-sizing: border-box;
+  height: 40px;
+  margin-top: 0;
+  padding: ofh-spacing(1);
+  width: 100%;
+
+  &:focus {
+    @include ofh-focused-input;
+  }
+}
+
+.ofh-input::-webkit-outer-spin-button,
+.ofh-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ofh-input[type="number"] { /* stylelint-disable-line string-quotes */
+  -moz-appearance: textfield;
+}
+
+.ofh-input--error {
+  border: $ofh-border-width-form-element-error solid $ofh-error-color;
+}
+
+// The ex measurements are based on the number of W's that can fit inside the input
+// Extra space is left on the right hand side to allow for the Safari prefill icon
+// Linear regression estimation based on visual tests: y = 1.76 + 1.81x
+
+.ofh-input--width-30 {
+  max-width: 56ex + 3ex;
+}
+
+.ofh-input--width-20 {
+  max-width: 38ex + 3ex;
+}
+
+.ofh-input--width-10 {
+  max-width: 20ex + 3ex;
+}
+
+.ofh-input--width-5 {
+  max-width: 10.8ex;
+}
+
+.ofh-input--width-4 {
+  max-width: 9ex;
+}
+
+.ofh-input--width-3 {
+  max-width: 7.2ex;
+}
+
+.ofh-input--width-2 {
+  max-width: 5.4ex;
+}
