@@ -1,0 +1,22 @@
+.ofh-form-group {
+  @include ofh-responsive-margin(4, 'bottom');
+
+  .ofh-form-group:last-of-type {
+    margin-bottom: 0; // Remove margin from last item in nested groups
+  }
+}
+
+.ofh-form-group--wrapper {
+  @include ofh-responsive-margin(5, 'bottom');
+}
+
+.ofh-form-group--error {
+  border-left: $ofh-border-width-form-group-error solid $ofh-error-color;
+  padding-left: ofh-spacing(3);
+
+  .ofh-form-group {
+    // Reset error styles in nested form groups that might have error class
+    border: 0;
+    padding: 0;
+  }
+}

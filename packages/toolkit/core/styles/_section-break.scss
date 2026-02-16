@@ -1,0 +1,73 @@
+/* ==========================================================================
+   STYLES / #SECTION-BREAK
+   ========================================================================== */
+
+// The % (silent class) allows code to be extended (@extend) to other elements
+// without bloating the code.
+//
+// @example scss
+//  .foo {
+//   @extend %ofh-section-break--xl;
+//  }
+
+/**
+ * 1. Extended the section-break--l code for usage of a semantic <hr> with
+ * no class name.
+ *
+ * Original code taken from GDS (Government Digital Service)
+ * https://github.com/alphagov/govuk-frontend
+ */
+
+%ofh-section-break {
+  border: 0;
+  margin: 0;
+}
+
+.ofh-section-break {
+  @extend %ofh-section-break;
+}
+
+%ofh-section-break--xl {
+  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(8, 'bottom');
+}
+
+.ofh-section-break--xl {
+  @extend %ofh-section-break--xl;
+}
+
+%ofh-section-break--l {
+  @include ofh-responsive-margin(6, 'top');
+  @include ofh-responsive-margin(6, 'bottom');
+}
+
+.ofh-section-break--l {
+  @extend %ofh-section-break--l;
+}
+
+%ofh-section-break--m {
+  @include ofh-responsive-margin(4, 'top');
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+.ofh-section-break--m {
+  @extend %ofh-section-break--m;
+}
+
+%ofh-section-break--visible {
+  border-bottom: 1px solid $ofh-border-color;
+}
+
+.ofh-section-break--visible {
+  @extend %ofh-section-break--visible;
+}
+
+hr { /* [1] */
+  @extend %ofh-section-break;
+  @extend %ofh-section-break--l;
+  @extend %ofh-section-break--visible;
+}
+
+.ofh-section-break--black {
+  border-bottom: 1px solid $color_ofh-true-black;
+}

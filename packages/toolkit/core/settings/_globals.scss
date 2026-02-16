@@ -1,0 +1,82 @@
+// ==========================================================================
+// SETTINGS / #GLOBALS
+// ==========================================================================
+
+//
+// Fonts
+//
+
+$ofh-font: 'Source Sans Pro', sans-serif;
+$serif-font: 'Source Serif Pro';
+$ofh-font-fallback: Arial, Sans-serif !default;
+$ofh-font-family-print: sans-serif !default;
+$ofh-font-bold: 600 !default;
+$ofh-font-normal: 400 !default;
+$ofh-font-light: $ofh-font-normal !default;
+
+//
+// Font sizing and spacing
+//
+
+$ofh-base-font-size: 16px !default;
+$ofh-base-line-height: 24px !default;
+
+//
+// Icon default sizing
+//
+
+$ofh-icon-size: 34px !default;
+
+//
+// Grid spacing
+//
+
+$ofh-page-width: 960px;
+$ofh-gutter: 32px;
+$ofh-gutter-half: $ofh-gutter * .5;
+
+//
+// Border sizes
+//
+
+$ofh-border-width-inset-text: 8px !default;
+$ofh-care-card-triangle-border: 16px !default;
+$ofh-hero-content-triangle-border: 16px !default;
+$ofh-hero-border: 1px !default;
+$ofh-border-table-header-width: 2px !default;
+$ofh-border-table-cell-width: 1px !default;
+
+//
+// Border radius
+//
+
+$ofh-border-radius: 4px !default;
+
+//
+// Box shadow
+//
+
+$ofh-box-shadow-spread: 4px !default;
+$ofh-box-shadow-blur: 4px !default;
+$ofh-box-shadow-link: 4px !default;
+$ofh-box-details: 8px !default;
+$ofh-box-expander: 4px !default;
+$ofh-box-shadow-pagination: 16px !default;
+$ofh-box-shadow-link: 4px !default;
+
+//
+// Header spacing
+//
+
+$ofh-header-spacing: 20px;
+
+//
+// Form elements
+//
+
+$ofh-border-width-form-element: 2px !default;
+$ofh-border-width-form-element-error: 4px !default;
+$ofh-focus-width: 4px !default;
+$ofh-border-width: 4px !default;
+$ofh-border-width-mobile: 4px !default;
+$ofh-border-width-form-group-error: $ofh-border-width !default;

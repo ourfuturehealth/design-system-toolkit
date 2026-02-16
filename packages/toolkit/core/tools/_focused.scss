@@ -1,0 +1,62 @@
+// ==========================================================================
+// TOOLS / #FOCUSED
+// ==========================================================================
+
+//
+// Focused text
+//
+// Provides an outline to clearly indicate when the target element is focused.
+// Used for interactive text-based elements.
+//
+
+@mixin ofh-focused-text {
+  outline: 3px solid $ofh-focus-color; /* 1 */
+  outline-offset: 1px;
+  text-decoration: none;
+}
+
+/// Focused input (form elements)
+///
+/// Provides an additional outline and border to clearly indicate when
+/// the target element has focus. Used for interactive input-based elements such
+/// as text inputs.
+
+@mixin ofh-focused-input {
+  border: $ofh-focus-width solid $ofh-input-border-active-color;
+  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
+  outline-offset: $ofh-focus-width;
+}
+
+/// Focused radio input (form element)
+///
+/// Provides an additional outline and border to clearly indicate when
+/// the target element has focus. Used by radios.
+
+@mixin ofh-focused-radio {
+  border: $ofh-focus-width solid $ofh-input-border-active-color;
+  outline: $ofh-focus-width solid $ofh-focus-color;
+
+  /* 1 */
+  outline-offset: $ofh-focus-width;
+}
+
+/// Focused checkbox input (form element)
+///
+/// Provides an additional outline and border to clearly indicate when
+/// the target element has focus. Used by checkbox.
+
+@mixin ofh-focused-checkbox {
+  border: $ofh-focus-width solid $ofh-input-border-active-color;
+  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
+  outline-offset: $ofh-focus-width;
+}
+
+/// Focused button
+///
+/// Provides an additional outline and background to clearly indicate when
+/// the target element has focus. Used for buttons.
+
+@mixin ofh-focused-button {
+  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
+  outline-offset: $ofh-focus-width;
+}

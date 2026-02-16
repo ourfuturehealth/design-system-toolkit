@@ -1,0 +1,15 @@
+/* ==========================================================================
+   UTILITIES / #CLEARFIX
+   ========================================================================== */
+
+/**
+ * Automatically clear an elements
+ * child elements
+ *
+ * Usage: class="ofh-u-clear"
+ * See tools/mixins
+ */
+
+.ofh-u-clear {
+  @include clearfix();
+}

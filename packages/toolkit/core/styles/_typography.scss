@@ -1,0 +1,263 @@
+/* ==========================================================================
+   STYLES / #TYPOGRAPHY
+   ========================================================================== */
+
+/* Headings */
+
+// The % (silent class) allows code to be extended (@extend) to other elements
+// without bloating the code.
+//
+// @example scss
+//  .foo {
+//   @extend %ofh-heading-xl;
+//  }
+
+%ofh-heading-xl {
+  @include ofh-typography-responsive(48);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(7, 'bottom');
+}
+
+h1,
+.ofh-heading-xl {
+  @extend %ofh-heading-xl;
+}
+
+%ofh-heading-l {
+  @include ofh-typography-responsive(32);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+h2,
+.ofh-heading-l {
+  @extend %ofh-heading-l;
+}
+
+%ofh-heading-m {
+  @include ofh-typography-responsive(24);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+h3,
+.ofh-heading-m {
+  @extend %ofh-heading-m;
+}
+
+%ofh-heading-s {
+  @include ofh-typography-responsive(22);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+h4,
+.ofh-heading-s {
+  @extend %ofh-heading-s;
+}
+
+%ofh-heading-xs {
+  @include ofh-typography-responsive(19);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+h5,
+.ofh-heading-xs {
+  @extend %ofh-heading-xs;
+}
+
+%ofh-heading-xxs {
+  @include ofh-typography-responsive(19);
+
+  display: block;
+  font-weight: $ofh-font-bold;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+h6,
+.ofh-heading-xxs {
+  @extend %ofh-heading-xxs;
+}
+
+/* Captions to be used inside headings */
+
+.ofh-caption-xl {
+  @include ofh-font(32);
+
+  color: $ofh-text-grey-color;
+  display: block;
+  margin-bottom: ofh-spacing(1);
+}
+
+.ofh-caption-l {
+  @include ofh-font(24);
+
+  color: $ofh-text-grey-color;
+  display: block;
+  margin-bottom: ofh-spacing(1);
+}
+
+.ofh-caption-m {
+  @include ofh-font(19);
+
+  color: $ofh-text-grey-color;
+  display: block;
+}
+
+.ofh-caption--bottom {
+  margin-bottom: ofh-spacing(0);
+  margin-top: ofh-spacing(1);
+}
+
+/* Body (paragraphs) */
+
+%ofh-body-l {
+  @include ofh-typography-responsive(24);
+
+  display: block;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(5, 'bottom');
+}
+
+.ofh-body-l {
+  @extend %ofh-body-l;
+}
+
+%ofh-body-m {
+  @include ofh-typography-responsive(19);
+
+  display: block;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+p,
+.ofh-body-m {
+  @extend %ofh-body-m;
+
+  color: inherit;
+}
+
+%ofh-body-s {
+  @include ofh-typography-responsive(16);
+
+  display: block;
+  margin-top: 0;
+
+  @include ofh-responsive-margin(4, 'bottom');
+}
+
+.ofh-body-s {
+  @extend %ofh-body-s;
+}
+
+address {
+  @extend %ofh-body-m;
+
+  font-style: normal;
+}
+
+/**
+ * Lede text
+ *
+ * 1. Apply lede text styling to p and ul within the lede element
+ * 2. Reduces the spacing between the page heading and the lede text
+ */
+
+.ofh-lede-text {
+  @include ofh-font(24);
+  @include ofh-responsive-margin(7, 'bottom');
+
+  /* [1] */
+
+  p,
+  ul {
+    @include ofh-font(24);
+  }
+}
+
+.ofh-lede-text--small {
+  @include ofh-font(19);
+  @include ofh-responsive-margin(5, 'bottom');
+}
+
+/* [2] */
+h1 + .ofh-lede-text,
+h1 + .ofh-lede-text--small {
+  margin-top: - ofh-spacing(2);
+}
+
+/**
+ * Contextual adjustments
+ *
+ * Add top padding to headings that appear directly after paragraphs.
+ *
+ * 1. Removes the padding-top because of the lede-text's increased margin-bottom
+ *
+ * Original code taken from GDS (Government Digital Service)
+ * https://github.com/alphagov/nhsuk-frontend
+ */
+
+%ofh-body-l  + %ofh-heading-l {
+  padding-top: ofh-spacing(1);
+
+  @include mq($from: tablet) {
+    padding-top: ofh-spacing(2);
+  }
+}
+
+%ofh-body-m  + %ofh-heading-l,
+%ofh-body-s  + %ofh-heading-l,
+%ofh-list + %ofh-heading-l {
+  @include ofh-responsive-padding(4, 'top');
+}
+
+%ofh-body-m + %ofh-heading-m,
+%ofh-body-s + %ofh-heading-m,
+%ofh-list + %ofh-heading-m,
+%ofh-body-m + %ofh-heading-s,
+%ofh-body-s + %ofh-heading-s,
+%ofh-list + %ofh-heading-s {
+  padding-top: ofh-spacing(1);
+
+  @include mq($from: tablet) {
+    padding-top: ofh-spacing(2);
+  }
+}
+
+/* [1] */
+.ofh-lede-text + %ofh-heading-l {
+  padding-top: 0;
+}
+
+/* Font weight for <strong> and <b> */
+
+strong,
+b {
+  font-weight: $ofh-font-bold;
+}

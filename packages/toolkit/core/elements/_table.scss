@@ -1,0 +1,51 @@
+/* ==========================================================================
+   ELEMENTS / #TABLES
+   ========================================================================== */
+
+/**
+ * 1. Force `<table>`s to be full-width by default.
+ */
+
+table {
+  @include ofh-responsive-margin(7, 'bottom');
+
+  border-spacing: 0;
+  vertical-align: top;
+  width: 100%; /* [1] */
+
+  @include mq($media-type: print) {
+    page-break-inside: avoid;
+  }
+}
+
+thead {
+  th {
+    border-bottom: $ofh-border-table-header-width solid $ofh-border-color;
+  }
+}
+
+th,
+td {
+  @include ofh-typography-responsive(19);
+  @include ofh-responsive-padding(3, 'bottom');
+  @include ofh-responsive-padding(4, 'right');
+  @include ofh-responsive-padding(3, 'top');
+
+  border-bottom: $ofh-border-table-cell-width solid $ofh-border-color;
+  text-align: left;
+  vertical-align: top;
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+th {
+  font-weight: $ofh-font-bold;
+}
+
+caption {
+  @include ofh-font($size: 22, $weight: bold);
+
+  text-align: left;
+}

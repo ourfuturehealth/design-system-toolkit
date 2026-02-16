@@ -1,0 +1,126 @@
+// ==========================================================================
+// TOOLS / #LINKS
+// ==========================================================================
+
+//
+// Default link styling
+//
+// Usage: @include ofh-link-style-default;
+//
+
+@mixin ofh-link-style-default {
+  color: $ofh-link-color;
+
+  &:visited {
+    color: $ofh-link-visited-color;
+  }
+
+  &:hover {
+    color: $ofh-link-hover-color;
+    text-decoration: none;
+  }
+
+  &:focus {
+    @include ofh-focused-text();
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:visited {
+      color: $ofh-focus-text-color;
+    }
+  }
+
+  &:active {
+    color: $ofh-link-active-color;
+  }
+}
+
+//
+// White link styling, used in the footer.
+//
+// Usage: @include ofh-link-style-light;
+//
+
+@mixin ofh-link-style-light {
+  color: $color_ofh-white;
+
+  &:visited {
+    color: $color_ofh-white;
+  }
+
+  &:hover {
+    color: $ofh-link-light-hover-color;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &:focus:visited {
+    color: $color_ofh-white;
+    outline: 3px solid $color_ofh-white;
+    outline-offset: 1px;
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $color_ofh-white;
+  }
+
+  &:active {
+    color: $ofh-link-light-active-color;
+  }
+}
+
+//
+// Default link hover only styling
+//
+// Usage: @include ofh-link-style-hover;
+//
+
+@mixin ofh-link-style-hover {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+/// No visited state link mixin
+///
+/// Used in cases where it is not helpful to distinguish between visited and
+/// non-visited links.
+///
+/// For example, navigation links to pages with dynamic content like admin
+/// dashboards. The content on the page is changing all the time, so the fact
+/// that you’ve visited it before is not important.
+///
+/// If you use this mixin in a component you must also include the
+/// ofh-link-style-default mixin in order to get the focus state.
+///
+/// @example scss
+///   .ofh-component__link {
+///     @include ofh-link-style-default;
+///     @include ofh-link-style-no-visited-state;
+///   }
+///
+
+@mixin ofh-link-style-no-visited-state {
+  &:link {
+    color: $ofh-link-color;
+  }
+
+  &:visited {
+    color: $ofh-link-color;
+  }
+
+  &:hover {
+    color: $ofh-link-hover-color;
+  }
+
+  &:active {
+    color: $ofh-link-active-color;
+  }
+
+  &:focus {
+    color: $ofh-focus-text-color;
+  }
+}
