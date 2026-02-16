@@ -1,81 +1,36 @@
 {
-  "name": "ofh-design-system-toolkit",
+  "name": "ofh-design-system-toolkit-monorepo",
+  "private": true,
   "version": "3.5.0",
   "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "packageManager": "pnpm@10.29.2",
   "scripts": {
-    "prepare": "gulp bundle",
-    "test": "pnpm run jest:ci",
-    "lint": "pnpm run lint:js && pnpm run lint:css && pnpm run lint:html",
-    "lint:js": "eslint -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
-    "lint:js:fix": "eslint --fix -c ./tests/linters/.eslintrc.js packages/components/**/*.js",
-    "lint:css": "stylelint -f verbose --config ./tests/linters/stylelint.config.js 'packages/**/*.scss'",
-    "lint:html": "htmlhint --config ./tests/linters/.htmlhintrc ./dist/app/components/**/*.html",
-    "build-gh-release": "gulp zip",
-    "jest:dev": "jest --watch",
-    "jest:ci": "jest",
-    "build": "pnpm run toolkit:build && pnpm run site:build",
-    "build:react-library": "turbo run build --filter=@ourfuturehealth/react-components",
-    "build:all": "pnpm run build && pnpm run build:react-library",
-    "dev": "pnpm run toolkit:build && pnpm run site:clean && concurrently 'pnpm run toolkit:watch' 'pnpm:site:watch:css' 'pnpm:site:watch:js' 'pnpm:site:watch:eleventy'",
-    "dev:react-library": "cd packages/react-components && pnpm dev",
-    "dev:react-consumer-app": "cd packages/example-react-consumer-app && pnpm dev",
-    "test:react-library": "turbo run test:vitest --filter=@ourfuturehealth/react-components",
-    "test:react-library:watch": "turbo run test:vitest:watch --filter=@ourfuturehealth/react-components",
-    "test:toolkit": "pnpm run jest:ci",
-    "test:all": "turbo run test:all",
-    "lint:react": "turbo run lint --filter=@ourfuturehealth/react-components",
-    "storybook": "turbo run storybook --filter=@ourfuturehealth/react-components",
-    "toolkit:build": "gulp clean && gulp build",
-    "toolkit:watch": "gulp watch",
-    "site:clean": "rm -rf site/dist/ && mkdir -p site/dist",
-    "site:watch:css": "pnpm run site:build:css -- --watch",
-    "site:watch:js": "pnpm run site:build:js -- --watch",
-    "site:watch:eleventy": "npx @11ty/eleventy --serve --config site.eleventy.config.js",
-    "site:build": "pnpm run site:clean && pnpm run site:build:css && pnpm run site:build:js && pnpm run site:build:eleventy",
-    "site:build:css": "sass --style compressed --load-path packages/ site/styles/:site/dist/css/",
-    "site:build:js": "webpack --config site.webpack.config.js",
-    "site:build:eleventy": "npx @11ty/eleventy --config site.eleventy.config.js"
+    "prepare": "turbo run bundle",
+    "dev": "turbo run watch --parallel",
+    "dev:consumer": "turbo run watch --filter=example-react-consumer-app",
+    "dev:storybook": "turbo run watch --filter=react-components",
+    "dev:site": "turbo run watch --filter=site",
+    "dev:toolkit": "turbo run watch --filter=toolkit",
+    "dev:react-components": "turbo run watch --filter=react-components",
+    "build": "turbo run build",
+    "build-gh-release": "turbo run zip --filter=toolkit",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0",
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
-    "babel-loader": "^9.1.2",
     "concurrently": "^7.6.0",
     "eslint": "^8.36.0",
     "eslint-config-nhsuk": "^1.0.0",
-    "glob": "^8.1.0",
-    "gulp": "^5.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-zip": "^5.1.0",
-    "highlight.js": "^11.7.0",
     "htmlhint": "^1.1.4",
     "husky": "^4.3.8",
-    "iframe-resizer": "^4.3.6",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
-    "js-beautify": "^1.14.7",
-    "nunjucks": "^3.2.4",
-    "sass": "^1.60.0",
     "stylelint": "^14.16.1",
     "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^4.1.0",
-    "turbo": "^2.8.4",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.0.1",
-    "webpack-stream": "^7.0.0"
+    "turbo": "^2.8.4"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "eslintConfig": {
-    "extends": "./tests/linters/.eslintrc.js"
   },
   "husky": {
     "hooks": {
@@ -91,9 +46,5 @@
     "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git"
   },
   "homepage": "https://ourfuturehealth.github.io/design-system-toolkit/",
-  "license": "MIT",
-  "dependencies": {
-    "accessible-autocomplete": "^3.0.1",
-    "i18n-js": "^4.5.1"
-  }
+  "license": "MIT"
 }
