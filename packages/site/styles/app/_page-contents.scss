@@ -1,0 +1,20 @@
+/* ==========================================================================
+   #PAGE-CONTENTS
+   ========================================================================== */
+
+.app-page-contents {
+  @include ofh-responsive-margin(5, 'bottom');
+}
+
+.app-page-contents__heading {
+  @include ofh-font(19, $weight: bold);
+  @include ofh-responsive-margin(3, 'bottom');
+}
+
+.app-page-contents__list {
+  @include ofh-font(16);
+}
+
+.app-page-contents__item {
+  @include ofh-responsive-margin(1, 'bottom');
+}

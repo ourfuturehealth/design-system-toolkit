@@ -1,0 +1,66 @@
+/* ==========================================================================
+   COMPONENTS / #INSET-TEXT
+   ========================================================================== */
+
+/**
+ * 1. Removes top margin from first element and bottom margin from last,
+ *    to ensure correct spacing within the component.
+ * 2. Restricts the width of the text to optimise the line length for
+ *    readability.
+ */
+
+ .ofh-inset-text-ds {
+    @include top-and-bottom(); /* [1] */
+    @include reading-width(); /* [2] */
+  
+    @include ofh-responsive-margin(4, 'bottom');
+    @include ofh-responsive-margin(4, 'top');
+    @include ofh-responsive-padding(4);
+  
+    background-color: $color_ofh-grey-6;
+    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
+    border-radius: $ofh-border-radius;
+
+  
+    @include mq($media-type: print) {
+      border-color: $ofh-text-black-color;
+    }
+  
+  }
+
+  .ofh-inset-text-ds--green {
+    @include top-and-bottom(); /* [1] */
+    @include reading-width(); /* [2] */
+  
+    @include ofh-responsive-margin(4, 'bottom');
+    @include ofh-responsive-margin(4, 'top');
+    @include ofh-responsive-padding(4);
+  
+    background-color: $color_ofh-grey-6;
+    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-green-3;
+    border-radius: $ofh-border-radius;
+  
+    @include mq($media-type: print) {
+      border-color: $ofh-text-black-color;
+    }
+  
+  }
+
+  .ofh-inset-text-ds--red {
+    @include top-and-bottom(); /* [1] */
+    @include reading-width(); /* [2] */
+  
+    @include ofh-responsive-margin(4, 'bottom');
+    @include ofh-responsive-margin(4, 'top');
+    @include ofh-responsive-padding(4);
+  
+    background-color: $color_ofh-grey-6;
+    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-red-3;
+    border-radius: $ofh-border-radius;
+  
+    @include mq($media-type: print) {
+      border-color: $ofh-text-black-color;
+    }
+  
+  }
+  

@@ -1,0 +1,22 @@
+<section class="ofh-hero-ds
+{%- if params.imageURL and params.heading %} ofh-hero-ds--image ofh-hero-ds--image-description
+{%- elif params.imageURL %} ofh-hero-ds--image{% endif %}
+{%- if params.classes %} {{ params.classes }}{% endif %}"
+{%- if params.imageURL %} style="background-image: url('{{ params.imageURL }}');"{% endif %}
+{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+{% if params.imageURL %}<div class="ofh-hero__overlay">{% endif %}
+{%- if params.heading %}
+  <div class="ofh-width-container{% if not params.imageURL %} ofh-hero-ds--border{% endif %}">
+    <div class="ofh-grid-row">
+      <div class="ofh-grid-column-two-thirds">
+        <div class="{% if params.imageURL %}ofh-hero-ds-content{% else %}ofh-hero-ds__wrapper{% endif %}">
+          <h1 {% if params.text %}class="ofh-u-margin-bottom-3"{% endif %}>{{ params.heading }}</h1>
+          {% if params.text %}<p class="ofh-body-l ofh-u-margin-bottom-0">{{ params.text }}</p>{% endif %}
+          {% if params.imageURL %}<span class="ofh-hero-ds__arrow" aria-hidden="true"></span>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif -%}
+{%- if params.imageURL %}</div>{% endif %}
+</section>

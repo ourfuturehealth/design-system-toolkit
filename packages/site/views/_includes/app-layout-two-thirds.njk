@@ -1,0 +1,33 @@
+{% extends "layout.njk" %}
+
+{% block body %}
+<div class="ofh-grid-row">
+  <div class="ofh-grid-column-two-thirds app-component-reading-width">
+
+    <h1 class="app-page-heading">{{pageTitle}}</h1>
+
+
+    {%- if hideDescription %}
+    {% else %}
+      <p class="ofh-lede-text app-lede-text">{{pageDescription}}</p>
+    {% endif %}
+
+  </div>
+  <div class="ofh-grid-column-two-thirds app-component-reading-width">
+
+    {% block bodyContent %}{% endblock %}
+
+    {%- if dateUpdated %}
+      <p class="ofh-body-s ofh-u-secondary-text-color ofh-u-margin-top-6 ofh-u-margin-bottom-0">Updated: {{dateUpdated}}</p>
+    </div>
+    {% endif %}
+
+  </div>
+
+    {% block aside %}
+    <aside class="ofh-grid-column-one-third">
+      {% block asideContent %}
+      {% endblock %}
+    </aside>
+    {% endblock %}
+{% endblock %}

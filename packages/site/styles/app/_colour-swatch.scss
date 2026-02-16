@@ -1,0 +1,65 @@
+/* ==========================================================================
+   #COLOUR SWATCH
+   ========================================================================== */
+
+/**
+ * Custom table for the colour palette
+ */
+
+.app-colour-list {
+  margin-top: 0;
+
+  th,
+  td {
+    border: 0;
+  }
+}
+
+.app-colour-list__swatch {
+  background-color: $color_ofh-grey-5;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  display: inline-block;
+  height: ofh-spacing(6);
+  margin-right: ofh-spacing(2);
+  vertical-align: middle;
+  width: ofh-spacing(6);
+
+  @include mq($until: tablet) {
+    height: ofh-spacing(4);
+    left: 0;
+    position: absolute;
+    width: ofh-spacing(4);
+  }
+}
+
+.app-colour-list__column {
+  padding-left: 0;
+  padding-top: 0;
+  vertical-align: middle;
+
+  @include mq($until: tablet) {
+    display: block;
+    padding-left: ofh-spacing(5);
+    position: relative;
+  }
+}
+
+.app-colour-list__column--name {
+  font-weight: normal;
+
+  @include mq($until: tablet) {
+    padding-bottom: ofh-spacing(1);
+    padding-top: ofh-spacing(2);
+  }
+}
+
+.app-colour-list__column--colour {
+  @include mq($until: tablet) {
+    padding-bottom: ofh-spacing(1);
+  }
+}
+
+.app-colour-list__swatch--border {
+  border: 1px solid $ofh-border-color;
+}

@@ -65,3 +65,6 @@ dist/ofh-design-system-toolkit.css
 dist/ofh-design-system-toolkit.js
 dist/ofh-design-system-toolkit-*.min.css
 dist/ofh-design-system-toolkit-*.min.js
+
+# VS Code workspace settings
+.vscode/

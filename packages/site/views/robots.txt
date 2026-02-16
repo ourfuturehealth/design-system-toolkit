@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://designsystem.ourfuturehealth.org.uk/sitemap.xml

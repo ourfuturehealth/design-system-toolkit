@@ -1,0 +1,6 @@
+{#
+  Usage: {{ example({ "text": "Hello" }) }}
+#}
+{% macro example(params) %}
+  <button class="ofh-button ofh-button--custom">Example: {{ params.text }}</button>
+{% endmacro %}

@@ -1,0 +1,12 @@
+{% from 'breadcrumb/macro.njk' import breadcrumb %}
+{{ breadcrumb({
+  items: [
+    {
+      href: "/",
+      text: "Home"
+    }
+  ],
+  href: "/content",
+  text: "Content style guide",
+  classes: "app-breadcrumb"
+}) }}

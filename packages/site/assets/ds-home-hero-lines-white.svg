@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1405 348">
+  <!-- Generator: Adobe Illustrator 29.6.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 9)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+      }
+
+      .st1 {
+        clip-path: url(#clippath-1);
+      }
+
+      .st2 {
+        fill: #fff;
+      }
+
+      .st3 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="st0" x="788.91" y="-1.03" width="380.91" height="329.07"/>
+    </clipPath>
+    <clipPath id="clippath-1">
+      <rect class="st0" x="1169.82" y="-.75" width="380.91" height="359.49"/>
+    </clipPath>
+  </defs>
+  <g class="st3">
+    <g>
+      <path class="st2" d="M1169.82,62.58h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1169.82,126.22h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1169.82,189.57h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1169.82,253.19h-380.91v10.55h380.91v-10.55h0Z"/>
+      <path class="st2" d="M1169.82,316.53h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1169.82-.75h-380.91v10.56h380.91V-.75Z"/>
+    </g>
+  </g>
+  <g class="st1">
+    <g>
+      <path class="st2" d="M1550.74,30.92h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,62.58h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,94.56h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,126.22h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,157.89h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,189.56h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,221.53h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,253.2h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,284.86h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,316.53h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74,348.19h-380.91v10.55h380.91v-10.55Z"/>
+      <path class="st2" d="M1550.74-.75h-380.91v10.56h380.91V-.75Z"/>
+    </g>
+  </g>
+</svg>

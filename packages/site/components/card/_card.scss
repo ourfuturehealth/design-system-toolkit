@@ -1,0 +1,309 @@
+/* ==========================================================================
+   COMPONENTS / #CARD
+   ========================================================================== */
+
+/**
+ * 1. Is needed for the :active top positioning.
+ * 2. Border is used to create a divider between the white content
+ *    box and an image.
+ * 3. Creates the 'pressed down' effect when clicked.
+ * 4. Removes padding-top from headings directly after the card group.
+ * 5. Includes the border width to achieve the correct left alignment.
+ * 6. Stops the heading from spanning the full width of the card.
+ * 7. Removes padding top for the feature heading positioning.
+ * 8. Default care card colour set to blue (non-urgent care card) -
+ *    using the @mixin care-card tools/_mixins.scss.
+ *    The same mixin is used for each care card, setting the background
+ *    colour,text colour and print border width with the variables.
+ * 9. 'Random number' for the heading triangle.
+ * 10. 'Random number' for the heading triangle positioning.
+ * 11. 'Random number' used for spacing to compensate for the triangle.
+ * 12. Needed to enable the triangle to show correctly in high contrast mode.
+ * 13. Prevent additional padding on headings
+ * 14. Give the action link icon sufficient contrast when used in the emergency variant
+ * 15. Reset the positioning to the default [1] to display heading triangle on a coloured background.
+ * 16. Emergency care card <a> needs to be white because the background colour is black.
+ */
+
+$card-border-width: 1px;
+$card-background: $color_ofh-white;
+$card-border-color: $color_ofh-grey-4;
+$card-border-hover-color: $color_ofh-grey-3;
+
+.ofh-card-ds {
+  @include ofh-responsive-margin(7, 'bottom');
+
+  background: $card-background;
+  border: $card-border-width solid $card-border-color;
+  border-radius: $ofh-border-radius;
+  position: relative; /* [1] */
+  width: 100%;
+
+  &.ofh-card-ds__with-icon {
+    > .ofh-card-ds__content {
+      display: flex;
+      height: 100%;
+
+      > div {
+        :last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      > :first-child {
+        flex-grow: 2;
+      }
+
+      > :last-child {
+        align-items: center;
+        display: flex;
+      }
+    }
+  }
+}
+
+.ofh-card-ds__img {
+  @include print-hide();
+
+  border-bottom: $card-border-width solid $color_ofh-grey-5; /* [2] */
+  display: block;
+  width: 100%;
+}
+
+.ofh-card-ds__content {
+  @include top-and-bottom();
+  @include ofh-responsive-padding(5);
+
+  position: relative;
+}
+
+.ofh-card-ds__heading,
+.ofh-card-ds__metadata,
+.ofh-card-ds__description {
+  margin-bottom: ofh-spacing(3);
+}
+
+/* Clickable card
+  ========================================================================== */
+
+.ofh-card-ds--clickable {
+
+  &:hover,
+  &:active {
+    cursor: pointer;
+    color: $ofh-link-hover-color;
+
+    .ofh-card-ds__heading a,
+    .ofh-card-ds__link {
+      color: $ofh-link-color;
+      text-decoration: none;
+
+      &:focus {
+        color: $ofh-focus-text-color;
+      }
+
+      &:visited {
+        color: $ofh-link-color;
+      }
+    }
+  }
+
+  &:hover {
+    border-color: $card-border-hover-color;
+  }
+
+  &:active {
+    border-color: $card-border-hover-color;
+    bottom: - $card-border-width; /* [3] */
+  }
+}
+
+/* Card group
+  ========================================================================== */
+
+/**
+* Card group allows you to have a row of cards.
+*
+* Flexbox is used to make each card in a row the same height.
+*/
+
+.ofh-card-ds-group {
+  @include flex();
+
+  margin-bottom: ofh-spacing(3);
+  padding: 0;
+
+  @include mq($until: desktop) {
+    margin-bottom: ofh-spacing(6);
+  }
+
+  + h2,
+  + .ofh-heading-l,
+  + h3,
+  + .ofh-heading-m {
+    padding-top: 0; /* [4] */
+  }
+}
+
+.ofh-card-ds-group__item {
+  @include flex-item();
+
+  list-style-type: none;
+  margin-bottom: 0;
+
+  .ofh-card-ds {
+    margin-bottom: ofh-spacing(5);
+  }
+
+  @include mq($until: desktop) {
+    .ofh-card-ds {
+      margin-bottom: ofh-spacing(3);
+    }
+
+    &:last-child .ofh-card-ds {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Card feature
+  ========================================================================== */
+
+.ofh-card--feature {
+  @include ofh-responsive-margin(7, 'top');
+}
+
+.ofh-card__heading--feature {
+  background: $color_ofh-brand-yellow;
+  color: $ofh-text-white-color;
+  display: inline-block;
+  left: - (ofh-spacing(4) + $card-border-width); /* [5] */
+  margin-bottom: ofh-spacing(2);
+  margin-right: - ofh-spacing(4); /* [6] */
+  padding: ofh-spacing(2) ofh-spacing(4);
+  position: relative;
+  top: - ofh-spacing(2);
+
+  @include mq($from: tablet) {
+    left: - (ofh-spacing(5) + $card-border-width); /* [5] */
+    margin-right: - ofh-spacing(5); /* [6] */
+    padding: ofh-spacing(2) ofh-spacing(5);
+    top: - ofh-spacing(3);
+  }
+}
+
+.ofh-card__content--feature {
+  padding-top: 0 !important; /* stylelint-disable-line declaration-no-important */ /* [7] */
+}
+
+/* Care card
+  ========================================================================== */
+
+.ofh-card--care {
+  @include ofh-responsive-margin(7, 'top');
+  @include care-card($color_ofh-brand-blue, $color_ofh-white, 4px); /* [8] */
+}
+
+.ofh-card--care__heading-container {
+  @include ofh-responsive-padding(5, 'left');
+  @include ofh-responsive-padding(5, 'right');
+
+  padding-bottom: ofh-spacing(3);
+  padding-top: ofh-spacing(3);
+  position: relative;
+}
+
+.ofh-card--care__heading {
+  @include ofh-font(24, $weight: bold);
+  @include print-color($ofh-text-black-color);
+
+  margin: 0;
+  padding-top: 0; /* [13] */
+}
+
+.ofh-card--care__arrow {
+  bottom: -10px; /* [9] */
+  display: block;
+  height: 20px; /* [9] */
+  left: 30px; /* [10] */
+  overflow: hidden;
+  position: absolute;
+  transform: rotate(45deg);
+  width: 20px; /* [9] */
+
+  @include print-hide();
+
+  @include mq($from: tablet) {
+    left: 38px; /* [10] */
+  }
+
+  &::before,
+  &::after {
+    border: solid 32px $color_ofh-brand-blue; /* [9] */
+    content: '';
+    display: block;
+    height: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(45deg); /* [12] */
+    width: 0;
+  }
+}
+
+.ofh-card--care--urgent {
+  @include care-card($color_ofh-brand-red, $color_ofh-white, 6px);
+
+  .ofh-card--care__arrow {
+    &::before,
+    &::after {
+      border-color: $color_ofh-brand-red;
+    }
+  }
+}
+
+.ofh-card--care--emergency {
+  @include care-card($color_ofh-brand-red, $color_ofh-white, 8px);
+
+  .ofh-card--care__arrow {
+    &::before,
+    &::after {
+      border-color: $color_ofh-brand-red;
+    }
+  }
+
+  .ofh-card__content {
+    background-color: $color_ofh-black;
+    border: 0;
+    color: $ofh-text-white-color;
+    position: static; /* [15] */
+
+    a {
+      color: $ofh-text-white-color; /* [16] */
+
+      &:focus {
+        color: $color_ofh-black; /* [16] */
+      }
+    }
+  }
+
+  .ofh-details,
+  .ofh-details__summary {
+    color: $ofh-text-white-color;
+  }
+
+  .ofh-details__summary {
+    &:hover {
+      color: $ofh-text-white-color;
+    }
+
+    &:focus {
+      color: $ofh-text-black-color;
+    }
+  }
+
+  .ofh-action-link__link {
+    .ofh-icon__arrow-right-circle {
+      fill: $color_ofh-white; /* [14] */
+    }
+  }
+}

@@ -1,0 +1,27 @@
+/* ==========================================================================
+   #LEDE-TEXT
+   ========================================================================== */
+
+.ofh-lede-text + .app-lede-text--sub {
+  margin-bottom: ofh-spacing(7);
+  margin-top: - ofh-spacing(3);
+
+  @include mq($until: tablet) {
+    margin-bottom: ofh-spacing(5);
+    margin-top: - ofh-spacing(3);
+  }
+}
+
+.app-lede-text + h2,
+.app-lede-text + .ofh-heading-l {
+  padding-top: ofh-spacing(2);
+}
+
+.app-lede-text--sub + h2,
+.app-lede-text--sub + .ofh-heading-l {
+  padding-top: ofh-spacing(0);
+}
+
+.app-lede-text + .app-index-navigation {
+  padding-top: 0;
+}

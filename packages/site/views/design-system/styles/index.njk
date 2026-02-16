@@ -1,0 +1,20 @@
+{% set pageTitle = "Foundation styles" %}
+{% set pageDescription = "Make your service look like other Our Future Health services with these foundation styles" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Foundation styles" %}
+{% set theme = "Design" %}
+{% set hideContact = "true" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "./_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <div class="app-index-navigation app-u-hide-desktop">
+    {% include "_side-nav.njk" %}
+  </div>
+
+{% endblock %}
