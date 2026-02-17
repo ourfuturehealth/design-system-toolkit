@@ -28,8 +28,8 @@
     "bundle": "gulp bundle",
     "zip": "gulp zip",
     "lint": "pnpm run lint:js && pnpm run lint:css",
-    "lint:js": "eslint components/**/*.js *.js",
-    "lint:js:fix": "eslint --fix components/**/*.js *.js",
+    "lint:js": "eslint components/**/*.js *.js --ignore-pattern '*.config.js'",
+    "lint:js:fix": "eslint --fix components/**/*.js *.js --ignore-pattern '*.config.js'",
     "lint:css": "stylelint -f verbose '**/*.scss'",
     "test": "jest"
   },

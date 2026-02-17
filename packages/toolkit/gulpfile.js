@@ -6,7 +6,7 @@ const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const zip = require('gulp-zip');
 const webpack = require('webpack-stream');
-const { version } = require('../../package.json');
+const { version } = require('./package.json');
 
 /* Remove all compiled files */
 function cleanDist() {
