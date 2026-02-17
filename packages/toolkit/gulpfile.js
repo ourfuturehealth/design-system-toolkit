@@ -160,9 +160,10 @@ function createZip() {
  * Development tasks
  */
 
-/* Recompile CSS, JS and docs when there are any changes */
+/* Recompile CSS, JS and docs when there are any changes,
+   ignoring the dist folder */
 function watch() {
-  gulp.watch(['./**/*'], gulp.series(['build']));
+  gulp.watch(['./**/*', '!dist/**'], gulp.series(['build']));
 }
 
 gulp.task('clean', cleanDist);
