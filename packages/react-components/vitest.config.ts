@@ -15,18 +15,26 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
     css: true,
-    include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     projects: [
+      // Regular unit tests
       {
-        extends: true,
+        test: {
+          name: 'unit',
+          globals: true,
+          environment: 'jsdom',
+          setupFiles: ['./src/test/setup.ts'],
+          include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+          css: true,
+        },
+      },
+      // Storybook tests
+      {
         plugins: [
           // The plugin will run tests for the stories defined in your Storybook config
           // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
           storybookTest({
-            configDir: path.join(dirname, '.storybook'),
+            configDir: path.join(currentDir, '.storybook'),
           }),
         ],
         test: {
@@ -48,7 +56,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': resolve(currentDir, 'src'),
     },
   },
 });

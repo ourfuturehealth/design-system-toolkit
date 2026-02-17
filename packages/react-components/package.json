@@ -22,7 +22,6 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:clean": "rm -rf dist && pnpm run build",
-    "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:vitest": "vitest run",
