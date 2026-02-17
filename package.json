@@ -1,8 +1,7 @@
 {
   "name": "ofh-design-system-toolkit-monorepo",
   "private": true,
-  "version": "3.5.0",
-  "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
+  "description": "Our Future Health design system toolkit monorepo. Individual packages have independent versioning - see packages/toolkit and packages/react-components for their versions.",
   "packageManager": "pnpm@10.29.2",
   "scripts": {
     "prepare": "turbo run bundle",

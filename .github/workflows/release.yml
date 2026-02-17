@@ -3,7 +3,9 @@ name: Create release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*" # Toolkit releases (backward compatible)
+      - "toolkit-v*" # Toolkit releases (new pattern)
+      - "react-components-v*" # React components releases
 
 jobs:
   build:
@@ -19,8 +21,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
-          cache: 'pnpm'
+          node-version: "22.x"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
@@ -31,12 +33,32 @@ jobs:
       - name: Run tests
         run: pnpm test
 
-      - name: Build release artifact
-        run: pnpm run build-gh-release
+      - name: Determine package and version
+        id: package_info
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          if [[ $TAG == react-components-v* ]]; then
+            echo "PACKAGE=react-components" >> $GITHUB_OUTPUT
+            echo "VERSION=${TAG#react-components-v}" >> $GITHUB_OUTPUT
+            echo "BUILD_CMD=build" >> $GITHUB_OUTPUT
+          elif [[ $TAG == toolkit-v* ]]; then
+            echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
+            echo "VERSION=${TAG#toolkit-v}" >> $GITHUB_OUTPUT
+            echo "BUILD_CMD=zip" >> $GITHUB_OUTPUT
+          else
+            # Assume v* tags are toolkit (backward compatibility)
+            echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
+            echo "VERSION=${TAG#v}" >> $GITHUB_OUTPUT
+            echo "BUILD_CMD=zip" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Get package version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+      - name: Build release artifact
+        run: |
+          if [ "${{ steps.package_info.outputs.PACKAGE }}" == "toolkit" ]; then
+            pnpm run build-gh-release
+          else
+            cd packages/react-components && pnpm run build
+          fi
 
       - name: Create release
         id: create_release
@@ -45,19 +67,32 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name:  ${{ github.ref }}
+          release_name: ${{ github.ref }}
           draft: false
           prerelease: false
+          body: |
+            Release of **${{ steps.package_info.outputs.PACKAGE }}** version ${{ steps.package_info.outputs.VERSION }}
 
-      - name: Upload release asset
-        id: upload-release-asset
+            ## Installation
+
+            ```json
+            {
+              "dependencies": {
+                "@ourfuturehealth/${{ steps.package_info.outputs.PACKAGE }}": "github:ourfuturehealth/design-system-toolkit#${{ github.ref_name }}:packages/${{ steps.package_info.outputs.PACKAGE }}"
+              }
+            }
+            ```
+
+      - name: Upload toolkit zip asset
+        if: steps.package_info.outputs.PACKAGE == 'toolkit'
+        id: upload-toolkit-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/ofh-design-system-toolkit-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_name: ofh-design-system-toolkit-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_path: ./packages/toolkit/dist/ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
+          asset_name: ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
           asset_content_type: application/zip
 
       # - name: Publish NPM package

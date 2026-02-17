@@ -1,7 +1,27 @@
 {
-  "name": "toolkit",
-  "private": true,
+  "name": "@ourfuturehealth/toolkit",
+  "version": "4.0.0",
+  "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git",
+    "directory": "packages/toolkit"
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "components",
+    "core",
+    "common",
+    "assets",
+    "ofh.js",
+    "ofh.scss",
+    "polyfills.js"
+  ],
+  "main": "dist/ofh-design-system-toolkit.js",
+  "style": "dist/ofh-design-system-toolkit.css",
   "scripts": {
+    "prepare": "gulp bundle",
     "build": "gulp build",
     "watch": "gulp watch",
     "clean": "gulp clean",
