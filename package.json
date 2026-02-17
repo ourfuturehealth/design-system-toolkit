@@ -6,15 +6,21 @@
   "scripts": {
     "prepare": "turbo run bundle",
     "dev": "turbo run watch --parallel",
-    "dev:consumer": "turbo run watch --filter=example-react-consumer-app",
-    "dev:storybook": "turbo run watch --filter=react-components",
-    "dev:site": "turbo run watch --filter=site",
     "dev:toolkit": "turbo run watch --filter=toolkit",
+    "dev:site": "turbo run watch --filter=site",
     "dev:react-components": "turbo run watch --filter=react-components",
+    "dev:consumer": "turbo run watch --filter=example-react-consumer-app",
+    "storybook": "pnpm --filter=react-components run storybook",
     "build": "turbo run build",
-    "build-gh-release": "turbo run zip --filter=toolkit",
     "lint": "turbo run lint",
-    "test": "turbo run test"
+    "lint:toolkit": "turbo run lint --filter=toolkit",
+    "lint:site": "turbo run lint --filter=site",
+    "lint:react-components": "turbo run lint --filter=react-components",
+    "lint:consumer": "turbo run lint --filter=example-react-consumer-app",
+    "test": "turbo run test",
+    "test:toolkit": "turbo run test --filter=toolkit",
+    "test:react-components": "turbo run test --filter=react-components",
+    "test:watch": "pnpm --filter=react-components run test:watch"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",

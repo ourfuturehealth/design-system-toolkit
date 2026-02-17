@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.29.2",
   "scripts": {
     "dev": "vite",
+    "watch": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ignore-pattern '*.config.js'"
   },

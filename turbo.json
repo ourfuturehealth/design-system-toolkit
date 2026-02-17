@@ -12,15 +12,21 @@
       "cache": false,
       "persistent": true
     },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "test": {
       "dependsOn": ["^build"],
       "outputs": []
     },
     "lint": {
+      "dependsOn": ["^build"],
       "outputs": []
     },
     "zip": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "outputs": ["dist/**/*.zip"]
     }
   }
 }
