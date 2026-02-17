@@ -23,15 +23,13 @@
     "build": "tsc && vite build",
     "build:clean": "rm -rf dist && pnpm run build",
     "type-check": "tsc --noEmit",
-    "test": "vitest",
-    "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "pnpm run test:run && pnpm run build:clean",
+    "prepublishOnly": "pnpm run test && pnpm run build:clean",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build:storybook": "storybook build"
   },
   "keywords": [
     "react",
