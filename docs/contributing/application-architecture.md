@@ -1,43 +1,95 @@
 # Application architecture
 
-> **Warning**<br>
-> This documentation is out-of-date and needs reviewing and updating.
+## Monorepo Structure
 
-The application generates static HTML pages to preview components, with each component having their own page, these files can be found in `app/`. To make changes to components, you will have to edit the individual components files within `packages/`. These are usually the only 2 folders that you will need.
+This repository is organized as a **pnpm workspace monorepo** containing multiple packages:
 
----
+### Packages
 
-`.github/`
+**`packages/toolkit/`** - Core Design System
 
-  GitHub specific files, such templates for pull requests and issues.
+- SCSS/CSS design system and vanilla JavaScript components
+- Distributed via GitHub releases
+- Built with Gulp
+- Versioned independently (e.g., v4.0.0)
 
-`app/`
+**`packages/react-components/`** - React Component Library
 
-  Nunjuck (HTML) files for the component example pages that you see at <http://localhost:3000> when running the application locally and on <https://ourfuturehealth.github.io/design-system-toolkit/>
+- React implementation of the design system
+- Imports and compiles toolkit SCSS
+- Distributed via GitHub releases
+- Built with Vite
+- Versioned independently (e.g., v0.0.1)
 
-`dist/` (Automatically generated)
+**`packages/site/`** - Documentation Website
 
-  Automatically generated compiled files and build assets for GitHub pages, releases and npm packages. Don't manually edit files in this folder as they will be deleted.
+- Static documentation site built with Eleventy
+- Uses Nunjucks templates
+- Deployed to designsystem.ourfuturehealth.org.uk via Netlify
+- Not versioned (documentation only)
 
-`docs/`
+**`packages/example-react-consumer-app/`** - Example Consumer App
 
-  Markdown files for documentation on GitHub, such as contributing to the project, coding standards and more.
+- Demonstrates how to consume the React components library
+- Built with Vite
+- Not versioned (example only)
 
-`node_modules/` (Automatically generated)
+### Root Directory
 
- Node package manager modules for third party dependencies. This folder is automatically generated when running `npm install`. Don't manually edit files in this folder as they will be deleted.
+**`.github/`**
 
-`packages/`
+GitHub specific files, such as workflows, templates for pull requests and issues.
 
-  Our Future Health design system toolkit individual components files, such as all the stylesheet (scss) files, HTML templates (nunjucks), READMEs and assets.
+**`docs/`**
 
-`tasks/`
+Markdown files for documentation on GitHub, including contributing guidelines, coding standards, and architectural docs (like this one).
 
-  Gulp.js tasks to build the `dist/` folder from the files in `app`.
+**`node_modules/`** (Auto-generated)
 
-`tests/`
+pnpm workspace node modules. Generated when running `pnpm install`. Don't manually edit.
 
-  Test configuration files for our testing frameworks Cypress and BackstopJS. Linting configuration for our linters eslint, htmlhint and stylelint.
+**`turbo.json`**
+
+Turborepo configuration for orchestrating monorepo tasks (build, test, lint).
+
+**`pnpm-workspace.yaml`**
+
+Defines which directories are packages in the pnpm workspace.
+
+## Build Tools
+
+- **pnpm**: Package manager and workspace coordinator
+- **Turbo**: Task orchestration for parallel builds/tests/lints
+- **Gulp**: Toolkit build system (CSS/JS compilation, bundling)
+- **Vite**: React packages build system (modern, fast HMR)
+- **Eleventy**: Static site generator for documentation
+- **Webpack**: Site JavaScript bundling
+
+## Development Workflows
+
+See [Running Locally](running-locally.md) for detailed setup instructions.
+
+### Architecture Highlights
+
+**Shared Dependencies**: The toolkit package is a workspace dependency for both react-components and site packages. Changes to toolkit SCSS are automatically picked up:
+
+- Site webpack watches toolkit source files
+- React components import toolkit SCSS at build time
+- Standalone examples use toolkit's gulp-built distribution files
+
+**Independent Builds**: Each package has its own build configuration:
+
+- Toolkit: `gulp build` → `dist/`
+- React components: `vite build` → `dist/`
+- Site: `eleventy build` + `webpack` → `dist/`
+- Consumer app: `vite build` → `dist/`
+
+**Dual Build System for Site**: The site package uses toolkit in two ways:
+
+1. Webpack bundles toolkit source for main documentation pages
+2. Gulp-built toolkit dist/ is used for standalone iframe examples
+
+See [Site Package README](../../packages/site/README.md) for details on why this architecture exists.
 
 ---
 

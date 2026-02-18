@@ -30,9 +30,6 @@
     "husky": "^4.3.8",
     "turbo": "^2.8.4"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "husky": {
     "hooks": {
       "pre-push": "pnpm run lint && pnpm test"

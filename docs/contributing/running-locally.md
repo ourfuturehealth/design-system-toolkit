@@ -1,18 +1,38 @@
 # Running the application locally
 
-> **Warning**<br>
-> This documentation is out-of-date and needs reviewing and updating.
-
 ## Requirements
 
 To run Our Future Health design system toolkit locally you'll need to:
-* [set up git](https://help.github.com/articles/set-up-git/)
-* [install Node.js](https://nodejs.org/en/)
-We recommend to use the [long-term support (LTS) version of Nodejs](https://nodejs.org/en/download/), rather than the latest beta version.
 
-> Type `git --version` to check if git is installed. This should print a version number like "git version 2.18.0".
+- [Set up git](https://help.github.com/articles/set-up-git/)
+- **Node.js 20.19.0+** (recommended: Node 24.13.1 LTS - see [.nvmrc](../../.nvmrc))
+- **pnpm 10+** (required - this project uses pnpm workspaces)
 
-> Type `node -v` to check if Node is installed. This should print a version number like "v8.11.3".
+> Type `git --version` to check if git is installed. This should print a version number like "git version 2.39.0".
+
+> Type `node -v` to check if Node is installed. This should print a version number like "v24.13.0".
+
+> Type `pnpm --version` to check if pnpm is installed. This should print a version number like "10.29.2".
+
+### Install pnpm
+
+If you don't have pnpm installed:
+
+```bash
+npm install -g pnpm
+# or
+curl -fsSL https://get.pnpm.io/install.sh | sh
+```
+
+### Optional: Use nvm for Node version management
+
+If you use nvm, the project includes an `.nvmrc` file:
+
+```bash
+nvm use
+# or install the recommended version
+nvm install
+```
 
 ## 1. Fork the repository
 
@@ -20,15 +40,15 @@ We recommend to use the [long-term support (LTS) version of Nodejs](https://node
 
 ## 2. Clone the repository
 
-You can clone the repository directly if you're a member of the [NHS.UK GitHub organisation](https://github.com/nhsuk/)
+You can clone the repository directly if you're a member of the Our Future Health GitHub organisation:
 
-```
+```bash
 git clone https://github.com/ourfuturehealth/design-system-toolkit.git
 ```
 
-Otherwise you'll have to clone your own fork
+Otherwise you'll have to clone your own fork:
 
-```
+```bash
 git clone https://github.com/[Username]/design-system-toolkit.git design-system-toolkit
 ```
 
@@ -36,27 +56,81 @@ git clone https://github.com/[Username]/design-system-toolkit.git design-system-
 
 ## 3. Install dependencies
 
-We use [node package manager (npm)](https://docs.npmjs.com/getting-started/what-is-npm) to manage third party dependencies.
+We use [pnpm](https://pnpm.io/) to manage dependencies in this monorepo.
 
-Whilst in the project directory you will need to install the dependencies listed in `package.json`
+Navigate to the project directory and install all dependencies:
 
-```
+```bash
 cd design-system-toolkit
+pnpm install
 ```
 
-```
-npm install
+This will install dependencies for all packages in the workspace.
+
+## 4. Start local development servers
+
+The monorepo contains multiple packages. Choose the development workflow that matches what you're working on:
+
+### Option A: Documentation Site (Eleventy)
+
+Build and serve the documentation website with hot reload:
+
+```bash
+pnpm dev:site
 ```
 
-## 4. Start a local server
+The site will be available at [http://localhost:8080](http://localhost:8080).
 
-This will build files, serve web pages and watch for changes when you save a file.
+### Option B: React Components (Storybook)
 
+Develop React components with Storybook:
+
+```bash
+pnpm storybook
 ```
-npm start
+
+Storybook will be available at [http://localhost:6006](http://localhost:6006).
+
+### Option C: Core Toolkit
+
+Work on the core design system (SCSS, vanilla JS):
+
+```bash
+pnpm dev:toolkit
 ```
 
-> The application will be available at [http://localhost:3000](http://localhost:3000).
+This runs gulp watch to rebuild toolkit distribution files.
+
+### Option D: React Consumer Example
+
+Test consuming the React components library:
+
+```bash
+pnpm dev:react-consumer
+```
+
+This runs both the library build watch and the consumer app dev server at [http://localhost:5174](http://localhost:5174).
+
+### Option E: Everything
+
+Run all development servers concurrently:
+
+```bash
+pnpm dev
+```
+
+This starts toolkit watch, site dev server, and Storybook simultaneously.
+
+## Package Structure
+
+The monorepo contains:
+
+- **`packages/toolkit/`** - Core design system (SCSS, JS, templates)
+- **`packages/react-components/`** - React component library
+- **`packages/site/`** - Documentation website (Eleventy)
+- **`packages/example-react-consumer-app/`** - Example React consumer app
+
+See the main [README](../../README.md) for more details on the monorepo structure.
 
 ---
 

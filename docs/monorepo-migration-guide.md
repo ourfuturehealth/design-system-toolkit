@@ -1,12 +1,12 @@
 # Monorepo Migration Guide
 
-This guide explains the changes made to the design system toolkit's structure during the monorepo refactor and how to migrate projects that consume the toolkit.
+This guide explains the monorepo restructure that occurred with v4.0.0 and how to migrate projects consuming the toolkit.
 
 ## ⚠️ Will This Break My Project?
 
 **No, existing consumers will NOT automatically break.**
 
-If your project uses a specific version tag (e.g., `v3.4.2`), it will continue to work indefinitely:
+If your project uses a version tag from v3.4.2 or earlier, it will continue to work indefinitely:
 
 ```json
 {
@@ -22,24 +22,36 @@ If your project uses a specific version tag (e.g., `v3.4.2`), it will continue t
 
 You'll need to update your installation syntax if:
 
-| Scenario                             | Will Break? | When to Update                           |
-| ------------------------------------ | ----------- | ---------------------------------------- |
-| Using `#v3.4.2` or older version tag | ❌ No       | Only when you want to upgrade to v4.0.0+ |
-| Using `#main` branch (no version)    | ✅ Yes      | Immediately after merge                  |
-| Trying to upgrade to `#v4.0.0`       | 🔄 Yes      | Must use new syntax (see below)          |
-| No version specified in package.json | ✅ Yes      | Immediately after merge                  |
+| Scenario                                        | Will Break? | When to Update                           |
+| ----------------------------------------------- | ----------- | ---------------------------------------- |
+| Using `#v3.4.2` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
+| Using `#main` branch (no version)               | ✅ Yes      | Immediately after merge                  |
+| Trying to upgrade to `#toolkit-v4.0.0` or newer | 🔄 Yes      | Must use new syntax (see below)          |
+| No version specified in package.json            | ✅ Yes      | Immediately after merge                  |
 
-**Bottom line:** If you're using a version tag, you're safe and can upgrade on your own timeline.
+**Bottom line:** If you're using a version tag from v3.4.2 or earlier, you're safe and can upgrade on your own timeline.
 
 ## Overview
 
-The toolkit has been restructured from a single-package repository into a monorepo with separate packages. This change improves maintainability and separation of concerns, but requires updates to how consuming projects reference toolkit components and templates when upgrading to v4.0.0+.
+**As of v4.0.0**, the toolkit was restructured from a single-package repository into a monorepo with separate packages. This change improves maintainability and separation of concerns, but requires updates to how consuming projects install and reference the toolkit.
+
+### Historic Change Timeline
+
+- **Before v3.4.2** (and earlier): Single-package repository
+  - Install: `"ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"`
+  - All files at repository root
+  - Single `package.json`
+- **v4.0.0 and later**: Monorepo structure
+  - Install: `"@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"`
+  - Packages in subdirectories
+  - Multiple package.json files (one per package)
+  - Independent package versioning
 
 ## What Changed
 
 ### Repository Structure
 
-**Before (main branch):**
+**Before v3.4.2 (single-package):**
 
 ```
 design-system-toolkit/
@@ -59,7 +71,7 @@ design-system-toolkit/
 └── package.json                   # Single package.json
 ```
 
-**After (monorepo structure):**
+**After v4.0.0 (monorepo structure):**
 
 ```
 design-system-toolkit/
@@ -166,7 +178,9 @@ Server-side rendering templates for generating HTML:
 When you install the toolkit via GitHub, you get **all three** distribution methods:
 
 ```bash
-npm install @ourfuturehealth/toolkit@github:ourfuturehealth/design-system-toolkit#v4.0.0:packages/toolkit
+pnpm add @ourfuturehealth/toolkit@github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit
+# or with npm:
+npm install @ourfuturehealth/toolkit@github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit
 ```
 
 This installs:
@@ -315,9 +329,9 @@ import "toolkit/dist/ofh-design-system-toolkit.js";
 
 ### Package Dependencies
 
-**Before:**
+**Before v3.4.2:**
 
-Projects would reference the toolkit repository directly (via git URL or local path):
+Projects would reference the toolkit repository directly:
 
 ```json
 {
@@ -327,7 +341,7 @@ Projects would reference the toolkit repository directly (via git URL or local p
 }
 ```
 
-**After:**
+**After v4.0.0:**
 
 Within the monorepo, use workspace dependencies:
 
@@ -346,7 +360,7 @@ External projects consuming the toolkit should reference it via GitHub using the
 {
   "name": "external-project",
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#main:packages/toolkit"
   }
 }
 ```
@@ -356,12 +370,12 @@ Or reference a specific release tag:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```
 
-**Note**: The use of `#packages/toolkit` tells npm/pnpm to install from that subdirectory of the repository. This is required with the monorepo structure.
+**Note**: The use of `:packages/toolkit` tells npm/pnpm to install from that subdirectory of the repository. This is required with the monorepo structure.
 
 ## Step-by-Step Migration for External Projects
 
@@ -454,12 +468,12 @@ If using webpack or another bundler, ensure `node_modules/toolkit` is in the res
 
 Update your `package.json` to reference the toolkit package from GitHub:
 
-**Option 1: Install from specific release tag**
+**Option 1: Install from specific release tag (recommended)**
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```
@@ -475,6 +489,7 @@ Update your `package.json` to reference the toolkit package from GitHub:
 ```
 
 **Option 3: Download release zip manually**
+
 Download the `ofh-design-system-toolkit-VERSION.zip` from [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and extract it to your project.
 
 **Important**: The `:packages/toolkit` suffix is required to install the toolkit package from the monorepo subdirectory.
@@ -503,7 +518,7 @@ Download the `ofh-design-system-toolkit-VERSION.zip` from [GitHub Releases](http
 
 The monorepo maintains a GitHub Actions workflow that creates releases when you push a version tag:
 
-1. **Tag a release**: `git tag v4.0.0 && git push origin v4.0.0`
+1. **Tag a release**: `git tag toolkit-v4.0.0 && git push origin toolkit-v4.0.0`
 2. **Workflow runs**: Builds the toolkit, runs tests, and creates a release zip
 3. **Release created**: GitHub Release is created with the toolkit zip attached
 4. **Consumers install**: External projects can install via GitHub or download the zip
@@ -517,7 +532,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```
@@ -527,30 +542,34 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#v3.5.0:packages/react-components"
+    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components"
   }
 }
 ```
 
 ### What Changed in the Release Process
 
-**Before (single package):**
+**Before v3.4.2 (single package):**
 
 - Single `package.json` at root with version
 - `npm install` from root would run `prepare` script and build everything
 - Git installations would get the entire repository as one package
-- One version number for everything: `v3.4.2`
+- One version number for everything: `v3.4.2`, `v3.4.1`, etc.
+- Tag format: `v*` (e.g., `v3.4.2`)
 
-**After (monorepo):**
+**After v4.0.0 (monorepo):**
 
 - Each package has its own `package.json` with **independent versioning**
   - Toolkit: `4.0.0`, `4.0.1`, `4.1.0`...
-  - React Components: `1.0.0`, `1.0.1`, `1.1.0`...
+  - React Components: `0.0.1`, `0.0.2`, `0.1.0`...
 - Root `package.json` has no version (it's just a workspace coordinator)
 - Git installations must specify subdirectory: `:packages/toolkit` or `:packages/react-components`
 - Each package runs its own `prepare` script when installed
 - Allows selective installation of only what you need
 - **Packages can be released independently** - toolkit doesn't need a new version when react-components updates
+- Tag format:
+  - Toolkit: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
+  - React: `react-v*` (e.g., `react-v0.0.1`)
 
 ### Independent Package Versioning
 
@@ -558,7 +577,7 @@ Each package maintains its own semantic version:
 
 | Package                               | Current Version | Purpose                                       |
 | ------------------------------------- | --------------- | --------------------------------------------- |
-| **@ourfuturehealth/toolkit**          | `3.5.0`         | Core HTML/CSS/JS components and templates     |
+| **@ourfuturehealth/toolkit**          | `4.0.0`         | Core HTML/CSS/JS components and templates     |
 | **@ourfuturehealth/react-components** | `0.0.1`         | React wrapper components                      |
 | **site**                              | (no version)    | Documentation/examples site (not distributed) |
 | **example-react-consumer-app**        | (no version)    | Development example app (not distributed)     |

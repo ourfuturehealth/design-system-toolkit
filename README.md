@@ -51,14 +51,17 @@ cd design-system-toolkit
 pnpm install
 
 # Development workflows
-pnpm run storybook              # React component documentation
-pnpm run dev:react-library      # React component development
-pnpm run dev:consumer-app       # Example consumer app
-pnpm run dev                    # Original toolkit documentation
+pnpm storybook                  # React component documentation (Storybook)
+pnpm dev:react-components       # React component library development
+pnpm dev:react-consumer         # Example consumer app with library watch
+pnpm dev:site                   # Documentation site development
+pnpm dev:toolkit                # Core toolkit development
+pnpm dev                        # Run all dev servers concurrently
 
-# Testing
-pnpm run test:all              # All tests (Jest + Vitest)
-pnpm run build:all             # Build all packages
+# Testing & Building
+pnpm test                       # Run all tests
+pnpm lint                       # Run all linters
+pnpm build                      # Build all packages
 ```
 
 ## Guidance
@@ -75,7 +78,7 @@ If you're looking to migrate an existing repo from OFH's V1 design system, see [
 For React applications, use the React component library:
 
 - **Installation guide:** [Consuming React Components](/docs/consuming-react-components.md)
-- **Package:** `@ourfuturehealth/react-components` (GitHub Packages)
+- **Package:** `@ourfuturehealth/react-components`
 
 ### Traditional CSS/JavaScript
 
@@ -89,21 +92,33 @@ You can also [install Our Future Health design system toolkit using our compiled
 
 ## How to make a new release
 
-1. Create a new branch for the release, off the latest `main` branch, and name it `release-v{version_number}`.
-1. Update the [CHANGELOG.md](CHANGELOG.md) and ensure it reflects everything that is being released in the new version.
-   - This mainly involves converting the "Unreleased" section (at the top) to a new version section (remember to add a date) and adding a new "Unreleased" section for the next version.
-   - The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-1. Update the `version` field in [package.json](package.json) and run `pnpm install` (to update the `pnpm-lock.yaml`).
-1. Submit a new pull request (PR) for the branch (with your changes) and get it reviewed.
-   - Note that this PR should only contain changes to the `CHANGELOG.md`, `package.json` and `package-lock.json` files. Any actual code/feature changes should first be done in a separate PR, before the release PR.
-   - See [this PR](https://github.com/ourfuturehealth/design-system-toolkit/pull/59) for an example.
-1. Immediately after the PR is merged, update your local clone, then create and push a Git tag for the release.
-   - E.g. `git tag -a v2.0.0 -m "v2.0.0" && git push origin --tags`.
-   - Note the `v` prefix is important as the release workflow will only trigger on tags that are prefixed with this.
-1. When the tag is pushed, the GitHub Actions 'release' workflow will trigger. This will create a named release in the GitHub repo ([docs](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)). Once this GitHub release page has been created, edit it via the GitHub UI and copy/paste the relevant Changelog entries.
-   - You can see the release workflow run for the tag by going to: <https://github.com/ourfuturehealth/design-system-toolkit/actions>.
-1. Announce this new release in the #design-system-announcements Slack channel.
-   - Make sure to provide a link to the GitHub release page.
+This monorepo uses **independent versioning** for each package. See the detailed [Release Process documentation](/docs/release-process.md) for full instructions.
+
+**Quick summary:**
+
+1. **Update package version**: Edit the `version` field in the specific package's `package.json`:
+   - `packages/toolkit/package.json` for toolkit releases
+   - `packages/react-components/package.json` for React component releases
+
+2. **Update [CHANGELOG.md](CHANGELOG.md)**: Document what's being released
+
+3. **Commit and push**:
+
+   ```bash
+   git add packages/[package-name]/package.json CHANGELOG.md
+   git commit -m "chore([package]): bump version to X.X.X"
+   git push origin main
+   ```
+
+4. **Create and push tag**:
+   - Toolkit: `git tag -a toolkit-vX.X.X -m "Release toolkit vX.X.X" && git push origin toolkit-vX.X.X`
+   - React: `git tag -a react-vX.X.X -m "Release react vX.X.X" && git push origin react-vX.X.X`
+
+5. **Verify**: Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and test installation
+
+6. **Announce**: Post in #design-system-announcements Slack channel
+
+For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 
 ## Browsers and assistive technology
 
@@ -119,7 +134,7 @@ Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future 
 > The docs website is based on the [NHS.UK digital service manual](https://github.com/nhsuk/nhsuk-service-manual/),
 > which we have incorporated into our design system toolkit as a statically generated site.
 
-You can find the code for the docs website under the `site/` folder. More details on this below.
+You can find the code for the docs website under the [`packages/site/`](packages/site/) folder. More details below.
 
 This is deployed using Netlify to <https://designsystem.ourfuturehealth.org.uk/>, on every merge to the `main` branch.
 
@@ -132,39 +147,22 @@ To build the toolkit and site in watch mode, and also serve the docs website
 (with hot reload), run the command:
 
 ```bash
-pnpm run dev
+pnpm dev:site
+```
+
+Or to run all development servers concurrently (toolkit, site, and Storybook):
+
+```bash
+pnpm dev
 ```
 
 ### Code structure
 
-The design system docs website codebase lives in the [`site/`](site/) directory.
+The design system docs website codebase lives in the [`packages/site/`](packages/site/) directory.
 The site uses [Nunjucks](https://mozilla.github.io/nunjucks/) templates and
 is built using the [Eleventy](https://www.11ty.dev/) static site generator.
 
-There are a few things to highlight about the structure of the site:
-
-- **Build and watch scripts** - Commands for building and watching the
-  website are configured as pnpm run scripts in [`package.json`](./package.json).
-  These run scripts are all prefixed with `site:`. Run the command `pnpm run`
-  in your terminal to see all available pnpm run scripts.
-- **Use of Nunjucks macros from toolkit components** - the component Nunjuck macros are imported into the site templates directly from the [`packages/components/`](./packages/components/) directory (which is the source of truth for toolkit components). This is possible because Eleventy adds the root directory to the lookup path for Nunjucks.
-- **Use of toolkit assets and artifacts** - The Eleventy configuration
-  ([`site.eleventy.config.js`](site.eleventy.config.js)) handles the copying of
-  the `dist/` and `packages/assets/` directories into the generated website.
-  The assets from these directories are then directly referenced in the site HTML.
-- **Component examples** - Isolated component examples live under the
-  [`site/views/examples`](./site/views/examples) directory. These pages are ideal
-  for testing component changes during development.
-- **Design examples** - All components, patterns and styles in the toolkit have
-  their own rendered design examples. These are HTML pages that are embedded in
-  iframes on the website. They can also be viewed standalone.
-  - _Generating design examples_ - The design example HTML pages are generated
-    using Eleventy's [Pagination feature](https://www.11ty.dev/docs/pages-from-data/).
-    The data is generated by [`site/views/_data/design-examples.js`](./site/views/_data/design-examples.js)
-    and [`site/views/design-examples.njk`](./site/views/design-examples.njk) iterates
-    over the data to generate the HTML pages.
-  - _Embedding design examples_ - The [`designExample`](./site/views/_includes/design-example.njk)
-    Nunjucks macro is used in the website to embed design examples via an iframe.
+See the [Site Package README](packages/site/README.md) for detailed documentation on the site architecture and development workflow.
 
 ## Licence
 

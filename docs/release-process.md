@@ -59,60 +59,94 @@ cd packages/toolkit
 ```bash
 cd packages/react-components
 # Edit package.json - update "version" field
+# Example: "version": "0.0.1" → "version": "0.0.2"
 ```
 
-**For workspace root:**
-
-```bash
-# Edit root package.json - update "version" field
-# This is the overall monorepo version
-```
+**Note:** The root `package.json` does NOT have a version field - it's a workspace coordinator only. Only package-specific `package.json` files are versioned.
 
 ### 2. Update Changelog
 
 Update [CHANGELOG.md](../CHANGELOG.md) with:
 
-- New version number and date
+- New version number and date (for the specific package being released)
 - List of changes, bug fixes, new features
 - Breaking changes (if any)
 - Migration notes (if applicable)
 
+**Note:** The changelog can include entries for multiple packages if releasing both together.
+
 ### 3. Commit Version Changes
+
+For a toolkit release:
 
 ```bash
 git add packages/toolkit/package.json CHANGELOG.md
-git commit -m "chore: bump version to 3.5.1"
+git commit -m "chore(toolkit): bump version to 4.0.1"
 git push origin main
 ```
 
-### 4. Create and Push Git Tag
-
-Create a tag matching the version:
+For a react-components release:
 
 ```bash
-# Create annotated tag
-git tag -a v3.5.1 -m "Release v3.5.1"
-
-# Push tag to GitHub
-git push origin v3.5.1
+git add packages/react-components/package.json CHANGELOG.md
+git commit -m "chore(react): bump version to 0.0.2"
+git push origin main
 ```
+
+For both:
+
+```bash
+git add packages/toolkit/package.json packages/react-components/package.json CHANGELOG.md
+git commit -m "chore: bump toolkit to 4.0.1 and react-components to 0.0.2"
+git push origin main
+```
+
+### 4. Create and Push Git Tags
+
+Create tags for each package being released:
+
+**For toolkit releases:**
+
+```bash
+git tag -a toolkit-v4.0.1 -m "Release toolkit v4.0.1"
+git push origin toolkit-v4.0.1
+```
+
+**For react-components releases:**
+
+```bash
+git tag -a react-v0.0.2 -m "Release react-components v0.0.2"
+git push origin react-v0.0.2
+```
+
+**Tag naming convention:**
+
+- Toolkit: `toolkit-v{version}` (e.g., `toolkit-v4.0.1`)
+- React components: `react-v{version}` (e.g., `react-v0.0.2`)
+
+**Note:** The legacy `v{version}` format may still work but use package-prefixed tags for clarity in a monorepo.
 
 ### 5. GitHub Actions Creates Release
 
-When you push a tag starting with `v`, the [release workflow](.github/workflows/release.yml) automatically:
+When you push a tag matching the pattern, the [release workflow](../.github/workflows/release.yml) automatically:
 
-1. Installs dependencies
-2. Runs linting
-3. Runs tests
-4. Builds the toolkit bundle and zip
+1. Installs dependencies with pnpm
+2. Runs linting (turbo run lint)
+3. Runs tests (turbo run test)
+4. Builds the specific package based on tag prefix
 5. Creates a GitHub Release
-6. Uploads the toolkit zip as a release asset
+6. Uploads build artifacts as release assets
+
+**Tag triggers:**
+
+- `toolkit-v*` → Builds and releases toolkit package
+- `react-v*` → Builds and releases react-components package
 
 ### 6. Verify Release
 
 1. Go to [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases)
 2. Verify the new release is created
-3. Check that the zip file is attached
+3. Check that the build artifacts are attached
 4. Test installation in a separate project
 
 ## Testing a Release
@@ -128,12 +162,12 @@ mkdir test-install && cd test-install
 npm init -y
 ```
 
-Update `package.json`:
+Update `package.json` to install from GitHub:
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.1:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.1:packages/toolkit"
   }
 }
 ```
@@ -153,12 +187,22 @@ ls node_modules/@ourfuturehealth/toolkit/dist
 
 ### Test React Components Installation
 
+Update `package.json`:
+
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#v3.5.1:packages/react-components"
+    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.0.2:packages/react-components"
   }
 }
+```
+
+Install and verify:
+
+```bash
+npm install
+ls node_modules/@ourfuturehealth/react-components/dist
+# Should show compiled library files
 ```
 
 ## Release Types
@@ -173,12 +217,12 @@ ls node_modules/@ourfuturehealth/toolkit/dist
 **Example:**
 
 ```bash
-# Update version in package.json
+# Update version in packages/toolkit/package.json
 git add packages/toolkit/package.json CHANGELOG.md
-git commit -m "chore: bump version to 3.5.1"
+git commit -m "chore(toolkit): bump version to 4.0.1"
 git push origin main
-git tag -a v3.5.1 -m "Release v3.5.1 - Bug fixes"
-git push origin v3.5.1
+git tag -a toolkit-v4.0.1 -m "Release toolkit v4.0.1 - Bug fixes"
+git push origin toolkit-v4.0.1
 ```
 
 ### Minor Release (4.0.0 → 4.1.0)
@@ -191,12 +235,12 @@ git push origin v3.5.1
 **Example:**
 
 ```bash
-# Update version in package.json
+# Update version in packages/toolkit/package.json
 git add packages/toolkit/package.json CHANGELOG.md
-git commit -m "chore: bump version to 3.6.0 - New components"
+git commit -m "chore(toolkit): bump version to 4.1.0 - New components"
 git push origin main
-git tag -a v3.6.0 -m "Release v3.6.0 - New card component"
-git push origin v3.6.0
+git tag -a toolkit-v4.1.0 -m "Release toolkit v4.1.0 - New card component"
+git push origin toolkit-v4.1.0
 ```
 
 ### Major Release (3.5.0 → 4.0.0)
@@ -349,7 +393,7 @@ The react-components [package.json](../packages/react-components/package.json) i
   },
   "files": ["dist", "README.md"],
   "scripts": {
-    "prepublishOnly": "pnpm run test:run && pnpm run build:clean"
+    "prepare": "pnpm run build"
   }
 }
 ```
@@ -440,44 +484,6 @@ This means the `gulp bundle` command failed during installation.
 - Check that the GitHub Actions workflow ran successfully
 - Verify the zip path in `.github/workflows/release.yml` matches where gulp creates it
 - Ensure `build-gh-release` script in root package.json runs successfully
-
-## Future: Publishing to npm or GitHub Packages
-
-### GitHub Packages (Recommended for Private Distribution)
-
-To publish to GitHub Packages (free for public repos):
-
-1. Add `.npmrc` to repository root:
-
-```
-@ourfuturehealth:registry=https://npm.pkg.github.com
-```
-
-2. Update release workflow:
-
-```yaml
-- name: Publish to GitHub Packages
-  run: |
-    cd packages/toolkit
-    echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > .npmrc
-    npm publish
-```
-
-3. External projects install:
-
-```bash
-npm config set @ourfuturehealth:registry https://npm.pkg.github.com
-npm install @ourfuturehealth/toolkit
-```
-
-### npm Registry (For Public Distribution)
-
-To publish to npm:
-
-1. Create npm organization account
-2. Add npm token to GitHub secrets
-3. Uncomment the npm publish step in release workflow
-4. Remove `"private": true` if present
 
 ## Best Practices
 
