@@ -4,6 +4,138 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
+## [v4.0.0] - 2026-02-18
+
+### 🎉 Major Change: Monorepo Restructure
+
+This release introduces a complete restructuring of the repository into a monorepo architecture with independent package versioning.
+
+### ⚠️ BREAKING CHANGES
+
+**Installation Method Changed**
+
+Projects must update their installation syntax to specify the package subdirectory:
+
+**Before (v3.4.2 and earlier):**
+
+```json
+{
+  "dependencies": {
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
+  }
+}
+```
+
+**After (v4.0.0+):**
+
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
+  }
+}
+```
+
+**Package Structure Changed**
+
+- All toolkit files moved from repository root to `packages/toolkit/`
+- Package name changed: `ofh-design-system-toolkit` → `@ourfuturehealth/toolkit`
+- Documentation site moved to `packages/site/`
+
+**Release Tag Format Changed**
+
+- Toolkit releases: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
+- React component releases: `react-v*` (e.g., `react-v0.0.1`)
+
+**Who is affected:**
+
+- Projects using `#main` branch (must update immediately)
+- Projects upgrading from v3.4.2 or earlier (update when ready)
+- Projects using version tags like `#v3.4.2` are **NOT affected** (tags are immutable)
+
+### Added
+
+#### @ourfuturehealth/toolkit (v4.0.0)
+
+- Monorepo package structure with independent versioning
+- `prepare` script for automatic building when installed from git
+- Package metadata for monorepo subdirectory installation
+
+#### @ourfuturehealth/react-components (v0.0.1)
+
+- **New package**: React component library
+- Initial components: `Button`, `TextInput`
+- Full TypeScript support
+- Storybook integration for development and documentation
+- Vitest testing setup
+- Built with Vite
+
+#### packages/site
+
+- Documentation site moved to dedicated package
+- Dual build system: Webpack for main pages, Gulp dist for iframe examples
+- Updated to consume toolkit from workspace
+
+#### packages/example-react-consumer-app
+
+- Example application demonstrating React component library usage
+- Hot reload development workflow
+- Shows integration patterns
+
+### Changed
+
+#### Build System
+
+- Introduced Turborepo for build orchestration
+- Switched from npm to pnpm for package management
+- Workspace-based dependency management
+- Parallel task execution across packages
+
+#### Development Workflow
+
+- New dev scripts for each package: `dev:toolkit`, `dev:site`, `dev:react-components`, `dev:react-consumer`
+- Unified storybook command
+- Watch mode with hot reload across packages
+
+#### Node.js Requirements
+
+- **Minimum**: Node.js 20.19.0 (required by Vite 7)
+- **Recommended**: Node.js 24.13.1 LTS
+- Added engines field to enforce minimum versions
+
+#### Documentation
+
+- Updated all installation guides for monorepo structure
+- Added comprehensive monorepo migration guide
+- Updated contributing documentation
+- Added React component consumption guide
+- Updated release process documentation
+
+### Migration Guide
+
+See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions.
+
+**Quick migration checklist:**
+
+1. Update package.json installation syntax
+2. Update import paths if using modules
+3. Update template search paths if using Nunjucks
+4. Update build configuration for new package location
+
+### Technical Details
+
+**Packages:**
+
+- `@ourfuturehealth/toolkit` - Core design system (v4.0.0)
+- `@ourfuturehealth/react-components` - React components (v0.0.1)
+- `site` - Documentation (not versioned)
+- `example-react-consumer-app` - Example app (not versioned)
+
+**Distribution:**
+All packages are distributed via GitHub releases. No npm registry publishing required.
+
+---
+
 ## [v3.4.2] - 2025-11-28
 
 ### Removed
@@ -80,16 +212,19 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 ## [v3.0.0-alpha.0] - 2024-04-03
 
 ### Added
+
 - **Breaking change**: added new button variations, if your app is using the old button variations, you would have to ensure your app is using the latest button variation classes when updating to this version.
 
 ## [v2.0.0-alpha.6] - 2023-12-14
 
 ### Added
+
 - Added **black** colour variation to section break typography
 
 ## [v2.0.0-alpha.5] - 2023-10-25
 
 ### Added
+
 - Added **card with icon** variation of card component
 
 ## [v2.0.0-alpha.4] - 2023-09-19
@@ -145,7 +280,7 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 - Output asset files renamed to `ofh-design-system-toolkit.*`.
 - All favicons and logos updated to latest Our Future Health branding.
 - Renamed the JS and SCSS source entry files to `ofh.*` (note: the build still outputs the compiled files as `ofh-design-system-toolkit.*`).
-- Renamed the prefix for *all* CSS class names from `nhsuk-` to `ofh-`.
+- Renamed the prefix for _all_ CSS class names from `nhsuk-` to `ofh-`.
 
 ## [v2.0.0-alpha.0] - 2022-07-20
 
