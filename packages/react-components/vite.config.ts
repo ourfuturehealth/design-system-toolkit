@@ -11,6 +11,9 @@ export default defineConfig({
       exclude: ['**/*.test.tsx', '**/*.spec.tsx', 'src/dev.tsx'],
     }),
   ],
+  server: {
+    port: 5173
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
@@ -44,6 +47,8 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         charset: false,
+        // Allow importing from node_modules and workspace packages
+        loadPaths: ['node_modules'],
       },
     },
   },

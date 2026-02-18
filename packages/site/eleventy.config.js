@@ -26,7 +26,7 @@ module.exports = function configuration(eleventyConfig) {
 
   // Prevent the output of toolkit CSS and JS assets in watch mode
   // triggering multiple rebuilds of the docs site.
-  eleventyConfig.setWatchThrottleWaitTime(1000);
+  eleventyConfig.setWatchThrottleWaitTime(100);
 
   const nunjucksEnv = nunjucks.configure(
     [

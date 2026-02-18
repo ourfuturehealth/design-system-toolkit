@@ -23,6 +23,7 @@
   "scripts": {
     "prepare": "gulp bundle",
     "build": "gulp build",
+    "dev": "gulp watch",
     "watch": "gulp watch",
     "clean": "gulp clean",
     "bundle": "gulp bundle",

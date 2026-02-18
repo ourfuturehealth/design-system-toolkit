@@ -1,5 +1,5 @@
 // Import and initialize the design system toolkit components
-import "toolkit/ofh";
+import "@ourfuturehealth/toolkit/ofh";
 
 // Import and initialize documentation site specific components
 import DesignExample from "./design-example";

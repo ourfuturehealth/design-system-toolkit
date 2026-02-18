@@ -97,6 +97,9 @@ importers:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
     devDependencies:
+      '@ourfuturehealth/toolkit':
+        specifier: workspace:*
+        version: link:../toolkit
       '@storybook/addon-a11y':
         specifier: ^10.2.8
         version: 10.2.8(storybook@10.2.8(@testing-library/dom@10.4.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -169,7 +172,7 @@ importers:
 
   packages/site:
     dependencies:
-      toolkit:
+      '@ourfuturehealth/toolkit':
         specifier: workspace:*
         version: link:../toolkit
     devDependencies:

@@ -55,9 +55,9 @@ jobs:
       - name: Build release artifact
         run: |
           if [ "${{ steps.package_info.outputs.PACKAGE }}" == "toolkit" ]; then
-            pnpm --filter=toolkit run zip
+            pnpm --filter=@ourfuturehealth/toolkit run zip
           else
-            pnpm --filter=react-components run build
+            pnpm --filter=@ourfuturehealth/react-components run build
           fi
 
       - name: Create release
