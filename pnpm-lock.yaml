@@ -97,6 +97,9 @@ importers:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
     devDependencies:
+      '@eslint/js':
+        specifier: ^9.39.1
+        version: 9.39.2
       '@ourfuturehealth/toolkit':
         specifier: workspace:*
         version: link:../toolkit
@@ -145,6 +148,18 @@ importers:
       '@vitest/ui':
         specifier: ^4.0.18
         version: 4.0.18(vitest@4.0.18)
+      eslint:
+        specifier: ^9.39.1
+        version: 9.39.2
+      eslint-plugin-react-hooks:
+        specifier: ^7.0.1
+        version: 7.0.1(eslint@9.39.2)
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.24
+        version: 0.4.26(eslint@9.39.2)
+      globals:
+        specifier: ^16.5.0
+        version: 16.5.0
       jsdom:
         specifier: ^28.0.0
         version: 28.0.0
@@ -160,6 +175,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      typescript-eslint:
+        specifier: ^8.46.4
+        version: 8.55.0(eslint@9.39.2)(typescript@5.9.3)
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.2.3)(sass@1.97.3)(terser@5.46.0)
