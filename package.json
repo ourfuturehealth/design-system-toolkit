@@ -23,14 +23,7 @@
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
-    "eslint": "^8.36.0",
-    "eslint-config-nhsuk": "^1.0.0",
-    "htmlhint": "^1.1.4",
     "husky": "^4.3.8",
-    "stylelint": "^14.16.1",
-    "stylelint-config-standard-scss": "^4.0.0",
-    "stylelint-order": "^6.0.4",
-    "stylelint-scss": "^4.1.0",
     "turbo": "^2.8.4"
   },
   "publishConfig": {
@@ -49,6 +42,5 @@
     "type": "git",
     "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git"
   },
-  "homepage": "https://ourfuturehealth.github.io/design-system-toolkit/",
   "license": "MIT"
 }
