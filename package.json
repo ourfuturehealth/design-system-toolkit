@@ -3,6 +3,10 @@
   "private": true,
   "description": "Our Future Health design system toolkit monorepo. Individual packages have independent versioning - see packages/toolkit and packages/react-components for their versions.",
   "packageManager": "pnpm@10.29.2",
+  "engines": {
+    "node": ">=20.19.0",
+    "pnpm": ">=10.0.0"
+  },
   "scripts": {
     "prepare": "turbo run bundle",
     "dev": "concurrently \"pnpm:dev:*\" \"pnpm storybook\"",

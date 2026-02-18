@@ -19,7 +19,9 @@ This repository is organized as a monorepo containing:
 
 **Required:**
 
-- Node.js 18+
+- **Node.js 20.19.0+** (minimum required by Vite 7)
+  - Recommended: **Node 24.13.1 LTS** (see [.nvmrc](.nvmrc) for nvm users)
+  - Any version >= 20.19.0 will work (e.g., 20.x, 22.x, 24.x)
 - **pnpm 10+** (This project uses pnpm workspaces - npm/yarn will not work correctly)
 
 **Install pnpm globally:**
@@ -28,6 +30,16 @@ This repository is organized as a monorepo containing:
 npm install -g pnpm
 # or
 curl -fsSL https://get.pnpm.io/install.sh | sh
+```
+
+**Optional - Use nvm for Node version management:**
+
+```bash
+# If you use nvm, automatically switch to the recommended version
+nvm use
+
+# Or install the recommended version if not already installed
+nvm install
 ```
 
 ## Quick Start
