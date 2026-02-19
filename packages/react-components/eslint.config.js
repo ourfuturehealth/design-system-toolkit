@@ -16,6 +16,7 @@ export default [
       'coverage', 
       'storybook-static',
       'src/dev.tsx', // Temporary dev playground - will be removed once Storybook is fully adopted
+      '*.config.cjs', // CommonJS config files (stylelint)
     ] 
   },
   ...tseslint.configs.recommended,

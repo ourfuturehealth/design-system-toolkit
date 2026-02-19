@@ -14,7 +14,7 @@
 
 // Main body styling
 .body-ds {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
 }
 
 // HEADER + MAIN NAV
@@ -47,15 +47,15 @@
 
 .app-annotate-block {
   margin-bottom: ofh-spacing(4);
-  outline: 2px dashed $color_ofh-grey-1;
+  outline: 2px dashed $ofh-color-greyscale-2;
   padding: ofh-spacing(3);
   padding-top: ofh-spacing(7);
   position: relative;
 }
 
 .app-annotate-block__label {
-  border-bottom: 2px dashed $color_ofh-grey-1;
-  border-right: 2px dashed $color_ofh-grey-1;
+  border-bottom: 2px dashed $ofh-color-greyscale-2;
+  border-right: 2px dashed $ofh-color-greyscale-2;
   left: 0;
   padding: ofh-spacing(1) ofh-spacing(2);
   position: absolute;

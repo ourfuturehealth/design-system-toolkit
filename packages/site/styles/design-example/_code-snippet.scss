@@ -3,7 +3,7 @@
 $button-shadow-size: 4px;
 
 .code-snippet {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
 
   .js-hidden {
     display: none;
@@ -34,7 +34,7 @@ $button-shadow-size: 4px;
       background-color: transparent;
       border: 0;
       bottom: 16px;
-      color: $color_ofh-brand-blue;
+      color: $ofh-color-brand-blue-royal-3-main;
       cursor: pointer;
       font-size: 16px;
       margin-top: 16px;
@@ -62,7 +62,7 @@ $button-shadow-size: 4px;
       }
 
       svg {
-        fill: $color_ofh-brand-blue;
+        fill: $ofh-color-brand-blue-royal-3-main;
         height: 16px;
         margin: 5px 5px 0 0;
         transform: rotate(-90deg);
@@ -73,7 +73,7 @@ $button-shadow-size: 4px;
 
   &__preformatted {
     align-items: flex-end;
-    border-bottom: 1px solid $color_ofh-grey-3;
+    border-bottom: 1px solid $ofh-color-greyscale-4;
     display: flex;
     flex-direction: column;
     padding: 16px;
@@ -85,8 +85,8 @@ $button-shadow-size: 4px;
 }
 
 .app-tabs {
-  background: $color_ofh-white;
-  border: 1px solid $color_ofh-grey-3;
+  background: $ofh-color-greyscale-white;
+  border: 1px solid $ofh-color-greyscale-4;
   border-bottom: 0;
   $root: &;
   display: none;
@@ -128,7 +128,7 @@ $button-shadow-size: 4px;
         text-decoration: none;
 
         @include mq($from: tablet) {
-          box-shadow: 0 $button-shadow-size 0 $color_ofh-brand-blue;
+          box-shadow: 0 $button-shadow-size 0 $ofh-color-brand-blue-royal-3-main;
         }
 
         &:hover {
@@ -145,8 +145,8 @@ $button-shadow-size: 4px;
     }
 
     &--mobile {
-      background-color: $color_ofh-white;
-      border: 1px solid $color_ofh-grey-3;
+      background-color: $ofh-color-greyscale-white;
+      border: 1px solid $ofh-color-greyscale-4;
       border-width: 1px 0;
       display: block;
       margin: -1px 0;
@@ -159,14 +159,14 @@ $button-shadow-size: 4px;
     }
 
   &__container {
-    background-color: $color_ofh-white;
-    border: 1px solid $color_ofh-grey-3;
+    background-color: $ofh-color-greyscale-white;
+    border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;
     margin-top: 0;
 
     pre {
       align-self: stretch;
-      background-color: $color_ofh-white;
+      background-color: $ofh-color-greyscale-white;
       padding: 0;
     }
 
@@ -183,7 +183,7 @@ $color-syntax--string: #025eb8;
 $color-syntax--selector: #330072;
 
 .hljs {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   color: $color-syntax--body;
   overflow-x: scroll;
   padding: 0;

@@ -11,12 +11,12 @@
   @include ofh-responsive-padding(5, 'right');
   @include ofh-responsive-padding(7, 'top');
 
-  border: 1px solid $color_ofh-grey-3;
+  border: 1px solid $ofh-color-greyscale-4;
   position: relative;
 }
 
 .app-example__heading {
-  background: $color_ofh-grey-1;
+  background: $ofh-color-greyscale-2;
   border: 0;
   left: -1px;
   position: absolute;
@@ -32,7 +32,7 @@
 }
 
 .app-example--white {
-  background: $color_ofh-white;
+  background: $ofh-color-greyscale-white;
 }
 
 // Image example

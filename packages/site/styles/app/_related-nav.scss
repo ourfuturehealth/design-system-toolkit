@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-related-nav {
-  border-top: 2px solid $color_ofh-brand-blue;
+  border-top: 2px solid $ofh-color-brand-blue-royal-3-main;
 
   @include mq($until: desktop) {
     margin-top: ofh-spacing(7);
@@ -11,14 +11,14 @@
 }
 
 .ofh-related-nav__heading {
-  @include ofh-typography-responsive(24, $override-line-height: 1.2);
+  @include ofh-typography-responsive(h3, $override-line-height: 1.2);
 
   margin-bottom: ofh-spacing(3);
   padding-top: ofh-spacing(3);
 }
 
 .ofh-related-nav__heading--small {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive(lead);
 }
 
 .ofh-related-nav__list {
@@ -28,11 +28,11 @@
 }
 
 .ofh-related-nav__item {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive(paragraph);
 }
 
 .ofh-related-nav__sub-heading {
   @include ofh-responsive-margin(2, 'bottom');
   @include ofh-responsive-padding(2, 'top');
-  @include ofh-typography-responsive(19, $override-line-height: 1.2);
+  @include ofh-typography-responsive(lead, $override-line-height: 1.2);
 }

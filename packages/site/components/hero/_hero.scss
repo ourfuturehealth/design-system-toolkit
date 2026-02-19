@@ -11,13 +11,13 @@
 
 .ofh-hero-ds {
   @include ofh-responsive-padding(6, 'top', 'bottom');
-  background-color: $color_ofh-neutral-yellow;
+  background-color: $ofh-color-background-neutral-yellow;
   color: $ofh-text-black-color;
   position: relative; /* [1] */
 }
 
 .ofh-hero-ds__wrapper {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   border-radius: ofh-border-radius;
 
   @include ofh-responsive-padding(6);
@@ -86,7 +86,7 @@
 
 .ofh-hero-ds--image-description {
   .ofh-hero-ds-content {
-    background-color: $color_ofh-brand-yellow;
+    background-color: $ofh-color-brand-yellow-3-main;
     color: $ofh-text-white-color;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
@@ -111,7 +111,7 @@
 
       &::before,
       &::after {
-        border: solid 32px $color_ofh-brand-yellow; /* [8] */
+        border: solid 32px $ofh-color-brand-yellow-3-main; /* [8] */
         content: '';
         display: block;
         height: 0;

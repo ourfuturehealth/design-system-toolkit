@@ -2,8 +2,8 @@
 li code,
 p code,
 td code {
-  background-color: $color_ofh-grey-6;
-  color: #D40202; // sass-lint:disable-line no-color-hex no-color-literals
+  background-color: $ofh-color-greyscale-6;
+  color: #d40202; // sass-lint:disable-line no-color-hex no-color-literals
   padding: 2px ofh-spacing(2);
   word-break: break-word;
 }
@@ -12,7 +12,7 @@ td code {
 .app-pre {
   @include ofh-responsive-margin(4, 'bottom');
 
-  background: $color_ofh-white;
+  background: $ofh-color-greyscale-white;
   border: 1px solid $ofh-border-color;
   margin-top: 0;
   overflow: auto;
@@ -31,14 +31,14 @@ td code {
 // Design example code snippet overrides
 .code-snippet__preformatted {
   align-items: flex-end;
-  border-bottom: 1px solid $color_ofh-grey-4;
+  border-bottom: 1px solid $ofh-color-greyscale-4;
   display: flex;
   flex-direction: column;
   padding: 16px;
 }
 
 .hljs {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   color: $ofh-text-black-color;
   display: block;
   overflow-x: scroll;
@@ -55,7 +55,7 @@ td code {
   -ms-flex-item-align: stretch;
   -ms-grid-row-align: stretch;
   align-self: stretch;
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   padding: 0;
 }
 

@@ -1,7 +1,6 @@
 {
   "name": "@ourfuturehealth/toolkit",
   "version": "4.0.0",
-  "type": "module",
   "description": "Our Future Health design system toolkit contains the code you need to start building user interfaces for Our Future Health websites and services.",
   "repository": {
     "type": "git",
