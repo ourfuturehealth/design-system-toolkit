@@ -12,7 +12,6 @@
  .ofh-inset-text-ds {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
-  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
@@ -31,7 +30,6 @@
   .ofh-inset-text-ds--green {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
-  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
@@ -49,7 +47,6 @@
   .ofh-inset-text-ds--red {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
-  
     @include ofh-responsive-margin(4, 'bottom');
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);

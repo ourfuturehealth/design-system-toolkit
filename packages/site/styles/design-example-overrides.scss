@@ -6,14 +6,14 @@
  */
 
 html {
-  background-color: #f0f4f5; // sass-lint:disable-line no-color-hex no-color-literals
+  background-color: $ofh-color-greyscale-7;
 }
 
 /* Component examples need a bit of space around them */
 body {
   padding: 32px;
 
-  @media only screen and (max-width: 641px) {
+  @media only screen and (width <= 641px) {
     padding: 16px;
   }
 }
@@ -27,8 +27,8 @@ body {
   grid that is visible and fills the available space with a background color.
 */
 .ofh-grid-row > .spacing-example div > p {
-  background-color: #005eb8; // sass-lint:disable-line no-color-hex no-color-literals
-  color: #ffffff; // sass-lint:disable-line no-color-hex no-color-literals
+  background-color: $ofh-color-brand-blue-royal-2;
+  color: $ofh-color-greyscale-white;
   padding: 20px;
   text-align: center;
 }
@@ -38,19 +38,19 @@ body {
   Spacing examples for on divs
 */
 .spacing-example div {
-  background: #80afdc; // sass-lint:disable-line no-color-hex no-color-literals
+  background: $ofh-color-brand-blue-royal-5;
 }
 
 .spacing-example div:nth-of-type(odd) {
-  background: #337ec6; // sass-lint:disable-line no-color-hex no-color-literals
+  background: $ofh-color-brand-blue-royal-3;
 }
 
 /*
   Layout examples for on divs
 */
 .app-example-layout-page [class^='ofh-grid-column']>p {
-  background-color: #005eb8; // sass-lint:disable-line no-color-hex no-color-literals
-  color: #ffffff; // sass-lint:disable-line no-color-hex no-color-literals
+  background-color: $ofh-color-brand-blue-royal-2;
+  color: $ofh-color-greyscale-white;
   padding: 20px;
   text-align: center;
 }

@@ -4,6 +4,7 @@
 
 .design-example {
   $root: &;
+
   margin-bottom: ofh-spacing(6);
   position: relative;
   width: 100%;
@@ -14,6 +15,7 @@
 
   &__pop-out {
     @include ofh-font($size: paragraph);
+
     border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;
     display: block;

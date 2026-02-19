@@ -12,10 +12,12 @@
 
 .footer-ds-text {
   color: $ofh-color-greyscale-white;
-  padding-top: ofh-spacing(5);
   float: left;
+  padding-top: ofh-spacing(5);
+
   p {
     @include ofh-font($size: paragraph);
+
     margin: 0;
   }
 }

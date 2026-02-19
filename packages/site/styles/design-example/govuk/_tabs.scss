@@ -1,3 +1,15 @@
+/* ==========================================================================
+   #TABS (NHS/GOVUK ADAPTED)
+   ========================================================================== */
+
+/*
+ * This file contains NHS/GOVUK adapted tab styles.
+ * Linting is disabled because it uses NHS-specific colors.
+ * TODO: Review before merge - check if this component is still needed
+ * or if it can be removed from documentation site entirely.
+ */
+/* stylelint-disable color-no-hex */
+
 .app-tabs {
   list-style-type: none;
   margin: -1px auto;
@@ -15,7 +27,7 @@
       background: inherit;
       border-bottom: 2px solid transparent;
       border-top: 2px solid transparent;
-      color: #005eb8; // sass-lint:disable-line no-color-hex no-color-literals
+      color: #005eb8;
       display: block;
       font-weight: bold;
       margin-top: -1px;
@@ -25,17 +37,17 @@
 
     &--current {
       a {
-        border-bottom-color: #005eb8; // sass-lint:disable-line no-color-hex no-color-literals
-        border-top-color: #005eb8; // sass-lint:disable-line no-color-hex no-color-literals
+        border-bottom-color: #005eb8;
+        border-top-color: #005eb8;
       }
     }
 
     &__heading {
       a {
         background: inherit;
-        border: 1px solid #bfc1c3; // sass-lint:disable-line no-color-hex no-color-literals
+        border: 1px solid #bfc1c3;
         border-top: 0;
-        color: #005ea5; // sass-lint:disable-line no-color-hex no-color-literals
+        color: #005ea5;
         display: none;
         font-weight: bold;
         padding: 15px;
@@ -44,12 +56,12 @@
         z-index: 2;
 
         &:visited {
-          color: #005ea5; // sass-lint:disable-line no-color-hex no-color-literals
+          color: #005ea5;
         }
       }
 
       &--current {
-        background-color: #f0f0f0; // sass-lint:disable-line no-color-hex no-color-literals
+        background-color: #f0f0f0;
       }
     }
 
@@ -60,12 +72,12 @@
   }
 
   &__container {
-    border: 1px solid #bfc1c3; // sass-lint:disable-line no-color-hex no-color-literals
+    border: 1px solid #bfc1c3;
     margin-top: -2px;
     position: relative;
 
     pre {
-      background-color: #f8f8f8; // sass-lint:disable-line no-color-hex no-color-literals
+      background-color: #f8f8f8;
       border: 0;
       font-size: inherit;
       margin: 0;

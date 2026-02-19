@@ -3,7 +3,7 @@ li code,
 p code,
 td code {
   background-color: $ofh-color-greyscale-6;
-  color: #d40202; // sass-lint:disable-line no-color-hex no-color-literals
+  color: $ofh-color-feedback-error-2-main;
   padding: 2px ofh-spacing(2);
   word-break: break-word;
 }
@@ -48,14 +48,14 @@ td code {
 .hljs.css .hljs-selector-class,
 .hljs.css .hljs-selector-tag,
 .hljs.css .hljs-keyword {
-  color: #330072;
+  color: $ofh-color-brand-blue-navy-3-main;
 }
 
 .app-tabs__container pre {
-  -ms-flex-item-align: stretch;
-  -ms-grid-row-align: stretch;
   align-self: stretch;
   background-color: $ofh-color-greyscale-white;
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
   padding: 0;
 }
 

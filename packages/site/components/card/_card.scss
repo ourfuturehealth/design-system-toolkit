@@ -87,11 +87,10 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card-ds--clickable {
-
   &:hover,
   &:active {
-    cursor: pointer;
     color: $ofh-link-hover-color;
+    cursor: pointer;
 
     .ofh-card-ds__heading a,
     .ofh-card-ds__link {
