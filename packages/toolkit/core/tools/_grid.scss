@@ -2,6 +2,7 @@
 // TOOLS / #GRID
 // ==========================================================================
 
+@use 'sass:map';
 
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
@@ -30,8 +31,8 @@ $_ofh-grid-widths: (
 
 
 @function grid-width($key) {
-  @if map-has-key($_ofh-grid-widths, $key) {
-    @return map-get($_ofh-grid-widths, $key);
+  @if map.has-key($_ofh-grid-widths, $key) {
+    @return map.get($_ofh-grid-widths, $key);
   }
 
   @error 'Unknown grid width `#{$key}`';

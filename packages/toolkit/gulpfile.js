@@ -17,13 +17,11 @@ function cleanDist() {
  * CSS tasks
  */
 
-sass.compiler = require('sass');
-
 /* Build the CSS from source */
 function compileCSS() {
   return gulp
     .src(['ofh.scss'])
-    .pipe(sass())
+    .pipe(sass.sync({ api: 'modern-compiler' }))
     .pipe(rename('ofh-design-system-toolkit.css'))
     .pipe(gulp.dest('dist/'))
     .on('error', (err) => {

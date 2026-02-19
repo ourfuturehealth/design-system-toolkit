@@ -6,7 +6,11 @@
 @charset "UTF-8"; // Fixes an issue where Ruby locale is not set properly
                   // See https://github.com/sass-mq/sass-mq/pull/10
 
+@use 'sass:list';
+@use 'sass:map';
 @use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
 
 /// Base font size on the `<body>` element
 /// @type Number (unit)
@@ -93,10 +97,10 @@ $mq-media-type: all !default;
 /// @requires $mq-base-font-size
 /// @returns {Number}
 @function mq-px2em($px, $base-font-size: $mq-base-font-size) { /* stylelint-disable-line scss/at-function-pattern */
-    @if unitless($px) { /* stylelint-disable-next-line at-rule-disallowed-list, string-quotes */
+    @if math.is-unitless($px) { /* stylelint-disable-next-line at-rule-disallowed-list, string-quotes */
         @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels.";
         @return mq-px2em($px * 1px, $base-font-size);
-    } @else if unit($px) == em {
+    } @else if math.unit($px) == em {
         @return $px;
     }
 
@@ -115,8 +119,8 @@ $mq-media-type: all !default;
 ///
 /// @returns {Number} Value in pixels
 @function mq-get-breakpoint-width($name, $breakpoints: $mq-breakpoints) {
-    @if map-has-key($breakpoints, $name) {
-        @return map-get($breakpoints, $name);
+    @if map.has-key($breakpoints, $name) {
+        @return map.get($breakpoints, $name);
     } @else {
         @warn "Breakpoint #{$name} wasn't found in $breakpoints."; /* stylelint-disable-line at-rule-disallowed-list */
     }
@@ -184,7 +188,7 @@ $mq-media-type: all !default;
 
     // From: this breakpoint (inclusive)
     @if $from {
-        @if type-of($from) == number {
+        @if meta.type-of($from) == number {
             $min-width: mq-px2em($from);
         } @else {
             $min-width: mq-px2em(mq-get-breakpoint-width($from, $breakpoints));
@@ -193,7 +197,7 @@ $mq-media-type: all !default;
 
     // Until: that breakpoint (exclusive)
     @if $until {
-        @if type-of($until) == number {
+        @if meta.type-of($until) == number {
             $max-width: mq-px2em($until);
         } @else {
             $max-width: mq-px2em(mq-get-breakpoint-width($until, $breakpoints)) - .01em;
@@ -230,7 +234,7 @@ $mq-media-type: all !default;
         // Remove unnecessary media query prefix 'all and '
         @if $media-type == 'all' and $media-query != '' {
             $media-type: '';
-            $media-query: str-slice(unquote($media-query), 6);
+            $media-query: string.slice(string.unquote($media-query), 6);
         }
 
         @media #{$media-type + $media-query} {
@@ -250,16 +254,16 @@ $mq-media-type: all !default;
     $equal: ();
     $large: ();
 
-    @if length($list) > 1 {
-        $seed: nth($list, ceil(length($list) * .5));
+    @if list.length($list) > 1 {
+        $seed: nth($list, ceil(list.length($list) * .5));
 
         @each $item in $list {
             @if $item == $seed {
-                $equal: append($equal, $item);
+                $equal: list.append($equal, $item);
             } @else if $item < $seed {
-                $less: append($less, $item);
+                $less: list.append($less, $item);
             } @else if $item > $seed {
-                $large: append($large, $item);
+                $large: list.append($large, $item);
             }
         }
 
@@ -276,13 +280,13 @@ $mq-media-type: all !default;
 /// @returns {Map} Map sorted by value
 @function _mq-map-sort-by-value($map) {
     $map-sorted: ();
-    $map-keys: map-keys($map);
-    $map-values: map-values($map);
+    $map-keys: map.keys($map);
+    $map-values: map.values($map);
     $map-values-sorted: _mq-quick-sort($map-values);
 
     // Reorder key/value pairs based on key values
     @each $value in $map-values-sorted {
-        $index: index($map-values, $value);
+        $index: list.index($map-values, $value);
         $key: nth($map-keys, $index);
         $map-sorted: map-merge($map-sorted, ($key: $value));
 
@@ -352,6 +356,6 @@ $mq-media-type: all !default;
     }
 }
 
-@if length($mq-show-breakpoints) > 0 {
+@if list.length($mq-show-breakpoints) > 0 {
     @include mq-show-breakpoints;
 }

@@ -2,6 +2,8 @@
 // SETTINGS / #TOKENS-EXTENSIONS
 // ==========================================================================
 
+@use 'sass:color';
+
 // SCSS-only tokens and functions not present in Figma
 
 // These are preserved for functionality that cannot be represented
@@ -86,11 +88,11 @@ $background-bounce-color: $ofh-color-greyscale-5;
 //   shade($color_ofh-brand-yellow, 50%)  // Darken by mixing with black
 
 @function tint($color, $percentage) {
-  @return mix(white, $color, $percentage);
+  @return color.mix(white, $color, $percentage);
 }
 
 @function shade($color, $percentage) {
-  @return mix(black, $color, $percentage);
+  @return color.mix(black, $color, $percentage);
 }
 
 // Computed shades (used in current components)

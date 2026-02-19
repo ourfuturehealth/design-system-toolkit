@@ -2,6 +2,8 @@
 // TOOLS / #EXPORTS
 // ==========================================================================
 
+@use 'sass:list';
+
 
 // Exports are used to ensure that the modules of CSS we define throughout Frontend
 // are only included in the generated CSS once, no matter how many times they
@@ -22,8 +24,8 @@
 $imported-modules: () !default; // [1] //
 
 @mixin govuk-exports($name, $warn: true) {
-  @if not index($imported-modules, $name) { // [2] //
-    $imported-modules: append($imported-modules, $name) !global; // [3] //
+  @if not list.index($imported-modules, $name) { // [2] //
+    $imported-modules: list.append($imported-modules, $name) !global; // [3] //
     @content; // [4] //
   } /* stylelint-disable-line scss/at-if-closing-brace-newline-after */ /* [5] */
 }
