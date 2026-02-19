@@ -13,7 +13,7 @@
  */
 
 .ofh-summary-list {
-  @include ofh-font($size: 19);
+  @include ofh-font($size: "paragraph");
 
   @include mq($from: tablet) {
     display: table;
@@ -23,7 +23,7 @@
 
   margin: 0; /* [2] */
 
-  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(6, "bottom");
 }
 
 .ofh-summary-list__row {

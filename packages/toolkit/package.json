@@ -32,6 +32,7 @@
     "lint:js": "eslint components/**/*.js *.js --ignore-pattern '*.config.js'",
     "lint:js:fix": "eslint --fix components/**/*.js *.js --ignore-pattern '*.config.js'",
     "lint:css": "stylelint -f verbose '**/*.scss'",
+    "lint:css:fix": "stylelint --fix -f verbose '**/*.scss'",
     "test": "jest"
   },
   "devDependencies": {

@@ -13,7 +13,7 @@
 }
 
 .ofh-back-link__link {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive("paragraph-small");
 
   color: $ofh-link-color;
   display: inline-block;

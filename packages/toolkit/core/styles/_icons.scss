@@ -12,19 +12,19 @@
 // Default icon colours
 
 .ofh-icon__search {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__chevron-left {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__chevron-right {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__close {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__cross {
@@ -36,15 +36,15 @@
 }
 
 .ofh-icon__arrow-right {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__arrow-left {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__chevron-down {
-  fill: $color_ofh-brand-yellow;
+  fill: $ofh-color-brand-yellow-3-main;
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
@@ -52,38 +52,38 @@
   transform: rotate(180deg);
 
   path {
-    fill: $color_ofh-white;
+    fill: $ofh-color-greyscale-white;
   }
 }
 
 .ofh-icon__chevron-up {
-  fill: $color_ofh-brand-yellow;
+  fill: $ofh-color-brand-yellow-3-main;
 
   path {
-    fill: $color_ofh-white;
+    fill: $ofh-color-greyscale-white;
   }
 }
 
 .ofh-icon__emdash {
   path {
-    fill: $color_ofh-grey-3;
+    fill: $ofh-color-greyscale-4;
   }
 }
 
 .ofh-icon__plus {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__minus {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__arrow-right-circle {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 .ofh-icon__new-tab {
-  fill: $color_ofh-black;
+  fill: $ofh-color-greyscale-black;
 }
 
 // Icon size adjustments

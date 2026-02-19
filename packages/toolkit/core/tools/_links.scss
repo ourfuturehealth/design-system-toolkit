@@ -44,10 +44,10 @@
 //
 
 @mixin ofh-link-style-light {
-  color: $color_ofh-white;
+  color: $ofh-color-greyscale-white;
 
   &:visited {
-    color: $color_ofh-white;
+    color: $ofh-color-greyscale-white;
   }
 
   &:hover {
@@ -57,14 +57,14 @@
 
   &:focus,
   &:focus:visited {
-    color: $color_ofh-white;
-    outline: 3px solid $color_ofh-white;
+    color: $ofh-color-greyscale-white;
+    outline: 3px solid $ofh-color-greyscale-white;
     outline-offset: 1px;
     text-decoration: none;
   }
 
   &:focus-visible {
-    outline: 3px solid $color_ofh-white;
+    outline: 3px solid $ofh-color-greyscale-white;
   }
 
   &:active {

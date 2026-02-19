@@ -17,8 +17,8 @@
  */
 
 %ofh-list {
-  @include ofh-typography-responsive(19);
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-typography-responsive("list");
+  @include ofh-responsive-margin(4, "bottom");
 
   list-style-type: none;
   margin-top: 0;
@@ -26,7 +26,7 @@
 }
 
 %ofh-list > li {
-  @include ofh-responsive-margin(2, 'bottom');
+  @include ofh-responsive-margin(2, "bottom");
 
   &:last-child {
     margin-bottom: 0;

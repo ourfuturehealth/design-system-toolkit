@@ -10,8 +10,8 @@
  */
 
 .ofh-pagination {
-  @include ofh-responsive-margin(7, 'top');
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(7, "top");
+  @include ofh-responsive-margin(7, "bottom");
 }
 
 .ofh-pagination__list {
@@ -114,20 +114,20 @@
 }
 
 .ofh-pagination__title {
-  @include ofh-typography-responsive(24);
+  @include ofh-typography-responsive("lead");
 
-  color: $color_ofh-brand-dark-blue;
+  color: $ofh-color-brand-blue-navy-3-main;
   display: block;
 
   @include mq($media-type: print) {
     &::after {
-      content: ' page'; /* [2] */
+      content: " page"; /* [2] */
     }
   }
 }
 
 .ofh-pagination__page {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive("paragraph-small");
 
   display: block;
   text-decoration: underline;

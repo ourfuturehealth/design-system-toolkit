@@ -11,10 +11,17 @@
  */
 
 .ofh-do-dont-list {
-  @include panel-with-label($color_ofh-white, $ofh-text-black-color, $color_ofh-grey-4); /* [1] */
+  @include panel-with-label(
+    $ofh-color-greyscale-white,
+    $ofh-text-black-color,
+    $ofh-color-greyscale-5
+  ); /* [1] */
 }
 
 .ofh-do-dont-list__label {
-  @include heading-label($color_ofh-brand-yellow, $color_ofh-white); /* [2] */
-  @include print-color($color_ofh-brand-dark-blue);
+  @include heading-label(
+    $ofh-color-brand-yellow-3-main,
+    $ofh-color-greyscale-white
+  ); /* [2] */
+  @include print-color($ofh-color-brand-blue-navy-3-main);
 }

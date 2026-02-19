@@ -12,7 +12,7 @@
 .ofh-hero {
   @include print-color($ofh-text-black-color);
 
-  background-color: $color_ofh-brand-yellow;
+  background-color: $ofh-color-brand-yellow-3-main;
   color: $ofh-text-white-color;
   position: relative; /* [1] */
 }
@@ -38,12 +38,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media only screen { /* [4] */
+  @media only screen {
+    /* [4] */
     min-height: 200px;
   }
 
   @include mq($from: tablet) {
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 320px; /* [5] */
 
       .ofh-hero__overlay {
@@ -57,9 +59,10 @@
   }
 
   .ofh-hero__overlay {
-    background-color: $color_transparent_ofh-blue-50; /* [7] */
+    background-color: $color-transparent-ofh-blue-50; /* [7] */
 
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 200px; /* [6] */
     }
 
@@ -84,7 +87,7 @@
 
 .ofh-hero--image-description {
   .ofh-hero-content {
-    background-color: $color_ofh-brand-yellow;
+    background-color: $ofh-color-brand-yellow-3-main;
     color: $ofh-text-white-color;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
@@ -109,8 +112,8 @@
 
       &::before,
       &::after {
-        border: solid 32px $color_ofh-brand-yellow; /* [8] */
-        content: '';
+        border: solid 32px $ofh-color-brand-yellow-3-main; /* [8] */
+        content: "";
         display: block;
         height: 0;
         position: absolute;
@@ -124,7 +127,8 @@
       }
     }
 
-    @include mq(375px) { /* [15] */
+    @include mq(375px) {
+      /* [15] */
       width: 85%;
     }
 
@@ -145,7 +149,8 @@
       padding: 0;
     }
 
-    @media screen and (-ms-high-contrast: active) { /* [14] */
+    @media screen and (-ms-high-contrast: active) {
+      /* [14] */
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;

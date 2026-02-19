@@ -11,7 +11,7 @@ $ofh-checkboxes-size: ofh-spacing(6);
 $ofh-checkboxes-label-padding-left-right: 12px;
 
 .ofh-checkboxes__item {
-  @include ofh-font(19);
+  @include ofh-font("paragraph");
 
   clear: left;
   display: block;
@@ -57,7 +57,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
   background: $ofh-input-element-background-color;
   border: $ofh-border-width-form-element solid $ofh-input-border-color;
   box-sizing: border-box;
-  content: '';
+  content: "";
   height: $ofh-checkboxes-size;
   left: 0;
   position: absolute;
@@ -70,7 +70,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
   border: solid;
   border-top-color: transparent;
   border-width: 0 0 $ofh-border-width $ofh-border-width;
-  content: '';
+  content: "";
   height: 10px;
   left: 10px;
   opacity: 0; /* 2 */
@@ -108,7 +108,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 }
 
 .ofh-checkboxes__input:disabled + .ofh-checkboxes__label {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 /* Divider variant */
@@ -116,7 +116,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 .ofh-checkboxes__divider {
   $ofh-divider-size: $ofh-checkboxes-size !default;
 
-  @include ofh-font(19);
+  @include ofh-font("paragraph");
 
   color: $ofh-text-black-color;
   margin-bottom: ofh-spacing(2);
@@ -134,12 +134,14 @@ $ofh-checkboxes-label-padding-left-right: 12px;
  */
 
 $conditional-border-width: $ofh-border-width-mobile;
-$conditional-border-padding: ($ofh-checkboxes-size * .5) - ($conditional-border-width * .5); /* 1 */
+$conditional-border-padding: ($ofh-checkboxes-size * 0.5) -
+  ($conditional-border-width * 0.5); /* 1 */
 $conditional-margin-left: $conditional-border-padding; /* 2 */
-$conditional-padding-left: $conditional-border-padding + $ofh-checkboxes-label-padding-left-right; /* 3 */
+$conditional-padding-left: $conditional-border-padding +
+  $ofh-checkboxes-label-padding-left-right; /* 3 */
 
 .ofh-checkboxes__conditional {
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(4, "bottom");
 
   border-left: $conditional-border-width solid $ofh-input-border-color;
   margin-left: $conditional-margin-left;

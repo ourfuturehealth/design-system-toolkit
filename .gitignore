@@ -68,3 +68,6 @@ dist/ofh-design-system-toolkit-*.min.js
 
 # VS Code workspace settings
 .vscode/
+
+# Other temporary or generated files
+do-not-track/

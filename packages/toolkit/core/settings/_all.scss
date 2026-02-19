@@ -2,10 +2,25 @@
 // #SETTINGS
 // ==========================================================================
 
-@import 'tokens-colours';
-@import 'breakpoints';
-@import 'colours';
-@import 'globals';
-@import 'spacing';
-@import 'typography';
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Source+Serif+Pro&display=swap');
+//
+// New Figma-aligned token system
+// These files contain design tokens aligned with Figma variables
+//
+
+@import "tokens-core"; // Size scale, colors (greyscale, brand, feedback)
+@import "tokens-breakpoint"; // Responsive tokens (space, typography, icons)
+@import "tokens-static"; // Static tokens (fonts, strokes, radius, semantic colors)
+@import "tokens-semantic"; // Semantic mappings (bridges old variable names to new)
+@import "tokens-extensions"; // Non-Figma tokens (shadows, print, functions)
+
+//
+// Preserved files (contain logic or different concerns)
+//
+
+@import "breakpoints"; // CSS breakpoints (not Figma frame sizes)
+
+//
+// Font loading
+//
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Source+Serif+Pro&display=swap");
