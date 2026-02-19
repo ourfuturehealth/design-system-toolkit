@@ -9,7 +9,7 @@
  */
 
 .ofh-table-container {
-  @include ofh-responsive-margin(7, "bottom");
+  @include ofh-responsive-margin(7, 'bottom');
 
   display: block;
   -webkit-overflow-scrolling: touch;

@@ -76,7 +76,7 @@
 }
 
 .autocomplete__menu--overlay {
-  box-shadow: rgb(0 0 0 / 0.256863) 0 2px 6px;
+  box-shadow: rgb(0 0 0 / .256863) 0 2px 6px;
   left: 0;
   position: absolute;
   top: 100%;
@@ -160,7 +160,7 @@
   padding: 8px 4px;
 }
 
-@media (min-width: 641px) {
+@media (width >= 641px) {
   .autocomplete__hint,
   .autocomplete__input {
     font-size: 1.1875rem;

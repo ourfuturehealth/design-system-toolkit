@@ -19,8 +19,8 @@
  */
 
 .ofh-details {
-  @include ofh-responsive-margin(4, "bottom");
-  @include ofh-typography-responsive("paragraph");
+  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-typography-responsive('paragraph');
 
   display: block;
 }
@@ -38,7 +38,7 @@
 
   &::before {
     bottom: 0;
-    content: "";
+    content: '';
     left: 0;
     margin: auto;
     position: absolute;
@@ -154,7 +154,7 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
     &::before {
       background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__plus' xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' aria-hidden='true'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23005eb8'%3E%3C/circle%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M12 8v8M8 12h8'%3E%3C/path%3E%3C/svg%3E%0A")
         left -2px center no-repeat;
-      content: "";
+      content: '';
       display: inline-block;
       height: 32px;
       left: 0;
@@ -165,10 +165,10 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   }
 
   .ofh-details__text {
-    @include ofh-responsive-padding(4, "bottom");
-    @include ofh-responsive-padding(4, "left");
-    @include ofh-responsive-padding(4, "right");
-    @include ofh-responsive-padding(0, "top");
+    @include ofh-responsive-padding(4, 'bottom');
+    @include ofh-responsive-padding(4, 'left');
+    @include ofh-responsive-padding(4, 'right');
+    @include ofh-responsive-padding(0, 'top');
 
     border-left: 0;
     margin-left: 0;
@@ -204,12 +204,12 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   /* [4] */
 
   > .ofh-details {
-    @include ofh-responsive-margin(2, "bottom");
+    @include ofh-responsive-margin(2, 'bottom');
   }
 
-  @include ofh-responsive-margin(4, "bottom");
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 .ofh-details + %ofh-heading-l {
-  @include ofh-responsive-padding(4, "top");
+  @include ofh-responsive-padding(4, 'top');
 }

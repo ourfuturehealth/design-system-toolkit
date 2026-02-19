@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-select {
-  @include ofh-font("paragraph");
+  @include ofh-font('paragraph');
 
   border: $ofh-border-width-form-element solid $ofh-input-border-color;
   box-sizing: border-box;

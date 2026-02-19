@@ -11,7 +11,7 @@
  * stylelint-disable-line declaration-no-important
  */
 module.exports = {
-  extends: '../../stylelint.config.js',
+  extends: '../../stylelint.config.cjs',
   rules: {
     // Package-specific overrides can be added here if needed
     // See https://stylelint.io/user-guide/rules/list for all available rules

@@ -23,5 +23,6 @@
     $ofh-color-brand-yellow-3-main,
     $ofh-color-greyscale-white
   ); /* [2] */
+
   @include print-color($ofh-color-brand-blue-navy-3-main);
 }

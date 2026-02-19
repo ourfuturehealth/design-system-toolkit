@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-textarea {
-  @include ofh-font("paragraph");
+  @include ofh-font('paragraph');
 
   -webkit-appearance: none;
   border: $ofh-border-width-form-element solid $ofh-input-border-color;

@@ -5,18 +5,18 @@
 /* stylelint-disable color-no-hex */
 
 .ofh-tag {
-  @include ofh-font($size: "paragraph-small", $weight: bold, $line-height: 1);
+  @include ofh-font($size: 'paragraph-small', $weight: bold, $line-height: 1);
 
   background-color: $ofh-color-brand-blue-royal-5;
   color: $ofh-color-greyscale-white;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  padding: ofh-spacing(1) ofh-spacing(2) ofh-spacing(1) ofh-spacing(2); /* top right bottom left */
+  padding: ofh-spacing(1) ofh-spacing(2); /* top right bottom left */
   text-decoration: none;
 }
 
-@media (min-width: 40.0625em) {
+@media (width >= 40.0625em) {
   .ofh-tag {
     font-size: 1rem;
     line-height: 1;

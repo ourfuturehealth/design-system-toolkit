@@ -2,15 +2,15 @@
 // SETTINGS / #BREAKPOINTS
 // ==========================================================================
 
-//
+
 // sass-mq config - https://github.com/sass-mq/sass-mq
-//
+
 // mq() takes up to three optional parameters:
 // $from: inclusive min-width boundary
 // $until: exclusive max-width boundary
 // $and: additional custom directives
 // $media-type: $mq-media-type // defaults to 'all'
-//
+
 // 1. To enable support for browsers that do not support @media queries,
 //    (IE <= 8, Firefox <= 3, Opera <= 9) set $mq-responsive to false
 //    Create a separate stylesheet served exclusively to these browsers,

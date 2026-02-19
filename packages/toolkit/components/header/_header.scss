@@ -98,7 +98,7 @@
     max-width: 60%;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     max-width: 50%;
   }
 }
@@ -118,15 +118,14 @@
     box-shadow: none;
 
     .ofh-logo {
-      box-shadow:
-        0 0 0 $ofh-focus-width $ofh-focus-color,
+      box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color,
         0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
     }
   }
 
   @include mq($media-type: print) {
     &::after {
-      content: ""; /* [8] */
+      content: ''; /* [8] */
     }
   }
 
@@ -186,8 +185,7 @@
   &:focus {
     @include ofh-focused-button();
 
-    box-shadow:
-      0 0 0 2px $ofh-focus-color,
+    box-shadow: 0 0 0 2px $ofh-focus-color,
       0 $ofh-focus-width 0 2px $ofh-focus-text-color;
   }
 
@@ -319,8 +317,7 @@
 
     &:focus {
       background-color: $ofh-focus-color;
-      box-shadow:
-        0 -4px $ofh-focus-color,
+      box-shadow: 0 -4px $ofh-focus-color,
         0 $ofh-focus-width $ofh-focus-text-color;
       outline: $ofh-focus-width solid transparent;
       outline-offset: $ofh-focus-width;
@@ -362,8 +359,7 @@
     &:focus {
       @include ofh-focused-button();
 
-      box-shadow:
-        0 -2px $ofh-focus-color,
+      box-shadow: 0 -2px $ofh-focus-color,
         0 $ofh-focus-width $ofh-focus-text-color;
     }
 
@@ -559,7 +555,7 @@
 }
 
 .ofh-header__navigation-link {
-  @include ofh-font("paragraph-small");
+  @include ofh-font('paragraph-small');
 
   border-bottom: ofh-spacing(1) solid transparent;
   border-top: ofh-spacing(1) solid transparent;
@@ -651,7 +647,7 @@
 
 .ofh-header__transactional-service-name--link {
   @include ofh-link-style-light;
-  @include ofh-font("paragraph");
+  @include ofh-font('paragraph');
 
   text-decoration: none;
 
@@ -700,8 +696,7 @@
 
   &:focus {
     background: $ofh-focus-color;
-    box-shadow:
-      0 0 0 $ofh-focus-width $ofh-focus-color,
+    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color,
       0 $ofh-focus-width 0 $ofh-focus-width $ofh-focus-text-color;
 
     .ofh-header__service-name {
@@ -720,7 +715,7 @@
 }
 
 .ofh-header__service-name {
-  @include ofh-font("paragraph");
+  @include ofh-font('paragraph');
 
   color: $ofh-text-white-color;
   display: block;
@@ -796,12 +791,12 @@
     height: 32px;
     width: 80px;
 
-    @media (max-width: 450px) {
+    @media (width <= 450px) {
       height: 24px;
       width: 60px;
     }
 
-    @media (max-width: 375px) {
+    @media (width <= 375px) {
       height: 20px;
       width: 50px;
     }
@@ -817,7 +812,7 @@
   display: block;
   font-size: 22px;
   font-weight: bold;
-  letter-spacing: 0.2px;
+  letter-spacing: .2px;
   line-height: 23px;
   margin-top: -2px;
 
@@ -825,13 +820,13 @@
     color: $ofh-text-black-color;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     font-size: 17px;
-    letter-spacing: 0.1px;
+    letter-spacing: .1px;
     line-height: 17px;
   }
 
-  @media (max-width: 375px) {
+  @media (width <= 375px) {
     font-size: 13px;
     line-height: 13px;
   }
@@ -852,12 +847,12 @@
     color: $ofh-color-brand-yellow-3-main;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     font-size: 12px;
     line-height: 18px;
   }
 
-  @media (max-width: 375px) {
+  @media (width <= 375px) {
     font-size: 10px;
     line-height: 13px;
   }

@@ -2,28 +2,28 @@
 // SETTINGS / #TOKENS-BREAKPOINT
 // ==========================================================================
 
-//
+
 // Responsive design tokens from Figma
 // Collection: breakpoint (Modes: Mobile, Tablet, Desktop, Large Desktop)
-//
+
 // This file contains tokens that adapt to viewport size:
 // - Space scale (margins, padding, gaps)
 // - Typography sizes (headings, body text)
 // - Iconography sizes
-//
+
 // Values collapse on smaller screens to optimize for mobile devices
-//
+
 
 // Responsive Space Scale
 // ==========================================================================
 
-//
+
 // Space tokens that adapt based on breakpoint
 // These map to the spacing mixins and functions
-//
+
 // NOTE: Values collapse significantly on mobile!
 // Space-64 goes from 64px (desktop) to 16px (mobile)
-//
+
 
 $ofh-space-responsive-scale: (
   0: (
@@ -119,13 +119,13 @@ $ofh-space-responsive-scale: (
 // Responsive Typography Scale
 // ==========================================================================
 
-//
+
 // Typography sizes that adapt based on breakpoint
 // These map to the typography mixins
-//
+
 // NOTE: Tablet headings significantly reduced from old system!
 // H1: Desktop 48px, Tablet 32px (was 64px in old system)
-//
+
 
 $ofh-typography-responsive-scale: (
   h1: (
@@ -303,9 +303,9 @@ $ofh-typography-responsive-scale: (
 // Responsive Iconography Scale
 // ==========================================================================
 
-//
+
 // Icon sizes (consistent across breakpoints in Figma)
-//
+
 
 $ofh-iconography-16: $ofh-size-16;
 $ofh-iconography-24: $ofh-size-24;
@@ -314,9 +314,9 @@ $ofh-iconography-32: $ofh-size-32;
 // Width Tokens
 // ==========================================================================
 
-//
+
 // Content width constraints
-//
+
 
 $ofh-width-page-max: 1100px;
 $ofh-width-content-max: 960px; // Matches old $ofh-page-width

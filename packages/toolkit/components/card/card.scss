@@ -32,7 +32,7 @@ $card-border-color: $ofh-color-greyscale-5;
 $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card {
-  @include ofh-responsive-margin(7, "bottom");
+  @include ofh-responsive-margin(7, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
@@ -166,7 +166,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--feature {
-  @include ofh-responsive-margin(7, "top");
+  @include ofh-responsive-margin(7, 'top');
 }
 
 .ofh-card__heading--feature {
@@ -196,7 +196,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--care {
-  @include ofh-responsive-margin(7, "top");
+  @include ofh-responsive-margin(7, 'top');
   @include care-card(
     $ofh-color-brand-blue-royal-3-main,
     $ofh-color-greyscale-white,
@@ -205,8 +205,8 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care__heading-container {
-  @include ofh-responsive-padding(5, "left");
-  @include ofh-responsive-padding(5, "right");
+  @include ofh-responsive-padding(5, 'left');
+  @include ofh-responsive-padding(5, 'right');
 
   padding-bottom: ofh-spacing(3);
   padding-top: ofh-spacing(3);
@@ -214,7 +214,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care__heading {
-  @include ofh-font("h3", $weight: bold);
+  @include ofh-font('h3', $weight: bold);
   @include print-color($ofh-text-black-color);
 
   margin: 0;
@@ -240,7 +240,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   &::before,
   &::after {
     border: solid 32px $ofh-color-brand-blue-royal-3-main; /* [9] */
-    content: "";
+    content: '';
     display: block;
     height: 0;
     position: absolute;

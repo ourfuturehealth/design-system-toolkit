@@ -2,11 +2,11 @@
 // TOOLS / #LINKS
 // ==========================================================================
 
-//
+
 // Default link styling
-//
+
 // Usage: @include ofh-link-style-default;
-//
+
 
 @mixin ofh-link-style-default {
   color: $ofh-link-color;
@@ -37,11 +37,11 @@
   }
 }
 
-//
+
 // White link styling, used in the footer.
-//
+
 // Usage: @include ofh-link-style-light;
-//
+
 
 @mixin ofh-link-style-light {
   color: $ofh-color-greyscale-white;
@@ -72,11 +72,11 @@
   }
 }
 
-//
+
 // Default link hover only styling
-//
+
 // Usage: @include ofh-link-style-hover;
-//
+
 
 @mixin ofh-link-style-hover {
   &:hover {

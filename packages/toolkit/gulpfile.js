@@ -43,7 +43,7 @@ function minifyCSS() {
     .pipe(
       rename({
         suffix: `-${version}.min`,
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -75,7 +75,7 @@ function webpackJS() {
           filename: 'ofh-design-system-toolkit.js',
         },
         target: 'web',
-      })
+      }),
     )
     .pipe(gulp.dest('./dist'));
 }
@@ -91,7 +91,7 @@ function minifyJS() {
     .pipe(
       rename({
         suffix: '.min',
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -107,7 +107,7 @@ function versionJS() {
     .pipe(
       rename({
         suffix: `-${version}.min`,
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -150,7 +150,7 @@ function createZip() {
         'dist/assets/**',
         '!dist/js/ofh-design-system-toolkit.min.js',
       ],
-      { base: 'dist' }
+      { base: 'dist' },
     )
     .pipe(zip(`ofh-design-system-toolkit-${version}.zip`))
     .pipe(gulp.dest('dist'));
@@ -174,12 +174,12 @@ gulp.task('build', gulp.series([compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
-  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS])
+  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS]),
 );
 
 gulp.task(
   'zip',
-  gulp.series(['bundle', assets, jsFolder, cssFolder, createZip])
+  gulp.series(['bundle', assets, jsFolder, cssFolder, createZip]),
 );
 
 gulp.task('watch', watch);

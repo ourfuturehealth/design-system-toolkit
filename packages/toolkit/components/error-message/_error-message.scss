@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-error-message {
-  @include ofh-font("paragraph", $weight: bold);
+  @include ofh-font('paragraph', $weight: bold);
 
   clear: both;
   color: $ofh-error-color;

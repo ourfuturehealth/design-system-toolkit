@@ -14,11 +14,11 @@
  */
 
 .ofh-action-link {
-  @include ofh-responsive-margin(6, "bottom");
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
 .ofh-action-link__link {
-  @include ofh-font("h4");
+  @include ofh-font('h4');
 
   display: inline-block; /* [1] */
   font-weight: $ofh-font-bold;

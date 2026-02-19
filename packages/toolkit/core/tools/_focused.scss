@@ -2,12 +2,12 @@
 // TOOLS / #FOCUSED
 // ==========================================================================
 
-//
+
 // Focused text
-//
+
 // Provides an outline to clearly indicate when the target element is focused.
 // Used for interactive text-based elements.
-//
+
 
 @mixin ofh-focused-text {
   outline: 3px solid $ofh-focus-color; /* 1 */

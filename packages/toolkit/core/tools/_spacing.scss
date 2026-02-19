@@ -2,18 +2,14 @@
 // TOOLS - #SPACING
 // ==========================================================================
 
-//
 // Updated to use new Figma-aligned token structure
 // References: $ofh-size-* and $ofh-space-responsive-scale from _tokens-*.scss
-//
 
 // Single point spacing
 // ==========================================================================
 
-//
 // Spacing point map - maps old point system to new size tokens
 // This maintains backwards compatibility with existing components
-//
 
 $ofh-spacing-points: (
   0: $ofh-size-0,
@@ -28,34 +24,30 @@ $ofh-spacing-points: (
   9: $ofh-size-64,
 );
 
-//
 // Returns measurement corresponding to the spacing point requested.
-//
+
 // @param {Number} $spacing-point - Point on the spacing scale
-//
+
 // @returns {String} Spacing Measurement eg. 8px
-//
+
 // @example scss
 //  .foo {
 //    padding: ofh-spacing(5);
 //    top: ofh-spacing(2) !important; // if `!important` is required
 //   }
-//
+
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
-//
 
 @function ofh-spacing($spacing-point) {
   $actual-input-type: type-of($spacing-point);
 
-  @if $actual-input-type != "number" {
-    @error 'Expected a number (integer), but got a '
-    + '#{$actual-input-type}.'; /* stylelint-disable-line indentation */
+  @if $actual-input-type != 'number' {
+    @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}.'; /* stylelint-disable-line indentation */
   }
 
   @if not map-has-key($ofh-spacing-points, $spacing-point) {
-    @error 'Unknown spacing variable `#{$spacing-point}`. '
-      + 'Make sure you are using a point from the spacing scale. Valid points: 0-9';
+    @error 'Unknown spacing variable `#{$spacing-point}`. ' + 'Make sure you are using a point from the spacing scale. Valid points: 0-9';
   }
 
   @return map-get($ofh-spacing-points, $spacing-point);
@@ -64,14 +56,13 @@ $ofh-spacing-points: (
 // Responsive spacing
 // ==========================================================================
 
-//
 // Adds responsive spacing (either padding or margin, depending on `$property`)
 // by fetching a 'spacing map' from the responsive spacing scale, which defines
 // different spacing values at different breakpoints.
-//
+
 // To generate responsive spacing, use 'ofh-responsive-margin' or
 // 'ofh-responsive-padding' mixins
-//
+
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 //  scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
@@ -79,48 +70,42 @@ $ofh-spacing-points: (
 //  (`top`, `right`, `bottom`, `left`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing by
-//
+
 // @example scss
 //  .foo {
 //    padding: ofh-spacing(5);
 //    top: ofh-spacing(2) !important; // if `!important` is required
 //   }
-//
+
 // 1. Make sure that the return value from `_settings/spacing.scss` is a map.
 // 2. Loop through each breakpoint in the map
 // 3. The 'null' breakpoint is for mobile.
-//
+
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
-//
 
 @mixin _ofh-responsive-spacing(
   $responsive-spacing-point,
   $property,
-  $direction: "all",
+  $direction: 'all',
   $important: false,
   $adjustment: false
 ) {
   $actual-input-type: type-of($responsive-spacing-point);
 
-  @if $actual-input-type != "number" {
+  @if $actual-input-type != 'number' {
     @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}.';
   }
 
   @if not map-has-key($ofh-space-responsive-scale, $responsive-spacing-point) {
-    @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the '
-    + 'responsive spacing scale in `_tokens-breakpoint.scss`. Valid points: 0-10'; /* stylelint-disable-line indentation */
+    @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the ' + 'responsive spacing scale in `_tokens-breakpoint.scss`. Valid points: 0-10';
   }
 
-  $scale-map: map-get(
-    $ofh-space-responsive-scale,
-    $responsive-spacing-point
-  ); // [1] //
+  $scale-map: map-get($ofh-space-responsive-scale, $responsive-spacing-point); // [1] //
   $actual-map-type: type-of($scale-map);
 
-  @if $actual-map-type != "map" {
-    @error 'Expected a number (integer), but got a #{$actual-map-type}. '
-      + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
+  @if $actual-map-type != 'map' {
+    @error 'Expected a number (integer), but got a #{$actual-map-type}. ' + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
   }
 
   @each $breakpoint, $breakpoint-value in $scale-map {
@@ -134,16 +119,14 @@ $ofh-spacing-points: (
       @if $direction == all {
         #{$property}: $breakpoint-value iff($important, !important);
       } @else {
-        #{$property}-#{$direction}: $breakpoint-value
-          iff($important, !important);
+        #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
       }
     } @else {
       @include govuk-media-query($from: $breakpoint) {
         @if $direction == all {
           #{$property}: $breakpoint-value iff($important, !important);
         } @else {
-          #{$property}-#{$direction}: $breakpoint-value
-            iff($important, !important);
+          #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
         }
       }
     }
@@ -153,38 +136,36 @@ $ofh-spacing-points: (
 // Responsive margin
 // ==========================================================================
 
-//
 // Adds responsive margin by fetching a 'spacing map' from the responsive
 // spacing scale, which defines different spacing values at different
 // breakpoints. Wrapper for the `_ofh-responsive-spacing` mixin.
-//
+
 // @see {mixin} _ofh-responsive-spacing
-//
+
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 // scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
 //   (`top`, `right`, `bottom`, `left`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing by
-//
+
 // @example scss
 //   .foo {
 //      @include ofh-responsive-margin(6, 'left', $adjustment: 1px);
 //   }
-//
+
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
-//
 
 @mixin ofh-responsive-margin(
   $responsive-spacing-point,
-  $direction: "all",
+  $direction: 'all',
   $important: false,
   $adjustment: false
 ) {
   @include _ofh-responsive-spacing(
     $responsive-spacing-point,
-    "margin",
+    'margin',
     $direction,
     $important,
     $adjustment
@@ -194,38 +175,36 @@ $ofh-spacing-points: (
 // Responsive padding
 // ==========================================================================
 
-//
 // Adds responsive padding by fetching a 'spacing map' from the responsive
 // spacing scale, which defines different spacing values at different
 // breakpoints. Wrapper for the `_ofh-responsive-spacing` mixin.
-//
+
 // @see {mixin} _ofh-responsive-spacing
-//
+
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 //   scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
 //   (`top`, `right`, `bottom`, `left`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing
-//
+
 // @example scss
 //   .foo {
 //      @include ofh-responsive-padding(6, 'left', $adjustment: 1px);
 //   }
-//
+
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
-//
 
 @mixin ofh-responsive-padding(
   $responsive-spacing-point,
-  $direction: "all",
+  $direction: 'all',
   $important: false,
   $adjustment: false
 ) {
   @include _ofh-responsive-spacing(
     $responsive-spacing-point,
-    "padding",
+    'padding',
     $direction,
     $important,
     $adjustment

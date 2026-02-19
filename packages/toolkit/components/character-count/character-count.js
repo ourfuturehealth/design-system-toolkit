@@ -86,7 +86,7 @@ class CharacterCount {
     this.$screenReaderCountMessage = $screenReaderCountMessage;
     $textareaDescription.insertAdjacentElement(
       'afterend',
-      $screenReaderCountMessage
+      $screenReaderCountMessage,
     );
 
     // Create our live-updating counter element, copying the classes from the
@@ -224,11 +224,11 @@ class CharacterCount {
     // counter invisible.
     if (this.isOverThreshold()) {
       this.$visibleCountMessage.classList.remove(
-        'ofh-character-count__message--disabled'
+        'ofh-character-count__message--disabled',
       );
     } else {
       this.$visibleCountMessage.classList.add(
-        'ofh-character-count__message--disabled'
+        'ofh-character-count__message--disabled',
       );
     }
 
@@ -345,7 +345,7 @@ export default () => {
   const $modules = document.querySelectorAll('[data-module="ofh-character-count"]');
 
   $modules.forEach((module) => {
-    // eslint-disable-next-line no-new
+     
     new CharacterCount(module);
   });
 };

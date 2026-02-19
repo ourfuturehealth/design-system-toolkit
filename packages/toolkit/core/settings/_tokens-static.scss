@@ -2,29 +2,29 @@
 // SETTINGS / #TOKENS-STATIC
 // ==========================================================================
 
-//
+
 // Static design tokens from Figma
 // Collection: static (Mode: Mode 1)
-//
+
 // This file contains tokens that don't change with viewport size:
 // - Typography (fonts, weights)
 // - Stroke weights (borders)
 // - Border radius
 // - Semantic colors (foreground, background, border with context)
-//
+
 
 // Typography - Fonts & Weights
 // ==========================================================================
 
-//
+
 // Font family
-//
 
-$ofh-typography-font-source-sans-pro: "Source Sans Pro", sans-serif;
 
-//
+$ofh-typography-font-source-sans-pro: 'Source Sans Pro', sans-serif;
+
+
 // Font weights
-//
+
 
 $ofh-typography-weight-regular: 400;
 $ofh-typography-weight-semibold: 600;
@@ -32,9 +32,9 @@ $ofh-typography-weight-semibold: 600;
 // Stroke Weights
 // ==========================================================================
 
-//
+
 // Border/stroke thickness values
-//
+
 
 $ofh-stroke-weight-1: $ofh-size-1; // 1px
 $ofh-stroke-weight-2: $ofh-size-2; // 2px
@@ -44,9 +44,9 @@ $ofh-stroke-weight-8: $ofh-size-8; // 8px
 // Border Radius
 // ==========================================================================
 
-//
+
 // Corner radius values
-//
+
 
 $ofh-radius-4: $ofh-size-4; // 4px
 $ofh-radius-8: $ofh-size-8; // 8px
@@ -57,9 +57,9 @@ $ofh-radius-circular: $ofh-size-10000; // Fully rounded
 // Semantic Colors - Background
 // ==========================================================================
 
-//
+
 // Background colors with semantic meaning
-//
+
 
 // Primary backgrounds
 $ofh-color-background-primary: $ofh-color-greyscale-white; // BREAKING: Was grey, now white
@@ -103,9 +103,9 @@ $ofh-color-background-button-active-inverted: $ofh-color-greyscale-5;
 // Semantic Colors - Foreground
 // ==========================================================================
 
-//
+
 // Text and icon colors with semantic meaning
-//
+
 
 // Primary text colors
 $ofh-color-foreground-primary: $ofh-color-greyscale-1;
@@ -159,9 +159,9 @@ $ofh-color-foreground-breadcrumb-active: $ofh-color-feedback-info-2-main;
 // Semantic Colors - Border
 // ==========================================================================
 
-//
+
 // Border/stroke colors with semantic meaning
-//
+
 
 // Primary border colors
 $ofh-color-border-primary: $ofh-color-greyscale-5;
