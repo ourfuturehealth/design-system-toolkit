@@ -5,6 +5,9 @@
  * code to look as close to the unmodified ofh-design-system-toolkit library as possible.
  */
 
+// Import toolkit to access design system variables
+@import 'ofh';
+
 html {
   background-color: $ofh-color-greyscale-7;
 }
@@ -33,7 +36,6 @@ body {
   text-align: center;
 }
 
-
 /*
   Spacing examples for on divs
 */
@@ -48,7 +50,7 @@ body {
 /*
   Layout examples for on divs
 */
-.app-example-layout-page [class^='ofh-grid-column']>p {
+.app-example-layout-page [class^='ofh-grid-column'] > p {
   background-color: $ofh-color-brand-blue-royal-2;
   color: $ofh-color-greyscale-white;
   padding: 20px;

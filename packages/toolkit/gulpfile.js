@@ -174,7 +174,7 @@ gulp.task('build', gulp.series([compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
-  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS]),
+  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS, assets]),
 );
 
 gulp.task(
