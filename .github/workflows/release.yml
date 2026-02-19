@@ -5,7 +5,7 @@ on:
     tags:
       - "v*" # Toolkit releases (backward compatible)
       - "toolkit-v*" # Toolkit releases (new pattern)
-      - "react-components-v*" # React components releases
+      - "react-v*" # React components releases
 
 jobs:
   build:
@@ -37,9 +37,9 @@ jobs:
         id: package_info
         run: |
           TAG=${GITHUB_REF#refs/tags/}
-          if [[ $TAG == react-components-v* ]]; then
+          if [[ $TAG == react-v* ]]; then
             echo "PACKAGE=react-components" >> $GITHUB_OUTPUT
-            echo "VERSION=${TAG#react-components-v}" >> $GITHUB_OUTPUT
+            echo "VERSION=${TAG#react-v}" >> $GITHUB_OUTPUT
             echo "BUILD_CMD=build" >> $GITHUB_OUTPUT
           elif [[ $TAG == toolkit-v* ]]; then
             echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
