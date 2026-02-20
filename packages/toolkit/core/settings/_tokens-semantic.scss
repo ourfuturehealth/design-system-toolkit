@@ -2,7 +2,6 @@
 // SETTINGS / #TOKENS-SEMANTIC
 // ==========================================================================
 
-
 // Semantic token mappings - bridges old variable names to new token system
 
 // This file maps familiar semantic variables (like $ofh-text-black-color)
@@ -11,14 +10,11 @@
 
 // BREAKING CHANGES are marked with comments.
 
-
 // Text Colors
 // ==========================================================================
 
-
 // Primary text colors
 // @deprecated Use $ofh-color-foreground-* tokens directly
-
 
 $ofh-text-black-color: $ofh-color-foreground-primary;
 $ofh-text-grey-color: $ofh-color-foreground-secondary;
@@ -28,10 +24,8 @@ $ofh-text-blue-color: $ofh-color-foreground-brand-blue-navy;
 // Link Colors
 // ==========================================================================
 
-
 // Link state colors
 // @deprecated Use $ofh-color-foreground-link-* tokens directly
-
 
 $ofh-link-color: $ofh-color-foreground-link-default;
 $ofh-link-hover-color: $ofh-color-foreground-link-hover;
@@ -52,10 +46,8 @@ $ofh-breadcrumb-link-active-color: $ofh-color-foreground-breadcrumb-active;
 // Background Colors
 // ==========================================================================
 
-
 // Page and element backgrounds
 // @deprecated Use $ofh-color-background-* tokens directly
-
 
 // BREAKING: Page background changed from grey (#F4F4F4) to white (#FFFFFF)
 $background-color: $ofh-color-background-primary;
@@ -63,10 +55,8 @@ $background-color: $ofh-color-background-primary;
 // Button Colors
 // ==========================================================================
 
-
 // Primary button colors
 // @deprecated Use $ofh-color-background-button-* tokens directly
-
 
 // BREAKING: Primary button changed from yellow (#FFC62C) to blue (#0053B3)
 $ofh-button-color: $ofh-color-background-button-default;
@@ -89,10 +79,8 @@ $ofh-reverse-button-text-color: $ofh-color-greyscale-1;
 // Border Colors
 // ==========================================================================
 
-
 // Border and stroke colors
 // @deprecated Use $ofh-color-border-* tokens directly
-
 
 $ofh-border-color: $ofh-color-border-primary;
 
@@ -103,10 +91,8 @@ $ofh-input-border-active-color: $ofh-color-border-input-active;
 // Feedback/Status Colors
 // ==========================================================================
 
-
 // Error, success, warning, info colors
 // @deprecated Use $ofh-color-feedback-* tokens directly
-
 
 $ofh-error-color: $ofh-color-feedback-error-2-main;
 $ofh-success-color: $ofh-color-feedback-success-2-main;
@@ -114,10 +100,8 @@ $ofh-success-color: $ofh-color-feedback-success-2-main;
 // Focus Colors
 // ==========================================================================
 
-
 // Focus ring and states
 // @deprecated Use $ofh-color-border-feedback-focus token directly
-
 
 $ofh-focus-color: $ofh-color-border-feedback-focus;
 $ofh-focus-white-color: $ofh-color-border-feedback-focus-inverted;
@@ -125,10 +109,8 @@ $ofh-focus-white-color: $ofh-color-border-feedback-focus-inverted;
 // Typography Settings
 // ==========================================================================
 
-
 // Font family and weights
 // @deprecated Use $ofh-typography-* tokens directly
-
 
 $ofh-font: $ofh-typography-font-source-sans-pro;
 $ofh-font-fallback: Arial, sans-serif;
@@ -147,10 +129,8 @@ $ofh-typography-scale: $ofh-typography-responsive-scale;
 // Border/Stroke Widths
 // ==========================================================================
 
-
 // Form element border widths
 // @deprecated Use $ofh-stroke-weight-* tokens directly
-
 
 $ofh-border-width-form-element: $ofh-stroke-weight-2; // 2px
 $ofh-border-width-form-element-error: $ofh-stroke-weight-4; // 4px
@@ -170,20 +150,16 @@ $ofh-border-width-inset-text: $ofh-stroke-weight-8; // 8px
 // Border Radius
 // ==========================================================================
 
-
 // Corner radius values
 // @deprecated Use $ofh-radius-* tokens directly
-
 
 $ofh-border-radius: $ofh-radius-4; // 4px
 
 // Spacing/Layout
 // ==========================================================================
 
-
 // Grid and layout spacing
 // @deprecated Use responsive spacing tokens directly
-
 
 $ofh-page-width: $ofh-width-content-max; // 960px
 $ofh-gutter: $ofh-size-32; // 32px
@@ -196,20 +172,16 @@ $ofh-spacing-responsive-scale: $ofh-space-responsive-scale;
 // Icon Sizing
 // ==========================================================================
 
-
 // Icon dimensions
 // @deprecated Use $ofh-iconography-* tokens directly
-
 
 $ofh-icon-size: 34px; // Note: Figma uses 16/24/32, this is custom
 
 // Neutral Background Colors
 // ==========================================================================
 
-
 // Subtle background tints
 // @deprecated Use $ofh-color-background-neutral-* tokens directly
-
 
 $ofh-neutral-blue: $ofh-color-background-neutral-blue;
 $ofh-neutral-yellow: $ofh-color-background-neutral-yellow;
