@@ -12,7 +12,7 @@
   }
 
   &:focus {
-    border: $ofh-focus-width solid $ofh-focus-text-color;
+    border: $ofh-focus-width solid $ofh-focus-color;
     box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
     outline: $ofh-focus-width solid transparent;
   }

@@ -56,7 +56,7 @@ $button-shadow-size: 4px;
         @include ofh-focused-text;
 
         &:hover {
-          color: $ofh-focus-text-color;
+          color: $ofh-color-foreground-brand-blue-navy;
         }
       }
 
@@ -141,7 +141,7 @@ $button-shadow-size: 4px;
 
         &:focus {
           &:hover {
-            color: $ofh-focus-text-color;
+            color: $ofh-color-foreground-brand-blue-navy;
           }
         }
       }

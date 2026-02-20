@@ -58,7 +58,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 }
 
 .ofh-radios__input + .ofh-radios__label::before {
-  background: $ofh-input-element-background-color;
+  background: $ofh-color-background-primary;
   border: $ofh-border-width-form-element solid $ofh-input-border-color;
   border-radius: 50%;
   box-sizing: border-box;

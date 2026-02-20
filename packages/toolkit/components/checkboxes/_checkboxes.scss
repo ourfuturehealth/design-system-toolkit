@@ -54,7 +54,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 }
 
 .ofh-checkboxes__input + .ofh-checkboxes__label::before {
-  background: $ofh-input-element-background-color;
+  background: $ofh-color-background-primary;
   border: $ofh-border-width-form-element solid $ofh-input-border-color;
   box-sizing: border-box;
   content: '';

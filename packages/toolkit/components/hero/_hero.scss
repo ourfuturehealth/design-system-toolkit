@@ -59,7 +59,7 @@
   }
 
   .ofh-hero__overlay {
-    background-color: $color-transparent-ofh-blue-50; /* [7] */
+    background-color: rgba($ofh-color-brand-blue-navy-3-main, 0.5); /* [7] */
 
     @media only screen {
       /* [4] */

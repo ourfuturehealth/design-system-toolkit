@@ -89,7 +89,7 @@
     &:hover,
     &:active {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -107,7 +107,7 @@
 
     &:focus {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
