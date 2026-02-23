@@ -9,6 +9,7 @@ Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://
 ### Removed
 
 - Ran `npm audit fix` which fixed vulnerability in minimatch subdependencies
+- Needed an override a subdependency editorconfig@1.0.4 which still required a vulnerable version
 
 
 ## [v3.4.2] - 2025-11-28
