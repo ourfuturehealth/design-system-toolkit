@@ -56,7 +56,32 @@ You will need to import a couple of things into your project before you can star
 
 To build the stylesheet you will need a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS. We recommend using the [sass](https://www.npmjs.com/package/sass) package.
 
-Import the Our Future Health design system toolkit styles into the main Sass file in your project. Place this before your own Sass rules:
+Import the Our Future Health design system toolkit styles into the main Sass file in your project. Place this before your own Sass rules.
+
+### Choose a theme (recommended)
+
+Each application should pick one theme:
+
+- `participant`
+- `research`
+
+Use the matching theme entrypoint:
+
+```scss
+// Participant theme
+@import 'node_modules/@ourfuturehealth/toolkit/ofh-participant';
+```
+
+```scss
+// Research theme
+@import 'node_modules/@ourfuturehealth/toolkit/ofh-research';
+```
+
+To add a new custom theme, follow `docs/theming/adding-a-new-theme.md`.
+
+### Default entrypoint (legacy-compatible)
+
+If you import `ofh`, it currently resolves to the participant theme by default:
 
 ```scss
 @import 'node_modules/@ourfuturehealth/toolkit/ofh';

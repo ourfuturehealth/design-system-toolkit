@@ -16,6 +16,8 @@
     "assets",
     "ofh.js",
     "ofh.scss",
+    "ofh-participant.scss",
+    "ofh-research.scss",
     "polyfills.js"
   ],
   "main": "dist/ofh-design-system-toolkit.js",

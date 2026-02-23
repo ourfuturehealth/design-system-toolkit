@@ -8,6 +8,7 @@
 @import 'tokens-core'; // Size scale, colors (greyscale, brand, feedback)
 @import 'tokens-breakpoint'; // Responsive tokens (space, typography, icons)
 @import 'tokens-static'; // Static tokens (fonts, strokes, radius, semantic colors)
+@import 'tokens-theme'; // Theme accent tokens (participant/research)
 @import 'tokens-semantic'; // Semantic mappings (bridges old variable names to new)
 
 // Preserved files (contain logic or different concerns)

@@ -205,3 +205,38 @@ Status labels:
     - `packages/toolkit/components/header/_header.scss`
   - Removed `@mixin toggle-button()` from:
     - `packages/toolkit/core/tools/_mixins.scss`
+
+## 12. Deferred: review and potential removal of `tokens-semantic`
+
+- Status: `candidate`
+- First noted: 2026-02-20
+- Related files:
+  - `packages/toolkit/core/settings/_tokens-semantic.scss`
+  - `packages/toolkit/core/settings/_tokens-core.scss`
+  - `packages/toolkit/core/settings/_tokens-static.scss`
+  - `packages/toolkit/core/settings/_tokens-breakpoint.scss`
+- Context:
+  - Team wants to align with Figma 1:1 as closely as possible.
+  - `tokens-semantic` currently acts as a compatibility bridge for legacy variable names.
+  - This review should happen only after theme token support is introduced.
+- Follow-up order:
+  1. Implement theme token support (Participant/Research) and document process for adding new themes.
+  2. Audit semantic alias usage across toolkit/site.
+  3. Decide whether to retain, shrink, or remove `tokens-semantic`.
+
+## 13. Future improvement: update GitHub PR template
+
+- Status: `candidate`
+- First noted: 2026-02-23
+- Related files:
+  - `.github/pull_request_template.md` (or equivalent PR template path)
+  - `docs/theming/adding-a-new-theme.md`
+- Context:
+  - We now have a documented process for adding new themes and theme-specific tokens.
+  - Contributor guidance should include a PR checklist to ensure theme changes are implemented and verified consistently.
+- Follow-up to decide:
+  - Add a dedicated "Theming changes" checklist section in the PR template.
+  - Include checks for:
+    - token mapping updates
+    - toolkit/react build outputs
+    - docs/consumer import updates where applicable

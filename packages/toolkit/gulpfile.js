@@ -19,10 +19,20 @@ function cleanDist() {
 
 /* Build the CSS from source */
 function compileCSS() {
+  const outputNames = {
+    ofh: 'ofh-design-system-toolkit',
+    'ofh-participant': 'ofh-design-system-toolkit-participant',
+    'ofh-research': 'ofh-design-system-toolkit-research',
+  };
+
   return gulp
-    .src(['ofh.scss'])
+    .src(['ofh.scss', 'ofh-participant.scss', 'ofh-research.scss'])
     .pipe(sass.sync({ api: 'modern-compiler' }))
-    .pipe(rename('ofh-design-system-toolkit.css'))
+    .pipe(
+      rename((path) => {
+        path.basename = outputNames[path.basename] || path.basename;
+      }),
+    )
     .pipe(gulp.dest('dist/'))
     .on('error', (err) => {
       console.log(err);

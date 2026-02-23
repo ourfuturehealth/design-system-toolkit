@@ -1,0 +1,49 @@
+// ==========================================================================
+// SETTINGS / #TOKENS-THEME
+// ==========================================================================
+
+// Theme mode selector
+// Each consuming app should use a single theme.
+// Valid values: participant | research
+$ofh-theme-mode: participant !default;
+$ofh-color-foreground-accent-1: null !default;
+$ofh-color-foreground-accent-2: null !default;
+$ofh-color-foreground-accent-3: null !default;
+$ofh-color-background-accent-1: null !default;
+$ofh-color-background-accent-2: null !default;
+$ofh-color-background-accent-3: null !default;
+$ofh-color-border-accent-1: null !default;
+$ofh-color-border-accent-2: null !default;
+$ofh-color-border-accent-3: null !default;
+
+@if $ofh-theme-mode == participant {
+  // Participant theme accent tokens
+  // Mapped from Figma theme mode: Participant
+  $ofh-color-foreground-accent-1: $ofh-color-brand-yellow-5;
+  $ofh-color-foreground-accent-2: $ofh-color-brand-yellow-3-main;
+  $ofh-color-foreground-accent-3: $ofh-color-feedback-warning-2-main;
+
+  $ofh-color-background-accent-1: $ofh-color-brand-yellow-5;
+  $ofh-color-background-accent-2: $ofh-color-brand-yellow-3-main;
+  $ofh-color-background-accent-3: $ofh-color-brand-yellow-2;
+
+  $ofh-color-border-accent-1: $ofh-color-brand-yellow-5;
+  $ofh-color-border-accent-2: $ofh-color-brand-yellow-3-main;
+  $ofh-color-border-accent-3: $ofh-color-feedback-warning-2-main;
+} @else if $ofh-theme-mode == research {
+  // Research theme accent tokens
+  // Mapped from Figma theme mode: Research
+  $ofh-color-foreground-accent-1: $ofh-color-brand-green-teal-5;
+  $ofh-color-foreground-accent-2: $ofh-color-brand-green-teal-3-main;
+  $ofh-color-foreground-accent-3: $ofh-color-brand-green-teal-2;
+
+  $ofh-color-background-accent-1: $ofh-color-brand-green-teal-5;
+  $ofh-color-background-accent-2: $ofh-color-brand-green-teal-3-main;
+  $ofh-color-background-accent-3: $ofh-color-brand-green-teal-2;
+
+  $ofh-color-border-accent-1: $ofh-color-brand-green-teal-5;
+  $ofh-color-border-accent-2: $ofh-color-brand-green-teal-3-main;
+  $ofh-color-border-accent-3: $ofh-color-brand-green-teal-2;
+} @else {
+  @error 'Unknown $ofh-theme-mode `#{$ofh-theme-mode}`. Valid values: participant, research.';
+}

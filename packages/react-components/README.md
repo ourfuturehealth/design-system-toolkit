@@ -12,6 +12,7 @@ npm install @ourfuturehealth/react-components
 
 ```tsx
 import { Button, TextInput } from '@ourfuturehealth/react-components';
+import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
@@ -22,6 +23,15 @@ function App() {
   );
 }
 ```
+
+### Theme styles
+
+Choose one theme stylesheet import per application:
+
+- `@ourfuturehealth/react-components/styles/participant`
+- `@ourfuturehealth/react-components/styles/research`
+
+`@ourfuturehealth/react-components/styles` is kept as a backward-compatible alias for `participant`.
 
 ## Components
 

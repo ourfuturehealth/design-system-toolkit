@@ -52,7 +52,7 @@ Import components and styles in your React application:
 ```tsx
 import React from "react";
 import { Button, TextInput } from "@ourfuturehealth/react-components";
-import "@ourfuturehealth/react-components/styles";
+import "@ourfuturehealth/react-components/styles/participant";
 
 function App() {
   return (
@@ -76,10 +76,37 @@ Import the stylesheet once in your app's entry point:
 
 ```tsx
 // main.tsx or App.tsx
-import "@ourfuturehealth/react-components/styles";
+import "@ourfuturehealth/react-components/styles/participant";
 ```
 
 The styles are based on the Our Future Health design system toolkit and include all component styles.
+
+## Theme Selection
+
+Each application should use one theme. Current theme bundles are:
+
+- `participant`
+- `research`
+
+### Squad C (React) using participant
+
+Use the participant styles export:
+
+```tsx
+import "@ourfuturehealth/react-components/styles/participant";
+```
+
+### Squad C (React) using research
+
+Use the matching themed styles export:
+
+```tsx
+import "@ourfuturehealth/react-components/styles/research";
+```
+
+For backward compatibility, `@ourfuturehealth/react-components/styles` remains available and maps to participant.
+
+To add a new custom React theme stylesheet export, follow `docs/theming/adding-a-new-theme.md`.
 
 ## Available Components
 
@@ -169,7 +196,7 @@ module.exports = {
 **Solution**: Ensure you import the styles:
 
 ```tsx
-import "@ourfuturehealth/react-components/styles";
+import "@ourfuturehealth/react-components/styles/participant";
 ```
 
 Import this in your app's entry point (e.g., `main.tsx` or `App.tsx`).
