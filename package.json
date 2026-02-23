@@ -82,5 +82,8 @@
   "dependencies": {
     "accessible-autocomplete": "^3.0.1",
     "i18n-js": "^4.5.1"
+  },
+  "overrides": {
+    "minimatch": "5.1.7"
   }
 }
