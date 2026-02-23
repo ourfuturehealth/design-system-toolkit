@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
+## [v3.4.3] - 2026-02-23
+
+### Removed
+
+- Ran `npm audit fix` which fixed vulnerability in minimatch subdependencies
+
+
 ## [v3.4.2] - 2025-11-28
 
 ### Removed
