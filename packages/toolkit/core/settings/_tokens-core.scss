@@ -12,6 +12,10 @@
 // - Feedback colors (error, success, warning, info, interactive)
 // - Background neutrals
 
+// Note: These tokens are not intended to be used directly in components.
+// Instead, they should be referenced by more specific tokens (e.g., spacing, typography, color) that are designed for use in components.
+// This allows for greater flexibility and maintainability in the design system.
+// Also this is the only file that should contain hex color values, as all other color tokens should reference these core color tokens to ensure consistency across the system.
 /* stylelint-disable color-no-hex */
 
 // Size Scale
