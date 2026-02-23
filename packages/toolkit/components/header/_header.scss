@@ -173,7 +173,6 @@
   border-radius: $ofh-border-radius;
   color: $ofh-text-white-color;
   cursor: pointer;
-
   min-height: ofh-spacing(6); /* [2] */
   padding: ofh-spacing(1) ofh-spacing(2) 0;
   position: absolute;
@@ -205,10 +204,10 @@
 
   &:focus {
     border: 1px solid $ofh-focus-color !important; /* stylelint-disable-line declaration-no-important */
-    @include ofh-focused-button();
-
     box-shadow: 0 0 0 2px $ofh-focus-color,
       0 $ofh-focus-width 0 2px $ofh-color-foreground-brand-blue-navy;
+
+    @include ofh-focused-button();
   }
 
   @include mq($from: tablet) {
@@ -402,6 +401,9 @@
     border: 0;
     cursor: pointer;
     height: 40px;
+    margin-left: ofh-spacing(2);
+    margin-right: - ofh-spacing(2); /* [11] */
+    margin-top: ofh-spacing(2);
     padding: 0;
     width: 40px;
 
@@ -423,13 +425,7 @@
 
     &:focus {
       @include ofh-focused-text;
-    }
 
-    margin-left: ofh-spacing(2);
-    margin-right: - ofh-spacing(2); /* [11] */
-    margin-top: ofh-spacing(2);
-
-    &:focus {
       .ofh-icon__close {
         fill: $ofh-color-foreground-brand-blue-navy;
       }
@@ -465,12 +461,11 @@
 .ofh-header__menu-toggle {
   background-color: transparent;
   border: 1px solid $ofh-color-greyscale-white;
+  border-color: $ofh-color-brand-blue-navy-3-main;
   border-radius: $ofh-border-radius;
   color: $ofh-text-white-color;
-  cursor: pointer;
-
-  border-color: $ofh-color-brand-blue-navy-3-main;
   color: $ofh-color-brand-blue-navy-3-main;
+  cursor: pointer;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -512,6 +507,7 @@
 
   &:focus {
     border: 1px solid $ofh-focus-color !important; /* stylelint-disable-line declaration-no-important */
+
     @include ofh-focused-button;
   }
 }
@@ -583,7 +579,12 @@
   border: 0;
   cursor: pointer;
   height: 40px;
+  overflow: hidden;
   padding: 0;
+  position: absolute;
+  right: ofh-spacing(2);
+  top: ofh-spacing(2);
+  white-space: nowrap;
   width: 40px;
 
   .ofh-icon__close {
@@ -604,15 +605,7 @@
 
   &:focus {
     @include ofh-focused-text;
-  }
 
-  overflow: hidden;
-  position: absolute;
-  right: ofh-spacing(2);
-  top: ofh-spacing(2);
-  white-space: nowrap;
-
-  &:focus {
     .ofh-icon__close {
       fill: $ofh-color-foreground-brand-blue-navy;
     }

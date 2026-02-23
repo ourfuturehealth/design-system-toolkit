@@ -9,22 +9,22 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "prepare": "turbo run bundle",
+    "prepare": "pnpm --filter=@ourfuturehealth/toolkit run bundle",
     "dev": "concurrently \"pnpm:dev:*\" \"pnpm storybook\"",
     "dev:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run watch",
     "dev:site": "pnpm --filter=site run watch",
     "dev:react-components": "pnpm --filter=@ourfuturehealth/react-components run watch",
     "dev:react-consumer": "concurrently -n lib,app -c cyan,green \"pnpm --filter=@ourfuturehealth/react-components watch:lib\" \"pnpm --filter=@ourfuturehealth/example-react-consumer-app watch\"",
     "storybook": "pnpm --filter=@ourfuturehealth/react-components run storybook",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "lint:toolkit": "turbo run lint --filter=@ourfuturehealth/toolkit",
-    "lint:site": "turbo run lint --filter=site",
-    "lint:react-components": "turbo run lint --filter=@ourfuturehealth/react-components",
-    "lint:react-consumer": "turbo run lint --filter=@ourfuturehealth/example-react-consumer-app",
-    "test": "turbo run test",
-    "test:toolkit": "turbo run test --filter=@ourfuturehealth/toolkit",
-    "test:react-components": "turbo run test --filter=@ourfuturehealth/react-components"
+    "build": "pnpm -r --filter='./packages/*' --if-present run build",
+    "lint": "pnpm -r --filter='./packages/*' --if-present run lint",
+    "lint:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run lint",
+    "lint:site": "pnpm --filter=site run lint",
+    "lint:react-components": "pnpm --filter=@ourfuturehealth/react-components run lint",
+    "lint:react-consumer": "pnpm --filter=@ourfuturehealth/example-react-consumer-app run lint",
+    "test": "pnpm -r --filter='./packages/*' --if-present run test",
+    "test:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run test",
+    "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

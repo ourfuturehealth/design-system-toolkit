@@ -60,7 +60,7 @@
   }
 
   .ofh-hero-ds__overlay {
-    background-color: $color_transparent_ofh-blue-50; /* [7] */
+    background-color: rgb(1 29 75 / 50%); /* [7] */
 
     @media only screen { /* [4] */
       min-height: 200px; /* [6] */

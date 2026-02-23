@@ -111,7 +111,7 @@
 
   &:hover {
     .ofh-logo {
-      box-shadow: 0 0 0 $ofh-focus-width $color_shade_ofh-blue-35;
+      box-shadow: 0 0 0 $ofh-focus-width $ofh-color-brand-blue-navy-4;
     }
   }
 
@@ -177,13 +177,20 @@
 }
 
 .ofh-header-ds__search-toggle {
-  @include toggle-button();
-
+  background-color: transparent;
+  border: 1px solid $ofh-color-greyscale-white;
+  border-radius: $ofh-border-radius;
+  color: $ofh-text-white-color;
+  cursor: pointer;
   min-height: ofh-spacing(6); /* [2] */
   padding: ofh-spacing(1) ofh-spacing(2) 0;
   position: absolute;
   right: 0;
   top: 0;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
 
   .ofh-icon__search {
     fill: $ofh-color-greyscale-white;
@@ -330,12 +337,12 @@
         background-color: $ofh-focus-color;
 
         .ofh-icon {
-          fill: $ofh-focus-text-color;
+          fill: $ofh-color-foreground-brand-blue-navy;
         }
       }
 
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -352,7 +359,7 @@
     }
 
     &:hover {
-      background-color: $color_shade_ofh-blue-35;
+      background-color: $ofh-color-brand-blue-navy-4;
       border: 1px solid $ofh-color-greyscale-white;
 
       .ofh-icon__search {
@@ -368,7 +375,7 @@
     }
 
     &:active {
-      background-color: $color_shade_ofh-blue-50;
+      background-color: $ofh-color-brand-blue-navy-3-main;
       border: 0;
 
       .ofh-icon__search {
@@ -380,15 +387,36 @@
 
 .ofh-search__close {
   @include mq($until: tablet) {
-    @include close-button();
-
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    height: 40px;
     margin-left: ofh-spacing(2);
     margin-right: - ofh-spacing(2); /* [11] */
     margin-top: ofh-spacing(2);
+    overflow: hidden;
+    padding: 0;
+    width: 40px;
+
+    .ofh-icon__close {
+      fill: $ofh-color-brand-blue-navy-3-main;
+      height: 40px;
+      width: 40px;
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
+
+    &:hover {
+      .ofh-icon__close {
+        fill: $ofh-color-foreground-secondary;
+      }
+    }
 
     &:focus {
       .ofh-icon__close {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -420,10 +448,13 @@
 }
 
 .ofh-header-ds__menu-toggle {
-  @include toggle-button();
-
+  background-color: transparent;
+  border: 1px solid $ofh-color-greyscale-white;
   border-color: $ofh-text-black-color;
+  border-radius: $ofh-border-radius;
+  color: $ofh-text-white-color;
   color: $ofh-text-black-color;
+  cursor: pointer;
   display: block;
   font-size: 16px;
   font-weight: 400;
@@ -451,6 +482,10 @@
 
     outline: $ofh-focus-width solid $ofh-focus-color;
     outline-offset: $ofh-focus-width;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 
 }
@@ -518,17 +553,37 @@
 }
 
 .ofh-header-ds__navigation-close {
-  @include close-button();
-
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 40px;
   overflow: hidden;
+  padding: 0;
   position: absolute;
   right: ofh-spacing(2);
   top: ofh-spacing(2);
   white-space: nowrap;
+  width: 40px;
+
+  .ofh-icon__close {
+    fill: $ofh-color-brand-blue-navy-3-main;
+    height: 40px;
+    width: 40px;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover {
+    .ofh-icon__close {
+      fill: $ofh-color-foreground-secondary;
+    }
+  }
 
   &:focus {
     .ofh-icon__close {
-      fill: $ofh-focus-text-color;
+      fill: $ofh-color-foreground-brand-blue-navy;
     }
   }
 }
@@ -613,12 +668,12 @@
     outline-offset: -$ofh-focus-width;
 
     &:hover {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
 
     }
 
     &:visited {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
     }
   }
 }
@@ -708,7 +763,7 @@
     outline-offset: $ofh-focus-width;
 
     .ofh-header__service-name {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
       text-decoration: none;
     }
 
@@ -785,7 +840,7 @@
 
       .ofh-organisation-name,
       .ofh-organisation-descriptor {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
       }
 
       .ofh-logo {
@@ -910,8 +965,8 @@
     }
 
     &:hover {
-      background-color: $color_shade_ofh-blue-20;
-      border-color: $color_shade_ofh-blue-20;
+      background-color: $ofh-color-brand-blue-navy-5;
+      border-color: $ofh-color-brand-blue-navy-5;
     }
 
     &:focus {
@@ -919,7 +974,7 @@
       outline-offset: $ofh-focus-width;
 
       .ofh-icon__search {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -928,10 +983,10 @@
     border: 1px solid $ofh-color-greyscale-4;
 
     &:focus {
-      border: 2px solid $ofh-focus-text-color;
+      border: 2px solid $ofh-color-foreground-brand-blue-navy;
 
       @include mq($until: tablet) {
-        border: $ofh-focus-width solid $ofh-focus-text-color;
+        border: $ofh-focus-width solid $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -958,10 +1013,10 @@
     }
 
     &:focus {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
 
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -1012,7 +1067,7 @@
       }
 
       &:focus {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
 
         &:hover {
           background: $ofh-focus-color;
