@@ -65,6 +65,15 @@ jobs:
             pnpm --filter=@ourfuturehealth/react-components run build
           fi
 
+      - name: Resolve toolkit asset details
+        if: steps.package_info.outputs.PACKAGE == 'toolkit'
+        id: toolkit_asset
+        run: |
+          ASSET_PATH=$(ls -1 ./packages/toolkit/dist/ofh-design-system-toolkit-*.zip | head -n 1)
+          ASSET_NAME=$(basename "$ASSET_PATH")
+          echo "ASSET_PATH=$ASSET_PATH" >> $GITHUB_OUTPUT
+          echo "ASSET_NAME=$ASSET_NAME" >> $GITHUB_OUTPUT
+
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -96,6 +105,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./packages/toolkit/dist/ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
-          asset_name: ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
+          asset_path: ${{ steps.toolkit_asset.outputs.ASSET_PATH }}
+          asset_name: ${{ steps.toolkit_asset.outputs.ASSET_NAME }}
           asset_content_type: application/zip
