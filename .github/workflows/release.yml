@@ -32,6 +32,9 @@ jobs:
       - name: Run linting
         run: pnpm run lint
 
+      - name: Install Playwright browser for tests
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
+
       - name: Run tests
         run: pnpm test
 
