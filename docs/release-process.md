@@ -1,6 +1,7 @@
 # Release Process
 
 This document explains how to create and publish releases of the design system toolkit and its packages.
+For release tag conventions and monorepo versioning context, see [Release Versioning Strategy](./release-versioning-strategy.md).
 
 ## Overview
 

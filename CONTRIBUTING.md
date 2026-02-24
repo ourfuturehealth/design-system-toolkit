@@ -17,6 +17,6 @@ We've compiled a list of contributing guidance to make it easier for you to cont
 - [Tooling](docs/contributing/tooling.md)
 - [Linting](docs/contributing/linting.md)
 - [Manual testing](docs/contributing/testing.md)
-- [Automated testing](docs/contributing/automated-testing.md)
+- [Automated testing](docs/contributing/testing.md#automated-testing)
 - [Support for browsers and assistive technology](/docs/contributing/browser-support.md)
 - [Git style guide](docs/contributing/git-style-guide.md)
