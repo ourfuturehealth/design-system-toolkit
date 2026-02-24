@@ -74,37 +74,37 @@ jobs:
           echo "ASSET_PATH=$ASSET_PATH" >> $GITHUB_OUTPUT
           echo "ASSET_NAME=$ASSET_NAME" >> $GITHUB_OUTPUT
 
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Create or update release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
-          body: |
-            Release of **${{ steps.package_info.outputs.PACKAGE }}** version ${{ steps.package_info.outputs.VERSION }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          RELEASE_BODY=$(cat <<EOF
+          Release of **${{ steps.package_info.outputs.PACKAGE }}** version ${{ steps.package_info.outputs.VERSION }}
 
-            ## Installation
+          ## Installation
 
-            ```json
-            {
-              "dependencies": {
-                "@ourfuturehealth/${{ steps.package_info.outputs.PACKAGE }}": "github:ourfuturehealth/design-system-toolkit#${{ github.ref_name }}:packages/${{ steps.package_info.outputs.PACKAGE }}"
-              }
+          \`\`\`json
+          {
+            "dependencies": {
+              "@ourfuturehealth/${{ steps.package_info.outputs.PACKAGE }}": "github:ourfuturehealth/design-system-toolkit#${{ github.ref_name }}:packages/${{ steps.package_info.outputs.PACKAGE }}"
             }
-            ```
+          }
+          \`\`\`
+          EOF
+          )
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TAG" --notes "$RELEASE_BODY"
+          else
+            gh release create "$TAG" --title "$TAG" --notes "$RELEASE_BODY"
+          fi
 
       - name: Upload toolkit zip asset
         if: steps.package_info.outputs.PACKAGE == 'toolkit'
-        id: upload-toolkit-asset
-        uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.toolkit_asset.outputs.ASSET_PATH }}
-          asset_name: ${{ steps.toolkit_asset.outputs.ASSET_NAME }}
-          asset_content_type: application/zip
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${GITHUB_REF_NAME}" "${{ steps.toolkit_asset.outputs.ASSET_PATH }}" \
+            --clobber \
+            --repo "${GITHUB_REPOSITORY}"
