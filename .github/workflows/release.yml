@@ -17,12 +17,15 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           cache: "pnpm"
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
 
       - name: Install dependencies
         run: pnpm install
@@ -94,8 +97,3 @@ jobs:
           asset_path: ./packages/toolkit/dist/ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
           asset_name: ofh-design-system-toolkit-${{ steps.package_info.outputs.VERSION }}.zip
           asset_content_type: application/zip
-
-      # - name: Publish NPM package
-      #   run: npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

@@ -10,12 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           cache: "pnpm"
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
 
       - name: Install dependencies
         run: pnpm install
