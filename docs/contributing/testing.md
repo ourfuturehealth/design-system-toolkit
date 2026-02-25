@@ -106,6 +106,29 @@ clear and viewable. Examples of colour schemes include:
 - inverted colours
 - greyscale
 
+## Automated testing
+
+Run the automated test suites from the repository root:
+
+```bash
+# Run all workspace tests
+pnpm test
+
+# Run tests for a specific package
+pnpm test:toolkit
+pnpm test:react-components
+```
+
+You should also run linting before opening a PR:
+
+```bash
+pnpm lint
+```
+
 ---
 
-Next: [Automated testing](automated-testing.md)
+Related docs:
+
+- [Running the application locally](running-locally.md)
+- [Coding standards and style guide](coding-standards.md)
+- [Linting](linting.md)

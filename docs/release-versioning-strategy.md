@@ -3,6 +3,7 @@
 ## Overview
 
 This document explains the versioning strategy for releases after the v4.0.0 monorepo restructure.
+For the operational step-by-step release checklist, see [Release Process](./release-process.md).
 
 ## The Change: Single Package → Monorepo
 

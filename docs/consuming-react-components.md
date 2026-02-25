@@ -50,9 +50,9 @@ npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-syst
 Import components and styles in your React application:
 
 ```tsx
-import React from "react";
-import { Button, TextInput } from "@ourfuturehealth/react-components";
-import "@ourfuturehealth/react-components/styles/participant";
+import React from 'react';
+import { Button, TextInput } from '@ourfuturehealth/react-components';
+import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
@@ -62,7 +62,7 @@ function App() {
         hint="Enter your full name"
         onChange={(e) => console.log(e.target.value)}
       />
-      <Button onClick={() => console.log("Clicked")}>Submit</Button>
+      <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
   );
 }
@@ -76,7 +76,7 @@ Import the stylesheet once in your app's entry point:
 
 ```tsx
 // main.tsx or App.tsx
-import "@ourfuturehealth/react-components/styles/participant";
+import '@ourfuturehealth/react-components/styles/participant';
 ```
 
 The styles are based on the Our Future Health design system toolkit and include all component styles.
@@ -93,7 +93,7 @@ Each application should use one theme. Current theme bundles are:
 Use the participant styles export:
 
 ```tsx
-import "@ourfuturehealth/react-components/styles/participant";
+import '@ourfuturehealth/react-components/styles/participant';
 ```
 
 ### Squad C (React) using research
@@ -101,7 +101,7 @@ import "@ourfuturehealth/react-components/styles/participant";
 Use the matching themed styles export:
 
 ```tsx
-import "@ourfuturehealth/react-components/styles/research";
+import '@ourfuturehealth/react-components/styles/research';
 ```
 
 For backward compatibility, `@ourfuturehealth/react-components/styles` remains available and maps to participant.
@@ -130,7 +130,7 @@ Or see the [example consumer app](../packages/example-react-consumer-app/) for u
 The package includes full TypeScript definitions. No additional `@types/` packages needed.
 
 ```tsx
-import type { ButtonProps } from "@ourfuturehealth/react-components";
+import type { ButtonProps } from '@ourfuturehealth/react-components';
 
 const MyButton: React.FC<ButtonProps> = (props) => {
   return <Button {...props} />;
@@ -145,8 +145,8 @@ The React components work out of the box with Vite. No additional configuration 
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
@@ -164,7 +164,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -196,7 +196,7 @@ module.exports = {
 **Solution**: Ensure you import the styles:
 
 ```tsx
-import "@ourfuturehealth/react-components/styles/participant";
+import '@ourfuturehealth/react-components/styles/participant';
 ```
 
 Import this in your app's entry point (e.g., `main.tsx` or `App.tsx`).

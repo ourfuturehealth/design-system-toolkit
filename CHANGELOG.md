@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
 
-## [v4.0.0] - 2026-02-18
+## [v4.0.0] - 2026-02-25
 
 ### 🎉 Major Change: Monorepo Restructure
 
@@ -16,7 +16,7 @@ This release introduces a complete restructuring of the repository into a monore
 
 Projects must update their installation syntax to specify the package subdirectory:
 
-**Before (v3.4.2 and earlier):**
+**Before (v3.4.3 and earlier):**
 
 ```json
 {
@@ -50,8 +50,8 @@ Projects must update their installation syntax to specify the package subdirecto
 **Who is affected:**
 
 - Projects using `#main` branch (must update immediately)
-- Projects upgrading from v3.4.2 or earlier (update when ready)
-- Projects using version tags like `#v3.4.2` are **NOT affected** (tags are immutable)
+- Projects upgrading from v3.4.3 or earlier (update when ready)
+- Projects using version tags like `#v3.4.3` are **NOT affected** (tags are immutable)
 
 ### Added
 
@@ -134,7 +134,18 @@ See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for de
 **Distribution:**
 All packages are distributed via GitHub releases. No npm registry publishing required.
 
+**Security:**
+Minimatch vulnerability fix from v3.4.3 was carried over via pnpm overrides after project restructure.
+Ran pnpm audit and added other vulnerability override fixes to reduce vulnerabilities.
+
 ---
+
+## [v3.4.3] - 2026-02-23
+
+### Removed
+
+- Ran `npm audit fix` which fixed vulnerability in minimatch subdependencies
+- Needed an override a subdependency editorconfig@1.0.4 which still required a vulnerable version
 
 ## [v3.4.2] - 2025-11-28
 

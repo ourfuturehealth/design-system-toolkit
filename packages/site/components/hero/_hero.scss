@@ -22,7 +22,6 @@
   border-radius: ofh-border-radius;
 
   @include ofh-responsive-padding(6);
-  
 }
 
 /**
@@ -41,12 +40,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media only screen { /* [4] */
+  @media only screen {
+    /* [4] */
     min-height: 200px;
   }
 
   @include mq($from: tablet) {
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 320px; /* [5] */
 
       .ofh-hero__overlay {
@@ -62,7 +63,8 @@
   .ofh-hero-ds__overlay {
     background-color: rgb(1 29 75 / 50%); /* [7] */
 
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 200px; /* [6] */
     }
 
@@ -127,7 +129,8 @@
       }
     }
 
-    @include mq(375px) { /* [15] */
+    @include mq(375px) {
+      /* [15] */
       width: 85%;
     }
 
@@ -148,7 +151,8 @@
       padding: 0;
     }
 
-    @media screen and (-ms-high-contrast: active) { /* [14] */
+    @media screen and (-ms-high-contrast: active) {
+      /* [14] */
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;

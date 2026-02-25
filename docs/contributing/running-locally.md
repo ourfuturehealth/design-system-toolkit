@@ -134,4 +134,10 @@ See the main [README](../../README.md) for more details on the monorepo structur
 
 ---
 
-Next: [Application architecture](application-architecture.md)
+Related docs:
+
+- [Application architecture](application-architecture.md)
+- [Coding standards and style guide](coding-standards.md)
+- [Tooling](tooling.md)
+- [Linting](linting.md)
+- [Testing](testing.md)

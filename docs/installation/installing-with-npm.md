@@ -12,11 +12,11 @@ To use Our Future Health design system toolkit in your projects you must:
 
 4. (Optional) If you want to use our [Nunjucks](https://mozilla.github.io/nunjucks/) macros, you will need to install Nunjucks. [Nunjucks macros](https://mozilla.github.io/nunjucks/templating.html#macro) allows you to define reusable chunks of content. It is similar to a function in a programming language.
 
-    ```bash
-    pnpm add nunjucks
-    # or with npm:
-    npm install nunjucks --save
-    ````
+   ```bash
+   pnpm add nunjucks
+   # or with npm:
+   npm install nunjucks --save
+   ```
 
 ## Installation
 
@@ -41,6 +41,7 @@ npm install
 ```
 
 **Version pinning:**
+
 - Use specific version tags (e.g., `toolkit-v4.0.0`) for production
 - For development, you can use `#main:packages/toolkit` but ensure your lockfile pins a specific commit
 
@@ -161,12 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
 If you want to import assets such as the Our Future Health logo, favicons and SVG icons, copy the files from `node_modules/@ourfuturehealth/toolkit/assets/` or reference them directly:
 
 ```html
-<link rel="shortcut icon" href="path-to-assets/favicons/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="path-to-assets/favicons/apple-touch-icon-180x180.png">
-<link rel="mask-icon" href="path-to-assets/favicons/favicon.svg" color="#FFC62C">
-<link rel="icon" sizes="192x192" href="path-to-assets/favicons/favicon-192x192.png">
-<meta name="msapplication-TileImage" content="path-to-assets/favicons/favicon-270x270.png">
-<meta name="msapplication-TileColor" content="#FFC62C">
+<link rel="shortcut icon" href="path-to-assets/favicons/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="path-to-assets/favicons/apple-touch-icon-180x180.png" />
+<link rel="mask-icon" href="path-to-assets/favicons/favicon.svg" color="#FFC62C" />
+<link rel="icon" sizes="192x192" href="path-to-assets/favicons/favicon-192x192.png" />
+<meta name="msapplication-TileImage" content="path-to-assets/favicons/favicon-270x270.png" />
+<meta name="msapplication-TileColor" content="#FFC62C" />
 ```
 
 ## Thanks to the Government Digital Service (GDS)

@@ -57,8 +57,10 @@ run_snyk_scans() {
   fi
 
   debug "Executing Snyk command: $snyk_command"
-  eval "$snyk_command" 2>&1 | tee snyk_debug.log
+  set +e
+  eval "$snyk_command" > >(tee snyk_debug.log) 2>&1
   snyk_exit_code=$?
+  set -e
 
   if [[ "$snyk_exit_code" -eq 0 || "$snyk_exit_code" -eq 1 ]]; then
     debug "Snyk scan ($tool) completed successfully with exit code $snyk_exit_code."

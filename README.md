@@ -64,6 +64,8 @@ pnpm lint                       # Run all linters
 pnpm build                      # Build all packages
 ```
 
+For step-by-step local setup (including fork/clone options and workflow selection), see [Running the application locally](/docs/contributing/running-locally.md).
+
 ## Guidance
 
 Visit the [design system docs website](https://designsystem.ourfuturehealth.org.uk/) for examples of components and guidance for when to use them.
@@ -93,6 +95,7 @@ You can also [install Our Future Health design system toolkit using our compiled
 ## How to make a new release
 
 This monorepo uses **independent versioning** for each package. See the detailed [Release Process documentation](/docs/release-process.md) for full instructions.
+For the background on tag naming and monorepo versioning, see [Release Versioning Strategy](/docs/release-versioning-strategy.md).
 
 **Quick summary:**
 
@@ -116,7 +119,7 @@ This monorepo uses **independent versioning** for each package. See the detailed
 
 5. **Verify**: Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and test installation
 
-6. **Announce**: Post in #design-system-announcements Slack channel
+6. **Announce**: Post in #design-system Slack channel
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 
