@@ -2,10 +2,14 @@ const highlightjs = require("highlight.js");
 const nunjucks = require("nunjucks");
 
 module.exports = function configuration(eleventyConfig) {
-  // Watch the site CSS and JS builds so they trigger a hot reload when they change.
+  // Watch source Sass/JS files so Eleventy can trigger browser reloads when
+  // assets are rebuilt by external watchers.
   eleventyConfig.setUseGitIgnore(false);
-  eleventyConfig.addWatchTarget("./dist/css/");
-  eleventyConfig.addWatchTarget("./dist/js/");
+  eleventyConfig.addWatchTarget("./styles/");
+  eleventyConfig.addWatchTarget("./scripts/");
+  eleventyConfig.addWatchTarget("../toolkit/core/");
+  eleventyConfig.addWatchTarget("../toolkit/components/");
+  eleventyConfig.addWatchTarget("../toolkit/ofh.scss");
   eleventyConfig.addWatchTarget("../toolkit/assets/");
   eleventyConfig.addWatchTarget("../toolkit/dist/");
 
@@ -27,7 +31,7 @@ module.exports = function configuration(eleventyConfig) {
 
   // Prevent the output of toolkit CSS and JS assets in watch mode
   // triggering multiple rebuilds of the docs site.
-  eleventyConfig.setWatchThrottleWaitTime(100);
+  eleventyConfig.setWatchThrottleWaitTime(300);
 
   const nunjucksEnv = nunjucks.configure(
     [

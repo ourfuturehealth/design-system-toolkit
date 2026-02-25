@@ -16,6 +16,8 @@ html {
 body {
   padding: 32px;
 
+  background-color: $ofh-color-greyscale-7;
+
   @media only screen and (width <= 641px) {
     padding: 16px;
   }
