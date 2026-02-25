@@ -31,8 +31,8 @@
     "bundle": "gulp bundle",
     "zip": "gulp zip",
     "lint": "pnpm run lint:js && pnpm run lint:css",
-    "lint:js": "eslint components/**/*.js *.js --ignore-pattern '*.config.js'",
-    "lint:js:fix": "eslint --fix components/**/*.js *.js --ignore-pattern '*.config.js'",
+    "lint:js": "eslint --no-warn-ignored components/**/*.js *.js --ignore-pattern '*.config.js'",
+    "lint:js:fix": "eslint --no-warn-ignored --fix components/**/*.js *.js --ignore-pattern '*.config.js'",
     "lint:css": "stylelint -f verbose '**/*.scss'",
     "lint:css:fix": "stylelint --fix -f verbose '**/*.scss'",
     "test": "jest"

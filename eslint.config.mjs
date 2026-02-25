@@ -6,11 +6,11 @@ import globals from 'globals';
  * 
  * This configuration provides shared JavaScript/TypeScript linting rules
  * across all packages. Individual packages can extend or override these
- * rules in their own eslint.config.js files.
+ * rules in their own eslint.config files.
  * 
  * Packages should import and extend this config:
  * ```js
- * import rootConfig from '../../eslint.config.js';
+ * import rootConfig from '../../eslint.config.mjs';
  * export default [...rootConfig, { your overrides }];
  * ```
  */

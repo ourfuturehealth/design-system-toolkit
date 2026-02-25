@@ -1,4 +1,4 @@
-import rootConfig from '../../eslint.config.js';
+import rootConfig from '../../eslint.config.mjs';
 
 /**
  * ESLint configuration for the toolkit package

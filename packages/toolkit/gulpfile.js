@@ -35,7 +35,7 @@ function compileCSS() {
     )
     .pipe(gulp.dest('dist/'))
     .on('error', (err) => {
-      console.log(err);
+      console.error(err);
       process.exit(1);
     });
 }

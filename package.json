@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "prepare": "husky && pnpm --filter=@ourfuturehealth/toolkit run bundle",
+    "prepare": "husky",
     "dev": "concurrently \"pnpm:dev:*\" \"pnpm storybook\"",
     "dev:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run watch",
     "dev:site": "pnpm --filter=site run watch",
