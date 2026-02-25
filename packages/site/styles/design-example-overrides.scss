@@ -14,9 +14,8 @@ html {
 
 /* Component examples need a bit of space around them */
 body {
-  padding: 32px;
-
   background-color: $ofh-color-greyscale-7;
+  padding: 32px;
 
   @media only screen and (width <= 641px) {
     padding: 16px;
