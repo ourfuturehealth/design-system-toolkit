@@ -1,0 +1,18 @@
+# Global directory exclusions
+.idea
+.turbo
+node_modules
+dist
+out
+coverage
+tmp
+.cache
+
+# Global file exclusions
+.DS_Store
+.env
+
+.vscode
+
+*storybook.log
+storybook-static

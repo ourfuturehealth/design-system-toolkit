@@ -1,0 +1,71 @@
+{% extends "design-example-wrapper-full-layout.njk" %}
+
+{% from 'back-link/macro.njk' import backLink %}
+{% from 'button/macro.njk' import button %}
+{% from 'date-input/macro.njk' import dateInput %}
+{% from 'error-summary/macro.njk' import errorSummary %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "#",
+    "text": "Go back",
+    "classes": "ofh-u-margin-bottom-0 ofh-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="ofh-grid-row">
+    <div class="ofh-grid-column-two-thirds">
+      <form>
+
+        {{ errorSummary({
+          "titleText": "There is a problem",
+          "errorList": [
+            {
+              "text": "Date of birth must include a year",
+              "href": "#dob-errors-year"
+            }
+          ]
+        }) }}
+
+        {{ dateInput({
+          "id": "dob-errors",
+          "fieldset": {
+            "legend": {
+              "text": "What is your date of birth?",
+              "classes": "ofh-fieldset__legend--l",
+              "isPageHeading": true
+            }
+          },
+          "hint": {
+            "text": "For example, 15 3 1984"
+          },
+          "errorMessage": {
+            "text": "Date of birth must include a year"
+          },
+          "items": [
+            {
+              "name": "day",
+              "classes": "ofh-input--width-2",
+              value: 15
+            },
+            {
+              "name": "month",
+              "classes": "ofh-input--width-2",
+              value: 3
+            },
+            {
+              "name": "year",
+              "classes": "ofh-input--width-4 ofh-input--error"
+            }
+          ]
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

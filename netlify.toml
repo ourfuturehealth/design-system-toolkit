@@ -1,6 +1,6 @@
 [build]
-  publish = "site/dist"
-  command = "npm run build"
+  publish = "packages/site/dist"
+  command = "pnpm --filter=site build"
 
 [[redirects]]
   from = "/*"

@@ -1,0 +1,66 @@
+{% extends "design-example-wrapper-full-layout.njk" %}
+
+{% from 'back-link/macro.njk' import backLink %}
+{% from 'button/macro.njk' import button %}
+{% from 'error-summary/macro.njk' import errorSummary %}
+{% from 'input/macro.njk' import input %}
+
+{% block beforeContent %}
+  {{ backLink({
+    "href": "#",
+    "text": "Go back",
+    "classes": "ofh-u-margin-bottom-0 ofh-u-margin-top-4"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="ofh-grid-row">
+    <div class="ofh-grid-column-two-thirds">
+      <form>
+
+        {{ errorSummary({
+          "titleText": "There is a problem",
+          "errorList": [
+            {
+              "text": "Enter your first  name",
+              "href": "#first-name"
+            },
+            {
+              "text": "Enter your last name",
+              "href": "#last-name"
+            }
+          ]
+        }) }}
+
+        <h1 class="ofh-heading-l">Your details</h1>
+
+        {{ input({
+          "label": {
+            "text": "First name"
+          },
+          "id": "first-name",
+          "name": "first-name",
+          "errorMessage": {
+            "text": "Enter your first name"
+          }
+        }) }}
+
+        {{ input({
+          "label": {
+            "text": "Last name"
+          },
+          "id": "last-name",
+          "name": "last-name",
+          "errorMessage": {
+            "text": "Enter your last name"
+          }
+        }) }}
+
+        {{ button({
+          "text": "Continue"
+        }) }}
+
+      </form>
+    </div>
+  </div>
+{% endblock %}

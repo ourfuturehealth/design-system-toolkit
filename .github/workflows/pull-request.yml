@@ -12,14 +12,21 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
-          cache: 'npm'
+          node-version: "22.x"
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run linting
-        run: npm run lint
+        run: pnpm run lint
+
+      - name: Install Playwright browser for tests
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
 
       - name: Run tests
-        run: npm test
+        run: pnpm test
