@@ -7,17 +7,17 @@
   @include print-hide();
   @include ofh-responsive-padding(5, bottom);
   @include ofh-responsive-padding(5, top);
-  @include ofh-font(14);
+  @include ofh-font('paragraph-small');
 
-  background-color: $color_ofh-grey-4;
-  border-top: ofh-spacing(1) solid $color_ofh-brand-yellow;
+  background-color: $ofh-color-greyscale-5;
+  border-top: ofh-spacing(1) solid $ofh-color-brand-yellow-3-main;
 }
 
 .footer-text {
   float: left;
 
   p {
-    @include ofh-font(16);
+    @include ofh-font('paragraph-small');
 
     margin: 0;
   }
@@ -38,7 +38,7 @@
 }
 
 .ofh-footer__list-item {
-  @include ofh-font(16);
+  @include ofh-font('paragraph-small');
 
   @include mq($from: desktop) {
     float: left;
@@ -47,10 +47,10 @@
 }
 
 .ofh-footer__list-item-link {
-  color: $color_ofh-brand-dark-blue;
+  color: $ofh-color-brand-blue-navy-3-main;
 
   &:visited {
-    color: $color_ofh-brand-dark-blue;
+    color: $ofh-color-brand-blue-navy-3-main;
   }
 
   &:hover {
@@ -59,9 +59,9 @@
 }
 
 .ofh-footer__copyright {
-  @include ofh-font(16);
+  @include ofh-font('paragraph-small');
 
-  color: $color-ofh-black;
+  color: $ofh-color-greyscale-black;
   margin-bottom: 0;
 
   @include mq($from: desktop) {

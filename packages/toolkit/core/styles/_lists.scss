@@ -4,7 +4,7 @@
 
 // The % (silent class) allows code to be extended (@extend) to other elements
 // without bloating the code.
-//
+
 // @example scss
 //  .foo {
 //   @extend %ofh-section-break--xl;
@@ -17,7 +17,7 @@
  */
 
 %ofh-list {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive('list');
   @include ofh-responsive-margin(4, 'bottom');
 
   list-style-type: none;

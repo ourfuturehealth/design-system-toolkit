@@ -113,7 +113,7 @@
 .autocomplete__option:hover {
   background-color: $ofh-link-color;
   border-color: $ofh-link-color;
-  color: $color_ofh-white;
+  color: $ofh-color-greyscale-white;
   outline: none;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .autocomplete__option--no-results {
-  background-color: $color_ofh-grey-6;
+  background-color: $ofh-color-greyscale-7;
   color: $ofh-text-grey-color;
   cursor: not-allowed;
 }
@@ -160,7 +160,7 @@
   padding: 8px 4px;
 }
 
-@media (min-width: 641px) {
+@media (width >= 641px) {
   .autocomplete__hint,
   .autocomplete__input {
     font-size: 1.1875rem;

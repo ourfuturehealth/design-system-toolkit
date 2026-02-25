@@ -15,6 +15,7 @@ module.exports = function configuration(eleventyConfig) {
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `views/_includes/standalone-example-layout.njk`.
+  // The bundle task now includes assets (logos, favicons, icons) in dist/assets/.
   eleventyConfig.addPassthroughCopy({
     "../toolkit/dist": "ofh-design-system-toolkit",
   });

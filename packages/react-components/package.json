@@ -13,7 +13,9 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs.js"
     },
-    "./styles": "./dist/ofh-design-system-react.css"
+    "./styles": "./dist/ofh-design-system-react.css",
+    "./styles/participant": "./dist/ofh-design-system-react.css",
+    "./styles/research": "./dist/ofh-design-system-react-research.css"
   },
   "files": [
     "dist",
@@ -23,15 +25,18 @@
     "dev": "vite",
     "watch": "vite",
     "watch:lib": "vite build --watch",
-    "build": "tsc && vite build",
+    "build": "tsc && node ./scripts/build-themes.mjs",
     "build:clean": "rm -rf dist && pnpm run build",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint . --max-warnings 0 --fix",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage",
+    "lint": "pnpm run lint:js && pnpm run lint:css",
+    "lint:js": "eslint . --max-warnings 0",
+    "lint:js:fix": "eslint . --max-warnings 0 --fix",
+    "lint:css": "stylelint -f verbose 'src/**/*.scss'",
+    "lint:css:fix": "stylelint --fix -f verbose 'src/**/*.scss'",
+    "test": "vitest run --project unit",
+    "test:watch": "vitest --project unit",
+    "test:ui": "vitest --ui --project unit",
+    "test:coverage": "vitest run --project unit --coverage",
     "prepare": "pnpm run build",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build"

@@ -11,7 +11,6 @@
   @include ofh-responsive-padding(6, 'top');
 
   @include mq($until: desktop) {
-
     .ofh-grid-column-one-half:last-child {
       padding-top: ofh-spacing(3);
     }
@@ -20,5 +19,5 @@
 }
 
 .ofh-section--white {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
 }

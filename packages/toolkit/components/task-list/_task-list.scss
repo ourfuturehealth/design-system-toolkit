@@ -9,7 +9,7 @@
  */
 
 .ofh-task-list {
-  @include ofh-font($size: 19);
+  @include ofh-font($size: 'paragraph');
 
   list-style-type: none;
   margin-top: 0;
@@ -50,13 +50,10 @@
 // any hint text. Because this is generated within the link element, this allows the whole area
 // to be clickable.
 .ofh-task-list__link::after {
-  bottom: 0;
   content: '';
   display: block;
-  left: 0;
+  inset: 0;
   position: absolute;
-  right: 0;
-  top: 0;
 }
 
 .ofh-task-list__hint {

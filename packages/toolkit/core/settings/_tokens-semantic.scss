@@ -1,0 +1,188 @@
+// ==========================================================================
+// SETTINGS / #TOKENS-SEMANTIC
+// ==========================================================================
+
+// Semantic token mappings - bridges old variable names to new token system
+
+// This file maps familiar semantic variables (like $ofh-text-black-color)
+// to the new Figma-aligned token structure. This provides backwards
+// compatibility and eases migration for components.
+
+// BREAKING CHANGES are marked with comments.
+
+// Text Colors
+// ==========================================================================
+
+// Primary text colors
+// @deprecated Use $ofh-color-foreground-* tokens directly
+
+$ofh-text-black-color: $ofh-color-foreground-primary;
+$ofh-text-grey-color: $ofh-color-foreground-secondary;
+$ofh-text-white-color: $ofh-color-foreground-primary-inverted;
+$ofh-text-blue-color: $ofh-color-foreground-brand-blue-navy;
+
+// Link Colors
+// ==========================================================================
+
+// Link state colors
+// @deprecated Use $ofh-color-foreground-link-* tokens directly
+
+$ofh-link-color: $ofh-color-foreground-link-default;
+$ofh-link-hover-color: $ofh-color-foreground-link-hover;
+$ofh-link-visited-color: $ofh-color-foreground-link-visited;
+$ofh-link-active-color: $ofh-color-foreground-link-active;
+
+// Light/inverted link colors (on dark backgrounds)
+$ofh-link-light-color: $ofh-color-foreground-link-default-inverted;
+$ofh-link-light-hover-color: $ofh-color-foreground-link-hover-inverted;
+$ofh-link-light-active-color: $ofh-color-foreground-link-active-inverted;
+
+// Breadcrumb link colors
+$ofh-breadcrumb-link-color: $ofh-color-foreground-breadcrumb-default;
+$ofh-breadcrumb-link-hover-color: $ofh-color-foreground-breadcrumb-hover;
+$ofh-breadcrumb-link-visited-color: $ofh-color-foreground-breadcrumb-visited;
+$ofh-breadcrumb-link-active-color: $ofh-color-foreground-breadcrumb-active;
+
+// Background Colors
+// ==========================================================================
+
+// Page and element backgrounds
+// @deprecated Use $ofh-color-background-* tokens directly
+
+// BREAKING: Page background changed from grey (#F4F4F4) to white (#FFFFFF)
+$background-color: $ofh-color-background-primary;
+
+// Button Colors
+// ==========================================================================
+
+// Primary button colors
+// @deprecated Use $ofh-color-background-button-* tokens directly
+
+// BREAKING: Primary button changed from yellow (#FFC62C) to blue (#0053B3)
+$ofh-button-color: $ofh-color-background-button-default;
+$ofh-button-hover-color: $ofh-color-background-button-hover;
+$ofh-button-active-color: $ofh-color-background-button-active;
+
+// White/inverted button
+$ofh-button-color-default: $ofh-color-background-button-default;
+$ofh-button-color-hover: $ofh-color-background-button-hover;
+$ofh-button-color-active: $ofh-color-background-button-active;
+$ofh-button-color-white: $ofh-color-background-button-default-inverted;
+$ofh-button-color-white-hover: $ofh-color-background-button-hover-inverted;
+$ofh-button-color-white-active: $ofh-color-background-button-active-inverted;
+
+// Button text colors
+$ofh-button-text-color: $ofh-color-brand-blue-navy-3-main;
+$ofh-button-secondary-text-color: $ofh-color-greyscale-white;
+$ofh-reverse-button-text-color: $ofh-color-greyscale-1;
+
+// Border Colors
+// ==========================================================================
+
+// Border and stroke colors
+// @deprecated Use $ofh-color-border-* tokens directly
+
+$ofh-border-color: $ofh-color-border-primary;
+
+// Form input borders
+$ofh-input-border-color: $ofh-color-border-input-default;
+$ofh-input-border-active-color: $ofh-color-border-input-active;
+
+// Feedback/Status Colors
+// ==========================================================================
+
+// Error, success, warning, info colors
+// @deprecated Use $ofh-color-feedback-* tokens directly
+
+$ofh-error-color: $ofh-color-feedback-error-2-main;
+$ofh-success-color: $ofh-color-feedback-success-2-main;
+
+// Focus Colors
+// ==========================================================================
+
+// Focus ring and states
+// @deprecated Use $ofh-color-border-feedback-focus token directly
+
+$ofh-focus-color: $ofh-color-border-feedback-focus;
+$ofh-focus-white-color: $ofh-color-border-feedback-focus-inverted;
+
+// Typography Settings
+// ==========================================================================
+
+// Font family and weights
+// @deprecated Use $ofh-typography-* tokens directly
+
+$ofh-font: $ofh-typography-font-source-sans-pro;
+$ofh-font-fallback: Arial, sans-serif;
+$ofh-font-normal: $ofh-typography-weight-regular;
+$ofh-font-bold: $ofh-typography-weight-semibold;
+$ofh-font-light: $ofh-typography-weight-regular;
+
+// Base typography sizing
+$ofh-base-font-size: 16px;
+$ofh-base-line-height: 24px;
+
+// Responsive typography scale for utilities
+// @deprecated Use $ofh-typography-responsive-scale directly
+$ofh-typography-scale: $ofh-typography-responsive-scale;
+
+// Border/Stroke Widths
+// ==========================================================================
+
+// Form element border widths
+// @deprecated Use $ofh-stroke-weight-* tokens directly
+
+$ofh-border-width-form-element: $ofh-stroke-weight-2; // 2px
+$ofh-border-width-form-element-error: $ofh-stroke-weight-4; // 4px
+$ofh-border-width: $ofh-stroke-weight-4; // 4px
+$ofh-border-width-mobile: $ofh-stroke-weight-4; // 4px
+$ofh-border-width-form-group-error: $ofh-stroke-weight-4; // 4px
+$ofh-focus-width: $ofh-stroke-weight-4; // 4px
+
+// Table borders
+$ofh-border-table-header-width: $ofh-stroke-weight-2; // 2px
+$ofh-border-table-cell-width: $ofh-stroke-weight-1; // 1px
+
+// Hero and inset text borders
+$ofh-hero-border: $ofh-stroke-weight-1; // 1px
+$ofh-border-width-inset-text: $ofh-stroke-weight-8; // 8px
+
+// Border Radius
+// ==========================================================================
+
+// Corner radius values
+// @deprecated Use $ofh-radius-* tokens directly
+
+$ofh-border-radius: $ofh-radius-4; // 4px
+
+// Spacing/Layout
+// ==========================================================================
+
+// Grid and layout spacing
+// @deprecated Use responsive spacing tokens directly
+
+$ofh-page-width: $ofh-width-content-max; // 960px
+$ofh-gutter: $ofh-size-32; // 32px
+$ofh-gutter-half: $ofh-size-16; // 16px (half of gutter)
+
+// Responsive spacing scale for utilities
+// @deprecated Use $ofh-space-responsive-scale directly
+$ofh-spacing-responsive-scale: $ofh-space-responsive-scale;
+
+// Icon Sizing
+// ==========================================================================
+
+// Icon dimensions
+// @deprecated Use $ofh-iconography-* tokens directly
+
+$ofh-icon-size: 34px; // Note: Figma uses 16/24/32, this is custom
+
+// Neutral Background Colors
+// ==========================================================================
+
+// Subtle background tints
+// @deprecated Use $ofh-color-background-neutral-* tokens directly
+
+$ofh-neutral-blue: $ofh-color-background-neutral-blue;
+$ofh-neutral-yellow: $ofh-color-background-neutral-yellow;
+$ofh-neutral-grey: $ofh-color-background-neutral-grey;

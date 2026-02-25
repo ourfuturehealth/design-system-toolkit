@@ -4,6 +4,7 @@
 
 .design-example {
   $root: &;
+
   margin-bottom: ofh-spacing(6);
   position: relative;
   width: 100%;
@@ -13,8 +14,9 @@
   }
 
   &__pop-out {
-    @include ofh-font(16);
-    border: 1px solid $color_ofh-grey-3;
+    @include ofh-font($size: paragraph);
+
+    border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;
     display: block;
     outline: 2px solid transparent;
@@ -32,7 +34,7 @@
       outline-offset: $ofh-focus-width;
 
       &:hover {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
       }
     }
 
@@ -56,11 +58,11 @@ p + .design-example {
 }
 
 .app-tabs__container pre {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
 }
 
 .app-code-snippet__container {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
   padding: ofh-spacing(3);
   padding-top: ofh-spacing(8);
   position: relative;

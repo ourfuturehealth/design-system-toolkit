@@ -26,7 +26,7 @@ thead {
 
 th,
 td {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive('paragraph');
   @include ofh-responsive-padding(3, 'bottom');
   @include ofh-responsive-padding(4, 'right');
   @include ofh-responsive-padding(3, 'top');
@@ -45,7 +45,7 @@ th {
 }
 
 caption {
-  @include ofh-font($size: 22, $weight: bold);
+  @include ofh-font($size: 'h4', $weight: bold);
 
   text-align: left;
 }

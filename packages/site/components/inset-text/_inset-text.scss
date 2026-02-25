@@ -16,8 +16,8 @@
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
   
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-border-width-inset-text solid $ofh-color-brand-blue-royal-3-main;
     border-radius: $ofh-border-radius;
   
     @include mq($media-type: print) {
@@ -32,8 +32,8 @@
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
   
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-border-width-inset-text solid $ofh-color-brand-blue-royal-3-main;
     border-radius: $ofh-border-radius;
   
     @include mq($media-type: print) {
@@ -49,8 +49,8 @@
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
   
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-green-3;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-border-width-inset-text solid $ofh-color-brand-green-teal-4;
     border-radius: $ofh-border-radius;
   
     @include mq($media-type: print) {
@@ -66,8 +66,8 @@
     @include ofh-responsive-margin(4, 'top');
     @include ofh-responsive-padding(4);
   
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-red-3;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-border-width-inset-text solid $ofh-color-brand-red-4;
     border-radius: $ofh-border-radius;
   
     @include mq($media-type: print) {

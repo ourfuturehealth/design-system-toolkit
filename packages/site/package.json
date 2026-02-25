@@ -12,8 +12,10 @@
     "build:css": "sass --style compressed --load-path ./node_modules/@ourfuturehealth/toolkit ./styles/:./dist/css/",
     "build:js": "webpack --config webpack.config.js",
     "build:eleventy": "eleventy --config eleventy.config.js",
-    "lint": "pnpm run lint:html",
-    "lint:html": "htmlhint dist/**/*.html"
+    "lint": "pnpm run lint:html && pnpm run lint:css",
+    "lint:html": "htmlhint dist/**/*.html",
+    "lint:css": "stylelint -f verbose '**/*.scss'",
+    "lint:css:fix": "stylelint --fix -f verbose '**/*.scss'"
   },
   "dependencies": {
     "@ourfuturehealth/toolkit": "workspace:*"

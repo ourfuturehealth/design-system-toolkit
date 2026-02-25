@@ -9,7 +9,7 @@ $app-container-size: 1100px;
 .app-breadcrumb .ofh-width-container {
   max-width: $app-container-size;
 
-  @media (min-width: 767px) and (max-width: 1164px) {
+  @media (width >= 767px) and (width <= 1164px) {
     margin: 0 ofh-spacing(5);
   }
 }

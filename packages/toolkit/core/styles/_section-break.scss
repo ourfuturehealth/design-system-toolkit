@@ -4,7 +4,7 @@
 
 // The % (silent class) allows code to be extended (@extend) to other elements
 // without bloating the code.
-//
+
 // @example scss
 //  .foo {
 //   @extend %ofh-section-break--xl;
@@ -62,12 +62,13 @@
   @extend %ofh-section-break--visible;
 }
 
-hr { /* [1] */
+hr {
+  /* [1] */
   @extend %ofh-section-break;
   @extend %ofh-section-break--l;
   @extend %ofh-section-break--visible;
 }
 
 .ofh-section-break--black {
-  border-bottom: 1px solid $color_ofh-true-black;
+  border-bottom: 1px solid $ofh-color-greyscale-black;
 }

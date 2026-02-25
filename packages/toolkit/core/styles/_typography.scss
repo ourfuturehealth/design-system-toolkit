@@ -6,14 +6,14 @@
 
 // The % (silent class) allows code to be extended (@extend) to other elements
 // without bloating the code.
-//
+
 // @example scss
 //  .foo {
 //   @extend %ofh-heading-xl;
 //  }
 
 %ofh-heading-xl {
-  @include ofh-typography-responsive(48);
+  @include ofh-typography-responsive('h1');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -28,7 +28,7 @@ h1,
 }
 
 %ofh-heading-l {
-  @include ofh-typography-responsive(32);
+  @include ofh-typography-responsive('h2');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -43,7 +43,7 @@ h2,
 }
 
 %ofh-heading-m {
-  @include ofh-typography-responsive(24);
+  @include ofh-typography-responsive('h3');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -58,7 +58,7 @@ h3,
 }
 
 %ofh-heading-s {
-  @include ofh-typography-responsive(22);
+  @include ofh-typography-responsive('h4');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -73,7 +73,7 @@ h4,
 }
 
 %ofh-heading-xs {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive('h5');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -88,7 +88,7 @@ h5,
 }
 
 %ofh-heading-xxs {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive('h5');
 
   display: block;
   font-weight: $ofh-font-bold;
@@ -105,7 +105,7 @@ h6,
 /* Captions to be used inside headings */
 
 .ofh-caption-xl {
-  @include ofh-font(32);
+  @include ofh-font('h2');
 
   color: $ofh-text-grey-color;
   display: block;
@@ -113,7 +113,7 @@ h6,
 }
 
 .ofh-caption-l {
-  @include ofh-font(24);
+  @include ofh-font('h3');
 
   color: $ofh-text-grey-color;
   display: block;
@@ -121,7 +121,7 @@ h6,
 }
 
 .ofh-caption-m {
-  @include ofh-font(19);
+  @include ofh-font('paragraph');
 
   color: $ofh-text-grey-color;
   display: block;
@@ -135,7 +135,7 @@ h6,
 /* Body (paragraphs) */
 
 %ofh-body-l {
-  @include ofh-typography-responsive(24);
+  @include ofh-typography-responsive('lead');
 
   display: block;
   margin-top: 0;
@@ -148,7 +148,7 @@ h6,
 }
 
 %ofh-body-m {
-  @include ofh-typography-responsive(19);
+  @include ofh-typography-responsive('paragraph');
 
   display: block;
   margin-top: 0;
@@ -164,7 +164,7 @@ p,
 }
 
 %ofh-body-s {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive('paragraph-small');
 
   display: block;
   margin-top: 0;
@@ -190,19 +190,19 @@ address {
  */
 
 .ofh-lede-text {
-  @include ofh-font(24);
+  @include ofh-font('lead');
   @include ofh-responsive-margin(7, 'bottom');
 
   /* [1] */
 
   p,
   ul {
-    @include ofh-font(24);
+    @include ofh-font('lead');
   }
 }
 
 .ofh-lede-text--small {
-  @include ofh-font(19);
+  @include ofh-font('paragraph');
   @include ofh-responsive-margin(5, 'bottom');
 }
 
@@ -223,7 +223,7 @@ h1 + .ofh-lede-text--small {
  * https://github.com/alphagov/nhsuk-frontend
  */
 
-%ofh-body-l  + %ofh-heading-l {
+%ofh-body-l + %ofh-heading-l {
   padding-top: ofh-spacing(1);
 
   @include mq($from: tablet) {
@@ -231,8 +231,8 @@ h1 + .ofh-lede-text--small {
   }
 }
 
-%ofh-body-m  + %ofh-heading-l,
-%ofh-body-s  + %ofh-heading-l,
+%ofh-body-m + %ofh-heading-l,
+%ofh-body-s + %ofh-heading-l,
 %ofh-list + %ofh-heading-l {
   @include ofh-responsive-padding(4, 'top');
 }

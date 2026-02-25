@@ -15,7 +15,7 @@
  */
 
 html {
-  background-color: $background-bounce-color;
+  background-color: $background-color;
   font-family: $ofh-font, $ofh-font-fallback;
   overflow-y: scroll; /* [1] */
 }
@@ -31,6 +31,6 @@ body {
   min-height: 100%; /* [4] */
 
   .heading-caption {
-    color: $color_ofh-grey-2;
+    color: $ofh-color-greyscale-3;
   }
 }

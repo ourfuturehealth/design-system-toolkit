@@ -10,8 +10,8 @@
  */
 
 .ofh-image {
-  background-color: $color_ofh-white;
-  border-bottom: 1px solid $color_ofh-grey-4;
+  background-color: $ofh-color-greyscale-white;
+  border-bottom: 1px solid $ofh-color-greyscale-5;
   margin-left: 0; /* [1] */
   margin-right: 0; /* [1] */
 
@@ -37,7 +37,7 @@
 }
 
 .ofh-image__caption {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive('paragraph-small');
 
   padding: ofh-spacing(3);
 }

@@ -5,25 +5,25 @@
   @include ofh-responsive-padding(4);
   @include ofh-responsive-margin(8, 'bottom');
 
-  border: $ofh-border-width-mobile solid $color_ofh-brand-blue;
+  border: $ofh-border-width-mobile solid $ofh-color-brand-blue-royal-3-main;
 
   @include govuk-media-query($from: tablet) {
-    border: $ofh-border-width solid $color_ofh-brand-blue;
+    border: $ofh-border-width solid $ofh-color-brand-blue-royal-3-main;
   }
 
   &:focus {
-    border: $ofh-focus-width solid $ofh-focus-text-color;
+    border: $ofh-focus-width solid $ofh-focus-color;
     box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
     outline: $ofh-focus-width solid transparent;
   }
 }
 
 .ofh-status-flag__title {
-  @include ofh-font(24, $weight: bold);
+  @include ofh-font('h3', $weight: bold);
 
   margin-top: 0;
 }
 
 .ofh-status-flag__body {
-  @include ofh-font(19);
+  @include ofh-font('paragraph');
 }

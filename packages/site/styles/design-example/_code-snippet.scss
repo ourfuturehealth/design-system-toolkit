@@ -1,16 +1,19 @@
-// sass-lint:disable border-zero no-color-hex
+/*
+ * Syntax highlighting colors for code examples.
+ * Using specific hex colors for token differentiation.
+ */
+/* stylelint-disable color-no-hex */
 
 $button-shadow-size: 4px;
 
 .code-snippet {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
 
   .js-hidden {
     display: none;
   }
 
   .app-link {
-
     &--copy {
       border-radius: $ofh-border-radius;
       margin-bottom: 16px;
@@ -26,6 +29,7 @@ $button-shadow-size: 4px;
 
       &:focus {
         @include ofh-focused-text;
+
         border-color: $ofh-focus-color;
       }
     }
@@ -34,7 +38,7 @@ $button-shadow-size: 4px;
       background-color: transparent;
       border: 0;
       bottom: 16px;
-      color: $color_ofh-brand-blue;
+      color: $ofh-color-brand-blue-royal-3-main;
       cursor: pointer;
       font-size: 16px;
       margin-top: 16px;
@@ -52,7 +56,7 @@ $button-shadow-size: 4px;
         @include ofh-focused-text;
 
         &:hover {
-          color: $ofh-focus-text-color;
+          color: $ofh-color-foreground-brand-blue-navy;
         }
       }
 
@@ -62,7 +66,7 @@ $button-shadow-size: 4px;
       }
 
       svg {
-        fill: $color_ofh-brand-blue;
+        fill: $ofh-color-brand-blue-royal-3-main;
         height: 16px;
         margin: 5px 5px 0 0;
         transform: rotate(-90deg);
@@ -73,7 +77,7 @@ $button-shadow-size: 4px;
 
   &__preformatted {
     align-items: flex-end;
-    border-bottom: 1px solid $color_ofh-grey-3;
+    border-bottom: 1px solid $ofh-color-greyscale-4;
     display: flex;
     flex-direction: column;
     padding: 16px;
@@ -85,11 +89,12 @@ $button-shadow-size: 4px;
 }
 
 .app-tabs {
-  background: $color_ofh-white;
-  border: 1px solid $color_ofh-grey-3;
+  background: $ofh-color-greyscale-white;
+  border: 1px solid $ofh-color-greyscale-4;
   border-bottom: 0;
-  $root: &;
   display: none;
+
+  $root: &;
 
   @include mq($from: tablet) {
     display: block;
@@ -120,7 +125,6 @@ $button-shadow-size: 4px;
         outline: $ofh-focus-width solid $ofh-focus-color;
         outline-offset: $ofh-focus-width;
       }
-
     }
 
     &--current {
@@ -128,7 +132,7 @@ $button-shadow-size: 4px;
         text-decoration: none;
 
         @include mq($from: tablet) {
-          box-shadow: 0 $button-shadow-size 0 $color_ofh-brand-blue;
+          box-shadow: 0 $button-shadow-size 0 $ofh-color-brand-blue-royal-3-main;
         }
 
         &:hover {
@@ -137,16 +141,15 @@ $button-shadow-size: 4px;
 
         &:focus {
           &:hover {
-            color: $ofh-focus-text-color;
+            color: $ofh-color-foreground-brand-blue-navy;
           }
         }
-
       }
     }
 
     &--mobile {
-      background-color: $color_ofh-white;
-      border: 1px solid $color_ofh-grey-3;
+      background-color: $ofh-color-greyscale-white;
+      border: 1px solid $ofh-color-greyscale-4;
       border-width: 1px 0;
       display: block;
       margin: -1px 0;
@@ -154,22 +157,20 @@ $button-shadow-size: 4px;
       @include mq($from: tablet) {
         display: none;
       }
-
-      }
     }
+  }
 
   &__container {
-    background-color: $color_ofh-white;
-    border: 1px solid $color_ofh-grey-3;
+    background-color: $ofh-color-greyscale-white;
+    border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;
     margin-top: 0;
 
     pre {
       align-self: stretch;
-      background-color: $color_ofh-white;
+      background-color: $ofh-color-greyscale-white;
       padding: 0;
     }
-
   }
 }
 
@@ -183,7 +184,7 @@ $color-syntax--string: #025eb8;
 $color-syntax--selector: #330072;
 
 .hljs {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   color: $color-syntax--body;
   overflow-x: scroll;
   padding: 0;
@@ -214,7 +215,8 @@ $color-syntax--selector: #330072;
   .hljs-literal,
   .hljs-variable,
   .hljs-template-variable,
-  .hljs-tag .hljs-attr { //sass-lint:disable-line force-element-nesting
+  .hljs-tag .hljs-attr {
+    // sass-lint:disable-line force-element-nesting
     color: $color-syntax--var;
   }
 
@@ -235,7 +237,8 @@ $color-syntax--selector: #330072;
   }
 
   .hljs-type,
-  .hljs-class .hljs-title { //sass-lint:disable-line force-element-nesting
+  .hljs-class .hljs-title {
+    // sass-lint:disable-line force-element-nesting
     color: $color-syntax--var;
     font-weight: normal;
   }

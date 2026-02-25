@@ -89,7 +89,7 @@
     &:hover,
     &:active {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -107,16 +107,16 @@
 
     &:focus {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 }
 
 .ofh-pagination__title {
-  @include ofh-typography-responsive(24);
+  @include ofh-typography-responsive('lead');
 
-  color: $color_ofh-brand-dark-blue;
+  color: $ofh-color-brand-blue-navy-3-main;
   display: block;
 
   @include mq($media-type: print) {
@@ -127,7 +127,7 @@
 }
 
 .ofh-pagination__page {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive('paragraph-small');
 
   display: block;
   text-decoration: underline;

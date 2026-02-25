@@ -24,9 +24,15 @@ If you require any of this functionality, you should [install using npm](/docs/i
     Make sure you change the version numbers of the `[latest version].min.css` and `[latest version].min.js` files,
     in the example below, to the version you are using.
 
+    Choose one theme stylesheet per application:
+    - participant: `ofh-design-system-toolkit-participant-[latest version].min.css`
+    - research: `ofh-design-system-toolkit-research-[latest version].min.css`
+
+    To add a new custom theme bundle, follow `docs/theming/adding-a-new-theme.md`.
+
     ```html
     <!-- Styles -->
-    <link rel="stylesheet" href="css/ofh-design-system-toolkit-[latest version].min.css">
+    <link rel="stylesheet" href="css/ofh-design-system-toolkit-participant-[latest version].min.css">
 
     <!-- Scripts -->
     <script src="js/ofh-design-system-toolkit-[latest version].min.js" defer></script>

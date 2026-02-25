@@ -5,11 +5,11 @@
 .app-contact-panel {
   @include ofh-responsive-margin(6, 'top');
 
-  border-top: 2px solid $color_ofh-brand-blue;
+  border-top: 2px solid $ofh-color-brand-blue-royal-3-main;
 }
 
 .app-contact-panel__heading {
-  @include ofh-font(24, $weight: bold);
+  @include ofh-font($size: h3, $weight: bold);
   @include ofh-responsive-padding(3, 'top');
 }
 

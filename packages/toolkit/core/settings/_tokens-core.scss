@@ -1,0 +1,187 @@
+// ==========================================================================
+// SETTINGS / #TOKENS-CORE
+// ==========================================================================
+
+// Core design tokens from Figma
+// Collection: core (Mode: Normal)
+
+// This file contains the fundamental building blocks of the design system:
+// - Size scale (used by spacing, typography, icons, etc.)
+// - Greyscale color palette
+// - Brand color palettes (all variants)
+// - Feedback colors (error, success, warning, info, interactive)
+// - Background neutrals
+
+// Note: These tokens are not intended to be used directly in components.
+// Instead, they should be referenced by more specific tokens (e.g., spacing, typography, color) that are designed for use in components.
+// This allows for greater flexibility and maintainability in the design system.
+// Also this is the only file that should contain hex color values, as all other color tokens should reference these core color tokens to ensure consistency across the system.
+/* stylelint-disable color-no-hex */
+
+// Size Scale
+// ==========================================================================
+// Base size scale - referenced by all other responsive tokens
+// Used for spacing, typography, borders, radius, etc.
+
+$ofh-size-0: 0;
+$ofh-size-1: 1px;
+$ofh-size-2: 2px;
+$ofh-size-4: 4px;
+$ofh-size-8: 8px;
+$ofh-size-12: 12px;
+$ofh-size-14: 14px;
+$ofh-size-16: 16px;
+$ofh-size-18: 18px;
+$ofh-size-20: 20px;
+$ofh-size-22: 22px;
+$ofh-size-24: 24px;
+$ofh-size-28: 28px;
+$ofh-size-32: 32px;
+$ofh-size-40: 40px;
+$ofh-size-48: 48px;
+$ofh-size-56: 56px;
+$ofh-size-64: 64px;
+$ofh-size-72: 72px;
+$ofh-size-80: 80px;
+$ofh-size-88: 88px;
+$ofh-size-96: 96px;
+$ofh-size-104: 104px;
+$ofh-size-10000: 10000px; // Used for circular radius
+
+// Greyscale Palette
+// ==========================================================================
+// Greyscale colors from black to white
+
+$ofh-color-greyscale-black: #000;
+$ofh-color-greyscale-1: #1b1b1b;
+$ofh-color-greyscale-2: #494949;
+$ofh-color-greyscale-3: #767676;
+$ofh-color-greyscale-4: #a4a4a4;
+$ofh-color-greyscale-5: #d1d1d1;
+$ofh-color-greyscale-6: #e8e8e8;
+$ofh-color-greyscale-7: #f4f4f4;
+$ofh-color-greyscale-white: #fff;
+
+// Brand Colors - Blue Family
+// ==========================================================================
+// Blue - Navy sub-palette
+
+$ofh-color-brand-blue-navy-1: #000e26;
+$ofh-color-brand-blue-navy-2: #011638;
+$ofh-color-brand-blue-navy-3-main: #011d4b;
+$ofh-color-brand-blue-navy-4: #405578;
+$ofh-color-brand-blue-navy-5: #808ea5;
+$ofh-color-brand-blue-navy-6: #c3c9d2;
+
+// Blue - Royal sub-palette
+
+$ofh-color-brand-blue-royal-1: #084571;
+$ofh-color-brand-blue-royal-2: #0c68a9;
+$ofh-color-brand-blue-royal-3-main: #108be2;
+$ofh-color-brand-blue-royal-3: #4ca8e9;
+$ofh-color-brand-blue-royal-5: #87c5f1;
+$ofh-color-brand-blue-royal-6: #c6dff0;
+
+// Blue - Aqua sub-palette
+
+$ofh-color-brand-blue-aqua-1: #527371;
+$ofh-color-brand-blue-aqua-2: #7bada9;
+$ofh-color-brand-blue-aqua-3-main: #a4e7e2;
+$ofh-color-brand-blue-aqua-4: #bbede9;
+$ofh-color-brand-blue-aqua-5: #d1f3f1;
+$ofh-color-brand-blue-aqua-6: #e4f1f0;
+
+// Brand Colors - Green Family
+// ==========================================================================
+// Green - Teal sub-palette
+
+$ofh-color-brand-green-teal-1: #005045;
+$ofh-color-brand-green-teal-2: #007867;
+$ofh-color-brand-green-teal-3-main: #00a08a;
+$ofh-color-brand-green-teal-4: #40b8a8;
+$ofh-color-brand-green-teal-5: #80cfc4;
+$ofh-color-brand-green-teal-6: #c7eae5;
+
+// Green - Lime sub-palette
+
+$ofh-color-brand-green-lime-1: #517b56;
+$ofh-color-brand-green-lime-2: #7ab881;
+$ofh-color-brand-green-lime-3-main: #a2f5ac;
+$ofh-color-brand-green-lime-4: #b9f8c1;
+$ofh-color-brand-green-lime-5: #d0fad5;
+$ofh-color-brand-green-lime-6: #e3f4e5;
+
+// Brand Colors - Other Hues
+// ==========================================================================
+// Yellow palette
+
+$ofh-color-brand-yellow-1: #806316;
+$ofh-color-brand-yellow-2: #bf9421;
+$ofh-color-brand-yellow-3-main: #ffc62c;
+$ofh-color-brand-yellow-4: #ffd461;
+$ofh-color-brand-yellow-5: #ffe296;
+$ofh-color-brand-yellow-6: #ffefc4;
+
+// Orange palette
+
+$ofh-color-brand-orange-1: #803c00;
+$ofh-color-brand-orange-2: #bf5a00;
+$ofh-color-brand-orange-3-main: #ff7800;
+$ofh-color-brand-orange-4: #ff9a40;
+$ofh-color-brand-orange-5: #ffbc80;
+$ofh-color-brand-orange-6: #f6dbc3;
+
+// Red palette
+
+$ofh-color-brand-red-1: #7a2424;
+$ofh-color-brand-red-2: #b63636;
+$ofh-color-brand-red-3-main: #f34848;
+$ofh-color-brand-red-4: #f67676;
+$ofh-color-brand-red-5: #f9a3a3;
+$ofh-color-brand-red-6: #f4d1d1;
+
+// Feedback Colors
+// ==========================================================================
+// Error colors
+
+$ofh-color-feedback-error-1: #750000;
+$ofh-color-feedback-error-2-main: #b60000;
+$ofh-color-feedback-error-3: #d93636;
+$ofh-color-feedback-error-4: #fcebeb;
+
+// Success colors
+
+$ofh-color-feedback-success-1: #004539;
+$ofh-color-feedback-success-2-main: #00725f;
+$ofh-color-feedback-success-3: #32a38d;
+$ofh-color-feedback-success-4: #e3f5f2;
+
+// Warning colors
+
+$ofh-color-feedback-warning-1: #7a4b00;
+$ofh-color-feedback-warning-2-main: #e08d00;
+$ofh-color-feedback-warning-3: #ffbc42;
+$ofh-color-feedback-warning-4: #fff8e6;
+
+// Info colors
+
+$ofh-color-feedback-info-1: #20354b;
+$ofh-color-feedback-info-2-main: #0c68a9;
+$ofh-color-feedback-info-3: #709bc2;
+$ofh-color-feedback-info-4: #eff6fa;
+
+// Interactive colors (links, focus states)
+
+$ofh-color-feedback-interactive-1: #330072;
+$ofh-color-feedback-interactive-2: #002d61;
+$ofh-color-feedback-interactive-3-main: #0053b3;
+$ofh-color-feedback-interactive-4: #4d8fe3;
+$ofh-color-feedback-interactive-5: #eff6fa;
+
+// Background Neutrals
+// ==========================================================================
+// Subtle background tints for different contexts
+
+$ofh-color-background-neutral-grey: #f8f8f8;
+$ofh-color-background-neutral-blue: #f2f5fa;
+$ofh-color-background-neutral-yellow: #f8f5ef;

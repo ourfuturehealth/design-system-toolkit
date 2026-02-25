@@ -2,11 +2,11 @@
 // TOOLS / #LINKS
 // ==========================================================================
 
-//
+
 // Default link styling
-//
+
 // Usage: @include ofh-link-style-default;
-//
+
 
 @mixin ofh-link-style-default {
   color: $ofh-link-color;
@@ -28,7 +28,7 @@
     }
 
     &:visited {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
     }
   }
 
@@ -37,17 +37,17 @@
   }
 }
 
-//
+
 // White link styling, used in the footer.
-//
+
 // Usage: @include ofh-link-style-light;
-//
+
 
 @mixin ofh-link-style-light {
-  color: $color_ofh-white;
+  color: $ofh-color-greyscale-white;
 
   &:visited {
-    color: $color_ofh-white;
+    color: $ofh-color-greyscale-white;
   }
 
   &:hover {
@@ -57,14 +57,14 @@
 
   &:focus,
   &:focus:visited {
-    color: $color_ofh-white;
-    outline: 3px solid $color_ofh-white;
+    color: $ofh-color-greyscale-white;
+    outline: 3px solid $ofh-color-greyscale-white;
     outline-offset: 1px;
     text-decoration: none;
   }
 
   &:focus-visible {
-    outline: 3px solid $color_ofh-white;
+    outline: 3px solid $ofh-color-greyscale-white;
   }
 
   &:active {
@@ -72,11 +72,11 @@
   }
 }
 
-//
+
 // Default link hover only styling
-//
+
 // Usage: @include ofh-link-style-hover;
-//
+
 
 @mixin ofh-link-style-hover {
   &:hover {
@@ -121,6 +121,6 @@
   }
 
   &:focus {
-    color: $ofh-focus-text-color;
+    color: $ofh-color-foreground-brand-blue-navy;
   }
 }

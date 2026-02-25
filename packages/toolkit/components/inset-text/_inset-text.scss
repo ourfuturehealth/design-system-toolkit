@@ -16,8 +16,9 @@
   @include ofh-responsive-margin(7, 'top');
   @include ofh-responsive-padding(4);
 
-  background-color: $color_ofh-white;
-  border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
+  background-color: $ofh-color-greyscale-white;
+  border-left: $ofh-border-width-inset-text solid
+    $ofh-color-brand-blue-royal-3-main;
 
   @include mq($media-type: print) {
     border-color: $ofh-text-black-color;

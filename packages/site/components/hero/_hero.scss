@@ -11,17 +11,17 @@
 
 .ofh-hero-ds {
   @include ofh-responsive-padding(6, 'top', 'bottom');
-  background-color: $color_ofh-neutral-yellow;
+
+  background-color: $ofh-color-background-neutral-yellow;
   color: $ofh-text-black-color;
   position: relative; /* [1] */
 }
 
 .ofh-hero-ds__wrapper {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
   border-radius: ofh-border-radius;
 
   @include ofh-responsive-padding(6);
-  
 }
 
 /**
@@ -40,12 +40,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media only screen { /* [4] */
+  @media only screen {
+    /* [4] */
     min-height: 200px;
   }
 
   @include mq($from: tablet) {
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 320px; /* [5] */
 
       .ofh-hero__overlay {
@@ -59,9 +61,10 @@
   }
 
   .ofh-hero-ds__overlay {
-    background-color: $color_transparent_ofh-blue-50; /* [7] */
+    background-color: rgb(1 29 75 / 50%); /* [7] */
 
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 200px; /* [6] */
     }
 
@@ -86,7 +89,7 @@
 
 .ofh-hero-ds--image-description {
   .ofh-hero-ds-content {
-    background-color: $color_ofh-brand-yellow;
+    background-color: $ofh-color-brand-yellow-3-main;
     color: $ofh-text-white-color;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
@@ -111,7 +114,7 @@
 
       &::before,
       &::after {
-        border: solid 32px $color_ofh-brand-yellow; /* [8] */
+        border: solid 32px $ofh-color-brand-yellow-3-main; /* [8] */
         content: '';
         display: block;
         height: 0;
@@ -126,7 +129,8 @@
       }
     }
 
-    @include mq(375px) { /* [15] */
+    @include mq(375px) {
+      /* [15] */
       width: 85%;
     }
 
@@ -147,7 +151,8 @@
       padding: 0;
     }
 
-    @media screen and (-ms-high-contrast: active) { /* [14] */
+    @media screen and (-ms-high-contrast: active) {
+      /* [14] */
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;

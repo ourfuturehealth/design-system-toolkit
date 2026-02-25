@@ -1,11 +1,14 @@
 # Coding standards
 
-> **Warning**<br>
-> This documentation is out-of-date and needs reviewing and updating.
+This document outlines the coding standards for the Our Future Health design system toolkit monorepo.
+
+**Automated Enforcement:** These standards are enforced through linting tools (ESLint, Stylelint, Prettier). See [Linting](linting.md) for configuration details.
 
 - [HTML](#html)
 - [SCSS](#scss)
 - [JavaScript](#javascript)
+- [TypeScript](#typescript)
+- [Code Formatting](#code-formatting)
 - [Nunjucks](#nunjucks)
 - [Components](#components)
 
@@ -38,9 +41,11 @@ HTML attributes should come in this particular order for easier reading of code.
 
 Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.
 
-----
+---
 
 ## SCSS
+
+All SCSS files are linted with Stylelint using a shared configuration across the monorepo. See [Linting](linting.md) for details.
 
 ### Class naming convention
 
@@ -82,9 +87,9 @@ For example:
 
 #### BEM further reading:
 
-* [Get BEM](http://getbem.com/introduction/)
-* [BEM Resources](https://github.com/sturobson/BEM-resources)
-* [Harry Roberts - BEMIT: Taking the BEM Naming Convention a Step Further](https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/)
+- [Get BEM](http://getbem.com/introduction/)
+- [BEM Resources](https://github.com/sturobson/BEM-resources)
+- [Harry Roberts - BEMIT: Taking the BEM Naming Convention a Step Further](https://csswizardry.com/2015/08/bemit-taking-the-bem-naming-convention-a-step-further/)
 
 ### Nesting
 
@@ -134,6 +139,7 @@ Avoid including multiple elements when naming classes.
 Create separate selectors rather using an `&` in the middle of a selector.
 
 This enables the Our Future Health styles to be used inside other applications, where, for example, an ID is being used to isolate a section of a page to style separately from the rest of an application; e.g.
+
 ```scss
 div#ofh-ers {
 ...
@@ -222,9 +228,74 @@ Example:
 
 ---
 
-## Javascript
+## JavaScript
 
-We're still writing our JavaScript style guide, as we're only just figuring it out ourselves.
+All JavaScript files are linted with ESLint using a shared configuration across the monorepo. See [Linting](linting.md) for details.
+
+### General Principles
+
+- Use `const` by default, `let` when reassignment is needed, never `var`
+- Use arrow functions for callbacks and anonymous functions
+- Use template literals for string interpolation
+- Use destructuring for object and array access where appropriate
+- Prefer `===` over `==` (except when comparing to `null`)
+
+### Code Style
+
+- **Indentation:** 2 spaces (enforced by Prettier)
+- **Quotes:** Single quotes for strings (enforced by ESLint and Prettier)
+- **Semicolons:** Always use semicolons (enforced by ESLint and Prettier)
+- **Naming:**
+  - Variables and functions: camelCase (e.g., `getUserName`)
+  - Constants: UPPER_SNAKE_CASE (e.g., `API_BASE_URL`)
+  - Classes: PascalCase (e.g., `UserAccount`)
+  - Private properties: Prefix with underscore (e.g., `_privateMethod`)
+
+### Jest Testing
+
+The toolkit package uses Jest for testing. Test globals (`describe`, `test`, `expect`, etc.) are automatically available without imports.
+
+---
+
+## TypeScript
+
+The React components and example consumer app packages use TypeScript. All TypeScript files are linted with ESLint + TypeScript ESLint.
+
+### General Principles
+
+- Prioritize explicit return types for functions
+- Use interfaces for object shapes, types for unions/intersections
+- Avoid `any` - use `unknown` if type is truly unknown
+- Enable strict mode features (already configured)
+
+### Code Style
+
+- Follow the same JavaScript code style principles
+- Use TypeScript-specific features: generics, utility types, type guards
+- Prefer type inference when obvious, explicit types when needed for clarity
+
+---
+
+## Code Formatting
+
+All code is automatically formatted with Prettier to ensure consistency.
+
+### Prettier Configuration
+
+The monorepo uses a shared Prettier configuration (`.prettierrc` at root):
+
+- **Single quotes** for strings (aligned with ESLint and Stylelint)
+- **Semicolons** always
+- **2 spaces** for indentation
+- **100 character** line length
+- **Trailing commas** for multi-line arrays/objects (ES5 compatible)
+
+### Editor Integration
+
+Install the Prettier extension for your editor:
+
+- VS Code: `esbenp.prettier-vscode`
+- Configure "Format on Save" for automatic formatting
 
 ---
 
@@ -232,14 +303,14 @@ We're still writing our JavaScript style guide, as we're only just figuring it o
 
 We have chosen as Nunjucks as the templating language for Our Future Health design system toolkit components. We expose those templates as reusable chunks of code: macros. Developers import macros into their application, call them as per documentation and provide data to its arguments.
 
-To provide a level of consistency for developers we have standardised argument names, their expected input, use and placement. There are expectations, and  if so they are documented accordingly.
+To provide a level of consistency for developers we have standardised argument names, their expected input, use and placement. There are expectations, and if so they are documented accordingly.
 
 ### Specifying content
 
-When providing *content* to a macro, say for a label or a button, we accept two argument options:
+When providing _content_ to a macro, say for a label or a button, we accept two argument options:
 
- - `text` accepts a plain string and is the default way of passing content
- - `html` accepts html markup. In the template we will not escape html so it will be rendered. In a scenario where both text and html are set, html argument will take precedence over text.
+- `text` accepts a plain string and is the default way of passing content
+- `html` accepts html markup. In the template we will not escape html so it will be rendered. In a scenario where both text and html are set, html argument will take precedence over text.
 
 Example:
 
@@ -267,7 +338,7 @@ We should use **camelCase** for naming attributes.
 
 ### Specifying multiple items
 
-When a component accepts a *single array of items* for an output, such as checkboxes or radios, we accept an ***"items"*** array of objects.  Table component is an exception is it can contain multiple array for rows, head, footer where there is need to for more specific names.
+When a component accepts a _single array of items_ for an output, such as checkboxes or radios, we accept an **_"items"_** array of objects. Table component is an exception is it can contain multiple array for rows, head, footer where there is need to for more specific names.
 
 ### Use of classes to specify variants
 
@@ -276,13 +347,13 @@ When a component has multiple visual presentations, such as the care cards, we m
 Care card urgent (red) example:
 
 ```html
-<div class="ofh-card ofh-card--care ofh-card--care--urgent">
+<div class="ofh-card ofh-card--care ofh-card--care--urgent"></div>
 ```
 
 Care card emergency (red and black) example:
 
 ```html
-<div class="ofh-card ofh-card--care ofh-card--care--emergency">
+<div class="ofh-card ofh-card--care ofh-card--care--emergency"></div>
 ```
 
 ---
@@ -300,10 +371,11 @@ For example, `.ofh-card`.
 Components must follow the conventions described in our SCSS coding standards.
 
 Components must:
-* use classes for child elements, scoped to the parent component
-* be flexible, not set a width or external padding and margins
-* set internal margins in a single direction
-* not rely on any other selector outside of the component scss file to style its children
+
+- use classes for child elements, scoped to the parent component
+- be flexible, not set a width or external padding and margins
+- set internal margins in a single direction
+- not rely on any other selector outside of the component scss file to style its children
 
 #### Component folder structure and naming
 

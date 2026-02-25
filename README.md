@@ -119,7 +119,7 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
 
 5. **Verify**: Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and test installation
 
-6. **Announce**: Post in #design-system-announcements Slack channel
+6. **Announce**: Post in #design-system Slack channel
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 

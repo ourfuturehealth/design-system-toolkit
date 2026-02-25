@@ -1,0 +1,173 @@
+// ==========================================================================
+// SETTINGS / #TOKENS-STATIC
+// ==========================================================================
+
+// Static design tokens from Figma
+// Collection: static (Mode: Mode 1)
+
+// This file contains tokens that don't change with viewport size:
+// - Typography (fonts, weights)
+// - Stroke weights (borders)
+// - Border radius
+// - Semantic colors (foreground, background, border with context)
+
+// Typography - Fonts & Weights
+// ==========================================================================
+
+// Font family
+
+$ofh-typography-font-source-sans-pro: 'Source Sans Pro', sans-serif;
+
+// Font weights
+
+$ofh-typography-weight-regular: 400;
+$ofh-typography-weight-semibold: 600;
+
+// Stroke Weights
+// ==========================================================================
+// Border/stroke thickness values
+
+$ofh-stroke-weight-1: $ofh-size-1; // 1px
+$ofh-stroke-weight-2: $ofh-size-2; // 2px
+$ofh-stroke-weight-4: $ofh-size-4; // 4px
+$ofh-stroke-weight-8: $ofh-size-8; // 8px
+
+// Border Radius
+// ==========================================================================
+// Corner radius values
+
+$ofh-radius-4: $ofh-size-4; // 4px
+$ofh-radius-8: $ofh-size-8; // 8px
+$ofh-radius-16: $ofh-size-16; // 16px
+$ofh-radius-24: $ofh-size-24; // 24px
+$ofh-radius-circular: $ofh-size-10000; // Fully rounded
+
+// Semantic Colors - Background
+// ==========================================================================
+// Background colors with semantic meaning
+
+// Primary backgrounds
+$ofh-color-background-primary: $ofh-color-greyscale-white; // BREAKING: Was grey, now white
+$ofh-color-background-secondary: $ofh-color-greyscale-6;
+$ofh-color-background-tertiary: $ofh-color-greyscale-5;
+
+// Secondary background tints
+$ofh-color-background-secondary-blue: $ofh-color-background-neutral-blue;
+$ofh-color-background-secondary-yellow: $ofh-color-background-neutral-yellow;
+$ofh-color-background-secondary-grey: $ofh-color-background-neutral-grey;
+
+// Brand backgrounds
+$ofh-color-background-brand-blue-navy: $ofh-color-brand-blue-navy-6;
+$ofh-color-background-brand-blue-navy-inverted: $ofh-color-brand-blue-navy-2;
+$ofh-color-background-brand-blue-royal: $ofh-color-brand-blue-royal-6;
+$ofh-color-background-brand-blue-aqua: $ofh-color-brand-blue-aqua-6;
+$ofh-color-background-brand-green-teal: $ofh-color-brand-green-teal-6;
+$ofh-color-background-brand-green-lime: $ofh-color-brand-green-lime-6;
+$ofh-color-background-brand-yellow: $ofh-color-brand-yellow-6;
+$ofh-color-background-brand-orange: $ofh-color-brand-orange-6;
+$ofh-color-background-brand-red: $ofh-color-brand-red-6;
+
+// Feedback backgrounds
+$ofh-color-background-feedback-error-1: $ofh-color-feedback-error-4;
+$ofh-color-background-feedback-error-2: $ofh-color-feedback-error-2-main;
+$ofh-color-background-feedback-success-1: $ofh-color-feedback-success-4;
+$ofh-color-background-feedback-success-2: $ofh-color-feedback-success-2-main;
+$ofh-color-background-feedback-warning-1: $ofh-color-feedback-warning-4;
+$ofh-color-background-feedback-warning-2: $ofh-color-feedback-warning-2-main;
+$ofh-color-background-feedback-info-1: $ofh-color-feedback-info-4;
+$ofh-color-background-feedback-info-2: $ofh-color-feedback-info-2-main;
+
+// Button backgrounds
+$ofh-color-background-button-default: $ofh-color-feedback-interactive-3-main; // BREAKING: Now blue
+$ofh-color-background-button-hover: $ofh-color-feedback-interactive-2;
+$ofh-color-background-button-active: $ofh-color-feedback-interactive-2;
+$ofh-color-background-button-default-inverted: $ofh-color-greyscale-white;
+$ofh-color-background-button-hover-inverted: $ofh-color-greyscale-6;
+$ofh-color-background-button-active-inverted: $ofh-color-greyscale-5;
+
+// Semantic Colors - Foreground
+// ==========================================================================
+// Text and icon colors with semantic meaning
+
+// Primary text colors
+$ofh-color-foreground-primary: $ofh-color-greyscale-1;
+$ofh-color-foreground-primary-inverted: $ofh-color-greyscale-white;
+$ofh-color-foreground-secondary: $ofh-color-greyscale-2;
+
+// Brand foreground colors
+$ofh-color-foreground-brand-blue-navy: $ofh-color-brand-blue-navy-3-main;
+$ofh-color-foreground-brand-blue-royal: $ofh-color-brand-blue-royal-1;
+$ofh-color-foreground-brand-blue-aqua: $ofh-color-brand-blue-aqua-1;
+$ofh-color-foreground-brand-green-teal: $ofh-color-brand-green-teal-1;
+$ofh-color-foreground-brand-green-lime: $ofh-color-brand-green-lime-1;
+$ofh-color-foreground-brand-yellow: $ofh-color-brand-yellow-1;
+$ofh-color-foreground-brand-orange: $ofh-color-brand-orange-1;
+$ofh-color-foreground-brand-red: $ofh-color-brand-red-1;
+
+// Feedback foreground colors
+$ofh-color-foreground-feedback-error-1: $ofh-color-feedback-error-1;
+$ofh-color-foreground-feedback-error-2: $ofh-color-feedback-error-2-main;
+$ofh-color-foreground-feedback-success-1: $ofh-color-feedback-success-1;
+$ofh-color-foreground-feedback-success-2: $ofh-color-feedback-success-2-main;
+$ofh-color-foreground-feedback-warning-1: $ofh-color-feedback-warning-1;
+$ofh-color-foreground-feedback-warning-2: $ofh-color-feedback-warning-2-main;
+$ofh-color-foreground-feedback-info-1: $ofh-color-feedback-info-1;
+$ofh-color-foreground-feedback-info-2: $ofh-color-feedback-info-2-main;
+
+// Button foreground colors
+$ofh-color-foreground-button-default: $ofh-color-feedback-interactive-3-main;
+$ofh-color-foreground-button-hover: $ofh-color-feedback-interactive-2;
+$ofh-color-foreground-button-active: $ofh-color-feedback-interactive-2;
+$ofh-color-foreground-button-default-inverted: $ofh-color-greyscale-white;
+$ofh-color-foreground-button-hover-inverted: $ofh-color-greyscale-6;
+$ofh-color-foreground-button-active-inverted: $ofh-color-greyscale-5;
+
+// Link foreground colors
+$ofh-color-foreground-link-default: $ofh-color-feedback-interactive-3-main;
+$ofh-color-foreground-link-hover: $ofh-color-feedback-interactive-2;
+$ofh-color-foreground-link-visited: $ofh-color-feedback-interactive-1;
+$ofh-color-foreground-link-active: $ofh-color-feedback-interactive-2;
+$ofh-color-foreground-link-default-inverted: $ofh-color-greyscale-white;
+$ofh-color-foreground-link-hover-inverted: $ofh-color-greyscale-6;
+$ofh-color-foreground-link-visited-inverted: $ofh-color-feedback-interactive-5;
+$ofh-color-foreground-link-active-inverted: $ofh-color-greyscale-5;
+
+// Breadcrumb foreground colors
+$ofh-color-foreground-breadcrumb-default: $ofh-color-brand-blue-navy-3-main;
+$ofh-color-foreground-breadcrumb-hover: $ofh-color-feedback-info-1;
+$ofh-color-foreground-breadcrumb-visited: $ofh-color-feedback-interactive-1;
+$ofh-color-foreground-breadcrumb-active: $ofh-color-feedback-info-2-main;
+
+// Semantic Colors - Border
+// ==========================================================================
+// Border/stroke colors with semantic meaning
+
+// Primary border colors
+$ofh-color-border-primary: $ofh-color-greyscale-5;
+$ofh-color-border-primary-inverted: $ofh-color-greyscale-black;
+$ofh-color-border-secondary: $ofh-color-greyscale-4;
+$ofh-color-border-brand: $ofh-color-brand-blue-navy-3-main;
+
+// Feedback border colors
+$ofh-color-border-feedback-error: $ofh-color-feedback-error-2-main;
+$ofh-color-border-feedback-success: $ofh-color-feedback-success-2-main;
+$ofh-color-border-feedback-warning: $ofh-color-feedback-warning-2-main;
+$ofh-color-border-feedback-info: $ofh-color-feedback-info-2-main;
+$ofh-color-border-feedback-focus: $ofh-color-feedback-interactive-3-main;
+$ofh-color-border-feedback-focus-inverted: $ofh-color-greyscale-white;
+
+// Button border colors
+$ofh-color-border-button-default: $ofh-color-feedback-interactive-3-main;
+$ofh-color-border-button-hover: $ofh-color-feedback-interactive-2;
+$ofh-color-border-button-active: $ofh-color-feedback-interactive-2;
+$ofh-color-border-button-default-inverted: $ofh-color-greyscale-white;
+$ofh-color-border-button-hover-inverted: $ofh-color-greyscale-6;
+$ofh-color-border-button-active-inverted: $ofh-color-greyscale-5;
+
+// Card border colors
+$ofh-color-border-card-default: $ofh-color-greyscale-5;
+$ofh-color-border-card-hover: $ofh-color-greyscale-4;
+
+// Input border colors
+$ofh-color-border-input-default: $ofh-color-greyscale-2;
+$ofh-color-border-input-active: $ofh-color-greyscale-1;

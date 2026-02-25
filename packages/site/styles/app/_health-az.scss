@@ -7,7 +7,6 @@
  */
 
 .app-style-guide-a-z {
-
   .ofh-a-z-list--results-items {
     @include ofh-responsive-margin(9, 'bottom');
   }
@@ -17,10 +16,10 @@
   }
 
   h2 {
-    background: $color_ofh-brand-blue;
+    background: $ofh-color-brand-blue-royal-3-main;
     color: $ofh-text-white-color;
     display: inline-block;
-    padding: ofh-spacing(2) + $ofh-box-shadow-link;
+    padding: ofh-spacing(2) + $ofh-size-4;
   }
 
 }

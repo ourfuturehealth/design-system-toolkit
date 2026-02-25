@@ -3,9 +3,9 @@ name: Create release
 on:
   push:
     tags:
-      - "v*" # Toolkit releases (backward compatible)
-      - "toolkit-v*" # Toolkit releases (new pattern)
-      - "react-v*" # React components releases
+      - 'v*' # Toolkit releases (backward compatible)
+      - 'toolkit-v*' # Toolkit releases (new pattern)
+      - 'react-v*' # React components releases
 
 jobs:
   build:
@@ -17,9 +17,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version: '22.x'
 
       - name: Enable Corepack and pnpm
         run: |
