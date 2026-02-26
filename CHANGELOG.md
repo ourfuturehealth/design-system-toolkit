@@ -2,21 +2,94 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-Whilst in the alpha phase, we don't yet adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), but we aim to once stable.
+We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as close as we can.
 
-## [v4.0.0] - 2026-02-25
+## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 🎉 Major Change: Monorepo Restructure
+### 2026-02-26
 
-This release introduces a complete restructuring of the repository into a monorepo architecture with independent package versioning.
+#### @ourfuturehealth/toolkit 4.1.0 (`toolkit-v4.1.0`)
 
-### ⚠️ BREAKING CHANGES
+##### ⚠️ BREAKING CHANGES (from toolkit `4.0.0`)
 
-**Installation Method Changed**
+- Added a new spacing point: `1 => 2px`
+- Shifted previous non-zero spacing indices by `+1`
+- Affected APIs/usages:
+  - `ofh-spacing(...)`
+  - `ofh-responsive-margin(...)` / `ofh-responsive-padding(...)`
+  - spacing utility classes: `ofh-u-margin-*`, `ofh-u-padding-*`
+- Static token rename alignment:
+  - Removed: `$ofh-color-background-brand-blue-navy-inverted`
+  - Added: `$ofh-color-background-brand-blue-navy-1`, `$ofh-color-background-brand-blue-navy-2`
 
-Projects must update their installation syntax to specify the package subdirectory:
+##### Added
 
-**Before (v3.4.3 and earlier):**
+- Figma-aligned token architecture in core settings:
+  - `_tokens-core.scss`
+  - `_tokens-breakpoint.scss`
+  - `_tokens-static.scss`
+  - `_tokens-theme.scss`
+- New toolkit theme entrypoints:
+  - `ofh-participant.scss`
+  - `ofh-research.scss`
+- Token-based spacing/typography utilities aligned to the new model.
+
+##### Changed
+
+- Broad code/design alignment across toolkit and site styles to match updated design tokens.
+- Updated typography usage to semantic scale keys (for example `h1`, `h2`, `lead`, `paragraph`).
+- Updated spacing documentation/examples to reflect the new spacing scale (including `2px` point).
+- Updated migration guidance for spacing index shift and v4.1.0 applicability.
+- Refined release-versioning strategy to focus on monorepo versioning model.
+- Added release communication notes/template to release process documentation.
+
+##### Removed
+
+- Legacy toolkit settings files replaced by token model:
+  - `_colours.scss`
+  - `_globals.scss`
+  - `_spacing.scss`
+  - `_typography.scss`
+  - `_tokens-colours.scss`
+- Semantic token bridge/audit artifacts:
+  - `packages/toolkit/core/settings/_tokens-semantic.scss`
+  - semantic import from `packages/toolkit/core/settings/_all.scss`
+  - `docs/tokens-semantic-audit.md`
+  - `scripts/generate-tokens-semantic-audit.mjs`
+  - root `audit:tokens-semantic` script
+
+##### Fixed
+
+- Restored docs-site Sass watch/live reload reliability.
+- Updated release workflow and docs consistency around package-prefixed tag usage.
+
+##### Migration Guide
+
+See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
+
+#### @ourfuturehealth/react-components 0.1.0 (`react-v0.1.0`)
+
+##### Added
+
+- Theme-aware stylesheet exports:
+  - `@ourfuturehealth/react-components/styles/participant`
+  - `@ourfuturehealth/react-components/styles/research`
+
+##### Changed
+
+- Kept `@ourfuturehealth/react-components/styles` as a backward-compatible alias to participant styles.
+- Added multi-theme build flow via `scripts/build-themes.mjs` and Vite theme mode.
+- Updated lint/test scripts and package documentation for monorepo git-tag installation and theme style usage.
+
+### 2026-02-25
+
+#### @ourfuturehealth/toolkit 4.0.0 (`toolkit-v4.0.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+Projects must update installation syntax to specify package name and subdirectory.
+
+Before (`v3.4.3` and earlier):
 
 ```json
 {
@@ -26,7 +99,7 @@ Projects must update their installation syntax to specify the package subdirecto
 }
 ```
 
-**After (v4.0.0+):**
+After (monorepo):
 
 ```json
 {
@@ -36,109 +109,36 @@ Projects must update their installation syntax to specify the package subdirecto
 }
 ```
 
-**Package Structure Changed**
-
-- All toolkit files moved from repository root to `packages/toolkit/`
-- Package name changed: `ofh-design-system-toolkit` → `@ourfuturehealth/toolkit`
-- Documentation site moved to `packages/site/`
-
-**Release Tag Format Changed**
-
-- Toolkit releases: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
-- React component releases: `react-v*` (e.g., `react-v0.0.1`)
-
-**Who is affected:**
-
-- Projects using `#main` branch (must update immediately)
-- Projects upgrading from v3.4.3 or earlier (update when ready)
-- Projects using version tags like `#v3.4.3` are **NOT affected** (tags are immutable)
-
-### Added
-
-#### @ourfuturehealth/toolkit (v4.0.0)
+##### Added
 
 - Monorepo package structure with independent versioning
 - `prepare` script for automatic building when installed from git
 - Package metadata for monorepo subdirectory installation
 
-#### @ourfuturehealth/react-components (v0.0.1)
+##### Changed
 
-- **New package**: React component library
+- All toolkit files moved from repository root to `packages/toolkit/`
+- Package name changed: `ofh-design-system-toolkit` → `@ourfuturehealth/toolkit`
+- Release tag format changed to package-prefixed tags (`toolkit-v*`, `react-v*`)
+
+#### @ourfuturehealth/react-components 0.0.1 (`react-v0.0.1`)
+
+##### Added
+
+- New package: React component library
 - Initial components: `Button`, `TextInput`
-- Full TypeScript support
-- Storybook integration for development and documentation
-- Vitest testing setup
-- Built with Vite
+- TypeScript support, Storybook integration, and Vitest setup
 
-#### packages/site
+#### Monorepo/Docs (no package tag)
 
-- Documentation site moved to dedicated package
-- Dual build system: Webpack for main pages, Gulp dist for iframe examples
-- Updated to consume toolkit from workspace
-
-#### packages/example-react-consumer-app
-
-- Example application demonstrating React component library usage
-- Hot reload development workflow
-- Shows integration patterns
-
-### Changed
-
-#### Build System
-
-- Introduced Turborepo for build orchestration
-- Switched from npm to pnpm for package management
-- Workspace-based dependency management
-- Parallel task execution across packages
-
-#### Development Workflow
-
-- New dev scripts for each package: `dev:toolkit`, `dev:site`, `dev:react-components`, `dev:react-consumer`
-- Unified storybook command
-- Watch mode with hot reload across packages
-
-#### Node.js Requirements
-
-- **Minimum**: Node.js 20.19.0 (required by Vite 7)
-- **Recommended**: Node.js 24.13.1 LTS
-- Added engines field to enforce minimum versions
-
-#### Documentation
-
-- Updated all installation guides for monorepo structure
-- Added comprehensive monorepo migration guide
-- Updated contributing documentation
-- Added React component consumption guide
-- Updated release process documentation
-
-### Migration Guide
-
-See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions.
-
-**Quick migration checklist:**
-
-1. Update package.json installation syntax
-2. Update import paths if using modules
-3. Update template search paths if using Nunjucks
-4. Update build configuration for new package location
-
-### Technical Details
-
-**Packages:**
-
-- `@ourfuturehealth/toolkit` - Core design system (v4.0.0)
-- `@ourfuturehealth/react-components` - React components (v0.0.1)
-- `site` - Documentation (not versioned)
-- `example-react-consumer-app` - Example app (not versioned)
-
-**Distribution:**
-All packages are distributed via GitHub releases. No npm registry publishing required.
-
-**Security:**
-Minimatch vulnerability fix from v3.4.3 was carried over via pnpm overrides after project restructure.
-Ran pnpm audit and added other vulnerability override fixes to reduce vulnerabilities.
+- Documentation site moved to `packages/site`
+- Example consumer app added at `packages/example-react-consumer-app`
+- Turborepo and pnpm workspace tooling introduced
+- Installation, migration, and release docs updated for monorepo structure
 
 ---
+
+## Legacy Single-Package Releases (`v*`)
 
 ## [v3.4.3] - 2026-02-23
 
