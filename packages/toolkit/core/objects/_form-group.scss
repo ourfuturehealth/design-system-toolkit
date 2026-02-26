@@ -1,5 +1,5 @@
 .ofh-form-group {
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 
   .ofh-form-group:last-of-type {
     margin-bottom: 0; // Remove margin from last item in nested groups
@@ -7,12 +7,12 @@
 }
 
 .ofh-form-group--wrapper {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
 .ofh-form-group--error {
   border-left: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
-  padding-left: ofh-spacing(3);
+  padding-left: ofh-spacing(4);
 
   .ofh-form-group {
     // Reset error styles in nested form groups that might have error class

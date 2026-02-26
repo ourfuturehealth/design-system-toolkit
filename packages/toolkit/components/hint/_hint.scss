@@ -7,7 +7,7 @@
 
   color: $ofh-color-foreground-secondary;
   display: block;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
 }
 
 // Reduces margin-bottom of hint when used after the default label (no class)
@@ -21,14 +21,14 @@
 // Users with these browsers will see the default size margin (5px larger).
 
 .ofh-label:not(.ofh-label--m, .ofh-label--l, .ofh-label--xl) + .ofh-hint {
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: ofh-spacing(3);
 }
 
 // Reduces visual spacing of label when there is a hint
 
 .ofh-label--l + .ofh-hint,
 .ofh-label--xl + .ofh-hint {
-  margin-top: -(ofh-spacing(1));
+  margin-top: -(ofh-spacing(2));
 }
 
 // Reduces margin-bottom of hint when used after the default legend (no class)
@@ -43,11 +43,11 @@
 
 .ofh-fieldset__legend:not(.ofh-fieldset__legend--m, .ofh-fieldset__legend--l, .ofh-fieldset__legend--xl) + .ofh-hint {
   /* stylelint-disable-line max-line-length */
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: ofh-spacing(3);
 }
 
 // Reduces visual spacing of legend when there is a hint
 
 .ofh-fieldset__legend + .ofh-hint {
-  margin-top: -(ofh-spacing(1));
+  margin-top: -(ofh-spacing(2));
 }

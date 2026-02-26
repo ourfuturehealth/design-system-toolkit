@@ -4,27 +4,27 @@ p code,
 td code {
   background-color: $ofh-color-greyscale-6;
   color: $ofh-color-feedback-error-2-main;
-  padding: 2px ofh-spacing(2);
+  padding: 2px ofh-spacing(3);
   word-break: break-word;
 }
 
 // Highlight code in a block
 .app-pre {
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 
   background: $ofh-color-greyscale-white;
   border: 1px solid $ofh-color-border-primary;
   margin-top: 0;
   overflow: auto;
-  padding: ofh-spacing(3);
+  padding: ofh-spacing(4);
   position: relative;
 
   & + h2 {
-    @include ofh-responsive-padding(4, 'top');
+    @include ofh-responsive-padding(5, 'top');
   }
 
   & + h3 {
-    @include ofh-responsive-padding(2, 'top');
+    @include ofh-responsive-padding(3, 'top');
   }
 }
 

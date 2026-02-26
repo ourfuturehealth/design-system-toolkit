@@ -1,19 +1,19 @@
 .ofh-footer-ds {
   @include clearfix();
   @include print-hide();
-  @include ofh-responsive-padding(5, bottom);
-  @include ofh-responsive-padding(5, top);
+  @include ofh-responsive-padding(6, bottom);
+  @include ofh-responsive-padding(6, top);
   @include ofh-font($size: paragraph-small);
 
   background-color: $ofh-color-brand-blue-navy-3-main;
-  border-top: ofh-spacing(2) solid $ofh-color-greyscale-7;
-  margin-top: ofh-spacing(9);
+  border-top: ofh-spacing(3) solid $ofh-color-greyscale-7;
+  margin-top: ofh-spacing(10);
 }
 
 .footer-ds-text {
   color: $ofh-color-greyscale-white;
   float: left;
-  padding-top: ofh-spacing(5);
+  padding-top: ofh-spacing(6);
 
   p {
     @include ofh-font($size: paragraph);
@@ -23,7 +23,7 @@
 }
 
 .ofh-footer-ds__list {
-  @include ofh-responsive-padding(4, bottom);
+  @include ofh-responsive-padding(5, bottom);
 
   list-style-type: none;
   margin: 0;
@@ -41,7 +41,7 @@
 
   @include mq($from: desktop) {
     float: left;
-    margin-right: ofh-spacing(5);
+    margin-right: ofh-spacing(6);
   }
 }
 

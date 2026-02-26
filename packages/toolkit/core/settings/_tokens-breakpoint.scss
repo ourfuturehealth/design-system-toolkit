@@ -31,6 +31,14 @@ $ofh-space-responsive-scale: (
     // Desktop: 0
   ),
   1: (
+    null: $ofh-size-2,
+    // Mobile: 2px
+    tablet: $ofh-size-2,
+    // Tablet: 2px
+    desktop: $ofh-size-2,
+    // Desktop: 2px
+  ),
+  2: (
     null: $ofh-size-4,
     // Mobile: 4px
     tablet: $ofh-size-4,
@@ -38,7 +46,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-4,
     // Desktop: 4px
   ),
-  2: (
+  3: (
     null: $ofh-size-8,
     // Mobile: 8px
     tablet: $ofh-size-8,
@@ -46,7 +54,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-8,
     // Desktop: 8px
   ),
-  3: (
+  4: (
     null: $ofh-size-12,
     // Mobile: 12px
     tablet: $ofh-size-12,
@@ -54,7 +62,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-12,
     // Desktop: 12px
   ),
-  4: (
+  5: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-16,
@@ -62,7 +70,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-16,
     // Desktop: 16px
   ),
-  5: (
+  6: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-24,
@@ -70,7 +78,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-24,
     // Desktop: 24px
   ),
-  6: (
+  7: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-24,
@@ -78,7 +86,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-32,
     // Desktop: 32px
   ),
-  7: (
+  8: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-32,
@@ -86,7 +94,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-40,
     // Desktop: 40px
   ),
-  8: (
+  9: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-32,
@@ -94,7 +102,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-48,
     // Desktop: 48px
   ),
-  9: (
+  10: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-32,
@@ -102,7 +110,7 @@ $ofh-space-responsive-scale: (
     desktop: $ofh-size-56,
     // Desktop: 56px
   ),
-  10: (
+  11: (
     null: $ofh-size-16,
     // Mobile: 16px
     tablet: $ofh-size-32,

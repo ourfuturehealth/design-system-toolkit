@@ -4,12 +4,12 @@
 
 .app-example {
   @include top-and-bottom;
-  @include ofh-responsive-margin(5, 'bottom');
-  @include ofh-responsive-margin(3, 'top');
-  @include ofh-responsive-padding(5, 'bottom');
-  @include ofh-responsive-padding(5, 'left');
-  @include ofh-responsive-padding(5, 'right');
-  @include ofh-responsive-padding(7, 'top');
+  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(4, 'top');
+  @include ofh-responsive-padding(6, 'bottom');
+  @include ofh-responsive-padding(6, 'left');
+  @include ofh-responsive-padding(6, 'right');
+  @include ofh-responsive-padding(8, 'top');
 
   border: 1px solid $ofh-color-greyscale-4;
   position: relative;
@@ -24,11 +24,11 @@
 }
 
 .app-example + h2 {
-  @include ofh-responsive-padding(4, 'top');
+  @include ofh-responsive-padding(5, 'top');
 }
 
 .app-example + h3 {
-  @include ofh-responsive-padding(2, 'top');
+  @include ofh-responsive-padding(3, 'top');
 }
 
 .app-example--white {
@@ -37,9 +37,9 @@
 
 // Image example
 .app-example--image {
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 
   & + h2 {
-    @include ofh-responsive-padding(4, 'top');
+    @include ofh-responsive-padding(5, 'top');
   }
 }

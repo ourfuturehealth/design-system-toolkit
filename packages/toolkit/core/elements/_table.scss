@@ -7,7 +7,7 @@
  */
 
 table {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'bottom');
 
   border-spacing: 0;
   vertical-align: top;
@@ -27,9 +27,9 @@ thead {
 th,
 td {
   @include ofh-typography-responsive('paragraph');
-  @include ofh-responsive-padding(3, 'bottom');
-  @include ofh-responsive-padding(4, 'right');
-  @include ofh-responsive-padding(3, 'top');
+  @include ofh-responsive-padding(4, 'bottom');
+  @include ofh-responsive-padding(5, 'right');
+  @include ofh-responsive-padding(4, 'top');
 
   border-bottom: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   text-align: left;

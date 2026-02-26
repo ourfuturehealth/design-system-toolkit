@@ -5,12 +5,12 @@
 .ofh-footer {
   @include clearfix();
   @include print-hide();
-  @include ofh-responsive-padding(5, bottom);
-  @include ofh-responsive-padding(5, top);
+  @include ofh-responsive-padding(6, bottom);
+  @include ofh-responsive-padding(6, top);
   @include ofh-font('paragraph-small');
 
   background-color: $ofh-color-greyscale-5;
-  border-top: ofh-spacing(1) solid $ofh-color-brand-yellow-3-main;
+  border-top: ofh-spacing(2) solid $ofh-color-brand-yellow-3-main;
 }
 
 .footer-text {
@@ -24,7 +24,7 @@
 }
 
 .ofh-footer__list {
-  @include ofh-responsive-padding(4, bottom);
+  @include ofh-responsive-padding(5, bottom);
 
   list-style-type: none;
   margin: 0;
@@ -42,7 +42,7 @@
 
   @include mq($from: desktop) {
     float: left;
-    margin-right: ofh-spacing(5);
+    margin-right: ofh-spacing(6);
   }
 }
 

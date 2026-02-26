@@ -2,8 +2,8 @@
    COMPONENTS/ #STATUS-FLAG
    ========================================================================== */
 .ofh-status-flag {
-  @include ofh-responsive-padding(4);
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-padding(5);
+  @include ofh-responsive-margin(9, 'bottom');
 
   border: $ofh-stroke-weight-4 solid $ofh-color-brand-blue-royal-3-main;
 

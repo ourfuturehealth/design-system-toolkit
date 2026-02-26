@@ -8,8 +8,8 @@
  */
 
 .ofh-error-summary {
-  @include ofh-responsive-padding(4);
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-padding(5);
+  @include ofh-responsive-margin(9, 'bottom');
 
   border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 
@@ -29,7 +29,7 @@
 
   margin-top: 0;
 
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
 .ofh-error-summary__body {
@@ -38,7 +38,7 @@
   p {
     margin-top: 0;
 
-    @include ofh-responsive-margin(4, 'bottom');
+    @include ofh-responsive-margin(5, 'bottom');
   }
 }
 

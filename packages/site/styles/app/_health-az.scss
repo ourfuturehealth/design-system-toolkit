@@ -8,7 +8,7 @@
 
 .app-style-guide-a-z {
   .ofh-a-z-list--results-items {
-    @include ofh-responsive-margin(9, 'bottom');
+    @include ofh-responsive-margin(10, 'bottom');
   }
 
   .ofh-back-to-top__link {
@@ -19,7 +19,7 @@
     background: $ofh-color-brand-blue-royal-3-main;
     color: $ofh-color-foreground-primary-inverted;
     display: inline-block;
-    padding: ofh-spacing(2) + $ofh-size-4;
+    padding: ofh-spacing(3) + $ofh-size-4;
   }
 
 }

@@ -10,8 +10,8 @@
  */
 
 .ofh-pagination {
-  @include ofh-responsive-margin(7, 'top');
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(8, 'bottom');
 }
 
 .ofh-pagination__list {
@@ -28,7 +28,7 @@
   }
 
   .ofh-pagination__title {
-    padding-left: ofh-spacing(5); /* [1] */
+    padding-left: ofh-spacing(6); /* [1] */
   }
 }
 
@@ -42,7 +42,7 @@
   }
 
   .ofh-pagination__title {
-    padding-right: ofh-spacing(5); /* [1] */
+    padding-right: ofh-spacing(6); /* [1] */
   }
 }
 

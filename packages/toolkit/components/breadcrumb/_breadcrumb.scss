@@ -95,7 +95,7 @@
   @include ofh-font('paragraph-small'); /* [4] */
 
   margin: 0;
-  padding-left: ofh-spacing(3);
+  padding-left: ofh-spacing(4);
   position: relative;
 
   @include mq($from: tablet) {

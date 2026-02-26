@@ -26,13 +26,13 @@
  */
 
 $card-border-width: 1px;
-$card-border-bottom-width: ofh-spacing(1);
+$card-border-bottom-width: ofh-spacing(2);
 $card-background: $ofh-color-greyscale-white;
 $card-border-color: $ofh-color-greyscale-5;
 $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
@@ -72,7 +72,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card__content {
   @include top-and-bottom();
-  @include ofh-responsive-padding(5);
+  @include ofh-responsive-padding(6);
 
   position: relative;
 }
@@ -80,7 +80,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 .ofh-card__heading,
 .ofh-card__metadata,
 .ofh-card__description {
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
 }
 
 /* Clickable card
@@ -126,11 +126,11 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 .ofh-card-group {
   @include flex();
 
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
   padding: 0;
 
   @include mq($until: desktop) {
-    margin-bottom: ofh-spacing(6);
+    margin-bottom: ofh-spacing(7);
   }
 
   + h2,
@@ -148,12 +148,12 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   margin-bottom: 0;
 
   .ofh-card {
-    margin-bottom: ofh-spacing(5);
+    margin-bottom: ofh-spacing(6);
   }
 
   @include mq($until: desktop) {
     .ofh-card {
-      margin-bottom: ofh-spacing(3);
+      margin-bottom: ofh-spacing(4);
     }
 
     &:last-child .ofh-card {
@@ -166,25 +166,25 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--feature {
-  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(8, 'top');
 }
 
 .ofh-card__heading--feature {
   background: $ofh-color-brand-yellow-3-main;
   color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
-  left: -(ofh-spacing(4) + $card-border-width); /* [5] */
-  margin-bottom: ofh-spacing(2);
-  margin-right: - ofh-spacing(4); /* [6] */
-  padding: ofh-spacing(2) ofh-spacing(4);
+  left: -(ofh-spacing(5) + $card-border-width); /* [5] */
+  margin-bottom: ofh-spacing(3);
+  margin-right: - ofh-spacing(5); /* [6] */
+  padding: ofh-spacing(3) ofh-spacing(5);
   position: relative;
-  top: - ofh-spacing(2);
+  top: - ofh-spacing(3);
 
   @include mq($from: tablet) {
-    left: -(ofh-spacing(5) + $card-border-width); /* [5] */
-    margin-right: - ofh-spacing(5); /* [6] */
-    padding: ofh-spacing(2) ofh-spacing(5);
-    top: - ofh-spacing(3);
+    left: -(ofh-spacing(6) + $card-border-width); /* [5] */
+    margin-right: - ofh-spacing(6); /* [6] */
+    padding: ofh-spacing(3) ofh-spacing(6);
+    top: - ofh-spacing(4);
   }
 }
 
@@ -196,7 +196,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--care {
-  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(8, 'top');
   @include care-card(
     $ofh-color-brand-blue-royal-3-main,
     $ofh-color-greyscale-white,
@@ -205,11 +205,11 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care__heading-container {
-  @include ofh-responsive-padding(5, 'left');
-  @include ofh-responsive-padding(5, 'right');
+  @include ofh-responsive-padding(6, 'left');
+  @include ofh-responsive-padding(6, 'right');
 
-  padding-bottom: ofh-spacing(3);
-  padding-top: ofh-spacing(3);
+  padding-bottom: ofh-spacing(4);
+  padding-top: ofh-spacing(4);
   position: relative;
 }
 

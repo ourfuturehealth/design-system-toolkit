@@ -494,6 +494,39 @@ Download the `ofh-design-system-toolkit-VERSION.zip` from [GitHub Releases](http
 
 **Important**: The `:packages/toolkit` suffix is required to install the toolkit package from the monorepo subdirectory.
 
+## Spacing Scale Migration (Index Shift, `@ourfuturehealth/toolkit` v4.1.0+)
+
+The spacing scale now includes a new `2px` point at index `1`.
+This is a breaking change from `v4.0.0` and applies from `v4.1.0` onward.
+
+To add this new point, spacing indices were shifted by `+1` for existing non-zero values.
+
+- `0` stays `0`
+- `1` is now `2px`
+- Previous `1..N` becomes `2..N+1`
+
+### What Changed
+
+- `ofh-spacing()` valid points changed from `0-9` to `0-10`
+- Responsive spacing points changed from `0-10` to `0-11`
+- Utility class suffixes for spacing (`ofh-u-margin-*`, `ofh-u-padding-*`) follow the same index shift
+
+### Required Updates for Consumers
+
+Update any spacing indices greater than zero by adding `1`.
+
+| Before | After |
+| --- | --- |
+| `ofh-spacing(1)` | `ofh-spacing(2)` |
+| `ofh-spacing(6)` | `ofh-spacing(7)` |
+| `@include ofh-responsive-margin(4, 'bottom')` | `@include ofh-responsive-margin(5, 'bottom')` |
+| `@include ofh-responsive-padding(8, 'top')` | `@include ofh-responsive-padding(9, 'top')` |
+| `ofh-u-margin-1` | `ofh-u-margin-2` |
+| `ofh-u-padding-top-4` | `ofh-u-padding-top-5` |
+| `ofh-u-margin-10` | `ofh-u-margin-11` |
+
+If you do not update these indices, spacing will render smaller than before.
+
 ## Benefits of the New Structure
 
 ### For Toolkit Maintainers

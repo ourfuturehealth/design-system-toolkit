@@ -6,7 +6,7 @@
 // Base button styles
 .ofh-button,
 a.ofh-button {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(6, 'bottom');
 
   -webkit-appearance: none;
   background-color: $ofh-color-background-button-default-inverted;
@@ -20,7 +20,7 @@ a.ofh-button {
   font-weight: 600;
   line-height: 28px;
   margin-top: 0;
-  padding: ofh-spacing(3) ofh-spacing(4);
+  padding: ofh-spacing(4) ofh-spacing(5);
   position: relative;
   text-align: center;
   text-decoration: underline;
@@ -32,7 +32,7 @@ a.ofh-button {
   @include mq($until: tablet) {
     font-size: 16px;
     line-height: 24px;
-    padding: 12px ofh-spacing(3); // 12px not defined in $ofh-spacing-points
+    padding: 12px ofh-spacing(4); // 12px not defined in $ofh-spacing-points
   }
 
   &:visited,
@@ -164,7 +164,7 @@ a.ofh-button.ofh-button--text {
   padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
 
   @include mq($until: tablet) {
-    padding: ofh-spacing(2) ofh-spacing(0);
+    padding: ofh-spacing(3) ofh-spacing(0);
   }
 
   &:hover {
@@ -189,7 +189,7 @@ a.ofh-button.ofh-button--text {
     padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
 
     @include mq($until: tablet) {
-      padding: ofh-spacing(2) ofh-spacing(0);
+      padding: ofh-spacing(3) ofh-spacing(0);
     }
 
     &:hover {

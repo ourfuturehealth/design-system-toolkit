@@ -19,7 +19,7 @@
  */
 
 .ofh-details {
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
   @include ofh-typography-responsive('paragraph');
 
   display: block;
@@ -29,7 +29,7 @@
   color: $ofh-color-foreground-link-default;
   cursor: pointer;
   display: inline-block; /* [2] */
-  padding-left: ofh-spacing(4);
+  padding-left: ofh-spacing(5);
   position: relative; /* [3] */
 
   &:hover {
@@ -76,9 +76,9 @@
 }
 
 .ofh-details__text {
-  border-left: ofh-spacing(1) solid $ofh-color-greyscale-5;
-  margin-top: ofh-spacing(2);
-  padding: ofh-spacing(3);
+  border-left: ofh-spacing(2) solid $ofh-color-greyscale-5;
+  margin-top: ofh-spacing(3);
+  padding: ofh-spacing(4);
   padding-left: 20px; /* [6] */
 
   @include top-and-bottom();
@@ -97,7 +97,7 @@
  */
 
 $expander-border-width: 1px;
-$expander-border-bottom-width: ofh-spacing(1);
+$expander-border-bottom-width: ofh-spacing(2);
 $expander-border-color: $ofh-color-greyscale-5;
 $expander-border-hover-color: $ofh-color-greyscale-4;
 
@@ -114,10 +114,10 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
     background-color: $ofh-color-greyscale-white;
     border-top: $ofh-stroke-weight-4 solid transparent;
     display: block;
-    padding: ofh-spacing(4) - $ofh-stroke-weight-4 ofh-spacing(4) ofh-spacing(4);
+    padding: ofh-spacing(5) - $ofh-stroke-weight-4 ofh-spacing(5) ofh-spacing(5);
 
     @include mq($until: tablet) {
-      padding: ofh-spacing(3) - $ofh-stroke-weight-4 ofh-spacing(3) ofh-spacing(3);
+      padding: ofh-spacing(4) - $ofh-stroke-weight-4 ofh-spacing(4) ofh-spacing(4);
     }
 
     &::before {
@@ -148,7 +148,7 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   .ofh-details__summary-text {
     cursor: pointer;
     display: inline-block;
-    padding: ofh-spacing(1) ofh-spacing(1) ofh-spacing(1) 38px;
+    padding: ofh-spacing(2) ofh-spacing(2) ofh-spacing(2) 38px;
     position: relative;
 
     &::before {
@@ -165,9 +165,9 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   }
 
   .ofh-details__text {
-    @include ofh-responsive-padding(4, 'bottom');
-    @include ofh-responsive-padding(4, 'left');
-    @include ofh-responsive-padding(4, 'right');
+    @include ofh-responsive-padding(5, 'bottom');
+    @include ofh-responsive-padding(5, 'left');
+    @include ofh-responsive-padding(5, 'right');
     @include ofh-responsive-padding(0, 'top');
 
     border-left: 0;
@@ -204,12 +204,12 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   /* [4] */
 
   > .ofh-details {
-    @include ofh-responsive-margin(2, 'bottom');
+    @include ofh-responsive-margin(3, 'bottom');
   }
 
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
 .ofh-details + %ofh-heading-l {
-  @include ofh-responsive-padding(4, 'top');
+  @include ofh-responsive-padding(5, 'top');
 }

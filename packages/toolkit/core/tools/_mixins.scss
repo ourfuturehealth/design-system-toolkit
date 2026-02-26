@@ -99,9 +99,9 @@
 
 @mixin panel($panel-background-color, $panel-text-color) {
   @include top-and-bottom();
-  @include ofh-responsive-margin(7, 'bottom');
-  @include ofh-responsive-margin(7, 'top');
-  @include ofh-responsive-padding(5);
+  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-padding(6);
 
   background-color: $panel-background-color;
   color: $panel-text-color;
@@ -156,15 +156,15 @@
   background-color: $heading-background-color; // [1] //
   color: $heading-text-color; // [2] //
   display: inline-block; // [3] //
-  margin: ofh-spacing(0) ofh-spacing(0) ofh-spacing(2) -33px;
-  padding: ofh-spacing(2) ofh-spacing(5);
+  margin: ofh-spacing(0) ofh-spacing(0) ofh-spacing(3) -33px;
+  padding: ofh-spacing(3) ofh-spacing(6);
   position: relative;
   top: -16px; // [5] //
 
   @include mq($until: tablet) {
     margin-left: -25px;
     margin-right: 0;
-    padding: ofh-spacing(2) ofh-spacing(4);
+    padding: ofh-spacing(3) ofh-spacing(5);
     top: -8px; // [5] //
   }
 

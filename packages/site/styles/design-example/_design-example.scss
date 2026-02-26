@@ -5,12 +5,12 @@
 .design-example {
   $root: &;
 
-  margin-bottom: ofh-spacing(6);
+  margin-bottom: ofh-spacing(7);
   position: relative;
   width: 100%;
 
   @include mq($until: tablet) {
-    margin-bottom: ofh-spacing(5);
+    margin-bottom: ofh-spacing(6);
   }
 
   &__pop-out {
@@ -42,7 +42,7 @@
 }
 
 p + .design-example {
-  @include ofh-responsive-padding(3, 'top');
+  @include ofh-responsive-padding(4, 'top');
 }
 
 .ofh-lede-text + .design-example {
@@ -63,8 +63,8 @@ p + .design-example {
 
 .app-code-snippet__container {
   background-color: $ofh-color-greyscale-6;
-  padding: ofh-spacing(3);
-  padding-top: ofh-spacing(8);
+  padding: ofh-spacing(4);
+  padding-top: ofh-spacing(9);
   position: relative;
   width: 100%;
 }

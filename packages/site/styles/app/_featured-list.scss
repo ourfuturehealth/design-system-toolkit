@@ -8,26 +8,26 @@
 
 .featured-list {
   list-style: none;
-  margin: ofh-spacing(4) 0 ofh-spacing(5);
+  margin: ofh-spacing(5) 0 ofh-spacing(6);
   padding-left: 0;
 }
 
 @include mq($from: tablet) {
   .featured-list {
-    margin: ofh-spacing(6) 0 ofh-spacing(5);
+    margin: ofh-spacing(7) 0 ofh-spacing(6);
   }
 }
 
 .featured-list--item {
-  margin-bottom: ofh-spacing(5);
+  margin-bottom: ofh-spacing(6);
 }
 
 @include mq($from: tablet) {
   .featured-list--item {
     display: flexbox; // sass-lint:disable-line no-duplicate-properties
     display: flex; // sass-lint:disable-line no-duplicate-properties
-    margin-bottom: ofh-spacing(6);
-    padding-left: ofh-spacing(9);
+    margin-bottom: ofh-spacing(7);
+    padding-left: ofh-spacing(10);
   }
 }
 
@@ -38,13 +38,13 @@
 .featured-list--item__number {
   display: none;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
 }
 
 @include mq($from: tablet) {
   .featured-list--item__number {
     display: block;
-    left: - ofh-spacing(9);
+    left: - ofh-spacing(10);
     margin: 0;
     position: absolute;
   }
@@ -60,17 +60,17 @@
 
 .featured-list--item__heading {
   align-items: center;
-  border-top: ofh-spacing(1) solid $ofh-color-brand-green-teal-4;
+  border-top: ofh-spacing(2) solid $ofh-color-brand-green-teal-4;
   display: flexbox; // sass-lint:disable-line no-duplicate-properties
   display: flex; // sass-lint:disable-line no-duplicate-properties
   -ms-flex-align: center;
   margin-top: 0;
-  padding-top: ofh-spacing(3);
+  padding-top: ofh-spacing(4);
   position: relative;
 }
 
 @include mq($from: tablet) {
   .featured-list--item__heading {
-    padding-top: ofh-spacing(5);
+    padding-top: ofh-spacing(6);
   }
 }

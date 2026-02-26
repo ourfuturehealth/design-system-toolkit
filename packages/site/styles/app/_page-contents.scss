@@ -3,12 +3,12 @@
    ========================================================================== */
 
 .app-page-contents {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(6, 'bottom');
 }
 
 .app-page-contents__heading {
   @include ofh-font($size: lead, $weight: bold);
-  @include ofh-responsive-margin(3, 'bottom');
+  @include ofh-responsive-margin(4, 'bottom');
 }
 
 .app-page-contents__list {
@@ -16,5 +16,5 @@
 }
 
 .app-page-contents__item {
-  @include ofh-responsive-margin(1, 'bottom');
+  @include ofh-responsive-margin(2, 'bottom');
 }

@@ -150,6 +150,47 @@ When you push a tag matching the pattern, the [release workflow](../.github/work
 3. Check that the build artifacts are attached
 4. Test installation in a separate project
 
+## Release Communication Notes
+
+For every release, include these points in the release notes:
+
+- Which package was released (`toolkit` or `react-components`)
+- Exact version and tag
+- Installation string consumers should use
+- Breaking changes, if any
+- Link to migration guidance when needed
+
+Template:
+
+````markdown
+## Installation
+
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#{{TAG}}:packages/toolkit"
+  }
+}
+```
+
+## What's Changed
+
+### Added
+- ...
+
+### Changed
+- ...
+
+### Fixed
+- ...
+
+### Breaking Changes
+- ...
+
+### Migration
+- See [Monorepo Migration Guide](./docs/monorepo-migration-guide.md)
+````
+
 ## Testing a Release
 
 After creating a release, test that external projects can install it:

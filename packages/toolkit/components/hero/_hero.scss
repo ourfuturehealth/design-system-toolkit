@@ -18,8 +18,8 @@
 }
 
 .ofh-hero__wrapper {
-  @include ofh-responsive-padding(8, top);
-  @include ofh-responsive-padding(8, bottom);
+  @include ofh-responsive-padding(9, top);
+  @include ofh-responsive-padding(9, bottom);
 }
 
 /**
@@ -90,7 +90,7 @@
     background-color: $ofh-color-brand-yellow-3-main;
     color: $ofh-color-foreground-primary-inverted;
     margin-bottom: 24px;
-    padding: ofh-spacing(4);
+    padding: ofh-spacing(5);
     position: relative;
     top: 70px;
 
@@ -138,7 +138,7 @@
       bottom: -48px; /* [8] */
       margin-bottom: 0;
       max-width: 35em; /* [11] */
-      padding: ofh-spacing(5) ofh-spacing(6);
+      padding: ofh-spacing(6) ofh-spacing(7);
       position: absolute;
       top: auto;
     }
@@ -154,7 +154,7 @@
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;
-      padding: ofh-spacing(5) 0 0;
+      padding: ofh-spacing(6) 0 0;
       position: relative;
       top: 0;
     }

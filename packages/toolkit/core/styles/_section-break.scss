@@ -28,8 +28,8 @@
 }
 
 %ofh-section-break--xl {
-  @include ofh-responsive-margin(8, 'top');
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(9, 'top');
+  @include ofh-responsive-margin(9, 'bottom');
 }
 
 .ofh-section-break--xl {
@@ -37,8 +37,8 @@
 }
 
 %ofh-section-break--l {
-  @include ofh-responsive-margin(6, 'top');
-  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(7, 'bottom');
 }
 
 .ofh-section-break--l {
@@ -46,8 +46,8 @@
 }
 
 %ofh-section-break--m {
-  @include ofh-responsive-margin(4, 'top');
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'top');
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
 .ofh-section-break--m {

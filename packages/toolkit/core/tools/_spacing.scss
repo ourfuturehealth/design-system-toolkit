@@ -16,15 +16,16 @@
 
 $ofh-spacing-points: (
   0: $ofh-size-0,
-  1: $ofh-size-4,
-  2: $ofh-size-8,
-  3: $ofh-size-16,
-  4: $ofh-size-24,
-  5: $ofh-size-32,
-  6: $ofh-size-40,
-  7: $ofh-size-48,
-  8: $ofh-size-56,
-  9: $ofh-size-64,
+  1: $ofh-size-2,
+  2: $ofh-size-4,
+  3: $ofh-size-8,
+  4: $ofh-size-16,
+  5: $ofh-size-24,
+  6: $ofh-size-32,
+  7: $ofh-size-40,
+  8: $ofh-size-48,
+  9: $ofh-size-56,
+  10: $ofh-size-64,
 );
 
 // Returns measurement corresponding to the spacing point requested.
@@ -35,8 +36,8 @@ $ofh-spacing-points: (
 
 // @example scss
 //  .foo {
-//    padding: ofh-spacing(5);
-//    top: ofh-spacing(2) !important; // if `!important` is required
+//    padding: ofh-spacing(6);
+//    top: ofh-spacing(3) !important; // if `!important` is required
 //   }
 
 // Original code taken from GDS (Government Digital Service)
@@ -50,7 +51,7 @@ $ofh-spacing-points: (
   }
 
   @if not map.has-key($ofh-spacing-points, $spacing-point) {
-    @error 'Unknown spacing variable `#{$spacing-point}`. ' + 'Make sure you are using a point from the spacing scale. Valid points: 0-9';
+    @error 'Unknown spacing variable `#{$spacing-point}`. ' + 'Make sure you are using a point from the spacing scale. Valid points: 0-10';
   }
 
   @return map.get($ofh-spacing-points, $spacing-point);
@@ -76,8 +77,8 @@ $ofh-spacing-points: (
 
 // @example scss
 //  .foo {
-//    padding: ofh-spacing(5);
-//    top: ofh-spacing(2) !important; // if `!important` is required
+//    padding: ofh-spacing(6);
+//    top: ofh-spacing(3) !important; // if `!important` is required
 //   }
 
 // 1. Make sure that the return value from `_settings/spacing.scss` is a map.
@@ -101,7 +102,7 @@ $ofh-spacing-points: (
   }
 
   @if not map.has-key($ofh-space-responsive-scale, $responsive-spacing-point) {
-    @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the ' + 'responsive spacing scale in `_tokens-breakpoint.scss`. Valid points: 0-10';
+    @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the ' + 'responsive spacing scale in `_tokens-breakpoint.scss`. Valid points: 0-11';
   }
 
   $scale-map: map.get($ofh-space-responsive-scale, $responsive-spacing-point); // [1] //
@@ -154,7 +155,7 @@ $ofh-spacing-points: (
 
 // @example scss
 //   .foo {
-//      @include ofh-responsive-margin(6, 'left', $adjustment: 1px);
+//      @include ofh-responsive-margin(7, 'left', $adjustment: 1px);
 //   }
 
 // Original code taken from GDS (Government Digital Service)
@@ -193,7 +194,7 @@ $ofh-spacing-points: (
 
 // @example scss
 //   .foo {
-//      @include ofh-responsive-padding(6, 'left', $adjustment: 1px);
+//      @include ofh-responsive-padding(7, 'left', $adjustment: 1px);
 //   }
 
 // Original code taken from GDS (Government Digital Service)

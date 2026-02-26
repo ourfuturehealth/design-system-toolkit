@@ -17,7 +17,7 @@
 
   <ul class="ofh-list app-side-nav__list">
 
-    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-4">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-5">
       <a class="ofh-back-link__link" href="/design-system">
       <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
@@ -55,7 +55,8 @@
 {% block bodyContent %}
 
   <h2 id="spacing-scale">The responsive spacing scale</h2>
-  <p>We use a responsive spacing scale which adapts based on screen size. For example, if you apply spacing unit 9 to a margin, it will be 64px on devices that are above 641 pixels screen width – large devices such as desktop and most tablets. It will be 56px on devices that are below 641 pixels screen width – small devices such as phones.</p>
+  <p>We use a responsive spacing scale which adapts based on screen size. For example, if you apply spacing unit 10 to a margin, it will be 64px on devices that are above 641 pixels screen width – large devices such as desktop and most tablets. It will be 56px on devices that are below 641 pixels screen width – small devices such as phones.</p>
+  <p>As of <code>@ourfuturehealth/toolkit v4.1.0</code>, spacing unit <code>1</code> is available as <code>2px</code>, and previous non-zero spacing unit indices were shifted by <code>+1</code>.</p>
 
   {{ table({
     panel: false,
@@ -76,7 +77,7 @@
     rows: [
       [
         {
-          text: "9"
+          text: "10"
         },
         {
           text: "64px",
@@ -89,7 +90,7 @@
       ],
       [
         {
-          text: "8"
+          text: "9"
         },
         {
           text: "56px",
@@ -102,7 +103,7 @@
       ],
       [
         {
-          text: "7"
+          text: "8"
         },
         {
           text: "48px",
@@ -115,7 +116,7 @@
       ],
       [
         {
-          text: "6"
+          text: "7"
         },
         {
           text: "40px",
@@ -128,7 +129,7 @@
       ],
       [
         {
-          text: "5"
+          text: "6"
         },
         {
           text: "32px",
@@ -141,7 +142,7 @@
       ],
       [
         {
-          text: "4"
+          text: "5"
         },
         {
           text: "24px",
@@ -154,7 +155,7 @@
       ],
       [
         {
-          text: "3"
+          text: "4"
         },
         {
           text: "16px",
@@ -167,7 +168,7 @@
       ],
       [
         {
-          text: "2"
+          text: "3"
         },
         {
           text: "8px",
@@ -180,7 +181,7 @@
       ],
       [
         {
-          text: "1"
+          text: "2"
         },
         {
           text: "4px",
@@ -188,6 +189,19 @@
         },
         {
           text: "4px",
+          format: "numeric"
+        }
+      ],
+      [
+        {
+          text: "1"
+        },
+        {
+          text: "2px",
+          format: "numeric"
+        },
+        {
+          text: "2px",
           format: "numeric"
         }
       ],
@@ -212,12 +226,12 @@
 
   <h3 id="using-the-override-classes">Using the override classes</h3>
   <p>The spacing override classes are structured to allow you to apply any size of the scale, using margin or padding in any direction.</p>
-  <p class="rich-text">For example, <code>ofh-u-margin-9</code> will set a margin of 64px on large screens and 56px on small screens.</p>
+  <p class="rich-text">For example, <code>ofh-u-margin-10</code> will set a margin of 64px on large screens and 56px on small screens.</p>
   <p class="rich-text">To add padding use <code>-padding</code> instead of <code>-margin</code>.</p>
   <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set margin-top, <code>-padding-right</code> will set padding-right. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
-  <p class="rich-text">The last part of the class represents the spacing unit value you want to apply. For example, in <code>ofh-u-margin-9</code>, the <code>-9</code> represents 9 on the spacing scale.</p>
+  <p class="rich-text">The last part of the class represents the spacing unit value you want to apply. For example, in <code>ofh-u-margin-10</code>, the <code>-10</code> represents 10 on the spacing scale.</p>
 
-  <h3 id="spacing-examples" class="ofh-u-padding-top-3">Examples</h3>
+  <h3 id="spacing-examples" class="ofh-u-padding-top-4">Examples</h3>
 
   {{ designExample({
     group: "styles",
@@ -238,14 +252,14 @@
 
   <h3 id="using-the-static-spacing-function">Using the static spacing function</h3>
   <p>If you want to use static values that will not change based on breakpoints you can reference the static spacing scale function like this:</p>
-  <p class="rich-text"><code>padding-top: ofh-spacing(6)</code></p>
+  <p class="rich-text"><code>padding-top: ofh-spacing(7)</code></p>
 
   <h3 id="using-the-responsive-spacing-mixin">Using the responsive spacing mixin</h3>
   <p>If you want to use the responsive spacing scale you can reference the mixin.</p>
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text">use <code>@include ofh-responsive-margin(6, "bottom");</code> for 40px margin-bottom on desktop and tablet and 32px on mobile</p></li>
-    <li><p class="rich-text">use <code>@include ofh-responsive-padding(6);</code> for 40px padding on all sides on desktop and tablet and 32px on mobile</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-margin(8, "bottom");</code> for 40px margin-bottom on desktop and tablet and 32px on mobile</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-padding(8);</code> for 40px padding on all sides on desktop and tablet and 32px on mobile</p></li>
   </ul>
 
   <h2 id="width-override-classes">Width override classes</h2>

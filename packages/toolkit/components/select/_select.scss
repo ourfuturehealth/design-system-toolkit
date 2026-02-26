@@ -9,7 +9,7 @@
   box-sizing: border-box;
   height: 40px;
   max-width: 100%;
-  padding: ofh-spacing(1);
+  padding: ofh-spacing(2);
 
   &:focus {
     @include ofh-focused-input;
