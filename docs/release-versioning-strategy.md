@@ -250,7 +250,7 @@ The v4.0.0 release should include clear release notes explaining the change:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v4.0.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```

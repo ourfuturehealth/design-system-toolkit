@@ -4,8 +4,16 @@ React component library for the OFH Design System.
 
 ## Installation
 
+Install from the monorepo using a package-specific Git tag and subdirectory.
+
 ```bash
-npm install @ourfuturehealth/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
+```
+
+or
+
+```bash
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
 ```
 
 ## Usage

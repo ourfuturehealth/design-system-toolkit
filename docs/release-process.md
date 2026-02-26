@@ -346,7 +346,18 @@ The toolkit [package.json](../packages/toolkit/package.json) includes:
     "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git",
     "directory": "packages/toolkit"
   },
-  "files": ["dist", "components", "core", "common", "assets", "ofh.js", "ofh.scss", "ofh-participant.scss", "ofh-research.scss", "polyfills.js"],
+  "files": [
+    "dist",
+    "components",
+    "core",
+    "common",
+    "assets",
+    "ofh.js",
+    "ofh.scss",
+    "ofh-participant.scss",
+    "ofh-research.scss",
+    "polyfills.js"
+  ],
   "main": "dist/ofh-design-system-toolkit.js",
   "style": "dist/ofh-design-system-toolkit.css",
   "scripts": {
@@ -397,14 +408,14 @@ The react-components [package.json](../packages/react-components/package.json) i
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.1:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```
 
 When npm/pnpm installs this:
 
-1. Clones the repository at tag `v3.5.1`
+1. Clones the repository at tag `toolkit-v4.0.0`
 2. Navigates to `packages/toolkit`
 3. Runs `pnpm install` (installs toolkit dependencies)
 4. Runs `prepare` script (`gulp bundle`)
