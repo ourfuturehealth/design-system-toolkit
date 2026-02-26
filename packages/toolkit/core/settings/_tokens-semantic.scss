@@ -25,9 +25,6 @@ $ofh-text-grey-color: $ofh-color-foreground-secondary;
 // [AUTO-USAGE] runtime: 11 files (packages/site/components/card/_card.scss, packages/site/components/footer/_footer.scss, packages/site/components/header/_header.scss, packages/site/components/hero/_hero.scss, packages/site/styles/app/_health-az.scss, packages/site/styles/design-example/govuk/_button.scss, packages/toolkit/components/auto-complete/_auto-complete.scss, packages/toolkit/components/card/card.scss, ... +3 more) | docs/text refs: 1
 $ofh-text-white-color: $ofh-color-foreground-primary-inverted;
 
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 1
-$ofh-text-blue-color: $ofh-color-foreground-brand-blue-navy;
-
 // Link Colors
 // ==========================================================================
 
@@ -47,12 +44,6 @@ $ofh-link-visited-color: $ofh-color-foreground-link-visited;
 $ofh-link-active-color: $ofh-color-foreground-link-active;
 
 // Light/inverted link colors (on dark backgrounds)
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-link-light-color: $ofh-color-foreground-link-default-inverted;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/tools/_links.scss) | docs/text refs: 0
-$ofh-link-light-hover-color: $ofh-color-foreground-link-hover-inverted;
-
 // [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/tools/_links.scss) | docs/text refs: 0
 $ofh-link-light-active-color: $ofh-color-foreground-link-active-inverted;
 
@@ -92,9 +83,6 @@ $ofh-button-color: $ofh-color-background-button-default;
 // [AUTO-USAGE] runtime: 2 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss) | docs/text refs: 0
 $ofh-button-hover-color: $ofh-color-background-button-hover;
 
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-button-active-color: $ofh-color-background-button-active;
-
 // White/inverted button
 // [AUTO-USAGE] runtime: 2 files (packages/site/styles/design-example/govuk/_button.scss, packages/toolkit/components/button/_button.scss) | docs/text refs: 1
 $ofh-button-color-default: $ofh-color-background-button-default;
@@ -113,16 +101,6 @@ $ofh-button-color-white-hover: $ofh-color-background-button-hover-inverted;
 
 // [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
 $ofh-button-color-white-active: $ofh-color-background-button-active-inverted;
-
-// Button text colors
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-button-text-color: $ofh-color-brand-blue-navy-3-main;
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-button-secondary-text-color: $ofh-color-greyscale-white;
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-reverse-button-text-color: $ofh-color-greyscale-1;
 
 // Border Colors
 // ==========================================================================
@@ -161,9 +139,6 @@ $ofh-success-color: $ofh-color-feedback-success-2-main;
 // [AUTO-USAGE] runtime: 8 files (packages/site/components/header/_header.scss, packages/site/styles/design-example/_code-snippet.scss, packages/site/styles/design-example/_design-example.scss, packages/toolkit/components/auto-complete/_auto-complete.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/components/status-flag/_status-flag.scss, packages/toolkit/core/tools/_focused.scss) | docs/text refs: 3
 $ofh-focus-color: $ofh-color-border-feedback-focus;
 
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-focus-white-color: $ofh-color-border-feedback-focus-inverted;
-
 // Typography Settings
 // ==========================================================================
 
@@ -181,9 +156,6 @@ $ofh-font-normal: $ofh-typography-weight-regular;
 
 // [AUTO-USAGE] runtime: 11 files (packages/site/components/header/_header.scss, packages/site/styles/app/_featured-list.scss, packages/site/styles/app/_side-nav.scss, packages/toolkit/components/action-link/_action-link.scss, packages/toolkit/components/contents-list/_contents-list.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/components/label/_label.scss, packages/toolkit/components/tables/_tables.scss, ... +3 more) | docs/text refs: 0
 $ofh-font-bold: $ofh-typography-weight-semibold;
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-font-light: $ofh-typography-weight-regular;
 
 // Base typography sizing
 // [AUTO-USAGE] runtime: 4 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/core/elements/_page.scss, packages/toolkit/core/tools/_functions.scss) | docs/text refs: 0
@@ -223,8 +195,6 @@ $ofh-border-table-header-width: $ofh-stroke-weight-2; // 2px
 $ofh-border-table-cell-width: $ofh-stroke-weight-1; // 1px
 
 // Hero and inset text borders
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-hero-border: $ofh-stroke-weight-1; // 1px
 // [AUTO-USAGE] runtime: 3 files (packages/site/components/card/_inset-text.scss, packages/site/components/inset-text/_inset-text.scss, packages/toolkit/components/inset-text/_inset-text.scss) | docs/text refs: 0
 $ofh-border-width-inset-text: $ofh-stroke-weight-8; // 8px
 
@@ -263,24 +233,3 @@ $ofh-spacing-responsive-scale: $ofh-space-responsive-scale;
 
 // [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/styles/_icons.scss) | docs/text refs: 0
 $ofh-icon-size: 34px; // Note: Figma uses 16/24/32, this is custom
-
-// Neutral Background Colors
-// ==========================================================================
-
-// Subtle background tints
-// @deprecated Use $ofh-color-background-neutral-* tokens directly
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-neutral-blue: $ofh-color-background-neutral-blue;
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-neutral-yellow: $ofh-color-background-neutral-yellow;
-
-// [AUTO-USAGE] runtime: 0 files (none) | docs/text refs: 0
-$ofh-neutral-grey: $ofh-color-background-neutral-grey;
-
-
-
-
-
-
