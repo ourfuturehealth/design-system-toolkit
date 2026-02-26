@@ -44,9 +44,6 @@ $ofh-link-visited-color: $ofh-color-foreground-link-visited;
 $ofh-link-active-color: $ofh-color-foreground-link-active;
 
 // Light/inverted link colors (on dark backgrounds)
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/tools/_links.scss) | docs/text refs: 0
-$ofh-link-light-active-color: $ofh-color-foreground-link-active-inverted;
-
 // Breadcrumb link colors
 // [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/breadcrumb/_breadcrumb.scss) | docs/text refs: 1
 $ofh-breadcrumb-link-color: $ofh-color-foreground-breadcrumb-default;
