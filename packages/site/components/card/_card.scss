@@ -35,7 +35,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
-  border-radius: $ofh-border-radius;
+  border-radius: $ofh-radius-4;
   position: relative; /* [1] */
   width: 100%;
 
@@ -89,12 +89,12 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 .ofh-card-ds--clickable {
   &:hover,
   &:active {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     cursor: pointer;
 
     .ofh-card-ds__heading a,
     .ofh-card-ds__link {
-      color: $ofh-link-color;
+      color: $ofh-color-foreground-link-default;
       text-decoration: none;
 
       &:focus {
@@ -102,7 +102,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
       }
 
       &:visited {
-        color: $ofh-link-color;
+        color: $ofh-color-foreground-link-default;
       }
     }
   }
@@ -174,7 +174,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card__heading--feature {
   background: $ofh-color-brand-yellow-3-main;
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
   left: - (ofh-spacing(4) + $card-border-width); /* [5] */
   margin-bottom: ofh-spacing(2);
@@ -214,7 +214,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card--care__heading {
   @include ofh-font($size: h3, $weight: bold);
-  @include print-color($ofh-text-black-color);
+  @include print-color($ofh-color-foreground-primary);
 
   margin: 0;
   padding-top: 0; /* [13] */
@@ -273,11 +273,11 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   .ofh-card__content {
     background-color: $ofh-color-greyscale-black;
     border: 0;
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
     position: static; /* [15] */
 
     a {
-      color: $ofh-text-white-color; /* [16] */
+      color: $ofh-color-foreground-primary-inverted; /* [16] */
 
       &:focus {
         color: $ofh-color-greyscale-black; /* [16] */
@@ -287,16 +287,16 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
   .ofh-details,
   .ofh-details__summary {
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
   }
 
   .ofh-details__summary {
     &:hover {
-      color: $ofh-text-white-color;
+      color: $ofh-color-foreground-primary-inverted;
     }
 
     &:focus {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 

@@ -15,14 +15,14 @@
 .ofh-back-link__link {
   @include ofh-typography-responsive('paragraph-small');
 
-  color: $ofh-link-color;
+  color: $ofh-color-foreground-link-default;
   display: inline-block;
   padding-left: 16px; /* 1 */
   position: relative;
   text-decoration: none;
 
   .ofh-icon__chevron-left {
-    fill: $ofh-link-color;
+    fill: $ofh-color-foreground-link-default;
     height: 24px;
     left: -8px; /* 2 */
     position: absolute;
@@ -31,15 +31,15 @@
   }
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     text-decoration: underline;
 
     .ofh-icon__chevron-left {
-      fill: $ofh-link-hover-color;
+      fill: $ofh-color-foreground-link-hover;
     }
   }
 

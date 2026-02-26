@@ -9,14 +9,14 @@
 
 
 @mixin ofh-link-style-default {
-  color: $ofh-link-color;
+  color: $ofh-color-foreground-link-default;
 
   &:visited {
     color: $ofh-color-foreground-link-visited;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     text-decoration: none;
   }
 
@@ -105,15 +105,15 @@
 
 @mixin ofh-link-style-no-visited-state {
   &:link {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
   }
 
   &:active {

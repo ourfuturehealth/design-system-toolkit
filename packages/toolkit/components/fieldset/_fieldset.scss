@@ -23,7 +23,7 @@
   @include ofh-font('paragraph');
 
   box-sizing: border-box; /* 1 */
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   display: table; /* 2 */
   margin-bottom: ofh-spacing(2);
   margin-top: 0;

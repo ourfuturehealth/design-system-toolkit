@@ -15,7 +15,7 @@ $button-shadow-size: 4px;
 
   .app-link {
     &--copy {
-      border-radius: $ofh-border-radius;
+      border-radius: $ofh-radius-4;
       margin-bottom: 16px;
       padding: 4px 8px;
       position: absolute;
@@ -24,13 +24,13 @@ $button-shadow-size: 4px;
       top: 16px;
 
       &:hover {
-        background-color: $ofh-link-hover-color;
+        background-color: $ofh-color-foreground-link-hover;
       }
 
       &:focus {
         @include ofh-focused-text;
 
-        border-color: $ofh-focus-color;
+        border-color: $ofh-color-border-feedback-focus;
       }
     }
 
@@ -48,7 +48,7 @@ $button-shadow-size: 4px;
       z-index: 1;
 
       &:hover {
-        color: $ofh-link-hover-color;
+        color: $ofh-color-foreground-link-hover;
         text-decoration: none;
       }
 
@@ -116,14 +116,14 @@ $button-shadow-size: 4px;
       }
 
       &:hover {
-        color: $ofh-link-hover-color;
+        color: $ofh-color-foreground-link-hover;
         outline: 0;
         text-decoration: none;
       }
 
       &:focus {
-        outline: $ofh-focus-width solid $ofh-focus-color;
-        outline-offset: $ofh-focus-width;
+        outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+        outline-offset: $ofh-stroke-weight-4;
       }
     }
 
@@ -136,7 +136,7 @@ $button-shadow-size: 4px;
         }
 
         &:hover {
-          color: $ofh-link-color;
+          color: $ofh-color-foreground-link-default;
         }
 
         &:focus {

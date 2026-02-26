@@ -13,7 +13,7 @@ td code {
   @include ofh-responsive-margin(4, 'bottom');
 
   background: $ofh-color-greyscale-white;
-  border: 1px solid $ofh-border-color;
+  border: 1px solid $ofh-color-border-primary;
   margin-top: 0;
   overflow: auto;
   padding: ofh-spacing(3);
@@ -39,7 +39,7 @@ td code {
 
 .hljs {
   background-color: $ofh-color-greyscale-white;
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   display: block;
   overflow-x: scroll;
   padding: 0;

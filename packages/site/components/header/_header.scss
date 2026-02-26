@@ -111,7 +111,7 @@
 
   &:hover {
     .ofh-logo {
-      box-shadow: 0 0 0 $ofh-focus-width $ofh-color-brand-blue-navy-4;
+      box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-brand-blue-navy-4;
     }
   }
 
@@ -119,8 +119,8 @@
     box-shadow: none;
 
     .ofh-logo {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
     }
   }
 
@@ -179,8 +179,8 @@
 .ofh-header-ds__search-toggle {
   background-color: transparent;
   border: 1px solid $ofh-color-greyscale-white;
-  border-radius: $ofh-border-radius;
-  color: $ofh-text-white-color;
+  border-radius: $ofh-radius-4;
+  color: $ofh-color-foreground-primary-inverted;
   cursor: pointer;
   min-height: ofh-spacing(6); /* [2] */
   padding: ofh-spacing(1) ofh-spacing(2) 0;
@@ -201,8 +201,8 @@
   &:focus {
     @include ofh-focused-button();
 
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
   }
 
   @include mq($from: tablet) {
@@ -245,12 +245,12 @@
 
 .ofh-search-ds__input {
   -webkit-appearance: listbox; /* [5] */
-  border-radius: $ofh-border-radius 0 0 $ofh-border-radius;
+  border-radius: $ofh-radius-4 0 0 $ofh-radius-4;
   padding: 0 ofh-spacing(3);
 
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
     padding: 0 9px;
   }
 
@@ -298,7 +298,7 @@
 
 .ofh-search__submit {
   border: 0;
-  border-radius: 0 $ofh-border-radius $ofh-border-radius 0;
+  border-radius: 0 $ofh-radius-4 $ofh-radius-4 0;
   float: right;
   font-size: inherit;
   line-height: inherit;
@@ -330,11 +330,11 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       &:hover {
-        background-color: $ofh-focus-color;
+        background-color: $ofh-color-border-feedback-focus;
 
         .ofh-icon {
           fill: $ofh-color-foreground-brand-blue-navy;
@@ -370,8 +370,8 @@
     &:focus {
       @include ofh-focused-button();
 
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
     }
 
     &:active {
@@ -450,10 +450,10 @@
 .ofh-header-ds__menu-toggle {
   background-color: transparent;
   border: 1px solid $ofh-color-greyscale-white;
-  border-color: $ofh-text-black-color;
-  border-radius: $ofh-border-radius;
-  color: $ofh-text-white-color;
-  color: $ofh-text-black-color;
+  border-color: $ofh-color-foreground-primary;
+  border-radius: $ofh-radius-4;
+  color: $ofh-color-foreground-primary-inverted;
+  color: $ofh-color-foreground-primary;
   cursor: pointer;
   display: block;
   font-size: 16px;
@@ -480,8 +480,8 @@
   &:focus {
     @include ofh-focused-button;
 
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
   }
 
   &::-moz-focus-inner {
@@ -519,7 +519,7 @@
     @include mq($until: large-desktop) {
       border-bottom: ofh-spacing(1) solid $ofh-color-background-neutral-yellow; /* [7] */
       border-top: ofh-spacing(1) solid $ofh-color-background-neutral-yellow; /* [7] */
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
 
       .ofh-width-container {
         margin: 0 ofh-spacing(3);
@@ -542,7 +542,7 @@
 }
 
 .ofh-header-ds__navigation-title {
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: 0;
   padding: ofh-spacing(3);
   position: relative;
@@ -622,13 +622,13 @@
 
   border-bottom: ofh-spacing(1) solid transparent;
   border-top: ofh-spacing(1) solid transparent;
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   display: block;
   padding: 12px ofh-spacing(3);
   text-decoration: none;
 
   @include mq($from: large-desktop) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
     line-height: normal;
   }
 
@@ -640,20 +640,20 @@
   }
 
   &:visited {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
 
     @include mq($from: large-desktop) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 
   &:hover {
     box-shadow: none;
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
     text-decoration: underline;
 
     @include mq($from: large-desktop) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
 
     .ofh-icon__chevron-right {
@@ -664,8 +664,8 @@
 
   &:active,
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: -$ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: -$ofh-stroke-weight-4;
 
     &:hover {
       color: $ofh-color-foreground-brand-blue-navy;
@@ -759,8 +759,8 @@
   }
 
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
 
     .ofh-header__service-name {
       color: $ofh-color-foreground-brand-blue-navy;
@@ -782,7 +782,7 @@
 .ofh-header-ds__service-name {
   @include ofh-font($size: lead);
 
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   padding-left: 0;
   padding-right: 0;
@@ -826,7 +826,7 @@
     width: auto;
 
     &:hover {
-      color: $ofh-text-white-color;
+      color: $ofh-color-foreground-primary-inverted;
       text-decoration: underline;
 
       .ofh-logo {
@@ -835,8 +835,8 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       .ofh-organisation-name,
       .ofh-organisation-descriptor {
@@ -875,7 +875,7 @@
 }
 
 .ofh-organisation-name {
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   font-size: 22px;
   font-weight: bold;
@@ -884,7 +884,7 @@
   margin-top: -2px;
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
   @media (width <= 450px) {
@@ -905,7 +905,7 @@
 }
 
 .ofh-organisation-descriptor {
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   font-size: 15px;
   font-weight: bold;
@@ -947,11 +947,11 @@
 
   .ofh-header-ds__link {
     &:hover {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       text-decoration: underline;
 
       .ofh-organisation-descriptor {
-        color: $ofh-text-black-color;
+        color: $ofh-color-foreground-primary;
       }
     }
 
@@ -970,8 +970,8 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       .ofh-icon__search {
         fill: $ofh-color-foreground-brand-blue-navy;
@@ -986,7 +986,7 @@
       border: 2px solid $ofh-color-foreground-brand-blue-navy;
 
       @include mq($until: tablet) {
-        border: $ofh-focus-width solid $ofh-color-foreground-brand-blue-navy;
+        border: $ofh-stroke-weight-4 solid $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -1036,7 +1036,7 @@
   }
 
   .ofh-header-ds__transactional-service-name--link {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
   .ofh-header-ds__navigation-list {
@@ -1044,7 +1044,7 @@
   }
 
   .ofh-header-ds__service-name {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
 }
@@ -1070,7 +1070,7 @@
         color: $ofh-color-foreground-brand-blue-navy;
 
         &:hover {
-          background: $ofh-focus-color;
+          background: $ofh-color-border-feedback-focus;
         }
       }
     }

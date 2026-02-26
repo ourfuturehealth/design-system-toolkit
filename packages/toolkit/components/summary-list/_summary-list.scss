@@ -28,7 +28,7 @@
 
 .ofh-summary-list__row {
   @include mq($until: tablet) {
-    border-bottom: 1px solid $ofh-border-color;
+    border-bottom: 1px solid $ofh-color-border-primary;
     margin-bottom: ofh-spacing(3);
   }
 
@@ -44,7 +44,7 @@
   vertical-align: top;
 
   @include mq($from: tablet) {
-    border-bottom: 1px solid $ofh-border-color;
+    border-bottom: 1px solid $ofh-color-border-primary;
     display: table-cell;
     padding-bottom: ofh-spacing(2);
     padding-right: ofh-spacing(4);
@@ -110,7 +110,7 @@
 }
 
 .ofh-summary-list__actions-list-item:not(:last-child) {
-  border-right: 1px solid $ofh-border-color;
+  border-right: 1px solid $ofh-color-border-primary;
 }
 
 .ofh-summary-list__actions-list-item:last-child {

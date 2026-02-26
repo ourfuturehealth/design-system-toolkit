@@ -46,21 +46,21 @@
 }
 
 .ofh-footer-ds__list-item-link {
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
 
   &:visited {
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
   }
 
   &:hover {
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
   }
 }
 
 .ofh-footer-ds__copyright {
   @include ofh-font($size: paragraph);
 
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   margin-bottom: 0;
 
   @include mq($from: desktop) {

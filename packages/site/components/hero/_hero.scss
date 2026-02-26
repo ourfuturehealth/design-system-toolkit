@@ -13,7 +13,7 @@
   @include ofh-responsive-padding(6, 'top', 'bottom');
 
   background-color: $ofh-color-background-neutral-yellow;
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   position: relative; /* [1] */
 }
 
@@ -90,7 +90,7 @@
 .ofh-hero-ds--image-description {
   .ofh-hero-ds-content {
     background-color: $ofh-color-brand-yellow-3-main;
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
     position: relative;
@@ -146,7 +146,7 @@
     }
 
     @include mq($media-type: print) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       max-width: 100%;
       padding: 0;
     }

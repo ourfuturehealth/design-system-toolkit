@@ -53,7 +53,7 @@
   width: 100%;
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
   .ofh-icon {
@@ -61,16 +61,16 @@
     top: -2px;
 
     @include mq($media-type: print) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       margin-top: 0;
     }
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
 
     .ofh-icon {
-      fill: $ofh-link-hover-color;
+      fill: $ofh-color-foreground-link-hover;
     }
 
     .ofh-pagination__page {
@@ -101,7 +101,7 @@
 
     &:hover {
       .ofh-icon {
-        fill: $ofh-link-hover-color;
+        fill: $ofh-color-foreground-link-hover;
       }
     }
 

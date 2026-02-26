@@ -17,10 +17,10 @@
 // https://github.com/alphagov/govuk-frontend
 
 @mixin ofh-text-color {
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
 
   @include govuk-media-query($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 }
 
@@ -41,7 +41,7 @@
 //   `!important`. Generally Used to create override classes.
 
 @mixin ofh-typography-weight-bold($important: false) {
-  font-weight: $ofh-font-bold iff($important, !important);
+  font-weight: $ofh-typography-weight-semibold iff($important, !important);
 }
 
 // Line height

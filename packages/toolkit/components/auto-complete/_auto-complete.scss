@@ -11,7 +11,7 @@
 .autocomplete__hint,
 .autocomplete__input {
   appearance: none;
-  border: 2px solid $ofh-text-grey-color;
+  border: 2px solid $ofh-color-foreground-secondary;
   border-radius: 0; /* Safari 10 on iOS adds implicit border rounding. */
   box-sizing: border-box;
   height: 40px;
@@ -26,7 +26,7 @@
 }
 
 .autocomplete__hint {
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   position: absolute;
 }
 
@@ -35,9 +35,9 @@
 }
 
 .autocomplete__input--focused {
-  border: $ofh-focus-width solid $ofh-color-border-input-active;
-  outline: $ofh-focus-width solid $ofh-focus-color;
-  outline-offset: $ofh-focus-width;
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+  outline-offset: $ofh-stroke-weight-4;
 }
 
 .autocomplete__input--show-all-values {
@@ -56,10 +56,10 @@
 }
 
 .autocomplete__menu {
-  background-color: $ofh-text-white-color;
-  border: 2px solid $ofh-text-grey-color;
+  background-color: $ofh-color-foreground-primary-inverted;
+  border: 2px solid $ofh-color-foreground-secondary;
   border-top: 0;
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   margin: 0;
   max-height: 342px;
   overflow-x: hidden;
@@ -88,7 +88,7 @@
 }
 
 .autocomplete__option {
-  border-bottom: solid $ofh-border-color;
+  border-bottom: solid $ofh-color-border-primary;
   border-width: 1px 0;
   cursor: pointer;
   display: block;
@@ -111,8 +111,8 @@
 
 .autocomplete__option--focused,
 .autocomplete__option:hover {
-  background-color: $ofh-link-color;
-  border-color: $ofh-link-color;
+  background-color: $ofh-color-foreground-link-default;
+  border-color: $ofh-color-foreground-link-default;
   color: $ofh-color-greyscale-white;
   outline: none;
 }
@@ -144,7 +144,7 @@
 
 .autocomplete__option--no-results {
   background-color: $ofh-color-greyscale-7;
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
 }
 

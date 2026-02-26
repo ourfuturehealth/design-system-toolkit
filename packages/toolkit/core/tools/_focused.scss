@@ -10,7 +10,7 @@
 
 
 @mixin ofh-focused-text {
-  outline: 3px solid $ofh-focus-color; /* 1 */
+  outline: 3px solid $ofh-color-border-feedback-focus; /* 1 */
   outline-offset: 1px;
   text-decoration: none;
 }
@@ -22,9 +22,9 @@
 /// as text inputs.
 
 @mixin ofh-focused-input {
-  border: $ofh-focus-width solid $ofh-color-border-input-active;
-  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
-  outline-offset: $ofh-focus-width;
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus; /* 1 */
+  outline-offset: $ofh-stroke-weight-4;
 }
 
 /// Focused radio input (form element)
@@ -33,11 +33,11 @@
 /// the target element has focus. Used by radios.
 
 @mixin ofh-focused-radio {
-  border: $ofh-focus-width solid $ofh-color-border-input-active;
-  outline: $ofh-focus-width solid $ofh-focus-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
 
   /* 1 */
-  outline-offset: $ofh-focus-width;
+  outline-offset: $ofh-stroke-weight-4;
 }
 
 /// Focused checkbox input (form element)
@@ -46,9 +46,9 @@
 /// the target element has focus. Used by checkbox.
 
 @mixin ofh-focused-checkbox {
-  border: $ofh-focus-width solid $ofh-color-border-input-active;
-  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
-  outline-offset: $ofh-focus-width;
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus; /* 1 */
+  outline-offset: $ofh-stroke-weight-4;
 }
 
 /// Focused button
@@ -57,6 +57,6 @@
 /// the target element has focus. Used for buttons.
 
 @mixin ofh-focused-button {
-  outline: $ofh-focus-width solid $ofh-focus-color; /* 1 */
-  outline-offset: $ofh-focus-width;
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus; /* 1 */
+  outline-offset: $ofh-stroke-weight-4;
 }

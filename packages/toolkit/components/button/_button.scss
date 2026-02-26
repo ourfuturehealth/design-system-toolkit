@@ -10,7 +10,7 @@ a.ofh-button {
 
   -webkit-appearance: none;
   background-color: $ofh-color-background-button-default-inverted;
-  border: $ofh-border-width-form-element solid transparent;
+  border: $ofh-stroke-weight-2 solid transparent;
   border-radius: 8px;
   box-shadow: none;
   color: $ofh-color-background-button-default-inverted;
@@ -73,17 +73,17 @@ a.ofh-button.ofh-button--contained {
 
 .ofh-button--outlined,
 a.ofh-button.ofh-button--outlined {
-  border: $ofh-border-width-form-element solid $ofh-color-background-button-default;
+  border: $ofh-stroke-weight-2 solid $ofh-color-background-button-default;
   color: $ofh-color-background-button-default;
 
   &:hover {
-    border: $ofh-border-width-form-element solid $ofh-color-background-button-hover;
+    border: $ofh-stroke-weight-2 solid $ofh-color-background-button-hover;
     color: $ofh-color-background-button-hover;
   }
 
   &:active,
   &:focus {
-    border: $ofh-border-width-form-element solid $ofh-color-background-button-active;
+    border: $ofh-stroke-weight-2 solid $ofh-color-background-button-active;
     color: $ofh-color-background-button-active;
   }
 
@@ -101,19 +101,19 @@ a.ofh-button.ofh-button--outlined {
 .ofh-button--ghost,
 a.ofh-button.ofh-button--ghost {
   background-color: transparent;
-  border: $ofh-border-width-form-element solid $ofh-color-background-button-default;
+  border: $ofh-stroke-weight-2 solid $ofh-color-background-button-default;
   color: $ofh-color-background-button-default;
 
   &:hover {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-color-background-button-hover;
+    border: $ofh-stroke-weight-2 solid $ofh-color-background-button-hover;
     color: $ofh-color-background-button-hover;
   }
 
   &:active,
   &:focus {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-color-background-button-active;
+    border: $ofh-stroke-weight-2 solid $ofh-color-background-button-active;
     color: $ofh-color-background-button-active;
   }
 
@@ -129,19 +129,19 @@ a.ofh-button.ofh-button--ghost {
 
   &-reverse {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-color-background-button-default-inverted;
+    border: $ofh-stroke-weight-2 solid $ofh-color-background-button-default-inverted;
     color: $ofh-color-background-button-default-inverted;
 
     &:hover {
       background-color: transparent;
-      border: $ofh-border-width-form-element solid $ofh-color-background-button-hover-inverted;
+      border: $ofh-stroke-weight-2 solid $ofh-color-background-button-hover-inverted;
       color: $ofh-color-background-button-hover-inverted;
     }
 
     &:active,
     &:focus {
       background-color: transparent;
-      border: $ofh-border-width-form-element solid $ofh-color-background-button-active-inverted;
+      border: $ofh-stroke-weight-2 solid $ofh-color-background-button-active-inverted;
       color: $ofh-color-background-button-active-inverted;
     }
 

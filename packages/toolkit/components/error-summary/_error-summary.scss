@@ -11,16 +11,16 @@
   @include ofh-responsive-padding(4);
   @include ofh-responsive-margin(8, 'bottom');
 
-  border: $ofh-stroke-weight-4 solid $ofh-error-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 
   @include govuk-media-query($from: tablet) {
-    border: $ofh-border-width solid $ofh-error-color;
+    border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
   }
 
   &:focus {
-    border: $ofh-focus-width solid $ofh-focus-color;
-    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
-    outline: $ofh-focus-width solid transparent;
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus;
+    outline: $ofh-stroke-weight-4 solid transparent;
   }
 }
 
@@ -56,7 +56,7 @@
   &:visited,
   &:hover,
   &:active {
-    color: $ofh-error-color;
+    color: $ofh-color-feedback-error-2-main;
   }
 
   &:focus {

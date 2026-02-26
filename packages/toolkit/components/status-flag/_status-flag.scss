@@ -8,13 +8,13 @@
   border: $ofh-stroke-weight-4 solid $ofh-color-brand-blue-royal-3-main;
 
   @include govuk-media-query($from: tablet) {
-    border: $ofh-border-width solid $ofh-color-brand-blue-royal-3-main;
+    border: $ofh-stroke-weight-4 solid $ofh-color-brand-blue-royal-3-main;
   }
 
   &:focus {
-    border: $ofh-focus-width solid $ofh-focus-color;
-    box-shadow: 0 0 0 $ofh-focus-width $ofh-focus-color;
-    outline: $ofh-focus-width solid transparent;
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus;
+    outline: $ofh-stroke-weight-4 solid transparent;
   }
 }
 

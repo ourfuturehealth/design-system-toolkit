@@ -95,7 +95,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
     .ofh-card__heading a,
     .ofh-card__link {
-      color: $ofh-link-hover-color;
+      color: $ofh-color-foreground-link-hover;
       text-decoration: none;
 
       &:focus {
@@ -171,7 +171,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card__heading--feature {
   background: $ofh-color-brand-yellow-3-main;
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
   left: -(ofh-spacing(4) + $card-border-width); /* [5] */
   margin-bottom: ofh-spacing(2);
@@ -215,7 +215,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card--care__heading {
   @include ofh-font('h3', $weight: bold);
-  @include print-color($ofh-text-black-color);
+  @include print-color($ofh-color-foreground-primary);
 
   margin: 0;
   padding-top: 0; /* [13] */
@@ -282,11 +282,11 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   .ofh-card__content {
     background-color: $ofh-color-greyscale-black;
     border: 0;
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
     position: static; /* [15] */
 
     a {
-      color: $ofh-text-white-color; /* [16] */
+      color: $ofh-color-foreground-primary-inverted; /* [16] */
 
       &:focus {
         color: $ofh-color-greyscale-black; /* [16] */
@@ -296,16 +296,16 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
   .ofh-details,
   .ofh-details__summary {
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
   }
 
   .ofh-details__summary {
     &:hover {
-      color: $ofh-text-white-color;
+      color: $ofh-color-foreground-primary-inverted;
     }
 
     &:focus {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 

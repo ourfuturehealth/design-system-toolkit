@@ -10,7 +10,7 @@
 .ofh-warning-callout {
   @include panel-with-label(
     $ofh-color-background-brand-blue-aqua,
-    $ofh-text-black-color,
+    $ofh-color-foreground-primary,
     $ofh-color-brand-blue-royal-3-main
   ); /* [1] */
 }

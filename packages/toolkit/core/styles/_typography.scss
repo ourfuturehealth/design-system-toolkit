@@ -16,7 +16,7 @@
   @include ofh-typography-responsive('h1');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(7, 'bottom');
@@ -31,7 +31,7 @@ h1,
   @include ofh-typography-responsive('h2');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(4, 'bottom');
@@ -46,7 +46,7 @@ h2,
   @include ofh-typography-responsive('h3');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(4, 'bottom');
@@ -61,7 +61,7 @@ h3,
   @include ofh-typography-responsive('h4');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(4, 'bottom');
@@ -76,7 +76,7 @@ h4,
   @include ofh-typography-responsive('h5');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(4, 'bottom');
@@ -91,7 +91,7 @@ h5,
   @include ofh-typography-responsive('h5');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
 
   @include ofh-responsive-margin(4, 'bottom');
@@ -107,7 +107,7 @@ h6,
 .ofh-caption-xl {
   @include ofh-font('h2');
 
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   display: block;
   margin-bottom: ofh-spacing(1);
 }
@@ -115,7 +115,7 @@ h6,
 .ofh-caption-l {
   @include ofh-font('h3');
 
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   display: block;
   margin-bottom: ofh-spacing(1);
 }
@@ -123,7 +123,7 @@ h6,
 .ofh-caption-m {
   @include ofh-font('paragraph');
 
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   display: block;
 }
 
@@ -259,5 +259,5 @@ h1 + .ofh-lede-text--small {
 
 strong,
 b {
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
 }

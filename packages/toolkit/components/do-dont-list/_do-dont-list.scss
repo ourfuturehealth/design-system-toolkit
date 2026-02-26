@@ -13,7 +13,7 @@
 .ofh-do-dont-list {
   @include panel-with-label(
     $ofh-color-greyscale-white,
-    $ofh-text-black-color,
+    $ofh-color-foreground-primary,
     $ofh-color-greyscale-5
   ); /* [1] */
 }

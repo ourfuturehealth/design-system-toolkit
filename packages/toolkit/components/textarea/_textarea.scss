@@ -6,7 +6,7 @@
   @include ofh-font('paragraph');
 
   -webkit-appearance: none;
-  border: $ofh-border-width-form-element solid $ofh-color-border-input-default;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   border-radius: 0;
   box-sizing: border-box;
   display: block;
@@ -21,5 +21,5 @@
 }
 
 .ofh-textarea--error {
-  border: $ofh-stroke-weight-4 solid $ofh-error-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 }

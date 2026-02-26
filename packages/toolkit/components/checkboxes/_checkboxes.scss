@@ -55,7 +55,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 
 .ofh-checkboxes__input + .ofh-checkboxes__label::before {
   background: $ofh-color-background-primary;
-  border: $ofh-border-width-form-element solid $ofh-color-border-input-default;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   box-sizing: border-box;
   content: '';
   height: $ofh-checkboxes-size;
@@ -69,7 +69,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
   background: transparent;
   border: solid;
   border-top-color: transparent;
-  border-width: 0 0 $ofh-border-width $ofh-border-width;
+  border-width: 0 0 $ofh-stroke-weight-4 $ofh-stroke-weight-4;
   content: '';
   height: 10px;
   left: 10px;
@@ -118,7 +118,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 
   @include ofh-font('paragraph');
 
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   margin-bottom: ofh-spacing(2);
   text-align: center;
   width: $ofh-divider-size;

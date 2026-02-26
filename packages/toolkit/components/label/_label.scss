@@ -15,7 +15,7 @@
   @include ofh-typography-responsive('h1');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: ofh-spacing(3);
   margin-top: 0;
 }
@@ -24,7 +24,7 @@
   @include ofh-typography-responsive('h2');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: ofh-spacing(3);
   margin-top: 0;
 }
@@ -33,7 +33,7 @@
   @include ofh-typography-responsive('h3');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: ofh-spacing(2);
   margin-top: 0;
 }
@@ -42,7 +42,7 @@
   @include ofh-typography-responsive('h5');
 
   display: block;
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: ofh-spacing(1);
   margin-top: 0;
 }

@@ -26,14 +26,14 @@
 }
 
 .ofh-details__summary {
-  color: $ofh-link-color;
+  color: $ofh-color-foreground-link-default;
   cursor: pointer;
   display: inline-block; /* [2] */
   padding-left: ofh-spacing(4);
   position: relative; /* [3] */
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
   }
 
   &::before {
@@ -112,12 +112,12 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
 
   .ofh-details__summary {
     background-color: $ofh-color-greyscale-white;
-    border-top: $ofh-focus-width solid transparent;
+    border-top: $ofh-stroke-weight-4 solid transparent;
     display: block;
-    padding: ofh-spacing(4) - $ofh-focus-width ofh-spacing(4) ofh-spacing(4);
+    padding: ofh-spacing(4) - $ofh-stroke-weight-4 ofh-spacing(4) ofh-spacing(4);
 
     @include mq($until: tablet) {
-      padding: ofh-spacing(3) - $ofh-focus-width ofh-spacing(3) ofh-spacing(3);
+      padding: ofh-spacing(3) - $ofh-stroke-weight-4 ofh-spacing(3) ofh-spacing(3);
     }
 
     &::before {
@@ -126,7 +126,7 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
 
     &:hover {
       .ofh-details__summary-text {
-        color: $ofh-link-hover-color;
+        color: $ofh-color-foreground-link-hover;
       }
     }
 

@@ -30,8 +30,8 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       &:hover {
         color: $ofh-color-foreground-brand-blue-navy;

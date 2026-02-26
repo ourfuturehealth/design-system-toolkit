@@ -5,7 +5,7 @@
 .ofh-hint {
   @include ofh-font('paragraph');
 
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   display: block;
   margin-bottom: ofh-spacing(3);
 }

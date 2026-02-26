@@ -116,10 +116,10 @@ Status labels:
     - border usage in focus states
     - text/fill usage in focus states
   - Better mapping in the new token system is:
-    - borders -> `$ofh-focus-color` (maps to `$ofh-color-border-feedback-focus`)
+    - borders -> `$ofh-color-border-feedback-focus` (maps to `$ofh-color-border-feedback-focus`)
     - text/fill -> `$ofh-color-foreground-brand-blue-navy`
 - Action taken in this pass:
-  - Replaced border uses of `$ofh-focus-text-color` with `$ofh-focus-color`.
+  - Replaced border uses of `$ofh-focus-text-color` with `$ofh-color-border-feedback-focus`.
   - Replaced remaining text/fill uses with `$ofh-color-foreground-brand-blue-navy`.
   - Removed `$ofh-focus-text-color` extension declaration from:
     - `packages/toolkit/core/settings/_tokens-extensions.scss`

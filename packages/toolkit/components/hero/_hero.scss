@@ -10,10 +10,10 @@
  */
 
 .ofh-hero {
-  @include print-color($ofh-text-black-color);
+  @include print-color($ofh-color-foreground-primary);
 
   background-color: $ofh-color-brand-yellow-3-main;
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   position: relative; /* [1] */
 }
 
@@ -88,7 +88,7 @@
 .ofh-hero--image-description {
   .ofh-hero-content {
     background-color: $ofh-color-brand-yellow-3-main;
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
     margin-bottom: 24px;
     padding: ofh-spacing(4);
     position: relative;
@@ -144,7 +144,7 @@
     }
 
     @include mq($media-type: print) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       max-width: 100%;
       padding: 0;
     }

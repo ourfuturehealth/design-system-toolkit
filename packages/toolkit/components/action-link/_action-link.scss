@@ -21,7 +21,7 @@
   @include ofh-font('h4');
 
   display: inline-block; /* [1] */
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   padding-left: 38px; /* [2] */
   position: relative; /* [3] */
   text-decoration: none; /* [4] */
@@ -48,15 +48,15 @@
   }
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
 
     &:visited {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 
   .ofh-icon__arrow-right-circle {
-    @include print-color($ofh-text-black-color);
+    @include print-color($ofh-color-foreground-primary);
 
     fill: $ofh-color-brand-yellow-3-main;
     height: 36px;

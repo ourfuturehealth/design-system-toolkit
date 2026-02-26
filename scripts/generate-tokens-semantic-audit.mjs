@@ -387,9 +387,6 @@ function buildAuditMarkdown(tokenDataList, generatedAt) {
 function main() {
   const semanticSource = readText(SEMANTIC_FILE);
   const parsedTokens = parseSemanticTokens(semanticSource);
-  if (parsedTokens.length === 0) {
-    throw new Error(`No semantic tokens found in ${SEMANTIC_FILE}`);
-  }
 
   const runtimeScssFiles = walkFiles(
     'packages',

@@ -5,7 +5,7 @@
 .ofh-select {
   @include ofh-font('paragraph');
 
-  border: $ofh-border-width-form-element solid $ofh-color-border-input-default;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   box-sizing: border-box;
   height: 40px;
   max-width: 100%;
@@ -20,9 +20,9 @@
 .ofh-select option:checked,
 .ofh-select:focus::-ms-value {
   background-color: $ofh-color-brand-yellow-3-main;
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
 }
 
 .ofh-select--error {
-  border: $ofh-stroke-weight-4 solid $ofh-error-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 }

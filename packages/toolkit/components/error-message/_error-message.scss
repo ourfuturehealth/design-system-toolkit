@@ -6,7 +6,7 @@
   @include ofh-font('paragraph', $weight: bold);
 
   clear: both;
-  color: $ofh-error-color;
+  color: $ofh-color-feedback-error-2-main;
   display: block;
   margin-bottom: ofh-spacing(3);
 }

@@ -5,19 +5,19 @@
 .app-side-nav__heading {
   @include ofh-font($size: lead, $line-height: 1.25, $weight: bold);
 
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   margin-bottom: 12px;
   padding-top: 4px;
 
   @include mq($until: desktop) {
     @include ofh-font($size: h3, $line-height: 1.25, $weight: bold);
 
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 }
 
 .app-side-nav__back {
-  border-bottom: 1px solid $ofh-border-color;
+  border-bottom: 1px solid $ofh-color-border-primary;
   padding-bottom: ofh-spacing(3);
 }
 
@@ -39,12 +39,12 @@
 }
 
 .app-side-nav__item--current {
-  border-left: 4px solid $ofh-link-color;
+  border-left: 4px solid $ofh-color-foreground-link-default;
   margin-left: -12px;
   padding-left: 8px;
 
   .app-side-nav__link {
-    font-weight: $ofh-font-bold;
+    font-weight: $ofh-typography-weight-semibold;
   }
 }
 
@@ -56,11 +56,11 @@
   }
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     text-decoration: underline;
   }
 

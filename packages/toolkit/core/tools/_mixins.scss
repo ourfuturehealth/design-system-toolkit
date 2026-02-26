@@ -107,7 +107,7 @@
   color: $panel-text-color;
 
   @include mq($media-type: print) {
-    border: 1px solid $ofh-text-black-color;
+    border: 1px solid $ofh-color-foreground-primary;
     page-break-inside: avoid;
   }
 }
@@ -170,7 +170,7 @@
 
   @include mq($media-type: print) {
     background: none;
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
     top: 0;
   }
 }
@@ -194,8 +194,8 @@
   }
 
   @include mq($media-type: print) {
-    border: $print-border-size solid $ofh-text-black-color;
-    color: $ofh-text-black-color;
+    border: $print-border-size solid $ofh-color-foreground-primary;
+    color: $ofh-color-foreground-primary;
     page-break-inside: avoid;
   }
 }
@@ -204,7 +204,7 @@
 // Print colour mixin, sets the text print colour
 // warning callout, do and don't lists and panels.
 
-// Usage: @include print-color($ofh-text-black-color);
+// Usage: @include print-color($ofh-color-foreground-primary);
 // See components/_care-card
 
 
@@ -216,7 +216,7 @@
     &:active,
     &:focus,
     &:visited {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 }

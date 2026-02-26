@@ -19,7 +19,7 @@
 }
 
 .ofh-task-list__item {
-  border-bottom: 1px solid $ofh-border-color;
+  border-bottom: 1px solid $ofh-color-border-primary;
   display: table;
   margin-bottom: 0;
   padding-bottom: ofh-spacing(2);
@@ -29,17 +29,17 @@
 }
 
 .ofh-task-list__item:first-child {
-  border-top: 1px solid $ofh-border-color;
+  border-top: 1px solid $ofh-color-border-primary;
 }
 
 .ofh-task-list__name-and-hint {
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   display: table-cell;
   vertical-align: top;
 }
 
 .ofh-task-list__status {
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   display: table-cell;
   padding-left: 10px;
   text-align: right;
@@ -57,6 +57,6 @@
 }
 
 .ofh-task-list__hint {
-  color: $ofh-text-grey-color;
+  color: $ofh-color-foreground-secondary;
   margin-top: 5px;
 }

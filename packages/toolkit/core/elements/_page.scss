@@ -16,13 +16,13 @@
 
 html {
   background-color: $ofh-color-background-primary;
-  font-family: $ofh-font, Arial, sans-serif;
+  font-family: $ofh-typography-font-source-sans-pro, Arial, sans-serif;
   overflow-y: scroll; /* [1] */
 }
 
 body {
   background-color: $ofh-color-background-primary;
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale; /* [2] */
   -webkit-font-smoothing: antialiased; /* [2] */

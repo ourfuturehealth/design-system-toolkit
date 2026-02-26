@@ -20,7 +20,7 @@ table {
 
 thead {
   th {
-    border-bottom: $ofh-stroke-weight-2 solid $ofh-border-color;
+    border-bottom: $ofh-stroke-weight-2 solid $ofh-color-border-primary;
   }
 }
 
@@ -31,7 +31,7 @@ td {
   @include ofh-responsive-padding(4, 'right');
   @include ofh-responsive-padding(3, 'top');
 
-  border-bottom: $ofh-stroke-weight-1 solid $ofh-border-color;
+  border-bottom: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   text-align: left;
   vertical-align: top;
 
@@ -41,7 +41,7 @@ td {
 }
 
 th {
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
 }
 
 caption {

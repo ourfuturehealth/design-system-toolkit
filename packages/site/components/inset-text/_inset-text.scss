@@ -18,10 +18,10 @@
   
     background-color: $ofh-color-greyscale-7;
     border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-blue-royal-3-main;
-    border-radius: $ofh-border-radius;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
@@ -34,10 +34,10 @@
   
     background-color: $ofh-color-greyscale-7;
     border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-blue-royal-3-main;
-    border-radius: $ofh-border-radius;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
@@ -51,10 +51,10 @@
   
     background-color: $ofh-color-greyscale-7;
     border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-green-teal-4;
-    border-radius: $ofh-border-radius;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
@@ -68,10 +68,10 @@
   
     background-color: $ofh-color-greyscale-7;
     border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-red-4;
-    border-radius: $ofh-border-radius;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
