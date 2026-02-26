@@ -242,3 +242,22 @@ Status labels:
     - token mapping updates
     - toolkit/react build outputs
     - docs/consumer import updates where applicable
+
+## 14. GOV.UK-adapted design-example styles folder
+
+- Status: `candidate`
+- First noted: 2026-02-26
+- Related files:
+  - `packages/site/styles/design-example/govuk/`
+  - `packages/site/styles/design-example/govuk/_main.scss`
+  - `packages/site/styles/design-example/govuk/_button.scss`
+  - `packages/site/styles/design-example/govuk/_tabs.scss`
+  - `packages/site/styles/design-example/govuk/_syntax-highlighting.scss`
+  - `packages/site/styles/design-example/_design-example.scss`
+- Context:
+  - The `govuk/` folder contains adapted styles used by documentation design examples.
+  - `packages/site/styles/design-example/govuk/_tabs.scss` already includes a TODO to review whether this is still needed or can be removed from the documentation site.
+  - Removal relevance/need should be validated with designers and engineers before any code deletion.
+- Follow-up to decide:
+  - Confirm whether any `govuk/` styles are still required for documentation UX.
+  - If not needed, remove the `govuk/` folder and remove `@import 'govuk/main';` from `packages/site/styles/design-example/_design-example.scss`.
