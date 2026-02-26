@@ -15,7 +15,7 @@ This monorepo uses a unified linting configuration to ensure code consistency ac
 The monorepo has root-level configuration files that define shared rules:
 
 - `eslint.config.mjs` - Shared ESLint rules for all JavaScript/TypeScript
-- `stylelint.config.js` - Shared Stylelint rules for all SCSS
+- `stylelint.config.cjs` - Shared Stylelint rules for all SCSS
 - `.prettierrc` - Shared Prettier formatting rules
 
 ### Package-Specific Configurations
@@ -25,8 +25,8 @@ Each package can extend the root configuration with package-specific overrides:
 - `packages/toolkit/eslint.config.mjs` - Extends root config with Jest globals
 - `packages/toolkit/stylelint.config.js` - Extends root config (no overrides currently)
 - `packages/react-components/eslint.config.js` - Extends root config with React + TypeScript rules
-- `packages/react-components/stylelint.config.js` - Extends root config (no overrides currently)
-- `packages/site/stylelint.config.js` - Extends root config (no overrides currently)
+- `packages/react-components/stylelint.config.cjs` - Extends root config (no overrides currently)
+- `packages/site/stylelint.config.cjs` - Extends root config (no overrides currently)
 
 ## Running Linting
 

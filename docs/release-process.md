@@ -346,7 +346,7 @@ The toolkit [package.json](../packages/toolkit/package.json) includes:
     "url": "git+https://github.com/ourfuturehealth/design-system-toolkit.git",
     "directory": "packages/toolkit"
   },
-  "files": ["dist", "components", "core", "common", "assets", "ofh.js", "ofh.scss", "polyfills.js"],
+  "files": ["dist", "components", "core", "common", "assets", "ofh.js", "ofh.scss", "ofh-participant.scss", "ofh-research.scss", "polyfills.js"],
   "main": "dist/ofh-design-system-toolkit.js",
   "style": "dist/ofh-design-system-toolkit.css",
   "scripts": {
