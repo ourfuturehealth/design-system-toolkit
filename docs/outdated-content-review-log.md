@@ -206,23 +206,25 @@ Status labels:
   - Removed `@mixin toggle-button()` from:
     - `packages/toolkit/core/tools/_mixins.scss`
 
-## 12. Deferred: review and potential removal of `tokens-semantic`
+## 12. Remove `tokens-semantic` bridge and deprecation audit artifacts
 
-- Status: `candidate`
+- Status: `removed`
 - First noted: 2026-02-20
 - Related files:
   - `packages/toolkit/core/settings/_tokens-semantic.scss`
-  - `packages/toolkit/core/settings/_tokens-core.scss`
-  - `packages/toolkit/core/settings/_tokens-static.scss`
-  - `packages/toolkit/core/settings/_tokens-breakpoint.scss`
+  - `packages/toolkit/core/settings/_all.scss`
+  - `docs/tokens-semantic-audit.md`
+  - `scripts/generate-tokens-semantic-audit.mjs`
+  - `package.json`
 - Context:
-  - Team wants to align with Figma 1:1 as closely as possible.
-  - `tokens-semantic` currently acts as a compatibility bridge for legacy variable names.
-  - This review should happen only after theme token support is introduced.
-- Follow-up order:
-  1. Implement theme token support (Participant/Research) and document process for adding new themes.
-  2. Audit semantic alias usage across toolkit/site.
-  3. Decide whether to retain, shrink, or remove `tokens-semantic`.
+  - Semantic token aliases were fully migrated to direct design-token equivalents.
+  - The semantic bridge and its audit workflow were no longer needed.
+- Action taken in this pass:
+  - Removed `@import 'tokens-semantic';` from `packages/toolkit/core/settings/_all.scss`.
+  - Deleted `packages/toolkit/core/settings/_tokens-semantic.scss`.
+  - Deleted `docs/tokens-semantic-audit.md`.
+  - Deleted `scripts/generate-tokens-semantic-audit.mjs`.
+  - Removed `audit:tokens-semantic` script from root `package.json`.
 
 ## 13. Future improvement: update GitHub PR template
 
