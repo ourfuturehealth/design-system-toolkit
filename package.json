@@ -38,7 +38,8 @@
     "lint:react-consumer": "pnpm --filter=@ourfuturehealth/example-react-consumer-app run lint",
     "test": "pnpm -r --filter='./packages/*' --if-present run test",
     "test:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run test",
-    "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test"
+    "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test",
+    "audit:tokens-semantic": "node scripts/generate-tokens-semantic-audit.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
