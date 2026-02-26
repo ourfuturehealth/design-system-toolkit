@@ -70,7 +70,7 @@
 }
 
 .ofh-breadcrumb__link {
-  color: $ofh-breadcrumb-link-color;
+  color: $ofh-color-foreground-breadcrumb-default;
 
   &:visited {
     color: $ofh-breadcrumb-link-visited-color;
@@ -116,7 +116,7 @@
 }
 
 .ofh-breadcrumb__backlink {
-  color: $ofh-breadcrumb-link-color;
+  color: $ofh-color-foreground-breadcrumb-default;
 
   &:visited {
     color: $ofh-breadcrumb-link-visited-color;
