@@ -5,8 +5,8 @@
 // Default icon size
 
 .ofh-icon {
-  height: $ofh-icon-size;
-  width: $ofh-icon-size;
+  height: 34px;
+  width: 34px;
 }
 
 // Default icon colours
@@ -32,7 +32,7 @@
 }
 
 .ofh-icon__tick {
-  stroke: $ofh-success-color;
+  stroke: $ofh-color-feedback-success-2-main;
 }
 
 .ofh-icon__arrow-right {
@@ -89,21 +89,21 @@
 // Icon size adjustments
 
 .ofh-icon--size-25 {
-  height: $ofh-icon-size * 1.25;
-  width: $ofh-icon-size * 1.25;
+  height: 34px * 1.25;
+  width: 34px * 1.25;
 }
 
 .ofh-icon--size-50 {
-  height: $ofh-icon-size * 1.5;
-  width: $ofh-icon-size * 1.5;
+  height: 34px * 1.5;
+  width: 34px * 1.5;
 }
 
 .ofh-icon--size-75 {
-  height: $ofh-icon-size * 1.75;
-  width: $ofh-icon-size * 1.75;
+  height: 34px * 1.75;
+  width: 34px * 1.75;
 }
 
 .ofh-icon--size-100 {
-  height: $ofh-icon-size * 2;
-  width: $ofh-icon-size * 2;
+  height: 34px * 2;
+  width: 34px * 2;
 }

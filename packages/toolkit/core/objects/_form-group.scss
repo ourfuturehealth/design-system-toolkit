@@ -11,7 +11,7 @@
 }
 
 .ofh-form-group--error {
-  border-left: $ofh-border-width-form-group-error solid $ofh-error-color;
+  border-left: $ofh-stroke-weight-4 solid $ofh-error-color;
   padding-left: ofh-spacing(3);
 
   .ofh-form-group {

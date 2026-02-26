@@ -256,17 +256,17 @@
 
   &::placeholder {
     color: $ofh-color-greyscale-2;
-    font-size: $ofh-base-font-size;
+    font-size: 16px;
   }
 
   &:-ms-input-placeholder {
     color: $ofh-color-greyscale-2;
-    font-size: $ofh-base-font-size;
+    font-size: 16px;
   }
 
   &::-webkit-input-placeholder {
     color: $ofh-color-greyscale-2;
-    font-size: $ofh-base-font-size;
+    font-size: 16px;
   }
 
   @include mq($until: tablet) {
@@ -286,7 +286,7 @@
 
   @include mq($from: tablet) {
     border: 1px solid $ofh-color-greyscale-white;
-    font-size: $ofh-base-font-size;
+    font-size: 16px;
     height: ofh-spacing(6); /* [2] */
     width: 200px; /* [2] */
   }
@@ -326,7 +326,7 @@
     }
 
     &:hover {
-      background-color: $ofh-button-hover-color;
+      background-color: $ofh-color-background-button-hover;
     }
 
     &:focus {
@@ -458,7 +458,7 @@
   display: block;
   font-size: 16px;
   font-weight: 400;
-  line-height: $ofh-base-line-height;
+  line-height: 24px;
   margin-right: -16px;
   padding: 7px ofh-spacing(3);
   position: relative;
@@ -537,7 +537,7 @@
     background-color: $ofh-color-background-neutral-yellow;
     display: block;
     margin: 0 auto;
-    max-width: $ofh-page-width + ofh-spacing(9); /* [12] */
+    max-width: $ofh-width-content-max + ofh-spacing(9); /* [12] */
   }
 }
 

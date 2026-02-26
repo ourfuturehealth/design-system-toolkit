@@ -59,7 +59,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 
 .ofh-radios__input + .ofh-radios__label::before {
   background: $ofh-color-background-primary;
-  border: $ofh-border-width-form-element solid $ofh-input-border-color;
+  border: $ofh-border-width-form-element solid $ofh-color-border-input-default;
   border-radius: 50%;
   box-sizing: border-box;
   content: '';
@@ -71,7 +71,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 }
 
 .ofh-radios__input + .ofh-radios__label::after {
-  background: $ofh-input-border-color;
+  background: $ofh-color-border-input-default;
   border: 10px solid $ofh-text-black-color;
   border-radius: 50%;
   content: '';
@@ -153,7 +153,7 @@ $ofh-radios-focus-width: $ofh-focus-width + 1px;
 
 /* Conditional */
 
-$conditional-border-width: $ofh-border-width-mobile;
+$conditional-border-width: $ofh-stroke-weight-4;
 
 // Calculate the amount of padding needed to keep the border centered against the radios.
 $conditional-border-padding: ($ofh-radios-size * 0.5) - ($conditional-border-width * 0.5);
@@ -167,7 +167,7 @@ $conditional-padding-left: $conditional-border-padding + $ofh-radios-label-paddi
 .ofh-radios__conditional {
   @include ofh-responsive-margin(4, 'bottom');
 
-  border-left: $conditional-border-width solid $ofh-input-border-color;
+  border-left: $conditional-border-width solid $ofh-color-border-input-default;
   margin-left: $conditional-margin-left;
   padding-left: $conditional-padding-left;
 

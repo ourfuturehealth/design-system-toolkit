@@ -73,21 +73,21 @@
   color: $ofh-color-foreground-breadcrumb-default;
 
   &:visited {
-    color: $ofh-breadcrumb-link-visited-color;
+    color: $ofh-color-foreground-breadcrumb-visited;
 
     &:hover {
-      color: $ofh-breadcrumb-link-hover-color;
+      color: $ofh-color-foreground-breadcrumb-hover;
     }
   }
 
   &:focus {
     &:hover {
-      color: $ofh-breadcrumb-link-hover-color;
+      color: $ofh-color-foreground-breadcrumb-hover;
     }
   }
 
   &:active {
-    color: $ofh-breadcrumb-link-active-color;
+    color: $ofh-color-foreground-breadcrumb-active;
   }
 }
 
@@ -119,20 +119,20 @@
   color: $ofh-color-foreground-breadcrumb-default;
 
   &:visited {
-    color: $ofh-breadcrumb-link-visited-color;
+    color: $ofh-color-foreground-breadcrumb-visited;
 
     &:hover {
-      color: $ofh-breadcrumb-link-hover-color;
+      color: $ofh-color-foreground-breadcrumb-hover;
     }
   }
 
   &:focus {
     &:hover {
-      color: $ofh-breadcrumb-link-hover-color;
+      color: $ofh-color-foreground-breadcrumb-hover;
     }
   }
 
   &:active {
-    color: $ofh-breadcrumb-link-active-color;
+    color: $ofh-color-foreground-breadcrumb-active;
   }
 }

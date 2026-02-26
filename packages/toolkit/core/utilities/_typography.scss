@@ -17,7 +17,7 @@
  * https://github.com/alphagov/govuk-frontend
  */
 
-@each $size in map.keys($ofh-typography-scale) {
+@each $size in map.keys($ofh-typography-responsive-scale) {
   .ofh-u-font-size-#{$size} {
     @include ofh-typography-responsive($size, $important: true);
   }

@@ -17,7 +17,7 @@
   @include ofh-responsive-padding(4);
 
   background-color: $ofh-color-greyscale-white;
-  border-left: $ofh-border-width-inset-text solid
+  border-left: $ofh-stroke-weight-8 solid
     $ofh-color-brand-blue-royal-3-main;
 
   @include mq($media-type: print) {

@@ -264,8 +264,8 @@
 
 @mixin remove-margin-mobile() {
   @include mq($until: tablet) {
-    margin-left: -$ofh-gutter-half;
-    margin-right: -$ofh-gutter-half;
+    margin-left: -$ofh-size-16;
+    margin-right: -$ofh-size-16;
   }
 }
 

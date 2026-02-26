@@ -97,7 +97,7 @@ Status labels:
 - Action taken in this pass:
   - Updated `html` background in `packages/toolkit/core/elements/_page.scss`:
     - from `$background-bounce-color`
-    - to `$background-color`
+    - to `$ofh-color-background-primary`
   - Removed `$background-bounce-color` from:
     - `packages/toolkit/core/settings/_tokens-extensions.scss`
 

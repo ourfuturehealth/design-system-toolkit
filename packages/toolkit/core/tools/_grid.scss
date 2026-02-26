@@ -51,8 +51,8 @@ $_ofh-grid-widths: (
   .#{$class} {
     @include clearfix;
 
-    margin-left: -($ofh-gutter-half);
-    margin-right: -($ofh-gutter-half);
+    margin-left: -($ofh-size-16);
+    margin-right: -($ofh-size-16);
   }
 }
 
@@ -87,7 +87,7 @@ $_ofh-grid-widths: (
 @mixin govuk-grid-column($width: full, $float: left, $at: desktop, $class: 'ofh-grid-column') {
   .#{$class}-#{$width} {
     box-sizing: border-box;
-    padding: 0 $ofh-gutter-half;
+    padding: 0 $ofh-size-16;
 
     @if $at != desktop {
       width: 100%;

@@ -31,7 +31,7 @@
 //   `!important`. Generally Used to create override classes.
 
 @mixin ofh-typography-weight-normal($important: false) {
-  font-weight: $ofh-font-normal iff($important, !important);
+  font-weight: $ofh-typography-weight-regular iff($important, !important);
 }
 
 // Bold font weight

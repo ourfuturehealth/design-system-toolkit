@@ -37,19 +37,8 @@ $ofh-link-color: $ofh-color-foreground-link-default;
 // [AUTO-USAGE] runtime: 8 files (packages/site/components/card/_card.scss, packages/site/styles/app/_side-nav.scss, packages/site/styles/design-example/_code-snippet.scss, packages/toolkit/components/back-link/_back-link.scss, packages/toolkit/components/card/card.scss, packages/toolkit/components/details/_details.scss, packages/toolkit/components/pagination/_pagination.scss, packages/toolkit/core/tools/_links.scss) | docs/text refs: 1
 $ofh-link-hover-color: $ofh-color-foreground-link-hover;
 
-// [AUTO-USAGE] runtime: 2 files (packages/toolkit/components/pagination/_pagination.scss, packages/toolkit/core/tools/_links.scss) | docs/text refs: 1
-$ofh-link-visited-color: $ofh-color-foreground-link-visited;
-
 // Light/inverted link colors (on dark backgrounds)
 // Breadcrumb link colors
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/breadcrumb/_breadcrumb.scss) | docs/text refs: 1
-$ofh-breadcrumb-link-hover-color: $ofh-color-foreground-breadcrumb-hover;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/breadcrumb/_breadcrumb.scss) | docs/text refs: 1
-$ofh-breadcrumb-link-visited-color: $ofh-color-foreground-breadcrumb-visited;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/breadcrumb/_breadcrumb.scss) | docs/text refs: 1
-$ofh-breadcrumb-link-active-color: $ofh-color-foreground-breadcrumb-active;
 
 // Background Colors
 // ==========================================================================
@@ -58,8 +47,6 @@ $ofh-breadcrumb-link-active-color: $ofh-color-foreground-breadcrumb-active;
 // @deprecated Use $ofh-color-background-* tokens directly
 
 // BREAKING: Page background changed from grey (#F4F4F4) to white (#FFFFFF)
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/elements/_page.scss) | docs/text refs: 1
-$background-color: $ofh-color-background-primary;
 
 // Button Colors
 // ==========================================================================
@@ -68,30 +55,8 @@ $background-color: $ofh-color-background-primary;
 // @deprecated Use $ofh-color-background-button-* tokens directly
 
 // BREAKING: Primary button changed from yellow (#FFC62C) to blue (#0053B3)
-// [AUTO-USAGE] runtime: 2 files (packages/site/styles/design-example/govuk/_button.scss, packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color: $ofh-color-background-button-default;
-
-// [AUTO-USAGE] runtime: 2 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss) | docs/text refs: 0
-$ofh-button-hover-color: $ofh-color-background-button-hover;
 
 // White/inverted button
-// [AUTO-USAGE] runtime: 2 files (packages/site/styles/design-example/govuk/_button.scss, packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-default: $ofh-color-background-button-default;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-hover: $ofh-color-background-button-hover;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-active: $ofh-color-background-button-active;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-white: $ofh-color-background-button-default-inverted;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-white-hover: $ofh-color-background-button-hover-inverted;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/components/button/_button.scss) | docs/text refs: 1
-$ofh-button-color-white-active: $ofh-color-background-button-active-inverted;
 
 // Border Colors
 // ==========================================================================
@@ -103,11 +68,6 @@ $ofh-button-color-white-active: $ofh-color-background-button-active-inverted;
 $ofh-border-color: $ofh-color-border-primary;
 
 // Form input borders
-// [AUTO-USAGE] runtime: 5 files (packages/toolkit/components/checkboxes/_checkboxes.scss, packages/toolkit/components/input/_input.scss, packages/toolkit/components/radios/_radios.scss, packages/toolkit/components/select/_select.scss, packages/toolkit/components/textarea/_textarea.scss) | docs/text refs: 1
-$ofh-input-border-color: $ofh-color-border-input-default;
-
-// [AUTO-USAGE] runtime: 2 files (packages/toolkit/components/auto-complete/_auto-complete.scss, packages/toolkit/core/tools/_focused.scss) | docs/text refs: 1
-$ofh-input-border-active-color: $ofh-color-border-input-active;
 
 // Feedback/Status Colors
 // ==========================================================================
@@ -117,9 +77,6 @@ $ofh-input-border-active-color: $ofh-color-border-input-active;
 
 // [AUTO-USAGE] runtime: 7 files (packages/toolkit/components/error-message/_error-message.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/input/_input.scss, packages/toolkit/components/select/_select.scss, packages/toolkit/components/textarea/_textarea.scss, packages/toolkit/core/objects/_form-group.scss, packages/toolkit/core/styles/_icons.scss) | docs/text refs: 1
 $ofh-error-color: $ofh-color-feedback-error-2-main;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/styles/_icons.scss) | docs/text refs: 1
-$ofh-success-color: $ofh-color-feedback-success-2-main;
 
 // Focus Colors
 // ==========================================================================
@@ -139,26 +96,13 @@ $ofh-focus-color: $ofh-color-border-feedback-focus;
 // [AUTO-USAGE] runtime: 12 files (packages/site/components/header/_header.scss, packages/site/styles/app/_featured-list.scss, packages/site/styles/app/_side-nav.scss, packages/toolkit/components/action-link/_action-link.scss, packages/toolkit/components/contents-list/_contents-list.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/components/label/_label.scss, packages/toolkit/components/tables/_tables.scss, ... +4 more) | docs/text refs: 1
 $ofh-font: $ofh-typography-font-source-sans-pro;
 
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/elements/_page.scss) | docs/text refs: 0
-$ofh-font-fallback: Arial, sans-serif;
-
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/tools/_typography.scss) | docs/text refs: 0
-$ofh-font-normal: $ofh-typography-weight-regular;
-
 // [AUTO-USAGE] runtime: 11 files (packages/site/components/header/_header.scss, packages/site/styles/app/_featured-list.scss, packages/site/styles/app/_side-nav.scss, packages/toolkit/components/action-link/_action-link.scss, packages/toolkit/components/contents-list/_contents-list.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/components/label/_label.scss, packages/toolkit/components/tables/_tables.scss, ... +3 more) | docs/text refs: 0
 $ofh-font-bold: $ofh-typography-weight-semibold;
 
 // Base typography sizing
-// [AUTO-USAGE] runtime: 4 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/core/elements/_page.scss, packages/toolkit/core/tools/_functions.scss) | docs/text refs: 0
-$ofh-base-font-size: 16px;
-
-// [AUTO-USAGE] runtime: 3 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/core/elements/_page.scss) | docs/text refs: 0
-$ofh-base-line-height: 24px;
 
 // Responsive typography scale for utilities
 // @deprecated Use $ofh-typography-responsive-scale directly
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/utilities/_typography.scss) | docs/text refs: 0
-$ofh-typography-scale: $ofh-typography-responsive-scale;
 
 // Border/Stroke Widths
 // ==========================================================================
@@ -168,26 +112,14 @@ $ofh-typography-scale: $ofh-typography-responsive-scale;
 
 // [AUTO-USAGE] runtime: 6 files (packages/toolkit/components/button/_button.scss, packages/toolkit/components/checkboxes/_checkboxes.scss, packages/toolkit/components/input/_input.scss, packages/toolkit/components/radios/_radios.scss, packages/toolkit/components/select/_select.scss, packages/toolkit/components/textarea/_textarea.scss) | docs/text refs: 0
 $ofh-border-width-form-element: $ofh-stroke-weight-2; // 2px
-// [AUTO-USAGE] runtime: 3 files (packages/toolkit/components/input/_input.scss, packages/toolkit/components/select/_select.scss, packages/toolkit/components/textarea/_textarea.scss) | docs/text refs: 0
-$ofh-border-width-form-element-error: $ofh-stroke-weight-4; // 4px
-// [AUTO-USAGE] runtime: 12 files (packages/site/components/card/_inset-text.scss, packages/site/components/inset-text/_inset-text.scss, packages/toolkit/components/button/_button.scss, packages/toolkit/components/checkboxes/_checkboxes.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/input/_input.scss, packages/toolkit/components/inset-text/_inset-text.scss, packages/toolkit/components/radios/_radios.scss, ... +4 more) | docs/text refs: 0
+// [AUTO-USAGE] runtime: 8 files (packages/toolkit/components/button/_button.scss, packages/toolkit/components/checkboxes/_checkboxes.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/input/_input.scss, packages/toolkit/components/radios/_radios.scss, packages/toolkit/components/select/_select.scss, packages/toolkit/components/status-flag/_status-flag.scss, packages/toolkit/components/textarea/_textarea.scss) | docs/text refs: 0
 $ofh-border-width: $ofh-stroke-weight-4; // 4px
-// [AUTO-USAGE] runtime: 4 files (packages/toolkit/components/checkboxes/_checkboxes.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/radios/_radios.scss, packages/toolkit/components/status-flag/_status-flag.scss) | docs/text refs: 0
-$ofh-border-width-mobile: $ofh-stroke-weight-4; // 4px
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/objects/_form-group.scss) | docs/text refs: 0
-$ofh-border-width-form-group-error: $ofh-stroke-weight-4; // 4px
 // [AUTO-USAGE] runtime: 10 files (packages/site/components/header/_header.scss, packages/site/styles/design-example/_code-snippet.scss, packages/site/styles/design-example/_design-example.scss, packages/toolkit/components/auto-complete/_auto-complete.scss, packages/toolkit/components/details/_details.scss, packages/toolkit/components/error-summary/_error-summary.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/components/radios/_radios.scss, ... +2 more) | docs/text refs: 1
 $ofh-focus-width: $ofh-stroke-weight-4; // 4px
 
 // Table borders
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/elements/_table.scss) | docs/text refs: 0
-$ofh-border-table-header-width: $ofh-stroke-weight-2; // 2px
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/elements/_table.scss) | docs/text refs: 0
-$ofh-border-table-cell-width: $ofh-stroke-weight-1; // 1px
 
 // Hero and inset text borders
-// [AUTO-USAGE] runtime: 3 files (packages/site/components/card/_inset-text.scss, packages/site/components/inset-text/_inset-text.scss, packages/toolkit/components/inset-text/_inset-text.scss) | docs/text refs: 0
-$ofh-border-width-inset-text: $ofh-stroke-weight-8; // 8px
 
 // Border Radius
 // ==========================================================================
@@ -204,17 +136,8 @@ $ofh-border-radius: $ofh-radius-4; // 4px
 // Grid and layout spacing
 // @deprecated Use responsive spacing tokens directly
 
-// [AUTO-USAGE] runtime: 3 files (packages/site/components/header/_header.scss, packages/toolkit/components/header/_header.scss, packages/toolkit/core/objects/_width-container.scss) | docs/text refs: 0
-$ofh-page-width: $ofh-width-content-max; // 960px
-// [AUTO-USAGE] runtime: 3 files (packages/toolkit/core/objects/_width-container.scss, packages/toolkit/core/tools/_grid.scss, packages/toolkit/core/tools/_mixins.scss) | docs/text refs: 0
-$ofh-gutter: $ofh-size-32; // 32px
-// [AUTO-USAGE] runtime: 3 files (packages/toolkit/core/objects/_width-container.scss, packages/toolkit/core/tools/_grid.scss, packages/toolkit/core/tools/_mixins.scss) | docs/text refs: 0
-$ofh-gutter-half: $ofh-size-16; // 16px (half of gutter)
-
 // Responsive spacing scale for utilities
 // @deprecated Use $ofh-space-responsive-scale directly
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/utilities/_spacing.scss) | docs/text refs: 0
-$ofh-spacing-responsive-scale: $ofh-space-responsive-scale;
 
 // Icon Sizing
 // ==========================================================================
@@ -222,5 +145,3 @@ $ofh-spacing-responsive-scale: $ofh-space-responsive-scale;
 // Icon dimensions
 // @deprecated Use $ofh-iconography-* tokens directly
 
-// [AUTO-USAGE] runtime: 1 file (packages/toolkit/core/styles/_icons.scss) | docs/text refs: 0
-$ofh-icon-size: 34px; // Note: Figma uses 16/24/32, this is custom

@@ -20,7 +20,7 @@ table {
 
 thead {
   th {
-    border-bottom: $ofh-border-table-header-width solid $ofh-border-color;
+    border-bottom: $ofh-stroke-weight-2 solid $ofh-border-color;
   }
 }
 
@@ -31,7 +31,7 @@ td {
   @include ofh-responsive-padding(4, 'right');
   @include ofh-responsive-padding(3, 'top');
 
-  border-bottom: $ofh-border-table-cell-width solid $ofh-border-color;
+  border-bottom: $ofh-stroke-weight-1 solid $ofh-border-color;
   text-align: left;
   vertical-align: top;
 

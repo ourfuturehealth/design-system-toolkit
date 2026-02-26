@@ -9,11 +9,11 @@ a.ofh-button {
   @include ofh-responsive-margin(5, 'bottom');
 
   -webkit-appearance: none;
-  background-color: $ofh-button-color-white;
+  background-color: $ofh-color-background-button-default-inverted;
   border: $ofh-border-width-form-element solid transparent;
   border-radius: 8px;
   box-shadow: none;
-  color: $ofh-button-color-white;
+  color: $ofh-color-background-button-default-inverted;
   cursor: pointer;
   display: inline-block;
   font-size: 19px;
@@ -51,21 +51,21 @@ a.ofh-button {
 // Button variations
 .ofh-button--contained,
 a.ofh-button.ofh-button--contained {
-  background-color: $ofh-button-color-default;
-  color: $ofh-button-color-white;
+  background-color: $ofh-color-background-button-default;
+  color: $ofh-color-background-button-default-inverted;
 
   &:hover {
-    background-color: $ofh-button-color-hover;
+    background-color: $ofh-color-background-button-hover;
   }
 
   &:focus {
-    background-color: $ofh-button-color-active;
-    outline: 4px solid $ofh-button-color-default;
+    background-color: $ofh-color-background-button-active;
+    outline: 4px solid $ofh-color-background-button-default;
     outline-offset: 4px;
   }
 
   &:active {
-    background-color: $ofh-button-color-active;
+    background-color: $ofh-color-background-button-active;
     outline: none;
     outline-offset: none;
   }
@@ -73,22 +73,22 @@ a.ofh-button.ofh-button--contained {
 
 .ofh-button--outlined,
 a.ofh-button.ofh-button--outlined {
-  border: $ofh-border-width-form-element solid $ofh-button-color-default;
-  color: $ofh-button-color-default;
+  border: $ofh-border-width-form-element solid $ofh-color-background-button-default;
+  color: $ofh-color-background-button-default;
 
   &:hover {
-    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
-    color: $ofh-button-color-hover;
+    border: $ofh-border-width-form-element solid $ofh-color-background-button-hover;
+    color: $ofh-color-background-button-hover;
   }
 
   &:active,
   &:focus {
-    border: $ofh-border-width-form-element solid $ofh-button-color-active;
-    color: $ofh-button-color-active;
+    border: $ofh-border-width-form-element solid $ofh-color-background-button-active;
+    color: $ofh-color-background-button-active;
   }
 
   &:focus {
-    outline: 4px solid $ofh-button-color-default;
+    outline: 4px solid $ofh-color-background-button-default;
     outline-offset: 4px;
   }
 
@@ -101,24 +101,24 @@ a.ofh-button.ofh-button--outlined {
 .ofh-button--ghost,
 a.ofh-button.ofh-button--ghost {
   background-color: transparent;
-  border: $ofh-border-width-form-element solid $ofh-button-color-default;
-  color: $ofh-button-color-default;
+  border: $ofh-border-width-form-element solid $ofh-color-background-button-default;
+  color: $ofh-color-background-button-default;
 
   &:hover {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-button-color-hover;
-    color: $ofh-button-color-hover;
+    border: $ofh-border-width-form-element solid $ofh-color-background-button-hover;
+    color: $ofh-color-background-button-hover;
   }
 
   &:active,
   &:focus {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid$ofh-button-color-active;
-    color: $ofh-button-color-active;
+    border: $ofh-border-width-form-element solid $ofh-color-background-button-active;
+    color: $ofh-color-background-button-active;
   }
 
   &:focus {
-    outline: 4px solid $ofh-button-color-default;
+    outline: 4px solid $ofh-color-background-button-default;
     outline-offset: 4px;
   }
 
@@ -129,24 +129,24 @@ a.ofh-button.ofh-button--ghost {
 
   &-reverse {
     background-color: transparent;
-    border: $ofh-border-width-form-element solid $ofh-button-color-white;
-    color: $ofh-button-color-white;
+    border: $ofh-border-width-form-element solid $ofh-color-background-button-default-inverted;
+    color: $ofh-color-background-button-default-inverted;
 
     &:hover {
       background-color: transparent;
-      border: $ofh-border-width-form-element solid $ofh-button-color-white-hover;
-      color: $ofh-button-color-white-hover;
+      border: $ofh-border-width-form-element solid $ofh-color-background-button-hover-inverted;
+      color: $ofh-color-background-button-hover-inverted;
     }
 
     &:active,
     &:focus {
       background-color: transparent;
-      border: $ofh-border-width-form-element solid $ofh-button-color-white-active;
-      color: $ofh-button-color-white-active;
+      border: $ofh-border-width-form-element solid $ofh-color-background-button-active-inverted;
+      color: $ofh-color-background-button-active-inverted;
     }
 
     &:focus {
-      outline: 4px solid $ofh-button-color-white;
+      outline: 4px solid $ofh-color-background-button-default-inverted;
       outline-offset: 4px;
     }
 
@@ -160,7 +160,7 @@ a.ofh-button.ofh-button--ghost {
 .ofh-button--text,
 a.ofh-button.ofh-button--text {
   background-color: transparent;
-  color: $ofh-button-color-default;
+  color: $ofh-color-background-button-default;
   padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
 
   @include mq($until: tablet) {
@@ -168,24 +168,24 @@ a.ofh-button.ofh-button--text {
   }
 
   &:hover {
-    color: $ofh-button-color-hover;
+    color: $ofh-color-background-button-hover;
   }
 
   &:focus {
     border-radius: 0;
-    color: $ofh-button-color-active;
-    outline: 4px solid $ofh-button-color-default;
+    color: $ofh-color-background-button-active;
+    outline: 4px solid $ofh-color-background-button-default;
   }
 
   &:active {
-    color: $ofh-button-color-active;
+    color: $ofh-color-background-button-active;
     outline: none;
     outline-offset: none;
   }
 
   &-reverse {
     background-color: transparent;
-    color: $ofh-button-color-white;
+    color: $ofh-color-background-button-default-inverted;
     padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
 
     @include mq($until: tablet) {
@@ -193,17 +193,17 @@ a.ofh-button.ofh-button--text {
     }
 
     &:hover {
-      color: $ofh-button-color-white-hover;
+      color: $ofh-color-background-button-hover-inverted;
     }
 
     &:focus {
       border-radius: 0;
-      color: $ofh-button-color-white-active;
-      outline: 4px solid $ofh-button-color-white;
+      color: $ofh-color-background-button-active-inverted;
+      outline: 4px solid $ofh-color-background-button-default-inverted;
     }
 
     &:active {
-      color: $ofh-button-color-white-active;
+      color: $ofh-color-background-button-active-inverted;
       outline: none;
       outline-offset: none;
     }

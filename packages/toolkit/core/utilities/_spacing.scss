@@ -29,7 +29,7 @@ $_spacing-directions: ('top', 'right', 'bottom', 'left') !default;
 
 @mixin _ofh-generate-spacing-overrides($property) {
   // [1] Generate override for all directions
-  @each $scale-point, $scale-map in $ofh-spacing-responsive-scale {
+  @each $scale-point, $scale-map in $ofh-space-responsive-scale {
     .ofh-u-#{$property}-#{$scale-point} {
       @include _ofh-responsive-spacing($scale-point, $property, 'all', true);
     }
