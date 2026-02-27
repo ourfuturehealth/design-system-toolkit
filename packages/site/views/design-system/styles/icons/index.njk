@@ -6,12 +6,52 @@
 {% set backlog_issue_id = "4" %}
 
 {% extends "app-layout.njk" %}
+{% from "icon/macro.njk" import icon %}
 
 {% block breadcrumb %}
   {% include "../_breadcrumb.njk" %}
 {% endblock %}
 
 {% block bodyContent %}
+  <h2 id="material-svg-icons">Material SVG icons</h2>
+  <p>New icon support is available using the shared <code>icon</code> macro and the Material SVG sprite.</p>
+  <p class="rich-text">Sprite file: <a href="{{ materialIcons.spritePath }}" target="_blank" rel="noopener noreferrer"><code>{{ materialIcons.spritePath }}</code></a></p>
+  <div class="ofh-u-margin-bottom-5">
+    {{ icon({ "name": "search", "size": 16, "title": "Search" }) }}
+    {{ icon({ "name": "search", "size": 24, "title": "Search" }) }}
+    {{ icon({ "name": "search", "size": 32, "title": "Search" }) }}
+  </div>
+  <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "search", "size": 24 }) }}{% endraw %}</code></p>
+  <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
+
+  <h3 id="material-icon-gallery">Material icon gallery</h3>
+  {% for group in materialIcons.iconsByCategory %}
+    <h4>{{ group.category }}</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>16</th>
+          <th>24</th>
+          <th>32</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in group.icons %}
+          <tr>
+            <td><code>{{ item.name }}</code></td>
+            <td>{{ icon({ "name": item.name, "size": 16 }) }}</td>
+            <td>{{ icon({ "name": item.name, "size": 24 }) }}</td>
+            <td>{{ icon({ "name": item.name, "size": 32 }) }}</td>
+            <td>{{ item.defaultSize }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor %}
+
+  <p>Legacy icon files have been removed. Use the Material icon macro and sprite for all icon usage.</p>
 
   <table>
     <thead>
@@ -151,7 +191,7 @@
     </tbody>
   </table>
 
-  <p>You can find the all the SVG icons code in the <a href="https://github.com/ourfuturehealth/design-system-toolkit/tree/7fbef88b09c21508bde683458a9f6b5d99a358b6/packages/assets/icons">Our Future Health frontend library on GitHub</a>.</p>
+  <p>You can find the Material SVG source files in <code>packages/toolkit/assets/icons/material</code> and the generated sprite at <code>packages/toolkit/assets/icons/material-sprite.svg</code>.</p>
 
   <h2 id="when-to-use-these-icons">When to use these icons</h2>
   <p>Use these icons to mark important parts of the page and highlight things you want users to do.</p>
@@ -177,9 +217,9 @@
   <h3>Using SVG classes for icons</h3>
   <p>We use scalable vector graphics (SVG) for icons, rather than images such as PNG. SVG are code snippets that you can drop directly into the HTML.</p>
   <p>SVG icons are sharp, flexible, and load quickly - and you can control how they appear, for example their colour, with style sheets (CSS).</p>
-  <p class="rich-text">If you're using a server side or templating language, you can include the icons with <code>include 'partials/icons/icon-search.svg'</code>.</p>
-  <p class="rich-text">SVG icons have the class <code>.ofh-icon</code>, which sets a default size for the icon. Each icon also has a specific class, such as <code>.ofh-icon__search</code>. The specific class allows you to modify the icon with styles, such as fill. This means you can change the colour of the SVG for states such as hover, focus and active.</p>
-  <p class="rich-text">Some older browsers like Internet Explorer 8 can't display SVG. So every SVG icon has a PNG fallback. The fallback images have a class, such as <code>.ofh-icon__search—fallback</code>, which you can use to modify their sizing and spacing.</p>
+  <p class="rich-text">If you're using a server side or templating language, include icons with the shared macro, for example <code>{% raw %}{{ icon({ "name": "search", "size": 24 }) }}{% endraw %}</code>.</p>
+  <p class="rich-text">The icon macro renders consistent <code>.ofh-icon</code> markup that references the Material sprite symbols.</p>
+  <p class="rich-text">Legacy PNG fallbacks are not provided as part of this implementation.</p>
 
   <h3>Accessibility</h3>
   <p>SVG icons must be accessible. For example, they need to meet accessible colour contrast standards. Our recommended tool to test colour combinations is the <a href="https://webaim.org/resources/contrastchecker/">WebAIM contrast checker</a>. Read more about <a href="https://css-tricks.com/accessible-svgs/">accessible SVGs on CSS Tricks website</a>.</p>

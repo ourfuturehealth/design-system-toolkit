@@ -16,6 +16,9 @@ module.exports = function configuration(eleventyConfig) {
   // Documentation assets e.g. images, PDFs.
   eleventyConfig.addPassthroughCopy({ assets: "assets" });
   eleventyConfig.addPassthroughCopy({ components: "components" });
+  eleventyConfig.addPassthroughCopy({
+    "../toolkit/assets/icons/material-sprite.svg": "assets/icons/material-sprite.svg",
+  });
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `views/_includes/standalone-example-layout.njk`.
