@@ -118,7 +118,8 @@
     box-shadow: none;
 
     .ofh-logo {
-      box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus,
+      box-shadow:
+        0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus,
         0 $ofh-stroke-weight-4 0 $ofh-stroke-weight-4 $ofh-color-foreground-brand-blue-navy;
     }
   }
@@ -203,11 +204,11 @@
   }
 
   &:focus {
-    border: 1px solid $ofh-color-border-feedback-focus !important; /* stylelint-disable-line declaration-no-important */
-    box-shadow: 0 0 0 2px $ofh-color-border-feedback-focus,
-      0 $ofh-stroke-weight-4 0 2px $ofh-color-foreground-brand-blue-navy;
-
     @include ofh-focused-button();
+
+    box-shadow:
+      0 0 0 2px $ofh-color-border-feedback-focus,
+      0 $ofh-stroke-weight-4 0 2px $ofh-color-foreground-brand-blue-navy;
   }
 
   @include mq($from: tablet) {
@@ -326,7 +327,7 @@
     margin: 0;
     padding: ofh-spacing(3) ofh-spacing(3) 0;
 
-    .ofh-icon__search {
+    .ofh-header__icon--search {
       fill: $ofh-color-greyscale-white;
       height: 38px; /* [3] */
       width: 38px; /* [3] */
@@ -338,7 +339,8 @@
 
     &:focus {
       background-color: $ofh-color-border-feedback-focus;
-      box-shadow: 0 -4px $ofh-color-border-feedback-focus,
+      box-shadow:
+        0 -4px $ofh-color-border-feedback-focus,
         0 $ofh-stroke-weight-4 $ofh-color-foreground-brand-blue-navy;
       outline: $ofh-stroke-weight-4 solid transparent;
       outline-offset: $ofh-stroke-weight-4;
@@ -363,7 +365,7 @@
     height: ofh-spacing(7); /* [2] */
     width: 44px; /* [2] */
 
-    .ofh-icon__search {
+    .ofh-header__icon--search {
       height: 27px; /* [3] */
       width: 27px; /* [3] */
     }
@@ -372,7 +374,7 @@
       background-color: $ofh-color-brand-yellow-2;
       border: 1px solid $ofh-color-greyscale-white;
 
-      .ofh-icon__search {
+      .ofh-header__icon--search {
         fill: $ofh-color-greyscale-white;
       }
     }
@@ -380,7 +382,8 @@
     &:focus {
       @include ofh-focused-button();
 
-      box-shadow: 0 -2px $ofh-color-border-feedback-focus,
+      box-shadow:
+        0 -2px $ofh-color-border-feedback-focus,
         0 $ofh-stroke-weight-4 $ofh-color-foreground-brand-blue-navy;
     }
 
@@ -388,7 +391,7 @@
       background-color: $ofh-color-brand-yellow-1;
       border: 0;
 
-      .ofh-icon__search {
+      .ofh-header__icon--search {
         fill: $ofh-color-greyscale-white;
       }
     }
@@ -424,9 +427,7 @@
     }
 
     &:focus {
-      @include ofh-focused-text;
-
-      .ofh-icon__close {
+      .ofh-header__icon--close {
         fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
@@ -506,8 +507,6 @@
   }
 
   &:focus {
-    border: 1px solid $ofh-color-border-feedback-focus !important; /* stylelint-disable-line declaration-no-important */
-
     @include ofh-focused-button;
   }
 }
@@ -604,9 +603,7 @@
   }
 
   &:focus {
-    @include ofh-focused-text;
-
-    .ofh-icon__close {
+    .ofh-header__icon--close {
       fill: $ofh-color-foreground-brand-blue-navy;
     }
   }
@@ -635,7 +632,7 @@
     margin: 0;
     text-align: center;
 
-    .ofh-icon__chevron-right {
+    .ofh-header__icon--chevron {
       display: none;
     }
   }
@@ -656,7 +653,7 @@
     line-height: normal;
   }
 
-  .ofh-icon__chevron-right {
+  .ofh-header__icon--chevron {
     fill: $ofh-color-greyscale-4;
     position: absolute;
     right: ofh-spacing(2);
@@ -680,7 +677,7 @@
       color: $ofh-color-foreground-primary-inverted;
     }
 
-    .ofh-icon__chevron-right {
+    .ofh-header__icon--chevron {
       fill: $ofh-color-brand-yellow-3-main;
     }
   }
@@ -693,7 +690,7 @@
     &:hover {
       color: $ofh-color-foreground-brand-blue-navy;
 
-      .ofh-icon__chevron-right {
+      .ofh-header__icon--chevron {
         fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
@@ -783,7 +780,8 @@
 
   &:focus {
     background: $ofh-color-border-feedback-focus;
-    box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus,
+    box-shadow:
+      0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus,
       0 $ofh-stroke-weight-4 0 $ofh-stroke-weight-4 $ofh-color-foreground-brand-blue-navy;
 
     .ofh-header__service-name {
@@ -899,7 +897,7 @@
   display: block;
   font-size: 22px;
   font-weight: bold;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
   line-height: 23px;
   margin-top: -2px;
 
@@ -909,7 +907,7 @@
 
   @media (width <= 450px) {
     font-size: 17px;
-    letter-spacing: .1px;
+    letter-spacing: 0.1px;
     line-height: 17px;
   }
 
@@ -978,7 +976,7 @@
   .ofh-search__submit {
     background-color: $ofh-color-brand-yellow-3-main;
 
-    .ofh-icon__search {
+    .ofh-header__icon--search {
       fill: $ofh-color-greyscale-white;
     }
 
@@ -990,7 +988,7 @@
     &:focus {
       background-color: $ofh-color-border-feedback-focus;
 
-      .ofh-icon__search {
+      .ofh-header__icon--search {
         fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
@@ -1000,10 +998,10 @@
     border: 1px solid $ofh-color-greyscale-4;
 
     &:focus {
-      border: 2px solid $ofh-color-border-feedback-focus;
+      border: 2px solid $ofh-color-foreground-brand-blue-navy;
 
       @include mq($until: tablet) {
-        border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+        border: $ofh-stroke-weight-4 solid $ofh-color-foreground-brand-blue-navy;
       }
     }
   }

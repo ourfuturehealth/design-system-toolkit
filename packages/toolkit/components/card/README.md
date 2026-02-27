@@ -2,6 +2,9 @@
 
 ## Guidance
 
+> Icon migration: this component now renders icons using `components/icon/macro.njk` and the Material SVG sprite.
+
+
 Find out more about the card component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/card).
 
 ## Quick start examples
@@ -208,7 +211,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2">91 <span class="ofh-u-visually-hidden">Applicants</span></p>
+        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1">91 <span class="ofh-u-visually-hidden">Applicants</span></p>
         <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state" style="display:block">Applicants</a>
       </div>
     </div>
@@ -216,7 +219,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2">23 <span class="ofh-u-visually-hidden">Jobs</span></p>
+        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1">23 <span class="ofh-u-visually-hidden">Jobs</span></p>
         <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Jobs</a>
       </div>
     </div>
@@ -224,7 +227,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2">8 <span class="ofh-u-visually-hidden">Services</span></p>
+        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1">8 <span class="ofh-u-visually-hidden">Services</span></p>
         <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Services</a>
       </div>
     </div>
@@ -232,7 +235,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2">33 <span class="ofh-u-visually-hidden">Messages</span></p>
+        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1">33 <span class="ofh-u-visually-hidden">Messages</span></p>
         <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Messages</a>
       </div>
     </div>
@@ -324,25 +327,25 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Applicants</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Applicants</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Jobs</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Jobs</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Services</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Services</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-2\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Messages</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-1\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Messages</a>"
     }) }}
   </li>
 </ul>

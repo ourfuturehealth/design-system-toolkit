@@ -26,3 +26,16 @@
 
   @include print-color($ofh-color-brand-blue-navy-3-main);
 }
+
+.ofh-do-dont-list__icon {
+  height: 34px;
+  width: 34px;
+}
+
+.ofh-do-dont-list__icon--tick {
+  color: $ofh-color-foreground-feedback-success-2;
+}
+
+.ofh-do-dont-list__icon--cross {
+  color: $ofh-color-foreground-feedback-error-2;
+}

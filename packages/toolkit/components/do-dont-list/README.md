@@ -1,6 +1,9 @@
 # Do and don't list
 
 ## Guidance
+
+> Icon migration: this component now renders icons using `components/icon/macro.njk` and the Material SVG sprite.
+
 Find out more about the do and don't list component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/do-and-dont-lists).
 
 ## Quick start example

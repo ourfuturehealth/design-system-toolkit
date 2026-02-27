@@ -55,10 +55,10 @@
     }
   }
 
-  .ofh-icon__arrow-right-circle {
+  .ofh-action-link__icon {
     @include print-color($ofh-color-foreground-primary);
 
-    fill: $ofh-color-brand-yellow-3-main;
+    color: $ofh-color-brand-yellow-3-main;
     height: 36px;
     left: -3px;
     position: absolute;
