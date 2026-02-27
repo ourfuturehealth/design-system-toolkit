@@ -2,6 +2,10 @@
 
 This directory contains the curated Material SVG icon set used by toolkit components.
 
+For the full end-to-end developer guide (architecture, sprite generation, docs wiring, and Figma onboarding flow), see:
+
+- [`docs/contributing/material-icons.md`](../../../../docs/contributing/material-icons.md)
+
 ## Source of truth
 
 - `manifest.json`: approved icon names, category metadata, and default sizes.
@@ -13,7 +17,7 @@ This directory contains the curated Material SVG icon set used by toolkit compon
 1. Update `manifest.json` with the icon metadata.
 2. Add or replace the matching SVG file in this directory.
 3. Build the sprite:
-   - `node scripts/build-material-icon-sprite.js`
+   - `pnpm --filter @ourfuturehealth/toolkit exec node scripts/build-material-icon-sprite.js`
 4. Run toolkit checks:
    - `pnpm --filter @ourfuturehealth/toolkit build`
    - `pnpm --filter @ourfuturehealth/toolkit lint`
