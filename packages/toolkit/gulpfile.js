@@ -6,6 +6,7 @@ const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const zip = require('gulp-zip');
 const webpack = require('webpack-stream');
+const { execFileSync } = require('node:child_process');
 const { version } = require('./package.json');
 
 /* Remove all compiled files */
@@ -124,6 +125,14 @@ function versionJS() {
  * Assets tasks
  */
 
+function buildMaterialIconSprite(done) {
+  execFileSync('node', ['scripts/build-material-icon-sprite.js'], {
+    stdio: 'inherit',
+  });
+
+  done();
+}
+
 /**
  * Copy assets such as icons and images into the distribution
  */
@@ -178,11 +187,18 @@ gulp.task('clean', cleanDist);
 
 gulp.task('style', compileCSS);
 
-gulp.task('build', gulp.series([compileCSS, webpackJS]));
+gulp.task('build', gulp.series([buildMaterialIconSprite, compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
-  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS, assets]),
+  gulp.series([
+    cleanDist,
+    'build',
+    minifyCSS,
+    minifyJS,
+    versionJS,
+    assets,
+  ]),
 );
 
 gulp.task(

@@ -1,0 +1,20 @@
+{% macro icon(params) %}
+  {% if not params.name %}
+    {# Icon name is required #}
+  {% else %}
+    {% set iconSize = params.size if params.size in [16, 24, 32] else 24 %}
+    {% set spritePath = params.spritePath if params.spritePath else '/assets/icons/material-sprite.svg' %}
+    {% set ariaHidden = 'true' if not params.title else 'false' %}
+
+    <svg class="ofh-icon ofh-icon--material ofh-icon--{{ iconSize }} ofh-icon--{{ params.name }}{% if params.classes %} {{ params.classes }}{% endif %}"
+      aria-hidden="{{ ariaHidden }}"
+      {% if not params.title %}focusable="false"{% endif %}
+      {% if params.title %}role="img"{% endif %}
+      width="{{ iconSize }}"
+      height="{{ iconSize }}"
+      {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      {% if params.title %}<title>{{ params.title }}</title>{% endif %}
+      <use href="{{ spritePath }}#ofh-icon-{{ params.name }}"></use>
+    </svg>
+  {% endif %}
+{% endmacro %}
