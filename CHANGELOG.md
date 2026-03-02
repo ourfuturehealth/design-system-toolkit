@@ -40,7 +40,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
   - Do/Don't lists: migrated to `Done` and `Close` icons
   - Action link: updated arrow circle icon
   - Card: updated chevron usage
-  - Contents list: updated dash icon implementation
+- Icon sizes standardized to Material icon system sizes (16px, 24px, 32px)
 - Icon component references now use PascalCase names throughout documentation
 
 ##### Removed

@@ -22,10 +22,10 @@
 
   .ofh-breadcrumb__separator {
     fill: $ofh-color-greyscale-2;
-    height: 18px;
+    height: 24px;
     position: relative;
-    top: 5px;
-    width: 18px;
+    top: 1px;
+    width: 24px;
 
     @include mq($from: large-desktop) {
       margin: 0 3px 0 5px;
@@ -100,7 +100,6 @@
   @include mq($from: tablet) {
     display: none; /* [5] */
   }
-
 }
 
 .ofh-breadcrumb__backlink {

@@ -197,7 +197,7 @@
     color: $ofh-color-greyscale-6;
   }
 
-  .ofh-icon__search {
+  .ofh-header__icon--search {
     fill: $ofh-color-greyscale-white;
     height: 21px; /* [3] */
     width: 21px; /* [3] */
@@ -410,7 +410,7 @@
     padding: 0;
     width: 40px;
 
-    .ofh-icon__close {
+    .ofh-header__icon--close {
       fill: $ofh-color-brand-blue-navy-3-main;
       height: 40px;
       width: 40px;
@@ -421,7 +421,7 @@
     }
 
     &:hover {
-      .ofh-icon__close {
+      .ofh-header__icon--close {
         fill: $ofh-color-foreground-secondary;
       }
     }
@@ -586,7 +586,7 @@
   white-space: nowrap;
   width: 40px;
 
-  .ofh-icon__close {
+  .ofh-header__icon--close {
     fill: $ofh-color-brand-blue-navy-3-main;
     height: 40px;
     width: 40px;
@@ -597,7 +597,7 @@
   }
 
   &:hover {
-    .ofh-icon__close {
+    .ofh-header__icon--close {
       fill: $ofh-color-foreground-secondary;
     }
   }
