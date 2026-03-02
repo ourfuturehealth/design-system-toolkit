@@ -12,6 +12,7 @@
   th,
   td {
     @include ofh-typography-responsive('paragraph-small');
+
     border: 0;
   }
 
@@ -51,6 +52,7 @@
 .app-colour-list__row {
   .app-colour-list__column {
     @include ofh-responsive-padding(3);
+
     // Use a dedicated row tint so light swatches (for example #e8e8e8 and #ffffff)
     // remain distinguishable against the documentation surface.
     background-color: $ofh-color-background-secondary-grey;
