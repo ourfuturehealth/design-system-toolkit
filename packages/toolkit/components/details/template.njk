@@ -6,8 +6,8 @@
   <summary class="ofh-details__summary">
     <span class="ofh-details__summary-text">
       {%- if params.classes and 'ofh-expander' in params.classes -%}
-        {{ icon({ "name": "plus-circle-solid", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--expand" }) }}
-        {{ icon({ "name": "minus-circle-solid", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--collapse" }) }}
+        {{ icon({ "name": "AddCircle", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--expand" }) }}
+        {{ icon({ "name": "RemoveCircle", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--collapse" }) }}
       {%- endif -%}
       {{ params.text }}
     </span>

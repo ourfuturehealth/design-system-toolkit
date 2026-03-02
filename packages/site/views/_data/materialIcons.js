@@ -15,13 +15,23 @@ const categoryOrder = [
   "Socials",
 ];
 
-const icons = [...manifest.icons].sort((a, b) => a.name.localeCompare(b.name));
+// Custom sort: preserve manifest order for Stepper icons (LooksZero-LooksNine),
+// alphabetically sort others
+const icons = [...manifest.icons];
 
 const iconsByCategory = categoryOrder
-  .map((category) => ({
-    category,
-    icons: icons.filter((icon) => icon.category === category),
-  }))
+  .map((category) => {
+    const categoryIcons = icons.filter((icon) => icon.category === category);
+    // Keep original order for Stepper category (numerical LooksX icons)
+    // Sort alphabetically for all other categories
+    if (category !== "Stepper") {
+      categoryIcons.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    return {
+      category,
+      icons: categoryIcons,
+    };
+  })
   .filter((group) => group.icons.length > 0);
 
 module.exports = {

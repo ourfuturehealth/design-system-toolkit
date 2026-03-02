@@ -61,7 +61,7 @@
 
         <div class="ofh-header__search">
           <button class="ofh-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search">
-            {{ icon({ "name": "search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
+            {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
             <span class="ofh-u-visually-hidden">Search</span>
           </button>
           <div class="ofh-header__search-wrap" id="wrap-search">
@@ -69,11 +69,11 @@
               <label class="ofh-u-visually-hidden" for="search-field">Search the NHS website</label>
               <input class="ofh-search__input" id="search-field" name="{{ params.searchInputName if params.searchInputName else 'q' }}" type="search" placeholder="Search" autocomplete="off">
               <button class="ofh-search__submit" type="submit">
-                {{ icon({ "name": "search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
+                {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
                 <span class="ofh-u-visually-hidden">Search</span>
               </button>
               <button class="ofh-search__close" id="close-search">
-                {{ icon({ "name": "cross", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
+                {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
                 <span class="ofh-u-visually-hidden">Close search</span>
               </button>
             </form>
@@ -88,7 +88,7 @@
       <div class="ofh-width-container">
         <p class="ofh-header__navigation-title"><span id="label-navigation">Menu</span>
           <button class="ofh-header__navigation-close" id="close-menu">
-            {{ icon({ "name": "cross", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
+            {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
             <span class="ofh-u-visually-hidden">Close menu</span>
           </button>
         </p>
@@ -96,14 +96,14 @@
           <li class="ofh-header__navigation-item ofh-header__navigation-item--for-mobile">
             <a class="ofh-header__navigation-link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}">
               {% if params.homeText %}{{ params.homeText }}{% else %}Home{% endif %}
-              {{ icon({ "name": "chevron-right", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
+              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
             </a>
           </li>
           {%- for item in params.primaryLinks %}
           <li class="ofh-header__navigation-item">
             <a class="ofh-header__navigation-link" href="{{item.url}}">
               {{item.label}}
-              {{ icon({ "name": "chevron-right", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
+              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
             </a>
           </li>
           {%- endfor %}
@@ -119,7 +119,7 @@
 
         <div class="ofh-header__search">
           <button class="ofh-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search">
-            {{ icon({ "name": "search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
+            {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
             <span class="ofh-u-visually-hidden">Search</span>
           </button>
           <div class="ofh-header__search-wrap" id="wrap-search">
@@ -127,11 +127,11 @@
               <label class="ofh-u-visually-hidden" for="search-field">Search the NHS website</label>
               <input class="ofh-search__input" id="search-field" name="{{ params.searchInputName if params.searchInputName else 'q' }}" type="search" placeholder="Search" autocomplete="off">
               <button class="ofh-search__submit" type="submit">
-                {{ icon({ "name": "search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
+                {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
                 <span class="ofh-u-visually-hidden">Search</span>
               </button>
               <button class="ofh-search__close" id="close-search">
-                {{ icon({ "name": "cross", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
+                {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
                 <span class="ofh-u-visually-hidden">Close search</span>
               </button>
             </form>
@@ -157,7 +157,7 @@
       <div class="ofh-width-container">
         <p class="ofh-header__navigation-title"><span id="label-navigation">Menu</span>
           <button class="ofh-header__navigation-close" id="close-menu">
-            {{ icon({ "name": "cross", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
+            {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
             <span class="ofh-u-visually-hidden">Close menu</span>
           </button>
         </p>
@@ -165,14 +165,14 @@
           <li class="ofh-header__navigation-item ofh-header__navigation-item--for-mobile">
             <a class="ofh-header__navigation-link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}">
               Home
-              {{ icon({ "name": "chevron-right", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
+              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
             </a>
           </li>
           {%- for item in params.primaryLinks %}
           <li class="ofh-header__navigation-item">
             <a class="ofh-header__navigation-link" href="{{item.url}}">
               {{item.label}}
-              {{ icon({ "name": "chevron-right", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
+              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
             </a>
           </li>
           {%- endfor %}

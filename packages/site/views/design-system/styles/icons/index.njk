@@ -17,11 +17,11 @@
   <p>New icon support is available using the shared <code>icon</code> macro and the Material SVG sprite.</p>
   <p class="rich-text">Sprite file: <a href="{{ materialIcons.spritePath }}" target="_blank" rel="noopener noreferrer"><code>{{ materialIcons.spritePath }}</code></a></p>
   <div class="ofh-u-margin-bottom-5">
-    {{ icon({ "name": "search", "size": 16, "title": "Search" }) }}
-    {{ icon({ "name": "search", "size": 24, "title": "Search" }) }}
-    {{ icon({ "name": "search", "size": 32, "title": "Search" }) }}
+    {{ icon({ "name": "Search", "size": 16, "title": "Search" }) }}
+    {{ icon({ "name": "Search", "size": 24, "title": "Search" }) }}
+    {{ icon({ "name": "Search", "size": 32, "title": "Search" }) }}
   </div>
-  <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "search", "size": 24 }) }}{% endraw %}</code></p>
+  <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code></p>
   <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
 
   <h3 id="material-icon-gallery">Material icon gallery</h3>
@@ -217,7 +217,7 @@
   <h3>Using SVG classes for icons</h3>
   <p>We use scalable vector graphics (SVG) for icons, rather than images such as PNG. SVG are code snippets that you can drop directly into the HTML.</p>
   <p>SVG icons are sharp, flexible, and load quickly - and you can control how they appear, for example their colour, with style sheets (CSS).</p>
-  <p class="rich-text">If you're using a server side or templating language, include icons with the shared macro, for example <code>{% raw %}{{ icon({ "name": "search", "size": 24 }) }}{% endraw %}</code>.</p>
+  <p class="rich-text">If you're using a server side or templating language, include icons with the shared macro, for example <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code>.</p>
   <p class="rich-text">The icon macro renders consistent <code>.ofh-icon</code> markup that references the Material sprite symbols.</p>
   <p class="rich-text">Legacy PNG fallbacks are not provided as part of this implementation.</p>
 

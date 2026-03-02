@@ -6,7 +6,7 @@
   {%- if params.href %}{{ params.href }}{% else %}#{% endif %}"
   {%- if params.openInNewWindow %} target="_blank"{% endif %}
   {%- for attribute, value in params.attributes %} {{attribute}}="{{ value }}"{% endfor %}>
-    {{ icon({ "name": "arrow-right-solid", "size": 32, "classes": "ofh-action-link__icon" }) }}
+    {{ icon({ "name": "ArrowCircleRight", "size": 32, "classes": "ofh-action-link__icon" }) }}
     <span class="ofh-action-link__text">{{ params.text }}</span>
   </a>
 </div>

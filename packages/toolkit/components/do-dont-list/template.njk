@@ -9,9 +9,9 @@
     {%- for data in params.items %}
     <li>
     {%- if params.type == 'cross' %}
-      {{ icon({ "name": "cross", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--cross" }) }}
+      {{ icon({ "name": "Close", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--cross" }) }}
     {%- else %}
-      {{ icon({ "name": "tick", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--tick" }) }}
+      {{ icon({ "name": "Done", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--tick" }) }}
     {%- endif %}
       {% if params.type == 'cross' %}{% if not params.hidePrefix %}do not {% endif %}{% endif %}{{ data.item | safe}}
     </li>
