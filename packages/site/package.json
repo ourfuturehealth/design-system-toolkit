@@ -4,8 +4,8 @@
   "scripts": {
     "build": "pnpm run clean && pnpm run build:css && pnpm run build:js && pnpm run build:eleventy",
     "clean": "rm -rf dist && mkdir -p dist",
-    "dev": "concurrently -n toolkit,css,js,eleventy -c magenta,blue,yellow,green \"pnpm --filter @ourfuturehealth/toolkit watch\" \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
-    "watch": "concurrently -n toolkit,css,js,eleventy -c magenta,blue,yellow,green \"pnpm --filter @ourfuturehealth/toolkit watch\" \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
+    "dev": "concurrently -n css,js,eleventy -c blue,yellow,green \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
+    "watch": "concurrently -n css,js,eleventy -c blue,yellow,green \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
     "watch:css": "sass --watch --style compressed --load-path ../toolkit ./styles/:./dist/css/",
     "watch:js": "webpack --config webpack.config.js --watch",
     "watch:eleventy": "eleventy --serve --config eleventy.config.js",
