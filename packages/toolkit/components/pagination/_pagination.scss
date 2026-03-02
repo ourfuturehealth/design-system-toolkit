@@ -10,8 +10,8 @@
  */
 
 .ofh-pagination {
-  @include ofh-responsive-margin(7, 'top');
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(8, 'bottom');
 }
 
 .ofh-pagination__list {
@@ -28,7 +28,7 @@
   }
 
   .ofh-pagination__title {
-    padding-left: ofh-spacing(5); /* [1] */
+    padding-left: ofh-spacing(6); /* [1] */
   }
 }
 
@@ -42,7 +42,7 @@
   }
 
   .ofh-pagination__title {
-    padding-right: ofh-spacing(5); /* [1] */
+    padding-right: ofh-spacing(6); /* [1] */
   }
 }
 
@@ -53,7 +53,7 @@
   width: 100%;
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
   .ofh-icon {
@@ -61,16 +61,16 @@
     top: -2px;
 
     @include mq($media-type: print) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       margin-top: 0;
     }
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
 
     .ofh-icon {
-      fill: $ofh-link-hover-color;
+      fill: $ofh-color-foreground-link-hover;
     }
 
     .ofh-pagination__page {
@@ -89,34 +89,34 @@
     &:hover,
     &:active {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 
   &:visited {
     .ofh-icon {
-      fill: $ofh-link-visited-color;
+      fill: $ofh-color-foreground-link-visited;
     }
 
     &:hover {
       .ofh-icon {
-        fill: $ofh-link-hover-color;
+        fill: $ofh-color-foreground-link-hover;
       }
     }
 
     &:focus {
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 }
 
 .ofh-pagination__title {
-  @include ofh-typography-responsive(24);
+  @include ofh-typography-responsive('lead');
 
-  color: $color_ofh-brand-dark-blue;
+  color: $ofh-color-brand-blue-navy-3-main;
   display: block;
 
   @include mq($media-type: print) {
@@ -127,7 +127,7 @@
 }
 
 .ofh-pagination__page {
-  @include ofh-typography-responsive(16);
+  @include ofh-typography-responsive('paragraph-small');
 
   display: block;
   text-decoration: underline;

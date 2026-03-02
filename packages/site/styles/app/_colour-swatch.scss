@@ -11,12 +11,19 @@
 
   th,
   td {
+    @include ofh-typography-responsive('paragraph-small');
+
     border: 0;
+  }
+
+  .app-colour-list__column--name code,
+  .app-colour-list__column--colour code {
+    white-space: nowrap;
   }
 }
 
 .app-colour-list__swatch {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
   border: 1px solid transparent;
   border-radius: 50%;
   display: inline-block;
@@ -26,40 +33,40 @@
   width: ofh-spacing(6);
 
   @include mq($until: tablet) {
-    height: ofh-spacing(4);
+    height: ofh-spacing(5);
     left: 0;
     position: absolute;
-    width: ofh-spacing(4);
+    width: ofh-spacing(5);
   }
 }
 
 .app-colour-list__column {
-  padding-left: 0;
-  padding-top: 0;
   vertical-align: middle;
 
   @include mq($until: tablet) {
     display: block;
-    padding-left: ofh-spacing(5);
     position: relative;
+  }
+}
+
+.app-colour-list__row {
+  .app-colour-list__column {
+    @include ofh-responsive-padding(3);
+
+    // Use a dedicated row tint so light swatches (for example #e8e8e8 and #ffffff)
+    // remain distinguishable against the documentation surface.
+    background-color: $ofh-color-background-secondary-grey;
+  }
+
+  .app-colour-list__column--colour code {
+    background-color: transparent;
   }
 }
 
 .app-colour-list__column--name {
   font-weight: normal;
-
-  @include mq($until: tablet) {
-    padding-bottom: ofh-spacing(1);
-    padding-top: ofh-spacing(2);
-  }
-}
-
-.app-colour-list__column--colour {
-  @include mq($until: tablet) {
-    padding-bottom: ofh-spacing(1);
-  }
 }
 
 .app-colour-list__swatch--border {
-  border: 1px solid $ofh-border-color;
+  border: 1px solid $ofh-color-border-primary;
 }

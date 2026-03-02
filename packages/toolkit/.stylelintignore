@@ -1,0 +1,8 @@
+# Vendor files - third-party code that will be replaced with package versions
+
+core/vendor/sass-mq.scss
+
+# Build outputs
+
+dist/
+coverage/

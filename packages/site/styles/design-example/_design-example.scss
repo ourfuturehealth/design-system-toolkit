@@ -4,17 +4,19 @@
 
 .design-example {
   $root: &;
-  margin-bottom: ofh-spacing(6);
+
+  margin-bottom: ofh-spacing(7);
   position: relative;
   width: 100%;
 
   @include mq($until: tablet) {
-    margin-bottom: ofh-spacing(5);
+    margin-bottom: ofh-spacing(6);
   }
 
   &__pop-out {
-    @include ofh-font(16);
-    border: 1px solid $color_ofh-grey-3;
+    @include ofh-font($size: paragraph);
+
+    border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;
     display: block;
     outline: 2px solid transparent;
@@ -28,11 +30,11 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       &:hover {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
       }
     }
 
@@ -40,7 +42,7 @@
 }
 
 p + .design-example {
-  @include ofh-responsive-padding(3, 'top');
+  @include ofh-responsive-padding(4, 'top');
 }
 
 .ofh-lede-text + .design-example {
@@ -56,13 +58,13 @@ p + .design-example {
 }
 
 .app-tabs__container pre {
-  background-color: $color_ofh-grey-5;
+  background-color: $ofh-color-greyscale-6;
 }
 
 .app-code-snippet__container {
-  background-color: $color_ofh-grey-5;
-  padding: ofh-spacing(3);
-  padding-top: ofh-spacing(8);
+  background-color: $ofh-color-greyscale-6;
+  padding: ofh-spacing(4);
+  padding-top: ofh-spacing(9);
   position: relative;
   width: 100%;
 }

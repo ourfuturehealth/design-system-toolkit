@@ -9,7 +9,7 @@ if (!NodeList.prototype.forEach) {
  * IE polyfill for Array.includes()
  */
 if (!Array.prototype.includes) {
-  // eslint-disable-next-line no-extend-native
+   
   Object.defineProperty(Array.prototype, 'includes', {
     enumerable: false,
     value(obj) {

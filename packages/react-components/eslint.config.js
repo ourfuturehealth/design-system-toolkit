@@ -1,20 +1,24 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import rootConfig from '../../eslint.config.mjs';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+import globals from 'globals';
 
+/**
+ * ESLint configuration for the react-components package
+ * Extends the root monorepo configuration with React + TypeScript specific rules
+ */
 export default [
+  ...rootConfig,
   { 
     ignores: [
       'dist', 
       'coverage', 
-      'storybook-static', 
-      'node_modules',
+      'storybook-static',
       'src/dev.tsx', // Temporary dev playground - will be removed once Storybook is fully adopted
+      '*.config.cjs', // CommonJS config files (stylelint)
     ] 
   },
-  js.configs.recommended,
   ...tseslint.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
@@ -34,4 +38,4 @@ export default [
       ],
     },
   },
-]
+];

@@ -150,6 +150,47 @@ When you push a tag matching the pattern, the [release workflow](../.github/work
 3. Check that the build artifacts are attached
 4. Test installation in a separate project
 
+## Release Communication Notes
+
+For every release, include these points in the release notes:
+
+- Which package was released (`toolkit` or `react-components`)
+- Exact version and tag
+- Installation string consumers should use
+- Breaking changes, if any
+- Link to migration guidance when needed
+
+Template:
+
+````markdown
+## Installation
+
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#{{TAG}}:packages/toolkit"
+  }
+}
+```
+
+## What's Changed
+
+### Added
+- ...
+
+### Changed
+- ...
+
+### Fixed
+- ...
+
+### Breaking Changes
+- ...
+
+### Migration
+- See [Monorepo Migration Guide](./docs/monorepo-migration-guide.md)
+````
+
 ## Testing a Release
 
 After creating a release, test that external projects can install it:
@@ -354,6 +395,8 @@ The toolkit [package.json](../packages/toolkit/package.json) includes:
     "assets",
     "ofh.js",
     "ofh.scss",
+    "ofh-participant.scss",
+    "ofh-research.scss",
     "polyfills.js"
   ],
   "main": "dist/ofh-design-system-toolkit.js",
@@ -406,14 +449,14 @@ The react-components [package.json](../packages/react-components/package.json) i
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#v3.5.1:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
   }
 }
 ```
 
 When npm/pnpm installs this:
 
-1. Clones the repository at tag `v3.5.1`
+1. Clones the repository at tag `toolkit-v4.0.0`
 2. Navigates to `packages/toolkit`
 3. Runs `pnpm install` (installs toolkit dependencies)
 4. Runs `prepare` script (`gulp bundle`)

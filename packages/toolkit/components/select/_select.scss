@@ -3,13 +3,13 @@
    ========================================================================== */
 
 .ofh-select {
-  @include ofh-font(19);
+  @include ofh-font('paragraph');
 
-  border: $ofh-border-width-form-element solid $ofh-input-border-color;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   box-sizing: border-box;
   height: 40px;
   max-width: 100%;
-  padding: ofh-spacing(1);
+  padding: ofh-spacing(2);
 
   &:focus {
     @include ofh-focused-input;
@@ -19,10 +19,10 @@
 .ofh-select option:active,
 .ofh-select option:checked,
 .ofh-select:focus::-ms-value {
-  background-color: $color_ofh-brand-yellow;
-  color: $ofh-text-white-color;
+  background-color: $ofh-color-brand-yellow-3-main;
+  color: $ofh-color-foreground-primary-inverted;
 }
 
 .ofh-select--error {
-  border: $ofh-border-width-form-element-error solid $ofh-error-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 }

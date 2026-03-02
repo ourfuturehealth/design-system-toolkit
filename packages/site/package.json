@@ -6,14 +6,16 @@
     "clean": "rm -rf dist && mkdir -p dist",
     "dev": "concurrently -n toolkit,css,js,eleventy -c magenta,blue,yellow,green \"pnpm --filter @ourfuturehealth/toolkit watch\" \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
     "watch": "concurrently -n toolkit,css,js,eleventy -c magenta,blue,yellow,green \"pnpm --filter @ourfuturehealth/toolkit watch\" \"pnpm watch:css\" \"pnpm watch:js\" \"pnpm watch:eleventy\"",
-    "watch:css": "sass --watch --style compressed --load-path ./node_modules/@ourfuturehealth/toolkit ./styles/:./dist/css/",
+    "watch:css": "sass --watch --style compressed --load-path ../toolkit ./styles/:./dist/css/",
     "watch:js": "webpack --config webpack.config.js --watch",
     "watch:eleventy": "eleventy --serve --config eleventy.config.js",
-    "build:css": "sass --style compressed --load-path ./node_modules/@ourfuturehealth/toolkit ./styles/:./dist/css/",
+    "build:css": "sass --style compressed --load-path ../toolkit ./styles/:./dist/css/",
     "build:js": "webpack --config webpack.config.js",
     "build:eleventy": "eleventy --config eleventy.config.js",
-    "lint": "pnpm run lint:html",
-    "lint:html": "htmlhint dist/**/*.html"
+    "lint": "pnpm run lint:html && pnpm run lint:css",
+    "lint:html": "htmlhint dist/**/*.html",
+    "lint:css": "stylelint -f verbose '**/*.scss'",
+    "lint:css:fix": "stylelint --fix -f verbose '**/*.scss'"
   },
   "dependencies": {
     "@ourfuturehealth/toolkit": "workspace:*"

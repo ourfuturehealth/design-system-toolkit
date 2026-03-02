@@ -17,13 +17,13 @@ const syncAllConditionalReveals = function syncAllConditionalReveals(input) {
  */
 const unCheckAllInputsExcept = function unCheckAllInputsExcept(input) {
   const allInputsInSameExclusiveGroup = input.form.querySelectorAll(
-    `input[type="checkbox"][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`
+    `input[type="checkbox"][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`,
   );
 
   allInputsInSameExclusiveGroup.forEach((inputWithSameName) => {
     const hasSameFormOwner = input.form === inputWithSameName.form;
     if (hasSameFormOwner && inputWithSameName !== input) {
-      inputWithSameName.checked = false; // eslint-disable-line no-param-reassign
+      inputWithSameName.checked = false;  
     }
   });
 
@@ -39,13 +39,13 @@ const unCheckAllInputsExcept = function unCheckAllInputsExcept(input) {
  */
 const unCheckExclusiveInputs = function unCheckExclusiveInputs(input) {
   const allExclusiveInputsInSameExclusiveGroup = input.form.querySelectorAll(
-    `input[type="checkbox"][data-checkbox-exclusive][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`
+    `input[type="checkbox"][data-checkbox-exclusive][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`,
   );
 
   allExclusiveInputsInSameExclusiveGroup.forEach((exclusiveInput) => {
     const hasSameFormOwner = input.form === exclusiveInput.form;
     if (hasSameFormOwner) {
-      exclusiveInput.checked = false; // eslint-disable-line no-param-reassign
+      exclusiveInput.checked = false;  
     }
   });
 

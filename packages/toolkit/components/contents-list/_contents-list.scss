@@ -8,7 +8,7 @@
  */
 
 .ofh-contents-list {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'bottom');
 }
 
 .ofh-contents-list__list {
@@ -18,7 +18,7 @@
 
 .ofh-contents-list__item {
   background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__emdash' xmlns='http://www.w3.org/2000/svg' fill='%23aeb7bd' width='19' height='1' aria-hidden='true'%3E%3Cpath d='M0 0h19v1H0z'%3E%3C/path%3E%3C/svg%3E") left ofh-px-to-rem(12px) no-repeat;
-  padding: 0 0 0 ofh-spacing(5);
+  padding: 0 0 0 ofh-spacing(6);
   position: relative;
 
   @include mq($from: tablet) {
@@ -31,5 +31,5 @@
 }
 
 .ofh-contents-list__current {
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
 }

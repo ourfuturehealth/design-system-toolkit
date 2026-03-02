@@ -14,7 +14,7 @@
 
 // Main body styling
 .body-ds {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
 }
 
 // HEADER + MAIN NAV
@@ -38,26 +38,26 @@
 // Reducing the padding on smaller screens
 .app-hero__wrapper {
   @include mq($until: desktop) {
-    padding-bottom: ofh-spacing(5);
-    padding-top: ofh-spacing(5);
+    padding-bottom: ofh-spacing(6);
+    padding-top: ofh-spacing(6);
   }
 }
 
 // Page template annotation
 
 .app-annotate-block {
-  margin-bottom: ofh-spacing(4);
-  outline: 2px dashed $color_ofh-grey-1;
-  padding: ofh-spacing(3);
-  padding-top: ofh-spacing(7);
+  margin-bottom: ofh-spacing(5);
+  outline: 2px dashed $ofh-color-greyscale-2;
+  padding: ofh-spacing(4);
+  padding-top: ofh-spacing(8);
   position: relative;
 }
 
 .app-annotate-block__label {
-  border-bottom: 2px dashed $color_ofh-grey-1;
-  border-right: 2px dashed $color_ofh-grey-1;
+  border-bottom: 2px dashed $ofh-color-greyscale-2;
+  border-right: 2px dashed $ofh-color-greyscale-2;
   left: 0;
-  padding: ofh-spacing(1) ofh-spacing(2);
+  padding: ofh-spacing(2) ofh-spacing(3);
   position: absolute;
   top: 0;
 }
@@ -73,7 +73,7 @@
   @include ofh-responsive-padding(0, "left");
 
   img {
-    @include ofh-responsive-margin(3, "right");
+    @include ofh-responsive-margin(4, "right");
 
     border: 2px solid transparent;
     border-radius: 30px;
@@ -92,5 +92,5 @@
 
 // FIXME: this should probably be done / addressed directly in the Hero component.
 .ofh-hero h1 {
-  color: $ofh-text-black-color;
+  color: $ofh-color-foreground-primary;
 }

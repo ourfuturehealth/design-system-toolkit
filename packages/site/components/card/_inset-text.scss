@@ -12,18 +12,17 @@
  .ofh-inset-text-ds {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+    @include ofh-responsive-margin(5, 'bottom');
+    @include ofh-responsive-margin(5, 'top');
+    @include ofh-responsive-padding(5);
   
-    @include ofh-responsive-margin(4, 'bottom');
-    @include ofh-responsive-margin(4, 'top');
-    @include ofh-responsive-padding(4);
-  
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-blue;
-    border-radius: $ofh-border-radius;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-blue-royal-3-main;
+    border-radius: $ofh-radius-4;
 
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
@@ -31,17 +30,16 @@
   .ofh-inset-text-ds--green {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+    @include ofh-responsive-margin(5, 'bottom');
+    @include ofh-responsive-margin(5, 'top');
+    @include ofh-responsive-padding(5);
   
-    @include ofh-responsive-margin(4, 'bottom');
-    @include ofh-responsive-margin(4, 'top');
-    @include ofh-responsive-padding(4);
-  
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-green-3;
-    border-radius: $ofh-border-radius;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-green-teal-4;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }
@@ -49,17 +47,16 @@
   .ofh-inset-text-ds--red {
     @include top-and-bottom(); /* [1] */
     @include reading-width(); /* [2] */
+    @include ofh-responsive-margin(5, 'bottom');
+    @include ofh-responsive-margin(5, 'top');
+    @include ofh-responsive-padding(5);
   
-    @include ofh-responsive-margin(4, 'bottom');
-    @include ofh-responsive-margin(4, 'top');
-    @include ofh-responsive-padding(4);
-  
-    background-color: $color_ofh-grey-6;
-    border-left: $ofh-border-width-inset-text solid $color_ofh-brand-red-3;
-    border-radius: $ofh-border-radius;
+    background-color: $ofh-color-greyscale-7;
+    border-left: $ofh-stroke-weight-8 solid $ofh-color-brand-red-4;
+    border-radius: $ofh-radius-4;
   
     @include mq($media-type: print) {
-      border-color: $ofh-text-black-color;
+      border-color: $ofh-color-foreground-primary;
     }
   
   }

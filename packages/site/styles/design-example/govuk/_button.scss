@@ -2,12 +2,12 @@
 .app-link--copy:active,
 .app-link--copy:visited,
 .app-link--copy:hover {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  background-color: $ofh-button-color-default;
-  color: $ofh-text-white-color;
+  background-color: $ofh-color-background-button-default;
+  color: $ofh-color-foreground-primary-inverted;
   font-family: 'Source Sans Pro', Arial, sans-serif;
   font-size: 14px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-weight: 400;
   min-width: 58px;
   padding: 4px 10px 0;

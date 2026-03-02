@@ -2,21 +2,21 @@
 // TOOLS / #LINKS
 // ==========================================================================
 
-//
+
 // Default link styling
-//
+
 // Usage: @include ofh-link-style-default;
-//
+
 
 @mixin ofh-link-style-default {
-  color: $ofh-link-color;
+  color: $ofh-color-foreground-link-default;
 
   &:visited {
-    color: $ofh-link-visited-color;
+    color: $ofh-color-foreground-link-visited;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     text-decoration: none;
   }
 
@@ -28,55 +28,55 @@
     }
 
     &:visited {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
     }
   }
 
   &:active {
-    color: $ofh-link-active-color;
+    color: $ofh-color-foreground-link-active;
   }
 }
 
-//
+
 // White link styling, used in the footer.
-//
+
 // Usage: @include ofh-link-style-light;
-//
+
 
 @mixin ofh-link-style-light {
-  color: $color_ofh-white;
+  color: $ofh-color-greyscale-white;
 
   &:visited {
-    color: $color_ofh-white;
+    color: $ofh-color-greyscale-white;
   }
 
   &:hover {
-    color: $ofh-link-light-hover-color;
+    color: $ofh-color-foreground-link-hover-inverted;
     text-decoration: none;
   }
 
   &:focus,
   &:focus:visited {
-    color: $color_ofh-white;
-    outline: 3px solid $color_ofh-white;
+    color: $ofh-color-greyscale-white;
+    outline: 3px solid $ofh-color-greyscale-white;
     outline-offset: 1px;
     text-decoration: none;
   }
 
   &:focus-visible {
-    outline: 3px solid $color_ofh-white;
+    outline: 3px solid $ofh-color-greyscale-white;
   }
 
   &:active {
-    color: $ofh-link-light-active-color;
+    color: $ofh-color-foreground-link-active-inverted;
   }
 }
 
-//
+
 // Default link hover only styling
-//
+
 // Usage: @include ofh-link-style-hover;
-//
+
 
 @mixin ofh-link-style-hover {
   &:hover {
@@ -105,22 +105,22 @@
 
 @mixin ofh-link-style-no-visited-state {
   &:link {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
   }
 
   &:active {
-    color: $ofh-link-active-color;
+    color: $ofh-color-foreground-link-active;
   }
 
   &:focus {
-    color: $ofh-focus-text-color;
+    color: $ofh-color-foreground-brand-blue-navy;
   }
 }

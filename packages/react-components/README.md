@@ -4,14 +4,23 @@ React component library for the OFH Design System.
 
 ## Installation
 
+Install from the monorepo using a package-specific Git tag and subdirectory.
+
 ```bash
-npm install @ourfuturehealth/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
+```
+
+or
+
+```bash
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
 ```
 
 ## Usage
 
 ```tsx
 import { Button, TextInput } from '@ourfuturehealth/react-components';
+import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
@@ -22,6 +31,15 @@ function App() {
   );
 }
 ```
+
+### Theme styles
+
+Choose one theme stylesheet import per application:
+
+- `@ourfuturehealth/react-components/styles/participant`
+- `@ourfuturehealth/react-components/styles/research`
+
+`@ourfuturehealth/react-components/styles` is kept as a backward-compatible alias for `participant`.
 
 ## Components
 

@@ -10,16 +10,16 @@
  */
 
 .ofh-hero {
-  @include print-color($ofh-text-black-color);
+  @include print-color($ofh-color-foreground-primary);
 
-  background-color: $color_ofh-brand-yellow;
-  color: $ofh-text-white-color;
+  background-color: $ofh-color-brand-yellow-3-main;
+  color: $ofh-color-foreground-primary-inverted;
   position: relative; /* [1] */
 }
 
 .ofh-hero__wrapper {
-  @include ofh-responsive-padding(8, top);
-  @include ofh-responsive-padding(8, bottom);
+  @include ofh-responsive-padding(9, top);
+  @include ofh-responsive-padding(9, bottom);
 }
 
 /**
@@ -38,12 +38,14 @@
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media only screen { /* [4] */
+  @media only screen {
+    /* [4] */
     min-height: 200px;
   }
 
   @include mq($from: tablet) {
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 320px; /* [5] */
 
       .ofh-hero__overlay {
@@ -57,9 +59,10 @@
   }
 
   .ofh-hero__overlay {
-    background-color: $color_transparent_ofh-blue-50; /* [7] */
+    background-color: rgba($ofh-color-brand-blue-navy-3-main, 0.5); /* [7] */
 
-    @media only screen { /* [4] */
+    @media only screen {
+      /* [4] */
       min-height: 200px; /* [6] */
     }
 
@@ -84,10 +87,10 @@
 
 .ofh-hero--image-description {
   .ofh-hero-content {
-    background-color: $color_ofh-brand-yellow;
-    color: $ofh-text-white-color;
+    background-color: $ofh-color-brand-yellow-3-main;
+    color: $ofh-color-foreground-primary-inverted;
     margin-bottom: 24px;
-    padding: ofh-spacing(4);
+    padding: ofh-spacing(5);
     position: relative;
     top: 70px;
 
@@ -109,7 +112,7 @@
 
       &::before,
       &::after {
-        border: solid 32px $color_ofh-brand-yellow; /* [8] */
+        border: solid 32px $ofh-color-brand-yellow-3-main; /* [8] */
         content: '';
         display: block;
         height: 0;
@@ -124,7 +127,8 @@
       }
     }
 
-    @include mq(375px) { /* [15] */
+    @include mq(375px) {
+      /* [15] */
       width: 85%;
     }
 
@@ -134,22 +138,23 @@
       bottom: -48px; /* [8] */
       margin-bottom: 0;
       max-width: 35em; /* [11] */
-      padding: ofh-spacing(5) ofh-spacing(6);
+      padding: ofh-spacing(6) ofh-spacing(7);
       position: absolute;
       top: auto;
     }
 
     @include mq($media-type: print) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       max-width: 100%;
       padding: 0;
     }
 
-    @media screen and (-ms-high-contrast: active) { /* [14] */
+    @media screen and (-ms-high-contrast: active) {
+      /* [14] */
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;
-      padding: ofh-spacing(5) 0 0;
+      padding: ofh-spacing(6) 0 0;
       position: relative;
       top: 0;
     }

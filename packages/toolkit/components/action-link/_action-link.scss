@@ -14,14 +14,14 @@
  */
 
 .ofh-action-link {
-  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(7, 'bottom');
 }
 
 .ofh-action-link__link {
-  @include ofh-font(22);
+  @include ofh-font('h4');
 
   display: inline-block; /* [1] */
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   padding-left: 38px; /* [2] */
   position: relative; /* [3] */
   text-decoration: none; /* [4] */
@@ -37,7 +37,7 @@
 
     &:hover {
       .ofh-action-link__text {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
         text-decoration: none;
       }
     }
@@ -48,17 +48,17 @@
   }
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
 
     &:visited {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 
   .ofh-icon__arrow-right-circle {
-    @include print-color($ofh-text-black-color);
+    @include print-color($ofh-color-foreground-primary);
 
-    fill: $color_ofh-brand-yellow;
+    fill: $ofh-color-brand-yellow-3-main;
     height: 36px;
     left: -3px;
     position: absolute;

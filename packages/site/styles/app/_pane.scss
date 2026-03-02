@@ -4,7 +4,7 @@
 
 .app-pane {
   display: -webkit-box;
-  display: -ms-flexbox; // sass-lint:disable-line no-duplicate-properties
+  display: flexbox; // sass-lint:disable-line no-duplicate-properties
   display: flex; // sass-lint:disable-line no-duplicate-properties
   min-height: 0;
   overflow: inherit;
@@ -12,8 +12,8 @@
 }
 
 .app-pane__side-bar {
-  -ms-flex: 0 0 auto;
   -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   width: 220px;
 
@@ -27,20 +27,20 @@
 }
 
 .app-pane__main-content {
-  -ms-flex: 1 1 100%; // sass-lint:disable-line no-duplicate-properties
-  -ms-flex-direction: column;
   -webkit-box-direction: normal;
   -webkit-box-flex: 1;
   -webkit-box-orient: vertical;
   display: -webkit-box;
-  display: -ms-flexbox; // sass-lint:disable-line no-duplicate-properties
+  display: flexbox; // sass-lint:disable-line no-duplicate-properties
   display: flex; // sass-lint:disable-line no-duplicate-properties
+  -ms-flex: 1 1 100%; // sass-lint:disable-line no-duplicate-properties
   flex: 1 1 100%;
+  -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
 
   @include mq($from: desktop) {
-    padding-left: ofh-spacing(9);
+    padding-left: ofh-spacing(10);
   }
 
 }
@@ -51,7 +51,7 @@
   .app-lede-text,
   .app-contents-list,
   .app-lede-text--sub {
-    margin-bottom: ofh-spacing(5);
+    margin-bottom: ofh-spacing(6);
   }
 
   .app-contents-list .ofh-contents-list__list {

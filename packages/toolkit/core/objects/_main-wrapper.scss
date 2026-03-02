@@ -22,20 +22,20 @@
  */
 
 @mixin govuk-main-wrapper {
-  @include ofh-responsive-padding(7, 'top');
-  @include ofh-responsive-padding(7, 'bottom');
+  @include ofh-responsive-padding(8, 'top');
+  @include ofh-responsive-padding(8, 'bottom');
   @include top-and-bottom();
 
   display: block; /* [1] */
 }
 
 @mixin govuk-main-wrapper--l {
-  @include ofh-responsive-padding(8, 'top');
+  @include ofh-responsive-padding(9, 'top');
 }
 
 @mixin govuk-main-wrapper--s {
-  @include ofh-responsive-padding(5, 'bottom');
-  @include ofh-responsive-padding(5, 'top');
+  @include ofh-responsive-padding(6, 'bottom');
+  @include ofh-responsive-padding(6, 'top');
 }
 
 @include govuk-exports('govuk/objects/main-wrapper') {

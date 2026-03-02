@@ -7,20 +7,18 @@
 // Convert pixels to em
 // ==========================================================================
 
-//
 // A quick way to convert px into em
-// Usage: ofh-em(20px, $ofh-base-font-size);
-//
+// Usage: ofh-em(20px, 16px);
+
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
-//
 
 @function ofh-em($value, $context-font-size) {
-  @if unitless($value) {
+  @if math.is-unitless($value) {
     $value: $value * 1px;
   }
 
-  @if unitless($context-font-size) {
+  @if math.is-unitless($context-font-size) {
     $context-font-size: $context-font-size * 1px;
   }
 
@@ -30,18 +28,16 @@
 // Convert pixels to rem
 // ==========================================================================
 
-//
 // A quick way to convert px into rem
 // Usage: ofh-px-to-rem(20px);
-//
-// The $ofh-base-font-size (defined in settings/_globals.scss)
+
+// The 16px (defined in settings/_globals.scss)
 // must be configured to match the font-size of your root (html) element
-//
 
 @function ofh-px-to-rem($value) {
-  @if unitless($value) {
+  @if math.is-unitless($value) {
     $value: $value * 1px;
   }
 
-  @return math.div($value, $ofh-base-font-size) * 1rem;
+  @return math.div($value, 16px) * 1rem;
 }

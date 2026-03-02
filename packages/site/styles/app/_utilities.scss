@@ -7,7 +7,7 @@ html {
 }
 
 .app-u-border-top {
-  border-top: 2px solid $color_ofh-brand-blue;
+  border-top: 2px solid $ofh-color-brand-blue-royal-3-main;
   margin-top: 8px;
 
   h3 {
@@ -19,7 +19,6 @@ html {
     list-style: none;
     padding-left: 0;
   }
-
 }
 
 // Hide content on mobile
@@ -34,10 +33,4 @@ html {
   @include mq($from: desktop) {
     display: none;
   }
-}
-
-// Make content full width of its parent container
-.app-u-full-width {
-  max-width: 100% !important; // sass-lint:disable-line no-important */
-  width: 100% !important; // sass-lint:disable-line no-important */
 }

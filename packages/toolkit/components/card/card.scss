@@ -26,13 +26,13 @@
  */
 
 $card-border-width: 1px;
-$card-border-bottom-width: ofh-spacing(1);
-$card-background: $color_ofh-white;
-$card-border-color: $color_ofh-grey-4;
-$card-border-hover-color: $color_ofh-grey-3;
+$card-border-bottom-width: ofh-spacing(2);
+$card-background: $ofh-color-greyscale-white;
+$card-border-color: $ofh-color-greyscale-5;
+$card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
@@ -65,14 +65,14 @@ $card-border-hover-color: $color_ofh-grey-3;
 .ofh-card__img {
   @include print-hide();
 
-  border-bottom: $card-border-width solid $color_ofh-grey-5; /* [2] */
+  border-bottom: $card-border-width solid $ofh-color-greyscale-6; /* [2] */
   display: block;
   width: 100%;
 }
 
 .ofh-card__content {
   @include top-and-bottom();
-  @include ofh-responsive-padding(5);
+  @include ofh-responsive-padding(6);
 
   position: relative;
 }
@@ -80,7 +80,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 .ofh-card__heading,
 .ofh-card__metadata,
 .ofh-card__description {
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
 }
 
 /* Clickable card
@@ -95,11 +95,11 @@ $card-border-hover-color: $color_ofh-grey-3;
 
     .ofh-card__heading a,
     .ofh-card__link {
-      color: $ofh-link-hover-color;
+      color: $ofh-color-foreground-link-hover;
       text-decoration: none;
 
       &:focus {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -110,7 +110,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 
   &:active {
     border-color: $card-border-hover-color;
-    bottom: - $card-border-width; /* [3] */
+    bottom: -$card-border-width; /* [3] */
   }
 }
 
@@ -126,11 +126,11 @@ $card-border-hover-color: $color_ofh-grey-3;
 .ofh-card-group {
   @include flex();
 
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: ofh-spacing(4);
   padding: 0;
 
   @include mq($until: desktop) {
-    margin-bottom: ofh-spacing(6);
+    margin-bottom: ofh-spacing(7);
   }
 
   + h2,
@@ -148,12 +148,12 @@ $card-border-hover-color: $color_ofh-grey-3;
   margin-bottom: 0;
 
   .ofh-card {
-    margin-bottom: ofh-spacing(5);
+    margin-bottom: ofh-spacing(6);
   }
 
   @include mq($until: desktop) {
     .ofh-card {
-      margin-bottom: ofh-spacing(3);
+      margin-bottom: ofh-spacing(4);
     }
 
     &:last-child .ofh-card {
@@ -166,25 +166,25 @@ $card-border-hover-color: $color_ofh-grey-3;
   ========================================================================== */
 
 .ofh-card--feature {
-  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(8, 'top');
 }
 
 .ofh-card__heading--feature {
-  background: $color_ofh-brand-yellow;
-  color: $ofh-text-white-color;
+  background: $ofh-color-brand-yellow-3-main;
+  color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
-  left: - (ofh-spacing(4) + $card-border-width); /* [5] */
-  margin-bottom: ofh-spacing(2);
-  margin-right: - ofh-spacing(4); /* [6] */
-  padding: ofh-spacing(2) ofh-spacing(4);
+  left: -(ofh-spacing(5) + $card-border-width); /* [5] */
+  margin-bottom: ofh-spacing(3);
+  margin-right: - ofh-spacing(5); /* [6] */
+  padding: ofh-spacing(3) ofh-spacing(5);
   position: relative;
-  top: - ofh-spacing(2);
+  top: - ofh-spacing(3);
 
   @include mq($from: tablet) {
-    left: - (ofh-spacing(5) + $card-border-width); /* [5] */
-    margin-right: - ofh-spacing(5); /* [6] */
-    padding: ofh-spacing(2) ofh-spacing(5);
-    top: - ofh-spacing(3);
+    left: -(ofh-spacing(6) + $card-border-width); /* [5] */
+    margin-right: - ofh-spacing(6); /* [6] */
+    padding: ofh-spacing(3) ofh-spacing(6);
+    top: - ofh-spacing(4);
   }
 }
 
@@ -196,22 +196,26 @@ $card-border-hover-color: $color_ofh-grey-3;
   ========================================================================== */
 
 .ofh-card--care {
-  @include ofh-responsive-margin(7, 'top');
-  @include care-card($color_ofh-brand-blue, $color_ofh-white, 4px); /* [8] */
+  @include ofh-responsive-margin(8, 'top');
+  @include care-card(
+    $ofh-color-brand-blue-royal-3-main,
+    $ofh-color-greyscale-white,
+    4px
+  ); /* [8] */
 }
 
 .ofh-card--care__heading-container {
-  @include ofh-responsive-padding(5, 'left');
-  @include ofh-responsive-padding(5, 'right');
+  @include ofh-responsive-padding(6, 'left');
+  @include ofh-responsive-padding(6, 'right');
 
-  padding-bottom: ofh-spacing(3);
-  padding-top: ofh-spacing(3);
+  padding-bottom: ofh-spacing(4);
+  padding-top: ofh-spacing(4);
   position: relative;
 }
 
 .ofh-card--care__heading {
-  @include ofh-font(24, $weight: bold);
-  @include print-color($ofh-text-black-color);
+  @include ofh-font('h3', $weight: bold);
+  @include print-color($ofh-color-foreground-primary);
 
   margin: 0;
   padding-top: 0; /* [13] */
@@ -235,7 +239,7 @@ $card-border-hover-color: $color_ofh-grey-3;
 
   &::before,
   &::after {
-    border: solid 32px $color_ofh-brand-blue; /* [9] */
+    border: solid 32px $ofh-color-brand-blue-royal-3-main; /* [9] */
     content: '';
     display: block;
     height: 0;
@@ -247,59 +251,67 @@ $card-border-hover-color: $color_ofh-grey-3;
 }
 
 .ofh-card--care--urgent {
-  @include care-card($color_ofh-brand-red, $color_ofh-white, 6px);
+  @include care-card(
+    $ofh-color-brand-red-3-main,
+    $ofh-color-greyscale-white,
+    6px
+  );
 
   .ofh-card--care__arrow {
     &::before,
     &::after {
-      border-color: $color_ofh-brand-red;
+      border-color: $ofh-color-brand-red-3-main;
     }
   }
 }
 
 .ofh-card--care--emergency {
-  @include care-card($color_ofh-brand-red, $color_ofh-white, 8px);
+  @include care-card(
+    $ofh-color-brand-red-3-main,
+    $ofh-color-greyscale-white,
+    8px
+  );
 
   .ofh-card--care__arrow {
     &::before,
     &::after {
-      border-color: $color_ofh-brand-red;
+      border-color: $ofh-color-brand-red-3-main;
     }
   }
 
   .ofh-card__content {
-    background-color: $color_ofh-black;
+    background-color: $ofh-color-greyscale-black;
     border: 0;
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
     position: static; /* [15] */
 
     a {
-      color: $ofh-text-white-color; /* [16] */
+      color: $ofh-color-foreground-primary-inverted; /* [16] */
 
       &:focus {
-        color: $color_ofh-black; /* [16] */
+        color: $ofh-color-greyscale-black; /* [16] */
       }
     }
   }
 
   .ofh-details,
   .ofh-details__summary {
-    color: $ofh-text-white-color;
+    color: $ofh-color-foreground-primary-inverted;
   }
 
   .ofh-details__summary {
     &:hover {
-      color: $ofh-text-white-color;
+      color: $ofh-color-foreground-primary-inverted;
     }
 
     &:focus {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 
   .ofh-action-link__link {
     .ofh-icon__arrow-right-circle {
-      fill: $color_ofh-white; /* [14] */
+      fill: $ofh-color-greyscale-white; /* [14] */
     }
   }
 }

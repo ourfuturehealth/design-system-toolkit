@@ -17,17 +17,25 @@ function cleanDist() {
  * CSS tasks
  */
 
-sass.compiler = require('sass');
-
 /* Build the CSS from source */
 function compileCSS() {
+  const outputNames = {
+    ofh: 'ofh-design-system-toolkit',
+    'ofh-participant': 'ofh-design-system-toolkit-participant',
+    'ofh-research': 'ofh-design-system-toolkit-research',
+  };
+
   return gulp
-    .src(['ofh.scss'])
-    .pipe(sass())
-    .pipe(rename('ofh-design-system-toolkit.css'))
+    .src(['ofh.scss', 'ofh-participant.scss', 'ofh-research.scss'])
+    .pipe(sass.sync({ api: 'modern-compiler' }))
+    .pipe(
+      rename((path) => {
+        path.basename = outputNames[path.basename] || path.basename;
+      }),
+    )
     .pipe(gulp.dest('dist/'))
     .on('error', (err) => {
-      console.log(err);
+      console.error(err);
       process.exit(1);
     });
 }
@@ -43,7 +51,7 @@ function minifyCSS() {
     .pipe(
       rename({
         suffix: `-${version}.min`,
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -75,7 +83,7 @@ function webpackJS() {
           filename: 'ofh-design-system-toolkit.js',
         },
         target: 'web',
-      })
+      }),
     )
     .pipe(gulp.dest('./dist'));
 }
@@ -91,7 +99,7 @@ function minifyJS() {
     .pipe(
       rename({
         suffix: '.min',
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -107,7 +115,7 @@ function versionJS() {
     .pipe(
       rename({
         suffix: `-${version}.min`,
-      })
+      }),
     )
     .pipe(gulp.dest('dist/'));
 }
@@ -150,7 +158,7 @@ function createZip() {
         'dist/assets/**',
         '!dist/js/ofh-design-system-toolkit.min.js',
       ],
-      { base: 'dist' }
+      { base: 'dist' },
     )
     .pipe(zip(`ofh-design-system-toolkit-${version}.zip`))
     .pipe(gulp.dest('dist'));
@@ -174,12 +182,12 @@ gulp.task('build', gulp.series([compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
-  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS])
+  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS, assets]),
 );
 
 gulp.task(
   'zip',
-  gulp.series(['bundle', assets, jsFolder, cssFolder, createZip])
+  gulp.series(['bundle', assets, jsFolder, cssFolder, createZip]),
 );
 
 gulp.task('watch', watch);

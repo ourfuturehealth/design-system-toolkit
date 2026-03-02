@@ -11,17 +11,17 @@
  */
 
 .ofh-input {
-  @include ofh-font(19);
+  @include ofh-font("paragraph");
 
   -moz-appearance: none; /* 1 */
   -webkit-appearance: none; /* 1 */
   appearance: none; /* 1 */
-  border: $ofh-border-width-form-element solid $ofh-input-border-color; /* 2 */
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default; /* 2 */
   border-radius: 0;
   box-sizing: border-box;
   height: 40px;
   margin-top: 0;
-  padding: ofh-spacing(1);
+  padding: ofh-spacing(2);
   width: 100%;
 
   &:focus {
@@ -35,12 +35,13 @@
   margin: 0;
 }
 
-.ofh-input[type="number"] { /* stylelint-disable-line string-quotes */
+.ofh-input[type="number"] {
+  /* stylelint-disable-line string-quotes */
   -moz-appearance: textfield;
 }
 
 .ofh-input--error {
-  border: $ofh-border-width-form-element-error solid $ofh-error-color;
+  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
 }
 
 // The ex measurements are based on the number of W's that can fit inside the input

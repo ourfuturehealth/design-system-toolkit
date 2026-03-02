@@ -30,24 +30,26 @@
  * 9. Use non variable colour to follow NHS England guidelines on logo colour
  * 10. N/A
  * 11. Align close icon with nav item arrow icons
- * 12. Add ofh-spacing(9) to align right and left main nav with header
+ * 12. Add ofh-spacing(10) to align right and left main nav with header
  */
 
 .ofh-header-ds {
   @include clearfix();
-  background-color: $color_ofh-neutral-yellow;
+
+  background-color: $ofh-color-background-neutral-yellow;
 }
 
 .ofh-header-ds__container {
   @include clearfix();
+
   height: 96px;
-  padding-top: ofh-spacing(2);
-  padding-bottom: ofh-spacing(2);
+  padding-bottom: ofh-spacing(3);
+  padding-top: ofh-spacing(3);
   position: relative;
 
   @include mq($until: large-desktop) {
     height: 96px;
-    margin-right: ofh-spacing(5);
+    margin-right: ofh-spacing(6);
   }
 
   .ofh-grid-row {
@@ -67,18 +69,18 @@
   }
 
   .ofh-logo__background {
-    fill: $color_ofh-white;
+    fill: $ofh-color-greyscale-white;
 
     @include mq($media-type: print) {
-      fill: $color_ofh-brand-yellow;
+      fill: $ofh-color-brand-yellow-3-main;
     }
   }
 
   .ofh-logo__text {
-    fill: $color_ofh-brand-yellow;
+    fill: $ofh-color-brand-yellow-3-main;
 
     @include mq($media-type: print) {
-      fill: $color_ofh-white;
+      fill: $ofh-color-greyscale-white;
     }
   }
 
@@ -88,6 +90,7 @@
 
   .ofh-logo {
     @include ofh-logo-size; /* [1] */
+
     border: 0;
   }
 
@@ -95,7 +98,7 @@
     max-width: 60%;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     max-width: 50%;
   }
 
@@ -103,11 +106,12 @@
 
 .ofh-header-ds__link {
   @include ofh-logo-size; /* [1] */
+
   display: block;
 
   &:hover {
     .ofh-logo {
-      box-shadow: 0 0 0 $ofh-focus-width $color_shade_ofh-blue-35;
+      box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-brand-blue-navy-4;
     }
   }
 
@@ -115,13 +119,13 @@
     box-shadow: none;
 
     .ofh-logo {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
     }
   }
 
   @include mq($media-type: print) {
-    &:after {
+    &::after {
       content: ''; /* [8] */
     }
   }
@@ -140,7 +144,7 @@
   position: relative;
 
   &.js-show {
-    border-bottom: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
+    border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
   }
 
   @include mq($from: tablet) {
@@ -167,29 +171,38 @@
 
   @include mq($from: tablet) {
     float: left;
-    margin-left: ofh-spacing(2);
+    margin-left: ofh-spacing(3);
   }
 
 }
 
 .ofh-header-ds__search-toggle {
-  @include toggle-button();
-  min-height: ofh-spacing(6); /* [2] */
-  padding: ofh-spacing(1) ofh-spacing(2) 0;
+  background-color: transparent;
+  border: 1px solid $ofh-color-greyscale-white;
+  border-radius: $ofh-radius-4;
+  color: $ofh-color-foreground-primary-inverted;
+  cursor: pointer;
+  min-height: ofh-spacing(7); /* [2] */
+  padding: ofh-spacing(2) ofh-spacing(3) 0;
   position: absolute;
   right: 0;
   top: 0;
 
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
   .ofh-icon__search {
-    fill: $color_ofh-white;
+    fill: $ofh-color-greyscale-white;
     height: 21px; /* [3] */
     width: 21px; /* [3] */
   }
 
   &:focus {
     @include ofh-focused-button();
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
   }
 
   @include mq($from: tablet) {
@@ -202,9 +215,9 @@
   overflow: visible;
 
   @include mq($until: tablet) {
-    background-color: $color_ofh-white;
+    background-color: $ofh-color-greyscale-white;
     display: flex;
-    padding: ofh-spacing(3);
+    padding: ofh-spacing(4);
     width: 100%;
   }
 }
@@ -232,34 +245,35 @@
 
 .ofh-search-ds__input {
   -webkit-appearance: listbox; /* [5] */
-  border-bottom-left-radius: $ofh-border-radius;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: $ofh-border-radius;
-  border-top-right-radius: 0;
-  padding: 0 ofh-spacing(3);
+  border-radius: $ofh-radius-4 0 0 $ofh-radius-4;
+  padding: 0 ofh-spacing(4);
+
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
     padding: 0 9px;
   }
+
   &::placeholder {
-    color: $color_ofh-grey-1;
-    font-size: $ofh-base-font-size;
+    color: $ofh-color-greyscale-2;
+    font-size: 16px;
   }
+
   &:-ms-input-placeholder {
-    color: $color_ofh-grey-1;
-    font-size: $ofh-base-font-size;
+    color: $ofh-color-greyscale-2;
+    font-size: 16px;
   }
+
   &::-webkit-input-placeholder {
-    color: $color_ofh-grey-1;
-    font-size: $ofh-base-font-size;
+    color: $ofh-color-greyscale-2;
+    font-size: 16px;
   }
 
   @include mq($until: tablet) {
-    border-bottom: 1px solid $color_ofh-grey-3;
-    border-left: 1px solid $color_ofh-grey-3;
+    border-bottom: 1px solid $ofh-color-greyscale-4;
+    border-left: 1px solid $ofh-color-greyscale-4;
     border-right: 0;
-    border-top: 1px solid $color_ofh-grey-3;
+    border-top: 1px solid $ofh-color-greyscale-4;
     flex-grow: 2;
     -ms-flex-positive: 2;
     font-size: inherit;
@@ -271,9 +285,9 @@
   }
 
   @include mq($from: tablet) {
-    border: 1px solid $color_ofh-white;
-    font-size: $ofh-base-font-size;
-    height: ofh-spacing(6); /* [2] */
+    border: 1px solid $ofh-color-greyscale-white;
+    font-size: 16px;
+    height: ofh-spacing(7); /* [2] */
     width: 200px; /* [2] */
   }
 
@@ -284,10 +298,7 @@
 
 .ofh-search__submit {
   border: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: $ofh-border-radius;
-  border-top-left-radius: 0;
-  border-top-right-radius: $ofh-border-radius;
+  border-radius: 0 $ofh-radius-4 $ofh-radius-4 0;
   float: right;
   font-size: inherit;
   line-height: inherit;
@@ -303,43 +314,43 @@
   }
 
   @include mq($until: tablet) {
-    background-color: $color_ofh-brand-green;
+    background-color: $ofh-color-brand-green-teal-3-main;
     height: 52px; /* [2] */
     margin: 0;
-    padding: ofh-spacing(2) ofh-spacing(2) 0;
+    padding: ofh-spacing(3) ofh-spacing(3) 0;
 
     .ofh-icon__search {
-      fill: $color_ofh-white;
+      fill: $ofh-color-greyscale-white;
       height: 38px; /* [3] */
       width: 38px; /* [3] */
     }
 
     &:hover {
-      background-color: $ofh-button-hover-color;
+      background-color: $ofh-color-background-button-hover;
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       &:hover {
-        background-color: $ofh-focus-color;
+        background-color: $ofh-color-border-feedback-focus;
 
         .ofh-icon {
-          fill: $ofh-focus-text-color;
+          fill: $ofh-color-foreground-brand-blue-navy;
         }
       }
 
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 
   @include mq($from: tablet) {
-    background-color: $color_ofh-neutral-yellow;
+    background-color: $ofh-color-background-neutral-yellow;
     display: block;
-    height: ofh-spacing(6); /* [2] */
+    height: ofh-spacing(7); /* [2] */
     width: 44px; /* [2] */
 
     .ofh-icon__search {
@@ -348,26 +359,27 @@
     }
 
     &:hover {
-      background-color: $color_shade_ofh-blue-35;
-      border: 1px solid $color_ofh-white;
+      background-color: $ofh-color-brand-blue-navy-4;
+      border: 1px solid $ofh-color-greyscale-white;
 
       .ofh-icon__search {
-        fill: $color_ofh-white;
+        fill: $ofh-color-greyscale-white;
       }
     }
 
     &:focus {
       @include ofh-focused-button();
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
     }
 
     &:active {
-      background-color: $color_shade_ofh-blue-50;
+      background-color: $ofh-color-brand-blue-navy-3-main;
       border: 0;
 
       .ofh-icon__search {
-        fill: $color_ofh-white;
+        fill: $ofh-color-greyscale-white;
       }
     }
   }
@@ -375,15 +387,36 @@
 
 .ofh-search__close {
   @include mq($until: tablet) {
-    @include close-button();
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    height: 40px;
+    margin-left: ofh-spacing(3);
+    margin-right: - ofh-spacing(3); /* [11] */
+    margin-top: ofh-spacing(3);
+    overflow: hidden;
+    padding: 0;
+    width: 40px;
 
-    margin-left: ofh-spacing(2);
-    margin-right: - ofh-spacing(2); /* [11] */
-    margin-top: ofh-spacing(2);
+    .ofh-icon__close {
+      fill: $ofh-color-brand-blue-navy-3-main;
+      height: 40px;
+      width: 40px;
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
+
+    &:hover {
+      .ofh-icon__close {
+        fill: $ofh-color-foreground-secondary;
+      }
+    }
 
     &:focus {
       .ofh-icon__close {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -415,16 +448,19 @@
 }
 
 .ofh-header-ds__menu-toggle {
-  @include toggle-button();
-
-  border-color: $ofh-text-black-color;
-  color: $ofh-text-black-color;
+  background-color: transparent;
+  border: 1px solid $ofh-color-greyscale-white;
+  border-color: $ofh-color-foreground-primary;
+  border-radius: $ofh-radius-4;
+  color: $ofh-color-foreground-primary-inverted;
+  color: $ofh-color-foreground-primary;
+  cursor: pointer;
   display: block;
   font-size: 16px;
   font-weight: 400;
-  line-height: $ofh-base-line-height;
+  line-height: 24px;
   margin-right: -16px;
-  padding: 7px ofh-spacing(3);
+  padding: 7px ofh-spacing(4);
   position: relative;
   text-decoration: none;
   z-index: 1;
@@ -443,8 +479,13 @@
 
   &:focus {
     @include ofh-focused-button;
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
   }
 
 }
@@ -464,7 +505,8 @@
 
 .ofh-header-ds__navigation {
   @include print-hide();
-  background-color: $color_ofh-white;
+
+  background-color: $ofh-color-greyscale-white;
   clear: both;
   display: none;
   max-width: none;
@@ -475,12 +517,12 @@
     display: block;
 
     @include mq($until: large-desktop) {
-      border-bottom: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
-      border-top: ofh-spacing(1) solid $color_ofh-neutral-yellow; /* [7] */
-      color: $ofh-text-black-color;
+      border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+      border-top: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+      color: $ofh-color-foreground-primary;
 
       .ofh-width-container {
-        margin: 0 ofh-spacing(3);
+        margin: 0 ofh-spacing(4);
       }
     }
 
@@ -492,17 +534,17 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $color_ofh-neutral-yellow;
+    background-color: $ofh-color-background-neutral-yellow;
     display: block;
     margin: 0 auto;
-    max-width: $ofh-page-width + ofh-spacing(9); /* [12] */
+    max-width: $ofh-width-content-max + ofh-spacing(10); /* [12] */
   }
 }
 
 .ofh-header-ds__navigation-title {
-  font-weight: $ofh-font-bold;
+  font-weight: $ofh-typography-weight-semibold;
   margin-bottom: 0;
-  padding: ofh-spacing(3);
+  padding: ofh-spacing(4);
   position: relative;
 
   @include mq($from: large-desktop) {
@@ -511,16 +553,37 @@
 }
 
 .ofh-header-ds__navigation-close {
-  @include close-button();
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 40px;
   overflow: hidden;
+  padding: 0;
   position: absolute;
-  right: ofh-spacing(2);
-  top: ofh-spacing(2);
+  right: ofh-spacing(3);
+  top: ofh-spacing(3);
   white-space: nowrap;
+  width: 40px;
+
+  .ofh-icon__close {
+    fill: $ofh-color-brand-blue-navy-3-main;
+    height: 40px;
+    width: 40px;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover {
+    .ofh-icon__close {
+      fill: $ofh-color-foreground-secondary;
+    }
+  }
 
   &:focus {
     .ofh-icon__close {
-      fill: $ofh-focus-text-color;
+      fill: $ofh-color-foreground-brand-blue-navy;
     }
   }
 }
@@ -539,7 +602,7 @@
 }
 
 .ofh-header-ds__navigation-item {
-  border-top: 1px solid $color_ofh-neutral-yellow;
+  border-top: 1px solid $ofh-color-background-neutral-yellow;
   margin-bottom: 0;
   position: relative;
 
@@ -555,61 +618,62 @@
 }
 
 .ofh-header-ds__navigation-link {
-  @include ofh-font(16);
-  border-bottom: ofh-spacing(1) solid transparent;
-  border-top: ofh-spacing(1) solid transparent;
-  color: $ofh-text-black-color;
+  @include ofh-font($size: paragraph);
+
+  border-bottom: ofh-spacing(2) solid transparent;
+  border-top: ofh-spacing(2) solid transparent;
+  color: $ofh-color-foreground-primary;
   display: block;
-  padding: 12px ofh-spacing(3);
+  padding: 12px ofh-spacing(4);
   text-decoration: none;
 
   @include mq($from: large-desktop) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
     line-height: normal;
   }
 
   .ofh-icon__chevron-right {
-    fill: $color_ofh-grey-3;
+    fill: $ofh-color-greyscale-4;
     position: absolute;
-    right: ofh-spacing(1);
+    right: ofh-spacing(2);
     top: 11px;
   }
 
   &:visited {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
 
     @include mq($from: large-desktop) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
   }
 
   &:hover {
     box-shadow: none;
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
     text-decoration: underline;
 
     @include mq($from: large-desktop) {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
     }
 
     .ofh-icon__chevron-right {
-      fill: $color_ofh-brand-yellow;
+      fill: $ofh-color-brand-yellow-3-main;
     }
 
   }
 
   &:active,
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: -$ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: -$ofh-stroke-weight-4;
 
     &:hover {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
 
     }
 
     &:visited {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
     }
   }
 }
@@ -633,19 +697,20 @@
 
 .ofh-header-ds__transactional-service-name {
   float: left;
-  padding-left: ofh-spacing(3);
+  padding-left: ofh-spacing(4);
   padding-top: 3px;
 
   @include mq($until: large-desktop) {
     padding-left: 0;
-    padding-top: ofh-spacing(2);
+    padding-top: ofh-spacing(3);
     width: 100%;
   }
 }
 
 .ofh-header-ds__transactional-service-name--link {
   @include ofh-link-style-light;
-  @include ofh-font(19);
+  @include ofh-font($size: lead);
+
   text-decoration: none;
 
   &:hover {
@@ -654,9 +719,9 @@
 }
 
 .ofh-header-ds--transactional {
-
   .ofh-header__link {
     @include ofh-logo-size-small;
+
     display: block;
   }
 
@@ -672,7 +737,7 @@
 
 .ofh-header-ds__link--service {
   height: 100%;
-  margin-bottom: -(ofh-spacing(1));
+  margin-bottom: -(ofh-spacing(2));
   text-decoration: none;
   width: auto;
 
@@ -694,11 +759,11 @@
   }
 
   &:focus {
-    outline: $ofh-focus-width solid $ofh-focus-color;
-    outline-offset: $ofh-focus-width;
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
 
     .ofh-header__service-name {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
       text-decoration: none;
     }
 
@@ -715,15 +780,15 @@
 }
 
 .ofh-header-ds__service-name {
-  @include ofh-font(19);
+  @include ofh-font($size: lead);
 
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   padding-left: 0;
   padding-right: 0;
 
   @include mq($from: large-desktop) {
-    padding-left: ofh-spacing(3);
+    padding-left: ofh-spacing(4);
   }
 
   @include mq($until: large-desktop) {
@@ -736,7 +801,6 @@
   max-width: 100%;
 
   @include mq($from: tablet) {
-
     .ofh-header-ds__link--service {
       align-items: center;
       display: flex;
@@ -746,7 +810,7 @@
     }
 
     .ofh-header-ds__service-name {
-      padding-left: ofh-spacing(3);
+      padding-left: ofh-spacing(4);
     }
   }
 }
@@ -756,14 +820,13 @@
 **/
 
 .ofh-header-ds--organisation {
-
   .ofh-header-ds__link {
     height: 100%;
     text-decoration: none;
     width: auto;
 
     &:hover {
-      color: $ofh-text-white-color;
+      color: $ofh-color-foreground-primary-inverted;
       text-decoration: underline;
 
       .ofh-logo {
@@ -772,12 +835,12 @@
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       .ofh-organisation-name,
       .ofh-organisation-descriptor {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
       }
 
       .ofh-logo {
@@ -794,12 +857,12 @@
     height: 32px;
     width: 80px;
 
-    @media (max-width: 450px) {
+    @media (width <= 450px) {
       height: 24px;
       width: 60px;
     }
 
-    @media (max-width: 375px) {
+    @media (width <= 375px) {
       height: 20px;
       width: 50px;
     }
@@ -812,7 +875,7 @@
 }
 
 .ofh-organisation-name {
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   font-size: 22px;
   font-weight: bold;
@@ -821,16 +884,16 @@
   margin-top: -2px;
 
   @include mq($media-type: print) {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     font-size: 17px;
     letter-spacing: .1px;
     line-height: 17px;
   }
 
-  @media (max-width: 375px) {
+  @media (width <= 375px) {
     font-size: 13px;
     line-height: 13px;
   }
@@ -842,22 +905,22 @@
 }
 
 .ofh-organisation-descriptor {
-  color: $ofh-text-white-color;
+  color: $ofh-color-foreground-primary-inverted;
   display: block;
   font-size: 15px;
   font-weight: bold;
   line-height: 21px;
 
   @include mq($media-type: print) {
-    color: $color_ofh-brand-yellow;
+    color: $ofh-color-brand-yellow-3-main;
   }
 
-  @media (max-width: 450px) {
+  @media (width <= 450px) {
     font-size: 12px;
     line-height: 18px;
   }
 
-  @media (max-width: 375px) {
+  @media (width <= 375px) {
     font-size: 10px;
     line-height: 13px;
   }
@@ -870,91 +933,90 @@
 // Header (white)
 
 .ofh-header-ds--white {
-  background-color: $color_ofh-white;
+  background-color: $ofh-color-greyscale-white;
 
   .ofh-logo {
     .ofh-logo__background {
-      fill: $color_ofh-brand-yellow;
+      fill: $ofh-color-brand-yellow-3-main;
     }
 
     .ofh-logo__text {
-      fill: $color_ofh-white;
+      fill: $ofh-color-greyscale-white;
     }
   }
 
   .ofh-header-ds__link {
-
     &:hover {
-      color: $ofh-text-black-color;
+      color: $ofh-color-foreground-primary;
       text-decoration: underline;
 
       .ofh-organisation-descriptor {
-        color: $ofh-text-black-color;
+        color: $ofh-color-foreground-primary;
       }
     }
 
   }
 
   .ofh-search__submit {
-    background-color: $color_ofh-brand-yellow;
+    background-color: $ofh-color-brand-yellow-3-main;
 
     .ofh-icon__search {
-      fill: $color_ofh-white;
+      fill: $ofh-color-greyscale-white;
     }
 
     &:hover {
-      background-color: $color_shade_ofh-blue-20;
-      border-color: $color_shade_ofh-blue-20;
+      background-color: $ofh-color-brand-blue-navy-5;
+      border-color: $ofh-color-brand-blue-navy-5;
     }
 
     &:focus {
-      outline: $ofh-focus-width solid $ofh-focus-color;
-      outline-offset: $ofh-focus-width;
+      outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+      outline-offset: $ofh-stroke-weight-4;
 
       .ofh-icon__search {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 
   .ofh-search__input {
-    border: 1px solid $color_ofh-grey-3;
+    border: 1px solid $ofh-color-greyscale-4;
 
     &:focus {
-      border: 2px solid $ofh-focus-text-color;
+      border: 2px solid $ofh-color-foreground-brand-blue-navy;
 
       @include mq($until: tablet) {
-        border: $ofh-focus-width solid $ofh-focus-text-color;
+        border: $ofh-stroke-weight-4 solid $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
 
   .ofh-header-ds__search-toggle,
   .ofh-header-ds__menu-toggle {
-    border-color: $color_ofh-brand-dark-blue;
-    color: $color_ofh-brand-dark-blue;
+    border-color: $ofh-color-brand-blue-navy-3-main;
+    color: $ofh-color-brand-blue-navy-3-main;
 
     .ofh-icon {
-      fill: $color_ofh-brand-yellow;
+      fill: $ofh-color-brand-yellow-3-main;
     }
 
     &.is-active,
     &:hover {
-      background-color: $color_ofh-brand-yellow;
-      border-color: $color_ofh-brand-dark-blue;
+      background-color: $ofh-color-brand-yellow-3-main;
+      border-color: $ofh-color-brand-blue-navy-3-main;
       box-shadow: none;
-      color: $color_ofh-brand-dark-blue;
+      color: $ofh-color-brand-blue-navy-3-main;
 
       .ofh-icon {
-        fill: $color_ofh-brand-dark-blue;
+        fill: $ofh-color-brand-blue-navy-3-main;
       }
     }
 
     &:focus {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
 
       .ofh-icon {
-        fill: $ofh-focus-text-color;
+        fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
   }
@@ -970,11 +1032,11 @@
   }
 
   .ofh-organisation-descriptor {
-    color: $color_ofh-brand-yellow;
+    color: $ofh-color-brand-yellow-3-main;
   }
 
   .ofh-header-ds__transactional-service-name--link {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
   .ofh-header-ds__navigation-list {
@@ -982,7 +1044,7 @@
   }
 
   .ofh-header-ds__service-name {
-    color: $ofh-text-black-color;
+    color: $ofh-color-foreground-primary;
   }
 
 }
@@ -991,24 +1053,24 @@
 
 .ofh-header--white-nav {
   .ofh-header__navigation {
-    background-color: $color_ofh-white;
+    background-color: $ofh-color-greyscale-white;
 
     .ofh-header__navigation-list {
-      border-top: 1px solid $color_ofh-neutral-yellow;
+      border-top: 1px solid $ofh-color-background-neutral-yellow;
     }
 
     .ofh-header__navigation-link {
-      color: $color_ofh-brand-yellow;
+      color: $ofh-color-brand-yellow-3-main;
 
       &:visited {
-        color: $color_ofh-brand-yellow;
+        color: $ofh-color-brand-yellow-3-main;
       }
 
       &:focus {
-        color: $ofh-focus-text-color;
+        color: $ofh-color-foreground-brand-blue-navy;
 
         &:hover {
-          background: $ofh-focus-color;
+          background: $ofh-color-border-feedback-focus;
         }
       }
     }

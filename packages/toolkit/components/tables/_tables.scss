@@ -9,7 +9,7 @@
  */
 
 .ofh-table-container {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(8, 'bottom');
 
   display: block;
   -webkit-overflow-scrolling: touch;
@@ -31,7 +31,7 @@
 
 .ofh-table__row {
   &:hover {
-    background-color: $color_ofh-grey-5;
+    background-color: $ofh-color-greyscale-6;
   }
 }
 
@@ -44,9 +44,9 @@
 
 .ofh-table__panel-with-heading-tab {
   @include panel-with-label(
-    $color_ofh-white,
-    $ofh-text-black-color,
-    $color_ofh-grey-4
+    $ofh-color-greyscale-white,
+    $ofh-color-foreground-primary,
+    $ofh-color-greyscale-5
   );
 
   .ofh-table-container,
@@ -56,7 +56,10 @@
 }
 
 .ofh-table__heading-tab {
-  @include heading-label($color_ofh-brand-yellow, $color_ofh-white);
+  @include heading-label(
+    $ofh-color-brand-yellow-3-main,
+    $ofh-color-greyscale-white
+  );
 }
 
 /* Responsive table
@@ -89,8 +92,8 @@
 
   .ofh-table__body {
     .ofh-table-responsive__heading {
-      font-weight: $ofh-font-bold;
-      padding-right: ofh-spacing(3);
+      font-weight: $ofh-typography-weight-semibold;
+      padding-right: ofh-spacing(4);
       text-align: left; /* [8] */
 
       @include mq($from: desktop) {
@@ -100,7 +103,7 @@
 
     .ofh-table__row {
       display: block; /* [3] */
-      margin-bottom: ofh-spacing(4);
+      margin-bottom: ofh-spacing(5);
 
       &:last-child {
         margin-bottom: 0;
@@ -124,7 +127,8 @@
         justify-content: space-between; /* [5] */
         min-width: 1px; /* [6] */
 
-        @media all and (-ms-high-contrast: none) { /* [10] */
+        @media all and (-ms-high-contrast: none) {
+          /* [10] */
           display: block;
         }
 
@@ -136,7 +140,7 @@
           padding-right: 0;
           text-align: right; /* [7] */
           &:last-child {
-            border-bottom: 3px solid $color_ofh-grey-4;
+            border-bottom: 3px solid $ofh-color-greyscale-5;
           }
         }
       }

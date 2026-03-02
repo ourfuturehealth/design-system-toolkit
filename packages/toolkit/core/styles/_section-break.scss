@@ -4,7 +4,7 @@
 
 // The % (silent class) allows code to be extended (@extend) to other elements
 // without bloating the code.
-//
+
 // @example scss
 //  .foo {
 //   @extend %ofh-section-break--xl;
@@ -28,8 +28,8 @@
 }
 
 %ofh-section-break--xl {
-  @include ofh-responsive-margin(8, 'top');
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(9, 'top');
+  @include ofh-responsive-margin(9, 'bottom');
 }
 
 .ofh-section-break--xl {
@@ -37,8 +37,8 @@
 }
 
 %ofh-section-break--l {
-  @include ofh-responsive-margin(6, 'top');
-  @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(7, 'bottom');
 }
 
 .ofh-section-break--l {
@@ -46,8 +46,8 @@
 }
 
 %ofh-section-break--m {
-  @include ofh-responsive-margin(4, 'top');
-  @include ofh-responsive-margin(4, 'bottom');
+  @include ofh-responsive-margin(5, 'top');
+  @include ofh-responsive-margin(5, 'bottom');
 }
 
 .ofh-section-break--m {
@@ -55,19 +55,20 @@
 }
 
 %ofh-section-break--visible {
-  border-bottom: 1px solid $ofh-border-color;
+  border-bottom: 1px solid $ofh-color-border-primary;
 }
 
 .ofh-section-break--visible {
   @extend %ofh-section-break--visible;
 }
 
-hr { /* [1] */
+hr {
+  /* [1] */
   @extend %ofh-section-break;
   @extend %ofh-section-break--l;
   @extend %ofh-section-break--visible;
 }
 
 .ofh-section-break--black {
-  border-bottom: 1px solid $color_ofh-true-black;
+  border-bottom: 1px solid $ofh-color-greyscale-black;
 }

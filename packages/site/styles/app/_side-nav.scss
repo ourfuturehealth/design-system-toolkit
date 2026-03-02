@@ -3,29 +3,33 @@
    ========================================================================== */
 
 .app-side-nav__heading {
-  @include ofh-font(19, $line-height: 1.25, $weight: bold);
-  color: $ofh-text-grey-color;
+  @include ofh-font($size: lead, $line-height: 1.25, $weight: bold);
+
+  color: $ofh-color-foreground-secondary;
   margin-bottom: 12px;
   padding-top: 4px;
 
   @include mq($until: desktop) {
-    @include ofh-font(24, $line-height: 1.25, $weight: bold);
-    color: $ofh-text-black-color;
+    @include ofh-font($size: h3, $line-height: 1.25, $weight: bold);
+
+    color: $ofh-color-foreground-primary;
   }
 }
 
 .app-side-nav__back {
-  border-bottom: 1px solid $ofh-border-color;
-  padding-bottom: ofh-spacing(3);
+  border-bottom: 1px solid $ofh-color-border-primary;
+  padding-bottom: ofh-spacing(4);
 }
 
 .app-side-nav__list {
-  @include ofh-font(16, $line-height: 1.3);
+  @include ofh-font($size: paragraph, $line-height: 1.3);
+
   margin-bottom: 0;
 
   @include mq($until: desktop) {
-    @include ofh-font(19, $line-height: 1.3);
-    margin-bottom: ofh-spacing(2);
+    @include ofh-font($size: lead, $line-height: 1.3);
+
+    margin-bottom: ofh-spacing(3);
   }
 }
 
@@ -35,12 +39,12 @@
 }
 
 .app-side-nav__item--current {
-  border-left: 4px solid $ofh-link-color;
+  border-left: 4px solid $ofh-color-foreground-link-default;
   margin-left: -12px;
   padding-left: 8px;
 
   .app-side-nav__link {
-    font-weight: $ofh-font-bold;
+    font-weight: $ofh-typography-weight-semibold;
   }
 }
 
@@ -52,28 +56,29 @@
   }
 
   &:visited {
-    color: $ofh-link-color;
+    color: $ofh-color-foreground-link-default;
   }
 
   &:hover {
-    color: $ofh-link-hover-color;
+    color: $ofh-color-foreground-link-hover;
     text-decoration: underline;
   }
 
   &:focus {
     &:hover,
     &:visited {
-      color: $ofh-focus-text-color;
+      color: $ofh-color-foreground-brand-blue-navy;
     }
   }
 }
 
 .app-side-nav__list--nested {
-  @include ofh-responsive-margin(2, 'bottom');
-  @include ofh-responsive-margin(3, 'top');
+  @include ofh-responsive-margin(3, 'bottom');
+  @include ofh-responsive-margin(4, 'top');
 
   .app-side-nav__item {
-    @include ofh-font(16, $line-height: 1.3);
+    @include ofh-font($size: paragraph, $line-height: 1.3);
+
     list-style: none;
   }
 
@@ -83,12 +88,12 @@
 }
 
 .app-side-nav__list--nested .app-side-nav__item::before {
-  color: $color_ofh-grey-3;
+  color: $ofh-color-greyscale-4;
   content: '—';
   margin-left: -20px;
   margin-right: 4px;
 }
 
 .app-index-navigation {
-  @include ofh-responsive-padding(4, 'top');
+  @include ofh-responsive-padding(5, 'top');
 }

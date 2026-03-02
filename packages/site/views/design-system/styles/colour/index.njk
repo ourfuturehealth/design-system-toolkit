@@ -2,7 +2,7 @@
 {% set pageDescription = "Our colours, and how to apply them." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "June 2023" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "2" %}
 
 {% extends "app-layout.njk" %}
@@ -16,7 +16,7 @@
 
   <ul class="ofh-list app-side-nav__list">
 
-    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-4">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-5">
       <a class="ofh-back-link__link" href="/design-system">
       <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
@@ -71,9 +71,9 @@
 
   <h2 id="main-colours">Main colours</h2>
 
-  <p>Use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> rather than the hexadecimal (hex) colour values. For example, use <code>$ofh-text-black-colour</code> rather than <code>#212b32</code>. This means that your product will always use the most recent colour palette whenever you update. </p>
+  <p>Use the <a href="https://sass-lang.com/guide#topic-2">Sass variables</a> rather than the hexadecimal (hex) colour values. For example, use <code>$ofh-color-foreground-primary</code> rather than <code>#1B1B1B</code>. This means that your product will always use the most recent colour palette whenever you update. </p>
 
-  <p>Only use the Sass variables in the context they are designed for. If you want to use a colour for something else, use the <a href="#extended-colours">extended colours</a>. For example, if you wanted to use red in a graph you should use <code>$ofh-brand-red</code> rather than <code>$ofh-error-colour</code>. </p>
+  <p>Only use the Sass variables in the context they are designed for. If you want to use a colour for something else, use the <a href="#extended-colours">extended colours</a>. For example, if you wanted to use red in a graph you should use <code>$ofh-color-brand-red-3-main</code> rather than <code>$ofh-color-feedback-error-2-main</code>. </p>
 
   <table class="app-colour-list" summary="Table of main colours">
     <tbody>
@@ -87,7 +87,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#1B1B1B"></span>
-          <code>$ofh-text-black-color</code>
+          <code>$ofh-color-foreground-primary</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#1B1B1B</code>
@@ -96,7 +96,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#494949"></span>
-          <code>$ofh-text-grey-color</code>
+          <code>$ofh-color-foreground-secondary</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#494949</code>
@@ -105,7 +105,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#011D4B"></span>
-          <code>$ofh-text-blue-color</code>
+          <code>$ofh-color-foreground-brand-blue-navy</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#011D4B</code>
@@ -114,7 +114,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#ffffff"></span>
-          <code>$ofh-text-white-color</code>
+          <code>$ofh-color-foreground-primary-inverted</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFFFFF</code>
@@ -123,7 +123,7 @@
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Links
           </h3>
         </td>
@@ -131,7 +131,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#0053B3"></span>
-          <code>$ofh-link-color</code>
+          <code>$ofh-color-foreground-link-default</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#0053B3</code>
@@ -140,7 +140,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#002D61"></span>
-          <code>$ofh-link-hover-color</code>
+          <code>$ofh-color-foreground-link-hover</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#002D61</code>
@@ -149,7 +149,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#330072"></span>
-          <code>$ofh-link-visited-color</code>
+          <code>$ofh-color-foreground-link-visited</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#330072</code>
@@ -158,16 +158,16 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#001F42"></span>
-          <code>$ofh-link-active-color</code>
+          <code>$ofh-color-foreground-link-active</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
-          <code>#001F42</code>
+          <code>#002D61</code>
         </td>
       </tr>
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Breadcrumb navigation links
           </h3>
         </td>
@@ -175,7 +175,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#011D4B"></span>
-          <code>$ofh-breadcrumb-link-color</code>
+          <code>$ofh-color-foreground-breadcrumb-default</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#011D4B</code>
@@ -184,16 +184,16 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#002D61"></span>
-          <code>$ofh-breadcrumb-link-hover-color</code>
+          <code>$ofh-color-foreground-breadcrumb-hover</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
-          <code>#002D61</code>
+          <code>#20354B</code>
         </td>
       </tr>
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#330072"></span>
-          <code>$ofh-breadcrumb-link-visited-color</code>
+          <code>$ofh-color-foreground-breadcrumb-visited</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#330072</code>
@@ -201,17 +201,17 @@
       </tr>
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
-          <span class="app-colour-list__swatch" style="background-color:#001F42"></span>
-          <code>$ofh-breadcrumb-link-active-color</code>
+          <span class="app-colour-list__swatch" style="background-color:#0C68A9"></span>
+          <code>$ofh-color-foreground-breadcrumb-active</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
-          <code>#001F42</code>
+          <code>#0C68A9</code>
         </td>
       </tr>
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Focus state
           </h3>
         </td>
@@ -219,7 +219,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#0053B3"></span>
-          <code>$ofh-focus-color</code>
+          <code>$ofh-color-border-feedback-focus</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#0053B3</code>
@@ -228,7 +228,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#011D4B"></span>
-          <code>$ofh-focus-text-color</code>
+          <code>$ofh-color-foreground-brand-blue-navy</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#011D4B</code>
@@ -237,7 +237,7 @@
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Buttons
           </h3>
         </td>
@@ -245,7 +245,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#0053B3"></span>
-          <code>$ofh-button-color-default</code>
+          <code>$ofh-color-background-button-default</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#0053B3</code>
@@ -254,7 +254,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#002D61"></span>
-          <code>$ofh-button-color-hover</code>
+          <code>$ofh-color-background-button-hover</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#002D61</code>
@@ -262,17 +262,17 @@
       </tr>
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
-          <span class="app-colour-list__swatch" style="background-color:#001F42"></span>
-          <code>$ofh-button-color-active</code>
+          <span class="app-colour-list__swatch" style="background-color:#002D61"></span>
+          <code>$ofh-color-background-button-active</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
-          <code>#001F42</code>
+          <code>#002D61</code>
         </td>
       </tr>
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFFFFF"></span>
-          <code>$ofh-button-color-white</code>
+          <code>$ofh-color-background-button-default-inverted</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFFFFF</code>
@@ -281,7 +281,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#E8E8E8"></span>
-          <code>$ofh-button-color-white-hover</code>
+          <code>$ofh-color-background-button-hover-inverted</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#E8E8E8</code>
@@ -290,7 +290,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#D1D1D1"></span>
-          <code>$ofh-button-color-white-active</code>
+          <code>$ofh-color-background-button-active-inverted</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#D1D1D1</code>
@@ -300,7 +300,7 @@
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Contextual colours
           </h3>
         </td>
@@ -308,7 +308,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#B60000"></span>
-          <code>$ofh-error-color</code>
+          <code>$ofh-color-feedback-error-2-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#B60000</code>
@@ -317,7 +317,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#00725F"></span>
-          <code>$ofh-success-color</code>
+          <code>$ofh-color-feedback-success-2-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#00725F</code>
@@ -326,7 +326,7 @@
      
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Borders
           </h3>
         </td>
@@ -334,7 +334,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#D1D1D1"></span>
-          <code>$ofh-border-color</code>
+          <code>$ofh-color-border-primary</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#D1D1D1</code>
@@ -343,7 +343,7 @@
 
       <tr>
         <td class="ofh-u-padding-left-0" colspan="3">
-          <h3 class="ofh-heading-m  ofh-u-margin-top-3 ofh-u-margin-bottom-0">
+          <h3 class="ofh-heading-m  ofh-u-margin-top-4 ofh-u-margin-bottom-0">
           Input fields
           </h3>
         </td>
@@ -351,7 +351,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#494949"></span>
-          <code>$ofh-input-border-color</code>
+          <code>$ofh-color-border-input-default</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#494949</code>
@@ -360,7 +360,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#1B1B1B"></span>
-          <code>$ofh-input-border-active-color</code>
+          <code>$ofh-color-border-input-active</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#1B1B1B</code>
@@ -369,7 +369,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFFFFF"></span>
-          <code>$ofh-input-background-color</code>
+          <code>$ofh-color-background-primary</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFFFFF</code>
@@ -379,16 +379,11 @@
   </table>
 
   <h3>Page background colour</h3>
-  <p class="rich-text">We use <code>$ofh-grey-5</code> as a background tint. This is because:</p>
-  <ul>
-    <li>it reduces overall page glare</li>
-    <li>the <a href="https://www.bdadyslexia.org.uk/employer/dyslexia-style-guide-2018-creating-dyslexia-friendly-content">British Dyslexia Association</a> recommends dark text on a light, but not white, background</li>
-    <li>components with important information, like callouts, stand out</li>
-  </ul>
-  <p class="rich-text">We use <code>$color_ofh-white</code> to make important information stand out and for alternating backgrounds, for example on the <a href="https://ourfuturehealth.org.uk">Our Future Health website home page</a>.</p>
+  <p class="rich-text">The default page background is <code>$ofh-color-background-primary</code> (<code>#FFFFFF</code>).</p>
+  <p class="rich-text">Use background tint tokens such as <code>$ofh-color-background-secondary</code>, <code>$ofh-color-background-secondary-blue</code>, <code>$ofh-color-background-secondary-yellow</code> and <code>$ofh-color-background-secondary-grey</code> to create contrast between sections and content blocks.</p>
 
   <h3 id="colour-palette">Colour palette</h3>
-  <p class="rich-text">Avoid using the palette colours if there is a Sass variable that is designed for your context. For example, if you are styling the error state of a component you should use the <code>$ofh-error-color</code> Sass variable rather than <code>$color_ofh-brand-red</code>.</p>
+  <p class="rich-text">Avoid using the palette colours if there is a Sass variable that is designed for your context. For example, if you are styling the error state of a component you should use the <code>$ofh-color-feedback-error-2-main</code> Sass variable rather than <code>$ofh-color-brand-red-3-main</code>.</p>
 
   <table class="app-colour-list" summary="Table of the full colour palette">
     <tbody>
@@ -396,7 +391,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#011D4B"></span>
-          <code>$color_ofh-brand-dark-blue</code>
+          <code>$ofh-color-brand-blue-navy-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#011D4B</code>
@@ -406,7 +401,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#108BE2"></span>
-          <code>$color_ofh-brand-blue</code>
+          <code>$ofh-color-brand-blue-royal-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#108BE2</code>
@@ -416,7 +411,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#A4E7E2"></span>
-          <code>$color_ofh-brand-light-blue</code>
+          <code>$ofh-color-brand-blue-aqua-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#A4E7E2</code>
@@ -426,7 +421,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#00A08A"></span>
-          <code>$color_ofh-brand-green</code>
+          <code>$ofh-color-brand-green-teal-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#00A08A</code>
@@ -436,7 +431,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#A2F5AC"></span>
-          <code>$color_ofh-brand-light-green</code>
+          <code>$ofh-color-brand-green-lime-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#A2F5AC</code>
@@ -446,7 +441,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFC62C"></span>
-          <code>$color_ofh-brand-yellow</code>
+          <code>$ofh-color-brand-yellow-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFC62C</code>
@@ -456,7 +451,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FF7800"></span>
-          <code>$color_ofh-brand-orange</code>
+          <code>$ofh-color-brand-orange-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FF7800</code>
@@ -466,7 +461,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#F34848"></span>
-          <code>$color_ofh-brand-red</code>
+          <code>$ofh-color-brand-red-3-main</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F34848</code>
@@ -475,17 +470,8 @@
 
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
-          <span class="app-colour-list__swatch" style="background-color:#1B1B1B"></span>
-          <code>$color_ofh-black</code>
-        </th>
-        <td class="app-colour-list__column app-colour-list__column--colour">
-          <code>#1B1B1B</code>
-        </td>
-      </tr>
-      <tr class="app-colour-list__row">
-        <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#000000"></span>
-          <code>$color_ofh-true-black</code>
+          <code>$ofh-color-greyscale-black</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#000000</code>
@@ -493,8 +479,17 @@
       </tr>
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
+          <span class="app-colour-list__swatch" style="background-color:#1B1B1B"></span>
+          <code>$ofh-color-greyscale-1</code>
+        </th>
+        <td class="app-colour-list__column app-colour-list__column--colour">
+          <code>#1B1B1B</code>
+        </td>
+      </tr>
+      <tr class="app-colour-list__row">
+        <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#494949"></span>
-          <code>$color_ofh-grey-1</code>
+          <code>$ofh-color-greyscale-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#494949</code>
@@ -503,7 +498,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#767676"></span>
-          <code>$color_ofh-grey-2</code>
+          <code>$ofh-color-greyscale-3</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#767676</code>
@@ -512,7 +507,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#A4A4A4"></span>
-          <code>$color_ofh-grey-3</code>
+          <code>$ofh-color-greyscale-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#A4A4A4</code>
@@ -521,7 +516,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#D1D1D1"></span>
-          <code>$color_ofh-grey-4</code>
+          <code>$ofh-color-greyscale-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#D1D1D1</code>
@@ -530,7 +525,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#E8E8E8"></span>
-          <code>$color_ofh-grey-5</code>
+          <code>$ofh-color-greyscale-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#E8E8E8</code>
@@ -539,7 +534,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#F4F4F4"></span>
-          <code>$color_ofh-grey-6</code>
+          <code>$ofh-color-greyscale-7</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F4F4F4</code>
@@ -548,7 +543,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFFFFF"></span>
-          <code>$color_ofh-white</code>
+          <code>$ofh-color-greyscale-white</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFFFFF</code>
@@ -566,7 +561,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#000E26"></span>
-          <code>$color_ofh-brand-dark-blue-1</code>
+          <code>$ofh-color-brand-blue-navy-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#000E26</code>
@@ -575,7 +570,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#011638"></span>
-          <code>$color_ofh-brand-dark-blue-2</code>
+          <code>$ofh-color-brand-blue-navy-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#011638</code>
@@ -584,7 +579,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#405578"></span>
-          <code>$color_ofh-brand-dark-blue-3</code>
+          <code>$ofh-color-brand-blue-navy-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#405578</code>
@@ -593,7 +588,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#808EA5"></span>
-          <code>$color_ofh-brand-dark-blue-4</code>
+          <code>$ofh-color-brand-blue-navy-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#808EA5</code>
@@ -602,7 +597,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#C3C9D2"></span>
-          <code>$color_ofh-brand-dark-blue-5</code>
+          <code>$ofh-color-brand-blue-navy-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#C3C9D2</code>
@@ -611,7 +606,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#084571"></span>
-          <code>$color_ofh-brand-blue-1</code>
+          <code>$ofh-color-brand-blue-royal-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#084571</code>
@@ -620,7 +615,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#0C68A9"></span>
-          <code>$color_ofh-brand-blue-2</code>
+          <code>$ofh-color-brand-blue-royal-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#0C68A9</code>
@@ -629,7 +624,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#4CA8E9"></span>
-          <code>$color_ofh-brand-blue-3</code>
+          <code>$ofh-color-brand-blue-royal-3</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#4CA8E9</code>
@@ -638,7 +633,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#87C5F1"></span>
-          <code>$color_ofh-brand-blue-4</code>
+          <code>$ofh-color-brand-blue-royal-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#87C5F1</code>
@@ -647,7 +642,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#C6DFF0"></span>
-          <code>$color_ofh-brand-blue-5</code>
+          <code>$ofh-color-brand-blue-royal-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#C6DFF0</code>
@@ -656,7 +651,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#527371"></span>
-          <code>$color_ofh-brand-light-blue-1</code>
+          <code>$ofh-color-brand-blue-aqua-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#527371</code>
@@ -665,7 +660,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#7BADA9"></span>
-          <code>$color_ofh-brand-light-blue-2</code>
+          <code>$ofh-color-brand-blue-aqua-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#7BADA9</code>
@@ -674,7 +669,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#BBEDE9"></span>
-          <code>$color_ofh-brand-light-blue-3</code>
+          <code>$ofh-color-brand-blue-aqua-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#BBEDE9</code>
@@ -683,7 +678,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#D1F3F1"></span>
-          <code>$color_ofh-brand-light-blue-4</code>
+          <code>$ofh-color-brand-blue-aqua-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#D1F3F1</code>
@@ -692,7 +687,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#E4F1F0"></span>
-          <code>$color_ofh-brand-light-blue-5</code>
+          <code>$ofh-color-brand-blue-aqua-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#E4F1F0</code>
@@ -701,7 +696,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#005045"></span>
-          <code>$color_ofh-brand-green-1</code>
+          <code>$ofh-color-brand-green-teal-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#005045</code>
@@ -710,7 +705,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#007867"></span>
-          <code>$color_ofh-brand-green-2</code>
+          <code>$ofh-color-brand-green-teal-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#007867</code>
@@ -719,7 +714,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#40B8A8"></span>
-          <code>$color_ofh-brand-green-3</code>
+          <code>$ofh-color-brand-green-teal-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#40B8A8</code>
@@ -728,7 +723,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#80CFC4"></span>
-          <code>$color_ofh-brand-green-4</code>
+          <code>$ofh-color-brand-green-teal-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#80CFC4</code>
@@ -737,7 +732,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#C7EAE5"></span>
-          <code>$color_ofh-brand-green-5</code>
+          <code>$ofh-color-brand-green-teal-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#C7EAE5</code>
@@ -746,7 +741,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#517B56"></span>
-          <code>$color_ofh-brand-light-green-1</code>
+          <code>$ofh-color-brand-green-lime-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#517B56</code>
@@ -755,7 +750,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#7AB881"></span>
-          <code>$color_ofh-brand-light-green-2</code>
+          <code>$ofh-color-brand-green-lime-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#7AB881</code>
@@ -764,7 +759,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#B9F8C1"></span>
-          <code>$color_ofh-brand-light-green-3</code>
+          <code>$ofh-color-brand-green-lime-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#B9F8C1</code>
@@ -773,7 +768,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#D0FAD5"></span>
-          <code>$color_ofh-brand-light-green-4</code>
+          <code>$ofh-color-brand-green-lime-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#D0FAD5</code>
@@ -782,7 +777,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#E3F4E5"></span>
-          <code>$color_ofh-brand-light-green-5</code>
+          <code>$ofh-color-brand-green-lime-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#E3F4E5</code>
@@ -791,7 +786,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#806316"></span>
-          <code>$color_ofh-brand-yellow-1</code>
+          <code>$ofh-color-brand-yellow-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#806316</code>
@@ -800,7 +795,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#BF9421"></span>
-          <code>$color_ofh-brand-yellow-2</code>
+          <code>$ofh-color-brand-yellow-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#BF9421</code>
@@ -809,7 +804,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFD461"></span>
-          <code>$color_ofh-brand-yellow-3</code>
+          <code>$ofh-color-brand-yellow-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFD461</code>
@@ -818,7 +813,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFE296"></span>
-          <code>$color_ofh-brand-yellow-4</code>
+          <code>$ofh-color-brand-yellow-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFE296</code>
@@ -827,7 +822,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#FFEFC4"></span>
-          <code>$color_ofh-brand-yellow-5</code>
+          <code>$ofh-color-brand-yellow-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFEFC4</code>
@@ -836,7 +831,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#803C00"></span>
-          <code>$color_ofh-brand-orange-1</code>
+          <code>$ofh-color-brand-orange-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#803C00</code>
@@ -845,7 +840,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#BF5A00"></span>
-          <code>$color_ofh-brand-orange-2</code>
+          <code>$ofh-color-brand-orange-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#BF5A00</code>
@@ -854,7 +849,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FF9A40"></span>
-          <code>$color_ofh-brand-orange-3</code>
+          <code>$ofh-color-brand-orange-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FF9A40</code>
@@ -863,7 +858,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#FFBC80"></span>
-          <code>$color_ofh-brand-orange-4</code>
+          <code>$ofh-color-brand-orange-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#FFBC80</code>
@@ -872,7 +867,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#F6DBC3"></span>
-          <code>$color_ofh-brand-orange-5</code>
+          <code>$ofh-color-brand-orange-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F6DBC3</code>
@@ -881,7 +876,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#7A2424"></span>
-          <code>$color_ofh-brand-red-1</code>
+          <code>$ofh-color-brand-red-1</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#7A2424</code>
@@ -890,7 +885,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#B63636"></span>
-          <code>$color_ofh-brand-red-2</code>
+          <code>$ofh-color-brand-red-2</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#B63636</code>
@@ -899,7 +894,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#F67676"></span>
-          <code>$color_ofh-brand-red-3</code>
+          <code>$ofh-color-brand-red-4</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F67676</code>
@@ -908,7 +903,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#F9A3A3"></span>
-          <code>$color_ofh-brand-red-4</code>
+          <code>$ofh-color-brand-red-5</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F9A3A3</code>
@@ -917,7 +912,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch" style="background-color:#F4D1D1"></span>
-          <code>$color_ofh-brand-red-5</code>
+          <code>$ofh-color-brand-red-6</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F4D1D1</code>
@@ -926,7 +921,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#F2F5FA"></span>
-          <code>$color_ofh-neutral-blue</code>
+          <code>$ofh-color-background-neutral-blue</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F2F5FA</code>
@@ -935,7 +930,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#F8F5EF"></span>
-          <code>$color_ofh-neutral-yellow</code>
+          <code>$ofh-color-background-neutral-yellow</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F8F5EF</code>
@@ -944,7 +939,7 @@
       <tr class="app-colour-list__row">
         <th class="app-colour-list__column app-colour-list__column--name" scope="row">
           <span class="app-colour-list__swatch app-colour-list__swatch--border" style="background-color:#F8F8F8"></span>
-          <code>$color_ofh-neutral-grey</code>
+          <code>$ofh-color-background-neutral-grey</code>
         </th>
         <td class="app-colour-list__column app-colour-list__column--colour">
           <code>#F8F8F8</code>
