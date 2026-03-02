@@ -4,7 +4,7 @@ Renders Material SVG icons from the toolkit sprite.
 
 ## Macro options
 
-- `name` (required): icon name, e.g. `search`
+- `name` (required): icon name in PascalCase, e.g. `Search`
 - `size` (optional): `16`, `24`, or `32` (default: `24`)
 - `title` (optional): accessible title. If omitted, icon is decorative (`aria-hidden="true"`)
 - `classes` (optional): additional class names
@@ -17,7 +17,7 @@ Renders Material SVG icons from the toolkit sprite.
 {% from 'icon/macro.njk' import icon %}
 
 {{ icon({
-  "name": "search",
+  "name": "Search",
   "size": 24,
   "title": "Search"
 }) }}

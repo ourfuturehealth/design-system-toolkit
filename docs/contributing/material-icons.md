@@ -64,7 +64,7 @@ Example usage:
 ```njk
 {% from 'icon/macro.njk' import icon %}
 
-{{ icon({ "name": "search", "size": 24, "title": "Search" }) }}
+{{ icon({ "name": "Search", "size": 24, "title": "Search" }) }}
 ```
 
 Core icon styles are in [`packages/toolkit/core/styles/_icons-material.scss`](../../packages/toolkit/core/styles/_icons-material.scss) and imported in [`packages/toolkit/core/all.scss`](../../packages/toolkit/core/all.scss).
@@ -108,10 +108,10 @@ Use this checklist whenever Design/Figma introduces new icons.
    Ensure the icon is approved for shipping and aligned with [`do-not-track/iconography-updates.md`](../../do-not-track/iconography-updates.md).
 
 2. Define stable metadata.
-   Choose a stable kebab-case name (for example `appointment-booking`), select a category from `Data Validation`, `Action`, `Arrows`, `Graphical`, `Stepper`, `Socials`, and choose a `defaultSize` of `16`, `24`, or `32`.
+   Choose a stable PascalCase name matching the Figma layer name (for example `AppointmentBooking`), select a category from `Data Validation`, `Action`, `Arrows`, `Graphical`, `Stepper`, `Socials`, and choose a `defaultSize` of `16`, `24`, or `32`.
 
 3. Export and add the SVG.
-   Export SVG from Figma, add it as `packages/toolkit/assets/icons/material/<name>.svg`, and use `currentColor` where colour should follow CSS.
+   Export SVG from Figma, add it as `packages/toolkit/assets/icons/material/<name>.svg`, and use `currentColor` where colour should follow CSS. For icons with brand-specific colors (like social media icons or `ArrowCircleRightColour`), preserve the original Figma colors instead of using `currentColor`.
 
 4. Update manifest metadata.
    Add an icon entry in [`manifest.json`](../../packages/toolkit/assets/icons/material/manifest.json) with `name`, `category`, and `defaultSize`.

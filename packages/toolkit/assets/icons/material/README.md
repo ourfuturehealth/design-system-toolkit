@@ -24,7 +24,8 @@ For the full end-to-end developer guide (architecture, sprite generation, docs w
 
 ## Rules
 
-- Keep names kebab-case and stable.
+- Keep names PascalCase matching Figma layer names and stable.
 - Only ship icons approved in `do-not-track/iconography-updates.md`.
 - Default sizes must be one of `16`, `24`, `32`.
 - Use `currentColor` in SVG where color should follow CSS.
+- For brand-colored icons (social media, `ArrowCircleRightColour`), preserve original Figma colors.
