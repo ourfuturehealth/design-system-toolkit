@@ -6,6 +6,85 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-02
+
+#### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
+
+##### Added
+
+- **Material Design Icon System**: Complete icon set with 61 icons organized in 6 categories
+  - Categories: Data Validation, Action, Arrows, Graphical, Stepper, Socials
+  - Icons use PascalCase naming aligned with Figma layer names (e.g., `Search`, `ChevronLeft`, `Done`)
+  - New icon macro: `components/icon/macro.njk` for consistent icon rendering
+  - Sprite-based implementation: `assets/icons/material-sprite.svg` (61 symbols)
+  - Icon metadata: `assets/icons/material/manifest.json` with categories and default sizes
+  - Support for brand-colored icons: social media icons with hover states, `ArrowCircleRightColour`
+  - Stepper icons: `LooksZero` through `LooksNine` for multi-step flows
+- Icon infrastructure:
+  - Build script: `scripts/build-material-icon-sprite.js` for sprite generation
+  - Material icon styles: `core/styles/_icons-material.scss`
+- Documentation:
+  - Material icons workflow guide: `docs/contributing/material-icons.md`
+  - Icon component README with usage examples: `components/icon/README.md`
+  - Material icons asset README: `assets/icons/material/README.md`
+  - Updated documentation site icon gallery at `/design-system/styles/icons`
+
+##### Changed
+
+- Updated all toolkit components to use Material icon system via icon macro:
+  - Header: migrated search and close icons
+  - Breadcrumb: migrated chevron navigation
+  - Back link: updated chevron usage
+  - Pagination: migrated arrow navigation
+  - Details: updated expand/collapse icons
+  - Do/Don't lists: migrated to `Done` and `Close` icons
+  - Action link: updated arrow circle icon
+  - Card: updated chevron usage
+  - Contents list: updated dash icon implementation
+- Icon component references now use PascalCase names throughout documentation
+
+##### Removed
+
+- Legacy icon system (14 icon files):
+  - `assets/icons/icon-arrow-left.svg`
+  - `assets/icons/icon-arrow-right-circle.svg`
+  - `assets/icons/icon-arrow-right.svg`
+  - `assets/icons/icon-chevron-left.svg`
+  - `assets/icons/icon-chevron-right.svg`
+  - `assets/icons/icon-close.svg`
+  - `assets/icons/icon-cross.svg`
+  - `assets/icons/icon-emdash-small.svg`
+  - `assets/icons/icon-emdash.svg`
+  - `assets/icons/icon-minus.svg`
+  - `assets/icons/icon-new-tab.svg`
+  - `assets/icons/icon-plus.svg`
+  - `assets/icons/icon-search.svg`
+  - `assets/icons/icon-tick.svg`
+- `core/styles/_icons.scss` and associated icon styling
+- Legacy icon helper mixins from `core/tools/_mixins.scss`
+
+##### Migration Notes
+
+**Replacing legacy icons with Material icons:**
+
+The 14 legacy `icon-*.svg` files have been replaced with a comprehensive Material icon system. Use the icon macro to render Material icons:
+
+```njk
+{{ icon({ "name": "Search", "size": 24 }) }}
+```
+
+**Common replacements:**
+
+- `icon-cross` → Use `Close` icon
+- `icon-tick` → Use `Done` icon
+- `icon-chevron-left` → Use `ChevronLeft` icon
+- `icon-chevron-right` → Use `ChevronRight` icon
+- `icon-search` → Use `Search` icon
+- `icon-arrow-right-circle` → Use `ArrowCircleRight` icon
+- Available sizes: `16`, `24` (default), `32`
+- For decorative icons, omit the `title` parameter (automatically sets `aria-hidden="true"`)
+- For semantic icons, include a `title` parameter for accessibility
+
 ### 2026-02-26
 
 #### @ourfuturehealth/toolkit 4.1.0 (`toolkit-v4.1.0`)
