@@ -6,12 +6,12 @@ This guide explains the monorepo restructure that occurred with v4.0.0 and how t
 
 **No, existing consumers will NOT automatically break.**
 
-If your project uses a version tag from v3.4.2 or earlier, it will continue to work indefinitely:
+If your project uses a version tag from v3.4.3 or earlier, it will continue to work indefinitely:
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
   }
 }
 ```
@@ -24,12 +24,12 @@ You'll need to update your installation syntax if:
 
 | Scenario                                        | Will Break? | When to Update                           |
 | ----------------------------------------------- | ----------- | ---------------------------------------- |
-| Using `#v3.4.2` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
+| Using `#v3.4.3` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
 | Using `#main` branch (no version)               | ✅ Yes      | Immediately after merge                  |
 | Trying to upgrade to `#toolkit-v4.0.0` or newer | 🔄 Yes      | Must use new syntax (see below)          |
 | No version specified in package.json            | ✅ Yes      | Immediately after merge                  |
 
-**Bottom line:** If you're using a version tag from v3.4.2 or earlier, you're safe and can upgrade on your own timeline.
+**Bottom line:** If you're using a version tag from v3.4.3 or earlier, you're safe and can upgrade on your own timeline.
 
 ## Overview
 
@@ -37,8 +37,8 @@ You'll need to update your installation syntax if:
 
 ### Historic Change Timeline
 
-- **Before v3.4.2** (and earlier): Single-package repository
-  - Install: `"ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"`
+- **Before v3.4.3** (and earlier): Single-package repository
+  - Install: `"ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"`
   - All files at repository root
   - Single `package.json`
 - **v4.0.0 and later**: Monorepo structure
@@ -51,7 +51,7 @@ You'll need to update your installation syntax if:
 
 ### Repository Structure
 
-**Before v3.4.2 (single-package):**
+**Before v3.4.3 (single-package):**
 
 ```
 design-system-toolkit/
@@ -144,17 +144,17 @@ Individual component source files for modern build tools:
 
 ```javascript
 // Import only what you need
-import { CharacterCount } from "@ourfuturehealth/toolkit/components/character-count/character-count.js";
-import { Button } from "@ourfuturehealth/toolkit/components/button/button.js";
+import { CharacterCount } from '@ourfuturehealth/toolkit/components/character-count/character-count.js';
+import { Button } from '@ourfuturehealth/toolkit/components/button/button.js';
 ```
 
 ```scss
 // Import specific component styles
-@import "@ourfuturehealth/toolkit/components/button/button";
-@import "@ourfuturehealth/toolkit/core/settings/colours";
+@import '@ourfuturehealth/toolkit/components/button/button';
+@import '@ourfuturehealth/toolkit/core/settings/colours';
 
 // Or import all styles
-@import "@ourfuturehealth/toolkit/ofh.scss";
+@import '@ourfuturehealth/toolkit/ofh.scss';
 ```
 
 ### 3. Nunjucks Templates
@@ -226,8 +226,8 @@ Eleventy config had no explicit path configuration:
 module.exports = function configuration(eleventyConfig) {
   return {
     dir: {
-      input: "site/views/",
-      output: "site/dist/",
+      input: 'site/views/',
+      output: 'site/dist/',
     },
   };
 };
@@ -247,29 +247,29 @@ Eleventy config explicitly configures Nunjucks search paths:
 
 ```javascript
 // packages/site/eleventy.config.js (monorepo structure)
-const nunjucks = require("nunjucks");
+const nunjucks = require('nunjucks');
 
 module.exports = function configuration(eleventyConfig) {
   const nunjucksEnv = nunjucks.configure(
     [
-      "views/",
-      "views/_includes/",
-      "./",
-      "../toolkit/components/", // Toolkit templates
-      "../toolkit/",
+      'views/',
+      'views/_includes/',
+      './',
+      '../toolkit/components/', // Toolkit templates
+      '../toolkit/',
     ],
     {
       watch: false,
       noCache: true,
-    },
+    }
   );
 
-  eleventyConfig.setLibrary("njk", nunjucksEnv);
+  eleventyConfig.setLibrary('njk', nunjucksEnv);
 
   return {
     dir: {
-      input: "views/",
-      output: "dist/",
+      input: 'views/',
+      output: 'dist/',
     },
   };
 };
@@ -281,8 +281,8 @@ module.exports = function configuration(eleventyConfig) {
 
 ```scss
 // Import from root packages directory
-@import "packages/core/all";
-@import "packages/components/button/button";
+@import 'packages/core/all';
+@import 'packages/components/button/button';
 ```
 
 **After:**
@@ -291,11 +291,11 @@ If consuming via workspace/npm package:
 
 ```scss
 // Import from toolkit package
-@import "toolkit/ofh.scss"; // All styles
+@import 'toolkit/ofh.scss'; // All styles
 
 // Or import specific components
-@import "toolkit/core/all";
-@import "toolkit/components/button/button";
+@import 'toolkit/core/all';
+@import 'toolkit/components/button/button';
 ```
 
 For site package (using load-path):
@@ -314,29 +314,29 @@ For site package (using load-path):
 
 ```javascript
 // Import from root packages directory
-import { Button } from "../packages/components/button/button.js";
+import { Button } from '../packages/components/button/button.js';
 ```
 
 **After:**
 
 ```javascript
 // Import from toolkit package
-import { Button } from "toolkit/components/button/button.js";
+import { Button } from 'toolkit/components/button/button.js';
 
 // Or use the compiled bundle
-import "toolkit/dist/ofh-design-system-toolkit.js";
+import 'toolkit/dist/ofh-design-system-toolkit.js';
 ```
 
 ### Package Dependencies
 
-**Before v3.4.2:**
+**Before v3.4.3:**
 
 Projects would reference the toolkit repository directly:
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
   }
 }
 ```
@@ -403,22 +403,22 @@ Replace with new pattern:
 Update your Eleventy config (or equivalent template engine config):
 
 ```javascript
-const nunjucks = require("nunjucks");
+const nunjucks = require('nunjucks');
 
 const nunjucksEnv = nunjucks.configure(
   [
-    "views/",
-    "views/_includes/",
-    "node_modules/toolkit/components/", // ← Add this
-    "node_modules/toolkit/",
+    'views/',
+    'views/_includes/',
+    'node_modules/toolkit/components/', // ← Add this
+    'node_modules/toolkit/',
   ],
   {
     watch: false,
     noCache: true,
-  },
+  }
 );
 
-eleventyConfig.setLibrary("njk", nunjucksEnv);
+eleventyConfig.setLibrary('njk', nunjucksEnv);
 ```
 
 ### 3. Update Asset References
@@ -427,17 +427,11 @@ Update paths to compiled CSS and JS files:
 
 ```html
 <!-- Old -->
-<link
-  rel="stylesheet"
-  href="/design-system-toolkit/ofh-design-system-toolkit.css"
-/>
+<link rel="stylesheet" href="/design-system-toolkit/ofh-design-system-toolkit.css" />
 <script src="/design-system-toolkit/ofh-design-system-toolkit.js"></script>
 
 <!-- New (assuming toolkit is in node_modules) -->
-<link
-  rel="stylesheet"
-  href="/node_modules/toolkit/dist/ofh-design-system-toolkit.css"
-/>
+<link rel="stylesheet" href="/node_modules/toolkit/dist/ofh-design-system-toolkit.css" />
 <script src="/node_modules/toolkit/dist/ofh-design-system-toolkit.js"></script>
 ```
 
@@ -446,7 +440,7 @@ Or update your build process to copy from the new location:
 ```javascript
 // Eleventy passthrough copy
 eleventyConfig.addPassthroughCopy({
-  "node_modules/toolkit/dist": "ofh-design-system-toolkit",
+  'node_modules/toolkit/dist': 'ofh-design-system-toolkit',
 });
 ```
 
@@ -515,15 +509,15 @@ To add this new point, spacing indices were shifted by `+1` for existing non-zer
 
 Update any spacing indices greater than zero by adding `1`.
 
-| Before | After |
-| --- | --- |
-| `ofh-spacing(1)` | `ofh-spacing(2)` |
-| `ofh-spacing(6)` | `ofh-spacing(7)` |
+| Before                                        | After                                         |
+| --------------------------------------------- | --------------------------------------------- |
+| `ofh-spacing(1)`                              | `ofh-spacing(2)`                              |
+| `ofh-spacing(6)`                              | `ofh-spacing(7)`                              |
 | `@include ofh-responsive-margin(4, 'bottom')` | `@include ofh-responsive-margin(5, 'bottom')` |
-| `@include ofh-responsive-padding(8, 'top')` | `@include ofh-responsive-padding(9, 'top')` |
-| `ofh-u-margin-1` | `ofh-u-margin-2` |
-| `ofh-u-padding-top-4` | `ofh-u-padding-top-5` |
-| `ofh-u-margin-10` | `ofh-u-margin-11` |
+| `@include ofh-responsive-padding(8, 'top')`   | `@include ofh-responsive-padding(9, 'top')`   |
+| `ofh-u-margin-1`                              | `ofh-u-margin-2`                              |
+| `ofh-u-padding-top-4`                         | `ofh-u-padding-top-5`                         |
+| `ofh-u-margin-10`                             | `ofh-u-margin-11`                             |
 
 If you do not update these indices, spacing will render smaller than before.
 
@@ -582,13 +576,13 @@ Each package in the monorepo can be installed independently:
 
 ### What Changed in the Release Process
 
-**Before v3.4.2 (single package):**
+**Before v3.4.3 (single package):**
 
 - Single `package.json` at root with version
 - `npm install` from root would run `prepare` script and build everything
 - Git installations would get the entire repository as one package
-- One version number for everything: `v3.4.2`, `v3.4.1`, etc.
-- Tag format: `v*` (e.g., `v3.4.2`)
+- One version number for everything: `v3.4.3`, `v3.4.2`, etc.
+- Tag format: `v*` (e.g., `v3.4.3`)
 
 **After v4.0.0 (monorepo):**
 
@@ -673,39 +667,34 @@ This ensures that when external projects install from GitHub, the toolkit is aut
 
 ```javascript
 // eleventy.config.js
-const nunjucks = require("nunjucks");
+const nunjucks = require('nunjucks');
 
 module.exports = function configuration(eleventyConfig) {
   // Configure Nunjucks to find toolkit templates
   const nunjucksEnv = nunjucks.configure(
-    [
-      "views/",
-      "views/_includes/",
-      "node_modules/toolkit/components/",
-      "node_modules/toolkit/",
-    ],
+    ['views/', 'views/_includes/', 'node_modules/toolkit/components/', 'node_modules/toolkit/'],
     {
       watch: false,
       noCache: true,
-    },
+    }
   );
 
-  eleventyConfig.setLibrary("njk", nunjucksEnv);
+  eleventyConfig.setLibrary('njk', nunjucksEnv);
 
   // Copy toolkit compiled assets
   eleventyConfig.addPassthroughCopy({
-    "node_modules/toolkit/dist": "ofh-design-system-toolkit",
+    'node_modules/toolkit/dist': 'ofh-design-system-toolkit',
   });
 
   // Copy toolkit asset files (icons, images, etc.)
   eleventyConfig.addPassthroughCopy({
-    "node_modules/toolkit/assets": "ofh-design-system-toolkit/assets",
+    'node_modules/toolkit/assets': 'ofh-design-system-toolkit/assets',
   });
 
   return {
     dir: {
-      input: "views/",
-      output: "dist/",
+      input: 'views/',
+      output: 'dist/',
     },
   };
 };
@@ -725,7 +714,7 @@ module.exports = function configuration(eleventyConfig) {
     "dev": "concurrently 'npm:watch:css' 'npm:watch:eleventy'"
   },
   "dependencies": {
-    "@ourfuturehealth/toolkit": "^3.4.2",
+    "@ourfuturehealth/toolkit": "^3.4.3",
     "@11ty/eleventy": "^2.0.0",
     "nunjucks": "^3.2.4",
     "sass": "^1.60.0"
