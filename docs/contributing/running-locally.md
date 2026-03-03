@@ -121,6 +121,48 @@ pnpm dev
 
 This starts toolkit watch, site dev server, and Storybook simultaneously.
 
+## Verbose Logging for Debugging
+
+By default, build tools are configured to minimize log output and only show errors, warnings, and critical information. This keeps your development console clean and focused on what matters.
+
+If you need detailed build information for debugging purposes, use the verbose variants:
+
+### Root-Level Verbose Commands
+
+From the root of the monorepo:
+
+- **Everything in verbose**: `pnpm dev:verbose` (runs toolkit, site, react-components, and Storybook in verbose mode)
+- **Storybook only**: `pnpm storybook:verbose`
+- **Individual packages**:
+  - `pnpm dev:toolkit:verbose`
+  - `pnpm dev:site:verbose`
+  - `pnpm dev:react-components:verbose`
+  - `pnpm dev:react-consumer:verbose`
+
+### Package-Specific Verbose Commands
+
+Or run verbose mode directly in specific packages:
+
+- **Toolkit**: `pnpm --filter=@ourfuturehealth/toolkit run watch:verbose`
+- **React Components**: `pnpm --filter=@ourfuturehealth/react-components run watch:lib:verbose`
+- **React Consumer App**: `pnpm --filter=@ourfuturehealth/example-react-consumer-app run watch:verbose`
+- **Site (Eleventy)**: `pnpm --filter=site run watch:eleventy:verbose`
+- **Site (Sass)**: `pnpm --filter=site run watch:css:verbose`
+
+These verbose modes will show:
+
+- All file writes and transformations
+- Detailed compilation steps
+- Full webpack/vite/eleventy output
+- Dependency resolution details
+
+Use verbose mode when:
+
+- Investigating build failures
+- Debugging missing files or assets
+- Troubleshooting watch mode issues
+- Understanding the full build process
+
 ## Package Structure
 
 The monorepo contains:

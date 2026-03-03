@@ -23,8 +23,11 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:verbose": "VERBOSE=true vite",
     "watch": "vite",
+    "watch:verbose": "VERBOSE=true vite",
     "watch:lib": "vite build --watch",
+    "watch:lib:verbose": "VERBOSE=true vite build --watch",
     "build": "tsc && node ./scripts/build-themes.mjs",
     "build:clean": "rm -rf dist && pnpm run build",
     "type-check": "tsc --noEmit",
@@ -39,6 +42,7 @@
     "test:coverage": "vitest run --project unit --coverage",
     "prepare": "pnpm run build",
     "storybook": "storybook dev -p 6006",
+    "storybook:verbose": "storybook dev -p 6006 --loglevel verbose",
     "build:storybook": "storybook build"
   },
   "keywords": [

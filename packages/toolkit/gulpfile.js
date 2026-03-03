@@ -28,7 +28,10 @@ function compileCSS() {
 
   return gulp
     .src(['ofh.scss', 'ofh-participant.scss', 'ofh-research.scss'])
-    .pipe(sass.sync({ api: 'modern-compiler' }))
+    .pipe(sass.sync({ 
+      api: 'modern-compiler',
+      quietDeps: true,
+    }))
     .pipe(
       rename((path) => {
         path.basename = outputNames[path.basename] || path.basename;
@@ -68,6 +71,11 @@ function webpackJS() {
     .pipe(
       webpack({
         mode: 'production',
+        stats: {
+          preset: 'errors-warnings',
+          colors: true,
+          timings: true,
+        },
         module: {
           rules: [
             {

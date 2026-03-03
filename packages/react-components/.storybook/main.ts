@@ -12,11 +12,17 @@ const config: StorybookConfig = {
   },
   viteFinal: async (config) => {
     // Ensure SCSS is handled properly
-    if (config.css && config.css.preprocessorOptions) {
-      config.css.preprocessorOptions.scss = {
-        charset: false,
-      };
+    if (!config.css) {
+      config.css = {};
     }
+    if (!config.css.preprocessorOptions) {
+      config.css.preprocessorOptions = {};
+    }
+    config.css.preprocessorOptions.scss = {
+      charset: false,
+      quietDeps: true, // Suppress deprecation warnings from dependencies
+      silenceDeprecations: ['import', 'if-function'], // Silence specific deprecations
+    };
     return config;
   },
 };
