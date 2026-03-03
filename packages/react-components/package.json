@@ -61,11 +61,10 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@ourfuturehealth/toolkit": "workspace:*",
-    "@storybook/addon-a11y": "^10.2.8",
-    "@storybook/addon-docs": "^10.2.8",
-    "@storybook/addon-vitest": "^10.2.8",
-    "@storybook/react": "^10.2.8",
-    "@storybook/react-vite": "^10.2.8",
+    "@storybook/addon-a11y": "^10.2.14",
+    "@storybook/addon-docs": "^10.2.14",
+    "@storybook/addon-vitest": "^10.2.14",
+    "@storybook/react-vite": "^10.2.14",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -83,11 +82,12 @@
     "jsdom": "^28.0.0",
     "playwright": "^1.58.1",
     "sass": "^1.97.3",
-    "storybook": "^10.2.8",
+    "storybook": "^10.2.14",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "eslint-plugin-storybook": "10.2.14"
   }
 }
