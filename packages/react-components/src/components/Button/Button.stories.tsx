@@ -79,6 +79,9 @@ export const GhostReverse: Story = {
     children: 'Ghost Reverse Button',
     onClick: () => alert('Button clicked!'),
   },
+  globals: {
+    backgrounds: { value: 'dark' },
+  },
 };
 
 export const Text: Story = {
@@ -94,6 +97,9 @@ export const TextReverse: Story = {
     variant: 'text-reverse',
     children: 'Text Reverse Button',
     onClick: () => alert('Button clicked!'),
+  },
+  globals: {
+    backgrounds: { value: 'dark' },
   },
 };
 
@@ -115,6 +121,9 @@ export const AllVariants: Story = {
         story: 'All available button variants in the OFH Design System.',
       },
     },
+  },
+  globals: {
+    backgrounds: { value: 'dark' },
   },
 };
 
@@ -166,22 +175,8 @@ export const AllLinkVariants: Story = {
       },
     },
   },
-};
-
-// Interactive states
-export const DisabledState: Story = {
-  args: {
-    variant: 'contained',
-    disabled: true,
-    children: 'Disabled Button',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Buttons can be disabled by setting the disabled prop. Note: disabled prop is not available when using href (anchor elements).',
-      },
-    },
+  globals: {
+    backgrounds: { value: 'dark' },
   },
 };
 
