@@ -71,14 +71,14 @@ $ofh-spacing-points: (
 //  scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 // @param {String} $direction [all] - Direction to add spacing to
-//  (`top`, `right`, `bottom`, `left`, `all`)
+//  (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing by
 
 // @example scss
 //  .foo {
-//    padding: ofh-spacing(6);
-//    top: ofh-spacing(3) !important; // if `!important` is required
+//    @include ofh-responsive-padding(6, 'horizontal');  // left + right
+//    @include ofh-responsive-margin(5, 'vertical');     // top + bottom
 //   }
 
 // 1. Make sure that the return value from `_settings/spacing.scss` is a map.
@@ -122,6 +122,12 @@ $ofh-spacing-points: (
       // [3] //
       @if $direction == all {
         #{$property}: $breakpoint-value iff($important, !important);
+      } @else if $direction == horizontal {
+        #{$property}-left: $breakpoint-value iff($important, !important);
+        #{$property}-right: $breakpoint-value iff($important, !important);
+      } @else if $direction == vertical {
+        #{$property}-top: $breakpoint-value iff($important, !important);
+        #{$property}-bottom: $breakpoint-value iff($important, !important);
       } @else {
         #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
       }
@@ -129,6 +135,12 @@ $ofh-spacing-points: (
       @include govuk-media-query($from: $breakpoint) {
         @if $direction == all {
           #{$property}: $breakpoint-value iff($important, !important);
+        } @else if $direction == horizontal {
+          #{$property}-left: $breakpoint-value iff($important, !important);
+          #{$property}-right: $breakpoint-value iff($important, !important);
+        } @else if $direction == vertical {
+          #{$property}-top: $breakpoint-value iff($important, !important);
+          #{$property}-bottom: $breakpoint-value iff($important, !important);
         } @else {
           #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
         }
@@ -149,13 +161,14 @@ $ofh-spacing-points: (
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 // scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
-//   (`top`, `right`, `bottom`, `left`, `all`)
+//   (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing by
 
 // @example scss
 //   .foo {
 //      @include ofh-responsive-margin(7, 'left', $adjustment: 1px);
+//      @include ofh-responsive-margin(6, 'vertical');  // top + bottom
 //   }
 
 // Original code taken from GDS (Government Digital Service)
@@ -188,13 +201,14 @@ $ofh-spacing-points: (
 // @param {Number} $responsive-spacing-point - Point on the responsive spacing
 //   scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
-//   (`top`, `right`, `bottom`, `left`, `all`)
+//   (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
 // @param {Number} $adjustment [false] - Offset to adjust spacing
 
 // @example scss
 //   .foo {
 //      @include ofh-responsive-padding(7, 'left', $adjustment: 1px);
+//      @include ofh-responsive-padding(6, 'horizontal');  // left + right
 //   }
 
 // Original code taken from GDS (Government Digital Service)
