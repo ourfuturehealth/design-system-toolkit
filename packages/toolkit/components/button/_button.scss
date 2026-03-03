@@ -135,7 +135,7 @@ a.ofh-button.ofh-button--ghost {
     }
 
     &:focus {
-      @include ofh-focused-button;
+      @include ofh-focused-button-inverted;
     }
 
     &:active {
@@ -154,7 +154,6 @@ a.ofh-button.ofh-button--text {
   }
 
   &:focus {
-    border-radius: 0;
     color: $ofh-color-background-button-active;
 
     @include ofh-focused-button;
@@ -174,10 +173,9 @@ a.ofh-button.ofh-button--text {
     }
 
     &:focus {
-      border-radius: 0;
       color: $ofh-color-background-button-active-inverted;
 
-      @include ofh-focused-button;
+      @include ofh-focused-button-inverted;
     }
 
     &:active {

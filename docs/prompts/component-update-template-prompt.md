@@ -95,6 +95,28 @@ Compare Figma ↔ Toolkit ↔ React:
 
 Review the entire component implementation against design system standards:
 
+**Figma Visual Comparison (MANDATORY FIRST STEP):**
+
+- [ ] **Fetch Figma screenshot** using `mcp_figma_get_screenshot` with the component node ID
+- [ ] **Compare ALL variants** in Figma vs. implementation:
+  - Default state visual appearance
+  - Hover state (if applicable)
+  - Focus state (outline color, width, offset, border-radius)
+  - Active/pressed state (if applicable)
+  - Disabled state (if applicable)
+  - Error state (if applicable)
+  - All variant combinations (e.g., primary, secondary, outlined, text, ghost)
+- [ ] **Check variant-specific overrides** - Do certain variants have different specs?
+  - Example: Text buttons may have different padding than contained buttons
+  - Example: Inverted variants may need different focus colors (white vs. blue)
+  - Example: Some variants may have squared corners while others are rounded
+- [ ] **Compare interactive state details**:
+  - Focus outline border-radius matches button border-radius relationship
+  - Inverted variants use inverted focus colors (white on dark bg)
+  - Hover states change correct properties (color, background, border)
+  - Active states are visually distinct from focus states
+- [ ] **Document design spec vs. code discrepancies** before any implementation
+
 **Design Tokens Audit:**
 
 - [ ] All hardcoded colors → Check against `$ofh-color-*` tokens
@@ -113,6 +135,9 @@ Review the entire component implementation against design system standards:
 **Focus State Audit:**
 
 - [ ] Manual `outline` declarations → Check if `@include ofh-focused-button()` or similar mixin exists
+- [ ] **Verify mixin produces correct visual output** (don't just check if mixin is used)
+- [ ] **Check for variant-specific focus overrides** that may break visual design (e.g., `border-radius: 0` in focus state)
+- [ ] **Inverted variants use inverted focus tokens** (`$ofh-color-border-feedback-focus-inverted` for white outline)
 - [ ] Inconsistent focus indicators → Standardize across all interactive elements
 
 **Accessibility Audit:**

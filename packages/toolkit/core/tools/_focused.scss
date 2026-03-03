@@ -2,12 +2,10 @@
 // TOOLS / #FOCUSED
 // ==========================================================================
 
-
 // Focused text
 
 // Provides an outline to clearly indicate when the target element is focused.
 // Used for interactive text-based elements.
-
 
 @mixin ofh-focused-text {
   outline: 3px solid $ofh-color-border-feedback-focus; /* 1 */
@@ -58,5 +56,15 @@
 
 @mixin ofh-focused-button {
   outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus; /* 1 */
+  outline-offset: $ofh-stroke-weight-4;
+}
+
+/// Focused button (inverted)
+///
+/// Provides an additional outline to clearly indicate when the target element
+/// has focus. Used for inverted/reverse button variants on dark backgrounds.
+
+@mixin ofh-focused-button-inverted {
+  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus-inverted; /* 1 */
   outline-offset: $ofh-stroke-weight-4;
 }
