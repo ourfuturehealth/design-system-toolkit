@@ -161,18 +161,6 @@ Review the entire component implementation against design system standards:
 2. Categorize as: **MUST FIX** (breaks design system) vs. **SHOULD IMPROVE** (quality/consistency) vs. **NICE TO HAVE** (future enhancement)
 3. **Present this analysis to the user BEFORE implementing** and ask: "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
 
-### 5. Gap Analysis
-
-Compare Figma ↔ Toolkit ↔ React:
-
-- Missing variants or states
-- Design token mismatches (colors, spacing, typography)
-- Accessibility requirements not met
-- API inconsistencies
-- Documentation gaps
-
-**Ask for feedback:** Present complete analysis (steps 3-5) and proposed changes before implementing.
-
 ---
 
 ## Implementation Phase
@@ -525,29 +513,29 @@ pnpm storybook
 
 ## Example: Filling Out for Button Component
 
-```markdown
+````markdown
 ## Component Update: Button
 
 ### Context
 
 - **JIRA Ticket ID:** DS-123
 - **JIRA Requirements/Notes:**
-```
 
-Update Button component to align with new Figma design system.
+  ```
+  Update Button component to align with new Figma design system.
 
-Acceptance Criteria:
+  Acceptance Criteria:
 
-- Support 6 variants: contained, outlined, ghost, ghost-reverse, text, text-reverse
-- Add proper focus indicators per WCAG 2.1 AA
-- Support disabled state consistently across variants
-- Add loading state support
-- Ensure keyboard accessibility (Tab, Enter, Space)
+  - Support 6 variants: contained, outlined, ghost, ghost-reverse, text, text-reverse
+  - Add proper focus indicators per WCAG 2.1 AA
+  - Support disabled state consistently across variants
+  - Add loading state support
+  - Ensure keyboard accessibility (Tab, Enter, Space)
+  ```
 
-```
 - **Figma Component:** https://figma.com/file/abc123?node-id=456:789
 - **Related PRs:** #166 (monorepo restructure), #170 (token alignment)
-```
+````
 
 ---
 

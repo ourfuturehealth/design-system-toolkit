@@ -22,14 +22,14 @@ interface BaseButtonProps {
 // Button element props
 interface ButtonElementProps
   extends
-    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'>,
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'ref'>,
     BaseButtonProps {
   /**
    * If provided, renders as an anchor tag
    */
   href?: never;
   /**
-   * Ref to the button element (React 19+)
+   * Ref forwarding for button element
    */
   ref?: React.Ref<HTMLButtonElement>;
 }
@@ -37,7 +37,7 @@ interface ButtonElementProps
 // Anchor element props
 interface AnchorElementProps
   extends
-    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children'>,
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'ref'>,
     BaseButtonProps {
   /**
    * URL to navigate to (renders as anchor tag)
@@ -48,7 +48,7 @@ interface AnchorElementProps
    */
   disabled?: never;
   /**
-   * Ref to the anchor element (React 19+)
+   * Ref forwarding for anchor element
    */
   ref?: React.Ref<HTMLAnchorElement>;
 }

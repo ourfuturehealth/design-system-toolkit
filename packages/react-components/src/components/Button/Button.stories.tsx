@@ -36,7 +36,7 @@ const meta: Meta<ButtonProps> = {
       description: 'URL to navigate to (renders as anchor tag)',
     },
     onClick: {
-      description: 'Click handler function (only for button elements)',
+      description: 'Click handler function for button or anchor elements',
     },
     disabled: {
       control: 'boolean',
