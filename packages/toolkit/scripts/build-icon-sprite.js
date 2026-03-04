@@ -6,7 +6,7 @@ const spritePath = path.resolve(__dirname, '../assets/icons/icon-sprite.svg');
 
 const files = fs
   .readdirSync(iconsDir)
-  .filter((file) => file.endsWith('.svg'))
+  .filter((file) => file.endsWith('.svg') && file !== 'icon-sprite.svg')
   .sort();
 
 function extractSvgParts(svg) {

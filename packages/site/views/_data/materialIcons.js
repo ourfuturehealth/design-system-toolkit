@@ -7,7 +7,7 @@ const manifestPath = path.join(
 const manifest = require(manifestPath);
 
 const categoryOrder = [
-  "Data Validation",
+  "DataValidation",
   "Action",
   "Arrows",
   "Graphical",
