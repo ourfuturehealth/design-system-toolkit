@@ -17,7 +17,7 @@ module.exports = function configuration(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ assets: "assets" });
   eleventyConfig.addPassthroughCopy({ components: "components" });
   eleventyConfig.addPassthroughCopy({
-    "../toolkit/assets/icons/material-sprite.svg": "assets/icons/material-sprite.svg",
+    "../toolkit/assets/icons/icon-sprite.svg": "assets/icons/icon-sprite.svg",
   });
 
   // Toolkit CSS & JavaScript assets.

@@ -6,7 +6,7 @@ This directory contains the curated Material SVG icon set used by toolkit compon
 
 - `manifest.json`: source of truth for approved icon names, category metadata, and default sizes
 - `*.svg`: one SVG file per icon name
-- `../material-sprite.svg`: generated sprite used at runtime by components
+- `icon-sprite.svg`: generated sprite used at runtime by components
 
 ## Adding or updating icons
 

@@ -3,7 +3,7 @@
     {# Icon name is required #}
   {% else %}
     {% set iconSize = params.size if params.size in [16, 24, 32] else 24 %}
-    {% set spritePath = params.spritePath if params.spritePath else '/assets/icons/material-sprite.svg' %}
+    {% set spritePath = params.spritePath if params.spritePath else '/assets/icons/icon-sprite.svg' %}
     {% set ariaHidden = 'true' if not params.title else 'false' %}
 
     <svg class="ofh-icon ofh-icon--material ofh-icon--{{ iconSize }} ofh-icon--{{ params.name }}{% if params.classes %} {{ params.classes }}{% endif %}"

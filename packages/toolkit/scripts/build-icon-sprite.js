@@ -1,11 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const materialDir = path.resolve(__dirname, '../assets/icons/material');
-const spritePath = path.resolve(__dirname, '../assets/icons/material-sprite.svg');
+const iconsDir = path.resolve(__dirname, '../assets/icons');
+const spritePath = path.resolve(__dirname, '../assets/icons/icon-sprite.svg');
 
 const files = fs
-  .readdirSync(materialDir)
+  .readdirSync(iconsDir)
   .filter((file) => file.endsWith('.svg'))
   .sort();
 
@@ -20,7 +20,7 @@ function extractSvgParts(svg) {
 }
 
 const symbols = files.map((file) => {
-  const filePath = path.join(materialDir, file);
+  const filePath = path.join(iconsDir, file);
   const raw = fs.readFileSync(filePath, 'utf8');
   const { viewBox, body } = extractSvgParts(raw);
   const id = `ofh-icon-${path.basename(file, '.svg')}`;

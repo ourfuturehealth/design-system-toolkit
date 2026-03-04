@@ -9,7 +9,7 @@ Renders Material SVG icons from the toolkit sprite.
 - `title` (optional): accessible title. If omitted, icon is decorative (`aria-hidden="true"`)
 - `classes` (optional): additional class names
 - `attributes` (optional): attribute map passed to the `<svg>` element
-- `spritePath` (optional): sprite URL, defaults to `/assets/icons/material-sprite.svg`
+- `spritePath` (optional): sprite URL, defaults to `/assets/icons/icon-sprite.svg`
 
 ## Example
 

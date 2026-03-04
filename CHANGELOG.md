@@ -16,17 +16,17 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
   - Categories: Data Validation, Action, Arrows, Graphical, Stepper, Socials
   - Icons use PascalCase naming aligned with Figma layer names (e.g., `Search`, `ChevronLeft`, `Done`)
   - New icon macro: `components/icon/macro.njk` for consistent icon rendering
-  - Sprite-based implementation: `assets/icons/material-sprite.svg` (61 symbols)
-  - Icon metadata: `assets/icons/material/manifest.json` with categories and default sizes
+  - Sprite-based implementation: `assets/icons/icon-sprite.svg` (61 symbols)
+  - Icon metadata: `assets/icons/manifest.json` with categories and default sizes
   - Support for brand-colored icons: social media icons with hover states, `ArrowCircleRightColour`
   - Stepper icons: `LooksZero` through `LooksNine` for multi-step flows
 - Icon infrastructure:
-  - Build script: `scripts/build-material-icon-sprite.js` for sprite generation
+  - Build script: `scripts/build-icon-sprite.js` for sprite generation
   - Material icon styles: `core/styles/_icons-material.scss`
 - Documentation:
   - Material icons workflow guide: `docs/contributing/material-icons.md`
   - Icon component README with usage examples: `components/icon/README.md`
-  - Material icons asset README: `assets/icons/material/README.md`
+  - Material icons asset README: `assets/icons/README.md`
   - Updated documentation site icon gallery at `/design-system/styles/icons`
 
 ##### Changed

@@ -2,7 +2,7 @@ const path = require("node:path");
 
 const manifestPath = path.join(
   __dirname,
-  "../../../toolkit/assets/icons/material/manifest.json",
+  "../../../toolkit/assets/icons/manifest.json",
 );
 const manifest = require(manifestPath);
 
@@ -36,7 +36,7 @@ const iconsByCategory = categoryOrder
 
 module.exports = {
   total: icons.length,
-  spritePath: "/assets/icons/material-sprite.svg",
+  spritePath: "/assets/icons/icon-sprite.svg",
   sizeOptions: manifest.sizeOptions,
   iconsByCategory,
 };

@@ -133,8 +133,8 @@ function versionJS() {
  * Assets tasks
  */
 
-function buildMaterialIconSprite(done) {
-  execFileSync('node', ['scripts/build-material-icon-sprite.js'], {
+function buildIconSprite(done) {
+  execFileSync('node', ['scripts/build-icon-sprite.js'], {
     stdio: 'inherit',
   });
 
@@ -195,7 +195,7 @@ gulp.task('clean', cleanDist);
 
 gulp.task('style', compileCSS);
 
-gulp.task('build', gulp.series([buildMaterialIconSprite, compileCSS, webpackJS]));
+gulp.task('build', gulp.series([buildIconSprite, compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
