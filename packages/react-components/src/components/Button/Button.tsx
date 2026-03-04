@@ -28,6 +28,10 @@ interface ButtonElementProps
    * If provided, renders as an anchor tag
    */
   href?: never;
+  /**
+   * Ref to the button element (React 19+)
+   */
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 // Anchor element props
@@ -43,14 +47,21 @@ interface AnchorElementProps
    * Not applicable for anchor elements
    */
   disabled?: never;
+  /**
+   * Ref to the anchor element (React 19+)
+   */
+  ref?: React.Ref<HTMLAnchorElement>;
 }
 
 export type ButtonProps = ButtonElementProps | AnchorElementProps;
 
-export const Button = React.forwardRef<
-  HTMLButtonElement | HTMLAnchorElement,
-  ButtonProps
->(({ variant = 'contained', className = '', children, ...props }, ref) => {
+export const Button = ({
+  variant = 'contained',
+  className = '',
+  children,
+  ref,
+  ...props
+}: ButtonProps) => {
   const buttonClasses = [
     'ofh-button', // Existing OFH design system class
     styles.button, // Our component-specific styles
@@ -83,6 +94,6 @@ export const Button = React.forwardRef<
       {children}
     </button>
   );
-});
+};
 
 Button.displayName = 'Button';
