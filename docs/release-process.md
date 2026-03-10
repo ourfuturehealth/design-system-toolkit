@@ -176,19 +176,24 @@ Template:
 ## What's Changed
 
 ### Added
+
 - ...
 
 ### Changed
+
 - ...
 
 ### Fixed
+
 - ...
 
 ### Breaking Changes
+
 - ...
 
 ### Migration
-- See [Monorepo Migration Guide](./docs/monorepo-migration-guide.md)
+
+- See [Upgrading Guide](../UPGRADING.md)
 ````
 
 ## Testing a Release
@@ -543,4 +548,4 @@ This means the `gulp bundle` command failed during installation.
 
 - Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) for examples
 - Review [GitHub Actions workflows](../.github/workflows/) to understand automation
-- See [Monorepo Migration Guide](./monorepo-migration-guide.md) for consumer perspective
+- See [Upgrading Guide](../UPGRADING.md) for consumer perspective

@@ -9,7 +9,7 @@ This document defines the release versioning model after the monorepo refactor i
 - Consumer-facing compatibility expectations
 
 For operational release steps, checks, and troubleshooting, use [Release Process](./release-process.md).
-For consumer migration instructions, use [Monorepo Migration Guide](./monorepo-migration-guide.md).
+For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 ## Context: Single Package to Monorepo
 
@@ -90,6 +90,6 @@ This table is a visual aid for pre-monorepo vs post-monorepo release identificat
 ## References
 
 - [Release Process](./release-process.md)
-- [Monorepo Migration Guide](./monorepo-migration-guide.md)
+- [Upgrading Guide](../UPGRADING.md)
 - [Changelog](../CHANGELOG.md)
 - [Release workflow](../.github/workflows/release.yml)

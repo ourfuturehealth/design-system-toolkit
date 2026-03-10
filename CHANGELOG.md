@@ -6,6 +6,41 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-10
+
+#### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - CSS classes changed: `.ofh-button--ghost-reverse` → `.ofh-button--ghost-inverted`
+  - CSS classes changed: `.ofh-button--text-reverse` → `.ofh-button--text-inverted`
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v420--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Updated button SCSS class names to align with Figma design specifications
+- Updated site documentation to use new variant names
+
+#### @ourfuturehealth/react-components 0.2.0 (`react-v0.2.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - TypeScript type definitions updated to reflect new variant names
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v420--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Updated Button component TypeScript types with new variant names
+- Updated Button component stories and tests
+- Updated example app and dev environment to use new variant names
+- Updated component documentation (README.md)
+
 ### 2026-02-26
 
 #### @ourfuturehealth/toolkit 4.1.0 (`toolkit-v4.1.0`)
@@ -65,7 +100,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Migration Guide
 
-See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
+See [UPGRADING.md](UPGRADING.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
 
 #### @ourfuturehealth/react-components 0.1.0 (`react-v0.1.0`)
 
