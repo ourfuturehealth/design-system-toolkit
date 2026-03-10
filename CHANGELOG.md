@@ -6,14 +6,14 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-03-02
+### 2026-03-10
 
 #### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
 
 ##### Added
 
 - **Material Design Icon System**: Complete icon set with 61 icons organized in 6 categories
-  - Categories: Data Validation, Action, Arrows, Graphical, Stepper, Socials
+  - Categories: DataValidation, Action, Arrows, Graphical, Stepper, Socials
   - Icons use PascalCase naming aligned with Figma layer names (e.g., `Search`, `ChevronLeft`, `Done`)
   - New icon macro: `components/icon/macro.njk` for consistent icon rendering
   - Sprite-based implementation: `assets/icons/icon-sprite.svg` (61 symbols)
@@ -31,17 +31,17 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Changed
 
-- Updated all toolkit components to use Material icon system via icon macro:
-  - Header: migrated search and close icons
-  - Breadcrumb: migrated chevron navigation
-  - Back link: updated chevron usage
-  - Pagination: migrated arrow navigation
-  - Details: updated expand/collapse icons
+- Updated toolkit components that previously embedded legacy SVGs to use the Material icon macro:
+  - Action link: migrated arrow circle icon
+  - Back link and breadcrumb: migrated chevron navigation
+  - Card: migrated confirmation icon
+  - Details expanders: migrated expand and collapse icons
   - Do/Don't lists: migrated to `Done` and `Close` icons
-  - Action link: updated arrow circle icon
-  - Card: updated chevron usage
+  - Header: migrated search, close, and chevron navigation icons
+  - Pagination: migrated arrow navigation
 - Icon sizes standardized to Material icon system sizes (16px, 24px, 32px)
-- Icon component references now use PascalCase names throughout documentation
+- Toolkit build now generates the Material icon sprite from `assets/icons`
+- Documentation now includes the Material icons workflow guide, the new icon macro README, and migration notes for affected components
 
 ##### Removed
 

@@ -34,7 +34,7 @@ This guide explains how to add new Material icons from Figma and how the icon sy
    }
    ```
 
-   - Categories: `Data Validation`, `Action`, `Arrows`, `Graphical`, `Stepper`, `Socials`
+   - Categories: `DataValidation`, `Action`, `Arrows`, `Graphical`, `Stepper`, `Socials`
 
 5. **Rebuild the sprite**
 
@@ -156,7 +156,7 @@ The sprite is copied into docs output by Eleventy:
 
 ### Icon doesn't appear in docs gallery
 
-The sprite builder includes all `*.svg` files in the `material/` folder, but the docs gallery reads from `manifest.json`.
+The sprite builder includes all `*.svg` files in `packages/toolkit/assets/icons/`, but the docs gallery reads from `manifest.json`.
 
 **Solution**: Ensure the icon has an entry in `manifest.json` with the exact same `name` as the SVG filename (without `.svg`).
 
