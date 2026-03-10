@@ -32,7 +32,7 @@
     { "name": "UnfoldLess", "category": "Arrows", "defaultSize": 24 },
     { "name": "FamilyHome", "category": "Graphical", "defaultSize": 24 },
     { "name": "InfoOutlined", "category": "Graphical", "defaultSize": 24 },
-    { "name": "WorkOutlineOutlined", "category": "Graphical", "defaultSize": 24 },
+    { "name": "WorkOutlined", "category": "Graphical", "defaultSize": 24 },
     { "name": "HealthCrossOutlined", "category": "Graphical", "defaultSize": 24 },
     { "name": "ListAltOutlined", "category": "Graphical", "defaultSize": 24 },
     { "name": "HealthAndSafetyOutlined", "category": "Graphical", "defaultSize": 24 },

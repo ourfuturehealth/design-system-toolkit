@@ -13,7 +13,7 @@ This guide explains how to add new Material icons from Figma and how the icon sy
 
 2. **Check and adjust colors**
    - **Most icons**: Replace fill colors with `currentColor` so they inherit CSS color
-   - **Brand-colored icons** (social media, specific branded icons): Keep original Figma colors (e.g., `#084571`, `#FFC62C`)
+   - **Brand-colored icons** (social media, specific branded icons): Keep original Figma colors (e.g., `#011D4B`, `#FFC62C`)
 
 3. **Add the SVG file**
 

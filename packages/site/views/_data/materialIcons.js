@@ -66,7 +66,7 @@ const categoryOrders = {
   Graphical: [
     // Location/Places
     "FamilyHome",
-    "WorkOutlineOutlined",
+    "WorkOutlined",
     "HospitalOutlined",
     "FmdGoodOutlined",
     // Health/Medical
