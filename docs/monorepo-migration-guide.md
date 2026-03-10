@@ -31,6 +31,28 @@ You'll need to update your installation syntax if:
 
 **Bottom line:** If you're using a version tag from v3.4.3 or earlier, you're safe and can upgrade on your own timeline.
 
+## Breaking Changes by Version
+
+This section tracks breaking changes across toolkit releases to help with migration planning.
+
+### Toolkit v4.2.0 / React Components v0.2.0 (March 2026)
+
+**Button variant naming alignment**
+
+- **What changed**: Button variant names updated to match Figma specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+- **Impact**: CSS classes and React component props require updates
+- **Migration guide**: See [Button Variant Migration Guide](./button-variant-migration-guide.md)
+
+### Toolkit v4.1.0 (February 2026)
+
+**Spacing scale update**
+
+- **What changed**: Added 2px spacing point, shifted indices by +1
+- **Impact**: Affects `ofh-spacing()`, `ofh-responsive-margin()`, `ofh-responsive-padding()`, utility classes
+- **Migration guide**: See spacing migration section in this document
+
 ## Overview
 
 **As of v4.0.0**, the toolkit was restructured from a single-package repository into a monorepo with separate packages. This change improves maintainability and separation of concerns, but requires updates to how consuming projects install and reference the toolkit.

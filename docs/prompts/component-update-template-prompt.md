@@ -1,26 +1,29 @@
 # Component Update Template Prompt
 
-Use this template to align a component between Figma design, toolkit implementation, and React library.
+This template provides a complete workflow for updating/creating design system components. It aligns Figma design specs with toolkit implementation (HTML/Nunjucks/SCSS) and React library components.
 
 ---
 
-## Quick Start Copy-Paste
+## 📋 How to Use This Template
 
-**How to use this template:**
+**For human operators:**
 
-1. Copy everything from `## Component Update: {COMPONENT_NAME}` below through `## Deliverables Checklist`
-2. Paste into your GitHub Copilot chat
-3. Replace all `{PLACEHOLDERS}` with actual values:
-   - `{COMPONENT_NAME}` → e.g., "Button"
-   - `{component-name}` → e.g., "button"
-   - `{ComponentName}` → e.g., "Button"
-   - `{JIRA_TICKET_ID}` → ticket number
-   - Paste JIRA content into the designated section
-   - `{Figma URL with node-id}` → Figma component link
-4. Delete or skip the "Usage Instructions", "Example", and "Tips" sections at the bottom
-5. Send to Copilot to begin the component update workflow
+1. **Copy the entire prompt** from the ✂️ cut line below through the end of the file
+2. **Replace all `{PLACEHOLDERS}`** with actual values:
+   - `{COMPONENT_NAME}` → e.g., "Button", "TextInput", "Card"
+   - `{component-name}` → e.g., "button", "text-input", "card"
+   - `{ComponentName}` → e.g., "Button", "TextInput", "Card"
+   - `{JIRA_TICKET_ID}` → Your ticket number (e.g., "DSE-263")
+   - Paste full JIRA content into the designated section
+   - `{Figma URL with node-id}` → Full Figma link with node-id parameter
+3. **Paste into your AI agent** (GitHub Copilot, Claude, etc.)
+4. The agent will follow the structured workflow automatically
 
-**💡 Tip:** Keep this file as your master reference template. Don't create component-specific files.
+**💡 Best Practice:** Keep this file as your master template. Don't create component-specific files.
+
+---
+
+**✂️ COPY EVERYTHING BELOW THIS LINE FOR YOUR AGENT PROMPT**
 
 ---
 
@@ -41,8 +44,8 @@ Use this template to align a component between Figma design, toolkit implementat
 ## Objectives
 
 1. Analyze current toolkit implementation vs Figma design
-2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS)
-3. Implement/update React component wrapper
+2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS) and polish it
+3. **Ensure React component exists** and matches toolkit exactly (create if missing)
 4. Create/update comprehensive Storybook documentation
 5. Add automated tests (functional + accessibility)
 6. Update all relevant documentation
@@ -76,8 +79,10 @@ Use this template to align a component between Figma design, toolkit implementat
 **React (`packages/react-components/src/components/{ComponentName}/`):**
 
 - Check if component exists
-- If exists: Review implementation against toolkit parity
-- If missing: Note as new implementation needed
+- **If exists:** Review implementation against toolkit parity - note all discrepancies
+- **If missing:** This is a REQUIRED deliverable - you MUST create the React component
+- React component API and functionality must match toolkit exactly
+- Both versions should work the same or as close as possible
 
 ### 3. Gap Analysis
 
@@ -165,6 +170,13 @@ Review the entire component implementation against design system standards:
 
 ## Implementation Phase
 
+**IMPLEMENTATION ORDER (MANDATORY):**
+
+1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
+2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
+3. **React Second:** Create/update React component to match polished toolkit
+4. **Verify Parity:** Both versions have same API, variants, behavior, and functionality
+
 ### 1. Toolkit Component Update
 
 **Files to modify/create:**
@@ -183,9 +195,10 @@ Review the entire component implementation against design system standards:
 - ✅ Support participant and research themes
 - ✅ Include all variants and states from Figma
 - ✅ Proper ARIA attributes and keyboard navigation
-- ✅ Smart element rendering (button/a/input where appropriate)
 
-### 2. React Component Implementation
+### 2. React Component Implementation (MANDATORY)
+
+**This is REQUIRED, not optional. If the React component doesn't exist, you must create it.**
 
 **Files to create/modify:**
 
@@ -198,33 +211,120 @@ Review the entire component implementation against design system standards:
 
 **Requirements:**
 
+- ✅ **Component must exist** - create from scratch if missing
 - ✅ TypeScript with strict mode
 - ✅ Extend appropriate HTML element props interface
-- ✅ Match toolkit variants and API exactly
+- ✅ **Match toolkit variants and API exactly** - 1:1 parity required
+- ✅ **Match toolkit functionality** - same behavior, same element selection logic
 - ✅ Reuse toolkit CSS classes (`.ofh-{component}`, `.ofh-{component}--{variant}`)
-- ✅ Forward refs to underlying DOM elements
+- ✅ Native ref for React 19+
 - ✅ Export component and type interfaces
 - ✅ Follow toolkit's element selection logic (e.g., Button with href renders as `<a>`)
+- ✅ All toolkit variants must be supported in React (no subset)
 
-**Component Pattern:**
+**Component Pattern (React 19+ with native ref):**
 
 ```tsx
-export interface {ComponentName}Props extends React.{ElementType}HTMLAttributes<HTML{ElementType}Element> {
+// For simple components with single element type:
+export interface {ComponentName}Props
+  extends Omit<React.{ElementType}HTMLAttributes<HTML{ElementType}Element>, 'ref'> {
+  /**
+   * Visual style variant
+   */
   variant?: 'variant1' | 'variant2' | 'variant3';
+  /**
+   * Ref forwarding for the underlying element
+   */
+  ref?: React.Ref<HTML{ElementType}Element>;
   // Additional props from Figma
 }
 
-export const {ComponentName} = React.forwardRef<HTML{ElementType}Element, {ComponentName}Props>(
-  ({ variant = 'default', className = '', ...props }, ref) => {
-    const classes = [
-      'ofh-{component}',
-      `ofh-{component}--${variant}`,
-      className,
-    ].filter(Boolean).join(' ');
+export const {ComponentName} = ({
+  variant = 'variant1',
+  className = '',
+  ref,
+  ...props
+}: {ComponentName}Props) => {
+  const classes = [
+    'ofh-{component}',
+    `ofh-{component}--${variant}`,
+    className,
+  ].filter(Boolean).join(' ');
 
-    return <{element} ref={ref} className={classes} {...props} />;
+  return (
+    <{element}
+      ref={ref}
+      className={classes}
+      {...props}
+    />
+  );
+};
+
+{ComponentName}.displayName = '{ComponentName}';
+```
+
+**For components with conditional element rendering** (e.g., Button with href → `<a>` vs `<button>`), use discriminated unions. See [Button.tsx](../react-components/src/components/Button/Button.tsx) for the pattern:
+
+```tsx
+// Base props shared between variants
+interface Base{ComponentName}Props {
+  variant?: 'variant1' | 'variant2';
+  children: React.ReactNode;
+}
+
+// Button element variant
+interface ButtonElementProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'ref'>,
+    Base{ComponentName}Props {
+  ref?: React.Ref<HTMLButtonElement>;
+}
+
+// Anchor element variant (when href provided)
+interface AnchorElementProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'ref'>,
+    Base{ComponentName}Props {
+  href: string;
+  ref?: React.Ref<HTMLAnchorElement>;
+}
+
+export type {ComponentName}Props = ButtonElementProps | AnchorElementProps;
+
+export const {ComponentName} = ({
+  variant = 'variant1',
+  className = '',
+  children,
+  ref,
+  ...props
+}: {ComponentName}Props) => {
+  const classes = [
+    'ofh-{component}',
+    `ofh-{component}--${variant}`,
+    className,
+  ].filter(Boolean).join(' ');
+
+  // Conditional element rendering with proper ref casting
+  if ('href' in props && props.href) {
+    return (
+      <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        className={classes}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {children}
+      </a>
+    );
   }
-);
+
+  return (
+    <button
+      ref={ref as React.Ref<HTMLButtonElement>}
+      className={classes}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {children}
+    </button>
+  );
+};
 
 {ComponentName}.displayName = '{ComponentName}';
 ```
@@ -365,7 +465,7 @@ export const KeyboardNavigation: Story = {
 
 - Component `README.md` (toolkit)
 - Contributing docs (if patterns changed)
-- Migration guides (if breaking changes)
+- Migration guides (if breaking changes, include from what version to what version it breaks and how to migrate it)
 - Design token docs (if new tokens added)
 
 **README Structure:**
@@ -432,14 +532,16 @@ pnpm storybook
 - [ ] Integration tests added/updated
 - [ ] `README.md` updated
 
-### React Implementation
+### React Implementation (MANDATORY)
 
+- [ ] **React component exists** (created if it was missing)
 - [ ] TypeScript component created/updated
 - [ ] Props interface with proper types
-- [ ] Ref forwarding implemented
+- [ ] Native ref for React 19+
+- [ ] **Matches toolkit API exactly** (same variants, same props, same behavior)
+- [ ] **Matches toolkit functionality** (same element rendering logic, same validation)
 - [ ] Component tests (unit + a11y)
 - [ ] Exported from package index
-- [ ] Matches toolkit API exactly
 
 ### Storybook Documentation
 
@@ -475,78 +577,26 @@ pnpm storybook
 
 ---
 
-## Usage Instructions
+## Agent Execution Guidelines
 
-**To use this template:**
+**Critical principles to follow throughout this workflow:**
 
-1. Copy this template and replace all `{PLACEHOLDERS}`:
-   - `{COMPONENT_NAME}` - e.g., "Button", "TextInput", "Card"
-   - `{component-name}` - kebab-case version
-   - `{ComponentName}` - PascalCase version
-   - `{JIRA_TICKET_ID}` - ticket number
-   - Paste JIRA content into the designated section
-   - `{Figma URL with node-id}` - Figma component link
+- **Toolkit + React parity is mandatory**: Never treat React components as "nice to have". Both toolkit and React versions MUST be updated or created. They must work identically with the same API.
 
-2. Start with **Analysis Phase** - use Figma MCP to fetch design specs
+- **Workflow discipline**: Always complete toolkit implementation first → test thoroughly → polish it → then create/update React component to match. The React component is a faithful wrapper of the toolkit component.
 
-3. Review current implementation files
+- **When React component is missing**: This is a required deliverable, not optional future work. Create the React component before marking the ticket complete. Reference existing React components for patterns.
 
-4. Present gap analysis and ask for feedback before implementing
+- **Complex component strategy**: For large components (Tables, Forms), you may break work into multiple tickets focused on core functionality first, then enhancements - BUT each ticket must still deliver both toolkit and React versions.
 
-5. Work through **Implementation Phase** systematically
+- **Design token questions**: If Figma uses colors/spacing not in the token system, ask the user before implementing custom values.
 
-6. Run **Verification Phase** checks
+- **Accessibility questions**: When unsure about ARIA patterns, consult [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/).
 
-7. Complete all items in **Deliverables Checklist**
+- **Testing priorities**: Focus on user-facing behavior and accessibility. Don't test implementation details.
 
-8. Request code review with links to Figma and JIRA context
+- **Documentation depth**: Keep component READMEs user-focused. Put technical details in code comments.
 
-**Questions to Ask During Process:**
+- **Ask before proceeding**: Present gap analysis findings and ask whether to implement just JIRA scope or include MUST FIX items. Don't assume scope.
 
-- If design differs significantly from current implementation
-- If API changes would break existing usage
-- If simplification opportunities need validation
-- If new patterns are needed that don't exist yet
-- If documentation needs major restructuring
-
----
-
-## Example: Filling Out for Button Component
-
-````markdown
-## Component Update: Button
-
-### Context
-
-- **JIRA Ticket ID:** DS-123
-- **JIRA Requirements/Notes:**
-
-  ```
-  Update Button component to align with new Figma design system.
-
-  Acceptance Criteria:
-
-  - Support 6 variants: contained, outlined, ghost, ghost-reverse, text, text-reverse
-  - Add proper focus indicators per WCAG 2.1 AA
-  - Support disabled state consistently across variants
-  - Add loading state support
-  - Ensure keyboard accessibility (Tab, Enter, Space)
-  ```
-
-- **Figma Component:** https://figma.com/file/abc123?node-id=456:789
-- **Related PRs:** #166 (monorepo restructure), #170 (token alignment)
-````
-
----
-
-## Tips
-
-- **Breaking down large components:** If the component is complex (e.g., Table, Form), consider breaking the work into multiple tickets/PRs focusing on core functionality first, then enhancements.
-
-- **Design token questions:** If Figma uses colors/spacing not in your token system, ask the designer before implementing custom values.
-
-- **Accessibility questions:** When in doubt about ARIA patterns, consult [WAI-ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/).
-
-- **Testing priorities:** Focus on user-facing behavior and accessibility. Don't test implementation details.
-
-- **Documentation depth:** Keep component READMEs user-focused. Technical details go in code comments.
+- **Never ask**: "Should I create the React component?" - The answer is always YES.

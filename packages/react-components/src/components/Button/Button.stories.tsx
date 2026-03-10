@@ -21,9 +21,9 @@ const meta: Meta<ButtonProps> = {
         'contained',
         'outlined',
         'ghost',
-        'ghost-reverse',
+        'ghost-inverted',
         'text',
-        'text-reverse',
+        'text-inverted',
       ],
       description: 'Visual style variant of the button',
     },
@@ -53,7 +53,7 @@ export const Contained: Story = {
   args: {
     variant: 'contained',
     children: 'Contained Button',
-    onClick: () => alert('Button clicked!'),
+    onClick: () => {},
   },
 };
 
@@ -61,7 +61,7 @@ export const Outlined: Story = {
   args: {
     variant: 'outlined',
     children: 'Outlined Button',
-    onClick: () => alert('Button clicked!'),
+    onClick: () => {},
   },
 };
 
@@ -69,15 +69,15 @@ export const Ghost: Story = {
   args: {
     variant: 'ghost',
     children: 'Ghost Button',
-    onClick: () => alert('Button clicked!'),
+    onClick: () => {},
   },
 };
 
-export const GhostReverse: Story = {
+export const GhostInverted: Story = {
   args: {
-    variant: 'ghost-reverse',
-    children: 'Ghost Reverse Button',
-    onClick: () => alert('Button clicked!'),
+    variant: 'ghost-inverted',
+    children: 'Ghost Inverted Button',
+    onClick: () => {},
   },
   globals: {
     backgrounds: { value: 'dark' },
@@ -88,15 +88,15 @@ export const Text: Story = {
   args: {
     variant: 'text',
     children: 'Text Button',
-    onClick: () => alert('Button clicked!'),
+    onClick: () => {},
   },
 };
 
-export const TextReverse: Story = {
+export const TextInverted: Story = {
   args: {
-    variant: 'text-reverse',
-    children: 'Text Reverse Button',
-    onClick: () => alert('Button clicked!'),
+    variant: 'text-inverted',
+    children: 'Text Inverted Button',
+    onClick: () => {},
   },
   globals: {
     backgrounds: { value: 'dark' },
@@ -110,9 +110,9 @@ export const AllVariants: Story = {
       <Button variant="contained">Contained</Button>
       <Button variant="outlined">Outlined</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="ghost-reverse">Ghost Reverse</Button>
+      <Button variant="ghost-inverted">Ghost Inverted</Button>
       <Button variant="text">Text</Button>
-      <Button variant="text-reverse">Text Reverse</Button>
+      <Button variant="text-inverted">Text Inverted</Button>
     </div>
   ),
   parameters: {
@@ -157,14 +157,14 @@ export const AllLinkVariants: Story = {
       <Button variant="ghost" href="#ghost">
         Ghost Link
       </Button>
-      <Button variant="ghost-reverse" href="#ghost-reverse">
-        Ghost Reverse Link
+      <Button variant="ghost-inverted" href="#ghost-inverted">
+        Ghost Inverted Link
       </Button>
       <Button variant="text" href="#text">
         Text Link
       </Button>
-      <Button variant="text-reverse" href="#text-reverse">
-        Text Reverse Link
+      <Button variant="text-inverted" href="#text-inverted">
+        Text Inverted Link
       </Button>
     </div>
   ),
@@ -188,12 +188,8 @@ export const KeyboardNavigation: Story = {
         Press Tab to focus buttons, Enter/Space to activate.
       </p>
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-        <Button variant="contained" onClick={() => alert('Button 1 clicked')}>
-          Button 1
-        </Button>
-        <Button variant="outlined" onClick={() => alert('Button 2 clicked')}>
-          Button 2
-        </Button>
+        <Button variant="contained">Button 1</Button>
+        <Button variant="outlined">Button 2</Button>
         <Button variant="ghost" href="#demo">
           Link Button
         </Button>

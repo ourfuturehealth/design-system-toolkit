@@ -18,9 +18,9 @@ describe('Button', () => {
       'contained',
       'outlined',
       'ghost',
-      'ghost-reverse',
+      'ghost-inverted',
       'text',
-      'text-reverse',
+      'text-inverted',
     ] as const;
 
     variants.forEach((variant) => {

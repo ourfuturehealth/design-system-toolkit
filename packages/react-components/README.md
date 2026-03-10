@@ -49,7 +49,7 @@ A flexible button component with multiple variants.
 
 **Props:**
 
-- `variant`: 'contained' | 'outlined' | 'ghost' | 'ghost-reverse' | 'text' | 'text-reverse'
+- `variant`: 'contained' | 'outlined' | 'ghost' | 'ghost-inverted' | 'text' | 'text-inverted'
 
 ### TextInput
 

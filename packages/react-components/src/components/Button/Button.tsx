@@ -10,9 +10,9 @@ interface BaseButtonProps {
     | 'contained'
     | 'outlined'
     | 'ghost'
-    | 'ghost-reverse'
+    | 'ghost-inverted'
     | 'text'
-    | 'text-reverse';
+    | 'text-inverted';
   /**
    * Button content
    */
@@ -24,10 +24,6 @@ interface ButtonElementProps
   extends
     Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'ref'>,
     BaseButtonProps {
-  /**
-   * If provided, renders as an anchor tag
-   */
-  href?: never;
   /**
    * Ref forwarding for button element
    */
@@ -43,10 +39,6 @@ interface AnchorElementProps
    * URL to navigate to (renders as anchor tag)
    */
   href: string;
-  /**
-   * Not applicable for anchor elements
-   */
-  disabled?: never;
   /**
    * Ref forwarding for anchor element
    */

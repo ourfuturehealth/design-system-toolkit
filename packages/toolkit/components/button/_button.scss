@@ -116,7 +116,7 @@ a.ofh-button.ofh-button--ghost {
     outline: none;
   }
 
-  &-reverse {
+  &-inverted {
     background-color: transparent;
     border: $ofh-stroke-weight-2 solid $ofh-color-background-button-default-inverted;
     color: $ofh-color-background-button-default-inverted;
@@ -164,7 +164,7 @@ a.ofh-button.ofh-button--text {
     outline: none;
   }
 
-  &-reverse {
+  &-inverted {
     background-color: transparent;
     color: $ofh-color-background-button-default-inverted;
 
