@@ -6,7 +6,9 @@
   "packageManager": "pnpm@10.29.2",
   "scripts": {
     "dev": "vite",
+    "dev:verbose": "VERBOSE=true vite",
     "watch": "vite",
+    "watch:verbose": "VERBOSE=true vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ignore-pattern '*.config.js'"
   },

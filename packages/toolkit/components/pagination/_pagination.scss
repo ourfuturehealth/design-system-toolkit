@@ -70,6 +70,7 @@
     color: $ofh-color-foreground-link-hover;
 
     .ofh-icon {
+      color: $ofh-color-foreground-link-hover;
       fill: $ofh-color-foreground-link-hover;
     }
 
@@ -89,6 +90,7 @@
     &:hover,
     &:active {
       .ofh-icon {
+        color: $ofh-color-foreground-brand-blue-navy;
         fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
@@ -96,17 +98,20 @@
 
   &:visited {
     .ofh-icon {
+      color: $ofh-color-foreground-link-visited;
       fill: $ofh-color-foreground-link-visited;
     }
 
     &:hover {
       .ofh-icon {
+        color: $ofh-color-foreground-link-hover;
         fill: $ofh-color-foreground-link-hover;
       }
     }
 
     &:focus {
       .ofh-icon {
+        color: $ofh-color-foreground-brand-blue-navy;
         fill: $ofh-color-foreground-brand-blue-navy;
       }
     }
