@@ -6,8 +6,10 @@ import dts from 'vite-plugin-dts';
 export default defineConfig(() => {
   const themeMode = process.env.OFH_THEME_MODE || 'participant';
   const isParticipantTheme = themeMode === 'participant';
+  const isVerbose = process.env.VERBOSE === 'true';
 
   return {
+    logLevel: isVerbose ? 'info' : 'warn',
     plugins: [
       react(),
       dts({

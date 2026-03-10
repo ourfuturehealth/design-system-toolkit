@@ -22,6 +22,11 @@ module.exports = {
     filename: "[name].min.js",
     path: path.resolve(__dirname, "dist/js/"),
   },
+  stats: {
+    preset: 'errors-warnings',
+    colors: true,
+    timings: true,
+  },
   watchOptions: {
     ignored: /node_modules/,
   },

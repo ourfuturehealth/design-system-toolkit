@@ -130,6 +130,7 @@ Visit our [support for browsers and assistive technology](/docs/contributing/bro
 ## Contribute
 
 Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future Health design system toolkit.
+If you're working with icon assets, see the [Material icons workflow](docs/contributing/material-icons.md).
 
 ## Design system docs website
 

@@ -8,18 +8,18 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.2.0 / React v0.2.0](#upgrading-to-v420--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
+| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
 
 ---
 
-## Upgrading to v4.2.0 / React v0.2.0
+## Upgrading to v4.3.0 / React v0.2.0
 
 **Released:** March 2026  
 **Affected packages:**
 
-- `@ourfuturehealth/toolkit` v4.2.0+
+- `@ourfuturehealth/toolkit` v4.3.0+
 - `@ourfuturehealth/react-components` v0.2.0+
 
 ### Breaking Changes
@@ -41,14 +41,14 @@ All other variants (`contained`, `outlined`, `ghost`, `text`) remain unchanged.
 
 If you're using the toolkit's CSS classes directly in HTML or templates:
 
-**Before (toolkit v4.1.0 and earlier):**
+**Before (toolkit v4.2.0 and earlier):**
 
 ```html
 <button class="ofh-button ofh-button--ghost-reverse">Button</button>
 <button class="ofh-button ofh-button--text-reverse">Button</button>
 ```
 
-**After (toolkit v4.2.0+):**
+**After (toolkit v4.3.0+):**
 
 ```html
 <button class="ofh-button ofh-button--ghost-inverted">Button</button>
@@ -170,7 +170,7 @@ BREAKING CHANGE: Update button variant naming to align with Figma
 - ghost-reverse → ghost-inverted
 - text-reverse → text-inverted
 
-Refs: toolkit v4.2.0, react-components v0.2.0
+Refs: toolkit v4.3.0, react-components v0.2.0
 ```
 
 ---

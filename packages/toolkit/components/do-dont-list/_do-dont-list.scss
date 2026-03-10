@@ -19,10 +19,19 @@
 }
 
 .ofh-do-dont-list__label {
-  @include heading-label(
-    $ofh-color-brand-yellow-3-main,
-    $ofh-color-greyscale-white
-  ); /* [2] */
-
+  @include heading-label($ofh-color-brand-yellow-3-main, $ofh-color-greyscale-white); /* [2] */
   @include print-color($ofh-color-brand-blue-navy-3-main);
+}
+
+.ofh-do-dont-list__icon {
+  height: 32px;
+  width: 32px;
+}
+
+.ofh-do-dont-list__icon--tick {
+  color: $ofh-color-foreground-feedback-success-2;
+}
+
+.ofh-do-dont-list__icon--cross {
+  color: $ofh-color-foreground-feedback-error-2;
 }
