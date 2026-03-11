@@ -20,7 +20,7 @@ function getAssociatedLegendOrLabel(input) {
     const legends = fieldset.getElementsByTagName('legend');
 
     if (legends.length) {
-      const candidateLegend = legends[0];  
+      const candidateLegend = legends[0];
 
       // If the input type is radio or checkbox, always use the legend if there
       // is one.
@@ -72,7 +72,7 @@ function getAssociatedLegendOrLabel(input) {
  */
 function focusTarget(target) {
   // If the element that was clicked was not a link, return early
-  if (target.tagName !== 'A' || target.href === false) {
+  if (!target || target.tagName !== 'A' || !target.hash) {
     return false;
   }
 
@@ -99,21 +99,29 @@ function focusTarget(target) {
  * Handle click events on the error summary
  */
 function handleClick(event) {
-  if (focusTarget(event.target)) {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const link = event.target.closest('a');
+
+  if (focusTarget(link)) {
     event.preventDefault();
   }
 }
 
 export default ({ focusOnPageLoad = true } = {}) => {
-  // Error summary component
-  const errorSummary = document.querySelector('.ofh-error-summary');
+  const errorSummaries = document.querySelectorAll('.ofh-error-summary');
 
-  if (errorSummary) {
-    // Focus error summary component if it exists
-
-    if (focusOnPageLoad) {
-      errorSummary.focus();
-    }
-    errorSummary.addEventListener('click', handleClick);
+  if (!errorSummaries.length) {
+    return;
   }
+
+  if (focusOnPageLoad) {
+    errorSummaries[0].focus();
+  }
+
+  errorSummaries.forEach((errorSummary) => {
+    errorSummary.addEventListener('click', handleClick);
+  });
 };

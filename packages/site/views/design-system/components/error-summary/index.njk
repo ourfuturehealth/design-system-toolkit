@@ -38,6 +38,14 @@
 
     <h3 id="linking-from-the-error-summary-to-each-answer">Linking from the error summary to each answer</h3>
     <p>You must link the errors in the error summary to the answer they relate to.</p>
+    <p>If there are multiple validation errors on a page, include a link for each error in the summary.</p>
+
+    {{ designExample({
+      group: "components",
+      item: "error-summary",
+      type: "multiple-errors"
+    }) }}
+
     <p>For questions that require a user to answer using a single field, like a select, textarea or text input, link to the field.</p>
 
     {{ designExample({
