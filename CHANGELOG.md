@@ -6,6 +6,41 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-11
+
+#### @ourfuturehealth/toolkit 4.4.0 (`toolkit-v4.4.0`)
+
+##### Added
+
+- Error Summary `idPrefix` support so multiple summaries on the same page can render unique title ids and `aria-labelledby` values
+- Dedicated multiple-errors examples in the site and design-system docs
+
+##### Changed
+
+- Updated the toolkit Error Summary JavaScript to enhance every summary instance on the page instead of only the first one
+- Error Summary links now resolve nested HTML click targets with `closest('a')`, so HTML-rich link content still scrolls and focuses the correct field
+- Expanded toolkit Error Summary documentation and integration coverage for multi-link, multi-summary, and radio / legend behaviour
+
+#### @ourfuturehealth/react-components 0.3.0 (`react-v0.3.0`)
+
+##### Added
+
+- New `ErrorSummary` component with toolkit-parity props and DOM structure:
+  - `titleText` / `titleHtml`
+  - `descriptionText` / `descriptionHtml`
+  - `errorList`
+  - `classes`
+  - `attributes`
+  - `idPrefix`
+  - `focusOnPageLoad`
+- Storybook coverage for default, description, multiple-errors, HTML-content, and in-form usage
+- Unit and accessibility coverage for nested HTML link clicks, multi-link focus behaviour, and `idPrefix` handling
+
+##### Changed
+
+- React Storybook examples now isolate link targets per story so docs previews do not jump into unrelated story content
+- In-form and multiple-errors stories were expanded to make focus and scroll behaviour easier to validate manually
+
 ### 2026-03-10
 
 #### @ourfuturehealth/toolkit 4.3.0 (`toolkit-v4.3.0`)
