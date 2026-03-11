@@ -8,6 +8,39 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-03-10
 
+#### @ourfuturehealth/toolkit 4.3.0 (`toolkit-v4.3.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - CSS classes changed: `.ofh-button--ghost-reverse` → `.ofh-button--ghost-inverted`
+  - CSS classes changed: `.ofh-button--text-reverse` → `.ofh-button--text-inverted`
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v430--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Refactored button styles to use design tokens and responsive spacing mixins instead of hardcoded typography and padding values
+- Aligned button focus treatments with Figma, including inverted variants on dark backgrounds
+- Updated toolkit selectors, site documentation, and examples to use the renamed button variants
+
+#### @ourfuturehealth/react-components 0.2.0 (`react-v0.2.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - TypeScript type definitions updated to reflect new variant names
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v430--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Updated Button component variant types, stories, tests, example app, and docs to use the renamed button variants
+- `Button` now renders an anchor automatically when `href` is provided, with ref support for both button and anchor paths
+- Expanded story and test coverage for link rendering, keyboard navigation, and form usage
+
 #### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
 
 ##### Added
@@ -144,7 +177,7 @@ The 14 legacy `icon-*.svg` files have been replaced with a comprehensive Materia
 
 ##### Migration Guide
 
-See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
+See [UPGRADING.md](UPGRADING.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
 
 #### @ourfuturehealth/react-components 0.1.0 (`react-v0.1.0`)
 

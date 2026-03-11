@@ -249,5 +249,5 @@ The example app is located in `packages/example-react-consumer-app/` and shows h
 
 1. Check the [Storybook](https://github.com/ourfuturehealth/design-system-toolkit#storybook) for component examples
 2. Review the [example consumer app](../packages/example-react-consumer-app/)
-3. Read the [migration guide](./monorepo-migration-guide.md) for monorepo structure details
+3. Read the [upgrade guide](../UPGRADING.md) for migration instructions
 4. Open an issue on [GitHub](https://github.com/ourfuturehealth/design-system-toolkit/issues)

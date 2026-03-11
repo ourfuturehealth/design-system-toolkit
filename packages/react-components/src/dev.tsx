@@ -23,9 +23,9 @@ function DevApp() {
           <Button variant="contained">Contained</Button>
           <Button variant="outlined">Outlined</Button>
           <Button variant="ghost">Ghost</Button>
-          <Button variant="ghost-reverse">Ghost Reverse</Button>
+          <Button variant="ghost-inverted">Ghost Inverted</Button>
           <Button variant="text">Text</Button>
-          <Button variant="text-reverse">Text Reverse</Button>
+          <Button variant="text-inverted">Text Inverted</Button>
         </div>
       </section>
 

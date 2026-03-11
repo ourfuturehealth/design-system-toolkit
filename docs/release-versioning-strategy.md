@@ -9,7 +9,7 @@ This document defines the release versioning model after the monorepo refactor i
 - Consumer-facing compatibility expectations
 
 For operational release steps, checks, and troubleshooting, use [Release Process](./release-process.md).
-For consumer migration instructions, use [Monorepo Migration Guide](./monorepo-migration-guide.md).
+For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 ## Context: Single Package to Monorepo
 
@@ -79,7 +79,11 @@ This table is a visual aid for pre-monorepo vs post-monorepo release identificat
 | 3     | `v3.4.2`         | `3.4.2`         | N/A           | Single package | Released               |
 | 4     | `toolkit-v4.0.0` | `4.0.0`         | N/A           | Monorepo       | Released               |
 | 5     | `react-v0.0.1`   | N/A             | `0.0.1`       | Monorepo       | Released               |
-| 6     | `toolkit-v4.1.0` | `4.1.0`         | N/A           | Monorepo       | Planned in this branch |
+| 6     | `toolkit-v4.1.0` | `4.1.0`         | N/A           | Monorepo       | Released               |
+| 7     | `react-v0.1.0`   | N/A             | `0.1.0`       | Monorepo       | Released               |
+| 8     | `toolkit-v4.2.0` | `4.2.0`         | N/A           | Monorepo       | Released               |
+| 9     | `toolkit-v4.3.0` | `4.3.0`         | N/A           | Monorepo       | Planned in this branch |
+| 10    | `react-v0.2.0`   | N/A             | `0.2.0`       | Monorepo       | Planned in this branch |
 
 ## Release Output Expectations
 
@@ -90,6 +94,6 @@ This table is a visual aid for pre-monorepo vs post-monorepo release identificat
 ## References
 
 - [Release Process](./release-process.md)
-- [Monorepo Migration Guide](./monorepo-migration-guide.md)
+- [Upgrading Guide](../UPGRADING.md)
 - [Changelog](../CHANGELOG.md)
 - [Release workflow](../.github/workflows/release.yml)

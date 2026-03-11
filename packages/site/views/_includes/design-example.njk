@@ -49,7 +49,7 @@
   {% endif %}
 
   {% set exampleType = params.type|lower|replace("-", " ") %}
-  {% set exampleItem = params.item|lower|replace("-", " ") %}
+  {% set exampleItem = (params.itemTitle or params.item)|lower|replace("-", " ") %}
   {% set exampleId = params.type + "-example" %}
   {% set exampleTitle = exampleType + " " + exampleItem %}
 

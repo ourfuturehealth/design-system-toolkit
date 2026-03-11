@@ -1,68 +1,12 @@
-{% set pageTitle = "Buttons" %}
-{% set pageSection = "Design system" %}
-{% set subSection = "Components" %}
-{% set pageDescription = "Use buttons to help users carry out an action on a page like starting an application or saving their progress." %}
-{% set theme = "Form elements" %}
-{% set dateUpdated = "March 2024" %}
-{% set backlog_issue_id = "7" %}
-
-{% extends "app-layout.njk" %}
-
-{% block breadcrumb %}
-  {% include "../_breadcrumb.njk" %}
-{% endblock %}
-
-{% block bodyContent %}
-  <p>We have 6 buttons</p>
-  <ul>
-    <li><a href="#contained-button">Contained</a></li>
-    <li><a href="#outlined-button">Outlined</a></li>
-    <li><a href="#ghost-button">Ghost</a></li>
-    <li><a href="#ghost-reverse-button">Ghost reverse</a></li>
-    <li><a href="#text-button">Text</a></li>
-    <li><a href="#text-reverse-button">Text reverse</a></li>
-  </ul>
-
-  <h2 id="contained-button">Contained button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "default"
-  }) }}
-
-  <h2 id="outlined-button">Outlined button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "outlined"
-  }) }}
-
-  <h2 id="ghost-button">Ghost button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "ghost"
-  }) }}
-
-  <h2 id="ghost-reverse-button">Ghost reverse button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "ghost-reverse",
-    bgColour: "medium-blue"
-  }) }}
-
-  <h2 id="text-button">Text button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "text"
-  }) }}
-
-  <h2 id="text-reverse-button">Text reverse button</h2>
-  {{ designExample({
-    group: "components",
-    item: "buttons",
-    type: "text-reverse"
-  }) }}
-{% endblock %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting to Button</title>
+    <meta http-equiv="refresh" content="0; url=/design-system/components/button">
+    <link rel="canonical" href="/design-system/components/button">
+  </head>
+  <body>
+    <p><a href="/design-system/components/button">Continue to the Button component page</a>.</p>
+  </body>
+</html>
