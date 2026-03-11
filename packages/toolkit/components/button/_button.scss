@@ -7,33 +7,27 @@
 .ofh-button,
 a.ofh-button {
   @include ofh-responsive-margin(6, 'bottom');
+  @include ofh-responsive-padding(5, 'vertical');
+  @include ofh-responsive-padding(6, 'horizontal');
+  @include ofh-typography-responsive('h5');
 
   -webkit-appearance: none;
   background-color: $ofh-color-background-button-default-inverted;
   border: $ofh-stroke-weight-2 solid transparent;
-  border-radius: 8px;
+  border-radius: $ofh-radius-8;
   box-shadow: none;
   color: $ofh-color-background-button-default-inverted;
   cursor: pointer;
   display: inline-block;
-  font-size: 19px;
-  font-weight: 600;
-  line-height: 28px;
+  font-weight: $ofh-typography-weight-semibold;
   margin-top: 0;
-  padding: ofh-spacing(4) ofh-spacing(5);
   position: relative;
   text-align: center;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: $ofh-stroke-weight-1;
   text-underline-offset: 1px;
   vertical-align: top;
   width: auto;
-
-  @include mq($until: tablet) {
-    font-size: 16px;
-    line-height: 24px;
-    padding: 12px ofh-spacing(4); // 12px not defined in $ofh-spacing-points
-  }
 
   &:visited,
   &:active,
@@ -60,14 +54,13 @@ a.ofh-button.ofh-button--contained {
 
   &:focus {
     background-color: $ofh-color-background-button-active;
-    outline: 4px solid $ofh-color-background-button-default;
-    outline-offset: 4px;
+
+    @include ofh-focused-button;
   }
 
   &:active {
     background-color: $ofh-color-background-button-active;
     outline: none;
-    outline-offset: none;
   }
 }
 
@@ -88,13 +81,11 @@ a.ofh-button.ofh-button--outlined {
   }
 
   &:focus {
-    outline: 4px solid $ofh-color-background-button-default;
-    outline-offset: 4px;
+    @include ofh-focused-button;
   }
 
   &:active {
     outline: none;
-    outline-offset: none;
   }
 }
 
@@ -118,16 +109,14 @@ a.ofh-button.ofh-button--ghost {
   }
 
   &:focus {
-    outline: 4px solid $ofh-color-background-button-default;
-    outline-offset: 4px;
+    @include ofh-focused-button;
   }
 
   &:active {
     outline: none;
-    outline-offset: none;
   }
 
-  &-reverse {
+  &-inverted {
     background-color: transparent;
     border: $ofh-stroke-weight-2 solid $ofh-color-background-button-default-inverted;
     color: $ofh-color-background-button-default-inverted;
@@ -146,13 +135,11 @@ a.ofh-button.ofh-button--ghost {
     }
 
     &:focus {
-      outline: 4px solid $ofh-color-background-button-default-inverted;
-      outline-offset: 4px;
+      @include ofh-focused-button-inverted;
     }
 
     &:active {
       outline: none;
-      outline-offset: none;
     }
   }
 }
@@ -161,51 +148,39 @@ a.ofh-button.ofh-button--ghost {
 a.ofh-button.ofh-button--text {
   background-color: transparent;
   color: $ofh-color-background-button-default;
-  padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
-
-  @include mq($until: tablet) {
-    padding: ofh-spacing(3) ofh-spacing(0);
-  }
 
   &:hover {
     color: $ofh-color-background-button-hover;
   }
 
   &:focus {
-    border-radius: 0;
     color: $ofh-color-background-button-active;
-    outline: 4px solid $ofh-color-background-button-default;
+
+    @include ofh-focused-button;
   }
 
   &:active {
     color: $ofh-color-background-button-active;
     outline: none;
-    outline-offset: none;
   }
 
-  &-reverse {
+  &-inverted {
     background-color: transparent;
     color: $ofh-color-background-button-default-inverted;
-    padding: 12px ofh-spacing(0); // 12px not defined in $ofh-spacing-points
-
-    @include mq($until: tablet) {
-      padding: ofh-spacing(3) ofh-spacing(0);
-    }
 
     &:hover {
       color: $ofh-color-background-button-hover-inverted;
     }
 
     &:focus {
-      border-radius: 0;
       color: $ofh-color-background-button-active-inverted;
-      outline: 4px solid $ofh-color-background-button-default-inverted;
+
+      @include ofh-focused-button-inverted;
     }
 
     &:active {
       color: $ofh-color-background-button-active-inverted;
       outline: none;
-      outline-offset: none;
     }
   }
 }

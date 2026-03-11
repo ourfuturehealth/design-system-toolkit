@@ -83,6 +83,12 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   margin-bottom: ofh-spacing(4);
 }
 
+.ofh-card__icon {
+  color: $ofh-color-foreground-feedback-success-2;
+  height: 32px;
+  width: 32px;
+}
+
 /* Clickable card
   ========================================================================== */
 
@@ -197,11 +203,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
 .ofh-card--care {
   @include ofh-responsive-margin(8, 'top');
-  @include care-card(
-    $ofh-color-brand-blue-royal-3-main,
-    $ofh-color-greyscale-white,
-    4px
-  ); /* [8] */
+  @include care-card($ofh-color-brand-blue-royal-3-main, $ofh-color-greyscale-white, 4px); /* [8] */
 }
 
 .ofh-card--care__heading-container {
@@ -251,11 +253,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care--urgent {
-  @include care-card(
-    $ofh-color-brand-red-3-main,
-    $ofh-color-greyscale-white,
-    6px
-  );
+  @include care-card($ofh-color-brand-red-3-main, $ofh-color-greyscale-white, 6px);
 
   .ofh-card--care__arrow {
     &::before,
@@ -266,11 +264,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care--emergency {
-  @include care-card(
-    $ofh-color-brand-red-3-main,
-    $ofh-color-greyscale-white,
-    8px
-  );
+  @include care-card($ofh-color-brand-red-3-main, $ofh-color-greyscale-white, 8px);
 
   .ofh-card--care__arrow {
     &::before,
@@ -310,8 +304,8 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   }
 
   .ofh-action-link__link {
-    .ofh-icon__arrow-right-circle {
-      fill: $ofh-color-greyscale-white; /* [14] */
+    .ofh-action-link__icon {
+      color: $ofh-color-greyscale-white; /* [14] */
     }
   }
 }

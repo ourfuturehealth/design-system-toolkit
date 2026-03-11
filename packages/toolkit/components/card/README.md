@@ -2,6 +2,9 @@
 
 ## Guidance
 
+> Icon migration: this component now renders icons using `components/icon/macro.njk` and the Material SVG sprite.
+
+
 Find out more about the card component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/card).
 
 ## Quick start examples

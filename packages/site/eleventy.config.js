@@ -11,11 +11,14 @@ module.exports = function configuration(eleventyConfig) {
   eleventyConfig.addWatchTarget("../toolkit/components/");
   eleventyConfig.addWatchTarget("../toolkit/ofh.scss");
   eleventyConfig.addWatchTarget("../toolkit/assets/");
-  eleventyConfig.addWatchTarget("../toolkit/dist/");
+  // Note: ../toolkit/dist/ is handled by passthrough copy and doesn't need watching
 
   // Documentation assets e.g. images, PDFs.
   eleventyConfig.addPassthroughCopy({ assets: "assets" });
   eleventyConfig.addPassthroughCopy({ components: "components" });
+  eleventyConfig.addPassthroughCopy({
+    "../toolkit/assets/icons/icon-sprite.svg": "assets/icons/icon-sprite.svg",
+  });
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `views/_includes/standalone-example-layout.njk`.

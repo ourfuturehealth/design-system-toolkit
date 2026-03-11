@@ -6,6 +6,118 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-10
+
+#### @ourfuturehealth/toolkit 4.3.0 (`toolkit-v4.3.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - CSS classes changed: `.ofh-button--ghost-reverse` → `.ofh-button--ghost-inverted`
+  - CSS classes changed: `.ofh-button--text-reverse` → `.ofh-button--text-inverted`
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v430--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Refactored button styles to use design tokens and responsive spacing mixins instead of hardcoded typography and padding values
+- Aligned button focus treatments with Figma, including inverted variants on dark backgrounds
+- Updated toolkit selectors, site documentation, and examples to use the renamed button variants
+
+#### @ourfuturehealth/react-components 0.2.0 (`react-v0.2.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Button variant naming aligned with Figma**: Renamed button variants to match design specifications
+  - `ghost-reverse` → `ghost-inverted`
+  - `text-reverse` → `text-inverted`
+  - TypeScript type definitions updated to reflect new variant names
+  - See [Upgrading Guide](UPGRADING.md#upgrading-to-v430--react-v020) for detailed migration instructions
+
+##### Changed
+
+- Updated Button component variant types, stories, tests, example app, and docs to use the renamed button variants
+- `Button` now renders an anchor automatically when `href` is provided, with ref support for both button and anchor paths
+- Expanded story and test coverage for link rendering, keyboard navigation, and form usage
+
+#### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
+
+##### Added
+
+- **Material Design Icon System**: Complete icon set with 61 icons organized in 6 categories
+  - Categories: DataValidation, Action, Arrows, Graphical, Stepper, Socials
+  - Icons use PascalCase naming aligned with Figma layer names (e.g., `Search`, `ChevronLeft`, `Done`)
+  - New icon macro: `components/icon/macro.njk` for consistent icon rendering
+  - Sprite-based implementation: `assets/icons/icon-sprite.svg` (61 symbols)
+  - Icon metadata: `assets/icons/manifest.json` with categories and default sizes
+  - Support for brand-colored icons: social media icons with hover states, `ArrowCircleRightColour`
+  - Stepper icons: `LooksZero` through `LooksNine` for multi-step flows
+- Icon infrastructure:
+  - Build script: `scripts/build-icon-sprite.js` for sprite generation
+  - Material icon styles: `core/styles/_icons-material.scss`
+- Documentation:
+  - Material icons workflow guide: `docs/contributing/material-icons.md`
+  - Icon component README with usage examples: `components/icon/README.md`
+  - Material icons asset README: `assets/icons/README.md`
+  - Updated documentation site icon gallery at `/design-system/styles/icons`
+
+##### Changed
+
+- Updated toolkit components that previously embedded legacy SVGs to use the Material icon macro:
+  - Action link: migrated arrow circle icon
+  - Back link and breadcrumb: migrated chevron navigation
+  - Card: migrated confirmation icon
+  - Details expanders: migrated expand and collapse icons
+  - Do/Don't lists: migrated to `Done` and `Close` icons
+  - Header: migrated search, close, and chevron navigation icons
+  - Pagination: migrated arrow navigation
+- Icon sizes standardized to Material icon system sizes (16px, 24px, 32px)
+- Toolkit build now generates the Material icon sprite from `assets/icons`
+- Documentation now includes the Material icons workflow guide, the new icon macro README, and migration notes for affected components
+
+##### Removed
+
+- Legacy icon system (14 icon files):
+  - `assets/icons/icon-arrow-left.svg`
+  - `assets/icons/icon-arrow-right-circle.svg`
+  - `assets/icons/icon-arrow-right.svg`
+  - `assets/icons/icon-chevron-left.svg`
+  - `assets/icons/icon-chevron-right.svg`
+  - `assets/icons/icon-close.svg`
+  - `assets/icons/icon-cross.svg`
+  - `assets/icons/icon-emdash-small.svg`
+  - `assets/icons/icon-emdash.svg`
+  - `assets/icons/icon-minus.svg`
+  - `assets/icons/icon-new-tab.svg`
+  - `assets/icons/icon-plus.svg`
+  - `assets/icons/icon-search.svg`
+  - `assets/icons/icon-tick.svg`
+- `core/styles/_icons.scss` and associated icon styling
+- Legacy icon helper mixins from `core/tools/_mixins.scss`
+
+##### Migration Notes
+
+**Replacing legacy icons with Material icons:**
+
+The 14 legacy `icon-*.svg` files have been replaced with a comprehensive Material icon system. Use the icon macro to render Material icons:
+
+```njk
+{{ icon({ "name": "Search", "size": 24 }) }}
+```
+
+**Common replacements:**
+
+- `icon-cross` → Use `Close` icon
+- `icon-tick` → Use `Done` icon
+- `icon-chevron-left` → Use `ChevronLeft` icon
+- `icon-chevron-right` → Use `ChevronRight` icon
+- `icon-search` → Use `Search` icon
+- `icon-arrow-right-circle` → Use `ArrowCircleRight` icon
+- Available sizes: `16`, `24` (default), `32`
+- For decorative icons, omit the `title` parameter (automatically sets `aria-hidden="true"`)
+- For semantic icons, include a `title` parameter for accessibility
+
 ### 2026-02-26
 
 #### @ourfuturehealth/toolkit 4.1.0 (`toolkit-v4.1.0`)
@@ -65,7 +177,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Migration Guide
 
-See [docs/monorepo-migration-guide.md](/docs/monorepo-migration-guide.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
+See [UPGRADING.md](UPGRADING.md) for detailed migration instructions, including spacing index shift mappings introduced in toolkit `4.1.0`.
 
 #### @ourfuturehealth/react-components 0.1.0 (`react-v0.1.0`)
 

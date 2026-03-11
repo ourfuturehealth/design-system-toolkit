@@ -6,6 +6,7 @@ const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const zip = require('gulp-zip');
 const webpack = require('webpack-stream');
+const { execFileSync } = require('node:child_process');
 const { version } = require('./package.json');
 
 /* Remove all compiled files */
@@ -27,7 +28,10 @@ function compileCSS() {
 
   return gulp
     .src(['ofh.scss', 'ofh-participant.scss', 'ofh-research.scss'])
-    .pipe(sass.sync({ api: 'modern-compiler' }))
+    .pipe(sass.sync({ 
+      api: 'modern-compiler',
+      quietDeps: true,
+    }))
     .pipe(
       rename((path) => {
         path.basename = outputNames[path.basename] || path.basename;
@@ -67,6 +71,11 @@ function webpackJS() {
     .pipe(
       webpack({
         mode: 'production',
+        stats: {
+          preset: 'errors-warnings',
+          colors: true,
+          timings: true,
+        },
         module: {
           rules: [
             {
@@ -124,6 +133,14 @@ function versionJS() {
  * Assets tasks
  */
 
+function buildIconSprite(done) {
+  execFileSync('node', ['scripts/build-icon-sprite.js'], {
+    stdio: 'inherit',
+  });
+
+  done();
+}
+
 /**
  * Copy assets such as icons and images into the distribution
  */
@@ -178,11 +195,18 @@ gulp.task('clean', cleanDist);
 
 gulp.task('style', compileCSS);
 
-gulp.task('build', gulp.series([compileCSS, webpackJS]));
+gulp.task('build', gulp.series([buildIconSprite, compileCSS, webpackJS]));
 
 gulp.task(
   'bundle',
-  gulp.series([cleanDist, 'build', minifyCSS, minifyJS, versionJS, assets]),
+  gulp.series([
+    cleanDist,
+    'build',
+    minifyCSS,
+    minifyJS,
+    versionJS,
+    assets,
+  ]),
 );
 
 gulp.task(

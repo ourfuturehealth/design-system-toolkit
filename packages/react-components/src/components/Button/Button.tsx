@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Button.module.scss';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Base props shared between button and anchor variants
+interface BaseButtonProps {
   /**
    * Button variant/style
    */
@@ -9,22 +10,50 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     | 'contained'
     | 'outlined'
     | 'ghost'
-    | 'ghost-reverse'
+    | 'ghost-inverted'
     | 'text'
-    | 'text-reverse';
+    | 'text-inverted';
   /**
    * Button content
    */
   children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+// Button element props
+interface ButtonElementProps
+  extends
+    Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'ref'>,
+    BaseButtonProps {
+  /**
+   * Ref forwarding for button element
+   */
+  ref?: React.Ref<HTMLButtonElement>;
+}
+
+// Anchor element props
+interface AnchorElementProps
+  extends
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'ref'>,
+    BaseButtonProps {
+  /**
+   * URL to navigate to (renders as anchor tag)
+   */
+  href: string;
+  /**
+   * Ref forwarding for anchor element
+   */
+  ref?: React.Ref<HTMLAnchorElement>;
+}
+
+export type ButtonProps = ButtonElementProps | AnchorElementProps;
+
+export const Button = ({
   variant = 'contained',
   className = '',
-  disabled,
   children,
+  ref,
   ...props
-}) => {
+}: ButtonProps) => {
   const buttonClasses = [
     'ofh-button', // Existing OFH design system class
     styles.button, // Our component-specific styles
@@ -34,9 +63,29 @@ export const Button: React.FC<ButtonProps> = ({
     .filter(Boolean)
     .join(' ');
 
+  // Render as anchor if href is provided
+  if ('href' in props && props.href) {
+    return (
+      <a
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        className={buttonClasses}
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  // Render as button
   return (
-    <button className={buttonClasses} disabled={disabled} {...props}>
-      <span>{children}</span>
+    <button
+      ref={ref as React.Ref<HTMLButtonElement>}
+      className={buttonClasses}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {children}
     </button>
   );
 };
+
+Button.displayName = 'Button';
