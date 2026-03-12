@@ -50,8 +50,7 @@ function getAssociatedLegendOrLabel(input) {
   }
 
   return (
-    document.querySelector(`label[for='${input.getAttribute('id')}']`)
-    || input.closest('label')
+    document.querySelector(`label[for='${input.getAttribute('id')}']`) || input.closest('label')
   );
 }
 
@@ -86,10 +85,14 @@ function focusTarget(target) {
     return false;
   }
 
-  // Scroll the legend or label into view *before* calling focus on the input to
-  // avoid extra scrolling in browsers that don't support `preventScroll` (which
-  // at time of writing is most of them...)
-  legendOrLabel.scrollIntoView();
+  const scrollTarget =
+    legendOrLabel.tagName === 'LEGEND'
+      ? legendOrLabel.closest('fieldset') || legendOrLabel
+      : legendOrLabel;
+
+  // Scroll the relevant question context into view before calling focus so the
+  // user is presented with the question context.
+  scrollTarget.scrollIntoView();
   input.focus({ preventScroll: true });
 
   return true;

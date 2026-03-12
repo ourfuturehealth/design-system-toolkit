@@ -112,7 +112,12 @@ function focusTarget(target: HTMLAnchorElement | null) {
     return false;
   }
 
-  legendOrLabel.scrollIntoView();
+  const scrollTarget =
+    legendOrLabel.tagName === 'LEGEND'
+      ? legendOrLabel.closest('fieldset') || legendOrLabel
+      : legendOrLabel;
+
+  scrollTarget.scrollIntoView();
   input.focus({ preventScroll: true });
 
   return true;

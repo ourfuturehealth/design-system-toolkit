@@ -222,7 +222,7 @@ describe('ErrorSummary', () => {
     ).resolves.not.toThrow();
   });
 
-  it('scrolls a related legend into view for radio inputs', async () => {
+  it('scrolls the related fieldset into view for radio inputs', async () => {
     const user = userEvent.setup();
 
     render(
@@ -243,14 +243,43 @@ describe('ErrorSummary', () => {
       </>,
     );
 
-    const legend = screen.getByText('How should we contact you?');
     const scrollIntoView = vi.fn();
-    legend.scrollIntoView = scrollIntoView;
+    screen.getByRole('group').scrollIntoView = scrollIntoView;
 
     await user.click(screen.getByRole('link', { name: 'Select how to contact you' }));
 
     expect(scrollIntoView).toHaveBeenCalledTimes(1);
     expect(document.activeElement).toBe(screen.getByRole('radio'));
+  });
+
+  it('scrolls the related fieldset into view for checkbox inputs', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <>
+        <ErrorSummary
+          titleText="There is a problem"
+          errorList={[
+            {
+              text: 'Select how to contact you',
+              href: '#contact-email',
+            },
+          ]}
+        />
+        <fieldset>
+          <legend>How should we contact you?</legend>
+          <input id="contact-email" type="checkbox" name="contact" />
+        </fieldset>
+      </>,
+    );
+
+    const scrollIntoView = vi.fn();
+    screen.getByRole('group').scrollIntoView = scrollIntoView;
+
+    await user.click(screen.getByRole('link', { name: 'Select how to contact you' }));
+
+    expect(scrollIntoView).toHaveBeenCalledTimes(1);
+    expect(document.activeElement).toBe(screen.getByRole('checkbox'));
   });
 
   it('has no accessibility violations', async () => {

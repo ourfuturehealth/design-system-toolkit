@@ -110,7 +110,7 @@ describe('Error summary module', () => {
       expect(document.activeElement).toBe(document.body);
     });
 
-    it('should scroll a related legend into view for radio inputs', () => {
+    it('should scroll the related fieldset into view for radio inputs', () => {
       document.body.innerHTML = `
         <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
@@ -123,15 +123,39 @@ describe('Error summary module', () => {
         </fieldset>
       `;
 
-      const legend = document.querySelector('legend');
-      legend.scrollIntoView = jest.fn();
+      const fieldset = document.querySelector('fieldset');
+      fieldset.scrollIntoView = jest.fn();
 
       ErrorSummary();
 
       document.querySelector('a[href="#contact"]').click();
 
-      expect(legend.scrollIntoView).toHaveBeenCalledTimes(1);
+      expect(fieldset.scrollIntoView).toHaveBeenCalledTimes(1);
       expect(document.activeElement).toBe(document.querySelector('#contact'));
+    });
+
+    it('should scroll the related fieldset into view for checkbox inputs', () => {
+      document.body.innerHTML = `
+        <div role="alert" class="ofh-error-summary">
+          <ul class="ofh-list ofh-error-summary__list">
+            <li><a href="#contact-email">Select how to contact you</a></li>
+          </ul>
+        </div>
+        <fieldset>
+          <legend>How should we contact you?</legend>
+          <input id="contact-email" type="checkbox" name="contact" />
+        </fieldset>
+      `;
+
+      const fieldset = document.querySelector('fieldset');
+      fieldset.scrollIntoView = jest.fn();
+
+      ErrorSummary();
+
+      document.querySelector('a[href="#contact-email"]').click();
+
+      expect(fieldset.scrollIntoView).toHaveBeenCalledTimes(1);
+      expect(document.activeElement).toBe(document.querySelector('#contact-email'));
     });
 
     it('should enhance links in every error summary instance', () => {

@@ -1,12 +1,24 @@
 import { toggleConditionalInput } from '../../common';
 
+const getCheckboxScope = function getCheckboxScope(input) {
+  return input.form || input.closest('.ofh-checkboxes');
+};
+
 /**
  * Conditionally show content when a checkbox button is checked
  * Test at http://0.0.0.0:3000/components/checkboxes/conditional.html
-*/
+ */
 const syncAllConditionalReveals = function syncAllConditionalReveals(input) {
-  const allInputsInForm = input.form.querySelectorAll('input[type="checkbox"]');
-  allInputsInForm.forEach(item => toggleConditionalInput(item, 'ofh-checkboxes__conditional--hidden'));
+  const checkboxScope = getCheckboxScope(input);
+
+  if (!checkboxScope) {
+    return;
+  }
+
+  const allInputsInScope = checkboxScope.querySelectorAll('input[type="checkbox"]');
+  allInputsInScope.forEach((item) =>
+    toggleConditionalInput(item, 'ofh-checkboxes__conditional--hidden'),
+  );
 };
 
 /**
@@ -16,14 +28,19 @@ const syncAllConditionalReveals = function syncAllConditionalReveals(input) {
  * This is useful for when a “None of these" checkbox is checked.
  */
 const unCheckAllInputsExcept = function unCheckAllInputsExcept(input) {
-  const allInputsInSameExclusiveGroup = input.form.querySelectorAll(
+  const checkboxScope = getCheckboxScope(input);
+
+  if (!checkboxScope) {
+    return;
+  }
+
+  const allInputsInSameExclusiveGroup = checkboxScope.querySelectorAll(
     `input[type="checkbox"][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`,
   );
 
   allInputsInSameExclusiveGroup.forEach((inputWithSameName) => {
-    const hasSameFormOwner = input.form === inputWithSameName.form;
-    if (hasSameFormOwner && inputWithSameName !== input) {
-      inputWithSameName.checked = false;  
+    if (inputWithSameName !== input) {
+      inputWithSameName.checked = false;
     }
   });
 
@@ -38,15 +55,18 @@ const unCheckAllInputsExcept = function unCheckAllInputsExcept(input) {
  * "None of these" checkbox in the same fieldset.
  */
 const unCheckExclusiveInputs = function unCheckExclusiveInputs(input) {
-  const allExclusiveInputsInSameExclusiveGroup = input.form.querySelectorAll(
+  const checkboxScope = getCheckboxScope(input);
+
+  if (!checkboxScope) {
+    return;
+  }
+
+  const allExclusiveInputsInSameExclusiveGroup = checkboxScope.querySelectorAll(
     `input[type="checkbox"][data-checkbox-exclusive][data-checkbox-exclusive-group="${input.getAttribute('data-checkbox-exclusive-group')}"]`,
   );
 
   allExclusiveInputsInSameExclusiveGroup.forEach((exclusiveInput) => {
-    const hasSameFormOwner = input.form === exclusiveInput.form;
-    if (hasSameFormOwner) {
-      exclusiveInput.checked = false;  
-    }
+    exclusiveInput.checked = false;
   });
 
   syncAllConditionalReveals(input);
@@ -59,7 +79,7 @@ export default () => {
   /**
    * Toggle classes and attributes
    * @param {Object} event click event object
-  */
+   */
   const handleClick = (event) => {
     // Toggle conditional content based on checked state
     toggleConditionalInput(event.target, 'ofh-checkboxes__conditional--hidden');
@@ -81,15 +101,19 @@ export default () => {
   // event is fired, so we need to sync after the pageshow event in browsers
   // that support it.
   if ('onpageshow' in window) {
-    window.addEventListener('pageshow', () => checkboxInputs.forEach(input => syncAllConditionalReveals(input)));
+    window.addEventListener('pageshow', () =>
+      checkboxInputs.forEach((input) => syncAllConditionalReveals(input)),
+    );
   } else {
-    window.addEventListener('DOMContentLoaded', () => checkboxInputs.forEach(input => syncAllConditionalReveals(input)));
+    window.addEventListener('DOMContentLoaded', () =>
+      checkboxInputs.forEach((input) => syncAllConditionalReveals(input)),
+    );
   }
 
   // Although we've set up handlers to sync state on the pageshow or
   // DOMContentLoaded event, init could be called after those events have fired,
   // for example if they are added to the page dynamically, so sync now too.
-  checkboxInputs.forEach(input => syncAllConditionalReveals(input));
+  checkboxInputs.forEach((input) => syncAllConditionalReveals(input));
 
   // Attach handleClick as click to checkboxInputs
   checkboxInputs.forEach((checkboxButton) => {

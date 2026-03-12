@@ -24,6 +24,22 @@ describe('Checkboxes module', () => {
       expect(conditional.classList.contains('ofh-checkboxes__conditional--hidden')).toEqual(false);
       expect(input.getAttribute('aria-expanded')).toEqual('true');
     });
+
+    it('when checking the input outside a form', () => {
+      document.body.innerHTML = `<div class="ofh-checkboxes">
+            <input class="ofh-checkboxes__input" id="input-1" type="checkbox" aria-controls="conditional-1" aria-expanded="false" />
+            <div class="ofh-checkboxes__conditional--hidden" id="conditional-1">Test</div>
+            </div>`;
+      const input = document.querySelector('#input-1');
+      const conditional = document.querySelector('#conditional-1');
+
+      expect(() => Checkboxes()).not.toThrow();
+
+      input.click();
+
+      expect(conditional.classList.contains('ofh-checkboxes__conditional--hidden')).toEqual(false);
+      expect(input.getAttribute('aria-expanded')).toEqual('true');
+    });
   });
 
   describe('hides conditional content', () => {
