@@ -72,11 +72,11 @@ function getAssociatedLegendOrLabel(input) {
  */
 function focusTarget(target) {
   // If the element that was clicked was not a link, return early
-  if (!target || target.tagName !== 'A' || !target.hash) {
+  if (!target || target.tagName !== 'A' || !target.hash || target.hash.length <= 1) {
     return false;
   }
 
-  const input = document.querySelector(target.hash);
+  const input = document.getElementById(target.hash.slice(1));
   if (!input) {
     return false;
   }

@@ -57,17 +57,6 @@ export interface ErrorSummaryProps
   ref?: React.Ref<HTMLDivElement>;
 }
 
-function assignRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
-  if (typeof ref === 'function') {
-    ref(value);
-    return;
-  }
-
-  if (ref) {
-    ref.current = value;
-  }
-}
-
 function getAssociatedLegendOrLabel(input: HTMLElement) {
   const fieldset = input.closest('fieldset');
 
@@ -107,11 +96,11 @@ function getAssociatedLegendOrLabel(input: HTMLElement) {
 }
 
 function focusTarget(target: HTMLAnchorElement | null) {
-  if (!target || !target.hash) {
+  if (!target || !target.hash || target.hash.length <= 1) {
     return false;
   }
 
-  const input = document.querySelector(target.hash);
+  const input = document.getElementById(target.hash.slice(1));
 
   if (!(input instanceof HTMLElement)) {
     return false;
@@ -144,7 +133,6 @@ export const ErrorSummary = ({
   id,
   ...props
 }: ErrorSummaryProps) => {
-  const localRef = React.useRef<HTMLDivElement | null>(null);
   const generatedId = React.useId().replace(/:/g, '');
   const { id: attributeIdValue, ...restAttributes } = attributes ?? {};
   const attributeId =
@@ -181,10 +169,7 @@ export const ErrorSummary = ({
       {...(restAttributes as React.HTMLAttributes<HTMLDivElement>)}
       {...props}
       id={rootId}
-      ref={(node) => {
-        localRef.current = node;
-        assignRef(ref, node);
-      }}
+      ref={ref}
       className={rootClasses}
       aria-labelledby={titleId}
       role="alert"

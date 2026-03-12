@@ -78,6 +78,8 @@ A form input component with label, hint, and error support.
 
 An error summary component for page-level validation messages.
 
+**Security note:** `titleHtml`, `descriptionHtml`, and `errorList[].html` are rendered as raw HTML. Only pass trusted or properly sanitised content to these props. Do not pass untrusted user input directly into them.
+
 **Props:**
 
 - `titleText`: string

@@ -10,6 +10,8 @@ Find out more about the error summary component and when to use it in the [desig
 
 If you render more than one error summary on a page, pass `idPrefix` so each summary heading gets a unique `id`.
 
+If you use `titleHtml`, `descriptionHtml`, or `errorList[].html`, only pass trusted or properly sanitised content. Do not pass untrusted user input directly into those HTML options.
+
 ### HTML markup
 
 ```html

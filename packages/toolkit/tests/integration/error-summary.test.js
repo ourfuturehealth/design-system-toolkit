@@ -95,6 +95,21 @@ describe('Error summary module', () => {
       expect(document.activeElement).toBe(document.querySelector('#email'));
     });
 
+    it('should ignore placeholder hash links without throwing', () => {
+      document.body.innerHTML = `
+        <div role="alert" class="ofh-error-summary">
+          <ul class="ofh-list ofh-error-summary__list">
+            <li><a href="#">Placeholder link</a></li>
+          </ul>
+        </div>
+      `;
+
+      ErrorSummary();
+
+      expect(() => document.querySelector('a[href="#"]').click()).not.toThrow();
+      expect(document.activeElement).toBe(document.body);
+    });
+
     it('should scroll a related legend into view for radio inputs', () => {
       document.body.innerHTML = `
         <div role="alert" class="ofh-error-summary">

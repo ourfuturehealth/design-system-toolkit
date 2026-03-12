@@ -202,6 +202,26 @@ describe('ErrorSummary', () => {
     expect(document.activeElement).toBe(screen.getByLabelText('Email address'));
   });
 
+  it('ignores placeholder hash links without throwing', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <ErrorSummary
+        titleText="There is a problem"
+        errorList={[
+          {
+            text: 'Placeholder link',
+            href: '#',
+          },
+        ]}
+      />,
+    );
+
+    await expect(
+      user.click(screen.getByRole('link', { name: 'Placeholder link' })),
+    ).resolves.not.toThrow();
+  });
+
   it('scrolls a related legend into view for radio inputs', async () => {
     const user = userEvent.setup();
 
