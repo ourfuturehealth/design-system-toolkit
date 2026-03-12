@@ -17,6 +17,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Changed
 
+- Error Summary containers are no longer focusable and are no longer focused on page load; error links still scroll and focus the relevant field
 - Updated the toolkit Error Summary JavaScript to enhance every summary instance on the page instead of only the first one
 - Error Summary links now resolve nested HTML click targets with `closest('a')`, so HTML-rich link content still scrolls and focuses the correct field
 - Expanded toolkit Error Summary documentation and integration coverage for multi-link, multi-summary, and radio / legend behaviour
@@ -38,6 +39,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Changed
 
+- ErrorSummary no longer makes the summary container focusable on mount; linked fields still receive focus when errors are selected
 - React Storybook examples now isolate link targets per story so docs previews do not jump into unrelated story content
 - In-form and multiple-errors stories were expanded to make focus and scroll behaviour easier to validate manually
 

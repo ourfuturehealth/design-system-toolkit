@@ -110,14 +110,9 @@ const meta: Meta<typeof ErrorSummary> = {
       description:
         'Optional prefix used to generate the title id referenced by `aria-labelledby`.',
     },
-    focusOnPageLoad: {
-      control: 'boolean',
-      description: 'Whether the summary should receive focus when it mounts.',
-    },
   },
   args: {
     titleText: 'There is a problem',
-    focusOnPageLoad: false,
     errorList: defaultErrorList,
   },
 };
@@ -153,7 +148,6 @@ export const WithDescription: Story = {
 
 export const MultipleErrors: Story = {
   args: {
-    focusOnPageLoad: false,
     errorList: multipleErrorsList,
   },
   render: (args) => (

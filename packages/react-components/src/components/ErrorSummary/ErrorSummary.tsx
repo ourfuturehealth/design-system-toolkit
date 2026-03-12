@@ -55,10 +55,6 @@ export interface ErrorSummaryProps
    * Ref forwarding for the underlying element.
    */
   ref?: React.Ref<HTMLDivElement>;
-  /**
-   * Focus the summary on mount.
-   */
-  focusOnPageLoad?: boolean;
 }
 
 function assignRef<T>(ref: React.Ref<T> | undefined, value: T | null) {
@@ -143,7 +139,6 @@ export const ErrorSummary = ({
   className = '',
   attributes,
   idPrefix,
-  focusOnPageLoad = true,
   onClick,
   ref,
   id,
@@ -162,20 +157,6 @@ export const ErrorSummary = ({
   const rootClasses = ['ofh-error-summary', classes, className]
     .filter(Boolean)
     .join(' ');
-
-  React.useEffect(() => {
-    const errorSummary = localRef.current;
-
-    if (!focusOnPageLoad || !errorSummary) {
-      return;
-    }
-
-    const firstErrorSummary = document.querySelector('.ofh-error-summary');
-
-    if (firstErrorSummary === errorSummary) {
-      errorSummary.focus();
-    }
-  }, [focusOnPageLoad]);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     onClick?.(event);
@@ -207,7 +188,6 @@ export const ErrorSummary = ({
       className={rootClasses}
       aria-labelledby={titleId}
       role="alert"
-      tabIndex={-1}
       onClick={handleClick}
     >
       <h2

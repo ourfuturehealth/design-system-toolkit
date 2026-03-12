@@ -27,7 +27,6 @@ function App() {
     <div>
       <ErrorSummary
         titleText="There is a problem"
-        focusOnPageLoad={false}
         errorList={[
           {
             text: 'Enter your name',
@@ -89,7 +88,6 @@ An error summary component for page-level validation messages.
 - `classes`: string
 - `attributes`: object
 - `idPrefix`: string
-- `focusOnPageLoad`: boolean
 
 ## Development
 

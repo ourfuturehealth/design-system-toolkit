@@ -39,6 +39,7 @@ describe('ErrorSummary', () => {
     const summary = screen.getByRole('alert');
 
     expect(summary).toHaveClass('ofh-error-summary');
+    expect(summary).not.toHaveAttribute('tabindex');
     expect(screen.getByRole('heading', { name: 'There is a problem' })).toHaveClass(
       'ofh-error-summary__title',
     );
@@ -113,12 +114,10 @@ describe('ErrorSummary', () => {
       <>
         <ErrorSummary
           titleText="First summary"
-          focusOnPageLoad={false}
           errorList={[{ text: 'First error', href: '#first-field' }]}
         />
         <ErrorSummary
           titleText="Second summary"
-          focusOnPageLoad={false}
           errorList={[{ text: 'Second error', href: '#second-field' }]}
         />
       </>,
@@ -131,7 +130,7 @@ describe('ErrorSummary', () => {
     expect(titleIds[0]).not.toEqual(titleIds[1]);
   });
 
-  it('focuses only the first summary on mount by default', () => {
+  it('does not focus the summary on mount', () => {
     render(
       <>
         <ErrorSummary
@@ -145,19 +144,7 @@ describe('ErrorSummary', () => {
       </>,
     );
 
-    expect(document.activeElement).toBe(screen.getAllByRole('alert')[0]);
-  });
-
-  it('does not focus the summary when focusOnPageLoad is false', () => {
-    render(
-      <ErrorSummary
-        titleText="There is a problem"
-        focusOnPageLoad={false}
-        errorList={[{ text: 'Enter your first name', href: '#first-name' }]}
-      />,
-    );
-
-    expect(document.activeElement).not.toBe(screen.getByRole('alert'));
+    expect(document.activeElement).not.toBe(screen.getAllByRole('alert')[0]);
   });
 
   it('focuses the linked input when selecting any error link', async () => {
@@ -167,7 +154,6 @@ describe('ErrorSummary', () => {
       <>
         <ErrorSummary
           titleText="There is a problem"
-          focusOnPageLoad={false}
           errorList={[
             {
               text: 'Enter your first name',
@@ -199,7 +185,6 @@ describe('ErrorSummary', () => {
       <>
         <ErrorSummary
           titleText="There is a problem"
-          focusOnPageLoad={false}
           errorList={[
             {
               html: '<span><strong>Email</strong> address</span>',
@@ -224,7 +209,6 @@ describe('ErrorSummary', () => {
       <>
         <ErrorSummary
           titleText="There is a problem"
-          focusOnPageLoad={false}
           errorList={[
             {
               text: 'Select how to contact you',
@@ -253,7 +237,6 @@ describe('ErrorSummary', () => {
     const { container } = render(
       <ErrorSummary
         titleText="There is a problem"
-        focusOnPageLoad={false}
         errorList={[
           {
             text: 'Enter your first name',

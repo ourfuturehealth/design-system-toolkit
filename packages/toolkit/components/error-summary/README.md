@@ -17,7 +17,6 @@ If you render more than one error summary on a page, pass `idPrefix` so each sum
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
@@ -87,16 +86,13 @@ If you render more than one error summary on a page, pass `idPrefix` so each sum
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
   </h2>
   <div class="ofh-error-summary__body">
     <p>
-      Optional description of the errors and how to correct them.<br />Note that
-      the error summary should receive focus on page load using the JavaScript
-      that comes with this component.
+      Optional description of the errors and how to correct them.
     </p>
     <ul class="ofh-list ofh-error-summary__list">
       <li>
@@ -137,7 +133,7 @@ If you render more than one error summary on a page, pass `idPrefix` so each sum
 
 {{ errorSummary({
   "titleText": "There is a problem",
-  "descriptionHtml": "Optional description of the errors and how to correct them.<br>Note that the error summary should receive focus on page load using the JavaScript that comes with this component.",
+  "descriptionHtml": "Optional description of the errors and how to correct them.",
   "errorList": [
     {
       "text": "Link to input error with explanation",
@@ -172,16 +168,13 @@ If you render more than one error summary on a page, pass `idPrefix` so each sum
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
   </h2>
   <div class="ofh-error-summary__body">
     <p>
-      Optional description of the errors and how to correct them.<br />Note that
-      the error summary should receive focus on page load using the JavaScript
-      that comes with this component.
+      Optional description of the errors and how to correct them.
     </p>
     <ul class="ofh-list ofh-error-summary__list">
       <li>
@@ -252,7 +245,7 @@ If you render more than one error summary on a page, pass `idPrefix` so each sum
 
 {{ errorSummary({
   "titleText": "There is a problem",
-  "descriptionHtml": "Optional description of the errors and how to correct them.<br>Note that the error summary should receive focus on page load using the JavaScript that comes with this component.",
+  "descriptionHtml": "Optional description of the errors and how to correct them.",
   "errorList": [
     {
       "text": "Link to radio error with explanation (Note how it links to the first radio)",

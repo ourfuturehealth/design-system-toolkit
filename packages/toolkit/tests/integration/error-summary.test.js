@@ -23,38 +23,28 @@ describe('Error summary module', () => {
   });
 
   describe('if an error summary exists', () => {
-    beforeEach(() => {
+    it('should not focus on the error summary', () => {
       document.body.innerHTML =
-        '<div role="alert" tabindex="-1" class="ofh-error-summary"></div>';
+        '<div role="alert" class="ofh-error-summary"></div>';
+
       ErrorSummary();
+
+      expect(document.activeElement).toBe(document.body);
     });
 
-    it('should focus on the error summary', () => {
-      const errorSummary = document.querySelector('.ofh-error-summary');
+    it('should not focus any instance when multiple summaries exist', () => {
+      document.body.innerHTML =
+        '<div role="alert" class="ofh-error-summary"></div>';
 
-      expect(document.activeElement).toBe(errorSummary);
-    });
-
-    it('should focus only on the first instance of the error summary', () => {
       const div = document.createElement('div');
       div.innerHTML =
-        '<div role="alert" tabindex="-1" class="ofh-error-summary"></div>';
+        '<div role="alert" class="ofh-error-summary"></div>';
 
       document.body.appendChild(div.firstChild);
 
       expect(document.body.childElementCount).toBe(2);
 
       ErrorSummary();
-
-      expect(document.activeElement).toBe(document.body.firstElementChild);
-      expect(document.activeElement).not.toBe(document.body.children[1]);
-    });
-
-    it('should not focus on the error summary when focusOnPageLoad is false', () => {
-      document.body.innerHTML =
-        '<div role="alert" tabindex="-1" class="ofh-error-summary"></div>';
-
-      ErrorSummary({ focusOnPageLoad: false });
 
       expect(document.activeElement).toBe(document.body);
     });
@@ -63,7 +53,7 @@ describe('Error summary module', () => {
   describe('error links', () => {
     it('should focus the linked input when selecting any error link', () => {
       document.body.innerHTML = `
-        <div role="alert" tabindex="-1" class="ofh-error-summary">
+        <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
             <li><a href="#first-name">Enter your first name</a></li>
             <li><a href="#last-name">Enter your last name</a></li>
@@ -75,7 +65,7 @@ describe('Error summary module', () => {
         <input id="last-name" type="text" />
       `;
 
-      ErrorSummary({ focusOnPageLoad: false });
+      ErrorSummary();
 
       document.querySelector('a[href="#last-name"]').click();
 
@@ -85,7 +75,7 @@ describe('Error summary module', () => {
 
     it('should focus the linked input when clicking nested content inside the link', () => {
       document.body.innerHTML = `
-        <div role="alert" tabindex="-1" class="ofh-error-summary">
+        <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
             <li>
               <a href="#email">
@@ -98,7 +88,7 @@ describe('Error summary module', () => {
         <input id="email" type="email" />
       `;
 
-      ErrorSummary({ focusOnPageLoad: false });
+      ErrorSummary();
 
       document.querySelector('a[href="#email"] span').click();
 
@@ -107,7 +97,7 @@ describe('Error summary module', () => {
 
     it('should scroll a related legend into view for radio inputs', () => {
       document.body.innerHTML = `
-        <div role="alert" tabindex="-1" class="ofh-error-summary">
+        <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
             <li><a href="#contact">Select how to contact you</a></li>
           </ul>
@@ -121,7 +111,7 @@ describe('Error summary module', () => {
       const legend = document.querySelector('legend');
       legend.scrollIntoView = jest.fn();
 
-      ErrorSummary({ focusOnPageLoad: false });
+      ErrorSummary();
 
       document.querySelector('a[href="#contact"]').click();
 
@@ -131,12 +121,12 @@ describe('Error summary module', () => {
 
     it('should enhance links in every error summary instance', () => {
       document.body.innerHTML = `
-        <div role="alert" tabindex="-1" class="ofh-error-summary">
+        <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
             <li><a href="#first-name">Enter your first name</a></li>
           </ul>
         </div>
-        <div role="alert" tabindex="-1" class="ofh-error-summary">
+        <div role="alert" class="ofh-error-summary">
           <ul class="ofh-list ofh-error-summary__list">
             <li><a href="#last-name">Enter your last name</a></li>
           </ul>
@@ -147,7 +137,7 @@ describe('Error summary module', () => {
         <input id="last-name" type="text" />
       `;
 
-      ErrorSummary({ focusOnPageLoad: false });
+      ErrorSummary();
 
       document.querySelectorAll('.ofh-error-summary a')[1].click();
 

@@ -110,15 +110,11 @@ function handleClick(event) {
   }
 }
 
-export default ({ focusOnPageLoad = true } = {}) => {
+export default () => {
   const errorSummaries = document.querySelectorAll('.ofh-error-summary');
 
   if (!errorSummaries.length) {
     return;
-  }
-
-  if (focusOnPageLoad) {
-    errorSummaries[0].focus();
   }
 
   errorSummaries.forEach((errorSummary) => {
