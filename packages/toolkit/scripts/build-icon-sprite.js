@@ -35,5 +35,14 @@ const sprite = [
   ''
 ].join('\n');
 
+if (fs.existsSync(spritePath)) {
+  const existingSprite = fs.readFileSync(spritePath, 'utf8');
+
+  if (existingSprite === sprite) {
+    console.log(`Icon sprite unchanged -> ${path.relative(process.cwd(), spritePath)}`);
+    process.exit(0);
+  }
+}
+
 fs.writeFileSync(spritePath, sprite);
 console.log(`Built sprite with ${symbols.length} symbols -> ${path.relative(process.cwd(), spritePath)}`);

@@ -1,0 +1,43 @@
+{% from 'error-summary/macro.njk' import errorSummary %}
+{% from 'input/macro.njk' import input %}
+
+{{ errorSummary({
+  "titleText": "There is a problem",
+  "idPrefix": "multiple-errors",
+  "errorList": [
+    {
+      "text": "Enter your first name",
+      "href": "#first-name"
+    },
+    {
+      "text": "Enter your last name",
+      "href": "#last-name"
+    }
+  ]
+}) }}
+
+<h1 class="ofh-heading-l">Your details</h1>
+
+{{ input({
+  "label": {
+    "text": "First name"
+  },
+  "id": "first-name",
+  "name": "first-name",
+  "errorMessage": {
+    "text": "Enter your first name"
+  }
+}) }}
+
+<br><br><br><br><br><br>↕ Intentionally long page to demonstrate scrolling to the second error summary link target ↕<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{{ input({
+  "label": {
+    "text": "Last name"
+  },
+  "id": "last-name",
+  "name": "last-name",
+  "errorMessage": {
+    "text": "Enter your last name"
+  }
+}) }}

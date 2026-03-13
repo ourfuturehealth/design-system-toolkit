@@ -1,0 +1,58 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Error summary' %}
+{% from 'error-summary/macro.njk' import errorSummary %}
+{% from 'input/macro.njk' import input %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ errorSummary({
+            "titleText": "There is a problem",
+            "idPrefix": "multiple-errors",
+            "errorList": [
+              {
+                "text": "Enter your first name",
+                "href": "#first-name"
+              },
+              {
+                "text": "Enter your last name",
+                "href": "#last-name"
+              }
+            ]
+          }) }}
+
+          {{ input({
+            "label": {
+              "text": "First name"
+            },
+            "id": "first-name",
+            "name": "first-name",
+            "errorMessage": {
+              "text": "Enter your first name"
+            }
+          }) }}
+
+          <br><br><br><br><br><br>↕ Intentionally long page to demonstrate scrolling to the second error summary link target ↕<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+          {{ input({
+            "label": {
+              "text": "Last name"
+            },
+            "id": "last-name",
+            "name": "last-name",
+            "errorMessage": {
+              "text": "Enter your last name"
+            }
+          }) }}
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

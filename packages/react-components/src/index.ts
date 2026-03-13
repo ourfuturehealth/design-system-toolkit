@@ -13,3 +13,6 @@ export type { ButtonProps } from './components/Button';
 
 export { TextInput } from './components/TextInput';
 export type { TextInputProps } from './components/TextInput';
+
+export { ErrorSummary } from './components/ErrorSummary';
+export type { ErrorSummaryItem, ErrorSummaryProps } from './components/ErrorSummary';

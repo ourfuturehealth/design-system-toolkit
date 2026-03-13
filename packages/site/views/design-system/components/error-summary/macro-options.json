@@ -63,6 +63,12 @@
       "description": "Classes to add to the error-summary container."
     },
     {
+      "name": "idPrefix",
+      "type": "string",
+      "required": false,
+      "description": "Optional prefix used to generate the title id referenced by aria-labelledby. Useful when rendering more than one error summary on the same page."
+    },
+    {
       "name": "attributes",
       "type": "object",
       "required": false,
