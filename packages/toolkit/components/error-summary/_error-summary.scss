@@ -38,6 +38,7 @@
 
 .ofh-error-summary__list a {
   @include ofh-typography-weight-bold;
+
   &:link,
   &:visited,
   &:hover,
