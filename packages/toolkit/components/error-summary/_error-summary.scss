@@ -2,13 +2,8 @@
    COMPONENTS/ #ERROR-SUMMARY
    ========================================================================== */
 
-/**
- * 1. Cross-component class - adjusts styling of list component.
- * 2. Override default link styling to use error colour
- */
-
 .ofh-error-summary {
-  @include ofh-responsive-padding(5);
+  @include ofh-responsive-padding(6);
   @include ofh-responsive-margin(9, 'bottom');
 
   border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
@@ -37,15 +32,12 @@
 }
 
 .ofh-error-summary__list {
-  /* 1 */
   margin-bottom: 0;
   margin-top: 0;
 }
 
 .ofh-error-summary__list a {
   @include ofh-typography-weight-bold;
-
-  /* 2 */
   &:link,
   &:visited,
   &:hover,
