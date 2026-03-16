@@ -69,6 +69,10 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   margin: 0;
 }
 
+.ofh-card__main > .ofh-tag {
+  align-self: flex-start;
+}
+
 .ofh-card__description,
 .ofh-card__action {
   margin: 0;
