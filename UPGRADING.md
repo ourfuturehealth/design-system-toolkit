@@ -372,7 +372,7 @@ Install from specific release tag (recommended):
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.4.0:packages/toolkit"
   }
 }
 ```
@@ -595,7 +595,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.2.0:packages/react-components"
+    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.3.0:packages/react-components"
   }
 }
 ```

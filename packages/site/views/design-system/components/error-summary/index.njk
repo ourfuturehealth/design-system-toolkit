@@ -25,6 +25,8 @@
     <p>Always show an error summary when there is a validation error, even if there’s only 1 mistake.</p>
 
     <h2 id="how-it-works">How to use an error summary</h2>
+    <p>Use <code>titleText</code> and <code>descriptionText</code> for standard content. Only use <code>titleHtml</code> or <code>descriptionHtml</code> when you need trusted inline markup, because the HTML options replace the plain text ones.</p>
+    <p>If you render more than one error summary on a page, pass <code>idPrefix</code> so each summary heading gets a unique <code>id</code> for <code>aria-labelledby</code>.</p>
     <p>You must:</p>
     <ul>
       <li class="rich-text">add "Error: " to the beginning of the <code>&lt;title&gt;</code> so screen readers read it out as soon as possible</li>

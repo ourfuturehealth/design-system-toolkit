@@ -9,7 +9,7 @@ const meta: Meta<ButtonProps> = {
     docs: {
       description: {
         component:
-          'A flexible button component based on the OFH Design System with multiple variants and states. Can render as a button or anchor element.',
+          'A flexible button component based on the OFH Design System with multiple variants and states. If `href` is provided, the component renders as an anchor instead of a button. The `variant` changes the visual prominence only, not the semantic element.',
       },
     },
   },
@@ -25,22 +25,52 @@ const meta: Meta<ButtonProps> = {
         'text',
         'text-inverted',
       ],
-      description: 'Visual style variant of the button',
+      description:
+        'Changes the visual style and prominence of the button. It does not change whether the component renders as a button or link.',
     },
     children: {
       control: 'text',
-      description: 'Button content/text',
+      description: 'Visible label content for the button or link.',
     },
     href: {
       control: 'text',
-      description: 'URL to navigate to (renders as anchor tag)',
+      description:
+        'Navigation destination. When this is set, the component renders as an anchor (`<a>`) instead of a button.',
+    },
+    type: {
+      control: 'select',
+      options: ['button', 'submit', 'reset'],
+      description:
+        'Button type for real `<button>` elements. This has no effect when `href` is set and the component renders as a link.',
     },
     onClick: {
-      description: 'Click handler function for button or anchor elements',
+      control: false,
+      description:
+        'Click handler for button or anchor elements.',
+      table: {
+        category: 'Advanced',
+      },
     },
     disabled: {
       control: 'boolean',
-      description: 'Disable the button (only for button elements)',
+      description:
+        'Disables the button. This only applies to real `<button>` elements and has no effect when `href` is set.',
+    },
+    className: {
+      control: false,
+      description:
+        'Adds extra classes to the root element for layout or integration hooks. It does not replace the built-in variant classes.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    ref: {
+      control: false,
+      description:
+        'React ref for the rendered button or anchor element. Use this only when you need direct access to the DOM node.',
+      table: {
+        category: 'Advanced',
+      },
     },
   },
 };
@@ -105,6 +135,16 @@ export const TextInverted: Story = {
 
 // Multiple variants showcase
 export const AllVariants: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'All available button variants in the OFH Design System.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <Button variant="contained">Contained</Button>
@@ -115,13 +155,6 @@ export const AllVariants: Story = {
       <Button variant="text-inverted">Text Inverted</Button>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All available button variants in the OFH Design System.',
-      },
-    },
-  },
   globals: {
     backgrounds: { value: 'dark' },
   },
@@ -146,6 +179,16 @@ export const AsLink: Story = {
 
 // Link variants showcase
 export const AllLinkVariants: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'All button variants rendered as links with href attributes.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <Button variant="contained" href="#contained">
@@ -168,13 +211,6 @@ export const AllLinkVariants: Story = {
       </Button>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'All button variants rendered as links with href attributes.',
-      },
-    },
-  },
   globals: {
     backgrounds: { value: 'dark' },
   },
@@ -182,6 +218,17 @@ export const AllLinkVariants: Story = {
 
 // Keyboard navigation demo
 export const KeyboardNavigation: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Demonstration of keyboard accessibility. All buttons are keyboard navigable and follow standard interaction patterns.',
+      },
+    },
+  },
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <p style={{ marginBottom: '1rem' }}>
@@ -196,18 +243,21 @@ export const KeyboardNavigation: Story = {
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Demonstration of keyboard accessibility. All buttons are keyboard navigable and follow standard interaction patterns.',
-      },
-    },
-  },
 };
 
 // Form usage example
 export const InForm: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Example of buttons used in a form context with submit and cancel actions.',
+      },
+    },
+  },
   render: () => (
     <form
       onSubmit={(e) => {
@@ -239,12 +289,4 @@ export const InForm: Story = {
       </div>
     </form>
   ),
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Example of buttons used in a form context with submit and cancel actions.',
-      },
-    },
-  },
 };
