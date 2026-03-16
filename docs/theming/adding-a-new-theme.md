@@ -18,6 +18,7 @@ Update `packages/toolkit/core/settings/_tokens-theme.scss`.
    - `$ofh-color-foreground-accent-1..3`
    - `$ofh-color-background-accent-1..3`
    - `$ofh-color-border-accent-1..3`
+   - `$ofh-color-border-header-option-1` when present in Figma
 3. Update the file comments and `@error` message valid values.
 
 ## 1a. Evolving theme-specific token sets (future-proofing)
@@ -32,6 +33,7 @@ If Design adds new theme-specific tokens (for example `accent-4`, or a new famil
    - `foreground`
    - `background`
    - `border`
+   - `header-option`
    - any new family introduced by design
 
 Example (adding `accent-4`):

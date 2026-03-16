@@ -50,6 +50,7 @@ $ofh-radius-circular: $ofh-size-10000; // Fully rounded
 $ofh-color-background-primary: $ofh-color-greyscale-white; // BREAKING: Was grey, now white
 $ofh-color-background-secondary: $ofh-color-greyscale-6;
 $ofh-color-background-tertiary: $ofh-color-greyscale-5;
+$ofh-color-background-brand: $ofh-color-brand-blue-royal-1;
 
 // Secondary background tints
 $ofh-color-background-secondary-blue: $ofh-color-background-neutral-blue;
@@ -67,6 +68,15 @@ $ofh-color-background-brand-green-lime: $ofh-color-brand-green-lime-6;
 $ofh-color-background-brand-yellow: $ofh-color-brand-yellow-6;
 $ofh-color-background-brand-orange: $ofh-color-brand-orange-6;
 $ofh-color-background-brand-red: $ofh-color-brand-red-6;
+
+// Quote backgrounds
+$ofh-color-background-quote-blue-royal: $ofh-color-brand-blue-royal-5;
+$ofh-color-background-quote-blue-aqua: $ofh-color-brand-blue-aqua-5;
+$ofh-color-background-quote-green-teal: $ofh-color-brand-green-teal-5;
+$ofh-color-background-quote-green-lime: $ofh-color-brand-green-lime-5;
+$ofh-color-background-quote-yellow: $ofh-color-brand-yellow-5;
+$ofh-color-background-quote-orange: $ofh-color-brand-orange-5;
+$ofh-color-background-quote-red: $ofh-color-brand-red-5;
 
 // Feedback backgrounds
 $ofh-color-background-feedback-error-1: $ofh-color-feedback-error-4;
@@ -94,6 +104,7 @@ $ofh-color-background-button-active-inverted: $ofh-color-greyscale-5;
 $ofh-color-foreground-primary: $ofh-color-greyscale-1;
 $ofh-color-foreground-primary-inverted: $ofh-color-greyscale-white;
 $ofh-color-foreground-secondary: $ofh-color-greyscale-2;
+$ofh-color-foreground-brand: $ofh-color-brand-blue-navy-3-main;
 
 // Brand foreground colors
 $ofh-color-foreground-brand-blue-navy: $ofh-color-brand-blue-navy-3-main;
