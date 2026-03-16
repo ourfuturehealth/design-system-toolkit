@@ -14,6 +14,36 @@ describe('Card', () => {
     expect(document.querySelector('.ofh-card')).toHaveClass('ofh-card');
   });
 
+  it('adds the dismissible content modifier when a dismiss button is present', () => {
+    render(
+      <Card
+        heading="Dismissible card"
+        description="Dismissible description"
+        dismissButton={{ label: 'Dismiss card' }}
+      />,
+    );
+
+    expect(document.querySelector('.ofh-card__content')).toHaveClass(
+      'ofh-card__content--dismissible',
+    );
+  });
+
+  it('does not add the dismissible content modifier when an image is present', () => {
+    render(
+      <Card
+        heading="Dismissible image card"
+        description="Dismissible image description"
+        imgURL="https://example.com/image.jpg"
+        imgALT=""
+        dismissButton={{ label: 'Dismiss card' }}
+      />,
+    );
+
+    expect(document.querySelector('.ofh-card__content')).not.toHaveClass(
+      'ofh-card__content--dismissible',
+    );
+  });
+
   it('proxies clicks from the card surface to the primary link', async () => {
     const user = userEvent.setup();
 

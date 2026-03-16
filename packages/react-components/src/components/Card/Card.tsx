@@ -133,6 +133,7 @@ export const Card = ({
   const contentClasses = joinClasses(
     'ofh-card__content',
     hasTrailingContent && 'ofh-card__content--with-aside',
+    dismissButton && !imgURL && 'ofh-card__content--dismissible',
   );
 
   const renderHeadingContent = () => {
@@ -261,23 +262,24 @@ export const Card = ({
           </div>
         ) : null}
 
-        {dismissButton ? (
-          <button
-            {...dismissButtonAttributes}
-            className={dismissButtonClassName}
-            type={dismissButtonAttributes.type ?? 'button'}
-          >
-            <span className="ofh-u-visually-hidden">
-              {dismissButton.label ?? 'Dismiss card'}
-            </span>
-            <OfhIcon
-              name="Close"
-              size={32}
-              classes="ofh-card__dismiss-icon"
-            />
-          </button>
-        ) : null}
       </div>
+
+      {dismissButton ? (
+        <button
+          {...dismissButtonAttributes}
+          className={dismissButtonClassName}
+          type={dismissButtonAttributes.type ?? 'button'}
+        >
+          <span className="ofh-u-visually-hidden">
+            {dismissButton.label ?? 'Dismiss card'}
+          </span>
+          <OfhIcon
+            name="Close"
+            size={32}
+            classes="ofh-card__dismiss-icon"
+          />
+        </button>
+      ) : null}
     </div>
   );
 };

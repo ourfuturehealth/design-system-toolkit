@@ -10,13 +10,13 @@
       "name": "heading",
       "type": "string",
       "required": false,
-      "description": "Optional heading text. Defaults to `Do` or `Don’t` from `type`."
+      "description": "Optional label text shown in the navy heading block. Defaults to `Do` or `Don’t` from `type`."
     },
     {
       "name": "headingLevel",
       "type": "integer",
       "required": false,
-      "description": "Optional heading level. Default: 3."
+      "description": "Optional semantic heading level for the label. Default: 3. This changes the HTML heading tag, not the visual styling."
     },
     {
       "name": "items",
@@ -42,13 +42,13 @@
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the Card / Do & Don’t."
+      "description": "Classes to add to the root Card / Do & Don’t element."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes to add to the Card / Do & Don’t."
+      "description": "HTML attributes to add to the root Card / Do & Don’t element, for example an `id`, `data-*` attribute or `aria-*` attribute."
     }
   ]
 }

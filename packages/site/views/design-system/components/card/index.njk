@@ -20,6 +20,7 @@
 
   <h2 id="how-it-works">How it works</h2>
   <p>Cards should stay concise and self-contained. They can include a heading, short supporting content, metadata, a tag, an action link or an icon.</p>
+  <p>Use <code>headingLevel</code> to fit the card heading into the page heading hierarchy. This changes the HTML heading tag, not the visual size. If you need a different visual heading size, use <code>headingClasses</code>.</p>
   <p>Use <a href="/design-system/components/card-callout">Card / Callout</a> for feedback-style messages and <a href="/design-system/components/card-do-dont">Card / Do &amp; Don’t</a> for short lists of recommendations.</p>
   <p>Legacy feature-card and care-card options are deprecated compatibility APIs for existing toolkit consumers. Use the Card family APIs documented here for new work.</p>
 
@@ -56,6 +57,15 @@
     group: "components",
     item: "card",
     type: "basic-dismissible"
+  }) }}
+
+  <h3 id="basic-dismissible-card-with-an-image">Dismissible card with an image</h3>
+  <p>When a dismissible card also includes an image, the dismiss button should stay aligned with the image area while the content continues to wrap cleanly below it.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "card",
+    type: "basic-dismissible-with-image"
   }) }}
 
   <h3 id="basic-success-card">Basic success card</h3>

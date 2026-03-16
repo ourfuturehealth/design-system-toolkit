@@ -65,25 +65,25 @@ Find out more about the Card component and when to use it in the [design system 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `variant` | string | No | Card variant: `basic` or `clickable`. Default: `basic`. |
-| `heading` | string | No | Text heading. Ignored if `headingHtml` is provided. |
-| `headingHtml` | string | No | HTML heading content. |
-| `headingClasses` | string | No | Additional heading classes. |
-| `headingLevel` | integer | No | Heading level. Default: `2`. |
+| `heading` | string | No | Text shown in the main card heading. Ignored if `headingHtml` is provided. |
+| `headingHtml` | string | No | HTML shown in the main card heading. |
+| `headingClasses` | string | No | Additional classes for the heading element, for example to change the visual heading size. |
+| `headingLevel` | integer | No | Semantic heading level. Default: `2`. This changes the HTML heading tag, not the visual styling. |
 | `href` | string | No | Primary card link URL. |
 | `description` | string | No | Plain text body copy. |
 | `descriptionHtml` | string | No | HTML body content. |
 | `icon` | object | No | Trailing icon configuration. |
-| `dismissButton` | object | No | Dismiss button configuration. |
+| `dismissButton` | object | No | Dismiss button configuration. This renders a close button in the card top-right corner. |
 | `number` | string | No | Large numeric value for dashboard-style cards. |
 | `tag` | object | No | Tag macro options passed through to the tag component. |
 | `metadataItems` | array | No | Metadata rows with icon and text. |
 | `helperText` | string | No | Helper text below the main content. |
 | `helperHtml` | string | No | HTML helper content below the main content. |
-| `actionLink` | object | No | Secondary action link. |
-| `imgURL` | string | No | Optional image URL. |
-| `imgALT` | string | No | Alternative text for the image. |
-| `classes` | string | No | Additional classes for the card root. |
-| `attributes` | object | No | Additional HTML attributes for the card root. |
+| `actionLink` | object | No | Secondary action link. In clickable cards without `href`, this can be the primary interactive target. |
+| `imgURL` | string | No | Optional image URL shown at the top of the card. |
+| `imgALT` | string | No | Alternative text for the image. Use an empty string when the image is decorative. |
+| `classes` | string | No | Additional classes for the root card element. |
+| `attributes` | object | No | Additional HTML attributes for the root card element, for example an `id`, `data-*` attribute or `aria-*` attribute. |
 
 ### Deprecated compatibility APIs
 

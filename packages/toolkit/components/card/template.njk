@@ -23,6 +23,7 @@
   <div class="{%- if not hasLegacyCare %}ofh-card__content
                 {%- if hasLegacyFeature %} ofh-card__content--feature{% endif %}
                 {%- if hasTrailingContent %} ofh-card__content--with-aside{% endif %}
+                {%- if dismissButton and not params.imgURL %} ofh-card__content--dismissible{% endif %}
                 {%- else %}ofh-card--care__heading-container{% endif %}">
     <div class="ofh-card__main">
       {%- if params.headingHtml %}
@@ -121,15 +122,15 @@
         {%- endif %}
       </div>
     {%- endif %}
-
-    {%- if dismissButton %}
-      <button class="ofh-card__dismiss" type="button"
-      {%- for attribute, value in dismissButton.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-        <span class="ofh-u-visually-hidden">
-          {{ dismissButton.label if dismissButton.label else 'Dismiss card' }}
-        </span>
-        {{ icon({ "name": "Close", "size": 32, "classes": "ofh-card__dismiss-icon" }) }}
-      </button>
-    {%- endif %}
   </div>
+
+  {%- if dismissButton %}
+    <button class="ofh-card__dismiss" type="button"
+    {%- for attribute, value in dismissButton.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      <span class="ofh-u-visually-hidden">
+        {{ dismissButton.label if dismissButton.label else 'Dismiss card' }}
+      </span>
+      {{ icon({ "name": "Close", "size": 32, "classes": "ofh-card__dismiss-icon" }) }}
+    </button>
+  {%- endif %}
 </div>

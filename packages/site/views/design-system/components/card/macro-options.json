@@ -10,25 +10,25 @@
       "name": "heading",
       "type": "string",
       "required": false,
-      "description": "Text to use within the heading. Ignored if `headingHtml` is provided."
+      "description": "Text to use within the main card heading. Ignored if `headingHtml` is provided."
     },
     {
       "name": "headingHtml",
       "type": "string",
       "required": false,
-      "description": "HTML to use within the heading."
+      "description": "HTML to use within the main card heading."
     },
     {
       "name": "headingClasses",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the heading."
+      "description": "Classes to add to the heading element, for example to change the visual heading size."
     },
     {
       "name": "headingLevel",
       "type": "integer",
       "required": false,
-      "description": "Optional heading level. Default: 2."
+      "description": "Optional semantic heading level. Default: 2. This changes the HTML heading tag, not the visual styling."
     },
     {
       "name": "href",
@@ -90,7 +90,7 @@
       "name": "dismissButton",
       "type": "object",
       "required": false,
-      "description": "Optional dismiss button configuration.",
+      "description": "Optional dismiss button configuration. This renders a close button in the card top-right corner.",
       "params": [
         {
           "name": "label",
@@ -160,7 +160,7 @@
       "name": "actionLink",
       "type": "object",
       "required": false,
-      "description": "Secondary action link for the card.",
+      "description": "Secondary action link for the card. In clickable cards without `href`, this can be the primary interactive target.",
       "params": [
         {
           "name": "text",
@@ -186,25 +186,25 @@
       "name": "imgURL",
       "type": "string",
       "required": false,
-      "description": "Optional image URL."
+      "description": "Optional image URL shown at the top of the card."
     },
     {
       "name": "imgALT",
       "type": "string",
       "required": false,
-      "description": "Alternative text for the image."
+      "description": "Alternative text for the image. Use an empty string when the image is decorative."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the card."
+      "description": "Classes to add to the root card element."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes to add to the card."
+      "description": "HTML attributes to add to the root card element, for example an `id`, `data-*` attribute or `aria-*` attribute."
     },
     {
       "name": "clickable",

@@ -28,8 +28,18 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 .ofh-card__content {
   @include top-and-bottom();
   @include ofh-responsive-padding(7);
+}
 
-  position: relative;
+.ofh-card__content--dismissible {
+  padding-right: calc(#{ofh-spacing(4)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+
+  @include mq($from: tablet) {
+    padding-right: calc(#{ofh-spacing(5)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+  }
+
+  @include mq($from: desktop) {
+    padding-right: calc(#{ofh-spacing(6)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+  }
 }
 
 .ofh-card__content--with-aside,
@@ -143,6 +153,7 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   position: absolute;
   right: ofh-spacing(4);
   top: ofh-spacing(4);
+  z-index: 1;
 
   @include mq($from: tablet) {
     right: ofh-spacing(5);

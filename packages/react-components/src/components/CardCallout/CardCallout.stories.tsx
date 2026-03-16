@@ -9,7 +9,7 @@ const meta: Meta<typeof CardCallout> = {
     docs: {
       description: {
         component:
-          'Use Card / Callout to highlight contextual information such as informational, warning, success or error messages.',
+          'Use Card / Callout to highlight contextual information such as informational, warning, success or error messages. `heading` changes the colored label text. `headingLevel` changes the semantic heading tag used for that label, but does not change the visual styling.',
       },
     },
   },
@@ -18,15 +18,63 @@ const meta: Meta<typeof CardCallout> = {
     variant: {
       control: 'select',
       options: ['info', 'error', 'success', 'warning'],
-      description: 'Callout variant.',
+      description:
+        'Changes the callout color scheme to match the type of message: informational, warning, success, or error.',
     },
     heading: {
       control: 'text',
-      description: 'Callout heading.',
+      description:
+        'Text shown in the colored label block at the top of the callout.',
+    },
+    headingHtml: {
+      control: false,
+      description:
+        'Trusted HTML to render inside the label. When this is provided, it replaces `heading`.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    headingLevel: {
+      control: 'select',
+      options: [2, 3, 4, 5, 6],
+      description:
+        'Changes the semantic heading element for the label, for example `h2` or `h3`. This helps the callout fit the page heading hierarchy, but does not change the visual appearance.',
+    },
+    html: {
+      control: false,
+      description:
+        'Trusted HTML content for the callout body. When this is provided, it replaces `text`.',
+      table: {
+        category: 'Advanced',
+      },
     },
     text: {
       control: 'text',
-      description: 'Plain text body content.',
+      description: 'Plain text body content shown inside the callout.',
+    },
+    classes: {
+      control: false,
+      description:
+        'Toolkit-parity alias for adding extra classes to the root element. In React-only usage, prefer `className`.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    className: {
+      control: false,
+      description:
+        'Adds extra classes to the root callout element for layout or integration hooks. It does not change the built-in variants by itself.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    ref: {
+      control: false,
+      description:
+        'React ref for the root `<div>` element. Use this only when you need direct access to the rendered DOM node.',
+      table: {
+        category: 'Advanced',
+      },
     },
   },
 };
@@ -87,6 +135,11 @@ export const Error: Story = {
 };
 
 export const AllVariants: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
   render: () => (
     <div style={{ display: 'grid', gap: '1rem', maxWidth: '32rem' }}>
       <CardCallout

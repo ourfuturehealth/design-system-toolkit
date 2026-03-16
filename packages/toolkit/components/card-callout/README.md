@@ -40,13 +40,13 @@ Find out more about the Card / Callout component and when to use it in the [desi
 
 | Name                 | Type     | Required | Description |
 | -------------------- | -------- | -------- | ----------- |
-| heading              | string   | Yes      | Heading text for the callout. Ignored when `headingHtml` is provided. |
+| heading              | string   | Yes      | Text shown in the colored label block for the callout. Ignored when `headingHtml` is provided. |
 | headingHtml          | string   | No       | HTML to use inside the heading element. |
-| headingLevel         | integer  | No       | Optional heading level. Default: `3`. |
+| headingLevel         | integer  | No       | Semantic heading level for the label. Default: `3`. This changes the HTML heading tag, not the visual styling. |
 | variant              | string   | No       | Visual variant: `info`, `error`, `success`, or `warning`. Default: `info`. |
-| html                 | string   | No       | HTML content inside the callout body. |
-| text                 | string   | No       | Plain text content inside the callout body. |
-| classes              | string   | No       | Optional additional classes for the root element. |
-| attributes           | object   | No       | Optional HTML attributes for the root element. |
+| html                 | string   | No       | HTML content inside the callout body. When this is provided, it replaces `text`. |
+| text                 | string   | No       | Plain text content inside the callout body. Ignored if `html` is provided. |
+| classes              | string   | No       | Optional additional classes for the root callout element. |
+| attributes           | object   | No       | Optional HTML attributes for the root callout element, for example an `id`, `data-*` attribute or `aria-*` attribute. |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).

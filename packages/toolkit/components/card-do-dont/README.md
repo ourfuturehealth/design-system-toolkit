@@ -47,11 +47,11 @@ Find out more about the Card / Do & Don’t component and when to use it in the 
 | Name                 | Type     | Required | Description |
 | -------------------- | -------- | -------- | ----------- |
 | type                 | string   | No       | Visual type: `do` or `dont`. Default: `do`. |
-| heading              | string   | No       | Optional heading. Defaults to `Do` or `Don’t` from `type`. |
-| headingLevel         | integer  | No       | Optional heading level. Default: `3`. |
+| heading              | string   | No       | Optional label text shown in the navy heading block. Defaults to `Do` or `Don’t` from `type`. |
+| headingLevel         | integer  | No       | Optional semantic heading level for the label. Default: `3`. This changes the HTML heading tag, not the visual styling. |
 | items                | array    | Yes      | Array of item objects with an `item` string. |
 | classes              | string   | No       | Optional additional classes for the root element. |
-| attributes           | object   | No       | Optional HTML attributes for the root element. |
+| attributes           | object   | No       | Optional HTML attributes for the root element, for example an `id`, `data-*` attribute or `aria-*` attribute. |
 
 ### Deprecated compatibility API
 
