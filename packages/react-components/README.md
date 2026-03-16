@@ -7,19 +7,26 @@ React component library for the OFH Design System.
 Install from the monorepo using a package-specific Git tag and subdirectory.
 
 ```bash
-pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.2.0:packages/react-components
 ```
 
 or
 
 ```bash
-npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.2.0:packages/react-components
 ```
 
 ## Usage
 
 ```tsx
-import { Button, ErrorSummary, TextInput } from '@ourfuturehealth/react-components';
+import {
+  Button,
+  Card,
+  CardCallout,
+  CardDoDont,
+  ErrorSummary,
+  TextInput,
+} from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -35,6 +42,9 @@ function App() {
         ]}
       />
       <Button variant="contained">Click me</Button>
+      <Card heading="Profile complete" description="You’ve completed all the required profile details." />
+      <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
+      <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />
       <TextInput id="name" label="Your name" />
     </div>
   );
@@ -90,6 +100,43 @@ An error summary component for page-level validation messages.
 - `classes`: string
 - `attributes`: object
 - `idPrefix`: string
+
+### Card
+
+A content-presentation card for summary, status, and next-step content.
+
+**Props:**
+
+- `variant`: 'basic' | 'clickable'
+- `heading`, `headingHtml`, `headingLevel`
+- `description`, `descriptionHtml`
+- `icon`, `dismissButton`, `number`, `tag`
+- `metadataItems`, `helperText`, `helperHtml`, `actionLink`
+- `imgURL`, `imgALT`
+
+### CardCallout
+
+A feedback-style card for contextual info, warning, success, and error content.
+
+**Props:**
+
+- `variant`: 'info' | 'warning' | 'success' | 'error'
+- `heading`, `headingHtml`, `headingLevel`
+- `text` or `html`
+
+### CardDoDont
+
+A card for short do and don’t recommendation lists.
+
+**Props:**
+
+- `type`: 'do' | 'dont'
+- `heading`, `headingLevel`
+- `items`
+
+### Icons
+
+React components bundle the toolkit icon sprite automatically. Consumers do not need to copy `/assets/icons/icon-sprite.svg` into their own app to render Card icons.
 
 ## Development
 

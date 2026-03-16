@@ -19,6 +19,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "vitest.shims.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
