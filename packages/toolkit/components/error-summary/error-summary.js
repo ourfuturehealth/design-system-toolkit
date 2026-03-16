@@ -20,7 +20,7 @@ function getAssociatedLegendOrLabel(input) {
     const legends = fieldset.getElementsByTagName('legend');
 
     if (legends.length) {
-      const candidateLegend = legends[0];  
+      const candidateLegend = legends[0];
 
       // If the input type is radio or checkbox, always use the legend if there
       // is one.
@@ -50,8 +50,7 @@ function getAssociatedLegendOrLabel(input) {
   }
 
   return (
-    document.querySelector(`label[for='${input.getAttribute('id')}']`)
-    || input.closest('label')
+    document.querySelector(`label[for='${input.getAttribute('id')}']`) || input.closest('label')
   );
 }
 
@@ -72,11 +71,11 @@ function getAssociatedLegendOrLabel(input) {
  */
 function focusTarget(target) {
   // If the element that was clicked was not a link, return early
-  if (target.tagName !== 'A' || target.href === false) {
+  if (!target || target.tagName !== 'A' || !target.hash || target.hash.length <= 1) {
     return false;
   }
 
-  const input = document.querySelector(target.hash);
+  const input = document.getElementById(target.hash.slice(1));
   if (!input) {
     return false;
   }
@@ -86,10 +85,14 @@ function focusTarget(target) {
     return false;
   }
 
-  // Scroll the legend or label into view *before* calling focus on the input to
-  // avoid extra scrolling in browsers that don't support `preventScroll` (which
-  // at time of writing is most of them...)
-  legendOrLabel.scrollIntoView();
+  const scrollTarget =
+    legendOrLabel.tagName === 'LEGEND'
+      ? legendOrLabel.closest('fieldset') || legendOrLabel
+      : legendOrLabel;
+
+  // Scroll the relevant question context into view before calling focus so the
+  // user is presented with the question context.
+  scrollTarget.scrollIntoView();
   input.focus({ preventScroll: true });
 
   return true;
@@ -99,21 +102,25 @@ function focusTarget(target) {
  * Handle click events on the error summary
  */
 function handleClick(event) {
-  if (focusTarget(event.target)) {
+  if (!(event.target instanceof Element)) {
+    return;
+  }
+
+  const link = event.target.closest('a');
+
+  if (focusTarget(link)) {
     event.preventDefault();
   }
 }
 
-export default ({ focusOnPageLoad = true } = {}) => {
-  // Error summary component
-  const errorSummary = document.querySelector('.ofh-error-summary');
+export default () => {
+  const errorSummaries = document.querySelectorAll('.ofh-error-summary');
 
-  if (errorSummary) {
-    // Focus error summary component if it exists
-
-    if (focusOnPageLoad) {
-      errorSummary.focus();
-    }
-    errorSummary.addEventListener('click', handleClick);
+  if (!errorSummaries.length) {
+    return;
   }
+
+  errorSummaries.forEach((errorSummary) => {
+    errorSummary.addEventListener('click', handleClick);
+  });
 };

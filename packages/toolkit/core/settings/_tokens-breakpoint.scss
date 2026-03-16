@@ -174,14 +174,14 @@ $ofh-typography-responsive-scale: (
     null: (
       font-size: $ofh-size-20,
       // Mobile: 20px
-      line-height: $ofh-size-28,
-      // Mobile: 28px (1.4 ratio)
+      line-height: $ofh-size-32,
+      // Mobile: 32px (1.6 ratio)
     ),
     tablet: (
       font-size: $ofh-size-20,
       // Tablet: 20px
-      line-height: $ofh-size-28,
-      // Tablet: 28px
+      line-height: $ofh-size-32,
+      // Tablet: 32px
     ),
     desktop: (
       font-size: $ofh-size-24,
@@ -194,20 +194,20 @@ $ofh-typography-responsive-scale: (
     null: (
       font-size: $ofh-size-18,
       // Mobile: 18px
-      line-height: $ofh-size-24,
-      // Mobile: 24px (1.333 ratio)
+      line-height: $ofh-size-32,
+      // Mobile: 32px (1.778 ratio)
     ),
     tablet: (
-      font-size: $ofh-size-20,
-      // Tablet: 20px
-      line-height: $ofh-size-28,
-      // Tablet: 28px (1.4 ratio)
+      font-size: $ofh-size-18,
+      // Tablet: 18px
+      line-height: $ofh-size-32,
+      // Tablet: 32px (1.778 ratio)
     ),
     desktop: (
       font-size: $ofh-size-22,
       // Desktop: 22px
-      line-height: $ofh-size-28,
-      // Desktop: 28px (1.273 ratio)
+      line-height: $ofh-size-32,
+      // Desktop: 32px (1.455 ratio)
     ),
   ),
   h5: (
@@ -216,6 +216,46 @@ $ofh-typography-responsive-scale: (
       // Mobile: 16px
       line-height: $ofh-size-24,
       // Mobile: 24px (1.5 ratio)
+    ),
+    tablet: (
+      font-size: $ofh-size-16,
+      // Tablet: 16px
+      line-height: $ofh-size-24,
+      // Tablet: 24px (1.5 ratio)
+    ),
+    desktop: (
+      font-size: $ofh-size-20,
+      // Desktop: 20px
+      line-height: $ofh-size-28,
+      // Desktop: 28px (1.4 ratio)
+    ),
+  ),
+  lead: (
+    null: (
+      font-size: $ofh-size-20,
+      // Mobile: 20px
+      line-height: $ofh-size-32,
+      // Mobile: 32px (1.6 ratio)
+    ),
+    tablet: (
+      font-size: $ofh-size-20,
+      // Tablet: 20px
+      line-height: $ofh-size-32,
+      // Tablet: 32px
+    ),
+    desktop: (
+      font-size: $ofh-size-24,
+      // Desktop: 24px
+      line-height: $ofh-size-32,
+      // Desktop: 32px (1.333 ratio)
+    ),
+  ),
+  paragraph: (
+    null: (
+      font-size: $ofh-size-18,
+      // Mobile: 18px
+      line-height: $ofh-size-24,
+      // Mobile: 24px (1.333 ratio)
     ),
     tablet: (
       font-size: $ofh-size-18,
@@ -230,27 +270,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 28px (1.4 ratio)
     ),
   ),
-  lead: (
-    null: (
-      font-size: $ofh-size-20,
-      // Mobile: 20px
-      line-height: $ofh-size-28,
-      // Mobile: 28px (1.4 ratio)
-    ),
-    tablet: (
-      font-size: $ofh-size-20,
-      // Tablet: 20px
-      line-height: $ofh-size-28,
-      // Tablet: 28px
-    ),
-    desktop: (
-      font-size: $ofh-size-24,
-      // Desktop: 24px
-      line-height: $ofh-size-32,
-      // Desktop: 32px (1.333 ratio)
-    ),
-  ),
-  paragraph: (
+  paragraph-small: (
     null: (
       font-size: $ofh-size-16,
       // Mobile: 16px
@@ -258,30 +278,10 @@ $ofh-typography-responsive-scale: (
       // Mobile: 24px (1.5 ratio)
     ),
     tablet: (
-      font-size: $ofh-size-18,
-      // Tablet: 18px
-      line-height: $ofh-size-28,
-      // Tablet: 28px (1.556 ratio)
-    ),
-    desktop: (
-      font-size: $ofh-size-20,
-      // Desktop: 20px
-      line-height: $ofh-size-28,
-      // Desktop: 28px (1.4 ratio)
-    ),
-  ),
-  paragraph-small: (
-    null: (
-      font-size: $ofh-size-14,
-      // Mobile: 14px
-      line-height: $ofh-size-20,
-      // Mobile: 20px (1.429 ratio)
-    ),
-    tablet: (
-      font-size: $ofh-size-14,
-      // Tablet: 14px
-      line-height: $ofh-size-20,
-      // Tablet: 20px
+      font-size: $ofh-size-16,
+      // Tablet: 16px
+      line-height: $ofh-size-24,
+      // Tablet: 24px
     ),
     desktop: (
       font-size: $ofh-size-16,
@@ -292,16 +292,16 @@ $ofh-typography-responsive-scale: (
   ),
   list: (
     null: (
-      font-size: $ofh-size-16,
-      // Mobile: 16px
+      font-size: $ofh-size-18,
+      // Mobile: 18px
       line-height: $ofh-size-24,
-      // Mobile: 24px (1.5 ratio)
+      // Mobile: 24px (1.333 ratio)
     ),
     tablet: (
       font-size: $ofh-size-18,
       // Tablet: 18px
-      line-height: $ofh-size-28,
-      // Tablet: 28px (1.556 ratio)
+      line-height: $ofh-size-24,
+      // Tablet: 24px (1.333 ratio)
     ),
     desktop: (
       font-size: $ofh-size-20,
@@ -312,16 +312,16 @@ $ofh-typography-responsive-scale: (
   ),
   list-small: (
     null: (
-      font-size: $ofh-size-14,
-      // Mobile: 14px
-      line-height: $ofh-size-20,
-      // Mobile: 20px (1.429 ratio)
+      font-size: $ofh-size-16,
+      // Mobile: 16px
+      line-height: $ofh-size-24,
+      // Mobile: 24px (1.5 ratio)
     ),
     tablet: (
-      font-size: $ofh-size-14,
-      // Tablet: 14px
-      line-height: $ofh-size-20,
-      // Tablet: 20px
+      font-size: $ofh-size-16,
+      // Tablet: 16px
+      line-height: $ofh-size-24,
+      // Tablet: 24px
     ),
     desktop: (
       font-size: $ofh-size-16,
@@ -332,11 +332,90 @@ $ofh-typography-responsive-scale: (
   ),
 );
 
+// Responsive Paragraph Spacing Scale
+// ==========================================================================
+
+// Paragraph spacing tokens map to text style names from Figma.
+// Keep them separate from the typography scale because paragraph spacing is
+// layout metadata, not a property emitted by the typography helper.
+
+$ofh-paragraph-spacing-responsive-scale: (
+  h1: (
+    null: $ofh-size-40,
+    tablet: $ofh-size-40,
+    desktop: $ofh-size-48,
+  ),
+  h2: (
+    null: $ofh-size-28,
+    tablet: $ofh-size-28,
+    desktop: $ofh-size-24,
+  ),
+  h3: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  h4: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  h5: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  lead: (
+    null: $ofh-size-32,
+    tablet: $ofh-size-32,
+    desktop: $ofh-size-32,
+  ),
+  paragraph: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  paragraph-small: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  list: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-8,
+  ),
+  list-small: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-8,
+  ),
+);
+
 // Responsive Iconography Scale
 // ==========================================================================
 
-// Icon sizes (consistent across breakpoints in Figma)
+// Icon sizes
+// These map to the breakpoint collection in Figma.
+// Keep the scalar aliases below as desktop defaults for backward compatibility.
 
+$ofh-iconography-responsive-scale: (
+  16: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-16,
+  ),
+  24: (
+    null: $ofh-size-24,
+    tablet: $ofh-size-24,
+    desktop: $ofh-size-24,
+  ),
+  32: (
+    null: $ofh-size-24,
+    tablet: $ofh-size-24,
+    desktop: $ofh-size-32,
+  ),
+);
 $ofh-iconography-16: $ofh-size-16;
 $ofh-iconography-24: $ofh-size-24;
 $ofh-iconography-32: $ofh-size-32;

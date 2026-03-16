@@ -8,6 +8,10 @@ Find out more about the error summary component and when to use it in the [desig
 
 [Preview the error summary component](https://ourfuturehealth.github.io/design-system-toolkit/components/error-summary/index.html)
 
+If you render more than one error summary on a page, pass `idPrefix` so each summary heading gets a unique `id`.
+
+If you use `titleHtml`, `descriptionHtml`, or `errorList[].html`, only pass trusted or properly sanitised content. Do not pass untrusted user input directly into those HTML options.
+
 ### HTML markup
 
 ```html
@@ -15,7 +19,6 @@ Find out more about the error summary component and when to use it in the [desig
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
@@ -38,11 +41,37 @@ Find out more about the error summary component and when to use it in the [desig
 
 {{ errorSummary({
   "titleText": "There is a problem",
+  "idPrefix": "error-summary-example",
   "descriptionText": "Describe the errors and how to correct them",
   "errorList": [
     {
       "text": "Date of birth must be in the past",
       "href": "#example-error-1"
+    }
+  ]
+}) }}
+```
+
+## With multiple errors
+
+[Preview the error summary component with multiple links](https://ourfuturehealth.github.io/design-system-toolkit/components/error-summary/multiple-errors.html)
+
+### Nunjucks macro
+
+```
+{% from 'components/error-summary/macro.njk' import errorSummary %}
+
+{{ errorSummary({
+  "titleText": "There is a problem",
+  "idPrefix": "multiple-errors",
+  "errorList": [
+    {
+      "text": "Enter your first name",
+      "href": "#first-name"
+    },
+    {
+      "text": "Enter your last name",
+      "href": "#last-name"
     }
   ]
 }) }}
@@ -59,16 +88,13 @@ Find out more about the error summary component and when to use it in the [desig
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
   </h2>
   <div class="ofh-error-summary__body">
     <p>
-      Optional description of the errors and how to correct them.<br />Note that
-      the error summary should receive focus on page load using the JavaScript
-      that comes with this component.
+      Optional description of the errors and how to correct them.
     </p>
     <ul class="ofh-list ofh-error-summary__list">
       <li>
@@ -109,7 +135,7 @@ Find out more about the error summary component and when to use it in the [desig
 
 {{ errorSummary({
   "titleText": "There is a problem",
-  "descriptionHtml": "Optional description of the errors and how to correct them.<br>Note that the error summary should receive focus on page load using the JavaScript that comes with this component.",
+  "descriptionHtml": "Optional description of the errors and how to correct them.",
   "errorList": [
     {
       "text": "Link to input error with explanation",
@@ -144,16 +170,13 @@ Find out more about the error summary component and when to use it in the [desig
   class="ofh-error-summary"
   aria-labelledby="error-summary-title"
   role="alert"
-  tabindex="-1"
 >
   <h2 class="ofh-error-summary__title" id="error-summary-title">
     There is a problem
   </h2>
   <div class="ofh-error-summary__body">
     <p>
-      Optional description of the errors and how to correct them.<br />Note that
-      the error summary should receive focus on page load using the JavaScript
-      that comes with this component.
+      Optional description of the errors and how to correct them.
     </p>
     <ul class="ofh-list ofh-error-summary__list">
       <li>
@@ -224,7 +247,7 @@ Find out more about the error summary component and when to use it in the [desig
 
 {{ errorSummary({
   "titleText": "There is a problem",
-  "descriptionHtml": "Optional description of the errors and how to correct them.<br>Note that the error summary should receive focus on page load using the JavaScript that comes with this component.",
+  "descriptionHtml": "Optional description of the errors and how to correct them.",
   "errorList": [
     {
       "text": "Link to radio error with explanation (Note how it links to the first radio)",
@@ -274,6 +297,7 @@ The error summary Nunjucks macro takes the following arguments:
 | **errorList.{}.text (or) errorList.{}.html** | string | No       | Text or HTML for the error link item. If `html` is provided, the `text` argument will be ignored.                                     |
 | **errorList.{}.attributes**                  | object | No       | Any extra HTML attributes (for example data attributes) to add to the error link anchor.                                              |
 | **classes**                                  | string | No       | Optional additional classes to add to the error-summary container. Separate each class with a space.                                  |
+| **idPrefix**                                 | string | No       | Optional prefix used to generate the heading `id` referenced by `aria-labelledby`. Use it when rendering multiple summaries on a page. |
 | **attributes**                               | object | No       | Any extra HTML attributes (for example data attributes) to add to the error-summary container.                                        |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).

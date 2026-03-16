@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Include an error summary at the top of a page to summarise any mistakes a user has made." %}
 {% set theme = "Form elements" %}
-{% set dateUpdated = "June 2020" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "13" %}
 
 {% extends "app-layout.njk" %}
@@ -29,7 +29,7 @@
     <ul>
       <li class="rich-text">add "Error: " to the beginning of the <code>&lt;title&gt;</code> so screen readers read it out as soon as possible</li>
       <li>show an error summary at the top of a page</li>
-      <li>move the keyboard focus to the error summary</li>
+      <li>keep the error summary itself unfocusable</li>
       <li>include the heading "There is a problem"</li>
       <li>link to each of the answers that have validation errors</li>
       <li>show the same error messages next to the inputs with errors</li>
@@ -38,6 +38,15 @@
 
     <h3 id="linking-from-the-error-summary-to-each-answer">Linking from the error summary to each answer</h3>
     <p>You must link the errors in the error summary to the answer they relate to.</p>
+    <p>If there are multiple validation errors on a page, include a link for each error in the summary.</p>
+    <p>When a user selects an error link, move focus to the relevant answer. For grouped questions, keep the question context visible while focus moves to the linked field, radio or checkbox.</p>
+
+    {{ designExample({
+      group: "components",
+      item: "error-summary",
+      type: "multiple-errors"
+    }) }}
+
     <p>For questions that require a user to answer using a single field, like a select, textarea or text input, link to the field.</p>
 
     {{ designExample({

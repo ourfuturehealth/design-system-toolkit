@@ -1,0 +1,35 @@
+// ==========================================================================
+// TOOLS / #ICONS
+// ==========================================================================
+
+@use 'sass:map';
+
+// Responsive iconography
+// ==========================================================================
+
+// Applies responsive width and height values for an icon size from
+// the breakpoint iconography scale.
+// This is opt-in. The default `.ofh-icon--16/24/32` classes remain fixed-size
+// for backwards compatibility.
+
+// @param {Number} $size - Icon size key from the responsive iconography scale
+
+@mixin ofh-iconography-responsive($size) {
+  @if not map.has-key($ofh-iconography-responsive-scale, $size) {
+    @error 'Unknown icon size `#{$size}`. Make sure you are using a size from the responsive iconography scale in `_tokens-breakpoint.scss`. Valid sizes: 16, 24, 32';
+  }
+
+  $icon-map: map.get($ofh-iconography-responsive-scale, $size);
+
+  @each $breakpoint, $breakpoint-value in $icon-map {
+    @if not $breakpoint {
+      height: $breakpoint-value;
+      width: $breakpoint-value;
+    } @else {
+      @include govuk-media-query($from: $breakpoint) {
+        height: $breakpoint-value;
+        width: $breakpoint-value;
+      }
+    }
+  }
+}

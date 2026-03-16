@@ -19,14 +19,23 @@ npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-syst
 ## Usage
 
 ```tsx
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, ErrorSummary, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
     <div>
+      <ErrorSummary
+        titleText="There is a problem"
+        errorList={[
+          {
+            text: 'Enter your name',
+            href: '#name',
+          },
+        ]}
+      />
       <Button variant="contained">Click me</Button>
-      <TextInput label="Your name" />
+      <TextInput id="name" label="Your name" />
     </div>
   );
 }
@@ -64,6 +73,23 @@ A form input component with label, hint, and error support.
 - `width`: 'full' | 'three-quarters' | 'two-thirds' | 'one-half' | 'one-third' | 'one-quarter'
 - `maxLength`: 2 | 3 | 4 | 5 | 10 | 20
 - `id`: string
+
+### ErrorSummary
+
+An error summary component for page-level validation messages.
+
+**Security note:** `titleHtml`, `descriptionHtml`, and `errorList[].html` are rendered as raw HTML. Only pass trusted or properly sanitised content to these props. Do not pass untrusted user input directly into them.
+
+**Props:**
+
+- `titleText`: string
+- `titleHtml`: string
+- `descriptionText`: string
+- `descriptionHtml`: string
+- `errorList`: { href?: string; text?: string; html?: string; attributes?: object }[]
+- `classes`: string
+- `attributes`: object
+- `idPrefix`: string
 
 ## Development
 
