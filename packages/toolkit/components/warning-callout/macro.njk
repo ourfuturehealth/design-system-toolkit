@@ -1,3 +1,23 @@
+{% from '../card-callout/macro.njk' import cardCallout %}
+
 {% macro warningCallout(params) %}
-  {%- include './template.njk' -%}
+  {% set heading = params.heading if params.heading else 'Important' %}
+  {% set visuallyHiddenPrefix = false %}
+
+  {% if "Important" not in heading and "important" not in heading %}
+    {% set visuallyHiddenPrefix = 'Important:' %}
+  {% endif %}
+
+  {{ cardCallout({
+    "heading": heading,
+    "headingLevel": params.headingLevel,
+    "html": params.html if params.html else params.HTML,
+    "classes": params.classes,
+    "attributes": params.attributes,
+    "variant": "warning",
+    "rootAliasClass": "ofh-warning-callout",
+    "labelAliasClass": "ofh-warning-callout__label",
+    "contentAliasClass": "ofh-warning-callout__content",
+    "visuallyHiddenPrefix": visuallyHiddenPrefix
+  }) }}
 {% endmacro %}

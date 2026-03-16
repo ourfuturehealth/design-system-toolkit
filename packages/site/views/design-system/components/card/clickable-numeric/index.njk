@@ -1,0 +1,10 @@
+{% from 'card/macro.njk' import card %}
+
+{{ card({
+  "variant": "clickable",
+  "number": "12",
+  "actionLink": {
+    "text": "Open tasks",
+    "href": "#"
+  }
+}) }}

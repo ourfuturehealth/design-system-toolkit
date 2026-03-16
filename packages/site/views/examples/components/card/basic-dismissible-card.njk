@@ -1,0 +1,25 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Basic dismissible card' %}
+{% from 'card/macro.njk' import card %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ card({
+            "heading": "Update available",
+            "headingLevel": "3",
+            "description": "A newer version of this content is available for review.",
+            "dismissButton": {
+              "label": "Dismiss update message"
+            }
+          }) }}
+        </div>
+      </div>
+    </main>
+  </div>
+
+{% endblock %}

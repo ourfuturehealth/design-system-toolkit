@@ -1,8 +1,11 @@
-{% from 'card/macro.njk' import cardWithIcon %}
+{% from 'card/macro.njk' import card %}
 
-{{ cardWithIcon({
-    "heading": "Congratulations",
-    "headingLevel": "3",
-    "descriptionHtml": "<p class=\"ofh-card__description\">You've completed all your tasks</p>",
-    "classes": "ofh-card__with-icon"
+{{ card({
+  "heading": "Congratulations",
+  "headingLevel": "3",
+  "descriptionHtml": "<p class=\"ofh-card__description\">You've completed all your tasks</p>",
+  "icon": {
+    "name": "Done",
+    "size": 32
+  }
 }) }}

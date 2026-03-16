@@ -1,23 +1,6 @@
 /* ==========================================================================
    COMPONENTS / #WARNING-CALLOUT
-   ========================================================================== */
+   ==========================================================================
 
-/**
- * 1. Uses @mixin panel-with-label from tools/_mixins.
- * 2. Uses @mixin heading-label from tools/_mixins.
+   Deprecated compatibility wrapper. Styles are provided by card-callout.
  */
-
-.ofh-warning-callout {
-  @include panel-with-label(
-    $ofh-color-background-brand-blue-aqua,
-    $ofh-color-foreground-primary,
-    $ofh-color-brand-blue-royal-3-main
-  ); /* [1] */
-}
-
-.ofh-warning-callout__label {
-  @include heading-label(
-    $ofh-color-brand-blue-royal-3-main,
-    $ofh-color-greyscale-white
-  ); /* [2] */
-}

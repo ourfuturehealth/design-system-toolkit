@@ -1,0 +1,69 @@
+/* ==========================================================================
+   COMPONENTS / #CARD-DO-DONT
+   ========================================================================== */
+
+.ofh-card-do-dont {
+  @include card-labelled-panel-root();
+}
+
+.ofh-card-do-dont__label {
+  @include card-heading-label(
+    $ofh-color-background-brand-blue-navy-1,
+    $ofh-color-foreground-primary-inverted
+  );
+  @include print-color($ofh-color-foreground-primary);
+}
+
+.ofh-card-do-dont__content {
+  @include card-panel-with-label(
+    $ofh-color-background-primary,
+    $ofh-color-foreground-primary,
+    $ofh-color-border-primary
+  );
+}
+
+.ofh-card-do-dont__spacer {
+  @include card-panel-spacer();
+}
+
+.ofh-card-do-dont__body {
+  @include card-panel-body();
+}
+
+.ofh-card-do-dont__items {
+  display: flex;
+  flex-direction: column;
+  gap: ofh-spacing(4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ofh-card-do-dont__item {
+  align-items: flex-start;
+  display: flex;
+  gap: ofh-spacing(2);
+}
+
+.ofh-card-do-dont__item-text {
+  @include ofh-font('paragraph-small');
+
+  display: block;
+  flex: 1 1 auto;
+  padding-bottom: ofh-spacing(2);
+  padding-top: ofh-spacing(2);
+}
+
+.ofh-card-do-dont__icon {
+  flex: none;
+  height: 32px;
+  width: 32px;
+}
+
+.ofh-card-do-dont__icon--do {
+  color: $ofh-color-foreground-feedback-success-2;
+}
+
+.ofh-card-do-dont__icon--dont {
+  color: $ofh-color-foreground-feedback-error-2;
+}

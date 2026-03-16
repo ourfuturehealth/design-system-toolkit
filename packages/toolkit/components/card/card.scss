@@ -2,91 +2,163 @@
    COMPONENTS / #CARD
    ========================================================================== */
 
-/**
- * 1. Is needed for the :active top positioning.
- * 2. Border is used to create a divider between the white content
- *    box and an image.
- * 3. Creates the 'pressed down' effect when clicked.
- * 4. Removes padding-top from headings directly after the card group.
- * 5. Includes the border width to achieve the correct left alignment.
- * 6. Stops the heading from spanning the full width of the card.
- * 7. Removes padding top for the feature heading positioning.
- * 8. Default care card colour set to blue (non-urgent care card) -
- *    using the @mixin care-card tools/_mixins.scss.
- *    The same mixin is used for each care card, setting the background
- *    colour,text colour and print border width with the variables.
- * 9. 'Random number' for the heading triangle.
- * 10. 'Random number' for the heading triangle positioning.
- * 11. 'Random number' used for spacing to compensate for the triangle.
- * 12. Needed to enable the triangle to show correctly in high contrast mode.
- * 13. Prevent additional padding on headings
- * 14. Give the action link icon sufficient contrast when used in the emergency variant
- * 15. Reset the positioning to the default [1] to display heading triangle on a coloured background.
- * 16. Emergency care card <a> needs to be white because the background colour is black.
- */
-
-$card-border-width: 1px;
-$card-border-bottom-width: ofh-spacing(2);
-$card-background: $ofh-color-greyscale-white;
-$card-border-color: $ofh-color-greyscale-5;
-$card-border-hover-color: $ofh-color-greyscale-4;
+$card-border-width: $ofh-stroke-weight-1;
+$card-border-bottom-width: $ofh-stroke-weight-4;
+$card-background: $ofh-color-background-primary;
+$card-border-color: $ofh-color-border-card-default;
+$card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card {
   @include ofh-responsive-margin(8, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
-  position: relative; /* [1] */
+  position: relative;
   width: 100%;
-
-  &.ofh-card__with-icon {
-    > .ofh-card__content {
-      display: flex;
-      height: 100%;
-
-      > div {
-        :last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      > :first-child {
-        flex-grow: 2;
-      }
-
-      > :last-child {
-        align-items: center;
-        display: flex;
-      }
-    }
-  }
 }
 
 .ofh-card__img {
   @include print-hide();
 
-  border-bottom: $card-border-width solid $ofh-color-greyscale-6; /* [2] */
+  border-bottom: $card-border-width solid $ofh-color-background-secondary;
   display: block;
   width: 100%;
 }
 
 .ofh-card__content {
   @include top-and-bottom();
-  @include ofh-responsive-padding(6);
+  @include ofh-responsive-padding(7);
 
   position: relative;
 }
 
-.ofh-card__heading,
-.ofh-card__metadata,
-.ofh-card__description {
-  margin-bottom: ofh-spacing(4);
+.ofh-card__content--with-aside,
+.ofh-card.ofh-card__with-icon > .ofh-card__content {
+  align-items: center;
+  display: flex;
+  gap: ofh-spacing(4);
+
+  @include mq($from: tablet) {
+    gap: ofh-spacing(5);
+  }
+
+  @include mq($from: desktop) {
+    gap: ofh-spacing(6);
+  }
+}
+
+.ofh-card__main {
+  @include top-and-bottom();
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: ofh-spacing(4);
+  min-width: 0;
+}
+
+.ofh-card__heading {
+  @include ofh-font('h3', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-card__number {
+  @include ofh-font('h1', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-card__description,
+.ofh-card__action {
+  margin: 0;
+}
+
+.ofh-card__helper {
+  @include ofh-font('paragraph-small');
+
+  margin: 0;
+}
+
+.ofh-card__link,
+.ofh-card__action-link {
+  @include ofh-link-style-default();
+}
+
+.ofh-card__metadata-list {
+  display: flex;
+  flex-direction: column;
+  gap: ofh-spacing(3);
+}
+
+.ofh-card__metadata-item {
+  align-items: center;
+  display: flex;
+  gap: ofh-spacing(3);
+}
+
+.ofh-card__metadata-icon-container {
+  align-items: center;
+  background: $ofh-color-background-secondary;
+  border-radius: $ofh-radius-circular;
+  display: flex;
+  flex: none;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.ofh-card__metadata-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.ofh-card__metadata-text {
+  flex: 1 1 auto;
+}
+
+.ofh-card__aside {
+  align-items: center;
+  display: flex;
+  flex: none;
+  justify-content: center;
 }
 
 .ofh-card__icon {
   color: $ofh-color-foreground-feedback-success-2;
   height: 32px;
   width: 32px;
+}
+
+.ofh-card__dismiss {
+  background: transparent;
+  border: 0;
+  color: $ofh-color-foreground-primary;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  right: ofh-spacing(4);
+  top: ofh-spacing(4);
+
+  @include mq($from: tablet) {
+    right: ofh-spacing(5);
+    top: ofh-spacing(5);
+  }
+
+  @include mq($from: desktop) {
+    right: ofh-spacing(6);
+    top: ofh-spacing(6);
+  }
+
+  &:focus {
+    @include ofh-focused-button();
+
+    border-radius: $ofh-radius-circular;
+  }
+}
+
+.ofh-card__dismiss-icon {
+  display: block;
 }
 
 /* Clickable card
@@ -99,8 +171,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   &:active {
     cursor: pointer;
 
-    .ofh-card__heading a,
-    .ofh-card__link {
+    .ofh-card__primary-link {
       color: $ofh-color-foreground-link-hover;
       text-decoration: none;
 
@@ -116,7 +187,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
   &:active {
     border-color: $card-border-hover-color;
-    bottom: -$card-border-width; /* [3] */
+    bottom: -$card-border-width;
   }
 }
 

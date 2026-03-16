@@ -1,0 +1,54 @@
+{
+  "params": [
+    {
+      "name": "type",
+      "type": "string",
+      "required": false,
+      "description": "Visual type: `do` or `dont`. Default: `do`."
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "description": "Optional heading text. Defaults to `Do` or `Don’t` from `type`."
+    },
+    {
+      "name": "headingLevel",
+      "type": "integer",
+      "required": false,
+      "description": "Optional heading level. Default: 3."
+    },
+    {
+      "name": "items",
+      "type": "array",
+      "required": true,
+      "description": "Array of item objects.",
+      "params": [
+        {
+          "name": "item",
+          "type": "string",
+          "required": true,
+          "description": "Text to use within each list item."
+        }
+      ]
+    },
+    {
+      "name": "hidePrefix",
+      "type": "boolean",
+      "required": false,
+      "description": "Deprecated compatibility option. When type is `dont`, hides the legacy `do not` prefix. Omit this for new work."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the Card / Do & Don’t."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes to add to the Card / Do & Don’t."
+    }
+  ]
+}

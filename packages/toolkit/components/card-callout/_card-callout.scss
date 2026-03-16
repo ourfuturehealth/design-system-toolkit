@@ -1,0 +1,92 @@
+/* ==========================================================================
+   COMPONENTS / #CARD-CALLOUT
+   ========================================================================== */
+
+.ofh-card-callout {
+  @include card-labelled-panel-root();
+
+  &.ofh-card-callout--info,
+  &.ofh-warning-callout {
+    .ofh-card-callout__label {
+      @include card-heading-label(
+        $ofh-color-background-feedback-info-2,
+        $ofh-color-foreground-primary-inverted
+      );
+    }
+
+    .ofh-card-callout__content {
+      @include card-panel-with-label(
+        $ofh-color-background-secondary,
+        $ofh-color-foreground-primary,
+        $ofh-color-border-feedback-info
+      );
+    }
+  }
+
+  &.ofh-card-callout--error {
+    .ofh-card-callout__label {
+      @include card-heading-label(
+        $ofh-color-background-feedback-error-2,
+        $ofh-color-foreground-primary-inverted
+      );
+    }
+
+    .ofh-card-callout__content {
+      @include card-panel-with-label(
+        $ofh-color-background-secondary,
+        $ofh-color-foreground-primary,
+        $ofh-color-border-feedback-error
+      );
+    }
+  }
+
+  &.ofh-card-callout--success {
+    .ofh-card-callout__label {
+      @include card-heading-label(
+        $ofh-color-background-feedback-success-2,
+        $ofh-color-foreground-primary-inverted
+      );
+    }
+
+    .ofh-card-callout__content {
+      @include card-panel-with-label(
+        $ofh-color-background-secondary,
+        $ofh-color-foreground-primary,
+        $ofh-color-border-feedback-success
+      );
+    }
+  }
+
+  &.ofh-card-callout--warning {
+    .ofh-card-callout__label {
+      @include card-heading-label(
+        $ofh-color-background-feedback-warning-2,
+        $ofh-color-foreground-primary
+      );
+    }
+
+    .ofh-card-callout__content {
+      @include card-panel-with-label(
+        $ofh-color-background-secondary,
+        $ofh-color-foreground-primary,
+        $ofh-color-border-feedback-warning
+      );
+    }
+  }
+}
+
+.ofh-card-callout__label {
+  @include print-color($ofh-color-foreground-primary);
+}
+
+.ofh-card-callout__content {
+  overflow: hidden;
+}
+
+.ofh-card-callout__spacer {
+  @include card-panel-spacer();
+}
+
+.ofh-card-callout__body {
+  @include card-panel-body();
+}

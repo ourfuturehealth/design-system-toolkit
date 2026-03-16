@@ -1,11 +1,33 @@
 export default () => {
-  // Loops through dom and finds all elements with ofh-card--clickable class
+  if (typeof document === 'undefined') {
+    return;
+  }
+
+  const interactiveSelector =
+    'a, button, input, select, textarea, summary, [role="button"], [role="link"]';
+
   document.querySelectorAll('.ofh-card--clickable').forEach((card) => {
-    // Check if card has a link within it
-    if (card.querySelector('a') !== null) {
-      // Clicks the link within the heading to navigate to desired page
-      card.addEventListener('click', () => {
-        card.querySelector('a').click();
+    const primaryLink = card.querySelector(
+      '[data-ofh-card-primary-link], .ofh-card__primary-link, .ofh-card__link',
+    );
+
+    if (primaryLink !== null) {
+      card.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element)) {
+          return;
+        }
+
+        const interactiveAncestor = event.target.closest(interactiveSelector);
+
+        if (interactiveAncestor && interactiveAncestor !== primaryLink) {
+          return;
+        }
+
+        if (interactiveAncestor === primaryLink) {
+          return;
+        }
+
+        primaryLink.click();
       });
     }
   });
