@@ -4,6 +4,8 @@ This template is for the final repo-wide cleanup once a component branch is func
 
 Use this prompt after manual QA passes, or when you want the final PR-preparation sweep across docs, release notes, branch state, and commits.
 
+This prompt assumes the implementation phase already included the main template's documentation and Storybook UX pass. PR-readiness work should verify consistency and clean up leftovers, not rely on this stage as the first place to discover misleading Storybook controls or unclear prop descriptions.
+
 ---
 
 ## How to Use This Template
@@ -50,6 +52,7 @@ Workflow I want you to follow:
 5. Check public API and migration clarity:
    - confirm deprecated compatibility paths exist only where intended
    - confirm toolkit vs React consumer expectations are documented clearly
+   - confirm Storybook controls policy and prop docs are still coherent after any late changes
    - identify any temporary internal adapters or dependency workarounds that were introduced because a reusable component was missing or not ready
    - if any remain, either remove them or document them explicitly as follow-up debt
    - add or refresh migration guidance if the branch changes APIs, names, routes, or recommended usage

@@ -2,7 +2,7 @@
 
 This template is for the interactive validation pass once a component branch is mostly implemented and you want to manually review the work step by step with the agent.
 
-Use this prompt after the main implementation work is done, but before final commit cleanup and PR preparation.
+Use this prompt after the main implementation work is done, including the implementation prompt's mandatory documentation and Storybook UX pass, but before final commit cleanup and PR preparation.
 
 ---
 
@@ -57,6 +57,7 @@ Important constraints:
 - Run `npm test` after modifying JavaScript or TypeScript files.
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
+- Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.

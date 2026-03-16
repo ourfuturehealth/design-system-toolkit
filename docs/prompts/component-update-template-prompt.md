@@ -493,7 +493,63 @@ export const KeyboardNavigation: Story = {
 };
 ```
 
-### 5. Documentation Updates
+### 5. Documentation & Storybook UX Pass (MANDATORY)
+
+**Do not treat this as optional polish. Complete it before handing off to manual QA.**
+
+Review the component's user-facing documentation surfaces and make sure they explain the component clearly rather than just listing API names.
+
+**Storybook controls policy (MANDATORY):**
+
+- Classify every story as one of:
+  - `interactive single-component example`
+  - `showcase/comparison story`
+  - `behavior/demo story`
+- Controls rule:
+  - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
+  - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
+- Check for misleading cases such as:
+  - `All variants` stories showing one prop panel that does not affect the displayed variants
+  - `Keyboard navigation` stories showing controls that do not apply to the demo content
+  - multi-example stories where the controls affect none of the rendered examples
+
+**Prop documentation clarity review (MANDATORY):**
+
+- Review Storybook prop descriptions, site docs, macro options, and toolkit/React READMEs
+- Rewrite vague descriptions so they explain:
+  - what changes visually
+  - what changes semantically
+  - when one prop overrides or replaces another prop
+  - whether the prop is an advanced/integration prop rather than a typical consumer prop
+- Explicitly explain common confusing prop categories where relevant:
+  - `heading` vs `headingHtml`
+  - `text` vs `html`
+  - `description` vs `descriptionHtml`
+  - `headingLevel` as semantic structure, not visual styling
+  - `headingClasses` or similar styling hooks
+  - `classes`, `className`, `attributes`, and `ref`
+- Mark advanced or integration-focused props clearly in Storybook where appropriate
+
+**Cross-surface consistency review (MANDATORY):**
+
+- Make sure the following surfaces do not contradict each other:
+  - Storybook docs
+  - site docs pages
+  - macro options JSON
+  - toolkit README
+  - React component story/docs descriptions
+- Ensure naming is consistent across toolkit and React:
+  - variant names
+  - component family names
+  - deprecated vs preferred usage wording
+
+**Output required before moving to QA:**
+
+- Confirm that each story has an intentional controls policy
+- Confirm that prop descriptions are written in plain language, not just implementation language
+- Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
+
+### 6. Documentation Updates
 
 **Files to update:**
 
@@ -510,6 +566,19 @@ export const KeyboardNavigation: Story = {
 - Variants and usage
 - Accessibility notes
 - Examples (HTML, Nunjucks, React)
+
+### 7. Mandatory Pre-QA Self-Review
+
+Before moving to the validation prompt, answer these checks explicitly:
+
+- [ ] Are any Storybook controls misleading for any story?
+- [ ] Does every story have an intentional controls policy?
+- [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
+- [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
+- [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
+- [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+
+If any answer is "no", fix it before moving to the QA prompt.
 
 ---
 
@@ -585,6 +654,9 @@ pnpm storybook
 - [ ] Accessibility demo
 - [ ] ArgTypes documented
 - [ ] Component description added
+- [ ] Each story has an intentional controls policy
+- [ ] Showcase/behavior-demo stories do not expose misleading controls
+- [ ] Prop descriptions explain visual vs semantic behavior clearly
 
 ### Testing
 
@@ -600,6 +672,8 @@ pnpm storybook
 - [ ] Storybook auto-docs generated
 - [ ] Migration notes (if breaking changes)
 - [ ] Updated relevant contributing docs
+- [ ] Site docs, Storybook docs, macro options, and README are consistent
+- [ ] Advanced/integration props are explained clearly where relevant
 
 ### Quality Checks
 
