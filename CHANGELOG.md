@@ -61,6 +61,9 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Refactored button styles to use design tokens and responsive spacing mixins instead of hardcoded typography and padding values
 - Aligned button focus treatments with Figma, including inverted variants on dark backgrounds
 - Updated toolkit selectors, site documentation, and examples to use the renamed button variants
+- Realigned the Card family to the current Figma structure with new `card-callout` and `card-do-dont` toolkit components
+- Kept legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
+- Updated Card documentation and examples to prefer the new Card family macros and options
 
 #### @ourfuturehealth/react-components 0.2.0 (`react-v0.2.0`)
 
@@ -77,6 +80,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Updated Button component variant types, stories, tests, example app, and docs to use the renamed button variants
 - `Button` now renders an anchor automatically when `href` is provided, with ref support for both button and anchor paths
 - Expanded story and test coverage for link rendering, keyboard navigation, and form usage
+- Added `Card`, `CardCallout`, and `CardDoDont` to the React library using the new Card family API only
+- Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
 
 #### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
 

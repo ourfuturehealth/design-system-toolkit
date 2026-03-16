@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
+| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button naming, Card family realignment | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
 
@@ -160,6 +160,42 @@ Test all button states for the renamed variants:
 
 - [ ] `ghost-inverted` - Default, Hover, Active, Focus, Disabled states
 - [ ] `text-inverted` - Default, Hover, Active, Focus, Disabled states
+
+### Card Family Realignment
+
+The Card family has been aligned to the current design-system split:
+
+- `card` remains the base component
+- `warning-callout` has moved to `card-callout`
+- `do-dont-list` has moved to `card-do-dont`
+
+#### Toolkit consumers
+
+Existing toolkit consumers should continue to work without immediate code changes:
+
+- `warningCallout()` still renders, but it is deprecated
+- `list()` still renders, but it is deprecated
+- legacy `card` inputs such as `clickable`, `feature`, `type`, and `HTML` still render, but they are deprecated
+
+For new work, migrate to the new APIs:
+
+| Deprecated toolkit API | Preferred API |
+| ---------------------- | ------------- |
+| `warningCallout()` | `cardCallout({ variant: 'warning', ... })` |
+| `list({ type: 'tick'|'cross' })` | `cardDoDont({ type: 'do'|'dont', ... })` |
+| `card({ clickable: true })` | `card({ variant: 'clickable' })` |
+| `cardWithIcon()` | `card({ icon: { ... } })` |
+| `card({ HTML: ... })` | `card({ descriptionHtml: ... })` |
+
+#### React consumers
+
+There was no existing React Card consumer base to migrate, so the React Card family only exposes the new API:
+
+- `Card`
+- `CardCallout`
+- `CardDoDont`
+
+React does not include the deprecated toolkit compatibility props.
 
 ### Example Migration Commit Message
 
@@ -538,7 +574,7 @@ Server-side rendering templates for generating HTML:
 - **Packages can be released independently**
 - Tag format:
   - Toolkit: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
-  - React: `react-v*` (e.g., `react-v0.0.1`)
+  - React: `react-v*` (e.g., `react-v0.2.0`)
 
 ### Installing Individual Packages
 
@@ -559,7 +595,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.0.1:packages/react-components"
+    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.2.0:packages/react-components"
   }
 }
 ```
