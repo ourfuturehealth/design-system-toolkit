@@ -50,6 +50,8 @@ Workflow I want you to follow:
 5. Check public API and migration clarity:
    - confirm deprecated compatibility paths exist only where intended
    - confirm toolkit vs React consumer expectations are documented clearly
+   - identify any temporary internal adapters or dependency workarounds that were introduced because a reusable component was missing or not ready
+   - if any remain, either remove them or document them explicitly as follow-up debt
    - add or refresh migration guidance if the branch changes APIs, names, routes, or recommended usage
 6. If any stale references, repo-drift issues, or missing release-doc updates are found, fix them with minimal changes and run the required checks.
 7. Make sure the branch is attached if the worktree is on a detached `HEAD`.
@@ -82,6 +84,7 @@ Important constraints:
 - Keep toolkit and React parity in scope where that is part of the intended component API.
 - If docs/examples are missing what is needed for consumers or reviewers, improve them.
 - If release or migration docs are expected for this repo, include them so the PR is review-ready rather than code-only.
+- Do not leave temporary dependency stand-ins implicit. Remove them if the real dependency is now available, or document them clearly if they must remain temporarily.
 - If the branch depends on another PR landing first, do not force a merge from the wrong base just to satisfy the workflow.
 - Leave unrelated modified or untracked files alone unless I explicitly ask you to include them.
 - At the end, summarize:

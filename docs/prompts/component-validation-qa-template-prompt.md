@@ -48,6 +48,7 @@ Workflow I want you to follow:
 9. Once all QA is validated on my side, summarize:
    - what was validated
    - any fixes made during QA
+   - whether any temporary internal adapter or dependency workaround was introduced during implementation
    - any residual risks or follow-ups
    - whether the branch is ready for the PR-readiness prompt
 10. Do not create final commits or PR text unless I explicitly ask for that in this session.
@@ -56,6 +57,7 @@ Important constraints:
 - Run `npm test` after modifying JavaScript or TypeScript files.
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
+- If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.
 - Leave unrelated modified or untracked files alone unless I explicitly ask you to include them.

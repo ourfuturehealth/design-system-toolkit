@@ -43,6 +43,7 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
   {Paste the JIRA ticket description, acceptance criteria, and design notes here}
   ```
 - **Figma Component:** {Figma URL with node-id}
+- **Dependency Figma Components:** {optional Figma URLs for any dependent components that may need auditing, for example Tag, Button, Inset text}
 - **Related PRs:** {any dependencies or related work}
 
 ---
@@ -90,7 +91,30 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - React component API and functionality must match toolkit exactly
 - Both versions should work the same or as close as possible
 
-### 3. Gap Analysis
+### 3. Dependency & Prerequisite Audit
+
+Identify any design-system components or shared primitives this component depends on in toolkit, React, docs/examples, or Storybook.
+
+- Audit direct dependencies such as Tag, Button, Inset text, Error message, Icon, or any other reusable design-system component used inside this component
+- For each dependency, determine whether it:
+  - exists in toolkit and is visually up to date with Figma
+  - exists in React and is ready to be reused
+  - exists in one surface but not the other
+  - is a public design-system component or just an internal implementation detail
+- If you need a dependency's own Figma reference to judge whether it is up to date, ask the user for that Figma URL before implementation
+- Categorize each dependency as:
+  - `ready`
+  - `needs update`
+  - `missing`
+  - `blocking prerequisite`
+
+**Dependency sequencing rule (MANDATORY):**
+
+- If this component depends on another public design-system component that is missing or not ready in the target surface, surface that clearly before implementation
+- Recommend updating the dependency first
+- Do not silently create an internal stand-in for a missing public component unless the user explicitly approves that as a temporary exception
+
+### 4. Gap Analysis
 
 Compare Figma ↔ Toolkit ↔ React:
 
@@ -100,7 +124,7 @@ Compare Figma ↔ Toolkit ↔ React:
 - API inconsistencies
 - Documentation gaps
 
-### 4. Design Token & Pattern Alignment (MANDATORY)
+### 5. Design Token & Pattern Alignment (MANDATORY)
 
 **This step is REQUIRED, not optional. Do not skip even if the JIRA ticket is narrow in scope.**
 
@@ -170,7 +194,10 @@ Review the entire component implementation against design system standards:
 
 1. Create a **comprehensive list** of all findings (not just JIRA ticket items)
 2. Categorize as: **MUST FIX** (breaks design system) vs. **SHOULD IMPROVE** (quality/consistency) vs. **NICE TO HAVE** (future enhancement)
-3. **Present this analysis to the user BEFORE implementing** and ask: "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
+3. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
+4. **Present this analysis to the user BEFORE implementing** and ask:
+   - "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
+   - "If there is a blocking prerequisite dependency, should I pause this component and update that dependency first, or proceed with an explicitly temporary internal adapter?"
 
 ---
 
@@ -178,6 +205,7 @@ Review the entire component implementation against design system standards:
 
 **IMPLEMENTATION ORDER (MANDATORY):**
 
+0. **Blocking Dependencies First:** If the dependency audit surfaced a blocking prerequisite, update that dependency first unless the user explicitly approves a temporary internal adapter
 1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
 2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
 3. **React Second:** Create/update React component to match polished toolkit
