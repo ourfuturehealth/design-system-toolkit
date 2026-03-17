@@ -22,7 +22,8 @@
       "ajv@8.17.1": "8.18.0",
       "serialize-javascript": "7.0.3",
       "rollup": "4.59.0",
-      "immutable": "5.1.5"
+      "immutable": "5.1.5",
+      "liquidjs": "10.25.0"
     }
   },
   "scripts": {
