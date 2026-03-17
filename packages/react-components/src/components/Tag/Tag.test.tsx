@@ -5,36 +5,45 @@ import { describe, expect, it } from 'vitest';
 import { Tag } from './Tag';
 
 describe('Tag', () => {
-  it('renders the toolkit class and text content', () => {
-    render(<Tag text="Inactive" />);
+  it('renders neutral tags by default', () => {
+    render(<Tag>Inactive</Tag>);
 
     const tag = screen.getByText('Inactive');
 
     expect(tag).toBeInTheDocument();
     expect(tag.tagName).toBe('STRONG');
-    expect(tag).toHaveClass('ofh-tag');
+    expect(tag).toHaveClass('ofh-tag', 'ofh-tag--neutral');
   });
 
-  it('prefers html over text', () => {
+  it('maps the variant prop to toolkit modifier classes', () => {
+    render(<Tag variant="blue">Ready</Tag>);
+
+    expect(screen.getByText('Ready')).toHaveClass('ofh-tag', 'ofh-tag--blue');
+  });
+
+  it('renders react node children', () => {
     render(
-      <Tag
-        text="Fallback content"
-        html="<span><strong>Beta</strong> feature</span>"
-        classes="ofh-tag--brand"
-      />,
+      <Tag variant="brand">
+        <span>
+          <strong>Beta</strong> feature
+        </span>
+      </Tag>,
     );
 
-    expect(screen.getByText('Beta')).toBeInTheDocument();
-    expect(screen.queryByText('Fallback content')).not.toBeInTheDocument();
+    const tag = screen.getByText(
+      (_, element) =>
+        element?.tagName === 'STRONG' && element.textContent === 'Beta feature',
+    );
+
+    expect(tag).toBeInTheDocument();
+    expect(tag).toHaveClass('ofh-tag', 'ofh-tag--brand');
   });
 
-  it('applies toolkit classes and react className together', () => {
+  it('applies variant classes and react className together', () => {
     render(
-      <Tag
-        text="Ready"
-        classes="ofh-tag--blue"
-        className="custom-tag"
-      />,
+      <Tag variant="blue" className="custom-tag">
+        Ready
+      </Tag>,
     );
 
     expect(screen.getByText('Ready')).toHaveClass(
@@ -44,17 +53,11 @@ describe('Tag', () => {
     );
   });
 
-  it('passes through attributes and standard html props', () => {
+  it('passes through standard html props', () => {
     render(
-      <Tag
-        text="Status"
-        id="status-tag"
-        title="Current status"
-        attributes={{
-          'data-testid': 'status-tag',
-          'aria-live': 'polite',
-        }}
-      />,
+      <Tag id="status-tag" title="Current status" data-testid="status-tag" aria-live="polite">
+        Status
+      </Tag>,
     );
 
     const tag = screen.getByTestId('status-tag');
@@ -67,16 +70,14 @@ describe('Tag', () => {
   it('forwards refs to the strong element', () => {
     const ref = createRef<HTMLElement>();
 
-    render(<Tag ref={ref} text="Neutral" />);
+    render(<Tag ref={ref}>Neutral</Tag>);
 
     expect(ref.current).toBeInstanceOf(HTMLElement);
     expect(ref.current?.tagName).toBe('STRONG');
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <Tag text="Delayed" classes="ofh-tag--yellow" />,
-    );
+    const { container } = render(<Tag variant="yellow">Delayed</Tag>);
 
     const results = await axe(container);
 

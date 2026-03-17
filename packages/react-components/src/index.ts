@@ -18,4 +18,4 @@ export { ErrorSummary } from './components/ErrorSummary';
 export type { ErrorSummaryItem, ErrorSummaryProps } from './components/ErrorSummary';
 
 export { Tag } from './components/Tag';
-export type { TagProps } from './components/Tag';
+export type { TagProps, TagVariant } from './components/Tag';

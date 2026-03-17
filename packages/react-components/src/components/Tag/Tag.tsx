@@ -1,7 +1,21 @@
 import React from 'react';
 
-type AttributeValue = string | number | boolean | null | undefined;
-type AttributeMap = Record<string, AttributeValue>;
+export type TagVariant =
+  | 'neutral'
+  | 'brand'
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'red';
+
+const variantClasses: Record<TagVariant, string> = {
+  neutral: 'ofh-tag--neutral',
+  brand: 'ofh-tag--brand',
+  blue: 'ofh-tag--blue',
+  green: 'ofh-tag--green',
+  yellow: 'ofh-tag--yellow',
+  red: 'ofh-tag--red',
+};
 
 export interface TagProps
   extends Omit<
@@ -9,23 +23,13 @@ export interface TagProps
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
   /**
-   * Plain text tag content.
-   * If `html` is provided it takes precedence.
+   * Visual style variant.
    */
-  text?: string;
+  variant?: TagVariant;
   /**
-   * HTML tag content.
-   * If provided it takes precedence over `text`.
+   * Tag content.
    */
-  html?: string;
-  /**
-   * Additional toolkit-style classes for the tag.
-   */
-  classes?: string;
-  /**
-   * Additional toolkit-style attributes for the tag.
-   */
-  attributes?: AttributeMap;
+  children: React.ReactNode;
   /**
    * Ref forwarding for the underlying strong element.
    */
@@ -33,25 +37,23 @@ export interface TagProps
 }
 
 export const Tag = ({
-  text,
-  html,
-  classes = '',
+  variant = 'neutral',
   className = '',
-  attributes,
+  children,
   ref,
   ...props
 }: TagProps) => {
-  const tagClasses = ['ofh-tag', classes, className].filter(Boolean).join(' ');
+  const tagClasses = ['ofh-tag', variantClasses[variant], className]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <strong
-      {...(attributes as React.HTMLAttributes<HTMLElement>)}
       {...props}
       ref={ref}
       className={tagClasses}
-      {...(html ? { dangerouslySetInnerHTML: { __html: html } } : {})}
     >
-      {html ? undefined : text}
+      {children}
     </strong>
   );
 };

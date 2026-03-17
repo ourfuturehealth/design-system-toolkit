@@ -34,7 +34,7 @@ function App() {
           },
         ]}
       />
-      <Tag text="Beta" classes="ofh-tag--brand" />
+      <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <TextInput id="name" label="Your name" />
     </div>
@@ -94,16 +94,12 @@ An error summary component for page-level validation messages.
 
 ### Tag
 
-A status tag component with toolkit-parity content and class APIs.
-
-**Security note:** `html` is rendered as raw HTML. Only pass trusted or properly sanitised content to this prop. Do not pass untrusted user input directly into it.
+A status tag component with a simple React API that maps to the toolkit variants.
 
 **Props:**
 
-- `text`: string
-- `html`: string
-- `classes`: string
-- `attributes`: object
+- `children`: React.ReactNode
+- `variant`: 'neutral' | 'brand' | 'blue' | 'green' | 'yellow' | 'red'
 - `className`: string
 
 ## Development
