@@ -145,8 +145,9 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__dismiss {
-  background: transparent;
+  background: $ofh-color-background-primary;
   border: 0;
+  border-radius: $ofh-radius-circular;
   color: $ofh-color-foreground-primary;
   cursor: pointer;
   padding: 0;

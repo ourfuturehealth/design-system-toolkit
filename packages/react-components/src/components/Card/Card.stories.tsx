@@ -198,13 +198,21 @@ export const BasicDismissibleWithImage: Story = {
   ),
 };
 
-export const BasicSuccess: Story = {
+export const BasicWithIcon: Story = {
   args: {
     heading: 'Profile complete',
     description: 'You’ve completed all the required profile details.',
     icon: {
       name: 'Done',
       size: 32,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use the `icon` prop to add a supporting icon to a basic card. Success is one common use, but the same pattern can support other short icon-led messages too.',
+      },
     },
   },
   render: (args) => (
