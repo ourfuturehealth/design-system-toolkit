@@ -1,0 +1,77 @@
+{% from "icon/macro.njk" import icon %}
+
+<div class="app-foundation-showcase__table-wrap">
+  <table class="ofh-table app-foundation-showcase__table">
+    {% if caption %}
+      <caption class="ofh-table__caption app-foundation-showcase__caption">{{ caption }}</caption>
+    {% endif %}
+    <thead class="ofh-table__head">
+      <tr class="ofh-table__row">
+        <th class="ofh-table__header" scope="col">Style</th>
+        <th class="ofh-table__header" scope="col">Preview</th>
+        {% if showClassName %}
+          <th class="ofh-table__header" scope="col">Class</th>
+        {% endif %}
+        {% if showToken %}
+          <th class="ofh-table__header" scope="col">Token</th>
+        {% endif %}
+        <th class="ofh-table__header" scope="col">Mobile</th>
+        <th class="ofh-table__header" scope="col">Tablet</th>
+        <th class="ofh-table__header" scope="col">Desktop</th>
+        {% if showLineHeight %}
+          <th class="ofh-table__header" scope="col">Line height</th>
+        {% endif %}
+        {% if showFixedClass %}
+          <th class="ofh-table__header" scope="col">Fixed class</th>
+        {% endif %}
+        {% if showResponsiveMixin %}
+          <th class="ofh-table__header" scope="col">Responsive mixin</th>
+        {% endif %}
+        {% if showNotes %}
+          <th class="ofh-table__header" scope="col">Notes</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody class="ofh-table__body">
+      {% for row in rows %}
+        <tr class="ofh-table__row">
+          <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row">{{ row.label }}</th>
+          <td class="ofh-table__cell app-foundation-showcase__preview-cell">
+            {% if row.previewHtml %}
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--html">{{ row.previewHtml | safe }}</div>
+            {% elseif row.iconName %}
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--icon">
+                {{ icon({ "name": row.iconName, "size": row.size, "title": row.iconName }) }}
+              </div>
+            {% else %}
+              <span class="app-foundation-showcase__preview{% if row.className %} {{ row.className }}{% endif %}">
+                {{ row.previewText }}
+              </span>
+            {% endif %}
+          </td>
+          {% if showClassName %}
+            <td class="ofh-table__cell"><code>{{ row.className }}</code></td>
+          {% endif %}
+          {% if showToken %}
+            <td class="ofh-table__cell"><code>{{ row.token }}</code></td>
+          {% endif %}
+          <td class="ofh-table__cell">{{ row.mobile }}</td>
+          <td class="ofh-table__cell">{{ row.tablet }}</td>
+          <td class="ofh-table__cell">{{ row.desktop }}</td>
+          {% if showLineHeight %}
+            <td class="ofh-table__cell">{{ row.lineHeight }}</td>
+          {% endif %}
+          {% if showFixedClass %}
+            <td class="ofh-table__cell"><code>{{ row.fixedClass }}</code></td>
+          {% endif %}
+          {% if showResponsiveMixin %}
+            <td class="ofh-table__cell"><code>{{ row.responsiveMixin }}</code></td>
+          {% endif %}
+          {% if showNotes %}
+            <td class="ofh-table__cell">{{ row.notes }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
