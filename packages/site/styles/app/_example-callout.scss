@@ -18,6 +18,8 @@
 .app-example__heading {
   background: $ofh-color-greyscale-2;
   border: 0;
+  box-shadow: none;
+  color: $ofh-color-foreground-primary-inverted;
   left: -1px;
   position: absolute;
   top: -1px;

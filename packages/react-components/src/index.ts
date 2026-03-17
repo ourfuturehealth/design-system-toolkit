@@ -16,3 +16,6 @@ export type { TextInputProps } from './components/TextInput';
 
 export { ErrorSummary } from './components/ErrorSummary';
 export type { ErrorSummaryItem, ErrorSummaryProps } from './components/ErrorSummary';
+
+export { Tag } from './components/Tag';
+export type { TagProps } from './components/Tag';

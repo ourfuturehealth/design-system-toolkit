@@ -8,10 +8,112 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
 | [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
+
+---
+
+## Upgrading to v4.6.0 / React v0.4.0
+
+**Released:** March 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.6.0+
+- `@ourfuturehealth/react-components` v0.4.0+
+
+### Breaking Changes
+
+Tag naming and defaults have been updated to align with Figma:
+
+| Previous usage | New usage |
+| -------------- | --------- |
+| `.ofh-tag` (blue default) | `.ofh-tag.ofh-tag--blue` |
+| `.ofh-tag--grey` | `.ofh-tag--neutral` |
+
+**Why this change?** The Tag component now matches the Figma component set directly: the default Tag is neutral, `neutral` is the canonical public name, and `brand` is available as a new supported variant.
+
+### Migration Steps
+
+#### For Toolkit (CSS/SCSS) Consumers
+
+If you rely on the default blue Tag styling, make the blue choice explicit:
+
+**Before (toolkit v4.5.0 and earlier):**
+
+```html
+<strong class="ofh-tag">Beta</strong>
+<strong class="ofh-tag ofh-tag--grey">Inactive</strong>
+```
+
+**After (toolkit v4.6.0+):**
+
+```html
+<strong class="ofh-tag ofh-tag--blue">Beta</strong>
+<strong class="ofh-tag ofh-tag--neutral">Inactive</strong>
+```
+
+**SCSS/CSS overrides:**
+
+Update custom selectors that target the deprecated grey modifier or assumed blue default:
+
+```scss
+// OLD
+.ofh-tag--grey {
+  // custom styles
+}
+
+.my-status-tag .ofh-tag {
+  // styles that expected the old blue default
+}
+
+// NEW
+.ofh-tag--neutral {
+  // custom styles
+}
+
+.my-status-tag .ofh-tag.ofh-tag--blue {
+  // styles for the explicit blue variant
+}
+```
+
+#### For React Components Consumers
+
+React Tag is available from `react-components` in v0.4.0+ and uses a semantic React API:
+
+```tsx
+import { Tag } from '@ourfuturehealth/react-components';
+
+<Tag variant="neutral">Inactive</Tag>
+<Tag variant="brand">Beta</Tag>
+```
+
+React exposes the canonical variant names directly. If you need additional classes for integration hooks, use `className`. If you still have toolkit wrappers that rely on the deprecated grey modifier, update them to use `ofh-tag--neutral`.
+
+### Migration Checklist
+
+- [ ] Replace `.ofh-tag` usages that expected the old blue default with `.ofh-tag.ofh-tag--blue`
+- [ ] Replace `.ofh-tag--grey` with `.ofh-tag--neutral`
+- [ ] Review Storybook stories, docs examples, and templates for removed legacy Tag colours
+- [ ] Re-test any docs-site or app-specific wrappers that style `.ofh-tag` without an explicit modifier
+
+### Search Your Codebase
+
+```bash
+grep -r "ofh-tag--grey" --include="*.scss" --include="*.css" --include="*.html" --include="*.njk" .
+grep -r "class=\"ofh-tag\"" --include="*.html" --include="*.njk" .
+```
+
+### Testing After Migration
+
+After updating your code, verify:
+
+1. Neutral Tags render with the low-emphasis bordered appearance
+2. Blue Tags are explicitly marked with `ofh-tag--blue`
+3. Brand Tags render with the dark OFH branded background
+4. Existing docs-site banners and example callouts still render as expected
 
 ---
 

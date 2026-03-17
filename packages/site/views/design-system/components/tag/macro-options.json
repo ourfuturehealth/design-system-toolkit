@@ -3,20 +3,20 @@
     {
       "name": "text",
       "type": "string",
-      "required": true,
-      "description": "If `html` is set, this is not required. Text to use within the tag component. If `html` is provided, the `text` argument will be ignored."
+      "required": false,
+      "description": "Text to use within the tag component. If `html` is provided, the `text` argument will be ignored."
     },
     {
       "name": "html",
       "type": "string",
-      "required": true,
-      "description": "If `text` is set, this is not required. HTML to use within the tag component. If `html` is provided, the `text` argument will be ignored."
+      "required": false,
+      "description": "HTML to use within the tag component. If `html` is provided, it takes precedence over `text`."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the tag."
+      "description": "Classes to add to the tag. Use `ofh-tag--neutral`, `ofh-tag--brand`, `ofh-tag--blue`, `ofh-tag--green`, `ofh-tag--yellow`, or `ofh-tag--red` for the supported colour variants. `ofh-tag--grey` is deprecated and should be replaced with `ofh-tag--neutral`."
     },
     {
       "name": "attributes",
