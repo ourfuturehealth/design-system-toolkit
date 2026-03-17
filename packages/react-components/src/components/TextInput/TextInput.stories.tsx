@@ -5,31 +5,38 @@ const meta: Meta<typeof TextInput> = {
   title: 'Components/TextInput',
   component: TextInput,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     docs: {
       description: {
         component:
-          'A form input component with label, hint text, error states, and various width options based on the OFH Design System.',
+          'A single-line text input that reuses the toolkit markup and classes, including the input-family label, hint, error, and width treatments.',
       },
     },
   },
   tags: ['autodocs'],
+  args: {
+    label: 'Full name',
+    name: 'full-name',
+    type: 'text',
+  },
   argTypes: {
     label: {
       control: 'text',
-      description: 'Input field label (required)',
+      description: 'Visible label content for the input.',
     },
     hint: {
       control: 'text',
-      description: 'Optional hint text to help users',
+      description: 'Optional hint text shown below the label.',
+    },
+    errorMessage: {
+      control: 'text',
+      description: 'Optional error message shown above the input.',
     },
     error: {
-      control: 'text',
-      description: 'Error message to display when validation fails',
-    },
-    required: {
-      control: 'boolean',
-      description: 'Whether the field is required (shows asterisk)',
+      control: false,
+      table: {
+        disable: true,
+      },
     },
     width: {
       control: 'select',
@@ -41,12 +48,17 @@ const meta: Meta<typeof TextInput> = {
         'one-third',
         'one-quarter',
       ],
-      description: 'Input field width',
+      description: 'Fluid width utility applied to the input.',
     },
-    maxLength: {
+    inputWidth: {
       control: 'select',
-      options: [2, 3, 4, 5, 10, 20],
-      description: 'Character limit for the input',
+      options: [2, 3, 4, 5, 10, 20, 30],
+      description: 'Fixed character-width modifier class.',
+    },
+    isPageHeading: {
+      control: 'boolean',
+      description:
+        'Wrap the label in an h1 when the input question is the page heading.',
     },
   },
 };
@@ -54,15 +66,12 @@ const meta: Meta<typeof TextInput> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default story
 export const Default: Story = {
   args: {
-    label: 'Full name',
     placeholder: 'Enter your full name',
   },
 };
 
-// With hint
 export const WithHint: Story = {
   args: {
     label: 'Email address',
@@ -72,111 +81,107 @@ export const WithHint: Story = {
   },
 };
 
-// Required field
-export const Required: Story = {
-  args: {
-    label: 'Phone number',
-    required: true,
-    type: 'tel',
-    placeholder: '+44 7700 900000',
-  },
-};
-
-// With error
 export const WithError: Story = {
   args: {
     label: 'Email address',
     type: 'email',
-    error: 'Enter a valid email address',
-    value: 'invalid-email',
+    errorMessage: 'Enter a valid email address',
+    defaultValue: 'invalid-email',
   },
 };
 
-// Different widths
-export const DifferentWidths: Story = {
+export const FixedWidths: Story = {
   render: () => (
     <div
       style={{
-        width: '600px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem',
+        gap: '1.5rem',
+        maxWidth: '32rem',
+      }}
+    >
+      <TextInput inputWidth={20} label="20 character width" />
+      <TextInput inputWidth={10} label="10 character width" />
+      <TextInput inputWidth={5} label="5 character width" />
+      <TextInput inputWidth={4} label="4 character width" />
+      <TextInput inputWidth={3} label="3 character width" />
+      <TextInput inputWidth={2} label="2 character width" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Fixed-width modifiers help users understand the expected length of the answer.',
+      },
+    },
+  },
+};
+
+export const FluidWidths: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        maxWidth: '48rem',
       }}
     >
       <TextInput label="Full width" width="full" />
-      <TextInput label="Three quarters" width="three-quarters" />
-      <TextInput label="Two thirds" width="two-thirds" />
-      <TextInput label="One half" width="one-half" />
-      <TextInput label="One third" width="one-third" />
-      <TextInput label="One quarter" width="one-quarter" />
+      <TextInput label="Three-quarters width" width="three-quarters" />
+      <TextInput label="Two-thirds width" width="two-thirds" />
+      <TextInput label="One-half width" width="one-half" />
+      <TextInput label="One-third width" width="one-third" />
+      <TextInput label="One-quarter width" width="one-quarter" />
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Different width options available for text inputs.',
+        story:
+          'Fluid width utilities resize with the viewport and work well for shorter answers inside wider layouts.',
       },
     },
   },
 };
 
-// Character limits
-export const CharacterLimits: Story = {
-  render: () => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        maxWidth: '400px',
-      }}
-    >
-      <TextInput label="2 characters" maxLength={2} hint="For country codes" />
-      <TextInput label="4 characters" maxLength={4} hint="For year input" />
-      <TextInput
-        label="10 characters"
-        maxLength={10}
-        hint="For phone numbers"
-      />
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Different character limit options for specific use cases.',
-      },
-    },
+export const AsPageHeading: Story = {
+  args: {
+    isPageHeading: true,
+    label: 'What is your name?',
+    labelClassName: 'ofh-label--l',
+    placeholder: 'Enter your full name',
   },
 };
 
-// Form example
 export const FormExample: Story = {
   render: () => (
     <form
       style={{
-        maxWidth: '400px',
+        maxWidth: '28rem',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem',
+        gap: '1.5rem',
       }}
     >
       <TextInput
-        label="Full name"
-        required
         hint="Enter your first and last name"
+        label="Full name"
         placeholder="e.g. John Smith"
+        required
       />
       <TextInput
-        label="Email address"
-        type="email"
-        required
         hint="We'll use this to contact you"
+        label="Email address"
+        required
+        type="email"
         width="three-quarters"
       />
       <TextInput
+        errorMessage="Enter a valid phone number"
         label="Phone number"
         type="tel"
-        hint="Optional - for urgent updates only"
         width="two-thirds"
       />
     </form>
