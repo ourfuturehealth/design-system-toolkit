@@ -12,7 +12,32 @@ export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
 
 export { TextInput } from './components/TextInput';
-export type { TextInputProps } from './components/TextInput';
+export type {
+  TextInputFixedWidth,
+  TextInputProps,
+  TextInputWidth,
+} from './components/TextInput';
+
+export { Textarea } from './components/Textarea';
+export type { TextareaProps } from './components/Textarea';
+
+export { Select } from './components/Select';
+export type { SelectItem, SelectProps } from './components/Select';
+
+export { DateInput } from './components/DateInput';
+export type { DateInputItem, DateInputProps } from './components/DateInput';
+
+export { Autocomplete } from './components/Autocomplete';
+export type { AutocompleteProps } from './components/Autocomplete';
+
+export { CharacterCount } from './components/CharacterCount';
+export type { CharacterCountProps } from './components/CharacterCount';
+
+export { Checkboxes } from './components/Checkboxes';
+export type { CheckboxItem, CheckboxesProps } from './components/Checkboxes';
+
+export { Radios } from './components/Radios';
+export type { RadioItem, RadiosProps } from './components/Radios';
 
 export { ErrorSummary } from './components/ErrorSummary';
 export type { ErrorSummaryItem, ErrorSummaryProps } from './components/ErrorSummary';
