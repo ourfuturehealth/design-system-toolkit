@@ -186,7 +186,8 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   &:active {
     cursor: pointer;
 
-    .ofh-card__primary-link {
+    .ofh-card__primary-link,
+    .ofh-card__link {
       color: $ofh-color-foreground-link-hover;
       text-decoration: none;
 
