@@ -23,8 +23,8 @@
       "serialize-javascript": "7.0.3",
       "rollup": "4.59.0",
       "immutable": "5.1.5",
-      "liquidjs": "10.25.0",
-      "flatted": "3.4.0"
+      "liquidjs@<10.25.0": "10.25.0",
+      "flatted@<3.4.0": "3.4.0"
     }
   },
   "scripts": {
