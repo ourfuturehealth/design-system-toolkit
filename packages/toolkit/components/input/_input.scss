@@ -10,8 +10,43 @@
  *    not be set either.
  */
 
+.ofh-input__header {
+  display: flex;
+  flex-direction: column;
+  gap: $ofh-size-4;
+  margin-bottom: $ofh-size-16;
+}
+
+.ofh-input__label,
+.ofh-input__hint,
+.ofh-input__error-message {
+  margin-bottom: 0;
+}
+
+.ofh-input__label {
+  font-weight: $ofh-typography-weight-semibold;
+}
+
+.ofh-input__error-message {
+  clear: none;
+}
+
+.ofh-input__legend {
+  font-weight: $ofh-typography-weight-semibold;
+}
+
+.ofh-input__legend--with-supporting-text {
+  margin-bottom: 0;
+}
+
+.ofh-input__legend--with-supporting-text + .ofh-input__header {
+  margin-top: $ofh-size-4;
+}
+
 .ofh-input {
-  @include ofh-font("paragraph-md");
+  @include ofh-font('paragraph-md');
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
 
   -moz-appearance: none; /* 1 */
   -webkit-appearance: none; /* 1 */
@@ -19,10 +54,17 @@
   border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default; /* 2 */
   border-radius: 0;
   box-sizing: border-box;
-  height: 40px;
+  display: block;
   margin-top: 0;
-  padding: $ofh-size-4;
   width: 100%;
+
+  &:hover:not(:disabled, .ofh-input--error) {
+    border-width: $ofh-stroke-weight-4;
+  }
+
+  &:active:not(:disabled, .ofh-input--error) {
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  }
 
   &:focus {
     @include ofh-focused-input;
@@ -41,7 +83,7 @@
 }
 
 .ofh-input--error {
-  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
 }
 
 // The ex measurements are based on the number of W's that can fit inside the input

@@ -10,7 +10,8 @@ export default () => {
     const defaultValueOption = element.getAttribute('data-default-value') || '';
     const fieldName = element.getAttribute('data-field-name') || '';
     const { id } = input;
-    const label = input.labels[0].innerText.toLowerCase() || 'value';
+    const labelText = input.labels[0]?.innerText || input.labels[0]?.textContent || 'value';
+    const label = labelText.trim().toLowerCase();
     const options = `${id}_options`;
 
     accessibleAutocomplete({
@@ -19,7 +20,7 @@ export default () => {
       id,
       name: fieldName,
       source: window[options],
-      tNoResults: () => `No results found. Enter your ${label}.`,
+      tNoResults: () => `No suggestions found. Enter a new ${label}.`,
     });
 
     // Move autocomplete to the form group containing the input to be replaced
@@ -28,14 +29,47 @@ export default () => {
       inputFormGroup.appendChild(element);
     }
 
-    input.remove();
+    const autocompleteInput = element.querySelector('.autocomplete__input');
+    const autocompleteMenu = element.querySelector('.autocomplete__menu');
 
-    // Add hint text for the autocomplete input
-    const container = element.parentNode;
-    const divHint = document.createElement('div');
-    divHint.id = `${id}-hint`;
-    divHint.className = 'ofh-hint';
-    divHint.innerHTML = `Select from the results or enter your ${label}`;
-    container.insertBefore(divHint, element);
+    if (autocompleteInput) {
+      const describedBy = input.getAttribute('aria-describedby');
+      const ariaInvalid = input.getAttribute('aria-invalid');
+
+      if (describedBy) {
+        autocompleteInput.setAttribute('aria-describedby', describedBy);
+      }
+
+      if (ariaInvalid) {
+        autocompleteInput.setAttribute('aria-invalid', ariaInvalid);
+      }
+
+      if (input.classList.contains('ofh-input--error')) {
+        autocompleteInput.classList.add('autocomplete__input--error');
+      }
+    }
+
+    if (autocompleteMenu) {
+      const updateMenuClasses = () => {
+        const hasNoResultsOption = autocompleteMenu.querySelector(
+          '.autocomplete__option--no-results',
+        );
+        autocompleteMenu.classList.toggle(
+          'autocomplete__menu--with-suggestions',
+          !hasNoResultsOption && autocompleteMenu.children.length > 0,
+        );
+      };
+
+      const observer = new MutationObserver(() => updateMenuClasses());
+
+      observer.observe(autocompleteMenu, {
+        childList: true,
+        subtree: true,
+      });
+
+      updateMenuClasses();
+    }
+
+    input.remove();
   });
 };
