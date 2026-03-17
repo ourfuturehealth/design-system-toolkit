@@ -84,9 +84,9 @@
         },
         {
           "name": "conditional",
-          "type": "string",
+          "type": "object",
           "required": false,
-          "description": "If true, content provided will be revealed when the item is checked."
+          "description": "Content configuration for a conditional reveal tied to this radio item."
         },
         {
           "name": "conditional.html",
@@ -101,6 +101,20 @@
       "type": "string",
       "required": false,
       "description": "Classes to add to the radio container."
+    },
+    {
+      "name": "formGroup",
+      "type": "object",
+      "required": false,
+      "description": "Options for the form-group wrapper.",
+      "params": [
+        {
+          "name": "classes",
+          "type": "string",
+          "required": false,
+          "description": "Classes to add to the form-group wrapper."
+        }
+      ]
     },
     {
       "name": "attributes",

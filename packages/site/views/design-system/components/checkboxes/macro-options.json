@@ -87,9 +87,9 @@
         },
         {
           "name": "conditional",
-          "type": "boolean",
+          "type": "object",
           "required": false,
-          "description": "If true, content provided will be revealed when the item is checked."
+          "description": "Content configuration for a conditional reveal tied to this checkbox item."
         },
         {
           "name": "conditional.html",
@@ -104,6 +104,18 @@
           "description": "If true, checkbox will be disabled."
         },
         {
+          "name": "exclusive",
+          "type": "boolean",
+          "required": false,
+          "description": "If `true`, marks this checkbox as the exclusive option in a group, such as a `None of these` answer."
+        },
+        {
+          "name": "exclusiveGroup",
+          "type": "string",
+          "required": false,
+          "description": "Used with `exclusive` to group related checkbox items together."
+        },
+        {
           "name": "attributes",
           "type": "object",
           "required": false,
@@ -112,16 +124,18 @@
       ]
     },
     {
-      "name": "exclusive",
-      "type": "boolean",
+      "name": "formGroup",
+      "type": "object",
       "required": false,
-      "description": "If set to `true`, marks this checkbox as the None option in a None of these type behaviour. Unchecking all other checkboxes in the group when None is clicked."
-    },
-    {
-      "name": "exclusiveGroup",
-      "type": "string",
-      "required": false,
-      "description": "Used in conjunction with `exclusive` - this should be set to a string which groups checkboxes together into a set for use in a None of these scenario."
+      "description": "Options for the form-group wrapper.",
+      "params": [
+        {
+          "name": "classes",
+          "type": "string",
+          "required": false,
+          "description": "Classes to add to the form-group wrapper."
+        }
+      ]
     },
     {
       "name": "classes",
