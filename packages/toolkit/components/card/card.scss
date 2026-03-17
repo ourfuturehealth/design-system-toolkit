@@ -117,14 +117,14 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   border-radius: $ofh-radius-circular;
   display: flex;
   flex: none;
-  height: 32px;
+  height: $ofh-size-32;
   justify-content: center;
-  width: 32px;
+  width: $ofh-size-32;
 }
 
 .ofh-card__metadata-icon {
-  height: 24px;
-  width: 24px;
+  height: $ofh-iconography-24;
+  width: $ofh-iconography-24;
 }
 
 .ofh-card__metadata-text {
@@ -140,41 +140,49 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card__icon {
   color: $ofh-color-foreground-feedback-success-2;
-  height: 32px;
-  width: 32px;
+  height: $ofh-iconography-32;
+  width: $ofh-iconography-32;
 }
 
 .ofh-card__dismiss {
-  background: $ofh-color-background-primary;
+  background: transparent;
   border: 0;
   border-radius: $ofh-radius-circular;
   color: $ofh-color-foreground-primary;
   cursor: pointer;
-  padding: 0;
+  padding: ofh-spacing(3);
   position: absolute;
-  right: ofh-spacing(4);
-  top: ofh-spacing(4);
+  right: calc(#{ofh-spacing(4)} - #{ofh-spacing(3)});
+  top: calc(#{ofh-spacing(4)} - #{ofh-spacing(3)});
   z-index: 1;
 
   @include mq($from: tablet) {
-    right: ofh-spacing(5);
-    top: ofh-spacing(5);
+    right: calc(#{ofh-spacing(5)} - #{ofh-spacing(3)});
+    top: calc(#{ofh-spacing(5)} - #{ofh-spacing(3)});
   }
 
   @include mq($from: desktop) {
-    right: ofh-spacing(6);
-    top: ofh-spacing(6);
+    right: calc(#{ofh-spacing(6)} - #{ofh-spacing(3)});
+    top: calc(#{ofh-spacing(6)} - #{ofh-spacing(3)});
   }
 
   &:focus {
-    @include ofh-focused-button();
+    outline: 0;
 
-    border-radius: $ofh-radius-circular;
+    .ofh-card__dismiss-icon {
+      @include ofh-focused-button();
+
+      border-radius: $ofh-radius-circular;
+    }
   }
 }
 
 .ofh-card__dismiss-icon {
+  background: $ofh-color-background-primary;
+  border-radius: $ofh-radius-circular;
   display: block;
+  height: $ofh-iconography-32;
+  width: $ofh-iconography-32;
 }
 
 /* Clickable card
