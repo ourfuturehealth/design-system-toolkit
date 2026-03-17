@@ -2,8 +2,7 @@
 {% set pageDescription = "Structure your page content and elements." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "May 2023" %}
-
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "3" %}
 {% set hideContact = "true" %}
 
@@ -60,27 +59,48 @@
 
   <h2 id="screen-size">Screen size</h2>
   <p>Design for mobile first using a single-column layout and work up to wider layouts.</p>
-  <p>The default maximum page width is 960px, but you can make it wider if your content requires it. Lines of text should be no longer than 70 to 80 characters. Any longer will make the page difficult to read.</p>
+  <p>The <code>mq</code> breakpoints define when layout rules change. They are not the same as the page-width and content-width tokens, which control how wide content is allowed to grow once a breakpoint has been reached.</p>
 
   <h3>Responsive breakpoints</h3>
-  <p>The responsive breakpoints are:</p>
-  <ul>
-    <li>mobile - 320px</li>
-    <li>tablet - 641px</li>
-    <li>desktop - 769px</li>
-    <li>large desktop - 990px</li>
-  </ul>
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Toolkit mq breakpoints</caption>
+      <thead class="ofh-table__head">
+        <tr class="ofh-table__row">
+          <th class="ofh-table__header" scope="col">Breakpoint</th>
+          <th class="ofh-table__header" scope="col">Token</th>
+          <th class="ofh-table__header" scope="col">Value</th>
+          <th class="ofh-table__header" scope="col">What changes here</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for breakpoint in foundationStyles.layout.breakpoints %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header" scope="row">{{ breakpoint.label }}</th>
+            <td class="ofh-table__cell"><code>{{ breakpoint.token }}</code></td>
+            <td class="ofh-table__cell">{{ breakpoint.value }}</td>
+            <td class="ofh-table__cell">{{ breakpoint.note }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
   <h2 id="containers">Containers</h2>
   <p>To set up your layout, you will need to use a container which sets the maximum width of the content.</p>
   <p>You can choose from either of these:</p>
   <ul>
-    <li>fixed-width container – up to 960px</li>
-    <li>fluid-width container – spans the entire width of the viewport </li>
+    <li>fixed-width container, which uses the content max width token</li>
+    <li>fluid-width container, which spans the viewport and relies on content-width utilities inside it</li>
   </ul>
 
+  {% set items = foundationStyles.layout.widths %}
+  {% set caption = "Container and width references" %}
+  {% set variant = "width" %}
+  {% include "design-system/styles/_partials/showcase-scale.njk" %}
+
   <h3>Fixed-width container</h3>
-  <p class="rich-text">Use <code>.ofh-width-container</code> for a container with a maximum width of 960px.</p>
+  <p class="rich-text">Use <code>.ofh-width-container</code> for a container with a maximum width of {{ foundationStyles.layout.widths[1].value }}.</p>
 
   {{ designExample({
     group: "styles",
@@ -105,6 +125,30 @@
   <p class="rich-text">To add vertical margin or padding to your layout, you will need a <code>main</code> element with the class <code>.ofh-main-wrapper</code>. This gives responsive padding to the top and bottom of the page and will be the wrapper for the main content of the page.</p>
   <p class="rich-text">There should be only one <code>main</code> element and it should have a unique id of <code>maincontent</code>, which allows keyboard-only users to skip to the main content on a page with the <a href="/design-system/components/skip-link">skip link component</a>.</p>
 
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Main wrapper spacing</caption>
+      <thead class="ofh-table__head">
+        <tr class="ofh-table__row">
+          <th class="ofh-table__header" scope="col">Class</th>
+          <th class="ofh-table__header" scope="col">Top padding</th>
+          <th class="ofh-table__header" scope="col">Bottom padding</th>
+          <th class="ofh-table__header" scope="col">Notes</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for wrapper in foundationStyles.layout.mainWrapper %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header" scope="row"><code>{{ wrapper.className }}</code></th>
+            <td class="ofh-table__cell">{{ wrapper.top }}</td>
+            <td class="ofh-table__cell">{{ wrapper.bottom }}</td>
+            <td class="ofh-table__cell">{{ wrapper.note }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
   {{ designExample({
     group: "styles",
     item: "layout",
@@ -113,12 +157,17 @@
     showExample: false
   }) }}
 
-  <p class="rich-text">The vertical padding can be made larger or smaller by using the modifier classes <code>.ofh-main-wrapper--l</code> or <code>.ofh-main-wrapper--s</code>. We recommend using smaller vertical padding on transactional services.</p>
+  <p class="rich-text">The vertical padding can be made larger or smaller by using the modifier classes <code>.ofh-main-wrapper--l</code> or <code>.ofh-main-wrapper--s</code>. We recommend using the smaller modifier on transactional services.</p>
 
   <h2 id="grid">Grid system</h2>
-  <p>We use a grid to structure our designs and create consistent spacing. It gives us a flexible way to layout components that adapts to different device sizes.</p>
+  <p>We use a grid to structure our designs and create consistent spacing. It gives us a flexible way to lay out components that adapts to different device sizes.</p>
   <p class="rich-text">The grid is structured with a <code>.ofh-grid-row</code> wrapper which acts as a row to contain your grid columns.</p>
-  <p class="rich-text">You can add columns inside this wrapper to create your layout. To define your columns, add the class beginning with <code>.ofh-grid-column-</code> to a new container followed by the width, for example <code>.ofh-grid-column-one-third</code>, to make it the width you want.</p>
+  <p class="rich-text">You can add columns inside this wrapper to create your layout. To define your columns, add the class beginning with <code>.ofh-grid-column-</code> to a new container followed by the width, for example <code>.ofh-grid-column-one-third</code>.</p>
+
+  {% set items = foundationStyles.layout.gridColumns %}
+  {% set caption = "Grid column widths" %}
+  {% set variant = "width" %}
+  {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3>Full width</h3>
 
@@ -207,7 +256,7 @@
 
   <h3>Reading width</h3>
   <p>Lines of text should be no longer than 70 to 80 characters.</p>
-  <p class="rich-text">When using the fluid-width container or wider grid columns, wrap text content with <code>.ofh-u-reading-width</code> to apply a maximum width and limit the number of characters per line.</p>
+  <p class="rich-text">Use <code>.ofh-u-reading-width</code> to apply a maximum width of {{ foundationStyles.layout.widths[3].value }} to longer blocks of content.</p>
 
   {{ designExample({
     group: "styles",
@@ -217,8 +266,8 @@
   }) }}
 
   <h3>Tablet and mobile-specific grid classes</h3>
-  <p>By default, grid columns sizes will go to 100% width of the container on screen sizes below the desktop breakpoint, which is 769px. These utility classes will enforce column widths on all screen sizes.</p>
-  <p class="rich-text">To define the column sizes, add the utility class <code>.ofh-u-</code> followed by the width to an existing grid column. For example <code>.ofh-u-one-half</code> will set your column width to be one-half on all screen sizes.</p>
+  <p>By default, grid columns go to 100% width of the container on screen sizes below the desktop breakpoint, which is {{ foundationStyles.layout.breakpoints[2].value }}. These utility classes will enforce column widths on all screen sizes.</p>
+  <p class="rich-text">To define the column sizes, add the utility class <code>.ofh-u-</code> followed by the width to an existing grid column. For example <code>.ofh-u-one-half</code> sets your column width to one-half on all screen sizes.</p>
 
   {{ designExample({
     group: "styles",
@@ -228,7 +277,7 @@
   }) }}
 
   <h3>Tablet-specific grid classes</h3>
-  <p>These utility classes will enforce column widths on screen sizes larger than the mobile breakpoint, which is 320px.</p>
+  <p>These utility classes will enforce column widths from the tablet breakpoint upwards, which is {{ foundationStyles.layout.breakpoints[1].value }}.</p>
   <p class="rich-text">To define your column sizes, add the utility class <code>.ofh-u-</code> followed by the width and the suffix <code>-tablet</code> to an existing grid column. For example, <code>.ofh-u-one-third-tablet</code> will set your column width to be one-third on screen sizes for tablet and larger.</p>
 
   {{ designExample({

@@ -1,8 +1,9 @@
 {% set pageTitle = "Foundation styles" %}
-{% set pageDescription = "Make your service look like other Our Future Health services with these foundation styles" %}
+{% set pageDescription = "Reference the core tokens, scales and layout rules that shape Our Future Health interfaces." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
 {% set theme = "Design" %}
+{% set dateUpdated = "March 2026" %}
 {% set hideContact = "true" %}
 
 {% extends "app-layout.njk" %}
@@ -12,6 +13,22 @@
 {% endblock %}
 
 {% block bodyContent %}
+
+  <p>Use these pages to inspect the toolkit foundations that sit underneath components and patterns.</p>
+  <p>Where practical, the values shown here are derived from the toolkit token files so the docs stay aligned with the code.</p>
+
+  <ul class="app-foundation-showcase__cards">
+    {% for card in foundationStyles.indexCards %}
+      <li>
+        <article class="app-foundation-showcase__card">
+          <h2 class="ofh-heading-m app-foundation-showcase__card-title">
+            <a class="ofh-link--no-visited-state" href="{{ card.href }}">{{ card.title }}</a>
+          </h2>
+          <p class="app-foundation-showcase__card-summary">{{ card.summary }}</p>
+        </article>
+      </li>
+    {% endfor %}
+  </ul>
 
   <div class="app-index-navigation app-u-hide-desktop">
     {% include "_side-nav.njk" %}

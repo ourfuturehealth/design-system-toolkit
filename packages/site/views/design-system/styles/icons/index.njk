@@ -4,6 +4,7 @@
 {% set subSection = "Foundation styles" %}
 {% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "4" %}
+{% set hideContact = "true" %}
 
 {% extends "app-layout.njk" %}
 {% from "icon/macro.njk" import icon %}
@@ -23,6 +24,17 @@
   </div>
   <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code></p>
   <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
+
+  <h3 id="responsive-size-behaviour">Responsive size behaviour</h3>
+  <p>The fixed icon classes <code>.ofh-icon--16</code>, <code>.ofh-icon--24</code>, and <code>.ofh-icon--32</code> keep the same rendered size at every breakpoint for backwards compatibility.</p>
+  <p>Responsive icon sizes are opt-in and come from <code>$ofh-iconography-responsive-scale</code> via <code>@include ofh-iconography-responsive(...)</code>.</p>
+
+  {% set rows = foundationStyles.icons.sizeScale %}
+  {% set caption = "Published icon size tokens" %}
+  {% set showFixedClass = true %}
+  {% set showResponsiveMixin = true %}
+  {% set showNotes = true %}
+  {% include "design-system/styles/_partials/showcase-matrix.njk" %}
 
   <h3 id="material-icon-gallery">Material icon gallery</h3>
   {% for group in materialIcons.iconsByCategory %}
@@ -66,19 +78,18 @@
   <ul>
     <li>Search</li>
     <li>ChevronRight</li>
-    <li>ExpandMore and ExpandLess (for expandable sections)</li>
+    <li>ExpandMore and ExpandLess for expandable sections</li>
     <li>Close</li>
   </ul>
-  <p>Other icons needs an explanation. They include:</p>
+  <p>Other icons need an explanation. They include:</p>
   <ul>
-    <li><a href="/design-system/components/action-link">action links</a> - tell the user what the link will help them do, for example: "Find a pharmacy"</li>
-    <li>right and left arrows for <a href="/design-system/components/pagination">pagination</a> - add "Previous" or "Next"</li>
-    <li>Close and Done - use the words Do and Don't at the top of <a href="/design-system/components/do-and-dont-lists">Do and Don't lists</a></li>
+    <li><a href="/design-system/components/action-link">action links</a> which should tell the user what the link will help them do, for example: "Find a pharmacy"</li>
+    <li>right and left arrows for <a href="/design-system/components/pagination">pagination</a> which should include "Previous" or "Next"</li>
+    <li>Close and Done in <a href="/design-system/components/do-and-dont-lists">Do and Don't lists</a></li>
   </ul>
 
   <h3>Using SVG classes for icons</h3>
-  <p>We use scalable vector graphics (SVG) for icons, rather than images such as PNG. SVG are code snippets that you can drop directly into the HTML.</p>
-  <p>SVG icons are sharp, flexible, and load quickly - and you can control how they appear, for example their colour, with style sheets (CSS).</p>
+  <p>We use scalable vector graphics, SVG, for icons rather than images such as PNG. SVGs are sharp, flexible, and load quickly. You can also control how they appear with CSS.</p>
   <p class="rich-text">If you're using a server side or templating language, include icons with the shared macro, for example <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code>.</p>
   <p class="rich-text">The icon macro renders consistent <code>.ofh-icon</code> markup that references the Material sprite symbols.</p>
   <p class="rich-text">Legacy PNG fallbacks are not provided as part of this implementation.</p>
@@ -88,7 +99,7 @@
   <p>If you have any research or experience to share, please get in touch on the <a href="/slack">NHS.UK service manual Slack workspace</a> or email us at <a href="mailto:service-manual@nhs.net">service-manual@nhs.net</a>.</p>
 
   <h2 id="research">Research</h2>
-  <p>These icons seem to be universally recognisable. When we tested them, we found that people understood them. We tested them in context - not on their own, but in components on a full page.</p>
+  <p>These icons seem to be universally recognisable. When we tested them, we found that people understood them. We tested them in context, not on their own, but in components on a full page.</p>
   <p>Read more about the benefits of SVG icons:</p>
   <ul>
     <li><a href="https://css-tricks.com/pretty-good-svg-icon-system/">CSS Tricks - a pretty good SVG icon system</a></li>
