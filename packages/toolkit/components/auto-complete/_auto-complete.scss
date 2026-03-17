@@ -10,12 +10,14 @@
 
 .autocomplete__hint,
 .autocomplete__input {
+  @include ofh-font('paragraph-md');
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
+
   appearance: none;
-  border: 2px solid $ofh-color-foreground-secondary;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   border-radius: 0; /* Safari 10 on iOS adds implicit border rounding. */
   box-sizing: border-box;
-  height: 40px;
-  line-height: 1.25;
   margin-bottom: 0; /* BUG: Safari 10 on macOS seems to add an implicit margin. */
   width: 100%;
 }
@@ -23,6 +25,14 @@
 .autocomplete__input {
   background-color: transparent;
   position: relative;
+
+  &:hover:not(:disabled, .autocomplete__input--error) {
+    border-width: $ofh-stroke-weight-4;
+  }
+
+  &:active:not(:disabled, .autocomplete__input--error) {
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  }
 }
 
 .autocomplete__hint {
@@ -30,41 +40,38 @@
   position: absolute;
 }
 
-.autocomplete__input--default {
-  padding: 4px;
+.autocomplete__input--focused {
+  @include ofh-focused-input;
 }
 
-.autocomplete__input--focused {
-  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
-  outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
-  outline-offset: $ofh-stroke-weight-4;
+.autocomplete__input--error {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
 }
 
 .autocomplete__input--show-all-values {
   cursor: pointer;
-  padding: 5px 35px 5px 5px; /* Space for arrow. Other padding should match .autocomplete__input--default. */
-}
-
-.autocomplete__dropdown-arrow-down {
-  display: inline-block;
-  height: 24px;
-  position: absolute;
-  right: 8px;
-  top: 10px;
-  width: 24px;
-  z-index: -1;
 }
 
 .autocomplete__menu {
-  background-color: $ofh-color-foreground-primary-inverted;
-  border: 2px solid $ofh-color-foreground-secondary;
-  border-top: 0;
+  background-color: $ofh-color-background-primary;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   color: $ofh-color-foreground-primary;
   margin: 0;
-  max-height: 342px;
+  max-height: 384px;
   overflow-x: hidden;
   padding: 0;
   width: 100%;
+}
+
+.autocomplete__menu--with-suggestions::before {
+  @include ofh-font('paragraph-sm');
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
+
+  background-color: $ofh-color-background-secondary;
+  color: $ofh-color-foreground-secondary;
+  content: 'Suggestions';
+  display: block;
 }
 
 .autocomplete__menu--visible {
@@ -76,7 +83,6 @@
 }
 
 .autocomplete__menu--overlay {
-  box-shadow: rgb(0 0 0 / .256863) 0 2px 6px;
   left: 0;
   position: absolute;
   top: 100%;
@@ -88,11 +94,14 @@
 }
 
 .autocomplete__option {
-  border-bottom: solid $ofh-color-border-primary;
-  border-width: 1px 0;
+  @include ofh-font('paragraph-md');
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
+
+  border-top: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   cursor: pointer;
   display: block;
-  height: 45px;
+  min-height: ofh-px-to-rem(56px);
   position: relative;
 }
 
@@ -100,20 +109,18 @@
   pointer-events: none;
 }
 
-.autocomplete__option:first-of-type {
-  border-top-width: 0;
+.autocomplete__menu--with-suggestions .autocomplete__option:first-of-type {
+  border-top-width: $ofh-stroke-weight-1;
 }
 
-.autocomplete__option:last-of-type {
-  border-bottom-width: 0;
-  height: 44px;
+.autocomplete__menu:not(.autocomplete__menu--with-suggestions) .autocomplete__option:first-of-type {
+  border-top-width: 0;
 }
 
 .autocomplete__option--focused,
 .autocomplete__option:hover {
-  background-color: $ofh-color-foreground-link-default;
-  border-color: $ofh-color-foreground-link-default;
-  color: $ofh-color-greyscale-white;
+  background-color: $ofh-color-background-button-default;
+  color: $ofh-color-foreground-primary-inverted;
   outline: none;
 }
 
@@ -143,33 +150,17 @@
 }
 
 .autocomplete__option--no-results {
-  background-color: $ofh-color-greyscale-7;
+  @include ofh-font('paragraph-sm');
+
+  background-color: $ofh-color-background-secondary;
+  border-top-width: 0;
   color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
 }
 
-.autocomplete__hint,
-.autocomplete__input,
-.autocomplete__option {
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.autocomplete__hint,
-.autocomplete__option {
-  padding: 8px 4px;
-}
-
-@media (width >= 641px) {
-  .autocomplete__hint,
-  .autocomplete__input {
-    font-size: 1.1875rem;
-    line-height: 1.3157894737;
-  }
-
-  .autocomplete__option {
-    font-size: 1.1875rem;
-  }
+.autocomplete__option--no-results:hover {
+  background-color: $ofh-color-background-secondary;
+  color: $ofh-color-foreground-secondary;
 }
 
 // End of accessible autocomplete
