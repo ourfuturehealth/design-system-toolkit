@@ -2,6 +2,11 @@
 
 This template provides a complete workflow for updating/creating design system components. It aligns Figma design specs with toolkit implementation (HTML/Nunjucks/SCSS) and React library components.
 
+Follow this with the dedicated finish-up prompts:
+
+- `component-validation-qa-template-prompt.md` for interactive manual QA
+- `component-pr-readiness-template-prompt.md` for final cleanup, release-doc refresh, commits, and PR prep
+
 ---
 
 ## 📋 How to Use This Template
@@ -20,6 +25,7 @@ This template provides a complete workflow for updating/creating design system c
 4. The agent will follow the structured workflow automatically
 
 **💡 Best Practice:** Keep this file as your master template. Don't create component-specific files.
+After implementation is mostly done, move to the dedicated validation and PR-readiness prompts instead of trying to do everything in one long session.
 
 ---
 
@@ -37,6 +43,7 @@ This template provides a complete workflow for updating/creating design system c
   {Paste the JIRA ticket description, acceptance criteria, and design notes here}
   ```
 - **Figma Component:** {Figma URL with node-id}
+- **Dependency Figma Components:** {optional Figma URLs for any dependent components that may need auditing, for example Tag, Button, Inset text}
 - **Related PRs:** {any dependencies or related work}
 
 ---
@@ -45,7 +52,7 @@ This template provides a complete workflow for updating/creating design system c
 
 1. Analyze current toolkit implementation vs Figma design
 2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS) and polish it
-3. **Ensure React component exists** and matches toolkit exactly (create if missing)
+3. **Ensure React component exists** and reaches feature/functional parity with toolkit (create if missing)
 4. Create/update comprehensive Storybook documentation
 5. Add automated tests (functional + accessibility)
 6. Update all relevant documentation
@@ -81,10 +88,34 @@ This template provides a complete workflow for updating/creating design system c
 - Check if component exists
 - **If exists:** Review implementation against toolkit parity - note all discrepancies
 - **If missing:** This is a REQUIRED deliverable - you MUST create the React component
-- React component API and functionality must match toolkit exactly
-- Both versions should work the same or as close as possible
+- React component must achieve full feature and behavior parity with toolkit
+- React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
+- Both versions should support the same user-facing capabilities, variants, and behaviors
 
-### 3. Gap Analysis
+### 3. Dependency & Prerequisite Audit
+
+Identify any design-system components or shared primitives this component depends on in toolkit, React, docs/examples, or Storybook.
+
+- Audit direct dependencies such as Tag, Button, Inset text, Error message, Icon, or any other reusable design-system component used inside this component
+- For each dependency, determine whether it:
+  - exists in toolkit and is visually up to date with Figma
+  - exists in React and is ready to be reused
+  - exists in one surface but not the other
+  - is a public design-system component or just an internal implementation detail
+- If you need a dependency's own Figma reference to judge whether it is up to date, ask the user for that Figma URL before implementation
+- Categorize each dependency as:
+  - `ready`
+  - `needs update`
+  - `missing`
+  - `blocking prerequisite`
+
+**Dependency sequencing rule (MANDATORY):**
+
+- If this component depends on another public design-system component that is missing or not ready in the target surface, surface that clearly before implementation
+- Recommend updating the dependency first
+- Do not silently create an internal stand-in for a missing public component unless the user explicitly approves that as a temporary exception
+
+### 4. Gap Analysis
 
 Compare Figma ↔ Toolkit ↔ React:
 
@@ -92,9 +123,10 @@ Compare Figma ↔ Toolkit ↔ React:
 - Design token mismatches (colors, spacing, typography)
 - Accessibility requirements not met
 - API inconsistencies
+- React API simplification opportunities where toolkit-style class or macro APIs could become clearer semantic props
 - Documentation gaps
 
-### 4. Design Token & Pattern Alignment (MANDATORY)
+### 5. Design Token & Pattern Alignment (MANDATORY)
 
 **This step is REQUIRED, not optional. Do not skip even if the JIRA ticket is narrow in scope.**
 
@@ -164,7 +196,10 @@ Review the entire component implementation against design system standards:
 
 1. Create a **comprehensive list** of all findings (not just JIRA ticket items)
 2. Categorize as: **MUST FIX** (breaks design system) vs. **SHOULD IMPROVE** (quality/consistency) vs. **NICE TO HAVE** (future enhancement)
-3. **Present this analysis to the user BEFORE implementing** and ask: "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
+3. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
+4. **Present this analysis to the user BEFORE implementing** and ask:
+   - "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
+   - "If there is a blocking prerequisite dependency, should I pause this component and update that dependency first, or proceed with an explicitly temporary internal adapter?"
 
 ---
 
@@ -172,10 +207,11 @@ Review the entire component implementation against design system standards:
 
 **IMPLEMENTATION ORDER (MANDATORY):**
 
+0. **Blocking Dependencies First:** If the dependency audit surfaced a blocking prerequisite, update that dependency first unless the user explicitly approves a temporary internal adapter
 1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
 2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
 3. **React Second:** Create/update React component to match polished toolkit
-4. **Verify Parity:** Both versions have same API, variants, behavior, and functionality
+4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
 
 ### 1. Toolkit Component Update
 
@@ -214,13 +250,17 @@ Review the entire component implementation against design system standards:
 - ✅ **Component must exist** - create from scratch if missing
 - ✅ TypeScript with strict mode
 - ✅ Extend appropriate HTML element props interface
-- ✅ **Match toolkit variants and API exactly** - 1:1 parity required
-- ✅ **Match toolkit functionality** - same behavior, same element selection logic
+- ✅ **Match toolkit functionality and capability** - same supported variants, same behavior, same element selection logic where relevant
+- ✅ Prefer a **simple, idiomatic React API** over a strict mirror of toolkit macro/class APIs
+- ✅ For common visual options, prefer semantic React props such as `variant`, `tone`, `status`, `size`, or similar clear names instead of requiring raw toolkit modifier classes
+- ✅ Internally map React props to toolkit classes where needed
+- ✅ Do not require consumers to know toolkit class names for common usage when a clearer React prop can express the same thing
 - ✅ Reuse toolkit CSS classes (`.ofh-{component}`, `.ofh-{component}--{variant}`)
 - ✅ Native ref for React 19+
 - ✅ Export component and type interfaces
 - ✅ Follow toolkit's element selection logic (e.g., Button with href renders as `<a>`)
 - ✅ All toolkit variants must be supported in React (no subset)
+- ✅ Keep `className` as the standard escape hatch for additional classes; only expose a separate toolkit-style `classes` prop if there is a strong, explicit reason
 
 **Component Pattern (React 19+ with native ref):**
 
@@ -236,7 +276,7 @@ export interface {ComponentName}Props
    * Ref forwarding for the underlying element
    */
   ref?: React.Ref<HTML{ElementType}Element>;
-  // Additional props from Figma
+  // Additional semantic props from Figma/toolkit capabilities
 }
 
 export const {ComponentName} = ({
@@ -328,6 +368,16 @@ export const {ComponentName} = ({
 
 {ComponentName}.displayName = '{ComponentName}';
 ```
+
+**React API design rule (MANDATORY):**
+
+- Feature parity with toolkit is required, but React prop names do **not** need to match toolkit or Nunjucks macro names exactly
+- Prefer idiomatic React APIs that are easy to read and easy to use
+- Examples:
+  - Prefer `<Tag variant="brand" />` over `<Tag classes="ofh-tag--brand" />`
+  - Prefer `children` over macro-style `text`/`html` props when that is the clearer React pattern, unless rich HTML handling or another constraint makes a different API more appropriate
+- If there are multiple reasonable React API shapes, briefly present the tradeoffs and ask the user for steer before locking one in
+- Document the mapping between the React API and toolkit classes/variants in Storybook/docs when useful for maintainers
 
 ### 3. Testing Implementation
 
@@ -459,7 +509,63 @@ export const KeyboardNavigation: Story = {
 };
 ```
 
-### 5. Documentation Updates
+### 5. Documentation & Storybook UX Pass (MANDATORY)
+
+**Do not treat this as optional polish. Complete it before handing off to manual QA.**
+
+Review the component's user-facing documentation surfaces and make sure they explain the component clearly rather than just listing API names.
+
+**Storybook controls policy (MANDATORY):**
+
+- Classify every story as one of:
+  - `interactive single-component example`
+  - `showcase/comparison story`
+  - `behavior/demo story`
+- Controls rule:
+  - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
+  - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
+- Check for misleading cases such as:
+  - `All variants` stories showing one prop panel that does not affect the displayed variants
+  - `Keyboard navigation` stories showing controls that do not apply to the demo content
+  - multi-example stories where the controls affect none of the rendered examples
+
+**Prop documentation clarity review (MANDATORY):**
+
+- Review Storybook prop descriptions, site docs, macro options, and toolkit/React READMEs
+- Rewrite vague descriptions so they explain:
+  - what changes visually
+  - what changes semantically
+  - when one prop overrides or replaces another prop
+  - whether the prop is an advanced/integration prop rather than a typical consumer prop
+- Explicitly explain common confusing prop categories where relevant:
+  - `heading` vs `headingHtml`
+  - `text` vs `html`
+  - `description` vs `descriptionHtml`
+  - `headingLevel` as semantic structure, not visual styling
+  - `headingClasses` or similar styling hooks
+  - `classes`, `className`, `attributes`, and `ref`
+- Mark advanced or integration-focused props clearly in Storybook where appropriate
+
+**Cross-surface consistency review (MANDATORY):**
+
+- Make sure the following surfaces do not contradict each other:
+  - Storybook docs
+  - site docs pages
+  - macro options JSON
+  - toolkit README
+  - React component story/docs descriptions
+- Ensure naming is consistent across toolkit and React:
+  - variant names
+  - component family names
+  - deprecated vs preferred usage wording
+
+**Output required before moving to QA:**
+
+- Confirm that each story has an intentional controls policy
+- Confirm that prop descriptions are written in plain language, not just implementation language
+- Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
+
+### 6. Documentation Updates
 
 **Files to update:**
 
@@ -476,6 +582,19 @@ export const KeyboardNavigation: Story = {
 - Variants and usage
 - Accessibility notes
 - Examples (HTML, Nunjucks, React)
+
+### 7. Mandatory Pre-QA Self-Review
+
+Before moving to the validation prompt, answer these checks explicitly:
+
+- [ ] Are any Storybook controls misleading for any story?
+- [ ] Does every story have an intentional controls policy?
+- [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
+- [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
+- [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
+- [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+
+If any answer is "no", fix it before moving to the QA prompt.
 
 ---
 
@@ -538,8 +657,9 @@ pnpm storybook
 - [ ] TypeScript component created/updated
 - [ ] Props interface with proper types
 - [ ] Native ref for React 19+
-- [ ] **Matches toolkit API exactly** (same variants, same props, same behavior)
-- [ ] **Matches toolkit functionality** (same element rendering logic, same validation)
+- [ ] **Matches toolkit functionality/capability** (same variants, same behavior, same element rendering logic where relevant)
+- [ ] React API is idiomatic and easy to use
+- [ ] Common visual/behavior choices use semantic React props rather than requiring toolkit class-name knowledge
 - [ ] Component tests (unit + a11y)
 - [ ] Exported from package index
 
@@ -551,6 +671,9 @@ pnpm storybook
 - [ ] Accessibility demo
 - [ ] ArgTypes documented
 - [ ] Component description added
+- [ ] Each story has an intentional controls policy
+- [ ] Showcase/behavior-demo stories do not expose misleading controls
+- [ ] Prop descriptions explain visual vs semantic behavior clearly
 
 ### Testing
 
@@ -566,6 +689,8 @@ pnpm storybook
 - [ ] Storybook auto-docs generated
 - [ ] Migration notes (if breaking changes)
 - [ ] Updated relevant contributing docs
+- [ ] Site docs, Storybook docs, macro options, and README are consistent
+- [ ] Advanced/integration props are explained clearly where relevant
 
 ### Quality Checks
 
@@ -581,9 +706,11 @@ pnpm storybook
 
 **Critical principles to follow throughout this workflow:**
 
-- **Toolkit + React parity is mandatory**: Never treat React components as "nice to have". Both toolkit and React versions MUST be updated or created. They must work identically with the same API.
+- **Toolkit + React parity is mandatory**: Never treat React components as "nice to have". Both toolkit and React versions MUST be updated or created. They must deliver the same user-facing capabilities and behavior, even if the React API is more idiomatic than the toolkit API.
 
-- **Workflow discipline**: Always complete toolkit implementation first → test thoroughly → polish it → then create/update React component to match. The React component is a faithful wrapper of the toolkit component.
+- **Workflow discipline**: Always complete toolkit implementation first → test thoroughly → polish it → then create/update React component to match in capability. The React component should usually wrap toolkit classes and behavior, but it should expose the clearest React-facing API for consumers.
+
+- **React API simplicity matters**: Prefer semantic React props like `variant`, `size`, `tone`, `status`, or `children` over raw toolkit class-name or macro-style APIs when that makes the component easier to understand and use.
 
 - **When React component is missing**: This is a required deliverable, not optional future work. Create the React component before marking the ticket complete. Reference existing React components for patterns.
 
