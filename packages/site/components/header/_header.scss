@@ -36,7 +36,7 @@
 .ofh-header-ds {
   @include clearfix();
 
-  background-color: $ofh-color-background-neutral-yellow;
+  background-color: $ofh-color-backgrounds-yellow;
 }
 
 .ofh-header-ds__container {
@@ -144,7 +144,7 @@
   position: relative;
 
   &.js-show {
-    border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+    border-bottom: ofh-spacing(2) solid $ofh-color-backgrounds-yellow; /* [7] */
   }
 
   @include mq($from: tablet) {
@@ -348,7 +348,7 @@
   }
 
   @include mq($from: tablet) {
-    background-color: $ofh-color-background-neutral-yellow;
+    background-color: $ofh-color-backgrounds-yellow;
     display: block;
     height: ofh-spacing(7); /* [2] */
     width: 44px; /* [2] */
@@ -517,8 +517,8 @@
     display: block;
 
     @include mq($until: large-desktop) {
-      border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
-      border-top: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+      border-bottom: ofh-spacing(2) solid $ofh-color-backgrounds-yellow; /* [7] */
+      border-top: ofh-spacing(2) solid $ofh-color-backgrounds-yellow; /* [7] */
       color: $ofh-color-foreground-primary;
 
       .ofh-width-container {
@@ -534,7 +534,7 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $ofh-color-background-neutral-yellow;
+    background-color: $ofh-color-backgrounds-yellow;
     display: block;
     margin: 0 auto;
     max-width: $ofh-width-content-max + ofh-spacing(10); /* [12] */
@@ -602,7 +602,7 @@
 }
 
 .ofh-header-ds__navigation-item {
-  border-top: 1px solid $ofh-color-background-neutral-yellow;
+  border-top: 1px solid $ofh-color-backgrounds-yellow;
   margin-bottom: 0;
   position: relative;
 
@@ -1056,7 +1056,7 @@
     background-color: $ofh-color-greyscale-white;
 
     .ofh-header__navigation-list {
-      border-top: 1px solid $ofh-color-background-neutral-yellow;
+      border-top: 1px solid $ofh-color-backgrounds-yellow;
     }
 
     .ofh-header__navigation-link {

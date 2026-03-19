@@ -12,7 +12,7 @@
 .ofh-hero-ds {
   @include ofh-responsive-padding(7, 'top', 'bottom');
 
-  background-color: $ofh-color-background-neutral-yellow;
+  background-color: $ofh-color-backgrounds-yellow;
   color: $ofh-color-foreground-primary;
   position: relative; /* [1] */
 }
