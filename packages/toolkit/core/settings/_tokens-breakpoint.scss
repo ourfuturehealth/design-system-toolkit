@@ -12,111 +12,137 @@
 
 // Values collapse on smaller screens to optimize for mobile devices
 
-// Responsive Space Scale
+// Responsive Spacing Scales
 // ==========================================================================
 
-// Space tokens that adapt based on breakpoint
-// These map to the spacing mixins and functions
+// Horizontal and vertical spacing now have separate responsive scales in Figma.
+// Keep a zero entry in both scales for helper compatibility.
 
-// NOTE: Values collapse significantly on mobile!
-// Space-64 goes from 64px (desktop) to 16px (mobile)
-
-$ofh-space-responsive-scale: (
+// Horizontal spacing tokens
+$ofh-space-horizontal-responsive-scale: (
   0: (
     null: $ofh-size-0,
-    // Mobile: 0
     tablet: $ofh-size-0,
-    // Tablet: 0
     desktop: $ofh-size-0,
-    // Desktop: 0
-  ),
-  1: (
-    null: $ofh-size-2,
-    // Mobile: 2px
-    tablet: $ofh-size-2,
-    // Tablet: 2px
-    desktop: $ofh-size-2,
-    // Desktop: 2px
   ),
   2: (
-    null: $ofh-size-4,
-    // Mobile: 4px
-    tablet: $ofh-size-4,
-    // Tablet: 4px
-    desktop: $ofh-size-4,
-    // Desktop: 4px
-  ),
-  3: (
-    null: $ofh-size-8,
-    // Mobile: 8px
-    tablet: $ofh-size-8,
-    // Tablet: 8px
-    desktop: $ofh-size-8,
-    // Desktop: 8px
+    null: $ofh-size-2,
+    tablet: $ofh-size-2,
+    desktop: $ofh-size-2,
   ),
   4: (
-    null: $ofh-size-12,
-    // Mobile: 12px
-    tablet: $ofh-size-12,
-    // Tablet: 12px
-    desktop: $ofh-size-12,
-    // Desktop: 12px
-  ),
-  5: (
-    null: $ofh-size-16,
-    // Mobile: 16px
-    tablet: $ofh-size-16,
-    // Tablet: 16px
-    desktop: $ofh-size-16,
-    // Desktop: 16px
-  ),
-  6: (
-    null: $ofh-size-16,
-    // Mobile: 16px
-    tablet: $ofh-size-24,
-    // Tablet: 24px
-    desktop: $ofh-size-24,
-    // Desktop: 24px
-  ),
-  7: (
-    null: $ofh-size-16,
-    // Mobile: 16px
-    tablet: $ofh-size-24,
-    // Tablet: 24px (collapsed from 32px)
-    desktop: $ofh-size-32,
-    // Desktop: 32px
+    null: $ofh-size-4,
+    tablet: $ofh-size-4,
+    desktop: $ofh-size-4,
   ),
   8: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-8,
+  ),
+  12: (
+    null: $ofh-size-12,
+    tablet: $ofh-size-12,
+    desktop: $ofh-size-12,
+  ),
+  16: (
     null: $ofh-size-16,
-    // Mobile: 16px
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-16,
+  ),
+  24: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-24,
+    desktop: $ofh-size-24,
+  ),
+  32: (
+    null: $ofh-size-16,
     tablet: $ofh-size-32,
-    // Tablet: 32px (collapsed from 40px)
+    desktop: $ofh-size-32,
+  ),
+  40: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-32,
     desktop: $ofh-size-40,
-    // Desktop: 40px
   ),
-  9: (
+  48: (
     null: $ofh-size-16,
-    // Mobile: 16px
     tablet: $ofh-size-32,
-    // Tablet: 32px (collapsed from 48px)
     desktop: $ofh-size-48,
-    // Desktop: 48px
   ),
-  10: (
+  56: (
     null: $ofh-size-16,
-    // Mobile: 16px
     tablet: $ofh-size-32,
-    // Tablet: 32px (collapsed from 56px)
     desktop: $ofh-size-56,
-    // Desktop: 56px
   ),
-  11: (
+  64: (
     null: $ofh-size-16,
-    // Mobile: 16px
     tablet: $ofh-size-32,
-    // Tablet: 32px (collapsed from 64px)
     desktop: $ofh-size-64,
-    // Desktop: 64px
+  ),
+);
+
+// Vertical spacing tokens
+$ofh-space-vertical-responsive-scale: (
+  0: (
+    null: $ofh-size-0,
+    tablet: $ofh-size-0,
+    desktop: $ofh-size-0,
+  ),
+  2: (
+    null: $ofh-size-2,
+    tablet: $ofh-size-2,
+    desktop: $ofh-size-2,
+  ),
+  4: (
+    null: $ofh-size-4,
+    tablet: $ofh-size-4,
+    desktop: $ofh-size-4,
+  ),
+  8: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-8,
+  ),
+  12: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-12,
+  ),
+  16: (
+    null: $ofh-size-8,
+    tablet: $ofh-size-8,
+    desktop: $ofh-size-16,
+  ),
+  24: (
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
+    desktop: $ofh-size-24,
+  ),
+  32: (
+    null: $ofh-size-24,
+    tablet: $ofh-size-24,
+    desktop: $ofh-size-32,
+  ),
+  40: (
+    null: $ofh-size-32,
+    tablet: $ofh-size-32,
+    desktop: $ofh-size-40,
+  ),
+  48: (
+    null: $ofh-size-40,
+    tablet: $ofh-size-40,
+    desktop: $ofh-size-48,
+  ),
+  56: (
+    null: $ofh-size-48,
+    tablet: $ofh-size-48,
+    desktop: $ofh-size-56,
+  ),
+  64: (
+    null: $ofh-size-56,
+    tablet: $ofh-size-56,
+    desktop: $ofh-size-64,
   ),
 );
 
@@ -130,7 +156,7 @@ $ofh-space-responsive-scale: (
 // H1: Desktop 48px, Tablet 32px (was 64px in old system)
 
 $ofh-typography-responsive-scale: (
-  h1: (
+  heading-xl: (
     null: (
       font-size: $ofh-size-32,
       // Mobile: 32px
@@ -150,7 +176,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 56px (1.167 ratio)
     ),
   ),
-  h2: (
+  heading-lg: (
     null: (
       font-size: $ofh-size-24,
       // Mobile: 24px
@@ -170,7 +196,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 40px (1.25 ratio)
     ),
   ),
-  h3: (
+  heading-md: (
     null: (
       font-size: $ofh-size-20,
       // Mobile: 20px
@@ -190,7 +216,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 32px (1.333 ratio)
     ),
   ),
-  h4: (
+  heading-sm: (
     null: (
       font-size: $ofh-size-18,
       // Mobile: 18px
@@ -210,7 +236,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 32px (1.455 ratio)
     ),
   ),
-  h5: (
+  heading-xs: (
     null: (
       font-size: $ofh-size-16,
       // Mobile: 16px
@@ -230,7 +256,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 28px (1.4 ratio)
     ),
   ),
-  lead: (
+  lead-md: (
     null: (
       font-size: $ofh-size-20,
       // Mobile: 20px
@@ -250,7 +276,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 32px (1.333 ratio)
     ),
   ),
-  paragraph: (
+  paragraph-md: (
     null: (
       font-size: $ofh-size-18,
       // Mobile: 18px
@@ -270,7 +296,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 28px (1.4 ratio)
     ),
   ),
-  paragraph-small: (
+  paragraph-sm: (
     null: (
       font-size: $ofh-size-16,
       // Mobile: 16px
@@ -290,7 +316,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 24px (1.5 ratio)
     ),
   ),
-  list: (
+  list-md: (
     null: (
       font-size: $ofh-size-18,
       // Mobile: 18px
@@ -310,7 +336,7 @@ $ofh-typography-responsive-scale: (
       // Desktop: 28px (1.4 ratio)
     ),
   ),
-  list-small: (
+  list-sm: (
     null: (
       font-size: $ofh-size-16,
       // Mobile: 16px
@@ -340,52 +366,52 @@ $ofh-typography-responsive-scale: (
 // layout metadata, not a property emitted by the typography helper.
 
 $ofh-paragraph-spacing-responsive-scale: (
-  h1: (
+  heading-xl: (
     null: $ofh-size-40,
     tablet: $ofh-size-40,
     desktop: $ofh-size-48,
   ),
-  h2: (
+  heading-lg: (
     null: $ofh-size-28,
     tablet: $ofh-size-28,
     desktop: $ofh-size-24,
   ),
-  h3: (
+  heading-md: (
     null: $ofh-size-16,
     tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
-  h4: (
+  heading-sm: (
     null: $ofh-size-16,
     tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
-  h5: (
+  heading-xs: (
     null: $ofh-size-16,
     tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
-  lead: (
+  lead-md: (
     null: $ofh-size-32,
     tablet: $ofh-size-32,
     desktop: $ofh-size-32,
   ),
-  paragraph: (
+  paragraph-md: (
     null: $ofh-size-16,
     tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
-  paragraph-small: (
+  paragraph-sm: (
     null: $ofh-size-16,
     tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
-  list: (
+  list-md: (
     null: $ofh-size-8,
     tablet: $ofh-size-8,
     desktop: $ofh-size-8,
   ),
-  list-small: (
+  list-sm: (
     null: $ofh-size-8,
     tablet: $ofh-size-8,
     desktop: $ofh-size-8,
@@ -406,8 +432,8 @@ $ofh-iconography-responsive-scale: (
     desktop: $ofh-size-16,
   ),
   24: (
-    null: $ofh-size-24,
-    tablet: $ofh-size-24,
+    null: $ofh-size-16,
+    tablet: $ofh-size-16,
     desktop: $ofh-size-24,
   ),
   32: (
@@ -425,5 +451,4 @@ $ofh-iconography-32: $ofh-size-32;
 
 // Content width constraints
 
-$ofh-width-page-max: 1100px;
 $ofh-width-content-max: 960px; // Matches old $ofh-width-content-max

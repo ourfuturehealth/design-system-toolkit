@@ -5,6 +5,31 @@
 @use 'sass:map';
 @use 'sass:math';
 
+$ofh-typography-size-aliases: (
+  h1: heading-xl,
+  h2: heading-lg,
+  h3: heading-md,
+  h4: heading-sm,
+  h5: heading-xs,
+  lead: lead-md,
+  paragraph: paragraph-md,
+  paragraph-small: paragraph-sm,
+  list: list-md,
+  list-small: list-sm,
+);
+
+@function _ofh-typography-size-key($size) {
+  @if map.has-key($ofh-typography-responsive-scale, $size) {
+    @return $size;
+  }
+
+  @if map.has-key($ofh-typography-size-aliases, $size) {
+    @return map.get($ofh-typography-size-aliases, $size);
+  }
+
+  @error 'Unknown font size `#{$size}` - expected a key from the typography scale.';
+}
+
 // These mixins allow us to quickly and consistently generate common text
 // patterns such as colours and font-weight
 
@@ -113,10 +138,7 @@
 //    are used in calculations
 
 @mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
-  @if not map.has-key($ofh-typography-responsive-scale, $size) {
-    @error 'Unknown font size `#{$size}` - expected a point from the typography scale (h1, h2, h3, h4, h5, lead, paragraph, etc).';
-  }
-
+  $size: _ofh-typography-size-key($size);
   $font-map: map.get($ofh-typography-responsive-scale, $size);
 
   @each $breakpoint, $breakpoint-map in $font-map {

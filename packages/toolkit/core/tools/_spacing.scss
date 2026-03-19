@@ -6,7 +6,7 @@
 @use 'sass:map';
 
 // Updated to use new Figma-aligned token structure
-// References: $ofh-size-* and $ofh-space-responsive-scale from _tokens-*.scss
+// References: $ofh-size-* and the responsive spacing scales from _tokens-*.scss
 
 // Single point spacing
 // ==========================================================================
@@ -26,6 +26,24 @@ $ofh-spacing-points: (
   8: $ofh-size-48,
   9: $ofh-size-56,
   10: $ofh-size-64,
+);
+
+// Legacy responsive spacing points are kept for helper compatibility.
+// New Figma-aligned spacing should use the size key directly.
+
+$ofh-legacy-responsive-spacing-points: (
+  0: 0,
+  1: 2,
+  2: 4,
+  3: 8,
+  4: 12,
+  5: 16,
+  6: 24,
+  7: 32,
+  8: 40,
+  9: 48,
+  10: 56,
+  11: 64,
 );
 
 // Returns measurement corresponding to the spacing point requested.
@@ -61,14 +79,13 @@ $ofh-spacing-points: (
 // ==========================================================================
 
 // Adds responsive spacing (either padding or margin, depending on `$property`)
-// by fetching a 'spacing map' from the responsive spacing scale, which defines
-// different spacing values at different breakpoints.
+// by fetching values from the horizontal or vertical responsive spacing scale.
 
 // To generate responsive spacing, use 'ofh-responsive-margin' or
 // 'ofh-responsive-padding' mixins
 
-// @param {Number} $responsive-spacing-point - Point on the responsive spacing
-//  scale, corresponds to a map of breakpoints and spacing values
+// @param {Number} $responsive-spacing-point - Either a legacy point (0-11)
+//  or a Figma-aligned size key (0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 56, 64)
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 // @param {String} $direction [all] - Direction to add spacing to
 //  (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
@@ -81,9 +98,70 @@ $ofh-spacing-points: (
 //    @include ofh-responsive-margin(5, 'vertical');     // top + bottom
 //   }
 
-// 1. Make sure that the return value from `_settings/spacing.scss` is a map.
-// 2. Loop through each breakpoint in the map
-// 3. The 'null' breakpoint is for mobile.
+@function _ofh-responsive-spacing-size-key($responsive-spacing-point) {
+  @if map.has-key($ofh-space-horizontal-responsive-scale, $responsive-spacing-point) and map.has-key(
+    $ofh-space-vertical-responsive-scale,
+    $responsive-spacing-point
+  ) {
+    @return $responsive-spacing-point;
+  }
+
+  @if map.has-key($ofh-legacy-responsive-spacing-points, $responsive-spacing-point) {
+    @return map.get($ofh-legacy-responsive-spacing-points, $responsive-spacing-point);
+  }
+
+  @error 'Unknown responsive spacing key `#{$responsive-spacing-point}`. Use a legacy point from 0-11 or a Figma size key from the responsive spacing scales.';
+}
+
+@function _ofh-responsive-spacing-scale($direction) {
+  @if $direction == horizontal or $direction == left or $direction == right {
+    @return $ofh-space-horizontal-responsive-scale;
+  }
+
+  @if $direction == vertical or $direction == top or $direction == bottom {
+    @return $ofh-space-vertical-responsive-scale;
+  }
+
+  @error 'Unknown spacing direction `#{$direction}`. Valid directions are top, right, bottom, left, horizontal, vertical, or all.';
+}
+
+@mixin _ofh-apply-responsive-spacing(
+  $scale-map,
+  $property,
+  $direction,
+  $important: false,
+  $adjustment: false
+) {
+  @each $breakpoint, $breakpoint-value in $scale-map {
+    @if $adjustment {
+      $breakpoint-value: $breakpoint-value + $adjustment;
+    }
+
+    @if not $breakpoint {
+      @if $direction == horizontal {
+        #{$property}-left: $breakpoint-value iff($important, !important);
+        #{$property}-right: $breakpoint-value iff($important, !important);
+      } @else if $direction == vertical {
+        #{$property}-top: $breakpoint-value iff($important, !important);
+        #{$property}-bottom: $breakpoint-value iff($important, !important);
+      } @else {
+        #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
+      }
+    } @else {
+      @include govuk-media-query($from: $breakpoint) {
+        @if $direction == horizontal {
+          #{$property}-left: $breakpoint-value iff($important, !important);
+          #{$property}-right: $breakpoint-value iff($important, !important);
+        } @else if $direction == vertical {
+          #{$property}-top: $breakpoint-value iff($important, !important);
+          #{$property}-bottom: $breakpoint-value iff($important, !important);
+        } @else {
+          #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
+        }
+      }
+    }
+  }
+}
 
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
@@ -101,51 +179,39 @@ $ofh-spacing-points: (
     @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}';
   }
 
-  @if not map.has-key($ofh-space-responsive-scale, $responsive-spacing-point) {
-    @error 'Unknown spacing point `#{$responsive-spacing-point}`. Make sure you are using a point from the ' + 'responsive spacing scale in `_tokens-breakpoint.scss`. Valid points: 0-11';
-  }
+  $spacing-size-key: _ofh-responsive-spacing-size-key($responsive-spacing-point);
 
-  $scale-map: map.get($ofh-space-responsive-scale, $responsive-spacing-point); // [1] //
-  $actual-map-type: meta.type-of($scale-map);
+  @if $direction == all {
+    @include _ofh-responsive-spacing(
+      $spacing-size-key,
+      $property,
+      vertical,
+      $important,
+      $adjustment
+    );
+    @include _ofh-responsive-spacing(
+      $spacing-size-key,
+      $property,
+      horizontal,
+      $important,
+      $adjustment
+    );
+  } @else {
+    $scale: _ofh-responsive-spacing-scale($direction);
+    $scale-map: map.get($scale, $spacing-size-key);
+    $actual-map-type: meta.type-of($scale-map);
 
-  @if $actual-map-type != 'map' {
-    @error 'Expected a number (integer), but got a #{$actual-map-type}. ' + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
-  }
-
-  @each $breakpoint, $breakpoint-value in $scale-map {
-    // [2] //
-    @if $adjustment {
-      $breakpoint-value: $breakpoint-value + $adjustment;
+    @if $actual-map-type != 'map' {
+      @error 'Expected a number (integer), but got a #{$actual-map-type}. ' + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
     }
 
-    @if not $breakpoint {
-      // [3] //
-      @if $direction == all {
-        #{$property}: $breakpoint-value iff($important, !important);
-      } @else if $direction == horizontal {
-        #{$property}-left: $breakpoint-value iff($important, !important);
-        #{$property}-right: $breakpoint-value iff($important, !important);
-      } @else if $direction == vertical {
-        #{$property}-top: $breakpoint-value iff($important, !important);
-        #{$property}-bottom: $breakpoint-value iff($important, !important);
-      } @else {
-        #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
-      }
-    } @else {
-      @include govuk-media-query($from: $breakpoint) {
-        @if $direction == all {
-          #{$property}: $breakpoint-value iff($important, !important);
-        } @else if $direction == horizontal {
-          #{$property}-left: $breakpoint-value iff($important, !important);
-          #{$property}-right: $breakpoint-value iff($important, !important);
-        } @else if $direction == vertical {
-          #{$property}-top: $breakpoint-value iff($important, !important);
-          #{$property}-bottom: $breakpoint-value iff($important, !important);
-        } @else {
-          #{$property}-#{$direction}: $breakpoint-value iff($important, !important);
-        }
-      }
-    }
+    @include _ofh-apply-responsive-spacing(
+      $scale-map,
+      $property,
+      $direction,
+      $important,
+      $adjustment
+    );
   }
 }
 

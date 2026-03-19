@@ -23,6 +23,12 @@
   }
 }
 
+@each $legacy-size, $size in $ofh-typography-size-aliases {
+  .ofh-u-font-size-#{$legacy-size} {
+    @include ofh-typography-responsive($legacy-size, $important: true);
+  }
+}
+
 /* Weights
    ========================================================================== */
 
