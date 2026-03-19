@@ -9,11 +9,10 @@
 // https://github.com/alphagov/govuk-frontend
 
 $_spacing-directions: ('top', 'right', 'bottom', 'left') !default;
-$_legacy-responsive-spacing-points: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) !default;
 
 // Spacing override classes
 // Generate spacing override classes for the given property (e.g. margin)
-// for each point in the spacing scale.
+// for each size key in the responsive spacing scale.
 
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 
@@ -22,11 +21,11 @@ $_legacy-responsive-spacing-points: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) !default
 //      margin: 0;
 //   }
 
-//  .ofh-u-margin-top-1 {
-//     margin-top: [whatever spacing point 1 is...]
+//  .ofh-u-margin-top-12 {
+//     margin-top: [the responsive value for size key 12]
 //   }
 
-// 1. For each point in the spacing scale (defined in settings), create an
+// 1. For each size key in the responsive spacing scale, create an
 //    override that affects all directions...
 // 2. ... and then an override for each individual direction
 
@@ -55,6 +54,4 @@ $_legacy-responsive-spacing-points: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) !default
     'padding',
     map.keys($ofh-space-horizontal-responsive-scale)
   );
-  @include _ofh-generate-spacing-overrides('margin', $_legacy-responsive-spacing-points);
-  @include _ofh-generate-spacing-overrides('padding', $_legacy-responsive-spacing-points);
 }

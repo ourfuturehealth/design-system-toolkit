@@ -6,7 +6,7 @@
   @include ofh-font('paragraph');
 
   display: block;
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: $ofh-size-4;
 }
 
 /* Modifiers that make labels look more like their equivalent headings */
@@ -16,7 +16,7 @@
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   margin-top: 0;
 }
 
@@ -25,7 +25,7 @@
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   margin-top: 0;
 }
 
@@ -34,7 +34,7 @@
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   margin-top: 0;
 }
 
@@ -43,7 +43,7 @@
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: $ofh-size-4;
   margin-top: 0;
 }
 

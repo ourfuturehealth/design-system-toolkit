@@ -8,9 +8,97 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing API hard cut  | 🟡 Medium - Replace legacy spacing APIs |
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
+
+---
+
+## Upgrading to v4.5.0
+
+**Released:** March 2026  
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.5.0+
+
+### Breaking Changes
+
+The toolkit spacing APIs now use the Figma-aligned size keys directly.
+
+- Removed `ofh-spacing(...)`
+- `ofh-responsive-margin(...)` and `ofh-responsive-padding(...)` now expect spacing size keys
+- Spacing utility classes now use spacing size keys as their suffixes
+
+This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but consumers adopting the monorepo line should migrate to the new spacing model.
+
+### What Changed
+
+- Static spacing now uses `$ofh-size-*` tokens
+- Responsive spacing now uses the Figma-aligned keys:
+  - `0`, `2`, `4`, `8`, `12`, `16`, `24`, `32`, `40`, `48`, `56`, `64`
+- `all` spacing uses the vertical scale for top and bottom and the horizontal scale for left and right
+
+### Migration Steps
+
+#### Replace static spacing function calls
+
+| Before | After |
+| ------ | ----- |
+| `ofh-spacing(0)` | `$ofh-size-0` |
+| `ofh-spacing(1)` | `$ofh-size-2` |
+| `ofh-spacing(2)` | `$ofh-size-4` |
+| `ofh-spacing(3)` | `$ofh-size-8` |
+| `ofh-spacing(4)` | `$ofh-size-16` |
+| `ofh-spacing(5)` | `$ofh-size-24` |
+| `ofh-spacing(6)` | `$ofh-size-32` |
+| `ofh-spacing(7)` | `$ofh-size-40` |
+| `ofh-spacing(8)` | `$ofh-size-48` |
+| `ofh-spacing(9)` | `$ofh-size-56` |
+| `ofh-spacing(10)` | `$ofh-size-64` |
+
+#### Replace responsive spacing mixin arguments
+
+| Before | After |
+| ------ | ----- |
+| `@include ofh-responsive-margin(0, 'bottom')` | `@include ofh-responsive-margin(0, 'bottom')` |
+| `@include ofh-responsive-margin(1, 'bottom')` | `@include ofh-responsive-margin(2, 'bottom')` |
+| `@include ofh-responsive-margin(2, 'bottom')` | `@include ofh-responsive-margin(4, 'bottom')` |
+| `@include ofh-responsive-margin(3, 'bottom')` | `@include ofh-responsive-margin(8, 'bottom')` |
+| `@include ofh-responsive-margin(4, 'bottom')` | `@include ofh-responsive-margin(12, 'bottom')` |
+| `@include ofh-responsive-margin(5, 'bottom')` | `@include ofh-responsive-margin(16, 'bottom')` |
+| `@include ofh-responsive-margin(6, 'bottom')` | `@include ofh-responsive-margin(24, 'bottom')` |
+| `@include ofh-responsive-margin(7, 'bottom')` | `@include ofh-responsive-margin(32, 'bottom')` |
+| `@include ofh-responsive-margin(8, 'bottom')` | `@include ofh-responsive-margin(40, 'bottom')` |
+| `@include ofh-responsive-margin(9, 'bottom')` | `@include ofh-responsive-margin(48, 'bottom')` |
+| `@include ofh-responsive-margin(10, 'bottom')` | `@include ofh-responsive-margin(56, 'bottom')` |
+| `@include ofh-responsive-margin(11, 'bottom')` | `@include ofh-responsive-margin(64, 'bottom')` |
+
+#### Replace spacing utility classes
+
+| Before | After |
+| ------ | ----- |
+| `ofh-u-margin-1` | `ofh-u-margin-2` |
+| `ofh-u-margin-top-4` | `ofh-u-margin-top-12` |
+| `ofh-u-padding-6` | `ofh-u-padding-24` |
+| `ofh-u-padding-bottom-8` | `ofh-u-padding-bottom-40` |
+| `ofh-u-margin-10` | `ofh-u-margin-56` |
+| `ofh-u-padding-11` | `ofh-u-padding-64` |
+
+### Search Your Codebase
+
+```bash
+grep -r "ofh-spacing(" --include="*.scss" .
+grep -r "ofh-responsive-margin(" --include="*.scss" .
+grep -r "ofh-responsive-padding(" --include="*.scss" .
+grep -r "ofh-u-margin\\|ofh-u-padding-" --include="*.njk" --include="*.html" --include="*.md" .
+```
+
+### Testing After Migration
+
+- [ ] Check spacing-heavy templates and components at mobile and desktop breakpoints
+- [ ] Check utility-class examples in the docs site
+- [ ] Check any spacing overrides that mix fixed geometry with layout spacing
 
 ---
 

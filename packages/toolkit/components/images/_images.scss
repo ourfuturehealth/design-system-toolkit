@@ -15,8 +15,8 @@
   margin-left: 0; /* [1] */
   margin-right: 0; /* [1] */
 
-  @include ofh-responsive-margin(7, 'bottom');
-  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(32, 'bottom');
+  @include ofh-responsive-margin(32, 'top');
 
   @include mq($from: desktop) {
     width: 66.66667%; /* [2] */
@@ -39,5 +39,5 @@
 .ofh-image__caption {
   @include ofh-typography-responsive('paragraph-small');
 
-  padding: ofh-spacing(4);
+  padding: $ofh-size-16;
 }

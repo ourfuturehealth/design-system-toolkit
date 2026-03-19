@@ -8,73 +8,6 @@
 // Updated to use new Figma-aligned token structure
 // References: $ofh-size-* and the responsive spacing scales from _tokens-*.scss
 
-// Single point spacing
-// ==========================================================================
-
-// Spacing point map - maps old point system to new size tokens
-// This maintains backwards compatibility with existing components
-
-$ofh-spacing-points: (
-  0: $ofh-size-0,
-  1: $ofh-size-2,
-  2: $ofh-size-4,
-  3: $ofh-size-8,
-  4: $ofh-size-16,
-  5: $ofh-size-24,
-  6: $ofh-size-32,
-  7: $ofh-size-40,
-  8: $ofh-size-48,
-  9: $ofh-size-56,
-  10: $ofh-size-64,
-);
-
-// Legacy responsive spacing points are kept for helper compatibility.
-// New Figma-aligned spacing should use the size key directly.
-
-$ofh-legacy-responsive-spacing-points: (
-  0: 0,
-  1: 2,
-  2: 4,
-  3: 8,
-  4: 12,
-  5: 16,
-  6: 24,
-  7: 32,
-  8: 40,
-  9: 48,
-  10: 56,
-  11: 64,
-);
-
-// Returns measurement corresponding to the spacing point requested.
-
-// @param {Number} $spacing-point - Point on the spacing scale
-
-// @returns {String} Spacing Measurement eg. 8px
-
-// @example scss
-//  .foo {
-//    padding: ofh-spacing(6);
-//    top: ofh-spacing(3) !important; // if `!important` is required
-//   }
-
-// Original code taken from GDS (Government Digital Service)
-// https://github.com/alphagov/govuk-frontend
-
-@function ofh-spacing($spacing-point) {
-  $actual-input-type: meta.type-of($spacing-point);
-
-  @if $actual-input-type != 'number' {
-    @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}.'; /* stylelint-disable-line indentation */
-  }
-
-  @if not map.has-key($ofh-spacing-points, $spacing-point) {
-    @error 'Unknown spacing variable `#{$spacing-point}`. ' + 'Make sure you are using a point from the spacing scale. Valid points: 0-10';
-  }
-
-  @return map.get($ofh-spacing-points, $spacing-point);
-}
-
 // Responsive spacing
 // ==========================================================================
 
@@ -84,8 +17,8 @@ $ofh-legacy-responsive-spacing-points: (
 // To generate responsive spacing, use 'ofh-responsive-margin' or
 // 'ofh-responsive-padding' mixins
 
-// @param {Number} $responsive-spacing-point - Either a legacy point (0-11)
-//  or a Figma-aligned size key (0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 56, 64)
+// @param {Number} $responsive-spacing-point - A Figma-aligned size key
+//  from the responsive spacing scales (0, 2, 4, 8, 12, 16, 24, 32, 40, 48, 56, 64)
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 // @param {String} $direction [all] - Direction to add spacing to
 //  (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
@@ -94,8 +27,8 @@ $ofh-legacy-responsive-spacing-points: (
 
 // @example scss
 //  .foo {
-//    @include ofh-responsive-padding(6, 'horizontal');  // left + right
-//    @include ofh-responsive-margin(5, 'vertical');     // top + bottom
+//    @include ofh-responsive-padding(24, 'horizontal');  // left + right
+//    @include ofh-responsive-margin(16, 'vertical');     // top + bottom
 //   }
 
 @function _ofh-responsive-spacing-size-key($responsive-spacing-point) {
@@ -106,11 +39,7 @@ $ofh-legacy-responsive-spacing-points: (
     @return $responsive-spacing-point;
   }
 
-  @if map.has-key($ofh-legacy-responsive-spacing-points, $responsive-spacing-point) {
-    @return map.get($ofh-legacy-responsive-spacing-points, $responsive-spacing-point);
-  }
-
-  @error 'Unknown responsive spacing key `#{$responsive-spacing-point}`. Use a legacy point from 0-11 or a Figma size key from the responsive spacing scales.';
+  @error 'Unknown responsive spacing key `#{$responsive-spacing-point}`. Use a size key from the responsive spacing scales.';
 }
 
 @function _ofh-responsive-spacing-scale($direction) {
@@ -224,7 +153,7 @@ $ofh-legacy-responsive-spacing-points: (
 
 // @see {mixin} _ofh-responsive-spacing
 
-// @param {Number} $responsive-spacing-point - Point on the responsive spacing
+// @param {Number} $responsive-spacing-point - Size key from the responsive
 // scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
 //   (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
@@ -233,8 +162,8 @@ $ofh-legacy-responsive-spacing-points: (
 
 // @example scss
 //   .foo {
-//      @include ofh-responsive-margin(7, 'left', $adjustment: 1px);
-//      @include ofh-responsive-margin(6, 'vertical');  // top + bottom
+//      @include ofh-responsive-margin(24, 'left', $adjustment: 1px);
+//      @include ofh-responsive-margin(16, 'vertical');  // top + bottom
 //   }
 
 // Original code taken from GDS (Government Digital Service)
@@ -264,8 +193,8 @@ $ofh-legacy-responsive-spacing-points: (
 
 // @see {mixin} _ofh-responsive-spacing
 
-// @param {Number} $responsive-spacing-point - Point on the responsive spacing
-//   scale, corresponds to a map of breakpoints and spacing values
+// @param {Number} $responsive-spacing-point - Size key from the responsive
+//   spacing scale, corresponds to a map of breakpoints and spacing values
 // @param {String} $direction [all] - Direction to add spacing to
 //   (`top`, `right`, `bottom`, `left`, `horizontal`, `vertical`, `all`)
 // @param {Boolean} $important [false] - Whether to mark as `!important`
@@ -273,8 +202,8 @@ $ofh-legacy-responsive-spacing-points: (
 
 // @example scss
 //   .foo {
-//      @include ofh-responsive-padding(7, 'left', $adjustment: 1px);
-//      @include ofh-responsive-padding(6, 'horizontal');  // left + right
+//      @include ofh-responsive-padding(24, 'left', $adjustment: 1px);
+//      @include ofh-responsive-padding(24, 'horizontal');  // left + right
 //   }
 
 // Original code taken from GDS (Government Digital Service)

@@ -14,7 +14,7 @@
     <div class="ofh-grid-row">
       <div class="ofh-grid-column-two-thirds">
         <div class="ofh-hero__wrapper">
-          <h1 class="ofh-u-margin-bottom-4">We’re here for you</h1>
+          <h1 class="ofh-u-margin-bottom-12">We’re here for you</h1>
           <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
         </div>
       </div>
@@ -49,7 +49,7 @@
       <div class="ofh-grid-row">
         <div class="ofh-grid-column-two-thirds">
           <div class="ofh-hero-content">
-            <h1 class="ofh-u-margin-bottom-4">We’re here for you</h1>
+            <h1 class="ofh-u-margin-bottom-12">We’re here for you</h1>
             <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
             <span class="ofh-hero__arrow" aria-hidden="true"></span>
           </div>

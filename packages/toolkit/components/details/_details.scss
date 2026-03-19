@@ -19,7 +19,7 @@
  */
 
 .ofh-details {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(16, 'bottom');
   @include ofh-typography-responsive('paragraph');
 
   display: block;
@@ -29,7 +29,7 @@
   color: $ofh-color-foreground-link-default;
   cursor: pointer;
   display: inline-block; /* [2] */
-  padding-left: ofh-spacing(5);
+  padding-left: $ofh-size-24;
   position: relative; /* [3] */
 
   &:hover {
@@ -76,9 +76,9 @@
 }
 
 .ofh-details__text {
-  border-left: ofh-spacing(2) solid $ofh-color-greyscale-5;
-  margin-top: ofh-spacing(3);
-  padding: ofh-spacing(4);
+  border-left: $ofh-size-4 solid $ofh-color-greyscale-5;
+  margin-top: $ofh-size-8;
+  padding: $ofh-size-16;
   padding-left: 20px; /* [6] */
 
   @include top-and-bottom();
@@ -97,7 +97,7 @@
  */
 
 $expander-border-width: 1px;
-$expander-border-bottom-width: ofh-spacing(2);
+$expander-border-bottom-width: $ofh-size-4;
 $expander-border-color: $ofh-color-greyscale-5;
 $expander-border-hover-color: $ofh-color-greyscale-4;
 
@@ -114,10 +114,10 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
     background-color: $ofh-color-greyscale-white;
     border-top: $ofh-stroke-weight-4 solid transparent;
     display: block;
-    padding: ofh-spacing(5) - $ofh-stroke-weight-4 ofh-spacing(5) ofh-spacing(5);
+    padding: $ofh-size-24 - $ofh-stroke-weight-4 $ofh-size-24 $ofh-size-24;
 
     @include mq($until: tablet) {
-      padding: ofh-spacing(4) - $ofh-stroke-weight-4 ofh-spacing(4) ofh-spacing(4);
+      padding: $ofh-size-16 - $ofh-stroke-weight-4 $ofh-size-16 $ofh-size-16;
     }
 
     &::before {
@@ -147,14 +147,14 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   .ofh-details__summary-text {
     cursor: pointer;
     display: inline-block;
-    padding: ofh-spacing(2) ofh-spacing(2) ofh-spacing(2) ofh-spacing(6);
+    padding: $ofh-size-4 $ofh-size-4 $ofh-size-4 $ofh-size-32;
     position: relative;
   }
 
   .ofh-details__text {
-    @include ofh-responsive-padding(5, 'bottom');
-    @include ofh-responsive-padding(5, 'left');
-    @include ofh-responsive-padding(5, 'right');
+    @include ofh-responsive-padding(16, 'bottom');
+    @include ofh-responsive-padding(16, 'left');
+    @include ofh-responsive-padding(16, 'right');
     @include ofh-responsive-padding(0, 'top');
 
     border-left: 0;
@@ -202,12 +202,12 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   /* [4] */
 
   > .ofh-details {
-    @include ofh-responsive-margin(2, 'bottom');
+    @include ofh-responsive-margin(4, 'bottom');
   }
 
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(16, 'bottom');
 }
 
 .ofh-details + %ofh-heading-l {
-  @include ofh-responsive-padding(5, 'top');
+  @include ofh-responsive-padding(16, 'top');
 }

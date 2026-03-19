@@ -12,14 +12,14 @@
 
 .app-ogl-footer--text {
   @include ofh-font($size: paragraph);
-  @include ofh-responsive-padding(6, 'bottom');
+  @include ofh-responsive-padding(24, 'bottom');
 
   color: $ofh-color-greyscale-white;
   margin-bottom: 0;
-  padding-bottom: ofh-spacing(5);
+  padding-bottom: $ofh-size-24;
 
   svg {
-    margin-right: ofh-spacing(3);
+    margin-right: $ofh-size-8;
     position: relative;
     top: 2px;
   }

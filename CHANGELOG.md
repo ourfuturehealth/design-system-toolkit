@@ -6,6 +6,24 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-19
+
+#### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Spacing API hard cut to Figma-aligned size keys**
+  - Removed `ofh-spacing(...)`
+  - `ofh-responsive-margin(...)` and `ofh-responsive-padding(...)` now take spacing size keys directly
+  - Spacing utility classes now use spacing size keys as their suffixes
+  - See [UPGRADING.md](UPGRADING.md#upgrading-to-v450) for migration details
+
+##### Changed
+
+- Replaced legacy point-based spacing usage across toolkit and site source with `$ofh-size-*` tokens and Figma-aligned responsive spacing keys
+- Removed legacy spacing helper compatibility and legacy point-based spacing utility generation
+- Updated spacing documentation and examples to teach the horizontal and vertical responsive spacing scales directly
+
 ### 2026-03-11
 
 #### @ourfuturehealth/toolkit 4.4.0 (`toolkit-v4.4.0`)

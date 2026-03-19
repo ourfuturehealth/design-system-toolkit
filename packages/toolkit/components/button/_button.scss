@@ -6,9 +6,9 @@
 // Base button styles
 .ofh-button,
 a.ofh-button {
-  @include ofh-responsive-margin(6, 'bottom');
-  @include ofh-responsive-padding(5, 'vertical');
-  @include ofh-responsive-padding(6, 'horizontal');
+  @include ofh-responsive-margin(24, 'bottom');
+  @include ofh-responsive-padding(16, 'vertical');
+  @include ofh-responsive-padding(24, 'horizontal');
   @include ofh-typography-responsive('h5');
 
   -webkit-appearance: none;
