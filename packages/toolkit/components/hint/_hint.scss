@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .ofh-hint {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-secondary;
   display: block;

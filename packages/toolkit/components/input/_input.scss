@@ -11,7 +11,7 @@
  */
 
 .ofh-input {
-  @include ofh-font("paragraph");
+  @include ofh-font("paragraph-md");
 
   -moz-appearance: none; /* 1 */
   -webkit-appearance: none; /* 1 */

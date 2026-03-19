@@ -54,7 +54,7 @@
 }
 
 .ofh-breadcrumb__item {
-  @include ofh-font('paragraph-small'); /* [4] */
+  @include ofh-font('paragraph-sm'); /* [4] */
 
   display: inline-block;
   margin-bottom: 0;
@@ -91,7 +91,7 @@
 }
 
 .ofh-breadcrumb__back {
-  @include ofh-font('paragraph-small'); /* [4] */
+  @include ofh-font('paragraph-sm'); /* [4] */
 
   margin: 0;
   padding-left: 0;

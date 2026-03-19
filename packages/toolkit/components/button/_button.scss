@@ -9,7 +9,7 @@ a.ofh-button {
   @include ofh-responsive-margin(24, 'bottom');
   @include ofh-responsive-padding(16, 'vertical');
   @include ofh-responsive-padding(24, 'horizontal');
-  @include ofh-typography-responsive('h5');
+  @include ofh-typography-responsive('heading-xs');
 
   -webkit-appearance: none;
   background-color: $ofh-color-background-button-default-inverted;

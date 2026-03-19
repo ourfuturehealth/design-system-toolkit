@@ -37,7 +37,7 @@
 }
 
 .ofh-image__caption {
-  @include ofh-typography-responsive('paragraph-small');
+  @include ofh-typography-responsive('paragraph-sm');
 
   padding: $ofh-size-16;
 }

@@ -131,7 +131,7 @@
 //    sit just outside the box.
 
 @mixin heading-label($heading-background-color, $heading-text-color) {
-  @include ofh-typography-responsive('h3');
+  @include ofh-typography-responsive('heading-md');
 
   background-color: $heading-background-color; // [1] //
   color: $heading-text-color; // [2] //

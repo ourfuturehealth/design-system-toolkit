@@ -19,11 +19,11 @@
 }
 
 .ofh-status-flag__title {
-  @include ofh-font('h3', $weight: bold);
+  @include ofh-font('heading-md', $weight: bold);
 
   margin-top: 0;
 }
 
 .ofh-status-flag__body {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 }

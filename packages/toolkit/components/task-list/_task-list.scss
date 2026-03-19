@@ -9,7 +9,7 @@
  */
 
 .ofh-task-list {
-  @include ofh-font($size: 'paragraph');
+  @include ofh-font($size: 'paragraph-md');
 
   list-style-type: none;
   margin-top: 0;

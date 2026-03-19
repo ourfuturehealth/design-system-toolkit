@@ -137,9 +137,9 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   }
 
   + h2,
-  + .ofh-heading-l,
+  + .ofh-heading-lg,
   + h3,
-  + .ofh-heading-m {
+  + .ofh-heading-md {
     padding-top: 0; /* [4] */
   }
 }
@@ -213,7 +213,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 }
 
 .ofh-card--care__heading {
-  @include ofh-font($size: h3, $weight: bold);
+  @include ofh-font($size: heading-md, $weight: bold);
   @include print-color($ofh-color-foreground-primary);
 
   margin: 0;

@@ -20,7 +20,7 @@
 
 .ofh-details {
   @include ofh-responsive-margin(16, 'bottom');
-  @include ofh-typography-responsive('paragraph');
+  @include ofh-typography-responsive('paragraph-md');
 
   display: block;
 }
@@ -208,6 +208,6 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   @include ofh-responsive-margin(16, 'bottom');
 }
 
-.ofh-details + %ofh-heading-l {
+.ofh-details + %ofh-heading-lg {
   @include ofh-responsive-padding(16, 'top');
 }
