@@ -2,7 +2,7 @@
 {% set pageDescription = "Our fonts and typographic styles, and how to apply them." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "April 2023" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "1" %}
 {% set hideContact = "true" %}
 
@@ -72,7 +72,7 @@
   <p class="rich-text"><code>font-family: “Source Sans Pro”, Arial, sans-serif;</code></p>
 
   <h2 id="typescale">Typescale</h2>
-  <p>The default font size depends on the device the user is using. The typescale is larger on devices that have a screen width of 641 pixels or more – large devices such as desktop and most tablets. It is smaller on devices that have a screen width of  640 pixels or less – small devices such as phones.</p>
+  <p>The typography scale depends on the viewport width. Phones and tablets share the same base sizes, and some styles step up at the desktop breakpoint from 769px and above.</p>
 
   <h2 id="headings">Headings</h2>
   <p>Write all headings in sentence case.</p>
@@ -104,7 +104,7 @@
   <h2 id="paragraphs">Paragraphs</h2>
 
   <h3 id="body">Body</h3>
-  <p>The default paragraph font size is 19px on desktop and most tablets and 16px on phones.</p>
+  <p>The default paragraph font size is 20px on desktop and 18px on phones and tablets.</p>
   <p>You can also add classes to create a lead paragraph or smaller body copy to convey content hierarchy in your page.</p>
 
   {{ designExample({
@@ -117,7 +117,7 @@
 
   <h3 id="lead-paragraph">Lead paragraph</h3>
   <p>A lead paragraph is an introductory paragraph that you can use at the top of a page to summarise the content.</p>
-  <p>Lead paragraphs use 24px type on desktop and tablet and 20px on phones. You should only use them once per page.</p>
+  <p>Lead paragraphs use 24px type on desktop and 20px on phones and tablets. You should only use them once per page.</p>
 
   {{ designExample({
     group: "styles",
@@ -128,7 +128,7 @@
 
   <h3 id="body-small">Body small</h3>
   <p class="rich-text">You can use the <code>ofh-body-s</code> class sparingly to make your paragraph font size smaller.</p>
-  <p>Small body text uses 16px on desktop and tablet and 14px on phones.</p>
+  <p>Small body text uses 16px across all breakpoints.</p>
 
   {{ designExample({
     group: "styles",
@@ -141,7 +141,7 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>Our full typography scale goes from 14px to 64px. You can add these font size override classes to any other typographic class or element, and they will change the font size.</p>
+  <p>The font size override classes follow the Figma-aligned typography scale keys, such as <code>ofh-u-font-size-heading-xl</code> and <code>ofh-u-font-size-paragraph-md</code>. You can add these classes to another typographic element when you need to override its size.</p>
   <p>Only use these font size overrides with <code>p</code> tags.
   {{ designExample({
     group: "styles",
