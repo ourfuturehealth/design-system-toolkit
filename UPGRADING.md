@@ -22,125 +22,21 @@ This guide provides detailed migration instructions for upgrading between versio
 
 - `@ourfuturehealth/toolkit` v4.5.0+
 
+**Authoritative migration guide:** [Toolkit v4.5.0 spacing, typography, and token migration guide](/Users/diogo.costa/.codex/worktrees/5dbf/design-system-toolkit/docs/migrations/toolkit-v4.5.0-spacing-typography-tokens.md)
+
 ### Breaking Changes
 
 The toolkit spacing and direct typography APIs now use the Figma-aligned keys directly.
 
-- Removed `ofh-spacing(...)`
-- `ofh-responsive-margin(...)` and `ofh-responsive-padding(...)` now expect spacing size keys
-- Spacing utility classes now use spacing size keys as their suffixes
-- Direct typography mixin keys now use the Figma-aligned names
-- Direct heading classes now use `lg`, `md`, and `sm` instead of `l`, `m`, and `s`
+Summary:
 
-This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but consumers adopting the monorepo line should migrate to the new spacing model.
+- removed `ofh-spacing(...)`
+- replaced the old unified responsive spacing map with separate horizontal and vertical maps
+- renamed direct typography keys in `ofh-typography-responsive(...)` and `ofh-font(...)`
+- renamed direct heading classes from `l/m/s` to `lg/md/sm`
+- renamed several raw tokens and removed `$ofh-width-page-max`
 
-### What Changed
-
-- Static spacing now uses `$ofh-size-*` tokens
-- Responsive spacing now uses the Figma-aligned keys:
-  - `0`, `2`, `4`, `8`, `12`, `16`, `24`, `32`, `40`, `48`, `56`, `64`
-- `all` spacing uses the vertical scale for top and bottom and the horizontal scale for left and right
-- Direct typography keys now use:
-  - `heading-xl`, `heading-lg`, `heading-md`, `heading-sm`, `heading-xs`
-  - `lead-md`, `paragraph-md`, `paragraph-sm`, `list-md`, `list-sm`
-- Semantic typography APIs such as `ofh-body-l`, `ofh-body-s`, `ofh-lede-text`, and caption classes remain in place for now
-
-### Migration Steps
-
-#### Replace static spacing function calls
-
-| Before | After |
-| ------ | ----- |
-| `ofh-spacing(0)` | `$ofh-size-0` |
-| `ofh-spacing(1)` | `$ofh-size-2` |
-| `ofh-spacing(2)` | `$ofh-size-4` |
-| `ofh-spacing(3)` | `$ofh-size-8` |
-| `ofh-spacing(4)` | `$ofh-size-16` |
-| `ofh-spacing(5)` | `$ofh-size-24` |
-| `ofh-spacing(6)` | `$ofh-size-32` |
-| `ofh-spacing(7)` | `$ofh-size-40` |
-| `ofh-spacing(8)` | `$ofh-size-48` |
-| `ofh-spacing(9)` | `$ofh-size-56` |
-| `ofh-spacing(10)` | `$ofh-size-64` |
-
-#### Replace responsive spacing mixin arguments
-
-| Before | After |
-| ------ | ----- |
-| `@include ofh-responsive-margin(0, 'bottom')` | `@include ofh-responsive-margin(0, 'bottom')` |
-| `@include ofh-responsive-margin(1, 'bottom')` | `@include ofh-responsive-margin(2, 'bottom')` |
-| `@include ofh-responsive-margin(2, 'bottom')` | `@include ofh-responsive-margin(4, 'bottom')` |
-| `@include ofh-responsive-margin(3, 'bottom')` | `@include ofh-responsive-margin(8, 'bottom')` |
-| `@include ofh-responsive-margin(4, 'bottom')` | `@include ofh-responsive-margin(12, 'bottom')` |
-| `@include ofh-responsive-margin(5, 'bottom')` | `@include ofh-responsive-margin(16, 'bottom')` |
-| `@include ofh-responsive-margin(6, 'bottom')` | `@include ofh-responsive-margin(24, 'bottom')` |
-| `@include ofh-responsive-margin(7, 'bottom')` | `@include ofh-responsive-margin(32, 'bottom')` |
-| `@include ofh-responsive-margin(8, 'bottom')` | `@include ofh-responsive-margin(40, 'bottom')` |
-| `@include ofh-responsive-margin(9, 'bottom')` | `@include ofh-responsive-margin(48, 'bottom')` |
-| `@include ofh-responsive-margin(10, 'bottom')` | `@include ofh-responsive-margin(56, 'bottom')` |
-| `@include ofh-responsive-margin(11, 'bottom')` | `@include ofh-responsive-margin(64, 'bottom')` |
-
-#### Replace spacing utility classes
-
-| Before | After |
-| ------ | ----- |
-| `ofh-u-margin-1` | `ofh-u-margin-2` |
-| `ofh-u-margin-top-4` | `ofh-u-margin-top-12` |
-| `ofh-u-padding-6` | `ofh-u-padding-24` |
-| `ofh-u-padding-bottom-8` | `ofh-u-padding-bottom-40` |
-| `ofh-u-margin-10` | `ofh-u-margin-56` |
-| `ofh-u-padding-11` | `ofh-u-padding-64` |
-
-#### Replace direct typography mixin keys and classes
-
-| Before | After |
-| ------ | ----- |
-| `@include ofh-typography-responsive('h1')` | `@include ofh-typography-responsive('heading-xl')` |
-| `@include ofh-typography-responsive('h2')` | `@include ofh-typography-responsive('heading-lg')` |
-| `@include ofh-typography-responsive('h3')` | `@include ofh-typography-responsive('heading-md')` |
-| `@include ofh-typography-responsive('h4')` | `@include ofh-typography-responsive('heading-sm')` |
-| `@include ofh-typography-responsive('h5')` | `@include ofh-typography-responsive('heading-xs')` |
-| `@include ofh-font('lead')` | `@include ofh-font('lead-md')` |
-| `@include ofh-font('paragraph')` | `@include ofh-font('paragraph-md')` |
-| `@include ofh-font('paragraph-small')` | `@include ofh-font('paragraph-sm')` |
-| `@include ofh-font('list')` | `@include ofh-font('list-md')` |
-| `@include ofh-font('list-small')` | `@include ofh-font('list-sm')` |
-| `.ofh-heading-l` | `.ofh-heading-lg` |
-| `.ofh-heading-m` | `.ofh-heading-md` |
-| `.ofh-heading-s` | `.ofh-heading-sm` |
-
-#### Audit semantic typography APIs before removal
-
-If you are considering removing semantic APIs such as `ofh-body-l`, `ofh-body-s`, `ofh-lede-text`, caption classes, or `ofh-heading-xxs`, generate the audit report first:
-
-```bash
-pnpm audit:typography-aliases
-pnpm audit:typography-aliases -- --owner ourfuturehealth
-```
-
-The audit report is written to:
-
-- `tmp/typography-alias-audit.json`
-- `tmp/typography-alias-audit.md`
-
-### Search Your Codebase
-
-```bash
-grep -r "ofh-spacing(" --include="*.scss" .
-grep -r "ofh-responsive-margin(" --include="*.scss" .
-grep -r "ofh-responsive-padding(" --include="*.scss" .
-grep -r "ofh-u-margin\\|ofh-u-padding-" --include="*.njk" --include="*.html" --include="*.md" .
-grep -r "ofh-typography-responsive('\\|ofh-font('" --include="*.scss" .
-grep -r "ofh-heading-l\\|ofh-heading-m\\|ofh-heading-s" --include="*.njk" --include="*.html" --include="*.md" --include="*.scss" .
-```
-
-### Testing After Migration
-
-- [ ] Check spacing-heavy templates and components at mobile and desktop breakpoints
-- [ ] Check utility-class examples in the docs site
-- [ ] Check any spacing overrides that mix fixed geometry with layout spacing
-- [ ] Check heading and body typography examples in the docs site
-- [ ] Check any templates or components that previously used `ofh-heading-l`, `ofh-heading-m`, or `ofh-heading-s`
+This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but any consumer adopting `v4.5.0` should use the standalone migration guide above.
 
 ---
 
