@@ -22,11 +22,11 @@ const aliasDefinitions = [
     category: 'semantic body class',
     definitionPattern: /%ofh-body-l\b/,
     tokenBasis:
-      "Uses `@include ofh-typography-responsive('lead')` with `@include ofh-responsive-margin(24, 'bottom')`.",
+      "Uses `@include ofh-typography-responsive('lead-md')` with `@include ofh-responsive-margin(24, 'bottom')`.",
     directReplacement: 'ofh-lead-md',
     internalDependencies: [
       '%ofh-body-l placeholder selector',
-      '%ofh-body-l + %ofh-heading-l contextual spacing rule',
+      '%ofh-body-l + %ofh-heading-lg contextual spacing rule',
     ],
   },
   {
@@ -34,14 +34,14 @@ const aliasDefinitions = [
     category: 'semantic body class',
     definitionPattern: /%ofh-body-m\b/,
     tokenBasis:
-      "Uses `@include ofh-typography-responsive('paragraph')` with `@include ofh-responsive-margin(16, 'bottom')`.",
+      "Uses `@include ofh-typography-responsive('paragraph-md')` with `@include ofh-responsive-margin(16, 'bottom')`.",
     directReplacement: 'ofh-paragraph-md',
     internalDependencies: [
       '%ofh-body-m placeholder selector',
       'Default `p` element extension',
-      '%ofh-body-m + %ofh-heading-l contextual spacing rule',
-      '%ofh-body-m + %ofh-heading-m contextual spacing rule',
-      '%ofh-body-m + %ofh-heading-s contextual spacing rule',
+      '%ofh-body-m + %ofh-heading-lg contextual spacing rule',
+      '%ofh-body-m + %ofh-heading-md contextual spacing rule',
+      '%ofh-body-m + %ofh-heading-sm contextual spacing rule',
       '`address` extension',
     ],
   },
@@ -50,13 +50,13 @@ const aliasDefinitions = [
     category: 'semantic body class',
     definitionPattern: /%ofh-body-s\b/,
     tokenBasis:
-      "Uses `@include ofh-typography-responsive('paragraph-small')` with `@include ofh-responsive-margin(16, 'bottom')`.",
+      "Uses `@include ofh-typography-responsive('paragraph-sm')` with `@include ofh-responsive-margin(16, 'bottom')`.",
     directReplacement: 'ofh-paragraph-sm',
     internalDependencies: [
       '%ofh-body-s placeholder selector',
-      '%ofh-body-s + %ofh-heading-l contextual spacing rule',
-      '%ofh-body-s + %ofh-heading-m contextual spacing rule',
-      '%ofh-body-s + %ofh-heading-s contextual spacing rule',
+      '%ofh-body-s + %ofh-heading-lg contextual spacing rule',
+      '%ofh-body-s + %ofh-heading-md contextual spacing rule',
+      '%ofh-body-s + %ofh-heading-sm contextual spacing rule',
     ],
   },
   {
@@ -64,12 +64,12 @@ const aliasDefinitions = [
     category: 'semantic wrapper class',
     definitionPattern: /\.ofh-lede-text\b/,
     tokenBasis:
-      "Uses `@include ofh-font('lead')` with `@include ofh-responsive-margin(40, 'bottom')`, and restyles nested `p` and `ul` content.",
+      "Uses `@include ofh-font('lead-md')` with `@include ofh-responsive-margin(40, 'bottom')`, and restyles nested `p` and `ul` content.",
     directReplacement: null,
     internalDependencies: [
       'Nested `p, ul` typography override',
       '`h1 + .ofh-lede-text` contextual spacing rule',
-      '`.ofh-lede-text + %ofh-heading-l` contextual spacing rule',
+      '`.ofh-lede-text + %ofh-heading-lg` contextual spacing rule',
     ],
   },
   {
@@ -77,7 +77,7 @@ const aliasDefinitions = [
     category: 'semantic wrapper modifier',
     definitionPattern: /\.ofh-lede-text--small\b/,
     tokenBasis:
-      "Uses `@include ofh-font('paragraph')` with `@include ofh-responsive-margin(24, 'bottom')`.",
+      "Uses `@include ofh-font('paragraph-md')` with `@include ofh-responsive-margin(24, 'bottom')`.",
     directReplacement: null,
     internalDependencies: ['`h1 + .ofh-lede-text--small` contextual spacing rule'],
   },
@@ -86,7 +86,7 @@ const aliasDefinitions = [
     category: 'semantic caption class',
     definitionPattern: /\.ofh-caption-xl\b/,
     tokenBasis:
-      "Uses `@include ofh-font('h2')` with secondary foreground colour and `$ofh-size-4` bottom margin.",
+      "Uses `@include ofh-font('heading-lg')` with secondary foreground colour and `$ofh-size-4` bottom margin.",
     directReplacement: null,
     internalDependencies: ['Heading caption styling'],
   },
@@ -95,7 +95,7 @@ const aliasDefinitions = [
     category: 'semantic caption class',
     definitionPattern: /\.ofh-caption-l\b/,
     tokenBasis:
-      "Uses `@include ofh-font('h3')` with secondary foreground colour and `$ofh-size-4` bottom margin.",
+      "Uses `@include ofh-font('heading-md')` with secondary foreground colour and `$ofh-size-4` bottom margin.",
     directReplacement: null,
     internalDependencies: ['Heading caption styling'],
   },
@@ -104,7 +104,7 @@ const aliasDefinitions = [
     category: 'semantic caption class',
     definitionPattern: /\.ofh-caption-m\b/,
     tokenBasis:
-      "Uses `@include ofh-font('paragraph')` with secondary foreground colour and no extra margin override.",
+      "Uses `@include ofh-font('paragraph-md')` with secondary foreground colour and no extra margin override.",
     directReplacement: null,
     internalDependencies: ['Heading caption styling'],
   },
@@ -122,7 +122,7 @@ const aliasDefinitions = [
     category: 'legacy heading alias',
     definitionPattern: /%ofh-heading-xxs\b/,
     tokenBasis:
-      "Uses `@include ofh-typography-responsive('h5')` with `@include ofh-responsive-margin(16, 'bottom')`.",
+      "Uses `@include ofh-typography-responsive('heading-xs')` with `@include ofh-responsive-margin(16, 'bottom')`.",
     directReplacement: 'ofh-heading-xs',
     internalDependencies: ['%ofh-heading-xxs placeholder selector', '`h6` extension'],
   },
