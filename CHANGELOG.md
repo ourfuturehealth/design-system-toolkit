@@ -27,11 +27,6 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Updated spacing documentation and examples to teach the horizontal and vertical responsive spacing scales directly
 - Updated typography documentation and examples to teach the Figma-aligned direct heading classes and mixin keys
 
-##### Added
-
-- `pnpm audit:typography-aliases` to generate a local semantic typography API usage report in `tmp/`
-- Optional `--owner` support on the audit command to enrich the report with advisory org-wide GitHub code search results when rate limits allow
-
 ##### Removed
 
 - Direct typography alias support for legacy keys such as `h1`, `lead`, `paragraph`, and `list-small`

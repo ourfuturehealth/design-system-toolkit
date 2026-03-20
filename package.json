@@ -43,16 +43,14 @@
     "storybook": "pnpm --filter=@ourfuturehealth/react-components run storybook",
     "storybook:verbose": "pnpm --filter=@ourfuturehealth/react-components run storybook:verbose",
     "build": "pnpm -r --filter='./packages/*' --if-present run build",
-    "lint": "pnpm run lint:audit && pnpm -r --filter='./packages/*' --if-present run lint",
-    "lint:audit": "eslint --max-warnings 0 scripts/audit",
+    "lint": "pnpm -r --filter='./packages/*' --if-present run lint",
     "lint:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run lint",
     "lint:site": "pnpm --filter=site run lint",
     "lint:react-components": "pnpm --filter=@ourfuturehealth/react-components run lint",
     "lint:react-consumer": "pnpm --filter=@ourfuturehealth/example-react-consumer-app run lint",
     "test": "pnpm -r --filter='./packages/*' --if-present run test",
     "test:toolkit": "pnpm --filter=@ourfuturehealth/toolkit run test",
-    "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test",
-    "audit:typography-aliases": "node scripts/audit/typography-aliases.mjs"
+    "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
