@@ -27,25 +27,23 @@ body {
 }
 
 /*
-  In order to show how the grid works, we need to have an element inside the
-  grid that is visible and fills the available space with a background color.
+  Spacing examples need a visible content block so the responsive gap beneath
+  each item is easy to inspect in the docs iframe.
 */
-.ofh-grid-row > .spacing-example div > p {
+.spacing-example__item {
+  border-left: 4px solid $ofh-color-brand-blue-royal-4;
+}
+
+.spacing-example__item > p {
   background-color: $ofh-color-brand-blue-royal-2;
   color: $ofh-color-greyscale-white;
-  padding: 20px;
-  text-align: center;
+  margin: 0;
+  padding: 12px 16px;
+  width: fit-content;
 }
 
-/*
-  Spacing examples for on divs
-*/
-.spacing-example div {
-  background: $ofh-color-brand-blue-royal-5;
-}
-
-.spacing-example div:nth-of-type(odd) {
-  background: $ofh-color-brand-blue-royal-4;
+.spacing-example__item:nth-of-type(odd) > p {
+  background-color: $ofh-color-brand-blue-royal-4;
 }
 
 /*
