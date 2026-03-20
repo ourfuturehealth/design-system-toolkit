@@ -52,7 +52,6 @@ Notes:
   - `ofh-body-s`
   - `ofh-caption-*`
   - `ofh-lede-text*`
-  - `ofh-heading-xxs`
 - Changed the token basis behind those semantic classes, so they can still render differently after the upgrade even if the class name did not change
 
 ### Tokens
@@ -322,7 +321,6 @@ Unchanged names with changed internals:
 - `.ofh-caption--bottom`
 - `.ofh-lede-text`
 - `.ofh-lede-text--small`
-- `.ofh-heading-xxs`
 
 ### Track A: `v4.4.x -> v4.5.0`
 
@@ -396,7 +394,6 @@ These names were kept, so they do not need a rename:
 - `ofh-caption--bottom`
 - `ofh-lede-text`
 - `ofh-lede-text--small`
-- `ofh-heading-xxs`
 
 But their token basis changed:
 
@@ -410,7 +407,6 @@ But their token basis changed:
 | `ofh-caption-m` | `paragraph` | `paragraph-md` |
 | `ofh-lede-text` | `lead` | `lead-md` |
 | `ofh-lede-text--small` | `paragraph` | `paragraph-md` |
-| `ofh-heading-xxs` | `h5` | `heading-xs` |
 
 If you keep these classes, you still need visual QA after upgrading.
 
@@ -486,7 +482,6 @@ These class names stayed public, but their internals changed:
 
 - `.ofh-heading-xl`
 - `.ofh-heading-xs`
-- `.ofh-heading-xxs`
 - `.ofh-body-l`
 - `.ofh-body-m`
 - `.ofh-body-s`

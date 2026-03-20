@@ -87,19 +87,8 @@ h5,
   @extend %ofh-heading-xs;
 }
 
-%ofh-heading-xxs {
-  @include ofh-typography-responsive('heading-xs');
-
-  display: block;
-  font-weight: $ofh-typography-weight-semibold;
-  margin-top: 0;
-
-  @include ofh-responsive-margin(16, 'bottom');
-}
-
-h6,
-.ofh-heading-xxs {
-  @extend %ofh-heading-xxs;
+h6 {
+  @extend %ofh-heading-xs;
 }
 
 /* Captions to be used inside headings */

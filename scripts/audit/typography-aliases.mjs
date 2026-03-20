@@ -117,15 +117,6 @@ const aliasDefinitions = [
     directReplacement: null,
     internalDependencies: ['Depends on caption classes being present'],
   },
-  {
-    name: 'ofh-heading-xxs',
-    category: 'legacy heading alias',
-    definitionPattern: /%ofh-heading-xxs\b/,
-    tokenBasis:
-      "Uses `@include ofh-typography-responsive('heading-xs')` with `@include ofh-responsive-margin(16, 'bottom')`.",
-    directReplacement: 'ofh-heading-xs',
-    internalDependencies: ['%ofh-heading-xxs placeholder selector', '`h6` extension'],
-  },
 ];
 
 function parseArguments(argv) {
