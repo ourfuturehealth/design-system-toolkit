@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing API hard cut  | 🟡 Medium - Replace legacy spacing APIs |
+| [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
@@ -34,6 +34,8 @@ Summary:
 - replaced the old unified responsive spacing map with separate horizontal and vertical maps
 - renamed direct typography keys in `ofh-typography-responsive(...)` and `ofh-font(...)`
 - renamed direct heading classes from `l/m/s` to `lg/md/sm`
+- removed legacy direct typography utility aliases such as `ofh-u-font-size-h1`
+- kept the numeric responsive font-size override utilities as the supported override utility surface
 - renamed several raw tokens and removed `$ofh-width-page-max`
 
 This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but any consumer adopting `v4.5.0` should use the standalone migration guide above.

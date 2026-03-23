@@ -45,7 +45,16 @@ Notes:
   - `ofh-heading-l` -> `ofh-heading-lg`
   - `ofh-heading-m` -> `ofh-heading-md`
   - `ofh-heading-s` -> `ofh-heading-sm`
-- Renamed the typography utility classes so they now use the Figma-aligned key names
+- Removed the legacy direct typography utility aliases such as `ofh-u-font-size-h1`
+- Kept the numeric responsive font-size override classes as the supported override utility surface:
+  - `ofh-u-font-size-64`
+  - `ofh-u-font-size-48`
+  - `ofh-u-font-size-32`
+  - `ofh-u-font-size-24`
+  - `ofh-u-font-size-22`
+  - `ofh-u-font-size-19`
+  - `ofh-u-font-size-16`
+  - `ofh-u-font-size-14`
 - Kept the semantic typography classes for now:
   - `ofh-body-l`
   - `ofh-body-m`
@@ -366,20 +375,46 @@ Use these exact replacements:
 | `.ofh-heading-m` | `.ofh-heading-md` |
 | `.ofh-heading-s` | `.ofh-heading-sm` |
 
-#### 4. Replace typography utility classes that use the old direct keys
+#### 4. Replace legacy direct typography utility aliases
 
-| Before | After |
-| ------ | ----- |
-| `ofh-u-font-size-h1` | `ofh-u-font-size-64` |
-| `ofh-u-font-size-h2` | `ofh-u-font-size-48` |
-| `ofh-u-font-size-h3` | `ofh-u-font-size-32` |
-| `ofh-u-font-size-h4` | `ofh-u-font-size-24` |
-| `ofh-u-font-size-h5` | `ofh-u-font-size-19` |
-| `ofh-u-font-size-lead` | `ofh-u-font-size-24` |
-| `ofh-u-font-size-paragraph` | `ofh-u-font-size-19` |
-| `ofh-u-font-size-paragraph-small` | `ofh-u-font-size-16` |
-| `ofh-u-font-size-list` | `ofh-u-font-size-19` |
-| `ofh-u-font-size-list-small` | `ofh-u-font-size-16` |
+The legacy utility aliases such as `ofh-u-font-size-h1` were removed.
+
+There is no exact drop-in utility replacement for those classes, because the supported override utility surface now uses the older numeric responsive scale while the direct typography API uses the Figma-aligned named scale.
+
+Use this rule:
+
+- if you were using the utility to apply a real design-system text style, switch to the direct class or to the equivalent mixin in component SCSS
+- if you were using it as a low-level override, switch to the numeric utility that matches the rendered size you want and visually QA it
+
+Preferred replacements when you were expressing a direct text style:
+
+| Removed class | Preferred replacement |
+| ------------- | --------------------- |
+| `ofh-u-font-size-h1` | `ofh-heading-xl` or `@include ofh-typography-responsive('heading-xl')` |
+| `ofh-u-font-size-h2` | `ofh-heading-lg` or `@include ofh-typography-responsive('heading-lg')` |
+| `ofh-u-font-size-h3` | `ofh-heading-md` or `@include ofh-typography-responsive('heading-md')` |
+| `ofh-u-font-size-h4` | `ofh-heading-sm` or `@include ofh-typography-responsive('heading-sm')` |
+| `ofh-u-font-size-h5` | `ofh-heading-xs` or `@include ofh-typography-responsive('heading-xs')` |
+| `ofh-u-font-size-lead` | `ofh-body-l` or `@include ofh-font('lead-md')` |
+| `ofh-u-font-size-paragraph` | `ofh-body-m` or `@include ofh-font('paragraph-md')` |
+| `ofh-u-font-size-paragraph-small` | `ofh-body-s` or `@include ofh-font('paragraph-sm')` |
+| `ofh-u-font-size-list` | `@include ofh-font('list-md')` |
+| `ofh-u-font-size-list-small` | `@include ofh-font('list-sm')` |
+
+If you need to stay with utility overrides, use the numeric override scale instead:
+
+| Removed class | Closest numeric override | Important note |
+| ------------- | ------------------------ | -------------- |
+| `ofh-u-font-size-h1` | `ofh-u-font-size-48` | switches up at tablet instead of desktop |
+| `ofh-u-font-size-h2` | `ofh-u-font-size-32` | switches up at tablet instead of desktop |
+| `ofh-u-font-size-h3` | `ofh-u-font-size-24` | mobile line-height differs |
+| `ofh-u-font-size-h4` | `ofh-u-font-size-22` | mobile line-height differs |
+| `ofh-u-font-size-h5` | `ofh-u-font-size-19` | tablet size differs |
+| `ofh-u-font-size-lead` | `ofh-u-font-size-24` | mobile line-height differs |
+| `ofh-u-font-size-paragraph` | `ofh-u-font-size-19` | mobile and tablet values differ |
+| `ofh-u-font-size-paragraph-small` | `ofh-u-font-size-16` | mobile value differs |
+| `ofh-u-font-size-list` | `ofh-u-font-size-19` | mobile and tablet values differ |
+| `ofh-u-font-size-list-small` | `ofh-u-font-size-16` | mobile value differs |
 
 #### 5. Recheck semantic classes that stayed public
 
@@ -585,7 +620,7 @@ Do not replace `$ofh-width-page-max` blindly with `$ofh-width-content-max`. Revi
 ### Typography
 
 - Check every migrated `ofh-heading-l`, `ofh-heading-m`, and `ofh-heading-s`
-- Check every migrated numeric `ofh-u-font-size-*` utility if you are upgrading from `v3.4.2`
+- Check every migrated `ofh-u-font-size-*` utility, especially if you replaced removed `h1/h2/...` utility aliases with numeric overrides
 - Check body copy, captions, and lede text even when the class name did not change
 - Check headings and body hierarchy around cards, forms, tables, and error summaries
 
@@ -606,7 +641,7 @@ Use this order to reduce noise:
 4. Replace direct typography keys in `ofh-typography-responsive(...)`.
 5. Replace direct typography keys in `ofh-font(...)`.
 6. Replace direct heading classes.
-7. Replace numeric or legacy typography utility classes.
+7. Replace removed legacy typography utility aliases and decide whether each usage should become a direct class, a mixin, or a numeric override utility.
 8. Rebuild and fix compile failures.
 9. Do visual QA on spacing-heavy and typography-heavy pages.
 
@@ -616,7 +651,7 @@ Run these before you call the migration complete:
 
 ```bash
 rg "ofh-spacing\\(" -g '*.scss'
-rg "ofh-u-font-size-(64|48|32|24|22|19|16|14|h1|h2|h3|h4|h5|lead|paragraph|paragraph-small|list|list-small)\\b" -g '*.scss' -g '*.html' -g '*.njk' -g '*.md' -g '*.tsx' -g '*.jsx'
+rg "ofh-u-font-size-(h1|h2|h3|h4|h5|lead|paragraph|paragraph-small|list|list-small)\\b" -g '*.scss' -g '*.html' -g '*.njk' -g '*.md' -g '*.tsx' -g '*.jsx'
 rg "ofh-heading-(l|m|s)\\b" -g '*.scss' -g '*.html' -g '*.njk' -g '*.md' -g '*.tsx' -g '*.jsx'
 rg "\\$ofh-spacing-points|\\$ofh-space-responsive-scale|\\$ofh-width-page-max|\\$ofh-color-background-neutral-(grey|blue|yellow)|\\$ofh-color-brand-blue-royal-3\\b" -g '*.scss'
 ```
