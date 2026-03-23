@@ -131,7 +131,7 @@
     $actual-map-type: meta.type-of($scale-map);
 
     @if $actual-map-type != 'map' {
-      @error 'Expected a number (integer), but got a #{$actual-map-type}. ' + 'Make sure you are using a map to set the responsive spacing in `_settings/spacing.scss`)';
+      @error 'Expected a map, but got a #{$actual-map-type}. ' + 'Make sure the responsive spacing scale in `_tokens-breakpoint.scss` returns a map for the size key.';
     }
 
     @include _ofh-apply-responsive-spacing(
