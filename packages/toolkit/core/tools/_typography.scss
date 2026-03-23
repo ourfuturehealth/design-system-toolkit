@@ -120,10 +120,7 @@
 //    these variables becoming strings, so this needs to happen//after* they
 //    are used in calculations
 
-@mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
-  $size: _ofh-typography-size-key($size);
-  $font-map: map.get($ofh-typography-responsive-scale, $size);
-
+@mixin _ofh-typography-responsive-font-map($font-map, $override-line-height: false, $important: false) {
   @each $breakpoint, $breakpoint-map in $font-map {
     $font-size: map.get($breakpoint-map, 'font-size');
     $font-size-rem: ofh-px-to-rem($font-size);
@@ -158,6 +155,17 @@
       }
     }
   }
+}
+
+@mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
+  $size: _ofh-typography-size-key($size);
+  $font-map: map.get($ofh-typography-responsive-scale, $size);
+
+  @include _ofh-typography-responsive-font-map(
+    $font-map,
+    $override-line-height: $override-line-height,
+    $important: $important
+  );
 }
 
 // Font

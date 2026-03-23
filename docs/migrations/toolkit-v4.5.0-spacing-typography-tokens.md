@@ -370,16 +370,16 @@ Use these exact replacements:
 
 | Before | After |
 | ------ | ----- |
-| `ofh-u-font-size-h1` | `ofh-u-font-size-heading-xl` |
-| `ofh-u-font-size-h2` | `ofh-u-font-size-heading-lg` |
-| `ofh-u-font-size-h3` | `ofh-u-font-size-heading-md` |
-| `ofh-u-font-size-h4` | `ofh-u-font-size-heading-sm` |
-| `ofh-u-font-size-h5` | `ofh-u-font-size-heading-xs` |
-| `ofh-u-font-size-lead` | `ofh-u-font-size-lead-md` |
-| `ofh-u-font-size-paragraph` | `ofh-u-font-size-paragraph-md` |
-| `ofh-u-font-size-paragraph-small` | `ofh-u-font-size-paragraph-sm` |
-| `ofh-u-font-size-list` | `ofh-u-font-size-list-md` |
-| `ofh-u-font-size-list-small` | `ofh-u-font-size-list-sm` |
+| `ofh-u-font-size-h1` | `ofh-u-font-size-64` |
+| `ofh-u-font-size-h2` | `ofh-u-font-size-48` |
+| `ofh-u-font-size-h3` | `ofh-u-font-size-32` |
+| `ofh-u-font-size-h4` | `ofh-u-font-size-24` |
+| `ofh-u-font-size-h5` | `ofh-u-font-size-19` |
+| `ofh-u-font-size-lead` | `ofh-u-font-size-24` |
+| `ofh-u-font-size-paragraph` | `ofh-u-font-size-19` |
+| `ofh-u-font-size-paragraph-small` | `ofh-u-font-size-16` |
+| `ofh-u-font-size-list` | `ofh-u-font-size-19` |
+| `ofh-u-font-size-list-small` | `ofh-u-font-size-16` |
 
 #### 5. Recheck semantic classes that stayed public
 
@@ -414,7 +414,7 @@ If you keep these classes, you still need visual QA after upgrading.
 
 The pre-monorepo toolkit used numeric typography keys and numeric typography utility classes.
 
-That means `ofh-u-font-size-16`, `ofh-u-font-size-19`, `ofh-u-font-size-24`, `ofh-u-font-size-48`, and similar classes are real migration work, not just stale documentation.
+Those numeric utility classes are still supported in `v4.5.0`, but the mixin API moved to the named Figma-aligned scale.
 
 #### 1. Replace numeric keys in `ofh-typography-responsive(...)`
 
@@ -446,27 +446,39 @@ Use this table when the old key appears in `ofh-font(...)`:
 | `@include ofh-font(16)` | `@include ofh-font('paragraph-sm')` for body copy, or `@include ofh-font('list-sm')` for lists |
 | `@include ofh-font(14)` | no exact replacement; redesign to `paragraph-sm`, `list-sm`, or a component-specific override |
 
-#### 3. Replace numeric typography utility classes
+#### 3. Numeric typography utility classes remain supported
 
-Use this table when the old class appears in templates, markdown, Nunjucks, HTML, or React markup:
+The numeric typography utility classes were kept as the override API in `v4.5.0`.
 
-| Before | Replace with |
-| ------ | ------------ |
-| `ofh-u-font-size-64` | `ofh-u-font-size-heading-xl` only if you want the largest current supported scale |
-| `ofh-u-font-size-48` | `ofh-u-font-size-heading-xl` |
-| `ofh-u-font-size-32` | `ofh-u-font-size-heading-lg` |
-| `ofh-u-font-size-24` | `ofh-u-font-size-heading-md` for headings, or `ofh-u-font-size-lead-md` for lead copy |
-| `ofh-u-font-size-22` | `ofh-u-font-size-heading-sm` |
-| `ofh-u-font-size-19` | `ofh-u-font-size-paragraph-md` for body copy, or `ofh-u-font-size-heading-xs` for small headings |
-| `ofh-u-font-size-16` | `ofh-u-font-size-paragraph-sm` for body copy, or `ofh-u-font-size-list-sm` for lists |
-| `ofh-u-font-size-14` | no exact replacement; redesign to `paragraph-sm`, `list-sm`, or a component-specific override |
+That means these classes do not need a rename:
+
+- `ofh-u-font-size-64`
+- `ofh-u-font-size-48`
+- `ofh-u-font-size-32`
+- `ofh-u-font-size-24`
+- `ofh-u-font-size-22`
+- `ofh-u-font-size-19`
+- `ofh-u-font-size-16`
+- `ofh-u-font-size-14`
+
+They keep the pre-monorepo responsive values and matching line heights, so a class like `ofh-u-font-size-64` still collapses on smaller screens instead of behaving like a fixed `64px` utility.
+
+| Utility class | Mobile | Tablet and above |
+| ------------- | ------ | ---------------- |
+| `ofh-u-font-size-64` | `48px / 56px` | `64px / 72px` |
+| `ofh-u-font-size-48` | `32px / 40px` | `48px / 56px` |
+| `ofh-u-font-size-32` | `24px / 32px` | `32px / 40px` |
+| `ofh-u-font-size-24` | `20px / 28px` | `24px / 32px` |
+| `ofh-u-font-size-22` | `18px / 28px` | `22px / 32px` |
+| `ofh-u-font-size-19` | `16px / 24px` | `19px / 28px` |
+| `ofh-u-font-size-16` | `14px / 24px` | `16px / 24px` |
+| `ofh-u-font-size-14` | `12px / 20px` | `14px / 24px` |
 
 Important:
 
-- The old numeric utilities existed in the real pre-monorepo toolkit.
-- Those numeric classes were also copied into downstream services.
-- If you find them in a consumer repo, treat them as real migration work.
-- `64` and `14` do not have true direct replacements in `v4.5.0`.
+- The numeric utilities are for override use only.
+- The direct typography API is still the Figma-aligned named scale.
+- If you find numeric utility classes in consumer repos, you can keep them as-is unless you want to move to component-specific typography classes instead.
 
 #### 4. Replace old direct heading classes if present
 

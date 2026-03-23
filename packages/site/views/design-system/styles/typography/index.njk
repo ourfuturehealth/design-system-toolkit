@@ -141,8 +141,63 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>The font size override classes follow the Figma-aligned typography scale keys, such as <code>ofh-u-font-size-heading-xl</code> and <code>ofh-u-font-size-paragraph-md</code>. You can add these classes to another typographic element when you need to override its size.</p>
-  <p>Only use these font size overrides with <code>p</code> tags.</p>
+  <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-19</code>. They keep the pre-monorepo responsive values so maintainers can choose an override by the expected size.</p>
+  <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
+  <p>These utilities use the mobile values below 641px, then switch to the tablet-and-up values from 641px and above.</p>
+
+  <table class="ofh-table">
+    <caption class="ofh-table__caption">Responsive font size override scale</caption>
+    <thead class="ofh-table__head">
+      <tr class="ofh-table__row">
+        <th class="ofh-table__header" scope="col">Class</th>
+        <th class="ofh-table__header" scope="col">Below 641px</th>
+        <th class="ofh-table__header" scope="col">641px and above</th>
+      </tr>
+    </thead>
+    <tbody class="ofh-table__body">
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-64</code></td>
+        <td class="ofh-table__cell">48px / 56px</td>
+        <td class="ofh-table__cell">64px / 72px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-48</code></td>
+        <td class="ofh-table__cell">32px / 40px</td>
+        <td class="ofh-table__cell">48px / 56px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-32</code></td>
+        <td class="ofh-table__cell">24px / 32px</td>
+        <td class="ofh-table__cell">32px / 40px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-24</code></td>
+        <td class="ofh-table__cell">20px / 28px</td>
+        <td class="ofh-table__cell">24px / 32px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-22</code></td>
+        <td class="ofh-table__cell">18px / 28px</td>
+        <td class="ofh-table__cell">22px / 32px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-19</code></td>
+        <td class="ofh-table__cell">16px / 24px</td>
+        <td class="ofh-table__cell">19px / 28px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-16</code></td>
+        <td class="ofh-table__cell">14px / 24px</td>
+        <td class="ofh-table__cell">16px / 24px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-14</code></td>
+        <td class="ofh-table__cell">12px / 20px</td>
+        <td class="ofh-table__cell">14px / 24px</td>
+      </tr>
+    </tbody>
+  </table>
+
   {{ designExample({
     group: "styles",
     item: "typography",
