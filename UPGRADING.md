@@ -22,7 +22,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 - `@ourfuturehealth/toolkit` v4.5.0+
 
-**Authoritative migration guide:** [Toolkit v4.5.0 spacing, typography, and token migration guide](/Users/diogo.costa/.codex/worktrees/5dbf/design-system-toolkit/docs/migrations/toolkit-v4.5.0-spacing-typography-tokens.md)
+**Authoritative migration guide:** [Toolkit v4.5.0 spacing, typography, and token migration guide](docs/migrations/toolkit-v4.5.0-spacing-typography-tokens.md)
 
 ### Breaking Changes
 
