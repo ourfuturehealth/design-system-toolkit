@@ -6,9 +6,9 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-03-16
+### 2026-03-24
 
-#### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
+#### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)
 
 ##### Added
 
@@ -17,7 +17,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Changed
 
-- Realigned the base `card` component to the current Figma structure across basic, dismissible, success, clickable, clickable-action, and clickable-numeric variants
+- Realigned the base `card` component to the current Figma structure across basic, dismissible, clickable, clickable-action, clickable-numeric, and icon-led variants
+- Migrated the Card family to the v4.5.0 spacing and typography API changes after the toolkit hard cut
 - Preserved legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
 - Updated Card-family documentation and examples to prefer the new Card family macros and options
 - Refined Card-family docs clarity across site docs, macro options, and toolkit READMEs
@@ -37,6 +38,32 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
 - Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
+
+### 2026-03-19
+
+#### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Spacing API hard cut to Figma-aligned size keys**
+  - Removed `ofh-spacing(...)`
+  - `ofh-responsive-margin(...)` and `ofh-responsive-padding(...)` now take spacing size keys directly
+  - Spacing utility classes now use spacing size keys as their suffixes
+  - See [UPGRADING.md](UPGRADING.md#upgrading-to-v450) for migration details
+
+##### Changed
+
+- Replaced legacy point-based spacing usage across toolkit and site source with `$ofh-size-*` tokens and Figma-aligned responsive spacing keys
+- Removed legacy spacing helper compatibility and legacy point-based spacing utility generation
+- Replaced direct typography alias usage across toolkit and site source with Figma-aligned typography keys such as `heading-lg`, `paragraph-md`, and `list-sm`
+- Renamed the direct heading class surface from `.ofh-heading-l/.m/.s` to `.ofh-heading-lg/.md/.sm`
+- Updated spacing documentation and examples to teach the horizontal and vertical responsive spacing scales directly
+- Updated typography documentation and examples to teach the Figma-aligned direct heading classes and mixin keys, while keeping numeric responsive font-size override utilities for consumers and replacing `ofh-u-font-size-19` with `ofh-u-font-size-20`
+
+##### Removed
+
+- Direct typography alias support for legacy keys such as `h1`, `lead`, `paragraph`, and `list-small`
+- Legacy direct typography utility aliases such as `.ofh-u-font-size-h1`; use numeric override classes such as `.ofh-u-font-size-64` instead
 
 ### 2026-03-11
 

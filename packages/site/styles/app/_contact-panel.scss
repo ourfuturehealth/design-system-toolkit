@@ -3,14 +3,14 @@
    ========================================================================== */
 
 .app-contact-panel {
-  @include ofh-responsive-margin(7, 'top');
+  @include ofh-responsive-margin(32, 'top');
 
   border-top: 2px solid $ofh-color-brand-blue-royal-3-main;
 }
 
 .app-contact-panel__heading {
-  @include ofh-font($size: h3, $weight: bold);
-  @include ofh-responsive-padding(4, 'top');
+  @include ofh-font($size: heading-md, $weight: bold);
+  @include ofh-responsive-padding(12, 'top');
 }
 
 .ofh-pagination + .app-contact-panel {

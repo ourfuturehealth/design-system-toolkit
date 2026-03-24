@@ -53,7 +53,7 @@ code[class*='language-'] ::selection {
 }
 
 pre[class*='language-'] {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(16, 'bottom');
 
   overflow: auto;
   padding: 1em;

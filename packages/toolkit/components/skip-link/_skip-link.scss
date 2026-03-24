@@ -10,13 +10,13 @@
 .ofh-skip-link {
   background-color: $ofh-color-greyscale-white;
   left: -9999px; /* [1] */
-  padding: ofh-spacing(3);
+  padding: $ofh-size-8;
   position: absolute;
 
   &:active,
   &:focus {
-    left: ofh-spacing(4); /* [2] */
-    top: ofh-spacing(4);
+    left: $ofh-size-16; /* [2] */
+    top: $ofh-size-16;
     z-index: 2;
   }
 

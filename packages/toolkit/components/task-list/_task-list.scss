@@ -9,21 +9,21 @@
  */
 
 .ofh-task-list {
-  @include ofh-font($size: 'paragraph');
+  @include ofh-font($size: 'paragraph-md');
 
   list-style-type: none;
   margin-top: 0;
   padding: 0;
 
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(32, 'bottom');
 }
 
 .ofh-task-list__item {
   border-bottom: 1px solid $ofh-color-border-primary;
   display: table;
   margin-bottom: 0;
-  padding-bottom: ofh-spacing(3);
-  padding-top: ofh-spacing(3);
+  padding-bottom: $ofh-size-8;
+  padding-top: $ofh-size-8;
   position: relative;
   width: 100%;
 }

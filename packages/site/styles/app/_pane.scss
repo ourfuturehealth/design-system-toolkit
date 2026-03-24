@@ -40,7 +40,7 @@
   min-width: 0;
 
   @include mq($from: desktop) {
-    padding-left: ofh-spacing(10);
+    padding-left: $ofh-size-64;
   }
 
 }
@@ -51,7 +51,7 @@
   .app-lede-text,
   .app-contents-list,
   .app-lede-text--sub {
-    margin-bottom: ofh-spacing(6);
+    margin-bottom: $ofh-size-32;
   }
 
   .app-contents-list .ofh-contents-list__list {

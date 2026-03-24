@@ -14,11 +14,11 @@
  */
 
 .ofh-action-link {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(32, 'bottom');
 }
 
 .ofh-action-link__link {
-  @include ofh-font('h4');
+  @include ofh-font('heading-sm');
 
   display: inline-block; /* [1] */
   font-weight: $ofh-typography-weight-semibold;

@@ -3,47 +3,47 @@
    ========================================================================== */
 
 .ofh-label {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   display: block;
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: $ofh-size-4;
 }
 
 /* Modifiers that make labels look more like their equivalent headings */
 
 .ofh-label--xl {
-  @include ofh-typography-responsive('h1');
+  @include ofh-typography-responsive('heading-xl');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   margin-top: 0;
 }
 
 .ofh-label--l {
-  @include ofh-typography-responsive('h2');
+  @include ofh-typography-responsive('heading-lg');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   margin-top: 0;
 }
 
 .ofh-label--m {
-  @include ofh-typography-responsive('h3');
+  @include ofh-typography-responsive('heading-md');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   margin-top: 0;
 }
 
 .ofh-label--s {
-  @include ofh-typography-responsive('h5');
+  @include ofh-typography-responsive('heading-xs');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: $ofh-size-4;
   margin-top: 0;
 }
 

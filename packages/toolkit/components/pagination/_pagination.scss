@@ -10,8 +10,8 @@
  */
 
 .ofh-pagination {
-  @include ofh-responsive-margin(8, 'top');
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(40, 'top');
+  @include ofh-responsive-margin(40, 'bottom');
 }
 
 .ofh-pagination__list {
@@ -28,7 +28,7 @@
   }
 
   .ofh-pagination__title {
-    padding-left: ofh-spacing(6); /* [1] */
+    padding-left: $ofh-size-32; /* [1] */
   }
 }
 
@@ -42,7 +42,7 @@
   }
 
   .ofh-pagination__title {
-    padding-right: ofh-spacing(6); /* [1] */
+    padding-right: $ofh-size-32; /* [1] */
   }
 }
 
@@ -119,7 +119,7 @@
 }
 
 .ofh-pagination__title {
-  @include ofh-typography-responsive('lead');
+  @include ofh-typography-responsive('lead-md');
 
   color: $ofh-color-brand-blue-navy-3-main;
   display: block;
@@ -132,7 +132,7 @@
 }
 
 .ofh-pagination__page {
-  @include ofh-typography-responsive('paragraph-small');
+  @include ofh-typography-responsive('paragraph-sm');
 
   display: block;
   text-decoration: underline;

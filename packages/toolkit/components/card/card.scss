@@ -9,7 +9,7 @@ $card-border-color: $ofh-color-border-card-default;
 $card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card {
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(40, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
@@ -27,18 +27,18 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card__content {
   @include top-and-bottom();
-  @include ofh-responsive-padding(7);
+  @include ofh-responsive-padding(32);
 }
 
 .ofh-card__content--dismissible {
-  padding-right: calc(#{ofh-spacing(4)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+  padding-right: calc(#{$ofh-size-16} + #{$ofh-size-32} + #{$ofh-size-8});
 
   @include mq($from: tablet) {
-    padding-right: calc(#{ofh-spacing(5)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+    padding-right: calc(#{$ofh-size-24} + #{$ofh-size-32} + #{$ofh-size-8});
   }
 
   @include mq($from: desktop) {
-    padding-right: calc(#{ofh-spacing(6)} + #{ofh-spacing(6)} + #{ofh-spacing(3)});
+    padding-right: calc(#{$ofh-size-32} + #{$ofh-size-32} + #{$ofh-size-8});
   }
 }
 
@@ -46,14 +46,14 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 .ofh-card.ofh-card__with-icon > .ofh-card__content {
   align-items: center;
   display: flex;
-  gap: ofh-spacing(4);
+  gap: $ofh-size-16;
 
   @include mq($from: tablet) {
-    gap: ofh-spacing(5);
+    gap: $ofh-size-24;
   }
 
   @include mq($from: desktop) {
-    gap: ofh-spacing(6);
+    gap: $ofh-size-32;
   }
 }
 
@@ -63,18 +63,18 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: ofh-spacing(4);
+  gap: $ofh-size-16;
   min-width: 0;
 }
 
 .ofh-card__heading {
-  @include ofh-font('h3', $weight: bold);
+  @include ofh-font('heading-md', $weight: bold);
 
   margin: 0;
 }
 
 .ofh-card__number {
-  @include ofh-font('h1', $weight: bold);
+  @include ofh-font('heading-xl', $weight: bold);
 
   margin: 0;
 }
@@ -89,7 +89,7 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__helper {
-  @include ofh-font('paragraph-small');
+  @include ofh-font('paragraph-sm');
 
   margin: 0;
 }
@@ -102,13 +102,13 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 .ofh-card__metadata-list {
   display: flex;
   flex-direction: column;
-  gap: ofh-spacing(3);
+  gap: $ofh-size-8;
 }
 
 .ofh-card__metadata-item {
   align-items: center;
   display: flex;
-  gap: ofh-spacing(3);
+  gap: $ofh-size-8;
 }
 
 .ofh-card__metadata-icon-container {
@@ -150,20 +150,20 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   border-radius: $ofh-radius-circular;
   color: $ofh-color-foreground-primary;
   cursor: pointer;
-  padding: ofh-spacing(3);
+  padding: $ofh-size-8;
   position: absolute;
-  right: calc(#{ofh-spacing(4)} - #{ofh-spacing(3)});
-  top: calc(#{ofh-spacing(4)} - #{ofh-spacing(3)});
+  right: calc(#{$ofh-size-16} - #{$ofh-size-8});
+  top: calc(#{$ofh-size-16} - #{$ofh-size-8});
   z-index: 1;
 
   @include mq($from: tablet) {
-    right: calc(#{ofh-spacing(5)} - #{ofh-spacing(3)});
-    top: calc(#{ofh-spacing(5)} - #{ofh-spacing(3)});
+    right: calc(#{$ofh-size-24} - #{$ofh-size-8});
+    top: calc(#{$ofh-size-24} - #{$ofh-size-8});
   }
 
   @include mq($from: desktop) {
-    right: calc(#{ofh-spacing(6)} - #{ofh-spacing(3)});
-    top: calc(#{ofh-spacing(6)} - #{ofh-spacing(3)});
+    right: calc(#{$ofh-size-32} - #{$ofh-size-8});
+    top: calc(#{$ofh-size-32} - #{$ofh-size-8});
   }
 
   &:focus {
@@ -228,17 +228,17 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 .ofh-card-group {
   @include flex();
 
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   padding: 0;
 
   @include mq($until: desktop) {
-    margin-bottom: ofh-spacing(7);
+    margin-bottom: $ofh-size-40;
   }
 
   + h2,
-  + .ofh-heading-l,
+  + .ofh-heading-lg,
   + h3,
-  + .ofh-heading-m {
+  + .ofh-heading-md {
     padding-top: 0; /* [4] */
   }
 }
@@ -250,12 +250,12 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   margin-bottom: 0;
 
   .ofh-card {
-    margin-bottom: ofh-spacing(6);
+    margin-bottom: $ofh-size-24;
   }
 
   @include mq($until: desktop) {
     .ofh-card {
-      margin-bottom: ofh-spacing(4);
+      margin-bottom: $ofh-size-16;
     }
 
     &:last-child .ofh-card {
@@ -268,25 +268,25 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   ========================================================================== */
 
 .ofh-card--feature {
-  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(40, 'top');
 }
 
 .ofh-card__heading--feature {
   background: $ofh-color-brand-yellow-3-main;
   color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
-  left: -(ofh-spacing(5) + $card-border-width); /* [5] */
-  margin-bottom: ofh-spacing(3);
-  margin-right: - ofh-spacing(5); /* [6] */
-  padding: ofh-spacing(3) ofh-spacing(5);
+  left: -($ofh-size-24 + $card-border-width); /* [5] */
+  margin-bottom: $ofh-size-8;
+  margin-right: -$ofh-size-24; /* [6] */
+  padding: $ofh-size-8 $ofh-size-24;
   position: relative;
-  top: - ofh-spacing(3);
+  top: -$ofh-size-8;
 
   @include mq($from: tablet) {
-    left: -(ofh-spacing(6) + $card-border-width); /* [5] */
-    margin-right: - ofh-spacing(6); /* [6] */
-    padding: ofh-spacing(3) ofh-spacing(6);
-    top: - ofh-spacing(4);
+    left: -($ofh-size-32 + $card-border-width); /* [5] */
+    margin-right: -$ofh-size-32; /* [6] */
+    padding: $ofh-size-8 $ofh-size-32;
+    top: -$ofh-size-16;
   }
 }
 
@@ -298,21 +298,21 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   ========================================================================== */
 
 .ofh-card--care {
-  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(40, 'top');
   @include care-card($ofh-color-brand-blue-royal-3-main, $ofh-color-greyscale-white, 4px); /* [8] */
 }
 
 .ofh-card--care__heading-container {
-  @include ofh-responsive-padding(6, 'left');
-  @include ofh-responsive-padding(6, 'right');
+  @include ofh-responsive-padding(24, 'left');
+  @include ofh-responsive-padding(24, 'right');
 
-  padding-bottom: ofh-spacing(4);
-  padding-top: ofh-spacing(4);
+  padding-bottom: $ofh-size-16;
+  padding-top: $ofh-size-16;
   position: relative;
 }
 
 .ofh-card--care__heading {
-  @include ofh-font('h3', $weight: bold);
+  @include ofh-font('heading-md', $weight: bold);
   @include print-color($ofh-color-foreground-primary);
 
   margin: 0;

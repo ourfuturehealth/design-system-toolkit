@@ -12,9 +12,9 @@
 .ofh-inset-text {
   @include top-and-bottom(); /* [1] */
   @include reading-width(); /* [2] */
-  @include ofh-responsive-margin(8, 'bottom');
-  @include ofh-responsive-margin(8, 'top');
-  @include ofh-responsive-padding(5);
+  @include ofh-responsive-margin(40, 'bottom');
+  @include ofh-responsive-margin(40, 'top');
+  @include ofh-responsive-padding(16);
 
   background-color: $ofh-color-greyscale-white;
   border-left: $ofh-stroke-weight-8 solid

@@ -6,6 +6,6 @@
  */
 
 .ofh-do-dont-list {
-  @include ofh-responsive-margin(8, 'bottom');
-  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(40, 'bottom');
+  @include ofh-responsive-margin(40, 'top');
 }

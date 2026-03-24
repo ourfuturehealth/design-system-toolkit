@@ -8,19 +8,47 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.5.0 / React v0.4.0](#upgrading-to-v450--react-v040) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
-| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button naming | 🟡 Medium - Find/replace required     |
+| [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
+| [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
+| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
 
 ---
 
-## Upgrading to v4.5.0 / React v0.4.0
+## Upgrading to v4.5.0
 
 **Released:** March 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.5.0+
+
+**Authoritative migration guide:** [Toolkit v4.5.0 spacing, typography, and token migration guide](docs/migrations/toolkit-v4.5.0-spacing-typography-tokens.md)
+
+### Breaking Changes
+
+The toolkit spacing and direct typography APIs now use the Figma-aligned keys directly.
+
+Summary:
+
+- removed `ofh-spacing(...)`
+- replaced the old unified responsive spacing map with separate horizontal and vertical maps
+- renamed direct typography keys in `ofh-typography-responsive(...)` and `ofh-font(...)`
+- renamed direct heading classes from `l/m/s` to `lg/md/sm`
+- removed legacy direct typography utility aliases such as `ofh-u-font-size-h1`
+- kept the numeric responsive font-size override utilities as the supported override utility surface, with `ofh-u-font-size-20` replacing `ofh-u-font-size-19`
+- renamed several raw tokens and removed `$ofh-width-page-max`
+
+This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but any consumer adopting `v4.5.0` should use the standalone migration guide above.
+
+---
+
+## Upgrading to v4.6.0 / React v0.4.0
+
+**Released:** March 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.6.0+
 - `@ourfuturehealth/react-components` v0.4.0+
 
 ### Breaking Changes

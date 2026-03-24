@@ -7,7 +7,7 @@
  */
 
 table {
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(40, 'bottom');
 
   border-spacing: 0;
   vertical-align: top;
@@ -26,10 +26,10 @@ thead {
 
 th,
 td {
-  @include ofh-typography-responsive('paragraph');
-  @include ofh-responsive-padding(4, 'bottom');
-  @include ofh-responsive-padding(5, 'right');
-  @include ofh-responsive-padding(4, 'top');
+  @include ofh-typography-responsive('paragraph-md');
+  @include ofh-responsive-padding(12, 'bottom');
+  @include ofh-responsive-padding(16, 'right');
+  @include ofh-responsive-padding(12, 'top');
 
   border-bottom: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   text-align: left;
@@ -45,7 +45,7 @@ th {
 }
 
 caption {
-  @include ofh-font($size: 'h4', $weight: bold);
+  @include ofh-font($size: 'heading-sm', $weight: bold);
 
   text-align: left;
 }

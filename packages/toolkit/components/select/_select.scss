@@ -3,13 +3,13 @@
    ========================================================================== */
 
 .ofh-select {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   box-sizing: border-box;
   height: 40px;
   max-width: 100%;
-  padding: ofh-spacing(2);
+  padding: $ofh-size-4;
 
   &:focus {
     @include ofh-focused-input;
