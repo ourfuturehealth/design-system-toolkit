@@ -78,7 +78,7 @@
   <p>Write all headings in sentence case.</p>
   <p>Style headings consistently to create a clear content structure throughout your service and a clear content hierarchy on a page.</p>
   <p>Heading levels have meaning, especially for screen reader users and search engines. Using correct heading levels improves SEO and helps people using assistive technology to navigate through a page.</p>
-  <h3>Heading overrides</h2>
+  <h3>Heading overrides</h3>
   <p>We have 5 different classes that can be used to change the default font-size and spacing of headings. These classes can be used with any heading. Always ensure heading structure is semantically correct.</p>
 
 
@@ -143,57 +143,57 @@
   <h3 id="font-size">Font size</h3>
   <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-19</code>. They keep the pre-monorepo responsive values so maintainers can choose an override by the expected size.</p>
   <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
-  <p>These utilities use the mobile values below 641px, then switch to the tablet-and-up values from 641px and above.</p>
+  <p>The class name reflects the tablet-and-up size. Below 641px, the utility collapses to the matching mobile value.</p>
 
   <table class="ofh-table">
     <caption class="ofh-table__caption">Responsive font size override scale</caption>
     <thead class="ofh-table__head">
       <tr class="ofh-table__row">
         <th class="ofh-table__header" scope="col">Class</th>
-        <th class="ofh-table__header" scope="col">Below 641px</th>
         <th class="ofh-table__header" scope="col">641px and above</th>
+        <th class="ofh-table__header" scope="col">Below 641px</th>
       </tr>
     </thead>
     <tbody class="ofh-table__body">
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-64</code></td>
-        <td class="ofh-table__cell">48px / 56px</td>
         <td class="ofh-table__cell">64px / 72px</td>
+        <td class="ofh-table__cell">48px / 56px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-48</code></td>
-        <td class="ofh-table__cell">32px / 40px</td>
         <td class="ofh-table__cell">48px / 56px</td>
+        <td class="ofh-table__cell">32px / 40px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-32</code></td>
-        <td class="ofh-table__cell">24px / 32px</td>
         <td class="ofh-table__cell">32px / 40px</td>
+        <td class="ofh-table__cell">24px / 32px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-24</code></td>
-        <td class="ofh-table__cell">20px / 28px</td>
         <td class="ofh-table__cell">24px / 32px</td>
+        <td class="ofh-table__cell">20px / 28px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-22</code></td>
-        <td class="ofh-table__cell">18px / 28px</td>
         <td class="ofh-table__cell">22px / 32px</td>
+        <td class="ofh-table__cell">18px / 28px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-19</code></td>
-        <td class="ofh-table__cell">16px / 24px</td>
         <td class="ofh-table__cell">19px / 28px</td>
+        <td class="ofh-table__cell">16px / 24px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-16</code></td>
-        <td class="ofh-table__cell">14px / 24px</td>
         <td class="ofh-table__cell">16px / 24px</td>
+        <td class="ofh-table__cell">14px / 24px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-14</code></td>
-        <td class="ofh-table__cell">12px / 20px</td>
         <td class="ofh-table__cell">14px / 24px</td>
+        <td class="ofh-table__cell">12px / 20px</td>
       </tr>
     </tbody>
   </table>
@@ -206,7 +206,7 @@
   }) }}
 
   <h3 id="font-weight">Font weight</h3>
-  <p>You can add a font weight override class to any other typographic class or element to change the font weight to regular or bold weight.</p>
+  <p>You can add <code>ofh-u-font-weight-normal</code> or <code>ofh-u-font-weight-bold</code> to any other typographic class or element to change the font weight.</p>
   <p>Use bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse of bold will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
 
   {{ designExample({
