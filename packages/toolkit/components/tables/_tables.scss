@@ -9,7 +9,7 @@
  */
 
 .ofh-table-container {
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(40, 'bottom');
 
   display: block;
   -webkit-overflow-scrolling: touch;
@@ -93,7 +93,7 @@
   .ofh-table__body {
     .ofh-table-responsive__heading {
       font-weight: $ofh-typography-weight-semibold;
-      padding-right: ofh-spacing(4);
+      padding-right: $ofh-size-16;
       text-align: left; /* [8] */
 
       @include mq($from: desktop) {
@@ -103,7 +103,7 @@
 
     .ofh-table__row {
       display: block; /* [3] */
-      margin-bottom: ofh-spacing(5);
+      margin-bottom: $ofh-size-24;
 
       &:last-child {
         margin-bottom: 0;

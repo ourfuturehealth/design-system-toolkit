@@ -2,7 +2,7 @@
 {% set pageDescription = "Our fonts and typographic styles, and how to apply them." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "April 2023" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "1" %}
 {% set hideContact = "true" %}
 
@@ -18,7 +18,7 @@
 
   <ul class="ofh-list app-side-nav__list">
 
-    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-5">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-16">
       <a class="ofh-back-link__link" href="/design-system">
       <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
@@ -72,13 +72,13 @@
   <p class="rich-text"><code>font-family: “Source Sans Pro”, Arial, sans-serif;</code></p>
 
   <h2 id="typescale">Typescale</h2>
-  <p>The default font size depends on the device the user is using. The typescale is larger on devices that have a screen width of 641 pixels or more – large devices such as desktop and most tablets. It is smaller on devices that have a screen width of  640 pixels or less – small devices such as phones.</p>
+  <p>The typography scale depends on the viewport width. Phones and tablets share the same base sizes, and some styles step up at the desktop breakpoint from 769px and above.</p>
 
   <h2 id="headings">Headings</h2>
   <p>Write all headings in sentence case.</p>
   <p>Style headings consistently to create a clear content structure throughout your service and a clear content hierarchy on a page.</p>
   <p>Heading levels have meaning, especially for screen reader users and search engines. Using correct heading levels improves SEO and helps people using assistive technology to navigate through a page.</p>
-  <h3>Heading overrides</h2>
+  <h3>Heading overrides</h3>
   <p>We have 5 different classes that can be used to change the default font-size and spacing of headings. These classes can be used with any heading. Always ensure heading structure is semantically correct.</p>
 
 
@@ -104,7 +104,7 @@
   <h2 id="paragraphs">Paragraphs</h2>
 
   <h3 id="body">Body</h3>
-  <p>The default paragraph font size is 19px on desktop and most tablets and 16px on phones.</p>
+  <p>The default paragraph font size is 20px on desktop and 18px on phones and tablets.</p>
   <p>You can also add classes to create a lead paragraph or smaller body copy to convey content hierarchy in your page.</p>
 
   {{ designExample({
@@ -117,7 +117,7 @@
 
   <h3 id="lead-paragraph">Lead paragraph</h3>
   <p>A lead paragraph is an introductory paragraph that you can use at the top of a page to summarise the content.</p>
-  <p>Lead paragraphs use 24px type on desktop and tablet and 20px on phones. You should only use them once per page.</p>
+  <p>Lead paragraphs use 24px type on desktop and 20px on phones and tablets. You should only use them once per page.</p>
 
   {{ designExample({
     group: "styles",
@@ -128,7 +128,7 @@
 
   <h3 id="body-small">Body small</h3>
   <p class="rich-text">You can use the <code>ofh-body-s</code> class sparingly to make your paragraph font size smaller.</p>
-  <p>Small body text uses 16px on desktop and tablet and 14px on phones.</p>
+  <p>Small body text uses 16px across all breakpoints.</p>
 
   {{ designExample({
     group: "styles",
@@ -141,8 +141,63 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>Our full typography scale goes from 14px to 64px. You can add these font size override classes to any other typographic class or element, and they will change the font size.</p>
-  <p>Only use these font size overrides with <code>p</code> tags.
+  <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-20</code>. They keep the pre-monorepo responsive values so maintainers can choose an override by the expected size.</p>
+  <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
+  <p>The class name reflects the tablet-and-desktop size. On mobile, the utility collapses to the matching smaller value.</p>
+
+  <table class="ofh-table">
+    <caption class="ofh-table__caption">Responsive font size override scale</caption>
+    <thead class="ofh-table__head">
+      <tr class="ofh-table__row">
+        <th class="ofh-table__header" scope="col">Class</th>
+        <th class="ofh-table__header" scope="col">Tablet and desktop (641px and above)</th>
+        <th class="ofh-table__header" scope="col">Mobile (below 641px)</th>
+      </tr>
+    </thead>
+    <tbody class="ofh-table__body">
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-64</code></td>
+        <td class="ofh-table__cell">64px / 72px</td>
+        <td class="ofh-table__cell">48px / 56px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-48</code></td>
+        <td class="ofh-table__cell">48px / 56px</td>
+        <td class="ofh-table__cell">32px / 40px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-32</code></td>
+        <td class="ofh-table__cell">32px / 40px</td>
+        <td class="ofh-table__cell">24px / 32px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-24</code></td>
+        <td class="ofh-table__cell">24px / 32px</td>
+        <td class="ofh-table__cell">20px / 28px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-22</code></td>
+        <td class="ofh-table__cell">22px / 32px</td>
+        <td class="ofh-table__cell">18px / 28px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-20</code></td>
+        <td class="ofh-table__cell">20px / 28px</td>
+        <td class="ofh-table__cell">18px / 24px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-16</code></td>
+        <td class="ofh-table__cell">16px / 24px</td>
+        <td class="ofh-table__cell">14px / 24px</td>
+      </tr>
+      <tr class="ofh-table__row">
+        <td class="ofh-table__cell"><code>ofh-u-font-size-14</code></td>
+        <td class="ofh-table__cell">14px / 24px</td>
+        <td class="ofh-table__cell">12px / 20px</td>
+      </tr>
+    </tbody>
+  </table>
+
   {{ designExample({
     group: "styles",
     item: "typography",
@@ -151,7 +206,7 @@
   }) }}
 
   <h3 id="font-weight">Font weight</h3>
-  <p>You can add a font weight override class to any other typographic class or element to change the font weight to regular or bold weight.</p>
+  <p>You can add <code>ofh-u-font-weight-normal</code> or <code>ofh-u-font-weight-bold</code> to any other typographic class or element to change the font weight.</p>
   <p>Use bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse of bold will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
 
   {{ designExample({

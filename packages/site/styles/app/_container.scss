@@ -10,7 +10,7 @@ $app-container-size: 1100px;
   max-width: $app-container-size;
 
   @media (width >= 767px) and (width <= 1164px) {
-    margin: 0 ofh-spacing(6);
+    margin: 0 $ofh-size-32;
   }
 }
 

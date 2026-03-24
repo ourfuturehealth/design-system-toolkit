@@ -1,9 +1,9 @@
 .ofh-character-count {
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(32, 'bottom');
 
   .ofh-form-group,
   .ofh-textarea {
-    margin-bottom: ofh-spacing(2);
+    margin-bottom: $ofh-size-4;
   }
 }
 

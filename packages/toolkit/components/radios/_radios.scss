@@ -7,7 +7,7 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$ofh-radios-size: ofh-spacing(7);
+$ofh-radios-size: $ofh-size-40;
 $ofh-radios-label-padding-left-right: 12px;
 
 // When the default focus width is used on a curved edge it looks visually smaller.
@@ -15,11 +15,11 @@ $ofh-radios-label-padding-left-right: 12px;
 $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
 
 .ofh-radios__item {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   clear: left;
   display: block;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   min-height: $ofh-radios-size;
   padding: 0 0 0 $ofh-radios-size;
   position: relative;
@@ -46,7 +46,7 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
   cursor: pointer;
   display: inline-block;
   margin-bottom: 0;
-  padding: 8px $ofh-radios-label-padding-left-right ofh-spacing(2);
+  padding: 8px $ofh-radios-label-padding-left-right $ofh-size-4;
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation; /* 1 */
 }
@@ -125,7 +125,7 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
     .ofh-radios__item {
       clear: none;
       float: left;
-      margin-right: ofh-spacing(5);
+      margin-right: $ofh-size-24;
     }
   }
 
@@ -143,10 +143,10 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
 .ofh-radios__divider {
   $ofh-divider-size: $ofh-radios-size !default;
 
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-primary;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   text-align: center;
   width: $ofh-divider-size;
 }
@@ -165,7 +165,7 @@ $conditional-margin-left: $conditional-border-padding;
 $conditional-padding-left: $conditional-border-padding + $ofh-radios-label-padding-left-right;
 
 .ofh-radios__conditional {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(16, 'bottom');
 
   border-left: $conditional-border-width solid $ofh-color-border-input-default;
   margin-left: $conditional-margin-left;

@@ -2,6 +2,8 @@
 // UTILITIES / #SPACING
 // ========================================================================== //
 
+@use 'sass:map';
+
 // Directions for spacing
 // Original code taken from GDS (Government Digital Service)
 // https://github.com/alphagov/govuk-frontend
@@ -10,7 +12,7 @@ $_spacing-directions: ('top', 'right', 'bottom', 'left') !default;
 
 // Spacing override classes
 // Generate spacing override classes for the given property (e.g. margin)
-// for each point in the spacing scale.
+// for each size key in the responsive spacing scale.
 
 // @param {String} $property - Property to add spacing to (e.g. 'margin')
 
@@ -19,17 +21,17 @@ $_spacing-directions: ('top', 'right', 'bottom', 'left') !default;
 //      margin: 0;
 //   }
 
-//  .ofh-u-margin-top-1 {
-//     margin-top: [whatever spacing point 1 is...]
+//  .ofh-u-margin-top-12 {
+//     margin-top: [the responsive value for size key 12]
 //   }
 
-// 1. For each point in the spacing scale (defined in settings), create an
+// 1. For each size key in the responsive spacing scale, create an
 //    override that affects all directions...
 // 2. ... and then an override for each individual direction
 
-@mixin _ofh-generate-spacing-overrides($property) {
+@mixin _ofh-generate-spacing-overrides($property, $scale-points) {
   // [1] Generate override for all directions
-  @each $scale-point, $scale-map in $ofh-space-responsive-scale {
+  @each $scale-point in $scale-points {
     .ofh-u-#{$property}-#{$scale-point} {
       @include _ofh-responsive-spacing($scale-point, $property, 'all', true);
     }
@@ -44,6 +46,12 @@ $_spacing-directions: ('top', 'right', 'bottom', 'left') !default;
 }
 
 @include govuk-exports('govuk/overrides/spacing') {
-  @include _ofh-generate-spacing-overrides('margin');
-  @include _ofh-generate-spacing-overrides('padding');
+  @include _ofh-generate-spacing-overrides(
+    'margin',
+    map.keys($ofh-space-horizontal-responsive-scale)
+  );
+  @include _ofh-generate-spacing-overrides(
+    'padding',
+    map.keys($ofh-space-horizontal-responsive-scale)
+  );
 }

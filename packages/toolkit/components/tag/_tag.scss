@@ -5,14 +5,14 @@
 /* stylelint-disable color-no-hex */
 
 .ofh-tag {
-  @include ofh-font($size: 'paragraph-small', $weight: bold, $line-height: 1);
+  @include ofh-font($size: 'paragraph-sm', $weight: bold, $line-height: 1);
 
   background-color: $ofh-color-brand-blue-royal-5;
   color: $ofh-color-greyscale-white;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  padding: ofh-spacing(2) ofh-spacing(3); /* top right bottom left */
+  padding: $ofh-size-4 $ofh-size-8; /* top right bottom left */
   text-decoration: none;
 }
 
