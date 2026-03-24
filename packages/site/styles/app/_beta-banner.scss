@@ -18,7 +18,7 @@
 }
 
 .app-beta__text {
-  @include ofh-font($size: paragraph-small, $line-height: 1.2);
+  @include ofh-font($size: paragraph-sm, $line-height: 1.2);
 
   display: table-cell;
   vertical-align: baseline;

@@ -3,7 +3,7 @@
   @include print-hide();
   @include ofh-responsive-padding(24, bottom);
   @include ofh-responsive-padding(24, top);
-  @include ofh-font($size: paragraph-small);
+  @include ofh-font($size: paragraph-sm);
 
   background-color: $ofh-color-brand-blue-navy-3-main;
   border-top: $ofh-size-8 solid $ofh-color-greyscale-7;
@@ -16,7 +16,7 @@
   padding-top: $ofh-size-32;
 
   p {
-    @include ofh-font($size: paragraph);
+    @include ofh-font($size: paragraph-md);
 
     margin: 0;
   }
@@ -37,7 +37,7 @@
 }
 
 .ofh-footer-ds__list-item {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   @include mq($from: desktop) {
     float: left;
@@ -58,7 +58,7 @@
 }
 
 .ofh-footer-ds__copyright {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   color: $ofh-color-foreground-primary-inverted;
   margin-bottom: 0;

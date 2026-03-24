@@ -11,7 +11,7 @@ $ofh-checkboxes-size: $ofh-size-40;
 $ofh-checkboxes-label-padding-left-right: 12px;
 
 .ofh-checkboxes__item {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   clear: left;
   display: block;
@@ -116,7 +116,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 .ofh-checkboxes__divider {
   $ofh-divider-size: $ofh-checkboxes-size !default;
 
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-primary;
   margin-bottom: $ofh-size-8;

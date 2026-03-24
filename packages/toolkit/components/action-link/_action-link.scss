@@ -18,7 +18,7 @@
 }
 
 .ofh-action-link__link {
-  @include ofh-font('h4');
+  @include ofh-font('heading-sm');
 
   display: inline-block; /* [1] */
   font-weight: $ofh-typography-weight-semibold;

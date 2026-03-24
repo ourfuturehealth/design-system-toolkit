@@ -618,7 +618,7 @@
 }
 
 .ofh-header-ds__navigation-link {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   border-bottom: $ofh-size-4 solid transparent;
   border-top: $ofh-size-4 solid transparent;
@@ -709,7 +709,7 @@
 
 .ofh-header-ds__transactional-service-name--link {
   @include ofh-link-style-light;
-  @include ofh-font($size: lead);
+  @include ofh-font($size: lead-md);
 
   text-decoration: none;
 
@@ -780,7 +780,7 @@
 }
 
 .ofh-header-ds__service-name {
-  @include ofh-font($size: lead);
+  @include ofh-font($size: lead-md);
 
   color: $ofh-color-foreground-primary-inverted;
   display: block;

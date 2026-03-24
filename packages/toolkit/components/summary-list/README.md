@@ -59,8 +59,8 @@
       Contact details
     </dt>
     <dd class="ofh-summary-list__value">
-      <p class="ofh-body">07700 900457</p>
-      <p class="ofh-body">sarah.phillips@example.com</p>
+      <p class="ofh-body-m">07700 900457</p>
+      <p class="ofh-body-m">sarah.phillips@example.com</p>
     </dd>
     <dd class="ofh-summary-list__actions">
       <a href="#">
@@ -192,8 +192,8 @@
       Contact details
     </dt>
     <dd class="ofh-summary-list__value">
-      <p class="ofh-body">07700 900457</p>
-      <p class="ofh-body">sarah.phillips@example.com</p>
+      <p class="ofh-body-m">07700 900457</p>
+      <p class="ofh-body-m">sarah.phillips@example.com</p>
     </dd>
   </div>
 </dl>
@@ -283,8 +283,8 @@
       Contact details
     </dt>
     <dd class="ofh-summary-list__value">
-      <p class="ofh-body">07700 900457</p>
-      <p class="ofh-body">sarah.phillips@example.com</p>
+      <p class="ofh-body-m">07700 900457</p>
+      <p class="ofh-body-m">sarah.phillips@example.com</p>
     </dd>
   </div>
 </dl>

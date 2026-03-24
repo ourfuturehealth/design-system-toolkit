@@ -17,7 +17,7 @@
  */
 
 %ofh-list {
-  @include ofh-typography-responsive('list');
+  @include ofh-typography-responsive('list-md');
   @include ofh-responsive-margin(16, 'bottom');
 
   list-style-type: none;

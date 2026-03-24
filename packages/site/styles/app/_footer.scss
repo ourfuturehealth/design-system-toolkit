@@ -11,7 +11,7 @@
 }
 
 .app-ogl-footer--text {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
   @include ofh-responsive-padding(24, 'bottom');
 
   color: $ofh-color-greyscale-white;

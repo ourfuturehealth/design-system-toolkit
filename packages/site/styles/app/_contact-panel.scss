@@ -9,7 +9,7 @@
 }
 
 .app-contact-panel__heading {
-  @include ofh-font($size: h3, $weight: bold);
+  @include ofh-font($size: heading-md, $weight: bold);
   @include ofh-responsive-padding(12, 'top');
 }
 

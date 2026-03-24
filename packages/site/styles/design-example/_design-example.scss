@@ -14,7 +14,7 @@
   }
 
   &__pop-out {
-    @include ofh-font($size: paragraph);
+    @include ofh-font($size: paragraph-md);
 
     border: 1px solid $ofh-color-greyscale-4;
     border-bottom: 0;

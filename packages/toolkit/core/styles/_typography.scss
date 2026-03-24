@@ -13,7 +13,7 @@
 //  }
 
 %ofh-heading-xl {
-  @include ofh-typography-responsive('h1');
+  @include ofh-typography-responsive('heading-xl');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
@@ -27,8 +27,8 @@ h1,
   @extend %ofh-heading-xl;
 }
 
-%ofh-heading-l {
-  @include ofh-typography-responsive('h2');
+%ofh-heading-lg {
+  @include ofh-typography-responsive('heading-lg');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
@@ -38,12 +38,12 @@ h1,
 }
 
 h2,
-.ofh-heading-l {
-  @extend %ofh-heading-l;
+.ofh-heading-lg {
+  @extend %ofh-heading-lg;
 }
 
-%ofh-heading-m {
-  @include ofh-typography-responsive('h3');
+%ofh-heading-md {
+  @include ofh-typography-responsive('heading-md');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
@@ -53,12 +53,12 @@ h2,
 }
 
 h3,
-.ofh-heading-m {
-  @extend %ofh-heading-m;
+.ofh-heading-md {
+  @extend %ofh-heading-md;
 }
 
-%ofh-heading-s {
-  @include ofh-typography-responsive('h4');
+%ofh-heading-sm {
+  @include ofh-typography-responsive('heading-sm');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
@@ -68,12 +68,12 @@ h3,
 }
 
 h4,
-.ofh-heading-s {
-  @extend %ofh-heading-s;
+.ofh-heading-sm {
+  @extend %ofh-heading-sm;
 }
 
 %ofh-heading-xs {
-  @include ofh-typography-responsive('h5');
+  @include ofh-typography-responsive('heading-xs');
 
   display: block;
   font-weight: $ofh-typography-weight-semibold;
@@ -87,25 +87,14 @@ h5,
   @extend %ofh-heading-xs;
 }
 
-%ofh-heading-xxs {
-  @include ofh-typography-responsive('h5');
-
-  display: block;
-  font-weight: $ofh-typography-weight-semibold;
-  margin-top: 0;
-
-  @include ofh-responsive-margin(16, 'bottom');
-}
-
-h6,
-.ofh-heading-xxs {
-  @extend %ofh-heading-xxs;
+h6 {
+  @extend %ofh-heading-xs;
 }
 
 /* Captions to be used inside headings */
 
 .ofh-caption-xl {
-  @include ofh-font('h2');
+  @include ofh-font('heading-lg');
 
   color: $ofh-color-foreground-secondary;
   display: block;
@@ -113,7 +102,7 @@ h6,
 }
 
 .ofh-caption-l {
-  @include ofh-font('h3');
+  @include ofh-font('heading-md');
 
   color: $ofh-color-foreground-secondary;
   display: block;
@@ -121,7 +110,7 @@ h6,
 }
 
 .ofh-caption-m {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-secondary;
   display: block;
@@ -135,7 +124,7 @@ h6,
 /* Body (paragraphs) */
 
 %ofh-body-l {
-  @include ofh-typography-responsive('lead');
+  @include ofh-typography-responsive('lead-md');
 
   display: block;
   margin-top: 0;
@@ -148,7 +137,7 @@ h6,
 }
 
 %ofh-body-m {
-  @include ofh-typography-responsive('paragraph');
+  @include ofh-typography-responsive('paragraph-md');
 
   display: block;
   margin-top: 0;
@@ -164,7 +153,7 @@ p,
 }
 
 %ofh-body-s {
-  @include ofh-typography-responsive('paragraph-small');
+  @include ofh-typography-responsive('paragraph-sm');
 
   display: block;
   margin-top: 0;
@@ -190,19 +179,19 @@ address {
  */
 
 .ofh-lede-text {
-  @include ofh-font('lead');
+  @include ofh-font('lead-md');
   @include ofh-responsive-margin(40, 'bottom');
 
   /* [1] */
 
   p,
   ul {
-    @include ofh-font('lead');
+    @include ofh-font('lead-md');
   }
 }
 
 .ofh-lede-text--small {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
   @include ofh-responsive-margin(24, 'bottom');
 }
 
@@ -223,7 +212,7 @@ h1 + .ofh-lede-text--small {
  * https://github.com/alphagov/nhsuk-frontend
  */
 
-%ofh-body-l + %ofh-heading-l {
+%ofh-body-l + %ofh-heading-lg {
   padding-top: $ofh-size-4;
 
   @include mq($from: tablet) {
@@ -231,18 +220,18 @@ h1 + .ofh-lede-text--small {
   }
 }
 
-%ofh-body-m + %ofh-heading-l,
-%ofh-body-s + %ofh-heading-l,
-%ofh-list + %ofh-heading-l {
+%ofh-body-m + %ofh-heading-lg,
+%ofh-body-s + %ofh-heading-lg,
+%ofh-list + %ofh-heading-lg {
   @include ofh-responsive-padding(16, 'top');
 }
 
-%ofh-body-m + %ofh-heading-m,
-%ofh-body-s + %ofh-heading-m,
-%ofh-list + %ofh-heading-m,
-%ofh-body-m + %ofh-heading-s,
-%ofh-body-s + %ofh-heading-s,
-%ofh-list + %ofh-heading-s {
+%ofh-body-m + %ofh-heading-md,
+%ofh-body-s + %ofh-heading-md,
+%ofh-list + %ofh-heading-md,
+%ofh-body-m + %ofh-heading-sm,
+%ofh-body-s + %ofh-heading-sm,
+%ofh-list + %ofh-heading-sm {
   padding-top: $ofh-size-4;
 
   @include mq($from: tablet) {
@@ -251,7 +240,7 @@ h1 + .ofh-lede-text--small {
 }
 
 /* [1] */
-.ofh-lede-text + %ofh-heading-l {
+.ofh-lede-text + %ofh-heading-lg {
   padding-top: 0;
 }
 

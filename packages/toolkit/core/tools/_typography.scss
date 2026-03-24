@@ -5,26 +5,9 @@
 @use 'sass:map';
 @use 'sass:math';
 
-$ofh-typography-size-aliases: (
-  h1: heading-xl,
-  h2: heading-lg,
-  h3: heading-md,
-  h4: heading-sm,
-  h5: heading-xs,
-  lead: lead-md,
-  paragraph: paragraph-md,
-  paragraph-small: paragraph-sm,
-  list: list-md,
-  list-small: list-sm,
-);
-
 @function _ofh-typography-size-key($size) {
   @if map.has-key($ofh-typography-responsive-scale, $size) {
     @return $size;
-  }
-
-  @if map.has-key($ofh-typography-size-aliases, $size) {
-    @return map.get($ofh-typography-size-aliases, $size);
   }
 
   @error 'Unknown font size `#{$size}` - expected a key from the typography scale.';
@@ -120,14 +103,14 @@ $ofh-typography-size-aliases: (
 
 // @example scss
 //  .foo {
-//    @include ofh-typography-responsive(19);
+//    @include ofh-typography-responsive('paragraph-md');
 //   }
 
 //  .foo {
-//    @include ofh-typography-responsive(32, $important: true);
+//    @include ofh-typography-responsive('heading-xl', $important: true);
 //   }
 
-// @param {Map} $font-map - Font map
+// @param {String} $size - Typography scale key
 // @param {Number} $override-line-height [false] - Non responsive custom line
 //   height. Omit to use the line height from the font map.
 // @param {Boolean} $important [false] - Whether to mark declarations as
@@ -137,10 +120,7 @@ $ofh-typography-size-aliases: (
 //    these variables becoming strings, so this needs to happen//after* they
 //    are used in calculations
 
-@mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
-  $size: _ofh-typography-size-key($size);
-  $font-map: map.get($ofh-typography-responsive-scale, $size);
-
+@mixin _ofh-typography-responsive-font-map($font-map, $override-line-height: false, $important: false) {
   @each $breakpoint, $breakpoint-map in $font-map {
     $font-size: map.get($breakpoint-map, 'font-size');
     $font-size-rem: ofh-px-to-rem($font-size);
@@ -177,20 +157,30 @@ $ofh-typography-size-aliases: (
   }
 }
 
+@mixin ofh-typography-responsive($size, $override-line-height: false, $important: false) {
+  $size: _ofh-typography-size-key($size);
+  $font-map: map.get($ofh-typography-responsive-scale, $size);
+
+  @include _ofh-typography-responsive-font-map(
+    $font-map,
+    $override-line-height: $override-line-height,
+    $important: $important
+  );
+}
+
 // Font
 // ==========================================================================
 
 // @example scss
 //  .foo {
-//    @include ofh-font(19);
+//    @include ofh-font('paragraph-md');
 //   }
 
 //  .foo {
-//    @include ofh-font(32, $weight: bold);
+//    @include ofh-font('heading-xl', $weight: bold);
 //   }
 
-// @param {Number} $size - Size of the font as it would appear on desktop -
-//   uses the responsive font size map
+// @param {String} $size - Typography scale key from the responsive font map
 // @param {String} $weight [normal] - Weight: `bold` or `normal`
 // @param {Number} $line-height [false] - Line-height, if overriding the default
 

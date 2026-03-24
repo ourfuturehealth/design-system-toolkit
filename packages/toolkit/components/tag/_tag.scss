@@ -5,7 +5,7 @@
 /* stylelint-disable color-no-hex */
 
 .ofh-tag {
-  @include ofh-font($size: 'paragraph-small', $weight: bold, $line-height: 1);
+  @include ofh-font($size: 'paragraph-sm', $weight: bold, $line-height: 1);
 
   background-color: $ofh-color-brand-blue-royal-5;
   color: $ofh-color-greyscale-white;

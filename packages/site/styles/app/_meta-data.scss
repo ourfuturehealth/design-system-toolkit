@@ -1,6 +1,6 @@
 // Added meta data for a promo (date)
 .app-meta-data {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   color: $ofh-color-foreground-secondary;
 

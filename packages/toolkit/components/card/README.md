@@ -45,7 +45,7 @@ Find out more about the card component and when to use it in the [design system 
 ```
 <div class="ofh-card ofh-card--clickable ">
   <div class="ofh-card__content">
-    <h2 class="ofh-card__heading ofh-heading-m">
+    <h2 class="ofh-card__heading ofh-heading-md">
       <a class="ofh-card__link" href="#">
         Introduction to care and support
       </a>
@@ -64,7 +64,7 @@ Find out more about the card component and when to use it in the [design system 
   "href": "#",
   "clickable": "true",
   "heading": "Introduction to care and support",
-  "headingClasses": "ofh-heading-m",
+  "headingClasses": "ofh-heading-md",
   "description": "A quick guide for people who have care and support needs and their carers"
 }) }}
 ```
@@ -79,7 +79,7 @@ Find out more about the card component and when to use it in the [design system 
 <div class="ofh-card ofh-card--clickable ">
   <img class="ofh-card__img" src="https://assets.nhs.uk/prod/images/A_0218_exercise-main_FKW1X7.width-690.jpg" alt="">
   <div class="ofh-card__content">
-    <h2 class="ofh-card__heading ofh-heading-m">
+    <h2 class="ofh-card__heading ofh-heading-md">
       <a class="ofh-card__link" href="#">
         Exercise
       </a>
@@ -99,7 +99,7 @@ Find out more about the card component and when to use it in the [design system 
   "href": "#",
   "clickable": "true",
   "heading": "Exercise",
-  "headingClasses": "ofh-heading-m",
+  "headingClasses": "ofh-heading-md",
   "description": "Programmes, workouts and tips to get you moving and improve your fitness and wellbeing"
 }) }}
 ```
@@ -117,7 +117,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-half ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Introduction to care and support
           </a>
@@ -129,7 +129,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-half ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Help from social services and charities
           </a>
@@ -141,7 +141,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-half ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Money, work and benefits
           </a>
@@ -153,7 +153,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-half ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Care after a hospital stay
           </a>
@@ -170,7 +170,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-third ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             5 steps to mental wellbeing
           </a>
@@ -182,7 +182,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-third ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Healthy weight
           </a>
@@ -194,7 +194,7 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-third ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable ">
       <div class="ofh-card__content">
-        <h2 class="ofh-card__heading ofh-heading-m">
+        <h2 class="ofh-card__heading ofh-heading-md">
           <a class="ofh-card__link" href="#">
             Exercise
           </a>
@@ -211,32 +211,32 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4">91 <span class="ofh-u-visually-hidden">Applicants</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state" style="display:block">Applicants</a>
+        <p class="ofh-heading-xl ofh-u-margin-bottom-4">91 <span class="ofh-u-visually-hidden">Applicants</span></p>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state" style="display:block">Applicants</a>
       </div>
     </div>
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4">23 <span class="ofh-u-visually-hidden">Jobs</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Jobs</a>
+        <p class="ofh-heading-xl ofh-u-margin-bottom-4">23 <span class="ofh-u-visually-hidden">Jobs</span></p>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Jobs</a>
       </div>
     </div>
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4">8 <span class="ofh-u-visually-hidden">Services</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Services</a>
+        <p class="ofh-heading-xl ofh-u-margin-bottom-4">8 <span class="ofh-u-visually-hidden">Services</span></p>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Services</a>
       </div>
     </div>
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
-        <p class="ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4">33 <span class="ofh-u-visually-hidden">Messages</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Messages</a>
+        <p class="ofh-heading-xl ofh-u-margin-bottom-4">33 <span class="ofh-u-visually-hidden">Messages</span></p>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Messages</a>
       </div>
     </div>
   </li>
@@ -256,7 +256,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Introduction to care and support",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "A quick guide for people who have care and support needs and their carers"
     }) }}
   </li>
@@ -265,7 +265,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Help from social services and charities",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "Includes helplines, needs assessments, advocacy and reporting abuse"
     }) }}
   </li>
@@ -274,7 +274,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Money, work and benefits",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "How to pay for care and support, and where you can get help with costs"
     }) }}
   </li>
@@ -283,7 +283,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Care after a hospital stay",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "Includes hospital discharge and care and support afterwards"
     }) }}
   </li>
@@ -297,7 +297,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "5 steps to mental wellbeing",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "Practical advice to help you feel mentally and emotionally better"
     }) }}
   </li>
@@ -306,7 +306,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Healthy weight",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "Check your BMI using our healthy weight calculator and find out if you're a healthy weight"
     }) }}
   </li>
@@ -315,7 +315,7 @@ Find out more about the card component and when to use it in the [design system 
       "href": "#",
       "clickable": "true",
       "heading": "Exercise",
-      "headingClasses": "ofh-heading-m",
+      "headingClasses": "ofh-heading-md",
       "description": "Programmes, workouts and tips to get you moving and improve your fitness and wellbeing"
     }) }}
   </li>
@@ -327,25 +327,25 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Applicants</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Applicants</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Jobs</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Jobs</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Services</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Services</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-font-size-64 ofh-u-margin-bottom-4\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Messages</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Messages</a>"
     }) }}
   </li>
 </ul>
@@ -361,7 +361,7 @@ Find out more about the card component and when to use it in the [design system 
 <div class="ofh-card ofh-card--feature ">
   <div class="ofh-card__content
    ofh-card__content--feature ">
-    <h2 class="ofh-card__heading ofh-card__heading--feature ofh-heading-m">
+    <h2 class="ofh-card__heading ofh-card__heading--feature ofh-heading-md">
       Feature card heading
     </h2>
     <p class="ofh-card__description">Feature card description</p>
@@ -377,7 +377,7 @@ Find out more about the card component and when to use it in the [design system 
 {{ card({
   "feature": "true",
   "heading": "Feature card heading",
-  "headingClasses": "ofh-heading-m",
+  "headingClasses": "ofh-heading-md",
   "description": "Feature card description"
 }) }}
 ```

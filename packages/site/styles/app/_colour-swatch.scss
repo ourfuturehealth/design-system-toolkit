@@ -11,7 +11,7 @@
 
   th,
   td {
-    @include ofh-typography-responsive('paragraph-small');
+    @include ofh-typography-responsive('paragraph-sm');
 
     border: 0;
   }

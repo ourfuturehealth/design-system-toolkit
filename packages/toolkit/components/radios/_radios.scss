@@ -15,7 +15,7 @@ $ofh-radios-label-padding-left-right: 12px;
 $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
 
 .ofh-radios__item {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   clear: left;
   display: block;
@@ -143,7 +143,7 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
 .ofh-radios__divider {
   $ofh-divider-size: $ofh-radios-size !default;
 
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-primary;
   margin-bottom: $ofh-size-8;

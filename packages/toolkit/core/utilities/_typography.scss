@@ -10,22 +10,131 @@
 /**
  * Font size and line height
  *
- * Generate typography override classes for each responsive font map in the
- * typography scale eg .ofh-u-font-size-48
+ * Generate numeric typography override classes using the pre-monorepo
+ * responsive utility scale eg .ofh-u-font-size-64
  *
  * Original code taken from GDS (Government Digital Service)
  * https://github.com/alphagov/govuk-frontend
  */
 
-@each $size in map.keys($ofh-typography-responsive-scale) {
-  .ofh-u-font-size-#{$size} {
-    @include ofh-typography-responsive($size, $important: true);
-  }
-}
+$ofh-typography-utility-scale: (
+  64: (
+    null: (
+      font-size: $ofh-size-48,
+      line-height: $ofh-size-56,
+    ),
+    tablet: (
+      font-size: $ofh-size-64,
+      line-height: $ofh-size-72,
+    ),
+    print: (
+      font-size: 53pt,
+      line-height: 1.1,
+    ),
+  ),
+  48: (
+    null: (
+      font-size: $ofh-size-32,
+      line-height: $ofh-size-40,
+    ),
+    tablet: (
+      font-size: $ofh-size-48,
+      line-height: $ofh-size-56,
+    ),
+    print: (
+      font-size: 32pt,
+      line-height: 1.15,
+    ),
+  ),
+  32: (
+    null: (
+      font-size: $ofh-size-24,
+      line-height: $ofh-size-32,
+    ),
+    tablet: (
+      font-size: $ofh-size-32,
+      line-height: $ofh-size-40,
+    ),
+    print: (
+      font-size: 24pt,
+      line-height: 1.05,
+    ),
+  ),
+  24: (
+    null: (
+      font-size: $ofh-size-20,
+      line-height: $ofh-size-28,
+    ),
+    tablet: (
+      font-size: $ofh-size-24,
+      line-height: $ofh-size-32,
+    ),
+    print: (
+      font-size: 18pt,
+      line-height: 1.15,
+    ),
+  ),
+  22: (
+    null: (
+      font-size: $ofh-size-18,
+      line-height: $ofh-size-28,
+    ),
+    tablet: (
+      font-size: $ofh-size-22,
+      line-height: $ofh-size-32,
+    ),
+    print: (
+      font-size: 18pt,
+      line-height: 1.15,
+    ),
+  ),
+  20: (
+    null: (
+      font-size: $ofh-size-18,
+      line-height: $ofh-size-24,
+    ),
+    tablet: (
+      font-size: $ofh-size-20,
+      line-height: $ofh-size-28,
+    ),
+    print: (
+      font-size: 14pt,
+      line-height: 1.15,
+    ),
+  ),
+  16: (
+    null: (
+      font-size: $ofh-size-14,
+      line-height: $ofh-size-24,
+    ),
+    tablet: (
+      font-size: $ofh-size-16,
+      line-height: $ofh-size-24,
+    ),
+    print: (
+      font-size: 14pt,
+      line-height: 1.2,
+    ),
+  ),
+  14: (
+    null: (
+      font-size: $ofh-size-12,
+      line-height: $ofh-size-20,
+    ),
+    tablet: (
+      font-size: $ofh-size-14,
+      line-height: $ofh-size-24,
+    ),
+    print: (
+      font-size: 12pt,
+      line-height: 1.2,
+    ),
+  ),
+);
 
-@each $legacy-size, $size in $ofh-typography-size-aliases {
-  .ofh-u-font-size-#{$legacy-size} {
-    @include ofh-typography-responsive($legacy-size, $important: true);
+@each $size, $font-map in $ofh-typography-utility-scale {
+  .ofh-u-font-size-#{$size} {
+    @include _ofh-typography-responsive-font-map($font-map, $important: true);
   }
 }
 

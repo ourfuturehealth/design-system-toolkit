@@ -7,12 +7,12 @@
 }
 
 .app-page-contents__heading {
-  @include ofh-font($size: lead, $weight: bold);
+  @include ofh-font($size: lead-md, $weight: bold);
   @include ofh-responsive-margin(12, 'bottom');
 }
 
 .app-page-contents__list {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 }
 
 .app-page-contents__item {
