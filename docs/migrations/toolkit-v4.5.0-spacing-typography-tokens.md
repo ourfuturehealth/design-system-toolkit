@@ -52,7 +52,7 @@ Notes:
   - `ofh-u-font-size-32`
   - `ofh-u-font-size-24`
   - `ofh-u-font-size-22`
-  - `ofh-u-font-size-19`
+  - `ofh-u-font-size-20`
   - `ofh-u-font-size-16`
   - `ofh-u-font-size-14`
 - Kept the semantic typography classes for now:
@@ -409,11 +409,11 @@ If you need to stay with utility overrides, use the numeric override scale inste
 | `ofh-u-font-size-h2` | `ofh-u-font-size-32` | switches up at tablet instead of desktop |
 | `ofh-u-font-size-h3` | `ofh-u-font-size-24` | mobile line-height differs |
 | `ofh-u-font-size-h4` | `ofh-u-font-size-22` | mobile line-height differs |
-| `ofh-u-font-size-h5` | `ofh-u-font-size-19` | tablet size differs |
+| `ofh-u-font-size-h5` | `ofh-u-font-size-20` | mobile and tablet values differ |
 | `ofh-u-font-size-lead` | `ofh-u-font-size-24` | mobile line-height differs |
-| `ofh-u-font-size-paragraph` | `ofh-u-font-size-19` | mobile and tablet values differ |
+| `ofh-u-font-size-paragraph` | `ofh-u-font-size-20` | mobile and tablet values differ |
 | `ofh-u-font-size-paragraph-small` | `ofh-u-font-size-16` | mobile value differs |
-| `ofh-u-font-size-list` | `ofh-u-font-size-19` | mobile and tablet values differ |
+| `ofh-u-font-size-list` | `ofh-u-font-size-20` | mobile and tablet values differ |
 | `ofh-u-font-size-list-small` | `ofh-u-font-size-16` | mobile value differs |
 
 #### 5. Recheck semantic classes that stayed public
@@ -492,9 +492,11 @@ That means these classes do not need a rename:
 - `ofh-u-font-size-32`
 - `ofh-u-font-size-24`
 - `ofh-u-font-size-22`
-- `ofh-u-font-size-19`
+- `ofh-u-font-size-20`
 - `ofh-u-font-size-16`
 - `ofh-u-font-size-14`
+
+If you already adopted `ofh-u-font-size-19` from earlier monorepo-line work, rename it to `ofh-u-font-size-20` and visually QA the result. The supported utility set now uses `20`, and both the mobile and tablet-and-up values changed.
 
 They keep the pre-monorepo responsive values and matching line heights, so a class like `ofh-u-font-size-64` still collapses on smaller screens instead of behaving like a fixed `64px` utility.
 
@@ -505,7 +507,7 @@ They keep the pre-monorepo responsive values and matching line heights, so a cla
 | `ofh-u-font-size-32` | `24px / 32px` | `32px / 40px` |
 | `ofh-u-font-size-24` | `20px / 28px` | `24px / 32px` |
 | `ofh-u-font-size-22` | `18px / 28px` | `22px / 32px` |
-| `ofh-u-font-size-19` | `16px / 24px` | `19px / 28px` |
+| `ofh-u-font-size-20` | `18px / 24px` | `20px / 28px` |
 | `ofh-u-font-size-16` | `14px / 24px` | `16px / 24px` |
 | `ofh-u-font-size-14` | `12px / 20px` | `14px / 24px` |
 

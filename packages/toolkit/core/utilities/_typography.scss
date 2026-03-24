@@ -88,13 +88,13 @@ $ofh-typography-utility-scale: (
       line-height: 1.15,
     ),
   ),
-  19: (
+  20: (
     null: (
-      font-size: $ofh-size-16,
+      font-size: $ofh-size-18,
       line-height: $ofh-size-24,
     ),
     tablet: (
-      font-size: 19px,
+      font-size: $ofh-size-20,
       line-height: $ofh-size-28,
     ),
     print: (

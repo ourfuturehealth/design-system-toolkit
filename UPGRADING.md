@@ -35,7 +35,7 @@ Summary:
 - renamed direct typography keys in `ofh-typography-responsive(...)` and `ofh-font(...)`
 - renamed direct heading classes from `l/m/s` to `lg/md/sm`
 - removed legacy direct typography utility aliases such as `ofh-u-font-size-h1`
-- kept the numeric responsive font-size override utilities as the supported override utility surface
+- kept the numeric responsive font-size override utilities as the supported override utility surface, with `ofh-u-font-size-20` replacing `ofh-u-font-size-19`
 - renamed several raw tokens and removed `$ofh-width-page-max`
 
 This is still being released as a minor bump because there are no active consumers on the post-`v3.4.2` monorepo line, but any consumer adopting `v4.5.0` should use the standalone migration guide above.

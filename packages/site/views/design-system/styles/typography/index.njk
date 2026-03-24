@@ -141,17 +141,17 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the font override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-19</code>. They keep the pre-monorepo responsive values so maintainers can choose an override by the expected size.</p>
+  <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-20</code>. They keep the pre-monorepo responsive values so maintainers can choose an override by the expected size.</p>
   <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
-  <p>The class name reflects the tablet-and-up size. Below 641px, the utility collapses to the matching mobile value.</p>
+  <p>The class name reflects the tablet-and-desktop size. On mobile, the utility collapses to the matching smaller value.</p>
 
   <table class="ofh-table">
     <caption class="ofh-table__caption">Responsive font size override scale</caption>
     <thead class="ofh-table__head">
       <tr class="ofh-table__row">
         <th class="ofh-table__header" scope="col">Class</th>
-        <th class="ofh-table__header" scope="col">641px and above</th>
-        <th class="ofh-table__header" scope="col">Below 641px</th>
+        <th class="ofh-table__header" scope="col">Tablet and desktop (641px and above)</th>
+        <th class="ofh-table__header" scope="col">Mobile (below 641px)</th>
       </tr>
     </thead>
     <tbody class="ofh-table__body">
@@ -181,9 +181,9 @@
         <td class="ofh-table__cell">18px / 28px</td>
       </tr>
       <tr class="ofh-table__row">
-        <td class="ofh-table__cell"><code>ofh-u-font-size-19</code></td>
-        <td class="ofh-table__cell">19px / 28px</td>
-        <td class="ofh-table__cell">16px / 24px</td>
+        <td class="ofh-table__cell"><code>ofh-u-font-size-20</code></td>
+        <td class="ofh-table__cell">20px / 28px</td>
+        <td class="ofh-table__cell">18px / 24px</td>
       </tr>
       <tr class="ofh-table__row">
         <td class="ofh-table__cell"><code>ofh-u-font-size-16</code></td>

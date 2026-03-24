@@ -212,7 +212,7 @@ Find out more about the card component and when to use it in the [design system 
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
         <p class="ofh-heading-xl ofh-u-margin-bottom-4">91 <span class="ofh-u-visually-hidden">Applicants</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state" style="display:block">Applicants</a>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state" style="display:block">Applicants</a>
       </div>
     </div>
   </li>
@@ -220,7 +220,7 @@ Find out more about the card component and when to use it in the [design system 
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
         <p class="ofh-heading-xl ofh-u-margin-bottom-4">23 <span class="ofh-u-visually-hidden">Jobs</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Jobs</a>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Jobs</a>
       </div>
     </div>
   </li>
@@ -228,7 +228,7 @@ Find out more about the card component and when to use it in the [design system 
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
         <p class="ofh-heading-xl ofh-u-margin-bottom-4">8 <span class="ofh-u-visually-hidden">Services</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Services</a>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Services</a>
       </div>
     </div>
   </li>
@@ -236,7 +236,7 @@ Find out more about the card component and when to use it in the [design system 
     <div class="ofh-card ofh-card--clickable">
       <div class="ofh-card__content">
         <p class="ofh-heading-xl ofh-u-margin-bottom-4">33 <span class="ofh-u-visually-hidden">Messages</span></p>
-        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state">Messages</a>
+        <a href="#" class="ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state">Messages</a>
       </div>
     </div>
   </li>
@@ -327,25 +327,25 @@ Find out more about the card component and when to use it in the [design system 
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Applicants</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">91 <span class=\"ofh-u-visually-hidden\">Applicants</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Applicants</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Jobs</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">23 <span class=\"ofh-u-visually-hidden\">Jobs</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Jobs</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Services</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">8 <span class=\"ofh-u-visually-hidden\">Services</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Services</a>"
     }) }}
   </li>
   <li class="ofh-grid-column-one-quarter ofh-card-group__item">
     {{ card({
       "clickable": "true",
-      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-19 ofh-link--no-visited-state\">Messages</a>"
+      "headingHtml": "<p class=\"ofh-heading-xl ofh-u-margin-bottom-4\">33 <span class=\"ofh-u-visually-hidden\">Messages</span></p><a href=\"#\" class=\"ofh-card__link ofh-u-font-weight-normal ofh-u-font-size-20 ofh-link--no-visited-state\">Messages</a>"
     }) }}
   </li>
 </ul>

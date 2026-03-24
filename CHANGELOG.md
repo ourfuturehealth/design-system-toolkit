@@ -25,7 +25,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Replaced direct typography alias usage across toolkit and site source with Figma-aligned typography keys such as `heading-lg`, `paragraph-md`, and `list-sm`
 - Renamed the direct heading class surface from `.ofh-heading-l/.m/.s` to `.ofh-heading-lg/.md/.sm`
 - Updated spacing documentation and examples to teach the horizontal and vertical responsive spacing scales directly
-- Updated typography documentation and examples to teach the Figma-aligned direct heading classes and mixin keys, while keeping numeric responsive font-size override utilities for consumers
+- Updated typography documentation and examples to teach the Figma-aligned direct heading classes and mixin keys, while keeping numeric responsive font-size override utilities for consumers and replacing `ofh-u-font-size-19` with `ofh-u-font-size-20`
 
 ##### Removed
 
