@@ -110,7 +110,7 @@
 }
 
 .autocomplete__menu--with-suggestions .autocomplete__option:first-of-type {
-  border-top-width: $ofh-stroke-weight-1;
+  border-top-width: 0;
 }
 
 .autocomplete__menu:not(.autocomplete__menu--with-suggestions) .autocomplete__option:first-of-type {
