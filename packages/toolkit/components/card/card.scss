@@ -31,14 +31,14 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__content--dismissible {
-  padding-right: calc(#{$ofh-size-16} + #{$ofh-size-32} + #{$ofh-size-8});
+  padding-right: $ofh-size-64;
 
   @include mq($from: tablet) {
-    padding-right: calc(#{$ofh-size-24} + #{$ofh-size-32} + #{$ofh-size-8});
+    padding-right: $ofh-size-80;
   }
 
   @include mq($from: desktop) {
-    padding-right: calc(#{$ofh-size-32} + #{$ofh-size-32} + #{$ofh-size-8});
+    padding-right: $ofh-size-96;
   }
 }
 
@@ -150,20 +150,18 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   border-radius: $ofh-radius-circular;
   color: $ofh-color-foreground-primary;
   cursor: pointer;
-  padding: $ofh-size-8;
+  padding: $ofh-size-16;
   position: absolute;
-  right: calc(#{$ofh-size-16} - #{$ofh-size-8});
-  top: calc(#{$ofh-size-16} - #{$ofh-size-8});
+  right: 0;
+  top: 0;
   z-index: 1;
 
   @include mq($from: tablet) {
-    right: calc(#{$ofh-size-24} - #{$ofh-size-8});
-    top: calc(#{$ofh-size-24} - #{$ofh-size-8});
+    padding: $ofh-size-24;
   }
 
   @include mq($from: desktop) {
-    right: calc(#{$ofh-size-32} - #{$ofh-size-8});
-    top: calc(#{$ofh-size-32} - #{$ofh-size-8});
+    padding: $ofh-size-32;
   }
 
   &:focus {
