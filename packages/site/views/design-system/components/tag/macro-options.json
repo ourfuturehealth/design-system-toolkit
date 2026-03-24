@@ -3,14 +3,14 @@
     {
       "name": "text",
       "type": "string",
-      "required": false,
-      "description": "Text to use within the tag component. If `html` is provided, the `text` argument will be ignored."
+      "required": true,
+      "description": "If `html` is set, this is not required. Text to use within the tag component. If `html` is provided, the `text` argument will be ignored."
     },
     {
       "name": "html",
       "type": "string",
-      "required": false,
-      "description": "HTML to use within the tag component. If `html` is provided, it takes precedence over `text`."
+      "required": true,
+      "description": "If `text` is set, this is not required. HTML to use within the tag component. If `html` is provided, the `text` argument will be ignored."
     },
     {
       "name": "classes",

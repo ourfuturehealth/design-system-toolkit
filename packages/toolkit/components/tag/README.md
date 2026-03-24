@@ -72,8 +72,8 @@ The tag Nunjucks macro takes the following arguments:
 
 | Name             | Type     | Required  | Description |
 | -----------------|----------|-----------|-------------|
-| text             | string   | No        | Text to use within the tag component. If `html` is provided, the `text` argument will be ignored. |
-| html             | string   | No        | HTML to use within the tag component. If `html` is provided, it takes precedence over `text`. |
+| text             | string   | Yes       | If `html` is set, this is not required. Text to use within the tag component. If `html` is provided, the `text` argument will be ignored. |
+| html             | string   | Yes       | If `text` is set, this is not required. HTML to use within the tag component. If `html` is provided, the `text` argument will be ignored. |
 | classes          | string   | No        | Optional additional classes to add to the tag. Use `ofh-tag--neutral`, `ofh-tag--brand`, `ofh-tag--blue`, `ofh-tag--green`, `ofh-tag--yellow`, or `ofh-tag--red` for the supported colour variants. `ofh-tag--grey` is deprecated. |
 | attributes       | object   | No        | HTML attributes (for example data attributes) to add to the tag. |
 
