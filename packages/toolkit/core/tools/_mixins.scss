@@ -194,8 +194,8 @@
 }
 
 @mixin card-panel-body() {
-  @include ofh-responsive-padding(5, 'vertical');
-  @include ofh-responsive-padding(6, 'horizontal');
+  @include ofh-responsive-padding(16, 'vertical');
+  @include ofh-responsive-padding(24, 'horizontal');
   @include top-and-bottom();
 
   width: 100%;
@@ -205,14 +205,14 @@
 // The label overlaps the content box using a negative bottom margin.
 
 @mixin card-heading-label($heading-background-color, $heading-text-color) {
-  @include ofh-typography-responsive('h3');
+  @include ofh-typography-responsive('heading-md');
   @include ofh-responsive-margin(0, 'bottom', $adjustment: $ofh-size-24 * -1);
 
   align-items: center;
   background-color: $heading-background-color;
   color: $heading-text-color;
   display: flex;
-  padding: ofh-spacing(3) ofh-spacing(6);
+  padding: $ofh-size-8 $ofh-size-32;
   position: relative;
   z-index: 2;
 

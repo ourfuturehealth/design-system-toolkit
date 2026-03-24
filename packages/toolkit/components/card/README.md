@@ -40,9 +40,9 @@ Find out more about the Card component and when to use it in the [design system 
 }) }}
 ```
 
-### Card with status icon
+### Basic card with icon
 
-[Preview the basic success card](https://ourfuturehealth.github.io/design-system-toolkit/components/card/basic-success-card.html)
+[Preview the basic card with icon](https://ourfuturehealth.github.io/design-system-toolkit/components/card/basic-card-with-icon.html)
 
 #### Nunjucks macro
 
