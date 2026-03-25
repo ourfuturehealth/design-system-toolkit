@@ -59,6 +59,8 @@ Important constraints:
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
 - Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
+- Treat raw JSON controls for stable nested props as implementation misses when the story could reasonably offer clearer text/select/boolean controls instead.
+- Treat controls for values the component visibly ignores or overrides as implementation misses to be fixed before QA is considered complete.
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.

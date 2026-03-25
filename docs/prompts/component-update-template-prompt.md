@@ -454,6 +454,7 @@ it('should be keyboard accessible', async () => {
 - ✅ Proper argTypes documentation
 - ✅ Component description from design system
 - ✅ Auto-generated prop table (via TypeScript)
+- ✅ Story controls that are ergonomic and honest about what the component actually supports
 
 **Story Pattern:**
 
@@ -548,10 +549,21 @@ Review the component's user-facing documentation surfaces and make sure they exp
 - Controls rule:
   - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
   - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
+- For structured or nested props, do not default to raw JSON editing when a clearer control model is available
+  - examples: `tag`, `icon`, `dismissButton`, `actionLink`, `metadataItems`
+  - when the story only needs a stable subset of that object shape, add story-only args such as `tagText`, `tagVariant`, `iconName`, `iconSize`, `actionHref`, or similar and map them to the real prop in `render`
+  - hide the raw object control for that story when the story-only controls are the intended interaction path
+  - only keep raw object editing visible when the JSON shape itself is what consumers need to learn
+- Use the most specific control type available for constrained values
+  - `select`, `radio`, `boolean`, `text`, or `number` instead of generic object editors whenever the value set is finite or easy to model
+- Do not expose controls for prop fields that the component visually ignores or overrides
+  - example: if a component slot forces a fixed icon size or color, do not expose a misleading size or tone control for that story unless the story is explicitly demonstrating that constraint
 - Check for misleading cases such as:
   - `All variants` stories showing one prop panel that does not affect the displayed variants
   - `Keyboard navigation` stories showing controls that do not apply to the demo content
   - multi-example stories where the controls affect none of the rendered examples
+  - nested object props that require raw JSON editing even though the story only needs a text/select/boolean subset
+  - controls for values that appear editable in Storybook but do not produce any visual or behavioral change in the rendered story
 
 **Prop documentation clarity review (MANDATORY):**
 
@@ -586,6 +598,8 @@ Review the component's user-facing documentation surfaces and make sure they exp
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
+- Confirm that structured props are not exposed as raw JSON when a clearer story-specific control model would be more usable
+- Confirm that no story exposes controls for values the component visibly ignores or overrides
 - Confirm that prop descriptions are written in plain language, not just implementation language
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
 
@@ -613,6 +627,8 @@ Before moving to the validation prompt, answer these checks explicitly:
 
 - [ ] Are any Storybook controls misleading for any story?
 - [ ] Does every story have an intentional controls policy?
+- [ ] Are any nested or structured props still exposed as raw JSON even though the story could offer clearer text/select/boolean controls instead?
+- [ ] Do any story controls expose values that the component visually ignores or overrides?
 - [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
