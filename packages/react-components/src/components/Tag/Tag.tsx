@@ -19,7 +19,7 @@ const variantClasses: Record<TagVariant, string> = {
 
 export interface TagProps
   extends Omit<
-    React.HTMLAttributes<HTMLElementTagNameMap['strong']>,
+    React.HTMLAttributes<HTMLElement>,
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
   /**
@@ -33,7 +33,7 @@ export interface TagProps
   /**
    * Ref forwarding for the underlying strong element.
    */
-  ref?: React.Ref<HTMLElementTagNameMap['strong']>;
+  ref?: React.Ref<HTMLElement>;
 }
 
 export const Tag = ({

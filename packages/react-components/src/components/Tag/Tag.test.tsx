@@ -68,7 +68,7 @@ describe('Tag', () => {
   });
 
   it('forwards refs to the strong element', () => {
-    const ref = createRef<HTMLElementTagNameMap['strong']>();
+    const ref = createRef<HTMLElement>();
 
     render(<Tag ref={ref}>Neutral</Tag>);
 
