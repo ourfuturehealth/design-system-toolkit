@@ -67,6 +67,12 @@
           "description": "Icon size. Default: 32."
         },
         {
+          "name": "color",
+          "type": "string",
+          "required": false,
+          "description": "Optional CSS colour value for monochrome icons. Icons with baked-in fills may ignore it."
+        },
+        {
           "name": "title",
           "type": "string",
           "required": false,
@@ -90,13 +96,13 @@
       "name": "dismissButton",
       "type": "object",
       "required": false,
-      "description": "Optional dismiss button configuration. This renders a close button in the card top-right corner.",
+      "description": "Optional dismiss button configuration. This renders a close button in the card top-right corner. Use it to set the accessible label or extra button attributes; it does not change the visible icon.",
       "params": [
         {
           "name": "label",
           "type": "string",
           "required": false,
-          "description": "Accessible label for the dismiss button. Default: `Dismiss card`."
+          "description": "Accessible label announced to assistive technology. Default: `Dismiss card`."
         },
         {
           "name": "attributes",

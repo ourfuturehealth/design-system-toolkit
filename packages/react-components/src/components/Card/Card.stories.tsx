@@ -1,7 +1,120 @@
+import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Card } from './Card';
+import type { TagVariant } from '../Tag';
 
-const meta: Meta<typeof Card> = {
+type CardStoryArgs = ComponentProps<typeof Card> & {
+  tagText?: string;
+  tagVariant?: TagVariant;
+  iconName?: string;
+  iconColor?: string;
+  metadataItem1Icon?: string;
+  metadataItem1Text?: string;
+  metadataItem2Icon?: string;
+  metadataItem2Text?: string;
+  metadataItem3Icon?: string;
+  metadataItem3Text?: string;
+  actionLinkText?: string;
+  actionLinkHref?: string;
+};
+
+const tagVariantOptions: TagVariant[] = [
+  'neutral',
+  'brand',
+  'blue',
+  'green',
+  'yellow',
+  'red',
+];
+
+const iconNameOptions = iconManifest.icons.map(({ name }) => name);
+
+const renderCard = ({
+  tagText,
+  tagVariant = 'blue',
+  iconName,
+  iconColor,
+  metadataItem1Icon,
+  metadataItem1Text,
+  metadataItem2Icon,
+  metadataItem2Text,
+  metadataItem3Icon,
+  metadataItem3Text,
+  actionLinkText,
+  actionLinkHref,
+  dismissButton,
+  tag,
+  icon,
+  metadataItems,
+  actionLink,
+  ...args
+}: CardStoryArgs) => {
+  const resolvedTag =
+    tagText !== undefined
+      ? tagText
+        ? { children: tagText, variant: tagVariant }
+        : undefined
+      : tag;
+  const resolvedIcon = iconName
+    ? {
+        ...icon,
+        name: iconName,
+        size: 32 as const,
+        color: iconColor,
+      }
+    : icon;
+  const resolvedMetadataItems =
+    metadataItem1Text !== undefined ||
+    metadataItem2Text !== undefined ||
+    metadataItem3Text !== undefined
+      ? [
+          metadataItem1Text
+            ? {
+                icon: metadataItem1Icon ?? 'FmdGoodOutlined',
+                text: metadataItem1Text,
+              }
+            : null,
+          metadataItem2Text
+            ? {
+                icon: metadataItem2Icon ?? 'CalendarTodayOutlined',
+                text: metadataItem2Text,
+              }
+            : null,
+          metadataItem3Text
+            ? {
+                icon: metadataItem3Icon ?? 'AccessTime',
+                text: metadataItem3Text,
+              }
+            : null,
+        ].filter((item) => item !== null)
+      : metadataItems;
+  const resolvedActionLink =
+    actionLinkText !== undefined || actionLinkHref !== undefined
+      ? actionLinkText && actionLinkHref
+        ? {
+            ...actionLink,
+            text: actionLinkText,
+            href: actionLinkHref,
+          }
+        : undefined
+      : actionLink;
+
+  return (
+    <div style={{ maxWidth: '32rem' }}>
+      <Card
+        {...args}
+        dismissButton={dismissButton}
+        tag={resolvedTag}
+        icon={resolvedIcon}
+        metadataItems={resolvedMetadataItems}
+        actionLink={resolvedActionLink}
+      />
+    </div>
+  );
+};
+
+const meta: Meta<CardStoryArgs> = {
   title: 'Components/Card/Basic',
   component: Card,
   parameters: {
@@ -68,12 +181,12 @@ const meta: Meta<typeof Card> = {
     icon: {
       control: 'object',
       description:
-        'Optional trailing icon shown to the right of the card content, for example a success state icon or action arrow.',
+        'Optional trailing icon shown to the right of the card content. The card keeps this slot at a fixed 32px size. Monochrome icons can be tinted with `icon.color`, while icons with baked-in fills keep their own colours.',
     },
     dismissButton: {
-      control: 'object',
+      control: false,
       description:
-        'Optional dismiss button configuration. This renders a close button in the card top-right corner.',
+        'Optional dismiss button configuration. This renders a close button in the card top-right corner. The label is announced to assistive technology, but does not change the visible icon.',
     },
     number: {
       control: 'text',
@@ -172,11 +285,7 @@ export const BasicDismissible: Story = {
       label: 'Dismiss update message',
     },
   },
-  render: (args) => (
-    <div style={{ maxWidth: '32rem' }}>
-      <Card {...args} />
-    </div>
-  ),
+  render: renderCard,
 };
 
 export const BasicDismissibleWithImage: Story = {
@@ -191,35 +300,44 @@ export const BasicDismissibleWithImage: Story = {
       label: 'Dismiss guidance update',
     },
   },
-  render: (args) => (
-    <div style={{ maxWidth: '32rem' }}>
-      <Card {...args} />
-    </div>
-  ),
+  render: renderCard,
 };
 
 export const BasicWithIcon: Story = {
   args: {
     heading: 'Profile complete',
     description: 'You’ve completed all the required profile details.',
+    iconName: 'Done',
+    iconColor: '#00725F',
+  },
+  argTypes: {
     icon: {
-      name: 'Done',
-      size: 32,
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    iconName: {
+      control: 'select',
+      options: iconNameOptions,
+      description:
+        'Glyph name for the fixed 32px trailing icon slot.',
+    },
+    iconColor: {
+      control: 'color',
+      description:
+        'Colour applied to monochrome icons in the trailing slot. Icons with baked-in fills may ignore it.',
     },
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Use the `icon` prop to add a supporting icon to a basic card. Success is one common use, but the same pattern can support other short icon-led messages too.',
+          'Use the `icon` prop to add a supporting icon to a basic card. Success is one common use, but the same pattern can support other short icon-led messages too. This story lets you swap the glyph and tint monochrome icons, while the Card component keeps the trailing icon slot at its built-in 32px size.',
       },
     },
   },
-  render: (args) => (
-    <div style={{ maxWidth: '32rem' }}>
-      <Card {...args} />
-    </div>
-  ),
+  render: renderCard,
 };
 
 export const Clickable: Story = {
@@ -242,44 +360,150 @@ export const ClickableAction: Story = {
     variant: 'clickable',
     href: '#card-action',
     heading: 'Introduction to care and support',
-    tag: {
-      children: 'New',
-      variant: 'blue',
-    },
+    tagText: 'New',
+    tagVariant: 'blue',
     description:
       'A quick guide for people who have care and support needs and their carers.',
-    metadataItems: [
-      { icon: 'FmdGoodOutlined', text: 'Online' },
-      { icon: 'CalendarTodayOutlined', text: 'Updated today' },
-      { icon: 'AccessTime', text: '5 minute read' },
-    ],
+    metadataItem1Icon: 'FmdGoodOutlined',
+    metadataItem1Text: 'Online',
+    metadataItem2Icon: 'CalendarTodayOutlined',
+    metadataItem2Text: 'Updated today',
+    metadataItem3Icon: 'AccessTime',
+    metadataItem3Text: '5 minute read',
     helperText: 'Recommended for new participants.',
+    iconName: 'ArrowCircleRightColour',
+    iconColor: '#FFC62C',
+  },
+  argTypes: {
+    tag: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    tagText: {
+      control: 'text',
+      description: 'Text content for the supporting tag.',
+    },
+    tagVariant: {
+      control: 'select',
+      options: tagVariantOptions,
+      description: 'Visual style variant for the tag.',
+    },
     icon: {
-      name: 'ArrowCircleRightColour',
-      size: 32,
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    metadataItems: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    metadataItem1Icon: {
+      control: 'select',
+      options: iconNameOptions,
+      description: 'Icon for the first metadata row.',
+    },
+    metadataItem1Text: {
+      control: 'text',
+      description: 'Text for the first metadata row.',
+    },
+    metadataItem2Icon: {
+      control: 'select',
+      options: iconNameOptions,
+      description: 'Icon for the second metadata row.',
+    },
+    metadataItem2Text: {
+      control: 'text',
+      description: 'Text for the second metadata row.',
+    },
+    metadataItem3Icon: {
+      control: 'select',
+      options: iconNameOptions,
+      description: 'Icon for the third metadata row.',
+    },
+    metadataItem3Text: {
+      control: 'text',
+      description: 'Text for the third metadata row.',
+    },
+    iconName: {
+      control: 'select',
+      options: iconNameOptions,
+      description:
+        'Trailing icon glyph from the toolkit icon set.',
+    },
+    iconColor: {
+      control: 'color',
+      description:
+        'Colour applied to monochrome trailing icons. Icons with baked-in fills, such as `ArrowCircleRightColour`, may ignore it.',
     },
   },
-  render: (args) => (
-    <div style={{ maxWidth: '32rem' }}>
-      <Card {...args} />
-    </div>
-  ),
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'This story exposes simpler controls for the nested tag, metadata rows, and trailing icon props. The tag can be edited as text plus variant, the metadata rows can be edited without raw JSON, and the trailing icon control lets you change the glyph and tint monochrome icons while the Card component keeps that slot at its built-in 32px size.',
+      },
+    },
+  },
+  render: renderCard,
 };
 
 export const ClickableNumeric: Story = {
   args: {
     variant: 'clickable',
     number: '12',
-    actionLink: {
-      text: 'Open tasks',
-      href: '#card-numeric',
+    actionLinkText: 'Open tasks',
+    actionLinkHref: '#card-numeric',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'This story uses simple text controls for the numeric action link instead of exposing the nested `actionLink` object directly.',
+      },
     },
   },
-  render: (args) => (
-    <div style={{ maxWidth: '20rem' }}>
-      <Card {...args} />
-    </div>
-  ),
+  argTypes: {
+    actionLink: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    actionLinkText: {
+      control: 'text',
+      description: 'Link text for the numeric card action.',
+    },
+    actionLinkHref: {
+      control: 'text',
+      description: 'Destination for the numeric card action link.',
+    },
+  },
+  render: ({
+    actionLinkText,
+    actionLinkHref,
+    actionLink,
+    ...args
+  }) => {
+    const resolvedActionLink =
+      actionLinkText && actionLinkHref
+        ? {
+            ...actionLink,
+            text: actionLinkText,
+            href: actionLinkHref,
+          }
+        : undefined;
+
+    return (
+      <div style={{ maxWidth: '20rem' }}>
+        <Card {...args} actionLink={resolvedActionLink} />
+      </div>
+    );
+  },
 };
 
 export const WithImage: Story = {

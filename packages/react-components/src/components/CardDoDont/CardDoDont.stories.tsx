@@ -1,7 +1,43 @@
+import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CardDoDont } from './CardDoDont';
 
-const meta: Meta<typeof CardDoDont> = {
+type CardDoDontStoryArgs = ComponentProps<typeof CardDoDont> & {
+  itemsText?: string;
+};
+
+const defaultDoItems = [
+  'cover blisters that are likely to burst with a soft plaster or dressing',
+  'wash your hands before touching a burst blister',
+  'allow the fluid to drain before covering it',
+  'keep the area clean and dry while it heals',
+];
+
+const defaultDontItems = [
+  'burst a blister yourself',
+  'peel the skin off a burst blister',
+  'wear the shoes or use the equipment that caused your blister until it heals',
+  'ignore signs that it may be infected',
+];
+
+const renderCardDoDont = ({ itemsText, items, ...args }: CardDoDontStoryArgs) => {
+  const resolvedItems =
+    itemsText !== undefined
+      ? itemsText
+          .split('\n')
+          .map((item) => item.trim())
+          .filter(Boolean)
+          .map((item) => ({ item }))
+      : items;
+
+  return (
+    <div style={{ width: '26.5rem' }}>
+      <CardDoDont {...args} items={resolvedItems} />
+    </div>
+  );
+};
+
+const meta: Meta<CardDoDontStoryArgs> = {
   title: 'Components/Card/Do & Don’t',
   component: CardDoDont,
   parameters: {
@@ -34,6 +70,11 @@ const meta: Meta<typeof CardDoDont> = {
     items: {
       control: 'object',
       description: 'Array of list items rendered in the card body.',
+    },
+    itemsText: {
+      control: 'text',
+      description:
+        'List items as newline-separated text for this story. Each non-empty line becomes one bullet.',
     },
     classes: {
       control: false,
@@ -68,35 +109,33 @@ type Story = StoryObj<typeof meta>;
 export const Do: Story = {
   args: {
     type: 'do',
-    items: [
-      { item: 'cover blisters that are likely to burst with a soft plaster or dressing' },
-      { item: 'wash your hands before touching a burst blister' },
-      { item: 'allow the fluid to drain before covering it' },
-      { item: 'keep the area clean and dry while it heals' },
-    ],
+    itemsText: defaultDoItems.join('\n'),
   },
-  render: (args) => (
-    <div style={{ width: '26.5rem' }}>
-      <CardDoDont {...args} />
-    </div>
-  ),
+  argTypes: {
+    items: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+  },
+  render: renderCardDoDont,
 };
 
 export const Dont: Story = {
   args: {
     type: 'dont',
-    items: [
-      { item: 'burst a blister yourself' },
-      { item: 'peel the skin off a burst blister' },
-      { item: 'wear the shoes or use the equipment that caused your blister until it heals' },
-      { item: 'ignore signs that it may be infected' },
-    ],
+    itemsText: defaultDontItems.join('\n'),
   },
-  render: (args) => (
-    <div style={{ width: '26.5rem' }}>
-      <CardDoDont {...args} />
-    </div>
-  ),
+  argTypes: {
+    items: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+  },
+  render: renderCardDoDont,
 };
 
 export const BothLists: Story = {
@@ -109,21 +148,11 @@ export const BothLists: Story = {
     <div style={{ display: 'grid', gap: '2.5rem', width: '26.5rem' }}>
       <CardDoDont
         type="do"
-        items={[
-          { item: 'cover blisters that are likely to burst with a soft plaster or dressing' },
-          { item: 'wash your hands before touching a burst blister' },
-          { item: 'allow the fluid to drain before covering it' },
-          { item: 'keep the area clean and dry while it heals' },
-        ]}
+        items={defaultDoItems.map((item) => ({ item }))}
       />
       <CardDoDont
         type="dont"
-        items={[
-          { item: 'burst a blister yourself' },
-          { item: 'peel the skin off a burst blister' },
-          { item: 'wear the shoes or use the equipment that caused your blister until it heals' },
-          { item: 'ignore signs that it may be infected' },
-        ]}
+        items={defaultDontItems.map((item) => ({ item }))}
       />
     </div>
   ),

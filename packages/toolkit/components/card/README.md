@@ -55,7 +55,8 @@ Find out more about the Card component and when to use it in the [design system 
   description: 'You’ve completed all the required profile details.',
   icon: {
     name: 'Done',
-    size: 32
+    size: 32,
+    color: '#00725F'
   }
 }) }}
 ```
@@ -72,8 +73,8 @@ Find out more about the Card component and when to use it in the [design system 
 | `href` | string | No | Primary card link URL. |
 | `description` | string | No | Plain text body copy. |
 | `descriptionHtml` | string | No | HTML body content. |
-| `icon` | object | No | Trailing icon configuration. |
-| `dismissButton` | object | No | Dismiss button configuration. This renders a close button in the card top-right corner. |
+| `icon` | object | No | Trailing icon configuration. The card keeps the trailing icon slot at 32px; use `icon.color` to tint monochrome icons when needed. |
+| `dismissButton` | object | No | Dismiss button configuration. This renders a close button in the card top-right corner. Use it to set the accessible label or extra button attributes; it does not change the visible icon. |
 | `number` | string | No | Large numeric value for dashboard-style cards. |
 | `tag` | object | No | Tag macro options passed through to the tag component. |
 | `metadataItems` | array | No | Metadata rows with icon and text. |

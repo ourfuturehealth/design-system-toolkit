@@ -7,6 +7,7 @@ export interface OfhIconProps {
   name: string;
   size?: OfhIconSize;
   title?: string;
+  color?: string;
   classes?: string;
   attributes?: React.SVGAttributes<SVGSVGElement>;
   spritePath?: string;

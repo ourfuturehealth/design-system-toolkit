@@ -143,6 +143,20 @@ describe('Card', () => {
     expect(document.querySelector('.ofh-card__icon')).toBeInTheDocument();
   });
 
+  it('applies a custom colour to monochrome trailing icons', () => {
+    render(
+      <Card
+        heading="Profile complete"
+        description="All required information is now saved."
+        icon={{ name: 'Done', color: '#00725F' }}
+      />,
+    );
+
+    expect(document.querySelector('.ofh-card__icon')).toHaveStyle({
+      color: 'rgb(0, 114, 95)',
+    });
+  });
+
   it('forwards ref to the card root element', () => {
     const ref = createRef<HTMLDivElement>();
 

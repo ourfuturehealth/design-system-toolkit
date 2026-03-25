@@ -255,6 +255,7 @@ export const Card = ({
               name={icon.name}
               size={icon.size ?? 32}
               title={icon.title}
+              color={icon.color}
               classes={joinClasses('ofh-card__icon', icon.classes)}
               attributes={icon.attributes}
             />

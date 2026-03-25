@@ -21,6 +21,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Realigned the base `card` component to the current Figma structure across basic, dismissible, clickable, clickable-action, clickable-numeric, and icon-led variants
 - Updated the Card family after the v4.5.0 spacing and typography hard cut, including responsive token alignment and shared labelled-panel spacing
 - Aligned the dismissible Card hit-zone with the latest Figma corner-target model
+- Updated Card trailing icons to be neutral by default and support an explicit colour override for monochrome icons
 - Preserved legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
 - Updated Card-family documentation and examples to prefer the new Card family macros and options
 - Refined Card-family docs clarity across site docs, macro options, toolkit READMEs, and Storybook-facing guidance
@@ -39,8 +40,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 ##### Changed
 
 - Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
-- Updated React Card to reuse the public `Tag` component API for nested tags instead of the previous internal helper
 - Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
+- Updated Card icon stories to expose glyph and colour controls that match the current component behavior
 
 ### 2026-03-24
 
