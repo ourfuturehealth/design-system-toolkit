@@ -31,22 +31,20 @@
 }
 
 .ofh-card-do-dont__items {
+  @include ofh-responsive-gap-y(16);
+
   display: flex;
   flex-direction: column;
-  gap: $ofh-size-8;
   list-style: none;
   margin: 0;
   padding: 0;
-
-  @include mq($from: desktop) {
-    gap: $ofh-size-16;
-  }
 }
 
 .ofh-card-do-dont__item {
+  @include ofh-responsive-gap-x(8);
+
   align-items: flex-start;
   display: flex;
-  gap: $ofh-size-8;
   margin-bottom: 0;
 }
 

@@ -40,27 +40,20 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card__content--with-aside,
 .ofh-card.ofh-card__with-icon > .ofh-card__content {
+  @include ofh-responsive-gap-x(32);
+
   align-items: center;
   display: flex;
-  gap: $ofh-size-16;
-
-  @include mq($from: tablet) {
-    gap: $ofh-size-32;
-  }
 }
 
 .ofh-card__main {
+  @include ofh-responsive-gap-y(16);
   @include top-and-bottom();
 
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: $ofh-size-8;
   min-width: 0;
-
-  @include mq($from: desktop) {
-    gap: $ofh-size-16;
-  }
 }
 
 .ofh-card__heading {
@@ -100,15 +93,17 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__metadata-list {
+  @include ofh-responsive-gap-y(8);
+
   display: flex;
   flex-direction: column;
-  gap: $ofh-size-8;
 }
 
 .ofh-card__metadata-item {
+  @include ofh-responsive-gap-x(8);
+
   align-items: center;
   display: flex;
-  gap: $ofh-size-8;
 }
 
 .ofh-card__metadata-icon-container {
