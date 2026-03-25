@@ -4,10 +4,9 @@ import {
   joinClasses,
   type HeadingLevel,
   type OfhIconProps,
-  type OfhTagProps,
 } from '../../internal/ofhUtils';
+import { Tag, type TagProps } from '../Tag';
 import { OfhIcon } from '../../internal/OfhIcon';
-import { OfhTag } from '../../internal/OfhTag';
 
 const interactiveSelector =
   'a, button, input, select, textarea, summary, [role="button"], [role="link"]';
@@ -29,7 +28,7 @@ export interface CardActionLink {
   attributes?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
 }
 
-export type CardTag = OfhTagProps;
+export type CardTag = Omit<TagProps, 'ref'>;
 export type CardIcon = OfhIconProps;
 
 export interface CardProps
@@ -197,7 +196,7 @@ export const Card = ({
 
           {number ? <p className="ofh-card__number">{number}</p> : null}
 
-          {tag ? <OfhTag {...tag} /> : null}
+          {tag ? <Tag {...tag} /> : null}
 
           {renderDescription()}
 

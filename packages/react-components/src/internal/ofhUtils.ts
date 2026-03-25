@@ -12,13 +12,6 @@ export interface OfhIconProps {
   spritePath?: string;
 }
 
-export interface OfhTagProps {
-  text?: React.ReactNode;
-  html?: string;
-  classes?: string;
-  attributes?: React.HTMLAttributes<HTMLElement>;
-}
-
 export const joinClasses = (
   ...classes: Array<string | false | null | undefined>
 ) => classes.filter(Boolean).join(' ');

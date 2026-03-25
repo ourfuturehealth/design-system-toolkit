@@ -83,7 +83,7 @@ const meta: Meta<typeof Card> = {
     tag: {
       control: 'object',
       description:
-        'Optional contextual tag shown above the body copy, for example `New`.',
+        'Optional contextual tag shown above the body copy. This uses the React `Tag` API, for example `children`, `variant`, and `className`.',
     },
     metadataItems: {
       control: 'object',
@@ -243,8 +243,8 @@ export const ClickableAction: Story = {
     href: '#card-action',
     heading: 'Introduction to care and support',
     tag: {
-      text: 'New',
-      classes: 'ofh-tag--blue',
+      children: 'New',
+      variant: 'blue',
     },
     description:
       'A quick guide for people who have care and support needs and their carers.',

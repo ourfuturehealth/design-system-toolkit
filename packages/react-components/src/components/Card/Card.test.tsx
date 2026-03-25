@@ -125,7 +125,7 @@ describe('Card', () => {
         heading="Profile complete"
         description="All required information is now saved."
         icon={{ name: 'Done', size: 32 }}
-        tag={{ text: 'New', classes: 'ofh-tag--blue' }}
+        tag={{ children: 'New', variant: 'blue' }}
         metadataItems={[
           { icon: 'AccessTime', text: '5 minute read' },
           { icon: 'CalendarTodayOutlined', text: 'Updated today' },
@@ -134,7 +134,7 @@ describe('Card', () => {
       />,
     );
 
-    expect(screen.getByText('New')).toHaveClass('ofh-tag');
+    expect(screen.getByText('New')).toHaveClass('ofh-tag', 'ofh-tag--blue');
     expect(screen.getByText('5 minute read')).toBeInTheDocument();
     expect(screen.getByText('Updated today')).toBeInTheDocument();
     expect(
