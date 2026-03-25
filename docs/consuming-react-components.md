@@ -17,18 +17,18 @@ Currently, the React components are not published to npm registry. Install direc
 ### Using pnpm (recommended)
 
 ```bash
-pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.4.0:packages/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
 ```
 
 ### Using npm
 
 ```bash
-npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.4.0:packages/react-components
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
 ```
 
 ### Version Pinning
 
-- **Production**: Use specific version tags (e.g., `#react-v0.4.0`)
+- **Production**: Use specific version tags (e.g., `#react-v0.5.0`)
 - **Development**: You can use `#main:packages/react-components` but ensure your lockfile pins a specific commit
 
 **package.json example:**
@@ -36,7 +36,7 @@ npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-syst
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.4.0:packages/react-components",
+    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -113,6 +113,7 @@ The React components package currently provides the following components:
 - `Button` - Call-to-action buttons and links
 - `TextInput` - Text input fields with hint and error support
 - `ErrorSummary` - Page-level validation summaries with linked errors
+- `Tag` - Status tags aligned with toolkit Tag variants
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists

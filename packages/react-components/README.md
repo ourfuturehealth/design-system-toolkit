@@ -7,13 +7,13 @@ React component library for the OFH Design System.
 Install from the monorepo using a package-specific Git tag and subdirectory.
 
 ```bash
-pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.4.0:packages/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
 ```
 
 or
 
 ```bash
-npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.4.0:packages/react-components
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
 ```
 
 ## Usage
@@ -115,6 +115,8 @@ A content-presentation card for summary, status, and next-step content.
 - `icon`, `dismissButton`, `number`, `tag`
 - `metadataItems`, `helperText`, `helperHtml`, `actionLink`
 - `imgURL`, `imgALT`
+
+`tag` uses the React `Tag` component API, so nested tag content is passed with `children` plus optional Tag props such as `variant` and `className`.
 
 ### CardCallout
 
