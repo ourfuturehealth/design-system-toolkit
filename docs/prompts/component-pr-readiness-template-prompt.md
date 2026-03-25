@@ -53,6 +53,8 @@ Workflow I want you to follow:
    - confirm deprecated compatibility paths exist only where intended
    - confirm toolkit vs React consumer expectations are documented clearly
    - confirm Storybook controls policy and prop docs are still coherent after any late changes
+   - if the component was touched by a spacing/typography token migration, do a final spot-check for same-number static-token substitutions where Figma expected responsive tokens
+   - do a final spot-check for accidental semantic-element inheritance (`p`, `ul`, `li`, `h*`, `a`) that may have reintroduced wrong spacing or typography
    - identify any temporary internal adapters or dependency workarounds that were introduced because a reusable component was missing or not ready
    - if any remain, either remove them or document them explicitly as follow-up debt
    - add or refresh migration guidance if the branch changes APIs, names, routes, or recommended usage

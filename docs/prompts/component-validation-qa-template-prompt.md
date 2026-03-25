@@ -37,6 +37,7 @@ Workflow I want you to follow:
    - exact Storybook docs/story URLs
    - a short pass/fail table
    - any Figma comparison notes I should keep in mind
+   - any breakpoint-specific token expectations I should keep in mind for mobile / tablet / desktop
 4. Then walk me through that QA script one step at a time.
 5. After each step, stop and wait for my response in the format:
    - `pass`
@@ -58,6 +59,7 @@ Important constraints:
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
 - Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
+- Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.

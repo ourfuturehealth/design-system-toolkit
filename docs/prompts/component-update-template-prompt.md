@@ -71,6 +71,14 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
   - Typography tokens
   - Interactive states (hover, focus, active, disabled)
   - Accessibility annotations
+- Build a **token translation table** for the component before implementation:
+  - list each meaningful subelement (container, header/label, body, list, helper text, link/action, icon gap, hit target, etc.)
+  - record the exact Figma token used for spacing, typography, radius, border, and icon sizing
+  - mark each token as `static` or `responsive`
+  - record the actual mobile / tablet / desktop values when the token is responsive
+- Do not assume that a same-number static token is equivalent to a responsive Figma token
+  - example: `ofh/space/vertical/16` is **not** automatically the same as `$ofh-size-16`
+  - example: `paragraph/md` in Figma should map to the responsive typography mixin, not rely on inherited browser or global text styles
 
 ### 2. Current Implementation Review
 
@@ -82,6 +90,10 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - Review `{component-name}.js` (if exists) - behavior
 - Review `README.md` - documentation completeness
 - Review `tests/integration/{component-name}.test.js` (if exists)
+- Review how the component interacts with **global semantic element styles**
+  - check `p`, `ul`, `ol`, `li`, `h1-h6`, `a`, `button`, and similar elements used inside the component
+  - identify where the component is intentionally relying on global typography or list spacing
+  - identify where those inherited styles must be overridden to match Figma exactly
 
 **React (`packages/react-components/src/components/{ComponentName}/`):**
 
@@ -160,12 +172,24 @@ Review the entire component implementation against design system standards:
 - [ ] All border-radius values → Check against `$ofh-radius-*` tokens
 - [ ] All border widths → Check against `$ofh-stroke-weight-*` tokens
 - [ ] All shadow values → Check against `$ofh-shadow-*` tokens
+- [ ] For every spacing and typography token in Figma, map it to the **correct code primitive**:
+  - responsive spacing helper
+  - responsive typography mixin
+  - static size token
+  - iconography token
+- [ ] Do not replace responsive Figma tokens with same-number static tokens just because the desktop value matches
+- [ ] Audit invisible layout/hit-area spacing too, not just visible padding and icon size
+- [ ] Audit semantic-element inheritance:
+  - check whether global `ul > li`, `p`, `h*`, or link styles are adding margins/typography the component did not ask for
+  - add explicit overrides when Figma requires component-specific spacing or typography
 
 **Responsive Pattern Audit:**
 
 - [ ] Manual media queries for spacing → Check if `@include ofh-responsive-padding/margin()` can be used
 - [ ] Manual media queries for typography → Check if responsive typography mixin handles this
 - [ ] Inconsistent breakpoint usage → Check against `$ofh-breakpoints`
+- [ ] When a responsive helper **cannot** express the exact Figma values, document why and use explicit breakpoint rules intentionally
+- [ ] Verify every responsive token hotspot at mobile, tablet, and desktop instead of only checking the desktop screenshot
 
 **Focus State Audit:**
 
@@ -577,6 +601,8 @@ Before moving to the validation prompt, answer these checks explicitly:
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+- [ ] Has every meaningful spacing/typography token from Figma been checked against the actual mobile / tablet / desktop values in code?
+- [ ] Have semantic-element defaults (`p`, `ul`, `li`, `h*`, `a`) been checked so the component is not accidentally inheriting the wrong margins or typography?
 
 If any answer is "no", fix it before moving to the QA prompt.
 
@@ -614,6 +640,7 @@ pnpm storybook
 3. Test with screen reader (if complex component)
 4. Visual comparison with Figma specs
 5. Test in `example-react-consumer-app`
+6. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
 
 ### Documentation Review
 
