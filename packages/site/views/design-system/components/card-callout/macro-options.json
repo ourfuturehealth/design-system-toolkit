@@ -1,0 +1,52 @@
+{
+  "params": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "description": "Text shown in the colored label block for the Card / Callout. Ignored if `headingHtml` is provided."
+    },
+    {
+      "name": "headingHtml",
+      "type": "string",
+      "required": false,
+      "description": "HTML to use inside the heading."
+    },
+    {
+      "name": "headingLevel",
+      "type": "integer",
+      "required": false,
+      "description": "Optional semantic heading level for the label. Default: 3. This changes the HTML heading tag, not the visual styling."
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "description": "Visual variant: `info`, `error`, `success` or `warning`. Default: `info`."
+    },
+    {
+      "name": "html",
+      "type": "string",
+      "required": false,
+      "description": "HTML to use inside the callout body. When this is provided, it replaces `text`."
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Plain text to use inside the callout body. Ignored if `html` is provided."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the root Card / Callout element."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes to add to the root Card / Callout element, for example an `id`, `data-*` attribute or `aria-*` attribute."
+    }
+  ]
+}

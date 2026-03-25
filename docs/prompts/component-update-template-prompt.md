@@ -71,6 +71,14 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
   - Typography tokens
   - Interactive states (hover, focus, active, disabled)
   - Accessibility annotations
+- Build a **token translation table** for the component before implementation:
+  - list each meaningful subelement (container, header/label, body, list, helper text, link/action, icon gap, hit target, etc.)
+  - record the exact Figma token used for spacing, typography, radius, border, and icon sizing
+  - mark each token as `static` or `responsive`
+  - record the actual mobile / tablet / desktop values when the token is responsive
+- Do not assume that a same-number static token is equivalent to a responsive Figma token
+  - example: `ofh/space/vertical/16` is **not** automatically the same as `$ofh-size-16`
+  - example: `paragraph/md` in Figma should map to the responsive typography mixin, not rely on inherited browser or global text styles
 
 ### 2. Current Implementation Review
 
@@ -82,6 +90,10 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - Review `{component-name}.js` (if exists) - behavior
 - Review `README.md` - documentation completeness
 - Review `tests/integration/{component-name}.test.js` (if exists)
+- Review how the component interacts with **global semantic element styles**
+  - check `p`, `ul`, `ol`, `li`, `h1-h6`, `a`, `button`, and similar elements used inside the component
+  - identify where the component is intentionally relying on global typography or list spacing
+  - identify where those inherited styles must be overridden to match Figma exactly
 
 **React (`packages/react-components/src/components/{ComponentName}/`):**
 
@@ -162,12 +174,24 @@ Review the entire component implementation against design system standards:
 - [ ] All border-radius values → Check against `$ofh-radius-*` tokens
 - [ ] All border widths → Check against `$ofh-stroke-weight-*` tokens
 - [ ] All shadow values → Check against `$ofh-shadow-*` tokens
+- [ ] For every spacing and typography token in Figma, map it to the **correct code primitive**:
+  - responsive spacing helper
+  - responsive typography mixin
+  - static size token
+  - iconography token
+- [ ] Do not replace responsive Figma tokens with same-number static tokens just because the desktop value matches
+- [ ] Audit invisible layout/hit-area spacing too, not just visible padding and icon size
+- [ ] Audit semantic-element inheritance:
+  - check whether global `ul > li`, `p`, `h*`, or link styles are adding margins/typography the component did not ask for
+  - add explicit overrides when Figma requires component-specific spacing or typography
 
 **Responsive Pattern Audit:**
 
 - [ ] Manual media queries for spacing → Check if `@include ofh-responsive-padding/margin()` can be used
 - [ ] Manual media queries for typography → Check if responsive typography mixin handles this
 - [ ] Inconsistent breakpoint usage → Check against `$ofh-breakpoints`
+- [ ] When a responsive helper **cannot** express the exact Figma values, document why and use explicit breakpoint rules intentionally
+- [ ] Verify every responsive token hotspot at mobile, tablet, and desktop instead of only checking the desktop screenshot
 
 **Focus State Audit:**
 
@@ -430,6 +454,7 @@ it('should be keyboard accessible', async () => {
 - ✅ Proper argTypes documentation
 - ✅ Component description from design system
 - ✅ Auto-generated prop table (via TypeScript)
+- ✅ Story controls that are ergonomic and honest about what the component actually supports
 
 **Story Pattern:**
 
@@ -524,10 +549,21 @@ Review the component's user-facing documentation surfaces and make sure they exp
 - Controls rule:
   - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
   - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
+- For structured or nested props, do not default to raw JSON editing when a clearer control model is available
+  - examples: `tag`, `icon`, `dismissButton`, `actionLink`, `metadataItems`
+  - when the story only needs a stable subset of that object shape, add story-only args such as `tagText`, `tagVariant`, `iconName`, `iconSize`, `actionHref`, or similar and map them to the real prop in `render`
+  - hide the raw object control for that story when the story-only controls are the intended interaction path
+  - only keep raw object editing visible when the JSON shape itself is what consumers need to learn
+- Use the most specific control type available for constrained values
+  - `select`, `radio`, `boolean`, `text`, or `number` instead of generic object editors whenever the value set is finite or easy to model
+- Do not expose controls for prop fields that the component visually ignores or overrides
+  - example: if a component slot forces a fixed icon size or color, do not expose a misleading size or tone control for that story unless the story is explicitly demonstrating that constraint
 - Check for misleading cases such as:
   - `All variants` stories showing one prop panel that does not affect the displayed variants
   - `Keyboard navigation` stories showing controls that do not apply to the demo content
   - multi-example stories where the controls affect none of the rendered examples
+  - nested object props that require raw JSON editing even though the story only needs a text/select/boolean subset
+  - controls for values that appear editable in Storybook but do not produce any visual or behavioral change in the rendered story
 
 **Prop documentation clarity review (MANDATORY):**
 
@@ -562,6 +598,8 @@ Review the component's user-facing documentation surfaces and make sure they exp
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
+- Confirm that structured props are not exposed as raw JSON when a clearer story-specific control model would be more usable
+- Confirm that no story exposes controls for values the component visibly ignores or overrides
 - Confirm that prop descriptions are written in plain language, not just implementation language
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
 
@@ -589,10 +627,14 @@ Before moving to the validation prompt, answer these checks explicitly:
 
 - [ ] Are any Storybook controls misleading for any story?
 - [ ] Does every story have an intentional controls policy?
+- [ ] Are any nested or structured props still exposed as raw JSON even though the story could offer clearer text/select/boolean controls instead?
+- [ ] Do any story controls expose values that the component visually ignores or overrides?
 - [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+- [ ] Has every meaningful spacing/typography token from Figma been checked against the actual mobile / tablet / desktop values in code?
+- [ ] Have semantic-element defaults (`p`, `ul`, `li`, `h*`, `a`) been checked so the component is not accidentally inheriting the wrong margins or typography?
 
 If any answer is "no", fix it before moving to the QA prompt.
 
@@ -630,6 +672,7 @@ pnpm storybook
 3. Test with screen reader (if complex component)
 4. Visual comparison with Figma specs
 5. Test in `example-react-consumer-app`
+6. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
 
 ### Documentation Review
 

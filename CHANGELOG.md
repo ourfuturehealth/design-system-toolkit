@@ -6,6 +6,43 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-25
+
+#### @ourfuturehealth/toolkit 4.7.0 (`toolkit-v4.7.0`)
+
+##### Added
+
+- Dedicated `card-callout` and `card-do-dont` toolkit components aligned to the current Card family structure
+- Dismissible-with-image Card examples in the docs site and examples index
+- Responsive `gap-x`, `gap-y`, and `gap` spacing helpers for flex/grid component work
+
+##### Changed
+
+- Realigned the base `card` component to the current Figma structure across basic, dismissible, clickable, clickable-action, clickable-numeric, and icon-led variants
+- Updated the Card family after the v4.5.0 spacing and typography hard cut, including responsive token alignment and shared labelled-panel spacing
+- Aligned the dismissible Card hit-zone with the latest Figma corner-target model
+- Updated Card trailing icons to be neutral by default and support an explicit colour override for monochrome icons
+- Preserved legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
+- Updated Card-family documentation and examples to prefer the new Card family macros and options
+- Refined Card-family docs clarity across site docs, macro options, toolkit READMEs, and Storybook-facing guidance
+
+#### @ourfuturehealth/react-components 0.5.0 (`react-v0.5.0`)
+
+##### Added
+
+- New Card family components using the current API only:
+  - `Card`
+  - `CardCallout`
+  - `CardDoDont`
+- Storybook coverage for base Card variants, Card / Callout, and Card / Do & Don’t
+- Unit and accessibility coverage for the Card family
+
+##### Changed
+
+- Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
+- Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
+- Updated Card icon stories to expose glyph and colour controls that match the current component behavior
+
 ### 2026-03-24
 
 #### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)

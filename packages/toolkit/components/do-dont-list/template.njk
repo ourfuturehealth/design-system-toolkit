@@ -1,20 +1,16 @@
-{% from '../icon/macro.njk' import icon %}
+{% from '../card-do-dont/macro.njk' import cardDoDont %}
 
-{% set headingLevel = params.headingLevel if params.headingLevel else 3 %}
-<div class="ofh-do-dont-list
-{%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
-  <h{{ headingLevel }} class="ofh-do-dont-list__label">{{ params.title }}</h{{ headingLevel }}>
-  <ul class="ofh-list {% if params.type == 'tick' %}ofh-list--tick{% else %}ofh-list--cross{% endif %}">
-    {%- for data in params.items %}
-    <li>
-    {%- if params.type == 'cross' %}
-      {{ icon({ "name": "Close", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--cross" }) }}
-    {%- else %}
-      {{ icon({ "name": "Done", "size": 32, "classes": "ofh-do-dont-list__icon ofh-do-dont-list__icon--tick" }) }}
-    {%- endif %}
-      {% if params.type == 'cross' %}{% if not params.hidePrefix %}do not {% endif %}{% endif %}{{ data.item | safe}}
-    </li>
-    {%- endfor %}
-  </ul>
-</div>
+{{ cardDoDont({
+  "type": "dont" if params.type == "cross" else "do",
+  "heading": params.title,
+  "headingLevel": params.headingLevel,
+  "items": params.items,
+  "hidePrefix": params.hidePrefix if params.hidePrefix is defined else false,
+  "classes": params.classes,
+  "attributes": params.attributes,
+  "rootAliasClass": "ofh-do-dont-list",
+  "labelAliasClass": "ofh-do-dont-list__label",
+  "contentAliasClass": "ofh-do-dont-list__content",
+  "iconAliasClass": "ofh-do-dont-list__icon",
+  "iconAliasVariantClass": "ofh-do-dont-list__icon--cross" if params.type == "cross" else "ofh-do-dont-list__icon--tick"
+}) }}

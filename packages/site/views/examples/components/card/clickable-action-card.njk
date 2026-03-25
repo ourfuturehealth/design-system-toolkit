@@ -1,0 +1,47 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Clickable action card' %}
+{% from 'card/macro.njk' import card %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          {{ card({
+            "variant": "clickable",
+            "href": "#",
+            "heading": "Introduction to care and support",
+            "headingLevel": "3",
+            "tag": {
+              "text": "New",
+              "classes": "ofh-tag--blue"
+            },
+            "description": "A quick guide for people who have care and support needs and their carers.",
+            "metadataItems": [
+              {
+                "icon": "FmdGoodOutlined",
+                "text": "Online"
+              },
+              {
+                "icon": "CalendarTodayOutlined",
+                "text": "Updated today"
+              },
+              {
+                "icon": "AccessTime",
+                "text": "5 minute read"
+              }
+            ],
+            "helperText": "Recommended for new participants.",
+            "icon": {
+              "name": "ArrowCircleRightColour",
+              "size": 32
+            }
+          }) }}
+        </div>
+      </div>
+    </main>
+  </div>
+
+{% endblock %}

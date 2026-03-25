@@ -4,19 +4,19 @@
 			"name": "element",
 			"type": "string",
 			"required": false,
-			"description": "Whether to use an `input`, `button` or `a` element to create the button. In most cases you will not need to set this as it will be configured automatically if you use `href` or `html`."
+			"description": "Optional element override for the button. In most cases you do not need this because the macro will render an anchor when you pass `href`, or a button when you pass `text` or `html`."
 		},
 		{
 			"name": "text",
 			"type": "string",
 			"required": true,
-			"description": "If `html` is set, this is not required. Text for the button or link. If `html` is provided, the `text` argument will be ignored and `element` will be automatically set to `button` unless `href` is also set, or it has already been defined. This argument has no effect if `element` is set to `input`."
+			"description": "Plain text label for the button or link. Ignored if `html` is provided. This has no effect when `element` is set to `input`."
 		},
 		{
 			"name": "html",
 			"type": "string",
 			"required": true,
-			"description": "If `text` is set, this is not required. HTML for the button or link. If `html` is provided, the `text` argument will be ignored and `element` will be automatically set to `button` unless `href` is also set, or it has already been defined. This argument has no effect if `element` is set to `input`."
+			"description": "Trusted HTML label content for the button or link. When provided it replaces `text`. This has no effect when `element` is set to `input`."
 		},
 		{
 			"name": "name",
@@ -46,19 +46,19 @@
 			"name": "href",
 			"type": "string",
 			"required": false,
-			"description": "The URL that the button should link to. If this is set, `element` will be automatically set to `a` if it has not already been defined."
+			"description": "Navigation destination. When provided, the macro renders an anchor unless you explicitly override `element`."
 		},
 		{
 			"name": "classes",
 			"type": "string",
 			"required": false,
-			"description": "Classes to add to the button component."
+			"description": "Extra classes added to the root element for layout or integration hooks."
 		},
 		{
 			"name": "attributes",
 			"type": "object",
 			"required": false,
-			"description": "HTML attributes (for example data attributes) to add to the button component."
+			"description": "Additional HTML attributes to add to the root element, for example `data-*` or `aria-*` attributes."
 		}
 	]
 }

@@ -1,37 +1,11 @@
 /* ==========================================================================
    COMPONENTS / #DO-DONT-LIST
-   ========================================================================== */
+   ==========================================================================
 
-/**
- * Do and Don't lists help users understand more easily what they should
- * and shouldn't do.
- *
- * 1. Uses @mixin panel-with-label from tools/_mixins.
- * 2. Uses @mixin heading-label from tools/_mixins.
+   Deprecated compatibility wrapper. Styles are provided by card-do-dont.
  */
 
 .ofh-do-dont-list {
-  @include panel-with-label(
-    $ofh-color-greyscale-white,
-    $ofh-color-foreground-primary,
-    $ofh-color-greyscale-5
-  ); /* [1] */
-}
-
-.ofh-do-dont-list__label {
-  @include heading-label($ofh-color-brand-yellow-3-main, $ofh-color-greyscale-white); /* [2] */
-  @include print-color($ofh-color-brand-blue-navy-3-main);
-}
-
-.ofh-do-dont-list__icon {
-  height: 32px;
-  width: 32px;
-}
-
-.ofh-do-dont-list__icon--tick {
-  color: $ofh-color-foreground-feedback-success-2;
-}
-
-.ofh-do-dont-list__icon--cross {
-  color: $ofh-color-foreground-feedback-error-2;
+  @include ofh-responsive-margin(40, 'bottom');
+  @include ofh-responsive-margin(40, 'top');
 }

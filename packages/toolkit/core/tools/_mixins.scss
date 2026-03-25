@@ -155,6 +155,76 @@
   }
 }
 
+// Card family panel with label mixin.
+// Used by CardCallout and CardDoDont to match the newer Figma layout
+// without changing the legacy panel-with-label defaults that tables use.
+
+@mixin card-labelled-panel-root() {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: $ofh-size-24;
+
+  @include mq($media-type: print) {
+    padding-bottom: 0;
+  }
+}
+
+@mixin card-panel-with-label($panel-background-color, $panel-text-color, $panel-border-color) {
+  background-color: $panel-background-color;
+  border: $ofh-stroke-weight-1 solid $panel-border-color;
+  color: $panel-text-color;
+  margin-bottom: $ofh-size-24 * -1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  @include mq($media-type: print) {
+    border: $ofh-stroke-weight-1 solid $ofh-color-foreground-primary;
+    margin-bottom: 0;
+    page-break-inside: avoid;
+  }
+}
+
+@mixin card-panel-spacer() {
+  flex: none;
+  height: $ofh-size-24;
+  width: 100%;
+}
+
+@mixin card-panel-body() {
+  @include ofh-responsive-padding(16, 'vertical');
+  @include ofh-responsive-padding(24, 'horizontal');
+  @include top-and-bottom();
+
+  width: 100%;
+}
+
+// Card family heading label mixin.
+// The label overlaps the content box using a negative bottom margin.
+
+@mixin card-heading-label($heading-background-color, $heading-text-color) {
+  @include ofh-typography-responsive('heading-md');
+  @include ofh-responsive-margin(0, 'bottom', $adjustment: $ofh-size-24 * -1);
+  @include ofh-responsive-padding(8, 'vertical');
+  @include ofh-responsive-padding(24, 'horizontal');
+
+  align-items: center;
+  background-color: $heading-background-color;
+  color: $heading-text-color;
+  display: flex;
+  position: relative;
+  z-index: 2;
+
+  @include mq($media-type: print) {
+    background: none;
+    color: $ofh-color-foreground-primary;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+}
+
 // Care card mixin, used for creating
 // different coloured care cards.
 

@@ -1,0 +1,34 @@
+{% set pageTitle = "Card / Do & Don’t" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Card / Do & Don’t to give users short, scannable recommendations." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "March 2026" %}
+{% set hideDescription = "true" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "card-do-dont",
+    type: "default"
+  }) }}
+
+  <h2>When to use Card / Do &amp; Don’t</h2>
+  <p>Use Card / Do &amp; Don’t to give users short, actionable recommendations that are easier to scan as positive and negative lists.</p>
+
+  <h2>How to use Card / Do &amp; Don’t</h2>
+  <p>Keep each item brief. Dos should usually come before Don’ts, and each list should stay focused on one topic.</p>
+  <p>The heading label defaults to <strong>Do</strong> or <strong>Don’t</strong> based on the card type. Use <code>heading</code> if you need different label text, and use <code>headingLevel</code> if you need that label to fit the page heading hierarchy. Changing <code>headingLevel</code> changes the HTML heading tag, not the visual design.</p>
+  <p>If you only have a single point, consider whether a <a href="/design-system/components/card-callout">Card / Callout</a> or <a href="/design-system/components/inset-text">Inset text</a> would be clearer.</p>
+
+  <h2>Accessibility</h2>
+  <p>Do not rely on the icons alone. The headings and list text must still make sense for users who do not perceive colour or icon shape.</p>
+
+{% endblock %}

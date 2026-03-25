@@ -1,0 +1,40 @@
+{% set pageTitle = "Card / Callout" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Card / Callout to highlight contextual information such as informational, warning, success or error messages." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "March 2026" %}
+{% set hideDescription = "true" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "card-callout",
+    type: "default"
+  }) }}
+
+  <h2>When to use Card / Callout</h2>
+  <p>Use Card / Callout to highlight short, self-contained contextual information that users need to notice while scanning a page.</p>
+
+  <h2>Variants</h2>
+  <p>Use the variant that matches the message:</p>
+  <ul>
+    <li><strong>Info</strong> for helpful context or signposting</li>
+    <li><strong>Warning</strong> for information users should pay attention to before they continue</li>
+    <li><strong>Success</strong> for positive confirmation or completed status</li>
+    <li><strong>Error</strong> for serious or blocking problems</li>
+  </ul>
+
+  <h2>How to use Card / Callout</h2>
+  <p>Keep the heading short and specific. The body should be concise enough that users can understand it quickly without needing surrounding context.</p>
+  <p>The heading label is the text shown in the colored block at the top of the callout. Use <code>headingLevel</code> if you need that label to fit the page heading hierarchy. Changing <code>headingLevel</code> changes the HTML heading tag, not the visual design.</p>
+  <p>If the content is more instructional than contextual, consider whether <a href="/design-system/components/card-do-dont">Card / Do &amp; Don’t</a> or a standard <a href="/design-system/components/card">Card</a> is a better fit.</p>
+
+{% endblock %}

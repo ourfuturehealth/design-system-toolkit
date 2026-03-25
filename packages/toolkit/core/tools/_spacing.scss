@@ -223,3 +223,145 @@
     $adjustment
   );
 }
+
+// Responsive gap
+// ==========================================================================
+
+// Adds responsive row-gap or column-gap by fetching values from the
+// appropriate responsive spacing scale.
+
+// @param {Number} $responsive-spacing-point - Size key from the responsive
+//   spacing scale, corresponds to a map of breakpoints and spacing values
+// @param {String} $property - `row-gap` or `column-gap`
+// @param {Map} $scale - Responsive spacing scale map to read from
+// @param {Boolean} $important [false] - Whether to mark as `!important`
+// @param {Number} $adjustment [false] - Offset to adjust spacing
+
+@mixin _ofh-responsive-gap(
+  $responsive-spacing-point,
+  $property,
+  $scale,
+  $important: false,
+  $adjustment: false
+) {
+  $actual-input-type: meta.type-of($responsive-spacing-point);
+
+  @if $actual-input-type != 'number' {
+    @error 'Expected a number (integer), but got a ' + '#{$actual-input-type}';
+  }
+
+  $spacing-size-key: _ofh-responsive-spacing-size-key($responsive-spacing-point);
+  $scale-map: map.get($scale, $spacing-size-key);
+  $actual-map-type: meta.type-of($scale-map);
+
+  @if $actual-map-type != 'map' {
+    @error 'Expected a map, but got a #{$actual-map-type}. ' + 'Make sure the responsive spacing scale in `_tokens-breakpoint.scss` returns a map for the size key.';
+  }
+
+  @each $breakpoint, $breakpoint-value in $scale-map {
+    @if $adjustment {
+      $breakpoint-value: $breakpoint-value + $adjustment;
+    }
+
+    $breakpoint-value: $breakpoint-value iff($important, !important);
+
+    @if not $breakpoint {
+      #{$property}: $breakpoint-value;
+    } @else {
+      @include govuk-media-query($from: $breakpoint) {
+        #{$property}: $breakpoint-value;
+      }
+    }
+  }
+}
+
+// Responsive gap-y
+// ==========================================================================
+
+// Adds responsive vertical gap using the vertical responsive spacing scale.
+
+// @param {Number} $responsive-spacing-point - Size key from the responsive
+//   spacing scale, corresponds to a map of breakpoints and spacing values
+// @param {Boolean} $important [false] - Whether to mark as `!important`
+// @param {Number} $adjustment [false] - Offset to adjust spacing
+
+// @example scss
+//   .foo {
+//      @include ofh-responsive-gap-y(16);
+//   }
+
+@mixin ofh-responsive-gap-y(
+  $responsive-spacing-point,
+  $important: false,
+  $adjustment: false
+) {
+  @include _ofh-responsive-gap(
+    $responsive-spacing-point,
+    'row-gap',
+    $ofh-space-vertical-responsive-scale,
+    $important,
+    $adjustment
+  );
+}
+
+// Responsive gap-x
+// ==========================================================================
+
+// Adds responsive horizontal gap using the horizontal responsive spacing scale.
+
+// @param {Number} $responsive-spacing-point - Size key from the responsive
+//   spacing scale, corresponds to a map of breakpoints and spacing values
+// @param {Boolean} $important [false] - Whether to mark as `!important`
+// @param {Number} $adjustment [false] - Offset to adjust spacing
+
+// @example scss
+//   .foo {
+//      @include ofh-responsive-gap-x(24);
+//   }
+
+@mixin ofh-responsive-gap-x(
+  $responsive-spacing-point,
+  $important: false,
+  $adjustment: false
+) {
+  @include _ofh-responsive-gap(
+    $responsive-spacing-point,
+    'column-gap',
+    $ofh-space-horizontal-responsive-scale,
+    $important,
+    $adjustment
+  );
+}
+
+// Responsive gap
+// ==========================================================================
+
+// Adds responsive gap to both axes using the corresponding responsive spacing
+// scales for horizontal and vertical spacing.
+
+// @param {Number} $responsive-spacing-point - Size key from the responsive
+//   spacing scale, corresponds to a map of breakpoints and spacing values
+// @param {Boolean} $important [false] - Whether to mark as `!important`
+// @param {Number} $adjustment [false] - Offset to adjust spacing
+
+// @example scss
+//   .foo {
+//      @include ofh-responsive-gap(16);
+//   }
+
+@mixin ofh-responsive-gap(
+  $responsive-spacing-point,
+  $important: false,
+  $adjustment: false
+) {
+  @include ofh-responsive-gap-y(
+    $responsive-spacing-point,
+    $important,
+    $adjustment
+  );
+  @include ofh-responsive-gap-x(
+    $responsive-spacing-point,
+    $important,
+    $adjustment
+  );
+}

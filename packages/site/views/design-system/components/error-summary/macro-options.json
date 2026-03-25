@@ -4,25 +4,25 @@
       "name": "titleText",
       "type": "string",
       "required": true,
-      "description": "If `titleHtml` is set, this is not required. Text to use for the heading of the error summary block. If `titleHtml` is provided, `titleText` will be ignored."
+      "description": "Plain text heading content for the summary. Ignored if `titleHtml` is provided."
     },
     {
       "name": "titleHtml",
       "type": "string",
       "required": true,
-      "description": "If `titleText` is set, this is not required. HTML to use for the heading of the error summary block. If `titleHtml` is provided, `titleText` will be ignored."
+      "description": "Trusted HTML heading content for the summary. When provided it replaces `titleText`."
     },
     {
       "name": "descriptionText",
       "type": "string",
       "required": false,
-      "description": "Text to use for the description of the errors. If you set `descriptionHtml`, the component will ignore `descriptionText`."
+      "description": "Optional plain text description shown below the heading. Ignored if `descriptionHtml` is provided."
     },
     {
       "name": "descriptionHtml",
       "type": "string",
       "required": false,
-      "description": "HTML to use for the description of the errors. If you set this option, the component will ignore `descriptionText`."
+      "description": "Optional trusted HTML description content. When provided it replaces `descriptionText`."
     },
     {
       "name": "errorList",
@@ -60,19 +60,19 @@
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the error-summary container."
+      "description": "Extra classes added to the root element for layout or integration hooks."
     },
     {
       "name": "idPrefix",
       "type": "string",
       "required": false,
-      "description": "Optional prefix used to generate the title id referenced by aria-labelledby. Useful when rendering more than one error summary on the same page."
+      "description": "Optional prefix used to generate the heading id referenced by `aria-labelledby`. Use this when rendering more than one summary on the same page."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to add to the error-summary container."
+      "description": "Additional HTML attributes to add to the root element, for example `data-*` or `aria-*` attributes."
     }
   ]
 }
