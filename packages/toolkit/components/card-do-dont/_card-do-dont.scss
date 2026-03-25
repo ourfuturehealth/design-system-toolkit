@@ -33,16 +33,21 @@
 .ofh-card-do-dont__items {
   display: flex;
   flex-direction: column;
-  gap: $ofh-size-16;
+  gap: $ofh-size-8;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  @include mq($from: desktop) {
+    gap: $ofh-size-16;
+  }
 }
 
 .ofh-card-do-dont__item {
   align-items: flex-start;
   display: flex;
-  gap: $ofh-size-4;
+  gap: $ofh-size-8;
+  margin-bottom: 0;
 }
 
 .ofh-card-do-dont__item-text {
@@ -56,8 +61,8 @@
 
 .ofh-card-do-dont__icon {
   flex: none;
-  height: 32px;
-  width: 32px;
+  height: $ofh-iconography-32;
+  width: $ofh-iconography-32;
 }
 
 .ofh-card-do-dont__icon--do {

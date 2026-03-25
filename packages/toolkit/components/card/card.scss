@@ -34,10 +34,6 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   padding-right: $ofh-size-64;
 
   @include mq($from: tablet) {
-    padding-right: $ofh-size-80;
-  }
-
-  @include mq($from: desktop) {
     padding-right: $ofh-size-96;
   }
 }
@@ -49,10 +45,6 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   gap: $ofh-size-16;
 
   @include mq($from: tablet) {
-    gap: $ofh-size-24;
-  }
-
-  @include mq($from: desktop) {
     gap: $ofh-size-32;
   }
 }
@@ -63,8 +55,12 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: $ofh-size-16;
+  gap: $ofh-size-8;
   min-width: 0;
+
+  @include mq($from: desktop) {
+    gap: $ofh-size-16;
+  }
 }
 
 .ofh-card__heading {
@@ -92,6 +88,10 @@ $card-border-hover-color: $ofh-color-border-card-hover;
   @include ofh-font('paragraph-sm');
 
   margin: 0;
+}
+
+.ofh-card__action {
+  @include ofh-typography-responsive('paragraph-md');
 }
 
 .ofh-card__link,
@@ -128,6 +128,8 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__metadata-text {
+  @include ofh-typography-responsive('paragraph-md');
+
   flex: 1 1 auto;
 }
 
@@ -145,24 +147,18 @@ $card-border-hover-color: $ofh-color-border-card-hover;
 }
 
 .ofh-card__dismiss {
+  @include ofh-responsive-padding(32, 'vertical');
+  @include ofh-responsive-padding(32, 'horizontal');
+
   background: transparent;
   border: 0;
   border-radius: $ofh-radius-circular;
   color: $ofh-color-foreground-primary;
   cursor: pointer;
-  padding: $ofh-size-16;
   position: absolute;
   right: 0;
   top: 0;
   z-index: 1;
-
-  @include mq($from: tablet) {
-    padding: $ofh-size-24;
-  }
-
-  @include mq($from: desktop) {
-    padding: $ofh-size-32;
-  }
 
   &:focus {
     outline: 0;

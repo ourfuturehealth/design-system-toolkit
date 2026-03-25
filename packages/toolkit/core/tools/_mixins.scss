@@ -207,12 +207,13 @@
 @mixin card-heading-label($heading-background-color, $heading-text-color) {
   @include ofh-typography-responsive('heading-md');
   @include ofh-responsive-margin(0, 'bottom', $adjustment: $ofh-size-24 * -1);
+  @include ofh-responsive-padding(8, 'vertical');
+  @include ofh-responsive-padding(24, 'horizontal');
 
   align-items: center;
   background-color: $heading-background-color;
   color: $heading-text-color;
   display: flex;
-  padding: $ofh-size-8 $ofh-size-32;
   position: relative;
   z-index: 2;
 
