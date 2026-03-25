@@ -10,34 +10,32 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 #### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)
 
+##### ⚠️ BREAKING CHANGES
+
+- Tag defaults now align with Figma:
+  - `.ofh-tag` now renders the neutral style by default
+  - `.ofh-tag--grey` is deprecated in favour of `.ofh-tag--neutral`
+  - consumers that relied on the old blue default should move to `.ofh-tag.ofh-tag--blue`
+  - see [Upgrading Guide](UPGRADING.md#upgrading-to-v460--react-v040) for migration steps
+
 ##### Added
 
-- Dedicated `card-callout` and `card-do-dont` toolkit components aligned to the current Card family structure
-- Dismissible-with-image Card examples in the docs site and examples index
+- New `ofh-tag--brand` modifier aligned with the OFH Tag component in Figma
+- Canonical `ofh-tag--neutral` naming for the neutral tag variant
 
 ##### Changed
 
-- Realigned the base `card` component to the current Figma structure across basic, dismissible, clickable, clickable-action, clickable-numeric, and icon-led variants
-- Migrated the Card family to the v4.5.0 spacing and typography API changes after the toolkit hard cut
-- Preserved legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
-- Updated Card-family documentation and examples to prefer the new Card family macros and options
-- Refined Card-family docs clarity across site docs, macro options, and toolkit READMEs
+- Updated Tag typography, spacing, and colour tokens to match the current design spec on top of the v4.5.0 spacing/typography hard cut
+- Refreshed toolkit Tag documentation, examples, and design-system guidance to use the supported Tag variants
+- Preserved docs-site beta banner and example callout styling after the neutral default change
 
 #### @ourfuturehealth/react-components 0.4.0 (`react-v0.4.0`)
 
 ##### Added
 
-- New Card family components using the current API only:
-  - `Card`
-  - `CardCallout`
-  - `CardDoDont`
-- Storybook coverage for base Card variants, Card / Callout, and Card / Do & Don’t
-- Unit and accessibility coverage for the Card family
-
-##### Changed
-
-- Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
-- Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
+- New `Tag` component with a semantic React API based on `variant` and `children`
+- Storybook coverage for default, variant showcase, and usage-example Tag stories
+- Unit and accessibility coverage for variant mapping, children rendering, passthrough props, and ref support
 
 ### 2026-03-19
 

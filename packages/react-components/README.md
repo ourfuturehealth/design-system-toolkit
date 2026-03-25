@@ -25,6 +25,7 @@ import {
   CardCallout,
   CardDoDont,
   ErrorSummary,
+  Tag,
   TextInput,
 } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
@@ -41,6 +42,7 @@ function App() {
           },
         ]}
       />
+      <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
@@ -137,6 +139,16 @@ A card for short do and don’t recommendation lists.
 ### Icons
 
 React components bundle the toolkit icon sprite automatically. Consumers do not need to copy `/assets/icons/icon-sprite.svg` into their own app to render Card icons.
+
+### Tag
+
+A status tag component with a simple React API that maps to the toolkit variants.
+
+**Props:**
+
+- `children`: React.ReactNode
+- `variant`: 'neutral' | 'brand' | 'blue' | 'green' | 'yellow' | 'red'
+- `className`: string
 
 ## Development
 

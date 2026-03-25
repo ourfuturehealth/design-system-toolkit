@@ -32,3 +32,6 @@ export type { CardCalloutProps } from './components/CardCallout';
 
 export { CardDoDont } from './components/CardDoDont';
 export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
+
+export { Tag } from './components/Tag';
+export type { TagProps, TagVariant } from './components/Tag';

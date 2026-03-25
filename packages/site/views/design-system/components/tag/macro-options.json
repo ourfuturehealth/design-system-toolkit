@@ -16,7 +16,7 @@
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the tag."
+      "description": "Classes to add to the tag. Use `ofh-tag--neutral`, `ofh-tag--brand`, `ofh-tag--blue`, `ofh-tag--green`, `ofh-tag--yellow`, or `ofh-tag--red` for the supported colour variants. `ofh-tag--grey` is deprecated and should be replaced with `ofh-tag--neutral`."
     },
     {
       "name": "attributes",

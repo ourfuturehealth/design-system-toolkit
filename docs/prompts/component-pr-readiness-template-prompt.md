@@ -55,6 +55,22 @@ Workflow I want you to follow:
    - confirm Storybook controls policy and prop docs are still coherent after any late changes
    - if the component was touched by a spacing/typography token migration, do a final spot-check for same-number static-token substitutions where Figma expected responsive tokens
    - do a final spot-check for accidental semantic-element inheritance (`p`, `ul`, `li`, `h*`, `a`) that may have reintroduced wrong spacing or typography
+   - confirm release/version metadata is internally consistent wherever this branch claims a release number or tag:
+     - `packages/*/package.json` version fields
+     - `CHANGELOG.md`
+     - `UPGRADING.md`
+     - release/versioning strategy docs
+     - PR title/body if it mentions planned release versions or tags
+   - if docs claim a package release version or tag that is not reflected in the relevant `package.json`, treat that as a PR-readiness failure and fix it before sign-off
+   - if the component was touched by a spacing/typography token migration, do a final spot-check for same-number static-token substitutions where Figma expected responsive tokens
+   - do a final spot-check for accidental semantic-element inheritance (`p`, `ul`, `li`, `h*`, `a`) that may have reintroduced wrong spacing or typography
+   - confirm release/version metadata is internally consistent wherever this branch claims a release number or tag:
+     - `packages/*/package.json` version fields
+     - `CHANGELOG.md`
+     - `UPGRADING.md`
+     - release/versioning strategy docs
+     - PR title/body if it mentions planned release versions or tags
+   - if docs claim a package release version or tag that is not reflected in the relevant `package.json`, treat that as a PR-readiness failure and fix it before sign-off
    - identify any temporary internal adapters or dependency workarounds that were introduced because a reusable component was missing or not ready
    - if any remain, either remove them or document them explicitly as follow-up debt
    - add or refresh migration guidance if the branch changes APIs, names, routes, or recommended usage

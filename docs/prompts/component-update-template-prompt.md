@@ -52,7 +52,7 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 
 1. Analyze current toolkit implementation vs Figma design
 2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS) and polish it
-3. **Ensure React component exists** and matches toolkit exactly (create if missing)
+3. **Ensure React component exists** and reaches feature/functional parity with toolkit (create if missing)
 4. Create/update comprehensive Storybook documentation
 5. Add automated tests (functional + accessibility)
 6. Update all relevant documentation
@@ -100,8 +100,9 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - Check if component exists
 - **If exists:** Review implementation against toolkit parity - note all discrepancies
 - **If missing:** This is a REQUIRED deliverable - you MUST create the React component
-- React component API and functionality must match toolkit exactly
-- Both versions should work the same or as close as possible
+- React component must achieve full feature and behavior parity with toolkit
+- React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
+- Both versions should support the same user-facing capabilities, variants, and behaviors
 
 ### 3. Dependency & Prerequisite Audit
 
@@ -134,6 +135,7 @@ Compare Figma ↔ Toolkit ↔ React:
 - Design token mismatches (colors, spacing, typography)
 - Accessibility requirements not met
 - API inconsistencies
+- React API simplification opportunities where toolkit-style class or macro APIs could become clearer semantic props
 - Documentation gaps
 
 ### 5. Design Token & Pattern Alignment (MANDATORY)
@@ -233,7 +235,7 @@ Review the entire component implementation against design system standards:
 1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
 2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
 3. **React Second:** Create/update React component to match polished toolkit
-4. **Verify Parity:** Both versions have same API, variants, behavior, and functionality
+4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
 
 ### 1. Toolkit Component Update
 
@@ -272,13 +274,17 @@ Review the entire component implementation against design system standards:
 - ✅ **Component must exist** - create from scratch if missing
 - ✅ TypeScript with strict mode
 - ✅ Extend appropriate HTML element props interface
-- ✅ **Match toolkit variants and API exactly** - 1:1 parity required
-- ✅ **Match toolkit functionality** - same behavior, same element selection logic
+- ✅ **Match toolkit functionality and capability** - same supported variants, same behavior, same element selection logic where relevant
+- ✅ Prefer a **simple, idiomatic React API** over a strict mirror of toolkit macro/class APIs
+- ✅ For common visual options, prefer semantic React props such as `variant`, `tone`, `status`, `size`, or similar clear names instead of requiring raw toolkit modifier classes
+- ✅ Internally map React props to toolkit classes where needed
+- ✅ Do not require consumers to know toolkit class names for common usage when a clearer React prop can express the same thing
 - ✅ Reuse toolkit CSS classes (`.ofh-{component}`, `.ofh-{component}--{variant}`)
 - ✅ Native ref for React 19+
 - ✅ Export component and type interfaces
 - ✅ Follow toolkit's element selection logic (e.g., Button with href renders as `<a>`)
 - ✅ All toolkit variants must be supported in React (no subset)
+- ✅ Keep `className` as the standard escape hatch for additional classes; only expose a separate toolkit-style `classes` prop if there is a strong, explicit reason
 
 **Component Pattern (React 19+ with native ref):**
 
@@ -294,7 +300,7 @@ export interface {ComponentName}Props
    * Ref forwarding for the underlying element
    */
   ref?: React.Ref<HTML{ElementType}Element>;
-  // Additional props from Figma
+  // Additional semantic props from Figma/toolkit capabilities
 }
 
 export const {ComponentName} = ({
@@ -386,6 +392,16 @@ export const {ComponentName} = ({
 
 {ComponentName}.displayName = '{ComponentName}';
 ```
+
+**React API design rule (MANDATORY):**
+
+- Feature parity with toolkit is required, but React prop names do **not** need to match toolkit or Nunjucks macro names exactly
+- Prefer idiomatic React APIs that are easy to read and easy to use
+- Examples:
+  - Prefer `<Tag variant="brand" />` over `<Tag classes="ofh-tag--brand" />`
+  - Prefer `children` over macro-style `text`/`html` props when that is the clearer React pattern, unless rich HTML handling or another constraint makes a different API more appropriate
+- If there are multiple reasonable React API shapes, briefly present the tradeoffs and ask the user for steer before locking one in
+- Document the mapping between the React API and toolkit classes/variants in Storybook/docs when useful for maintainers
 
 ### 3. Testing Implementation
 
@@ -668,8 +684,9 @@ pnpm storybook
 - [ ] TypeScript component created/updated
 - [ ] Props interface with proper types
 - [ ] Native ref for React 19+
-- [ ] **Matches toolkit API exactly** (same variants, same props, same behavior)
-- [ ] **Matches toolkit functionality** (same element rendering logic, same validation)
+- [ ] **Matches toolkit functionality/capability** (same variants, same behavior, same element rendering logic where relevant)
+- [ ] React API is idiomatic and easy to use
+- [ ] Common visual/behavior choices use semantic React props rather than requiring toolkit class-name knowledge
 - [ ] Component tests (unit + a11y)
 - [ ] Exported from package index
 
@@ -716,9 +733,11 @@ pnpm storybook
 
 **Critical principles to follow throughout this workflow:**
 
-- **Toolkit + React parity is mandatory**: Never treat React components as "nice to have". Both toolkit and React versions MUST be updated or created. They must work identically with the same API.
+- **Toolkit + React parity is mandatory**: Never treat React components as "nice to have". Both toolkit and React versions MUST be updated or created. They must deliver the same user-facing capabilities and behavior, even if the React API is more idiomatic than the toolkit API.
 
-- **Workflow discipline**: Always complete toolkit implementation first → test thoroughly → polish it → then create/update React component to match. The React component is a faithful wrapper of the toolkit component.
+- **Workflow discipline**: Always complete toolkit implementation first → test thoroughly → polish it → then create/update React component to match in capability. The React component should usually wrap toolkit classes and behavior, but it should expose the clearest React-facing API for consumers.
+
+- **React API simplicity matters**: Prefer semantic React props like `variant`, `size`, `tone`, `status`, or `children` over raw toolkit class-name or macro-style APIs when that makes the component easier to understand and use.
 
 - **When React component is missing**: This is a required deliverable, not optional future work. Create the React component before marking the ticket complete. Reference existing React components for patterns.
 
