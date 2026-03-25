@@ -2,53 +2,56 @@
    #TAG
    ========================================================================== */
 
-/* stylelint-disable color-no-hex */
-
 .ofh-tag {
-  @include ofh-font($size: 'paragraph-sm', $weight: bold, $line-height: 1);
+  @include ofh-font($size: 'paragraph-sm', $weight: bold);
 
-  background-color: $ofh-color-brand-blue-royal-5;
-  color: $ofh-color-greyscale-white;
+  background-color: $ofh-color-background-secondary;
+  box-shadow: inset 0 0 0 $ofh-stroke-weight-1 $ofh-color-border-primary;
+  color: $ofh-color-foreground-secondary;
   display: inline-block;
   outline: 2px solid transparent;
   outline-offset: -2px;
-  padding: $ofh-size-4 $ofh-size-8; /* top right bottom left */
+  padding: $ofh-size-2 $ofh-size-8;
   text-decoration: none;
-}
-
-@media (width >= 40.0625em) {
-  .ofh-tag {
-    font-size: 1rem;
-    line-height: 1;
-  }
 }
 
 /* Colour variants
   ========================================================================== */
 
+.ofh-tag--neutral,
+/* Deprecated alias. Prefer .ofh-tag--neutral. */
 .ofh-tag--grey {
-  background-color: $ofh-color-greyscale-6;
-  color: $ofh-color-greyscale-2;
-  outline: 1px solid $ofh-color-greyscale-4;
-  outline-offset: -1px;
+  background-color: $ofh-color-background-secondary;
+  box-shadow: inset 0 0 0 $ofh-stroke-weight-1 $ofh-color-border-primary;
+  color: $ofh-color-foreground-secondary;
+}
+
+.ofh-tag--brand {
+  background-color: $ofh-color-background-brand-blue-navy-1;
+  box-shadow: none;
+  color: $ofh-color-foreground-primary-inverted;
 }
 
 .ofh-tag--green {
-  background-color: $ofh-color-brand-green-lime-5;
-  color: $ofh-color-brand-green-teal-1;
+  background-color: $ofh-color-background-brand-green-teal;
+  box-shadow: none;
+  color: $ofh-color-foreground-brand-green-teal;
 }
 
 .ofh-tag--blue {
-  background-color: $ofh-color-brand-blue-royal-5;
-  color: $ofh-color-brand-blue-royal-1;
+  background-color: $ofh-color-background-brand-blue-royal;
+  box-shadow: none;
+  color: $ofh-color-foreground-brand-blue-navy;
 }
 
 .ofh-tag--red {
-  background-color: $ofh-color-brand-red-5;
-  color: $ofh-color-brand-red-1;
+  background-color: $ofh-color-background-brand-red;
+  box-shadow: none;
+  color: $ofh-color-foreground-brand-red;
 }
 
 .ofh-tag--yellow {
-  background-color: $ofh-color-brand-yellow-5;
-  color: $ofh-color-brand-orange-1;
+  background-color: $ofh-color-background-brand-yellow;
+  box-shadow: none;
+  color: $ofh-color-foreground-brand-orange;
 }

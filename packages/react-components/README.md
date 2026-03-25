@@ -19,7 +19,7 @@ npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-syst
 ## Usage
 
 ```tsx
-import { Button, ErrorSummary, TextInput } from '@ourfuturehealth/react-components';
+import { Button, ErrorSummary, Tag, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           },
         ]}
       />
+      <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <TextInput id="name" label="Your name" />
     </div>
@@ -90,6 +91,16 @@ An error summary component for page-level validation messages.
 - `classes`: string
 - `attributes`: object
 - `idPrefix`: string
+
+### Tag
+
+A status tag component with a simple React API that maps to the toolkit variants.
+
+**Props:**
+
+- `children`: React.ReactNode
+- `variant`: 'neutral' | 'brand' | 'blue' | 'green' | 'yellow' | 'red'
+- `className`: string
 
 ## Development
 

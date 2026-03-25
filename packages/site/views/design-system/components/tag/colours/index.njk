@@ -10,23 +10,23 @@
   <tbody class="ofh-table__body">
     <tr class="ofh-table__row">
       <td class="ofh-table__cell">
-        <code> ofh-tag--grey </code>
+        <code> ofh-tag--neutral </code>
       </td>
       <td class="ofh-table__cell">
         {{ tag({
           text: "Inactive",
-          classes: "ofh-tag--grey"
+          classes: "ofh-tag--neutral"
         })}}
       </td>
     </tr>
     <tr class="ofh-table__row">
       <td class="ofh-table__cell">
-        <code> ofh-tag--green </code>
+        <code> ofh-tag--brand </code>
       </td>
       <td class="ofh-table__cell">
         {{ tag({
-          text: "In progress",
-          classes: "ofh-tag--green"
+          text: "Beta",
+          classes: "ofh-tag--brand"
         })}}
       </td>
     </tr>
@@ -43,23 +43,34 @@
     </tr>
     <tr class="ofh-table__row">
       <td class="ofh-table__cell">
-        <code> ofh-tag--red </code>
+        <code> ofh-tag--green </code>
       </td>
       <td class="ofh-table__cell">
         {{ tag({
-          text: "Cancelled",
-          classes: "ofh-tag--red"
+          text: "In progress",
+          classes: "ofh-tag--green"
         })}}
       </td>
     </tr>
     <tr class="ofh-table__row">
       <td class="ofh-table__cell">
-        <code> ofh-tag--Yellow </code>
+        <code> ofh-tag--yellow </code>
       </td>
       <td class="ofh-table__cell">
         {{ tag({
           text: "Delayed",
           classes: "ofh-tag--yellow"
+        })}}
+      </td>
+    </tr>
+    <tr class="ofh-table__row">
+      <td class="ofh-table__cell">
+        <code> ofh-tag--red </code>
+      </td>
+      <td class="ofh-table__cell">
+        {{ tag({
+          text: "Urgent",
+          classes: "ofh-tag--red"
         })}}
       </td>
     </tr>

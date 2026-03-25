@@ -6,6 +6,37 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-24
+
+#### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- Tag defaults now align with Figma:
+  - `.ofh-tag` now renders the neutral style by default
+  - `.ofh-tag--grey` is deprecated in favour of `.ofh-tag--neutral`
+  - consumers that relied on the old blue default should move to `.ofh-tag.ofh-tag--blue`
+  - see [Upgrading Guide](UPGRADING.md#upgrading-to-v460--react-v040) for migration steps
+
+##### Added
+
+- New `ofh-tag--brand` modifier aligned with the OFH Tag component in Figma
+- Canonical `ofh-tag--neutral` naming for the neutral tag variant
+
+##### Changed
+
+- Updated Tag typography, spacing, and colour tokens to match the current design spec on top of the v4.5.0 spacing/typography hard cut
+- Refreshed toolkit Tag documentation, examples, and design-system guidance to use the supported Tag variants
+- Preserved docs-site beta banner and example callout styling after the neutral default change
+
+#### @ourfuturehealth/react-components 0.4.0 (`react-v0.4.0`)
+
+##### Added
+
+- New `Tag` component with a semantic React API based on `variant` and `children`
+- Storybook coverage for default, variant showcase, and usage-example Tag stories
+- Unit and accessibility coverage for variant mapping, children rendering, passthrough props, and ref support
+
 ### 2026-03-19
 
 #### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
