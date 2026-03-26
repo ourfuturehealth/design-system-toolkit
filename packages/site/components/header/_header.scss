@@ -30,26 +30,26 @@
  * 9. Use non variable colour to follow NHS England guidelines on logo colour
  * 10. N/A
  * 11. Align close icon with nav item arrow icons
- * 12. Add ofh-spacing(10) to align right and left main nav with header
+ * 12. Add $ofh-size-64 to align right and left main nav with header
  */
 
 .ofh-header-ds {
   @include clearfix();
 
-  background-color: $ofh-color-background-neutral-yellow;
+  background-color: $ofh-color-backgrounds-yellow;
 }
 
 .ofh-header-ds__container {
   @include clearfix();
 
   height: 96px;
-  padding-bottom: ofh-spacing(3);
-  padding-top: ofh-spacing(3);
+  padding-bottom: $ofh-size-8;
+  padding-top: $ofh-size-8;
   position: relative;
 
   @include mq($until: large-desktop) {
     height: 96px;
-    margin-right: ofh-spacing(6);
+    margin-right: $ofh-size-32;
   }
 
   .ofh-grid-row {
@@ -144,7 +144,7 @@
   position: relative;
 
   &.js-show {
-    border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+    border-bottom: $ofh-size-4 solid $ofh-color-backgrounds-yellow; /* [7] */
   }
 
   @include mq($from: tablet) {
@@ -171,7 +171,7 @@
 
   @include mq($from: tablet) {
     float: left;
-    margin-left: ofh-spacing(3);
+    margin-left: $ofh-size-8;
   }
 
 }
@@ -182,8 +182,8 @@
   border-radius: $ofh-radius-4;
   color: $ofh-color-foreground-primary-inverted;
   cursor: pointer;
-  min-height: ofh-spacing(7); /* [2] */
-  padding: ofh-spacing(2) ofh-spacing(3) 0;
+  min-height: $ofh-size-40; /* [2] */
+  padding: $ofh-size-4 $ofh-size-8 0;
   position: absolute;
   right: 0;
   top: 0;
@@ -217,7 +217,7 @@
   @include mq($until: tablet) {
     background-color: $ofh-color-greyscale-white;
     display: flex;
-    padding: ofh-spacing(4);
+    padding: $ofh-size-16;
     width: 100%;
   }
 }
@@ -246,7 +246,7 @@
 .ofh-search-ds__input {
   -webkit-appearance: listbox; /* [5] */
   border-radius: $ofh-radius-4 0 0 $ofh-radius-4;
-  padding: 0 ofh-spacing(4);
+  padding: 0 $ofh-size-16;
 
   &:focus {
     outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
@@ -287,7 +287,7 @@
   @include mq($from: tablet) {
     border: 1px solid $ofh-color-greyscale-white;
     font-size: 16px;
-    height: ofh-spacing(7); /* [2] */
+    height: $ofh-size-40; /* [2] */
     width: 200px; /* [2] */
   }
 
@@ -317,7 +317,7 @@
     background-color: $ofh-color-brand-green-teal-3-main;
     height: 52px; /* [2] */
     margin: 0;
-    padding: ofh-spacing(3) ofh-spacing(3) 0;
+    padding: $ofh-size-8 $ofh-size-8 0;
 
     .ofh-icon__search {
       fill: $ofh-color-greyscale-white;
@@ -348,9 +348,9 @@
   }
 
   @include mq($from: tablet) {
-    background-color: $ofh-color-background-neutral-yellow;
+    background-color: $ofh-color-backgrounds-yellow;
     display: block;
-    height: ofh-spacing(7); /* [2] */
+    height: $ofh-size-40; /* [2] */
     width: 44px; /* [2] */
 
     .ofh-icon__search {
@@ -391,9 +391,9 @@
     border: 0;
     cursor: pointer;
     height: 40px;
-    margin-left: ofh-spacing(3);
-    margin-right: - ofh-spacing(3); /* [11] */
-    margin-top: ofh-spacing(3);
+    margin-left: $ofh-size-8;
+    margin-right: - $ofh-size-8; /* [11] */
+    margin-top: $ofh-size-8;
     overflow: hidden;
     padding: 0;
     width: 40px;
@@ -460,7 +460,7 @@
   font-weight: 400;
   line-height: 24px;
   margin-right: -16px;
-  padding: 7px ofh-spacing(4);
+  padding: 7px $ofh-size-16;
   position: relative;
   text-decoration: none;
   z-index: 1;
@@ -517,12 +517,12 @@
     display: block;
 
     @include mq($until: large-desktop) {
-      border-bottom: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
-      border-top: ofh-spacing(2) solid $ofh-color-background-neutral-yellow; /* [7] */
+      border-bottom: $ofh-size-4 solid $ofh-color-backgrounds-yellow; /* [7] */
+      border-top: $ofh-size-4 solid $ofh-color-backgrounds-yellow; /* [7] */
       color: $ofh-color-foreground-primary;
 
       .ofh-width-container {
-        margin: 0 ofh-spacing(4);
+        margin: 0 $ofh-size-16;
       }
     }
 
@@ -534,17 +534,17 @@
   }
 
   @include mq($from: large-desktop) {
-    background-color: $ofh-color-background-neutral-yellow;
+    background-color: $ofh-color-backgrounds-yellow;
     display: block;
     margin: 0 auto;
-    max-width: $ofh-width-content-max + ofh-spacing(10); /* [12] */
+    max-width: $ofh-width-content-max + $ofh-size-64; /* [12] */
   }
 }
 
 .ofh-header-ds__navigation-title {
   font-weight: $ofh-typography-weight-semibold;
   margin-bottom: 0;
-  padding: ofh-spacing(4);
+  padding: $ofh-size-16;
   position: relative;
 
   @include mq($from: large-desktop) {
@@ -560,8 +560,8 @@
   overflow: hidden;
   padding: 0;
   position: absolute;
-  right: ofh-spacing(3);
-  top: ofh-spacing(3);
+  right: $ofh-size-8;
+  top: $ofh-size-8;
   white-space: nowrap;
   width: 40px;
 
@@ -602,7 +602,7 @@
 }
 
 .ofh-header-ds__navigation-item {
-  border-top: 1px solid $ofh-color-background-neutral-yellow;
+  border-top: 1px solid $ofh-color-backgrounds-yellow;
   margin-bottom: 0;
   position: relative;
 
@@ -618,13 +618,13 @@
 }
 
 .ofh-header-ds__navigation-link {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
-  border-bottom: ofh-spacing(2) solid transparent;
-  border-top: ofh-spacing(2) solid transparent;
+  border-bottom: $ofh-size-4 solid transparent;
+  border-top: $ofh-size-4 solid transparent;
   color: $ofh-color-foreground-primary;
   display: block;
-  padding: 12px ofh-spacing(4);
+  padding: 12px $ofh-size-16;
   text-decoration: none;
 
   @include mq($from: large-desktop) {
@@ -635,7 +635,7 @@
   .ofh-icon__chevron-right {
     fill: $ofh-color-greyscale-4;
     position: absolute;
-    right: ofh-spacing(2);
+    right: $ofh-size-4;
     top: 11px;
   }
 
@@ -697,19 +697,19 @@
 
 .ofh-header-ds__transactional-service-name {
   float: left;
-  padding-left: ofh-spacing(4);
+  padding-left: $ofh-size-16;
   padding-top: 3px;
 
   @include mq($until: large-desktop) {
     padding-left: 0;
-    padding-top: ofh-spacing(3);
+    padding-top: $ofh-size-8;
     width: 100%;
   }
 }
 
 .ofh-header-ds__transactional-service-name--link {
   @include ofh-link-style-light;
-  @include ofh-font($size: lead);
+  @include ofh-font($size: lead-md);
 
   text-decoration: none;
 
@@ -737,7 +737,7 @@
 
 .ofh-header-ds__link--service {
   height: 100%;
-  margin-bottom: -(ofh-spacing(2));
+  margin-bottom: -($ofh-size-4);
   text-decoration: none;
   width: auto;
 
@@ -780,7 +780,7 @@
 }
 
 .ofh-header-ds__service-name {
-  @include ofh-font($size: lead);
+  @include ofh-font($size: lead-md);
 
   color: $ofh-color-foreground-primary-inverted;
   display: block;
@@ -788,7 +788,7 @@
   padding-right: 0;
 
   @include mq($from: large-desktop) {
-    padding-left: ofh-spacing(4);
+    padding-left: $ofh-size-16;
   }
 
   @include mq($until: large-desktop) {
@@ -810,7 +810,7 @@
     }
 
     .ofh-header-ds__service-name {
-      padding-left: ofh-spacing(4);
+      padding-left: $ofh-size-16;
     }
   }
 }
@@ -1056,7 +1056,7 @@
     background-color: $ofh-color-greyscale-white;
 
     .ofh-header__navigation-list {
-      border-top: 1px solid $ofh-color-background-neutral-yellow;
+      border-top: 1px solid $ofh-color-backgrounds-yellow;
     }
 
     .ofh-header__navigation-link {

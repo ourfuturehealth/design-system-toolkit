@@ -201,7 +201,7 @@ class="ofh-u-margin-[direction]-[spacing]"
 #### Custom margins
 
 ```html
-<h1 class="ofh-u-margin-top-2"></h1>
+<h1 class="ofh-u-margin-top-4"></h1>
 ```
 
 ### Prevent text wrapping

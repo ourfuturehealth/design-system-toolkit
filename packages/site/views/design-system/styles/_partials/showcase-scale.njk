@@ -6,12 +6,12 @@
     <thead class="ofh-table__head">
       <tr class="ofh-table__row">
         {% if variant == "spacing" %}
-          <th class="ofh-table__header" scope="col">Step</th>
+          <th class="ofh-table__header" scope="col">Size key</th>
           <th class="ofh-table__header" scope="col">Responsive preview</th>
           <th class="ofh-table__header" scope="col">Mobile</th>
           <th class="ofh-table__header" scope="col">Tablet</th>
           <th class="ofh-table__header" scope="col">Desktop</th>
-          <th class="ofh-table__header" scope="col">Static helper</th>
+          <th class="ofh-table__header" scope="col">Static token</th>
           <th class="ofh-table__header" scope="col">Utility example</th>
         {% else %}
           <th class="ofh-table__header" scope="col">Reference</th>
@@ -37,7 +37,7 @@
             <td class="ofh-table__cell">{{ item.mobile }}</td>
             <td class="ofh-table__cell">{{ item.tablet }}</td>
             <td class="ofh-table__cell">{{ item.desktop }}</td>
-            <td class="ofh-table__cell">{{ item.staticLegacy }}</td>
+            <td class="ofh-table__cell"><code>{{ item.staticToken }}</code></td>
             <td class="ofh-table__cell"><code>{{ item.utilityExample }}</code></td>
           {% else %}
             <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row">{{ item.label }}</th>

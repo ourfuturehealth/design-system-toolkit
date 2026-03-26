@@ -13,56 +13,60 @@ const files = {
   mixins: path.join(toolsDirectory, '_mixins.scss'),
   grid: path.join(toolsDirectory, '_grid.scss'),
   spacingTool: path.join(toolsDirectory, '_spacing.scss'),
+  typographyUtilities: path.join(
+    __dirname,
+    '../../toolkit/core/utilities/_typography.scss',
+  ),
   mainWrapper: path.join(objectsDirectory, '_main-wrapper.scss'),
 };
 
 const typographyRows = [
   {
-    id: 'h1',
+    id: 'heading-xl',
     label: 'Heading XL',
     previewText: 'Page heading',
     className: 'ofh-heading-xl',
-    token: 'h1',
+    scaleKey: 'heading-xl',
     notes: 'Default h1 style.',
   },
   {
-    id: 'h2',
+    id: 'heading-lg',
     label: 'Heading L',
     previewText: 'Section heading',
-    className: 'ofh-heading-l',
-    token: 'h2',
+    className: 'ofh-heading-lg',
+    scaleKey: 'heading-lg',
     notes: 'Default h2 style.',
   },
   {
-    id: 'h3',
+    id: 'heading-md',
     label: 'Heading M',
     previewText: 'Subsection heading',
-    className: 'ofh-heading-m',
-    token: 'h3',
+    className: 'ofh-heading-md',
+    scaleKey: 'heading-md',
     notes: 'Default h3 style.',
   },
   {
-    id: 'h4',
+    id: 'heading-sm',
     label: 'Heading S',
     previewText: 'Support heading',
-    className: 'ofh-heading-s',
-    token: 'h4',
+    className: 'ofh-heading-sm',
+    scaleKey: 'heading-sm',
     notes: 'Default h4 style.',
   },
   {
-    id: 'h5',
+    id: 'heading-xs',
     label: 'Heading XS',
     previewText: 'Small heading',
     className: 'ofh-heading-xs',
-    token: 'h5',
-    notes: 'Used for h5 and h6 utility styles.',
+    scaleKey: 'heading-xs',
+    notes: 'Used for h5, h6, and the smallest heading override.',
   },
   {
     id: 'lead',
     label: 'Lead paragraph',
     previewText: 'Use lead text once to introduce a page.',
     className: 'ofh-body-l',
-    token: 'lead',
+    scaleKey: 'lead-md',
     notes: 'Used by .ofh-body-l and .ofh-lede-text.',
   },
   {
@@ -70,7 +74,7 @@ const typographyRows = [
     label: 'Body',
     previewText: 'Use body copy for most written content.',
     className: 'ofh-body-m',
-    token: 'paragraph',
+    scaleKey: 'paragraph-md',
     notes: 'Default paragraph style.',
   },
   {
@@ -78,7 +82,7 @@ const typographyRows = [
     label: 'Body small',
     previewText: 'Use small body copy sparingly.',
     className: 'ofh-body-s',
-    token: 'paragraph-small',
+    scaleKey: 'paragraph-sm',
     notes: 'Secondary or supporting text.',
   },
   {
@@ -87,8 +91,8 @@ const typographyRows = [
     previewText: 'List item',
     previewHtml: '<ul class="ofh-list app-foundation-showcase__inline-list"><li>List item</li></ul>',
     className: 'ofh-list',
-    token: 'list',
-    notes: 'Bulleted and numbered lists inherit this scale.',
+    scaleKey: 'list-md',
+    notes: 'Bulleted and numbered lists use this responsive list token.',
   },
 ];
 
@@ -308,9 +312,9 @@ const paletteColourGroups = [
   {
     title: 'Neutral backgrounds',
     items: [
-      '$ofh-color-background-neutral-grey',
-      '$ofh-color-background-neutral-blue',
-      '$ofh-color-background-neutral-yellow',
+      '$ofh-color-backgrounds-grey',
+      '$ofh-color-backgrounds-blue',
+      '$ofh-color-backgrounds-yellow',
     ],
   },
 ];
@@ -324,7 +328,8 @@ const indexCards = [
   {
     title: 'Spacing',
     href: '/design-system/styles/spacing',
-    summary: 'The responsive spacing scale, legacy static helper, and spacing utility classes.',
+    summary:
+      'The horizontal and vertical responsive spacing scales, static size tokens, and spacing utility classes.',
   },
   {
     title: 'Layout',
@@ -690,75 +695,116 @@ function needsSwatchBorder(hexValue) {
   return luminance >= 220;
 }
 
-function toBreakpointSummary(scaleEntry) {
+function toBreakpointSummary(scaleEntry, property) {
+  const mobileValue = property ? scaleEntry.null[property] : scaleEntry.null;
+  const tabletValue = property
+    ? (scaleEntry.tablet || scaleEntry.null)[property]
+    : scaleEntry.tablet || scaleEntry.null;
+  const desktopValue = property
+    ? (scaleEntry.desktop || scaleEntry.tablet || scaleEntry.null)[property]
+    : scaleEntry.desktop || scaleEntry.tablet || scaleEntry.null;
+
   return {
-    mobile: scaleEntry.null,
-    tablet: scaleEntry.tablet || scaleEntry.null,
-    desktop: scaleEntry.desktop || scaleEntry.tablet || scaleEntry.null,
+    mobile: mobileValue,
+    tablet: tabletValue,
+    desktop: desktopValue,
   };
 }
 
 function buildTypographyData(registry) {
   const typographyScale = getTokenValue('$ofh-typography-responsive-scale', registry);
+  const utilityScale = getTokenValue('$ofh-typography-utility-scale', registry);
 
   const rows = typographyRows.map((row) => {
-    const scale = typographyScale[row.id];
-    const lineHeight = [
-      `M ${scale.null['line-height']}`,
-      `T ${scale.tablet['line-height']}`,
-      `D ${scale.desktop['line-height']}`,
-    ].join(' / ');
+    const scale = typographyScale[row.scaleKey];
+    const fontSize = toBreakpointSummary(scale, 'font-size');
+    const lineHeight = toBreakpointSummary(scale, 'line-height');
 
     return {
       ...row,
-      mobile: scale.null['font-size'],
-      tablet: scale.tablet['font-size'],
-      desktop: scale.desktop['font-size'],
-      lineHeight,
+      token: row.scaleKey,
+      mobile: fontSize.mobile,
+      tablet: fontSize.tablet,
+      desktop: fontSize.desktop,
+      lineHeight: formatTriplet(lineHeight),
     };
   });
 
   const byId = Object.fromEntries(rows.map((row) => [row.id, row]));
+  const utilityRows = Object.keys(utilityScale)
+    .map((size) => Number.parseInt(size, 10))
+    .sort((first, second) => second - first)
+    .map((size) => {
+      const scale = utilityScale[size];
+      const fontSize = toBreakpointSummary(scale, 'font-size');
+      const lineHeight = toBreakpointSummary(scale, 'line-height');
+
+      return {
+        id: `utility-${size}`,
+        label: `${size}`,
+        previewText: 'Sample text',
+        className: `ofh-u-font-size-${size}`,
+        mobile: fontSize.mobile,
+        tablet: fontSize.tablet,
+        desktop: fontSize.desktop,
+        lineHeight: formatTriplet(lineHeight),
+        notes:
+          fontSize.tablet === fontSize.desktop
+            ? 'Tablet and desktop share the same value.'
+            : 'Utility collapses on smaller screens.',
+      };
+    });
 
   return {
     rows,
     byId,
+    utilityRows,
   };
 }
 
 function buildSpacingData(registry) {
-  const responsiveScale = getTokenValue('$ofh-space-responsive-scale', registry);
-  const staticScale = getTokenValue('$ofh-spacing-points', registry);
-  const orderedSteps = Object.keys(responsiveScale)
+  const horizontalScale = getTokenValue('$ofh-space-horizontal-responsive-scale', registry);
+  const verticalScale = getTokenValue('$ofh-space-vertical-responsive-scale', registry);
+  const orderedSteps = Object.keys(horizontalScale)
     .map((step) => Number.parseInt(step, 10))
     .sort((first, second) => first - second);
 
-  const scale = orderedSteps.map((step) => {
-    const values = toBreakpointSummary(responsiveScale[step]);
-    const staticLegacy = typeof staticScale[step] === 'string' ? staticScale[step] : '—';
+  const toRows = (scale, utilityPrefix) =>
+    orderedSteps.map((step) => {
+      const values = toBreakpointSummary(scale[step]);
 
-    return {
+      return {
+        step,
+        mobile: values.mobile,
+        tablet: values.tablet,
+        desktop: values.desktop,
+        staticToken: `$ofh-size-${step}`,
+        utilityExample: `${utilityPrefix}${step}`,
+      };
+    });
+
+  const byKey = Object.fromEntries(
+    orderedSteps.map((step) => [
       step,
-      mobile: values.mobile,
-      tablet: values.tablet,
-      desktop: values.desktop,
-      staticLegacy,
-      utilityExample: `ofh-u-margin-${step}`,
-    };
-  });
-
-  const byStep = Object.fromEntries(scale.map((item) => [item.step, item]));
+      {
+        step,
+        staticToken: `$ofh-size-${step}`,
+        horizontal: toBreakpointSummary(horizontalScale[step]),
+        vertical: toBreakpointSummary(verticalScale[step]),
+      },
+    ]),
+  );
 
   return {
-    scale,
-    byStep,
+    horizontalScale: toRows(horizontalScale, 'ofh-u-margin-right-'),
+    verticalScale: toRows(verticalScale, 'ofh-u-margin-bottom-'),
+    byKey,
   };
 }
 
 function buildLayoutData(registry) {
   const mqBreakpoints = getTokenValue('$mq-breakpoints', registry);
   const gridWidths = getTokenValue('$_ofh-grid-widths', registry);
-  const pageMaxWidth = getTokenValue('$ofh-width-page-max', registry);
   const contentMaxWidth = getTokenValue('$ofh-width-content-max', registry);
   const readingWidth = extractReadingWidth();
   const mainWrapper = buildMainWrapperData(registry);
@@ -808,14 +854,6 @@ function buildLayoutData(registry) {
       note: 'Used by the default fixed-width container.',
     },
     {
-      id: 'page',
-      label: 'Page max token',
-      className: '$ofh-width-page-max',
-      value: pageMaxWidth,
-      visualPercent: 100,
-      note: 'Available width token for broader page layouts.',
-    },
-    {
       id: 'reading',
       label: 'Reading width',
       className: 'ofh-u-reading-width',
@@ -849,7 +887,7 @@ function extractReadingWidth() {
 
 function buildMainWrapperData(registry) {
   const content = stripBlockComments(readFile(files.mainWrapper));
-  const responsiveScale = getTokenValue('$ofh-space-responsive-scale', registry);
+  const verticalScale = getTokenValue('$ofh-space-vertical-responsive-scale', registry);
 
   const mixinNames = [
     ['govuk-main-wrapper', '.ofh-main-wrapper', 'Base page wrapper for main content.'],
@@ -866,11 +904,15 @@ function buildMainWrapperData(registry) {
 
     return {
       className,
-      top: formatSpacingTriplet(topCall ? responsiveScale[topCall[1]] : null),
-      bottom: formatSpacingTriplet(bottomCall ? responsiveScale[bottomCall[1]] : null),
+      top: formatSpacingTriplet(topCall ? verticalScale[topCall[1]] : null),
+      bottom: formatSpacingTriplet(bottomCall ? verticalScale[bottomCall[1]] : null),
       note,
     };
   });
+}
+
+function formatTriplet(values) {
+  return `M ${values.mobile} / T ${values.tablet} / D ${values.desktop}`;
 }
 
 function formatSpacingTriplet(scaleEntry) {
@@ -878,8 +920,7 @@ function formatSpacingTriplet(scaleEntry) {
     return 'Inherits base spacing';
   }
 
-  const values = toBreakpointSummary(scaleEntry);
-  return `${values.mobile} / ${values.tablet} / ${values.desktop}`;
+  return formatTriplet(toBreakpointSummary(scaleEntry));
 }
 
 function buildIconData(registry) {
@@ -939,6 +980,7 @@ function buildRegistry() {
     ...parseVariables(files.breakpoints),
     ...parseVariables(files.grid),
     ...parseVariables(files.spacingTool),
+    ...parseVariables(files.typographyUtilities),
   };
 }
 

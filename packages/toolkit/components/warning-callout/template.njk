@@ -1,16 +1,21 @@
-{% set headingLevel = params.headingLevel if params.headingLevel else 3 %}
-<div class="ofh-warning-callout
-{%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
-  <h{{ headingLevel }} class="ofh-warning-callout__label">
-    {%- if "Important" in params.heading or "important" in params.heading %}
-    {{ params.heading | safe }}<span class="ofh-u-visually-hidden">:</span>
-    {%- else %}
-    <span role="text">
-      <span class="ofh-u-visually-hidden">Important: </span>
-      {{ params.heading | safe }}
-    </span>
-    {%- endif %}
-  </h{{ headingLevel }}>
-  {{ params.HTML | safe }}
-</div>
+{% from '../card-callout/macro.njk' import cardCallout %}
+
+{% set heading = params.heading if params.heading else 'Important' %}
+{% set visuallyHiddenPrefix = false %}
+
+{% if "Important" not in heading and "important" not in heading %}
+  {% set visuallyHiddenPrefix = 'Important:' %}
+{% endif %}
+
+{{ cardCallout({
+  "heading": heading,
+  "headingLevel": params.headingLevel,
+  "html": params.html if params.html else params.HTML,
+  "classes": params.classes,
+  "attributes": params.attributes,
+  "variant": "warning",
+  "rootAliasClass": "ofh-warning-callout",
+  "labelAliasClass": "ofh-warning-callout__label",
+  "contentAliasClass": "ofh-warning-callout__content",
+  "visuallyHiddenPrefix": visuallyHiddenPrefix
+}) }}

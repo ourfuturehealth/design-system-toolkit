@@ -13,7 +13,7 @@
  */
 
 .ofh-summary-list {
-  @include ofh-font($size: 'paragraph');
+  @include ofh-font($size: 'paragraph-md');
 
   @include mq($from: tablet) {
     display: table;
@@ -23,13 +23,13 @@
 
   margin: 0; /* [2] */
 
-  @include ofh-responsive-margin(7, 'bottom');
+  @include ofh-responsive-margin(32, 'bottom');
 }
 
 .ofh-summary-list__row {
   @include mq($until: tablet) {
     border-bottom: 1px solid $ofh-color-border-primary;
-    margin-bottom: ofh-spacing(4);
+    margin-bottom: $ofh-size-16;
   }
 
   @include mq($from: tablet) {
@@ -46,14 +46,14 @@
   @include mq($from: tablet) {
     border-bottom: 1px solid $ofh-color-border-primary;
     display: table-cell;
-    padding-bottom: ofh-spacing(3);
-    padding-right: ofh-spacing(5);
-    padding-top: ofh-spacing(3);
+    padding-bottom: $ofh-size-8;
+    padding-right: $ofh-size-24;
+    padding-top: $ofh-size-8;
   }
 }
 
 .ofh-summary-list__actions {
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
 
   @include mq($from: tablet) {
     padding-right: 0;
@@ -72,7 +72,7 @@
 .ofh-summary-list__key {
   @include ofh-typography-weight-bold;
 
-  margin-bottom: ofh-spacing(2);
+  margin-bottom: $ofh-size-4;
 
   @include mq($from: tablet) {
     width: 30%;
@@ -81,7 +81,7 @@
 
 .ofh-summary-list__value {
   @include mq($until: tablet) {
-    margin-bottom: ofh-spacing(4);
+    margin-bottom: $ofh-size-16;
   }
 
   @include mq($from: tablet) {
@@ -90,7 +90,7 @@
 }
 
 .ofh-summary-list__value > p {
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
 }
 
 .ofh-summary-list__value > :last-child {
@@ -105,8 +105,8 @@
 
 .ofh-summary-list__actions-list-item {
   display: inline;
-  margin-right: ofh-spacing(3);
-  padding-right: ofh-spacing(3);
+  margin-right: $ofh-size-8;
+  padding-right: $ofh-size-8;
 }
 
 .ofh-summary-list__actions-list-item:not(:last-child) {

@@ -6,33 +6,33 @@
   border-top: 2px solid $ofh-color-brand-blue-royal-3-main;
 
   @include mq($until: desktop) {
-    margin-top: ofh-spacing(8);
+    margin-top: $ofh-size-48;
   }
 }
 
 .ofh-related-nav__heading {
-  @include ofh-typography-responsive(h3, $override-line-height: 1.2);
+  @include ofh-typography-responsive(heading-md, $override-line-height: 1.2);
 
-  margin-bottom: ofh-spacing(4);
-  padding-top: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
+  padding-top: $ofh-size-16;
 }
 
 .ofh-related-nav__heading--small {
-  @include ofh-typography-responsive(lead);
+  @include ofh-typography-responsive(lead-md);
 }
 
 .ofh-related-nav__list {
   list-style: none;
-  margin-bottom: ofh-spacing(4);
-  padding-left: ofh-spacing(0);
+  margin-bottom: $ofh-size-16;
+  padding-left: $ofh-size-0;
 }
 
 .ofh-related-nav__item {
-  @include ofh-typography-responsive(paragraph);
+  @include ofh-typography-responsive(paragraph-md);
 }
 
 .ofh-related-nav__sub-heading {
-  @include ofh-responsive-margin(3, 'bottom');
-  @include ofh-responsive-padding(3, 'top');
-  @include ofh-typography-responsive(lead, $override-line-height: 1.2);
+  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-padding(8, 'top');
+  @include ofh-typography-responsive(lead-md, $override-line-height: 1.2);
 }

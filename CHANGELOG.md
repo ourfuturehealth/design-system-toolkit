@@ -6,6 +6,100 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-25
+
+#### @ourfuturehealth/toolkit 4.7.0 (`toolkit-v4.7.0`)
+
+##### Added
+
+- Dedicated `card-callout` and `card-do-dont` toolkit components aligned to the current Card family structure
+- Dismissible-with-image Card examples in the docs site and examples index
+- Responsive `gap-x`, `gap-y`, and `gap` spacing helpers for flex/grid component work
+
+##### Changed
+
+- Realigned the base `card` component to the current Figma structure across basic, dismissible, clickable, clickable-action, clickable-numeric, and icon-led variants
+- Updated the Card family after the v4.5.0 spacing and typography hard cut, including responsive token alignment and shared labelled-panel spacing
+- Aligned the dismissible Card hit-zone with the latest Figma corner-target model
+- Updated Card trailing icons to be neutral by default and support an explicit colour override for monochrome icons
+- Preserved legacy toolkit APIs such as `warningCallout()`, `list()`, and old Card inputs as deprecated compatibility paths for existing consumers
+- Updated Card-family documentation and examples to prefer the new Card family macros and options
+- Refined Card-family docs clarity across site docs, macro options, toolkit READMEs, and Storybook-facing guidance
+
+#### @ourfuturehealth/react-components 0.5.0 (`react-v0.5.0`)
+
+##### Added
+
+- New Card family components using the current API only:
+  - `Card`
+  - `CardCallout`
+  - `CardDoDont`
+- Storybook coverage for base Card variants, Card / Callout, and Card / Do & Don’t
+- Unit and accessibility coverage for the Card family
+
+##### Changed
+
+- Bundled the toolkit icon sprite for React and Storybook consumers so Card icons render without a separately hosted `/assets/icons/icon-sprite.svg`
+- Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
+- Updated Card icon stories to expose glyph and colour controls that match the current component behavior
+
+### 2026-03-24
+
+#### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- Tag defaults now align with Figma:
+  - `.ofh-tag` now renders the neutral style by default
+  - `.ofh-tag--grey` is deprecated in favour of `.ofh-tag--neutral`
+  - consumers that relied on the old blue default should move to `.ofh-tag.ofh-tag--blue`
+  - see [Upgrading Guide](UPGRADING.md#upgrading-to-v460--react-v040) for migration steps
+
+##### Added
+
+- New `ofh-tag--brand` modifier aligned with the OFH Tag component in Figma
+- Canonical `ofh-tag--neutral` naming for the neutral tag variant
+
+##### Changed
+
+- Updated Tag typography, spacing, and colour tokens to match the current design spec on top of the v4.5.0 spacing/typography hard cut
+- Refreshed toolkit Tag documentation, examples, and design-system guidance to use the supported Tag variants
+- Preserved docs-site beta banner and example callout styling after the neutral default change
+
+#### @ourfuturehealth/react-components 0.4.0 (`react-v0.4.0`)
+
+##### Added
+
+- New `Tag` component with a semantic React API based on `variant` and `children`
+- Storybook coverage for default, variant showcase, and usage-example Tag stories
+- Unit and accessibility coverage for variant mapping, children rendering, passthrough props, and ref support
+
+### 2026-03-19
+
+#### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **Spacing API hard cut to Figma-aligned size keys**
+  - Removed `ofh-spacing(...)`
+  - `ofh-responsive-margin(...)` and `ofh-responsive-padding(...)` now take spacing size keys directly
+  - Spacing utility classes now use spacing size keys as their suffixes
+  - See [UPGRADING.md](UPGRADING.md#upgrading-to-v450) for migration details
+
+##### Changed
+
+- Replaced legacy point-based spacing usage across toolkit and site source with `$ofh-size-*` tokens and Figma-aligned responsive spacing keys
+- Removed legacy spacing helper compatibility and legacy point-based spacing utility generation
+- Replaced direct typography alias usage across toolkit and site source with Figma-aligned typography keys such as `heading-lg`, `paragraph-md`, and `list-sm`
+- Renamed the direct heading class surface from `.ofh-heading-l/.m/.s` to `.ofh-heading-lg/.md/.sm`
+- Updated spacing documentation and examples to teach the horizontal and vertical responsive spacing scales directly
+- Updated typography documentation and examples to teach the Figma-aligned direct heading classes and mixin keys, while keeping numeric responsive font-size override utilities for consumers and replacing `ofh-u-font-size-19` with `ofh-u-font-size-20`
+
+##### Removed
+
+- Direct typography alias support for legacy keys such as `h1`, `lead`, `paragraph`, and `list-small`
+- Legacy direct typography utility aliases such as `.ofh-u-font-size-h1`; use numeric override classes such as `.ofh-u-font-size-64` instead
+
 ### 2026-03-11
 
 #### @ourfuturehealth/toolkit 4.4.0 (`toolkit-v4.4.0`)

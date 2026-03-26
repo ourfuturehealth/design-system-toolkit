@@ -11,7 +11,7 @@
 
   th,
   td {
-    @include ofh-typography-responsive('paragraph-small');
+    @include ofh-typography-responsive('paragraph-sm');
 
     border: 0;
   }
@@ -28,16 +28,16 @@
   border: 1px solid transparent;
   border-radius: 50%;
   display: inline-block;
-  height: ofh-spacing(6);
-  margin-right: ofh-spacing(2);
+  height: $ofh-size-32;
+  margin-right: $ofh-size-4;
   vertical-align: middle;
-  width: ofh-spacing(6);
+  width: $ofh-size-32;
 
   @include mq($until: tablet) {
-    height: ofh-spacing(5);
+    height: $ofh-size-24;
     left: 0;
     position: absolute;
-    width: ofh-spacing(5);
+    width: $ofh-size-24;
   }
 }
 
@@ -52,7 +52,7 @@
 
 .app-colour-list__row {
   .app-colour-list__column {
-    @include ofh-responsive-padding(3);
+    @include ofh-responsive-padding(8);
 
     // Use a dedicated row tint so light swatches (for example #e8e8e8 and #ffffff)
     // remain distinguishable against the documentation surface.

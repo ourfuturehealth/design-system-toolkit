@@ -17,7 +17,7 @@
 
   <ul class="ofh-list app-side-nav__list">
 
-    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-5">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-16">
       <a class="ofh-back-link__link" href="/design-system">
       <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
@@ -71,7 +71,8 @@
   <p class="rich-text"><code>font-family: 'Source Sans Pro', Arial, sans-serif;</code></p>
 
   <h2 id="typescale">Typescale</h2>
-  <p>The responsive type scale is defined in <code>$ofh-typography-responsive-scale</code>. It uses the same named tokens across the toolkit, docs, and utility classes.</p>
+  <p>The responsive type scale is defined in <code>$ofh-typography-responsive-scale</code>. It uses the same named tokens across the toolkit, docs, and published type utilities.</p>
+  <p>Phones and tablets share the same base sizes, and styles step up at the desktop breakpoint where the current token scale defines larger values.</p>
   <p>The matrix below shows the current mobile, tablet, and desktop values behind the published typography utilities.</p>
 
   {% set rows = foundationStyles.typography.rows %}
@@ -88,7 +89,8 @@
   <p>Heading levels have meaning, especially for screen reader users and search engines. Using correct heading levels improves SEO and helps people using assistive technology to navigate through a page.</p>
 
   <h3>Heading overrides</h3>
-  <p>We provide 6 heading utility classes. <code>ofh-heading-xs</code> and <code>ofh-heading-xxs</code> share the same responsive token, but let you style different heading levels consistently.</p>
+  <p>We provide 5 heading utility classes, from <code>ofh-heading-xl</code> to <code>ofh-heading-xs</code>, which can be applied to any heading level.</p>
+  <p><code>h5</code> and <code>h6</code> share the same responsive heading token.</p>
   <p>Always ensure the heading structure is semantically correct, even when you override the visual size.</p>
 
   {{ designExample({
@@ -149,8 +151,17 @@
   <p>You might need to set the font size or font weight of an element outside the predefined heading and paragraph classes. To do this you can use the typography override classes in your HTML or reference the typography mixins in your own components.</p>
 
   <h3 id="font-size">Font size</h3>
-  <p>The font-size override classes follow the named responsive typography tokens, for example <code>ofh-u-font-size-h1</code> or <code>ofh-u-font-size-paragraph-small</code>.</p>
-  <p>Only use these font size overrides when the semantic heading and body utilities do not fit your content. Use them with <code>p</code> tags or custom components that need a specific published token value.</p>
+  <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-20</code>. They keep the current toolkit utility scale so maintainers can choose an override by the expected rendered size.</p>
+  <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
+  <p>The class name reflects the tablet-and-desktop size. On mobile, the utility collapses to the matching smaller value.</p>
+
+  {% set rows = foundationStyles.typography.utilityRows %}
+  {% set caption = "Responsive font size override scale" %}
+  {% set showClassName = true %}
+  {% set showToken = false %}
+  {% set showLineHeight = true %}
+  {% set showNotes = true %}
+  {% include "design-system/styles/_partials/showcase-matrix.njk" %}
 
   {{ designExample({
     group: "styles",
@@ -160,7 +171,7 @@
   }) }}
 
   <h3 id="font-weight">Font weight</h3>
-  <p>You can add a font weight override class to any other typographic class or element to change the font weight to regular or bold.</p>
+  <p>You can add <code>ofh-u-font-weight-normal</code> or <code>ofh-u-font-weight-bold</code> to any other typographic class or element to change the font weight.</p>
   <p>Use bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse of bold will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
 
   {{ designExample({
@@ -202,7 +213,7 @@
 
   <h2 id="lists">Lists</h2>
   <p>Use lists to make blocks of text easier to read, and to break information into manageable chunks.</p>
-  <p>The list styles use the same responsive typography token shown in the matrix above, so body copy and list items stay aligned across breakpoints.</p>
+  <p>The list styles use their own responsive token shown in the matrix above, and in the current scale those values align with the default body copy.</p>
 
   {{ designExample({
     group: "styles",
@@ -264,6 +275,5 @@
     type: "text-alignment",
     htmlOnly: true
   }) }}
-
 
 {% endblock %}

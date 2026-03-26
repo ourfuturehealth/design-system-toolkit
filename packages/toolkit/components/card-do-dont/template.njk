@@ -1,0 +1,46 @@
+{% from '../icon/macro.njk' import icon %}
+{% set headingLevel = params.headingLevel if params.headingLevel else 3 %}
+{% set type = params.type if params.type else 'do' %}
+{% set heading = params.heading if params.heading else ("Don’t" if type == 'dont' else 'Do') %}
+{% set hidePrefix = params.hidePrefix if params.hidePrefix is defined else true %}
+
+<div class="ofh-card-do-dont ofh-card-do-dont--{{ type }}
+{%- if params.rootAliasClass %} {{ params.rootAliasClass }}{% endif %}
+{%- if params.classes %} {{ params.classes }}{% endif %}"
+{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  <h{{ headingLevel }} class="ofh-card-do-dont__label
+  {%- if params.labelAliasClass %} {{ params.labelAliasClass }}{% endif %}">
+    {{ heading }}
+  </h{{ headingLevel }}>
+  <div class="ofh-card-do-dont__content
+  {%- if params.contentAliasClass %} {{ params.contentAliasClass }}{% endif %}">
+    <div class="ofh-card-do-dont__spacer" aria-hidden="true"></div>
+    <div class="ofh-card-do-dont__body">
+      <ul class="ofh-card-do-dont__items">
+        {%- for data in params.items %}
+          <li class="ofh-card-do-dont__item">
+            {% if type == 'dont' %}
+              {{ icon({
+                "name": "Close",
+                "size": 32,
+                "classes": "ofh-card-do-dont__icon ofh-card-do-dont__icon--dont" ~ (" " ~ params.iconAliasClass ~ " " ~ params.iconAliasVariantClass if params.iconAliasClass else "")
+              }) }}
+            {% else %}
+              {{ icon({
+                "name": "Done",
+                "size": 32,
+                "classes": "ofh-card-do-dont__icon ofh-card-do-dont__icon--do" ~ (" " ~ params.iconAliasClass ~ " " ~ params.iconAliasVariantClass if params.iconAliasClass else "")
+              }) }}
+            {% endif %}
+            <span class="ofh-card-do-dont__item-text">
+              {% if type == 'dont' and not hidePrefix %}
+                do not
+              {% endif %}
+              {{ data.item | safe }}
+            </span>
+          </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

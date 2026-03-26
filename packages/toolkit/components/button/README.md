@@ -2,7 +2,7 @@
 
 ## Guidance
 
-Find out more about the button component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/buttons).
+Find out more about the button component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/button).
 
 ## Quick start examples
 
@@ -18,7 +18,7 @@ Find out more about the button component and when to use it in the [design syste
 </button>
 ```
 
-Or can be used with link element
+Or can be used with a link element.
 ```html
 <a class="ofh-button ofh-button--contained" href="/">
   Save and continue
@@ -105,15 +105,15 @@ The button Nunjucks macro takes the following arguments:
 
 | Name                | Type     | Required  | Description             |
 | --------------------|----------|-----------|-------------------------|
-| **element**         | string   | No        | Whether to use an `input`, `button` or `a` element to create the button. In most cases you will not need to set this as it will be configured automatically if you use `href` or `html`. |
-| **text (or) html**  | string   | Yes       | Text or HTML for the button or link. If `html` is provided, the `text` argument will be ignored and `element` will be automatically set to `button` unless `href` is also set, or it has already been defined. This argument has no effect if `element` is set to `input`.|
-| **name**            | string   | Yes       | Name for the `input` or `button`. This has no effect on `a` elements. |
-| **type**            | string   | Yes       | Type of `input` or `button` – `button`, `submit` or `reset`. Defaults to `submit`. This has no effect on `a` elements. |
-| **value**           | string   | Yes       | Value for the `button` tag. This has no effect on `a` or `input` elements. |
-| **disabled**        | boolean   | No       | Whether the button should be disabled. For button and input elements, `disabled` and `aria-disabled` attributes will be set automatically. |
-| **href**           | string   | No       | The URL that the button should link to. If this is set, `element` will be automatically set to `a` if it has not already been defined. |
-| **classes**         | string   | No        | Optional additional classes to add to the button element. Separate each class with a space. |
-| **attributes**      | object   | No        | Any extra HTML attributes (for example data attributes) to add to the textarea tag. |
+| **element**         | string   | No        | Optional element override. In most cases you do not need this because the macro will render an anchor when you pass `href`, or a button when you pass `text` or `html`. |
+| **text (or) html**  | string   | Yes       | Plain text or trusted HTML label content for the button or link. If `html` is provided, it replaces `text`. These arguments have no effect when `element` is set to `input`. |
+| **name**            | string   | Yes       | Name attribute for `input` or `button` elements. This has no effect on anchors. |
+| **type**            | string   | Yes       | Type of `input` or `button` element: `button`, `submit` or `reset`. Defaults to `submit`. This has no effect on anchors. |
+| **value**           | string   | Yes       | Value for `button` elements. This has no effect on anchors or `input` elements. |
+| **disabled**        | boolean  | No        | Whether the button should be disabled. For button and input elements, `disabled` and `aria-disabled` attributes will be set automatically. |
+| **href**            | string   | No        | Navigation destination. When this is set, the macro will render an anchor unless you explicitly override `element`. |
+| **classes**         | string   | No        | Optional additional classes to add to the root element. Separate each class with a space. |
+| **attributes**      | object   | No        | Any extra HTML attributes (for example `data-*` or `aria-*` attributes) to add to the root element. |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).
 

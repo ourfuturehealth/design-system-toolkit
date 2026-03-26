@@ -9,11 +9,11 @@
  */
 
 .ofh-back-link {
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
 }
 
 .ofh-back-link__link {
-  @include ofh-typography-responsive('paragraph-small');
+  @include ofh-typography-responsive('paragraph-sm');
 
   color: $ofh-color-foreground-link-default;
   display: inline-block;

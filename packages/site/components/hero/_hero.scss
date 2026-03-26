@@ -10,9 +10,9 @@
  */
 
 .ofh-hero-ds {
-  @include ofh-responsive-padding(7, 'top', 'bottom');
+  @include ofh-responsive-padding(32, 'vertical');
 
-  background-color: $ofh-color-background-neutral-yellow;
+  background-color: $ofh-color-backgrounds-yellow;
   color: $ofh-color-foreground-primary;
   position: relative; /* [1] */
 }
@@ -21,7 +21,7 @@
   background-color: $ofh-color-greyscale-white;
   border-radius: ofh-border-radius;
 
-  @include ofh-responsive-padding(7);
+  @include ofh-responsive-padding(32);
 }
 
 /**
@@ -92,7 +92,7 @@
     background-color: $ofh-color-brand-yellow-3-main;
     color: $ofh-color-foreground-primary-inverted;
     margin-bottom: 24px;
-    padding: ofh-spacing(5);
+    padding: $ofh-size-24;
     position: relative;
     top: 70px;
 
@@ -140,7 +140,7 @@
       bottom: -48px; /* [8] */
       margin-bottom: 0;
       max-width: 35em; /* [11] */
-      padding: ofh-spacing(6) ofh-spacing(7);
+      padding: $ofh-size-32 $ofh-size-40;
       position: absolute;
       top: auto;
     }
@@ -156,7 +156,7 @@
       bottom: 0;
       margin-bottom: 0;
       min-height: 0;
-      padding: ofh-spacing(6) 0 0;
+      padding: $ofh-size-32 0 0;
       position: relative;
       top: 0;
     }

@@ -38,18 +38,18 @@
 // Reducing the padding on smaller screens
 .app-hero__wrapper {
   @include mq($until: desktop) {
-    padding-bottom: ofh-spacing(6);
-    padding-top: ofh-spacing(6);
+    padding-bottom: $ofh-size-32;
+    padding-top: $ofh-size-32;
   }
 }
 
 // Page template annotation
 
 .app-annotate-block {
-  margin-bottom: ofh-spacing(5);
+  margin-bottom: $ofh-size-24;
   outline: 2px dashed $ofh-color-greyscale-2;
-  padding: ofh-spacing(4);
-  padding-top: ofh-spacing(8);
+  padding: $ofh-size-16;
+  padding-top: $ofh-size-48;
   position: relative;
 }
 
@@ -57,7 +57,7 @@
   border-bottom: 2px dashed $ofh-color-greyscale-2;
   border-right: 2px dashed $ofh-color-greyscale-2;
   left: 0;
-  padding: ofh-spacing(2) ofh-spacing(3);
+  padding: $ofh-size-4 $ofh-size-8;
   position: absolute;
   top: 0;
 }
@@ -73,7 +73,7 @@
   @include ofh-responsive-padding(0, "left");
 
   img {
-    @include ofh-responsive-margin(4, "right");
+    @include ofh-responsive-margin(12, "right");
 
     border: 2px solid transparent;
     border-radius: 30px;

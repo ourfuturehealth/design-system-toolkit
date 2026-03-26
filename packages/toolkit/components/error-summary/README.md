@@ -290,15 +290,15 @@ The error summary Nunjucks macro takes the following arguments:
 
 | Name                                         | Type   | Required | Description                                                                                                                           |
 | -------------------------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| **titleText (or) titleHtml**                 | string | Yes      | Text or HTML to use for the heading of the error summary block. If `titleHtml` is provided, the `titleText` argument will be ignored. |
-| **descriptionText (or) descriptionHtml**     | string | No       | Optional text or HTML description of the errors. If `descriptionhtml` is provided, the `descriptionText` argument will be ignored.    |
+| **titleText (or) titleHtml**                 | string | Yes      | Plain text or trusted HTML heading content for the summary. If `titleHtml` is provided, it replaces `titleText`. |
+| **descriptionText (or) descriptionHtml**     | string | No       | Optional plain text or trusted HTML description shown below the heading. If `descriptionHtml` is provided, it replaces `descriptionText`. |
 | **errorList**                                | object | Yes      | Contains an array of error link items and all their available arguments.                                                              |
 | **errorList.{}.href**                        | string | No       | Href attribute for the error link item. If provided item will be an anchor.                                                           |
-| **errorList.{}.text (or) errorList.{}.html** | string | No       | Text or HTML for the error link item. If `html` is provided, the `text` argument will be ignored.                                     |
-| **errorList.{}.attributes**                  | object | No       | Any extra HTML attributes (for example data attributes) to add to the error link anchor.                                              |
-| **classes**                                  | string | No       | Optional additional classes to add to the error-summary container. Separate each class with a space.                                  |
+| **errorList.{}.text (or) errorList.{}.html** | string | No       | Plain text or trusted HTML for the error link item. If `html` is provided, it replaces `text`.                                     |
+| **errorList.{}.attributes**                  | object | No       | Any extra HTML attributes (for example `data-*` attributes) to add to the error link anchor.                                              |
+| **classes**                                  | string | No       | Optional additional classes to add to the root element. Separate each class with a space.                                  |
 | **idPrefix**                                 | string | No       | Optional prefix used to generate the heading `id` referenced by `aria-labelledby`. Use it when rendering multiple summaries on a page. |
-| **attributes**                               | object | No       | Any extra HTML attributes (for example data attributes) to add to the error-summary container.                                        |
+| **attributes**                               | object | No       | Any extra HTML attributes (for example `data-*` or `aria-*` attributes) to add to the root element.                                        |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).
 

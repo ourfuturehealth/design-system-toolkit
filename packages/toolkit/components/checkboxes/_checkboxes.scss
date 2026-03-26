@@ -7,15 +7,15 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$ofh-checkboxes-size: ofh-spacing(7);
+$ofh-checkboxes-size: $ofh-size-40;
 $ofh-checkboxes-label-padding-left-right: 12px;
 
 .ofh-checkboxes__item {
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   clear: left;
   display: block;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   min-height: $ofh-checkboxes-size;
   padding: 0 0 0 $ofh-checkboxes-size;
   position: relative;
@@ -42,7 +42,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
   cursor: pointer;
   display: inline-block;
   margin-bottom: 0;
-  padding: 8px $ofh-checkboxes-label-padding-left-right ofh-spacing(2);
+  padding: 8px $ofh-checkboxes-label-padding-left-right $ofh-size-4;
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation;
 }
@@ -116,10 +116,10 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 .ofh-checkboxes__divider {
   $ofh-divider-size: $ofh-checkboxes-size !default;
 
-  @include ofh-font('paragraph');
+  @include ofh-font('paragraph-md');
 
   color: $ofh-color-foreground-primary;
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
   text-align: center;
   width: $ofh-divider-size;
 }
@@ -139,7 +139,7 @@ $conditional-margin-left: $conditional-border-padding; /* 2 */
 $conditional-padding-left: $conditional-border-padding + $ofh-checkboxes-label-padding-left-right; /* 3 */
 
 .ofh-checkboxes__conditional {
-  @include ofh-responsive-margin(5, 'bottom');
+  @include ofh-responsive-margin(16, 'bottom');
 
   border-left: $conditional-border-width solid $ofh-color-border-input-default;
   margin-left: $conditional-margin-left;

@@ -1,3 +1,18 @@
+{% from '../card-do-dont/macro.njk' import cardDoDont %}
+
 {% macro list(params) %}
-  {%- include './template.njk' -%}
+  {{ cardDoDont({
+    "type": "dont" if params.type == "cross" else "do",
+    "heading": params.title,
+    "headingLevel": params.headingLevel,
+    "items": params.items,
+    "hidePrefix": params.hidePrefix if params.hidePrefix is defined else false,
+    "classes": params.classes,
+    "attributes": params.attributes,
+    "rootAliasClass": "ofh-do-dont-list",
+    "labelAliasClass": "ofh-do-dont-list__label",
+    "contentAliasClass": "ofh-do-dont-list__content",
+    "iconAliasClass": "ofh-do-dont-list__icon",
+    "iconAliasVariantClass": "ofh-do-dont-list__icon--cross" if params.type == "cross" else "ofh-do-dont-list__icon--tick"
+  }) }}
 {% endmacro %}

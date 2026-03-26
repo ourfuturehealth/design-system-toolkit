@@ -1,82 +1,240 @@
 {
   "params": [
     {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "description": "Card variant: `basic` or `clickable`. Default: `basic`, unless the legacy `clickable` flag is set."
+    },
+    {
       "name": "heading",
       "type": "string",
-      "required": true,
-      "description": "Text to use within the heading of the card component. If `headingHtml` is provided, the `heading` argument will be ignored."
+      "required": false,
+      "description": "Text to use within the main card heading. Ignored if `headingHtml` is provided."
     },
     {
       "name": "headingHtml",
       "type": "string",
-      "required": true,
-      "description": "HTML to use within the heading of the card component. If `headingHtml` is provided, the `heading` argument will be ignored."
+      "required": false,
+      "description": "HTML to use within the main card heading."
     },
     {
       "name": "headingClasses",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the card heading."
+      "description": "Classes to add to the heading element, for example to change the visual heading size."
     },
     {
       "name": "headingLevel",
       "type": "integer",
       "required": false,
-      "description": "Optional heading level for the card heading. Default: 2"
+      "description": "Optional semantic heading level. Default: 2. This changes the HTML heading tag, not the visual styling."
     },
     {
       "name": "href",
       "type": "string",
       "required": false,
-      "description": "The value of the card link href attribute."
-    },
-    {
-      "name": "clickable",
-      "type": "boolean",
-      "required": false,
-      "description": "If set to true, then the whole Card will become a clickable Card variant."
-    },
-    {
-      "name": "feature",
-      "type": "boolean",
-      "required": false,
-      "description": "If set to true, then the Card will become a feature Card variant."
-    },
-    {
-      "name": "imgURL",
-      "type": "string",
-      "required": false,
-      "description": "The URL of the image in the card."
-    },
-    {
-      "name": "imgALT",
-      "type": "string",
-      "required": false,
-      "description": "The alternative text of the image in the card."
+      "description": "Primary card link URL. Use this for clickable cards with a heading link."
     },
     {
       "name": "description",
       "type": "string",
       "required": false,
-      "description": "Text description within the card content. If `descriptionHtml` is provided, the `description` argument will be ignored."
+      "description": "Plain text card description. Ignored if `descriptionHtml` is provided."
     },
     {
       "name": "descriptionHtml",
       "type": "string",
       "required": false,
-      "description": "HTML to use within the card content. If `descriptionHtml` is provided, the `description` argument will be ignored."
+      "description": "HTML content to render inside the card body."
+    },
+    {
+      "name": "icon",
+      "type": "object",
+      "required": false,
+      "description": "Optional trailing icon configuration.",
+      "params": [
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Icon sprite name."
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "required": false,
+          "description": "Icon size. Default: 32."
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": false,
+          "description": "Optional CSS colour value for monochrome icons. Icons with baked-in fills may ignore it."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "description": "Accessible title for the icon."
+        },
+        {
+          "name": "classes",
+          "type": "string",
+          "required": false,
+          "description": "Additional classes for the icon."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the icon."
+        }
+      ]
+    },
+    {
+      "name": "dismissButton",
+      "type": "object",
+      "required": false,
+      "description": "Optional dismiss button configuration. This renders a close button in the card top-right corner. Use it to set the accessible label or extra button attributes; it does not change the visible icon.",
+      "params": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label announced to assistive technology. Default: `Dismiss card`."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the dismiss button."
+        }
+      ]
+    },
+    {
+      "name": "number",
+      "type": "string",
+      "required": false,
+      "description": "Large numeric value for dashboard-style cards."
+    },
+    {
+      "name": "tag",
+      "type": "object",
+      "required": false,
+      "description": "Tag macro options passed through to the tag component."
+    },
+    {
+      "name": "metadataItems",
+      "type": "array",
+      "required": false,
+      "description": "Optional metadata rows with icon and text.",
+      "params": [
+        {
+          "name": "icon",
+          "type": "string",
+          "required": true,
+          "description": "Icon sprite name."
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "description": "Metadata text."
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "required": false,
+          "description": "Icon size. Default: 24."
+        }
+      ]
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "required": false,
+      "description": "Supporting helper text below the main content."
+    },
+    {
+      "name": "helperHtml",
+      "type": "string",
+      "required": false,
+      "description": "HTML helper content below the main content."
+    },
+    {
+      "name": "actionLink",
+      "type": "object",
+      "required": false,
+      "description": "Secondary action link for the card. In clickable cards without `href`, this can be the primary interactive target.",
+      "params": [
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "description": "Link text."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Link destination."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the action link."
+        }
+      ]
+    },
+    {
+      "name": "imgURL",
+      "type": "string",
+      "required": false,
+      "description": "Optional image URL shown at the top of the card."
+    },
+    {
+      "name": "imgALT",
+      "type": "string",
+      "required": false,
+      "description": "Alternative text for the image. Use an empty string when the image is decorative."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the card."
+      "description": "Classes to add to the root card element."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to add to the card."
+      "description": "HTML attributes to add to the root card element, for example an `id`, `data-*` attribute or `aria-*` attribute."
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "required": false,
+      "description": "Deprecated compatibility flag for clickable cards. Prefer `variant: 'clickable'`."
+    },
+    {
+      "name": "feature",
+      "type": "boolean",
+      "required": false,
+      "description": "Deprecated feature-card mode retained for existing toolkit consumers."
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "required": false,
+      "description": "Deprecated care-card type retained for existing toolkit consumers."
+    },
+    {
+      "name": "HTML",
+      "type": "string",
+      "required": false,
+      "description": "Deprecated alias for `descriptionHtml`."
     }
   ]
 }

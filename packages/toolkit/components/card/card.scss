@@ -2,91 +2,175 @@
    COMPONENTS / #CARD
    ========================================================================== */
 
-/**
- * 1. Is needed for the :active top positioning.
- * 2. Border is used to create a divider between the white content
- *    box and an image.
- * 3. Creates the 'pressed down' effect when clicked.
- * 4. Removes padding-top from headings directly after the card group.
- * 5. Includes the border width to achieve the correct left alignment.
- * 6. Stops the heading from spanning the full width of the card.
- * 7. Removes padding top for the feature heading positioning.
- * 8. Default care card colour set to blue (non-urgent care card) -
- *    using the @mixin care-card tools/_mixins.scss.
- *    The same mixin is used for each care card, setting the background
- *    colour,text colour and print border width with the variables.
- * 9. 'Random number' for the heading triangle.
- * 10. 'Random number' for the heading triangle positioning.
- * 11. 'Random number' used for spacing to compensate for the triangle.
- * 12. Needed to enable the triangle to show correctly in high contrast mode.
- * 13. Prevent additional padding on headings
- * 14. Give the action link icon sufficient contrast when used in the emergency variant
- * 15. Reset the positioning to the default [1] to display heading triangle on a coloured background.
- * 16. Emergency care card <a> needs to be white because the background colour is black.
- */
-
-$card-border-width: 1px;
-$card-border-bottom-width: ofh-spacing(2);
-$card-background: $ofh-color-greyscale-white;
-$card-border-color: $ofh-color-greyscale-5;
-$card-border-hover-color: $ofh-color-greyscale-4;
+$card-border-width: $ofh-stroke-weight-1;
+$card-border-bottom-width: $ofh-stroke-weight-4;
+$card-background: $ofh-color-background-primary;
+$card-border-color: $ofh-color-border-card-default;
+$card-border-hover-color: $ofh-color-border-card-hover;
 
 .ofh-card {
-  @include ofh-responsive-margin(8, 'bottom');
+  @include ofh-responsive-margin(40, 'bottom');
 
   background: $card-background;
   border: $card-border-width solid $card-border-color;
-  position: relative; /* [1] */
+  position: relative;
   width: 100%;
-
-  &.ofh-card__with-icon {
-    > .ofh-card__content {
-      display: flex;
-      height: 100%;
-
-      > div {
-        :last-child {
-          margin-bottom: 0;
-        }
-      }
-
-      > :first-child {
-        flex-grow: 2;
-      }
-
-      > :last-child {
-        align-items: center;
-        display: flex;
-      }
-    }
-  }
 }
 
 .ofh-card__img {
   @include print-hide();
 
-  border-bottom: $card-border-width solid $ofh-color-greyscale-6; /* [2] */
+  border-bottom: $card-border-width solid $ofh-color-background-secondary;
   display: block;
   width: 100%;
 }
 
 .ofh-card__content {
   @include top-and-bottom();
-  @include ofh-responsive-padding(6);
-
-  position: relative;
+  @include ofh-responsive-padding(32);
 }
 
-.ofh-card__heading,
-.ofh-card__metadata,
-.ofh-card__description {
-  margin-bottom: ofh-spacing(4);
+.ofh-card__content--dismissible {
+  padding-right: $ofh-size-64;
+
+  @include mq($from: tablet) {
+    padding-right: $ofh-size-96;
+  }
+}
+
+.ofh-card__content--with-aside,
+.ofh-card.ofh-card__with-icon > .ofh-card__content {
+  @include ofh-responsive-gap-x(32);
+
+  align-items: center;
+  display: flex;
+}
+
+.ofh-card__main {
+  @include ofh-responsive-gap-y(16);
+  @include top-and-bottom();
+
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ofh-card__heading {
+  @include ofh-font('heading-md', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-card__number {
+  @include ofh-font('heading-xl', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-card__main > .ofh-tag {
+  align-self: flex-start;
+}
+
+.ofh-card__description,
+.ofh-card__action {
+  margin: 0;
+}
+
+.ofh-card__helper {
+  @include ofh-font('paragraph-sm');
+
+  margin: 0;
+}
+
+.ofh-card__action {
+  @include ofh-typography-responsive('paragraph-md');
+}
+
+.ofh-card__link,
+.ofh-card__action-link {
+  @include ofh-link-style-default();
+}
+
+.ofh-card__metadata-list {
+  @include ofh-responsive-gap-y(8);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ofh-card__metadata-item {
+  @include ofh-responsive-gap-x(8);
+
+  align-items: center;
+  display: flex;
+}
+
+.ofh-card__metadata-icon-container {
+  align-items: center;
+  background: $ofh-color-background-secondary;
+  border-radius: $ofh-radius-circular;
+  display: flex;
+  flex: none;
+  height: $ofh-size-32;
+  justify-content: center;
+  width: $ofh-size-32;
+}
+
+.ofh-card__metadata-icon {
+  height: $ofh-iconography-24;
+  width: $ofh-iconography-24;
+}
+
+.ofh-card__metadata-text {
+  @include ofh-typography-responsive('paragraph-md');
+
+  flex: 1 1 auto;
+}
+
+.ofh-card__aside {
+  align-items: center;
+  display: flex;
+  flex: none;
+  justify-content: center;
 }
 
 .ofh-card__icon {
-  color: $ofh-color-foreground-feedback-success-2;
-  height: 32px;
-  width: 32px;
+  height: $ofh-iconography-32;
+  width: $ofh-iconography-32;
+}
+
+.ofh-card__dismiss {
+  @include ofh-responsive-padding(32, 'vertical');
+  @include ofh-responsive-padding(32, 'horizontal');
+
+  background: transparent;
+  border: 0;
+  border-radius: $ofh-radius-circular;
+  color: $ofh-color-foreground-primary;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+
+  &:focus {
+    outline: 0;
+
+    .ofh-card__dismiss-icon {
+      @include ofh-focused-button();
+
+      border-radius: $ofh-radius-circular;
+    }
+  }
+}
+
+.ofh-card__dismiss-icon {
+  background: $ofh-color-background-primary;
+  border-radius: $ofh-radius-circular;
+  display: block;
+  height: $ofh-iconography-32;
+  width: $ofh-iconography-32;
 }
 
 /* Clickable card
@@ -99,7 +183,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   &:active {
     cursor: pointer;
 
-    .ofh-card__heading a,
+    .ofh-card__primary-link,
     .ofh-card__link {
       color: $ofh-color-foreground-link-hover;
       text-decoration: none;
@@ -116,7 +200,7 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 
   &:active {
     border-color: $card-border-hover-color;
-    bottom: -$card-border-width; /* [3] */
+    bottom: -$card-border-width;
   }
 }
 
@@ -132,17 +216,17 @@ $card-border-hover-color: $ofh-color-greyscale-4;
 .ofh-card-group {
   @include flex();
 
-  margin-bottom: ofh-spacing(4);
+  margin-bottom: $ofh-size-16;
   padding: 0;
 
   @include mq($until: desktop) {
-    margin-bottom: ofh-spacing(7);
+    margin-bottom: $ofh-size-40;
   }
 
   + h2,
-  + .ofh-heading-l,
+  + .ofh-heading-lg,
   + h3,
-  + .ofh-heading-m {
+  + .ofh-heading-md {
     padding-top: 0; /* [4] */
   }
 }
@@ -154,12 +238,12 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   margin-bottom: 0;
 
   .ofh-card {
-    margin-bottom: ofh-spacing(6);
+    margin-bottom: $ofh-size-24;
   }
 
   @include mq($until: desktop) {
     .ofh-card {
-      margin-bottom: ofh-spacing(4);
+      margin-bottom: $ofh-size-16;
     }
 
     &:last-child .ofh-card {
@@ -172,25 +256,25 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--feature {
-  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(40, 'top');
 }
 
 .ofh-card__heading--feature {
   background: $ofh-color-brand-yellow-3-main;
   color: $ofh-color-foreground-primary-inverted;
   display: inline-block;
-  left: -(ofh-spacing(5) + $card-border-width); /* [5] */
-  margin-bottom: ofh-spacing(3);
-  margin-right: - ofh-spacing(5); /* [6] */
-  padding: ofh-spacing(3) ofh-spacing(5);
+  left: -($ofh-size-24 + $card-border-width); /* [5] */
+  margin-bottom: $ofh-size-8;
+  margin-right: -$ofh-size-24; /* [6] */
+  padding: $ofh-size-8 $ofh-size-24;
   position: relative;
-  top: - ofh-spacing(3);
+  top: -$ofh-size-8;
 
   @include mq($from: tablet) {
-    left: -(ofh-spacing(6) + $card-border-width); /* [5] */
-    margin-right: - ofh-spacing(6); /* [6] */
-    padding: ofh-spacing(3) ofh-spacing(6);
-    top: - ofh-spacing(4);
+    left: -($ofh-size-32 + $card-border-width); /* [5] */
+    margin-right: -$ofh-size-32; /* [6] */
+    padding: $ofh-size-8 $ofh-size-32;
+    top: -$ofh-size-16;
   }
 }
 
@@ -202,21 +286,21 @@ $card-border-hover-color: $ofh-color-greyscale-4;
   ========================================================================== */
 
 .ofh-card--care {
-  @include ofh-responsive-margin(8, 'top');
+  @include ofh-responsive-margin(40, 'top');
   @include care-card($ofh-color-brand-blue-royal-3-main, $ofh-color-greyscale-white, 4px); /* [8] */
 }
 
 .ofh-card--care__heading-container {
-  @include ofh-responsive-padding(6, 'left');
-  @include ofh-responsive-padding(6, 'right');
+  @include ofh-responsive-padding(24, 'left');
+  @include ofh-responsive-padding(24, 'right');
 
-  padding-bottom: ofh-spacing(4);
-  padding-top: ofh-spacing(4);
+  padding-bottom: $ofh-size-16;
+  padding-top: $ofh-size-16;
   position: relative;
 }
 
 .ofh-card--care__heading {
-  @include ofh-font('h3', $weight: bold);
+  @include ofh-font('heading-md', $weight: bold);
   @include print-color($ofh-color-foreground-primary);
 
   margin: 0;

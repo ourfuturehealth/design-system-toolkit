@@ -1,0 +1,31 @@
+{% from 'card-callout/macro.njk' import cardCallout %}
+
+<div class="ofh-u-margin-bottom-16">
+  {{ cardCallout({
+    "heading": "Information",
+    "variant": "info",
+    "html": "<p>This is additional context to help the user understand the next step.</p>"
+  }) }}
+</div>
+
+<div class="ofh-u-margin-bottom-16">
+  {{ cardCallout({
+    "heading": "Error",
+    "variant": "error",
+    "html": "<p>There is a problem with the information in this section.</p>"
+  }) }}
+</div>
+
+<div class="ofh-u-margin-bottom-16">
+  {{ cardCallout({
+    "heading": "Success",
+    "variant": "success",
+    "html": "<p>Your details have been saved successfully.</p>"
+  }) }}
+</div>
+
+{{ cardCallout({
+  "heading": "Warning",
+  "variant": "warning",
+  "html": "<p>Check this information before you continue.</p>"
+}) }}

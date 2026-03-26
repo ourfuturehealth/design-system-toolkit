@@ -17,7 +17,7 @@
 
   <ul class="ofh-list app-side-nav__list">
 
-    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-5">
+    <div class="ofh-back-link app-u-hide-mobile app-side-nav__back ofh-u-margin-bottom-16">
       <a class="ofh-back-link__link" href="/design-system">
       <svg class="ofh-icon ofh-icon__chevron-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" height="34" width="34">
         <path d="M8.5 12c0-.3.1-.5.3-.7l5-5c.4-.4 1-.4 1.4 0s.4 1 0 1.4L10.9 12l4.3 4.3c.4.4.4 1 0 1.4s-1 .4-1.4 0l-5-5c-.2-.2-.3-.4-.3-.7z"></path>
@@ -39,7 +39,7 @@
 
     <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/design-system/styles/spacing">Spacing</a>
       <ul class="app-side-nav__list app-side-nav__list--nested">
-        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-scale">The responsive spacing scale</a></li>
+        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-scale">The responsive spacing scales</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-on-custom-components">Spacing on custom components</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#width-override-classes">Width override classes</a></li>
       </ul>
@@ -54,12 +54,18 @@
 
 {% block bodyContent %}
 
-  <h2 id="spacing-scale">The responsive spacing scale</h2>
-  <p>We use a responsive spacing scale which adapts across mobile, tablet, and desktop breakpoints. The values below come from <code>$ofh-space-responsive-scale</code>, so the documentation matches the toolkit source of truth.</p>
-  <p>The responsive scale and the legacy static <code>ofh-spacing()</code> helper intentionally diverge after the smaller steps. Use the responsive values for layout and component spacing that should adapt with the viewport.</p>
+  <h2 id="spacing-scale">The responsive spacing scales</h2>
+  <p>We use Figma-aligned spacing size keys instead of the older point-based scale. Use the size key itself in utility classes and responsive mixins, for example <code>ofh-u-margin-56</code> or <code>@include ofh-responsive-padding(40)</code>.</p>
+  <p>Desktop is the reference size for each spacing key. Values then either stay the same or collapse at smaller breakpoints.</p>
+  <p>The responsive scales are split by direction. When you use the mixin with <code>all</code>, top and bottom use the vertical scale, while left and right use the horizontal scale.</p>
 
-  {% set items = foundationStyles.spacing.scale %}
-  {% set caption = "Responsive spacing scale" %}
+  {% set items = foundationStyles.spacing.horizontalScale %}
+  {% set caption = "Horizontal spacing scale" %}
+  {% set variant = "spacing" %}
+  {% include "design-system/styles/_partials/showcase-scale.njk" %}
+
+  {% set items = foundationStyles.spacing.verticalScale %}
+  {% set caption = "Vertical spacing scale" %}
   {% set variant = "spacing" %}
   {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
@@ -68,12 +74,20 @@
 
   <h3 id="using-the-override-classes">Using the override classes</h3>
   <p>The spacing override classes are structured to allow you to apply any size of the scale, using margin or padding in any direction.</p>
-  <p class="rich-text">For example, <code>ofh-u-margin-10</code> sets a margin of {{ foundationStyles.spacing.byStep['10'].mobile }} on mobile, {{ foundationStyles.spacing.byStep['10'].tablet }} on tablet, and {{ foundationStyles.spacing.byStep['10'].desktop }} on desktop.</p>
+  <p class="rich-text">The class name gives you the spacing size key, not a single fixed pixel value at every breakpoint.</p>
   <p class="rich-text">To add padding use <code>-padding</code> instead of <code>-margin</code>.</p>
-  <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set <code>margin-top</code> and <code>-padding-right</code> will set <code>padding-right</code>. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
-  <p class="rich-text">The last part of the class represents the spacing step you want to apply. For example, in <code>ofh-u-margin-10</code>, the <code>-10</code> represents step 10 on the responsive scale.</p>
+  <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set margin-top and <code>-padding-right</code> will set padding-right. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
+  <p class="rich-text">The last part of the class is the spacing size key. For example, <code>ofh-u-margin-56</code> uses the <code>56</code> responsive spacing key and then applies the matching values from the relevant horizontal or vertical scale.</p>
+  <p class="rich-text">Examples:</p>
+  <ul>
+    <li><p class="rich-text"><code>ofh-u-margin-bottom-56</code> uses the vertical scale, so it is {{ foundationStyles.spacing.byKey['56'].vertical.desktop }} on desktop and {{ foundationStyles.spacing.byKey['56'].vertical.tablet }} on tablet and mobile</p></li>
+    <li><p class="rich-text"><code>ofh-u-margin-right-56</code> uses the horizontal scale, so it is {{ foundationStyles.spacing.byKey['56'].horizontal.desktop }} on desktop, {{ foundationStyles.spacing.byKey['56'].horizontal.tablet }} on tablet, and {{ foundationStyles.spacing.byKey['56'].horizontal.mobile }} on mobile</p></li>
+    <li><p class="rich-text"><code>ofh-u-margin-56</code> combines both scales, so top and bottom use the vertical values while left and right use the horizontal values</p></li>
+  </ul>
+  <p>Small spacing keys stay consistent across breakpoints. Larger keys reduce as the layout collapses.</p>
 
-  <h3 id="spacing-examples" class="ofh-u-padding-top-4">Examples</h3>
+  <h3 id="spacing-examples" class="ofh-u-padding-top-12">Examples</h3>
+  <p>In the default example below, the blue label is the content block and the white gap underneath it is the responsive spacing being applied.</p>
 
   {{ designExample({
     group: "styles",
@@ -90,28 +104,28 @@
   }) }}
 
   <h2 id="spacing-on-custom-components">Spacing on custom components</h2>
-  <p>If you’re building your own components and want to reference the spacing scale directly in your SCSS file, you can use the spacing scale through a mixin or a function.</p>
+  <p>If you are building your own components and want to reference spacing directly in SCSS, use the static size tokens for fixed geometry and the responsive spacing mixins for layout spacing.</p>
+  <p>The old <code>ofh-spacing()</code> helper was removed in toolkit v4.5.0, so fixed spacing values should now come from <code>$ofh-size-*</code> tokens.</p>
 
-  <h3 id="using-the-static-spacing-function">Using the static spacing function</h3>
-  <p>If you want to use static values that will not change based on breakpoints you can reference the static spacing helper like this:</p>
-  <p class="rich-text"><code>padding-top: ofh-spacing(7)</code></p>
-  <p>This returns a fixed value of {{ foundationStyles.spacing.byStep['7'].staticLegacy }} at every breakpoint.</p>
+  <h3 id="using-the-static-spacing-function">Using the static spacing tokens</h3>
+  <p>If you want a fixed value that does not change by breakpoint, use the matching <code>$ofh-size-*</code> token:</p>
+  <p class="rich-text"><code>padding-top: $ofh-size-40</code></p>
 
   <h3 id="using-the-responsive-spacing-mixin">Using the responsive spacing mixin</h3>
-  <p>If you want to use the responsive spacing scale, reference the responsive margin and padding mixins instead.</p>
+  <p>If you want layout spacing that adapts by breakpoint, use the responsive mixin with a size key from the tables above.</p>
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text">use <code>@include ofh-responsive-margin(8, "bottom");</code> for {{ foundationStyles.spacing.byStep['8'].mobile }} bottom margin on mobile, {{ foundationStyles.spacing.byStep['8'].tablet }} on tablet, and {{ foundationStyles.spacing.byStep['8'].desktop }} on desktop</p></li>
-    <li><p class="rich-text">use <code>@include ofh-responsive-padding(8);</code> for the same responsive spacing on all sides</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-margin(40, "bottom");</code> for {{ foundationStyles.spacing.byKey['40'].vertical.desktop }} margin-bottom on desktop and {{ foundationStyles.spacing.byKey['40'].vertical.tablet }} on tablet and mobile</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-padding(40);</code> for {{ foundationStyles.spacing.byKey['40'].vertical.desktop }} top and bottom on desktop, {{ foundationStyles.spacing.byKey['40'].vertical.tablet }} top and bottom on tablet and mobile, and the matching horizontal scale on the left and right</p></li>
   </ul>
 
   <h2 id="width-override-classes">Width override classes</h2>
   <p>If you need to constrain the width of an element independently of the <a href="/design-system/styles/layout">grid system</a>, you can use width override classes.</p>
-  <p class="rich-text">As with the spacing override classes, the width override classes start with <code>ofh-u-</code>. The second part of the class name indicates the width on larger screen sizes.</p>
+  <p class="rich-text">As with the spacing override classes, the width override classes start with <code>ofh-u-</code>. They are full width on smaller screens, then apply the named fraction from the tablet breakpoint upwards.</p>
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text"><code>ofh-u-width-one-half</code> will apply a width of 50%</p></li>
-    <li><p class="rich-text"><code>ofh-u-width-two-thirds</code> will apply a width of 66.6666%</p></li>
+    <li><p class="rich-text"><code>ofh-u-width-one-half</code> will apply a width of 100% on mobile and 50% from tablet upwards</p></li>
+    <li><p class="rich-text"><code>ofh-u-width-two-thirds</code> will apply a width of 100% on mobile and 66.66% from tablet upwards.</p></li>
   </ul>
 
   {{ designExample({

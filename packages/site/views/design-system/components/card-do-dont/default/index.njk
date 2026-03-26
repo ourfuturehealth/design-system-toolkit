@@ -1,0 +1,39 @@
+{% from 'card-do-dont/macro.njk' import cardDoDont %}
+
+<div style="display: grid; gap: 40px; max-width: 424px;">
+  {{ cardDoDont({
+    "type": "do",
+    "items": [
+      {
+        "item": "cover blisters that are likely to burst with a soft plaster or dressing"
+      },
+      {
+        "item": "wash your hands before touching a burst blister"
+      },
+      {
+        "item": "allow the fluid to drain before covering it"
+      },
+      {
+        "item": "keep the area clean and dry while it heals"
+      }
+    ]
+  }) }}
+
+  {{ cardDoDont({
+    "type": "dont",
+    "items": [
+      {
+        "item": "burst a blister yourself"
+      },
+      {
+        "item": "peel the skin off a burst blister"
+      },
+      {
+        "item": "wear the shoes or use the equipment that caused your blister until it heals"
+      },
+      {
+        "item": "ignore signs that it may be infected"
+      }
+    ]
+  }) }}
+</div>

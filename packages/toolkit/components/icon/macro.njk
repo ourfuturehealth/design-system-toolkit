@@ -5,6 +5,7 @@
     {% set iconSize = params.size if params.size in [16, 24, 32] else 24 %}
     {% set spritePath = params.spritePath if params.spritePath else '/assets/icons/icon-sprite.svg' %}
     {% set ariaHidden = 'true' if not params.title else 'false' %}
+    {% set iconStyle = params.attributes.style if params.attributes and params.attributes.style else '' %}
 
     <svg class="ofh-icon ofh-icon--material ofh-icon--{{ iconSize }} ofh-icon--{{ params.name }}{% if params.classes %} {{ params.classes }}{% endif %}"
       aria-hidden="{{ ariaHidden }}"
@@ -12,7 +13,8 @@
       {% if params.title %}role="img"{% endif %}
       width="{{ iconSize }}"
       height="{{ iconSize }}"
-      {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      {%- if params.color or iconStyle %} style="{% if params.color %}color: {{ params.color }};{% endif %}{% if iconStyle %} {{ iconStyle }}{% endif %}"{% endif %}
+      {%- for attribute, value in params.attributes %}{% if attribute != 'style' %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}>
       {% if params.title %}<title>{{ params.title }}</title>{% endif %}
       <use href="{{ spritePath }}#ofh-icon-{{ params.name }}"></use>
     </svg>

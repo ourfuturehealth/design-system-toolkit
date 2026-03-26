@@ -3,12 +3,12 @@
    ========================================================================== */
 
 .app-foundation-showcase__table-wrap {
-  margin-bottom: ofh-spacing(6);
+  margin-bottom: $ofh-size-32;
   overflow-x: auto;
 }
 
 .app-foundation-showcase__caption {
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
 }
 
 .app-foundation-showcase__table {
@@ -51,7 +51,7 @@
 .app-foundation-showcase__spacing-bars {
   align-items: flex-end;
   display: flex;
-  gap: ofh-spacing(2);
+  gap: $ofh-size-8;
   min-height: 72px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .app-foundation-showcase__width-track {
-  background-color: $ofh-color-background-neutral-grey;
+  background-color: $ofh-color-background-secondary-grey;
   border-radius: $ofh-radius-24;
   max-width: 320px;
   min-width: 180px;
@@ -89,16 +89,16 @@
     $ofh-color-brand-blue-aqua-2 100%
   );
   display: block;
-  height: ofh-spacing(5);
+  height: $ofh-size-24;
 }
 
 .app-foundation-showcase__colour-group + .app-foundation-showcase__colour-group {
-  margin-top: ofh-spacing(7);
+  margin-top: $ofh-size-48;
 }
 
 .app-foundation-showcase__cards {
   display: grid;
-  gap: ofh-spacing(5);
+  gap: $ofh-size-24;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   list-style: none;
   margin: 0;
@@ -106,15 +106,15 @@
 }
 
 .app-foundation-showcase__card {
-  background-color: $ofh-color-background-neutral-grey;
+  background-color: $ofh-color-background-secondary-grey;
   border: 1px solid $ofh-color-border-primary;
   border-radius: $ofh-radius-16;
   height: 100%;
-  padding: ofh-spacing(5);
+  padding: $ofh-size-24;
 }
 
 .app-foundation-showcase__card-title {
-  margin-bottom: ofh-spacing(3);
+  margin-bottom: $ofh-size-8;
 }
 
 .app-foundation-showcase__card-summary {

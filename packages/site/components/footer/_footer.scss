@@ -1,33 +1,33 @@
 .ofh-footer-ds {
   @include clearfix();
   @include print-hide();
-  @include ofh-responsive-padding(6, bottom);
-  @include ofh-responsive-padding(6, top);
-  @include ofh-font($size: paragraph-small);
+  @include ofh-responsive-padding(24, bottom);
+  @include ofh-responsive-padding(24, top);
+  @include ofh-font($size: paragraph-sm);
 
   background-color: $ofh-color-brand-blue-navy-3-main;
-  border-top: ofh-spacing(3) solid $ofh-color-greyscale-7;
-  margin-top: ofh-spacing(10);
+  border-top: $ofh-size-8 solid $ofh-color-greyscale-7;
+  margin-top: $ofh-size-64;
 }
 
 .footer-ds-text {
   color: $ofh-color-greyscale-white;
   float: left;
-  padding-top: ofh-spacing(6);
+  padding-top: $ofh-size-32;
 
   p {
-    @include ofh-font($size: paragraph);
+    @include ofh-font($size: paragraph-md);
 
     margin: 0;
   }
 }
 
 .ofh-footer-ds__list {
-  @include ofh-responsive-padding(5, bottom);
+  @include ofh-responsive-padding(16, bottom);
 
   list-style-type: none;
   margin: 0;
-  padding-left: ofh-spacing(0);
+  padding-left: $ofh-size-0;
 
   @include mq($from: desktop) {
     float: left;
@@ -37,11 +37,11 @@
 }
 
 .ofh-footer-ds__list-item {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   @include mq($from: desktop) {
     float: left;
-    margin-right: ofh-spacing(6);
+    margin-right: $ofh-size-32;
   }
 }
 
@@ -58,7 +58,7 @@
 }
 
 .ofh-footer-ds__copyright {
-  @include ofh-font($size: paragraph);
+  @include ofh-font($size: paragraph-md);
 
   color: $ofh-color-foreground-primary-inverted;
   margin-bottom: 0;
