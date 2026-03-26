@@ -93,10 +93,12 @@
     <li>fixed-width container, which uses the content max width token</li>
     <li>fluid-width container, which spans the viewport and relies on content-width utilities inside it</li>
   </ul>
+  <p>The class column shows the container or utility class to apply to the wrapper that should take on that width behaviour.</p>
 
   {% set items = foundationStyles.layout.widths %}
   {% set caption = "Container and width references" %}
   {% set variant = "width" %}
+  {% set classColumnLabel = "Use this class" %}
   {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3>Fixed-width container</h3>
@@ -129,8 +131,8 @@
     <table class="ofh-table app-foundation-showcase__table">
       <caption class="ofh-table__caption app-foundation-showcase__caption">Main wrapper spacing</caption>
       <thead class="ofh-table__head">
-        <tr class="ofh-table__row">
-          <th class="ofh-table__header" scope="col">Class</th>
+        <tr>
+          <th class="ofh-table__header" scope="col">Main wrapper class</th>
           <th class="ofh-table__header" scope="col">Top padding</th>
           <th class="ofh-table__header" scope="col">Bottom padding</th>
           <th class="ofh-table__header" scope="col">Notes</th>
@@ -163,10 +165,12 @@
   <p>We use a grid to structure our designs and create consistent spacing. It gives us a flexible way to lay out components that adapts to different device sizes.</p>
   <p class="rich-text">The grid is structured with a <code>.ofh-grid-row</code> wrapper which acts as a row to contain your grid columns.</p>
   <p class="rich-text">You can add columns inside this wrapper to create your layout. To define your columns, add the class beginning with <code>.ofh-grid-column-</code> to a new container followed by the width, for example <code>.ofh-grid-column-one-third</code>.</p>
+  <p>The grid class column shows the class to apply to a child of <code>.ofh-grid-row</code> to set that column width.</p>
 
   {% set items = foundationStyles.layout.gridColumns %}
   {% set caption = "Grid column widths" %}
   {% set variant = "width" %}
+  {% set classColumnLabel = "Grid class" %}
   {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3>Full width</h3>

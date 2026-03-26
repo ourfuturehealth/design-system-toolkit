@@ -73,14 +73,17 @@
   <h2 id="typescale">Typescale</h2>
   <p>The responsive type scale is defined in <code>$ofh-typography-responsive-scale</code>. It uses the same named tokens across the toolkit, docs, and published type utilities.</p>
   <p>Phones and tablets share the same base sizes, and styles step up at the desktop breakpoint where the current token scale defines larger values.</p>
-  <p>The matrix below shows the current mobile, tablet, and desktop values behind the published typography utilities.</p>
+  <p>The matrix below shows the current desktop, tablet, and mobile values behind the published typography utilities.</p>
+  <p>The class column shows the published class to apply when you want that typography style on an element.</p>
 
   {% set rows = foundationStyles.typography.rows %}
   {% set caption = "Responsive typography matrix" %}
   {% set showClassName = true %}
-  {% set showToken = true %}
+  {% set showToken = false %}
   {% set showLineHeight = true %}
   {% set showNotes = true %}
+  {% set firstColumnLabel = "Token" %}
+  {% set classColumnLabel = "Apply this class" %}
   {% include "design-system/styles/_partials/showcase-matrix.njk" %}
 
   <h2 id="headings">Headings</h2>
@@ -153,14 +156,17 @@
   <h3 id="font-size">Font size</h3>
   <p>The font size override classes use the numeric responsive typography utilities, such as <code>ofh-u-font-size-24</code> and <code>ofh-u-font-size-20</code>. They keep the current toolkit utility scale so maintainers can choose an override by the expected rendered size.</p>
   <p>Use these overrides sparingly where you need a utility-based typography adjustment, and visually check the result because they also apply the matching line height.</p>
-  <p>The class name reflects the tablet-and-desktop size. On mobile, the utility collapses to the matching smaller value.</p>
+  <p>The class name reflects the tablet-and-desktop size. Smaller utilities stay the same across breakpoints, while larger utilities step down on mobile.</p>
+  <p>The override utility class column shows the utility to add to an existing element when you need a one-off font-size adjustment.</p>
 
   {% set rows = foundationStyles.typography.utilityRows %}
   {% set caption = "Responsive font size override scale" %}
   {% set showClassName = true %}
   {% set showToken = false %}
   {% set showLineHeight = true %}
-  {% set showNotes = true %}
+  {% set showNotes = false %}
+  {% set firstColumnLabel = "Style" %}
+  {% set classColumnLabel = "Override utility class" %}
   {% include "design-system/styles/_partials/showcase-matrix.njk" %}
 
   {{ designExample({
@@ -171,8 +177,8 @@
   }) }}
 
   <h3 id="font-weight">Font weight</h3>
-  <p>You can add <code>ofh-u-font-weight-normal</code> or <code>ofh-u-font-weight-bold</code> to any other typographic class or element to change the font weight.</p>
-  <p>Use bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse of bold will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
+  <p>You can add <code>ofh-u-font-weight-normal</code> for regular text or <code>ofh-u-font-weight-bold</code> for semi-bold text (600) to any other typographic class or element.</p>
+  <p>Use semi-bold in body content sparingly. It can be used to highlight critical information that users need to refer to, such as a reference number. But overuse will make it difficult for users to know which parts of your content they need to pay the most attention to.</p>
 
   {{ designExample({
     group: "styles",

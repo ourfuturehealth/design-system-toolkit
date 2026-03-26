@@ -23,7 +23,7 @@ const files = {
 const typographyRows = [
   {
     id: 'heading-xl',
-    label: 'Heading XL',
+    label: 'heading-xl',
     previewText: 'Page heading',
     className: 'ofh-heading-xl',
     scaleKey: 'heading-xl',
@@ -31,7 +31,7 @@ const typographyRows = [
   },
   {
     id: 'heading-lg',
-    label: 'Heading L',
+    label: 'heading-lg',
     previewText: 'Section heading',
     className: 'ofh-heading-lg',
     scaleKey: 'heading-lg',
@@ -39,7 +39,7 @@ const typographyRows = [
   },
   {
     id: 'heading-md',
-    label: 'Heading M',
+    label: 'heading-md',
     previewText: 'Subsection heading',
     className: 'ofh-heading-md',
     scaleKey: 'heading-md',
@@ -47,7 +47,7 @@ const typographyRows = [
   },
   {
     id: 'heading-sm',
-    label: 'Heading S',
+    label: 'heading-sm',
     previewText: 'Support heading',
     className: 'ofh-heading-sm',
     scaleKey: 'heading-sm',
@@ -55,7 +55,7 @@ const typographyRows = [
   },
   {
     id: 'heading-xs',
-    label: 'Heading XS',
+    label: 'heading-xs',
     previewText: 'Small heading',
     className: 'ofh-heading-xs',
     scaleKey: 'heading-xs',
@@ -63,7 +63,7 @@ const typographyRows = [
   },
   {
     id: 'lead',
-    label: 'Lead paragraph',
+    label: 'lead-md',
     previewText: 'Use lead text once to introduce a page.',
     className: 'ofh-body-l',
     scaleKey: 'lead-md',
@@ -71,7 +71,7 @@ const typographyRows = [
   },
   {
     id: 'paragraph',
-    label: 'Body',
+    label: 'paragraph-md',
     previewText: 'Use body copy for most written content.',
     className: 'ofh-body-m',
     scaleKey: 'paragraph-md',
@@ -79,7 +79,7 @@ const typographyRows = [
   },
   {
     id: 'paragraph-small',
-    label: 'Body small',
+    label: 'paragraph-sm',
     previewText: 'Use small body copy sparingly.',
     className: 'ofh-body-s',
     scaleKey: 'paragraph-sm',
@@ -87,12 +87,21 @@ const typographyRows = [
   },
   {
     id: 'list',
-    label: 'List',
+    label: 'list-md',
     previewText: 'List item',
     previewHtml: '<ul class="ofh-list app-foundation-showcase__inline-list"><li>List item</li></ul>',
     className: 'ofh-list',
     scaleKey: 'list-md',
     notes: 'Bulleted and numbered lists use this responsive list token.',
+  },
+  {
+    id: 'list-small',
+    label: 'list-sm',
+    previewText: 'List item',
+    previewHtml: '<ul class="ofh-list app-foundation-showcase__inline-list ofh-body-s"><li>List item</li></ul>',
+    className: 'ofh-body-s',
+    scaleKey: 'list-sm',
+    notes: 'Smaller list token for more compact supporting content.',
   },
 ];
 
@@ -321,27 +330,6 @@ const paletteColourGroups = [
 
 const indexCards = [
   {
-    title: 'Typography',
-    href: '/design-system/styles/typography',
-    summary: 'Responsive type styles, headline hierarchy, body sizes, and override utilities.',
-  },
-  {
-    title: 'Spacing',
-    href: '/design-system/styles/spacing',
-    summary:
-      'The horizontal and vertical responsive spacing scales, static size tokens, and spacing utility classes.',
-  },
-  {
-    title: 'Layout',
-    href: '/design-system/styles/layout',
-    summary: 'Breakpoints, containers, content widths, grid widths, and page wrapper spacing.',
-  },
-  {
-    title: 'Icons',
-    href: '/design-system/styles/icons',
-    summary: 'Material icon inventory plus the fixed and responsive sizing rules used by the toolkit.',
-  },
-  {
     title: 'Colour',
     href: '/design-system/styles/colour',
     summary: 'Semantic colour tokens for UI work and the core palette they are built from.',
@@ -352,9 +340,30 @@ const indexCards = [
     summary: 'Focus colour guidance and implementation patterns for accessible interactive states.',
   },
   {
+    title: 'Icons',
+    href: '/design-system/styles/icons',
+    summary: 'Material icon inventory plus the fixed and responsive sizing rules used by the toolkit.',
+  },
+  {
+    title: 'Layout',
+    href: '/design-system/styles/layout',
+    summary: 'Breakpoints, containers, content widths, grid widths, and page wrapper spacing.',
+  },
+  {
     title: 'Page template',
     href: '/design-system/styles/page-template',
     summary: 'The shared page shell, template blocks, and default content-page and transactional layouts.',
+  },
+  {
+    title: 'Spacing',
+    href: '/design-system/styles/spacing',
+    summary:
+      'The horizontal and vertical responsive spacing scales, static size tokens, and spacing utility classes.',
+  },
+  {
+    title: 'Typography',
+    href: '/design-system/styles/typography',
+    summary: 'Responsive type styles, headline hierarchy, body sizes, and override utilities.',
   },
 ];
 
@@ -912,7 +921,7 @@ function buildMainWrapperData(registry) {
 }
 
 function formatTriplet(values) {
-  return `M ${values.mobile} / T ${values.tablet} / D ${values.desktop}`;
+  return `D ${values.desktop} / T ${values.tablet} / M ${values.mobile}`;
 }
 
 function formatSpacingTriplet(scaleEntry) {

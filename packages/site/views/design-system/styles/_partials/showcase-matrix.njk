@@ -6,20 +6,20 @@
       <caption class="ofh-table__caption app-foundation-showcase__caption">{{ caption }}</caption>
     {% endif %}
     <thead class="ofh-table__head">
-      <tr class="ofh-table__row">
-        <th class="ofh-table__header" scope="col">Style</th>
+      <tr>
+        <th class="ofh-table__header" scope="col">{{ firstColumnLabel or "Style" }}</th>
         <th class="ofh-table__header" scope="col">Preview</th>
         {% if showClassName %}
-          <th class="ofh-table__header" scope="col">Class</th>
+          <th class="ofh-table__header" scope="col">{{ classColumnLabel or "Class" }}</th>
         {% endif %}
         {% if showToken %}
           <th class="ofh-table__header" scope="col">Token</th>
         {% endif %}
-        <th class="ofh-table__header" scope="col">Mobile</th>
-        <th class="ofh-table__header" scope="col">Tablet</th>
         <th class="ofh-table__header" scope="col">Desktop</th>
+        <th class="ofh-table__header" scope="col">Tablet</th>
+        <th class="ofh-table__header" scope="col">Mobile</th>
         {% if showLineHeight %}
-          <th class="ofh-table__header" scope="col">Line height</th>
+          <th class="ofh-table__header app-foundation-showcase__line-height-header" scope="col">Line height</th>
         {% endif %}
         {% if showFixedClass %}
           <th class="ofh-table__header" scope="col">Fixed class</th>
@@ -28,7 +28,7 @@
           <th class="ofh-table__header" scope="col">Responsive mixin</th>
         {% endif %}
         {% if showNotes %}
-          <th class="ofh-table__header" scope="col">Notes</th>
+          <th class="ofh-table__header app-foundation-showcase__notes-header" scope="col">Notes</th>
         {% endif %}
       </tr>
     </thead>
@@ -55,11 +55,11 @@
           {% if showToken %}
             <td class="ofh-table__cell"><code>{{ row.token }}</code></td>
           {% endif %}
-          <td class="ofh-table__cell">{{ row.mobile }}</td>
-          <td class="ofh-table__cell">{{ row.tablet }}</td>
           <td class="ofh-table__cell">{{ row.desktop }}</td>
+          <td class="ofh-table__cell">{{ row.tablet }}</td>
+          <td class="ofh-table__cell">{{ row.mobile }}</td>
           {% if showLineHeight %}
-            <td class="ofh-table__cell">{{ row.lineHeight }}</td>
+            <td class="ofh-table__cell app-foundation-showcase__line-height-cell">{{ row.lineHeight }}</td>
           {% endif %}
           {% if showFixedClass %}
             <td class="ofh-table__cell"><code>{{ row.fixedClass }}</code></td>
@@ -68,7 +68,7 @@
             <td class="ofh-table__cell"><code>{{ row.responsiveMixin }}</code></td>
           {% endif %}
           {% if showNotes %}
-            <td class="ofh-table__cell">{{ row.notes }}</td>
+            <td class="ofh-table__cell app-foundation-showcase__notes-cell">{{ row.notes }}</td>
           {% endif %}
         </tr>
       {% endfor %}

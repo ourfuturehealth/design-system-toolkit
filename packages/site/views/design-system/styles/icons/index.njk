@@ -26,41 +26,112 @@
   <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
 
   <h3 id="responsive-size-behaviour">Responsive size behaviour</h3>
-  <p>The fixed icon classes <code>.ofh-icon--16</code>, <code>.ofh-icon--24</code>, and <code>.ofh-icon--32</code> keep the same rendered size at every breakpoint for backwards compatibility.</p>
+  <p>Icons can be sized in 2 different ways. Use a fixed class when the icon should stay the same size at every breakpoint, or use the responsive mixin when the icon should follow the responsive iconography scale.</p>
+  <p>The fixed classes <code>.ofh-icon--16</code>, <code>.ofh-icon--24</code>, and <code>.ofh-icon--32</code> are backwards compatible and always render at the size you pick.</p>
   <p>Responsive icon sizes are opt-in and come from <code>$ofh-iconography-responsive-scale</code> via <code>@include ofh-iconography-responsive(...)</code>.</p>
 
-  {% set rows = foundationStyles.icons.sizeScale %}
-  {% set caption = "Published icon size tokens" %}
-  {% set showFixedClass = true %}
-  {% set showResponsiveMixin = true %}
-  {% set showNotes = true %}
-  {% include "design-system/styles/_partials/showcase-matrix.njk" %}
-
-  <h3 id="material-icon-gallery">Material icon gallery</h3>
-  {% for group in materialIcons.iconsByCategory %}
-    <h4>{{ group.category }}</h4>
-    <table>
-      <thead>
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Fixed icon sizes</caption>
+      <thead class="ofh-table__head">
         <tr>
-          <th>Name</th>
-          <th>16</th>
-          <th>24</th>
-          <th>32</th>
-          <th>Default</th>
+          <th class="ofh-table__header" scope="col">Fixed class</th>
+          <th class="ofh-table__header" scope="col">Preview</th>
+          <th class="ofh-table__header" scope="col">Rendered size</th>
+          <th class="ofh-table__header app-foundation-showcase__notes-header" scope="col">Behaviour</th>
         </tr>
       </thead>
-      <tbody>
-        {% for item in group.icons %}
-          <tr>
-            <td><code>{{ item.name }}</code></td>
-            <td>{{ icon({ "name": item.name, "size": 16 }) }}</td>
-            <td>{{ icon({ "name": item.name, "size": 24 }) }}</td>
-            <td>{{ icon({ "name": item.name, "size": 32 }) }}</td>
-            <td>{{ item.defaultSize }}</td>
+      <tbody class="ofh-table__body">
+        {% for row in foundationStyles.icons.sizeScale %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ row.fixedClass }}</code></th>
+            <td class="ofh-table__cell app-foundation-showcase__preview-cell">
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--icon">
+                {{ icon({ "name": row.iconName, "size": row.size, "title": row.iconName }) }}
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ row.size }}px</td>
+            <td class="ofh-table__cell app-foundation-showcase__notes-cell">Always {{ row.size }}px.</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Responsive icon scale</caption>
+      <thead class="ofh-table__head">
+        <tr>
+          <th class="ofh-table__header" scope="col">Responsive mixin</th>
+          <th class="ofh-table__header" scope="col">Preview</th>
+          <th class="ofh-table__header" scope="col">Desktop</th>
+          <th class="ofh-table__header" scope="col">Tablet</th>
+          <th class="ofh-table__header" scope="col">Mobile</th>
+          <th class="ofh-table__header app-foundation-showcase__notes-header" scope="col">Behaviour</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for row in foundationStyles.icons.sizeScale %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ row.responsiveMixin }}</code></th>
+            <td class="ofh-table__cell app-foundation-showcase__preview-cell">
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--icon">
+                {{ icon({ "name": row.iconName, "size": row.size, "title": row.iconName }) }}
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ row.desktop }}</td>
+            <td class="ofh-table__cell">{{ row.tablet }}</td>
+            <td class="ofh-table__cell">{{ row.mobile }}</td>
+            <td class="ofh-table__cell app-foundation-showcase__notes-cell">
+              {% if row.mobile == row.tablet and row.tablet == row.desktop %}
+                {{ row.desktop }} at every breakpoint.
+              {% elseif row.mobile == row.tablet %}
+                {{ row.desktop }} desktop, {{ row.tablet }} tablet/mobile.
+              {% else %}
+                {{ row.desktop }} desktop, {{ row.tablet }} tablet, {{ row.mobile }} mobile.
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="material-icon-gallery">Material icon gallery</h3>
+  {% for group in materialIcons.iconsByCategory %}
+    <h4>{{ group.category }}</h4>
+    <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table app-foundation-showcase__icon-gallery-table">
+      <colgroup>
+        <col>
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+        <col class="app-foundation-showcase__icon-gallery-default-col">
+      </colgroup>
+      <thead class="ofh-table__head">
+        <tr>
+          <th class="ofh-table__header" scope="col">Name</th>
+          <th class="ofh-table__header" scope="col">16</th>
+          <th class="ofh-table__header" scope="col">24</th>
+          <th class="ofh-table__header" scope="col">32</th>
+          <th class="ofh-table__header" scope="col">Default</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for item in group.icons %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ item.name }}</code></th>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 16 }) }}</td>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 24 }) }}</td>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 32 }) }}</td>
+            <td class="ofh-table__cell">{{ item.defaultSize }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
   {% endfor %}
 
   <p>Legacy icon files have been removed. Use the Material icon macro and sprite for all icon usage.</p>

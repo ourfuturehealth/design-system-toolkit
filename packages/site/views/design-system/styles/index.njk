@@ -5,6 +5,7 @@
 {% set theme = "Design" %}
 {% set dateUpdated = "March 2026" %}
 {% set hideContact = "true" %}
+{% from 'card/macro.njk' import card %}
 
 {% extends "app-layout.njk" %}
 
@@ -18,14 +19,16 @@
   <p>Where practical, the values shown here are derived from the toolkit token files so the docs stay aligned with the code.</p>
 
   <ul class="app-foundation-showcase__cards">
-    {% for card in foundationStyles.indexCards %}
+    {% for item in foundationStyles.indexCards %}
       <li>
-        <article class="app-foundation-showcase__card">
-          <h2 class="ofh-heading-md app-foundation-showcase__card-title">
-            <a class="ofh-link--no-visited-state" href="{{ card.href }}">{{ card.title }}</a>
-          </h2>
-          <p class="app-foundation-showcase__card-summary">{{ card.summary }}</p>
-        </article>
+        {{ card({
+          variant: 'clickable',
+          href: item.href,
+          heading: item.title,
+          headingLevel: 2,
+          description: item.summary,
+          classes: 'app-foundation-showcase__landing-card'
+        }) }}
       </li>
     {% endfor %}
   </ul>

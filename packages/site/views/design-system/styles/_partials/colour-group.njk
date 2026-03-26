@@ -1,28 +1,32 @@
 <section class="app-foundation-showcase__colour-group">
   <h3 class="ofh-heading-md">{{ group.title }}</h3>
-  <table class="app-colour-list" summary="{{ group.title }} colour tokens">
-    <thead class="ofh-u-visually-hidden">
-      <tr>
-        <th scope="col">Token</th>
-        <th scope="col">Source token</th>
-        <th scope="col">Hex value</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in group.items %}
-        <tr class="app-colour-list__row">
-          <th class="app-colour-list__column app-colour-list__column--name" scope="row">
-            <span class="app-colour-list__swatch{% if item.useBorder %} app-colour-list__swatch--border{% endif %}" style="background-color:{{ item.hex }}"></span>
-            <code>{{ item.token }}</code>
-          </th>
-          <td class="app-colour-list__column app-colour-list__column--source">
-            <code>{{ item.sourceToken }}</code>
-          </td>
-          <td class="app-colour-list__column app-colour-list__column--colour">
-            <code>{{ item.hex }}</code>
-          </td>
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table app-colour-list">
+      <thead class="ofh-table__head">
+        <tr>
+          <th class="ofh-table__header" scope="col">Token</th>
+          <th class="ofh-table__header" scope="col">Source token</th>
+          <th class="ofh-table__header" scope="col">Hex value</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for item in group.items %}
+          <tr class="ofh-table__row">
+            <td class="ofh-table__cell app-colour-list__token-cell">
+              <span class="app-colour-list__token">
+                <span class="app-colour-list__swatch{% if item.useBorder %} app-colour-list__swatch--border{% endif %}" style="background-color: {{ item.hex }};"></span>
+                <code>{{ item.token }}</code>
+              </span>
+            </td>
+            <td class="ofh-table__cell app-colour-list__source">
+              <code>{{ item.sourceToken }}</code>
+            </td>
+            <td class="ofh-table__cell app-colour-list__hex">
+              <code>{{ item.hex }}</code>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </section>
