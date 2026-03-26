@@ -1,9 +1,10 @@
 {% set pageTitle = "Focus state" %}
-{% set pageDescription = "Use these focus state styles to let users know which element they’re on and that they can interact with it." %}
+{% set pageDescription = "Current focus treatments for links, form controls and buttons in the OFH toolkit." %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Foundation styles" %}
-{% set dateUpdated = "October 2019" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "193" %}
+{% set hideContact = "true" %}
 
 {% extends "app-layout.njk" %}
 
@@ -14,53 +15,188 @@
 {% block bodyContent %}
 
   <h2>What is a focus state?</h2>
-  <p>Some people use keyboards or other devices to navigate through a page by jumping from 1 interactive element to the next. The focus state lets users know which element they’re currently on and that it's ready for them to interact with.</p>
+  <p>Focus states show people which interactive element is currently active when they move through a page using a keyboard or another assistive technology.</p>
+  <p>The toolkit applies focus styles through shared mixins and tokens so links, form controls and buttons behave consistently.</p>
 
-  <h2>Our focus state styles</h2>
-  <p>We've followed the <a href="https://design-system.service.gov.uk/get-started/focus-states/">GOV.UK Design System's approach to focus state styles</a>.</p>
-  <p>Like GOV.UK, we use a combination of yellow and black to make sure we meet the <a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html">Web Content Accessibility Guidelines (WCAG) 2.1 level AA non-text contrast</a> on any background <a href="/design-system/styles/colour">colour on the NHS website</a>.</p>
-  <p>The yellow has a high contrast with dark backgrounds and the thick black border has a high contrast against light backgrounds.</p>
+  <h2>Current focus tokens</h2>
+  <p>Our default focus ring uses <code>$ofh-color-border-feedback-focus</code>, which resolves to the current interactive blue token. On dark surfaces, inverted button variants use <code>$ofh-color-border-feedback-focus-inverted</code>, which resolves to white.</p>
+  <p>This page replaces the older yellow-and-black guidance that no longer matches the current OFH toolkit.</p>
 
-  <h2 id="link-focus-state-style">Link focus state style</h2>
-  <p>When links are focused, they have a yellow background with a black bottom border. This helps the focused link stand out from the rest of the content on the page.</p>
-  <img class="app-image--border app-example--image" src="/assets/focus-example-backgrounds.png" alt="A focused link against different NHS.UK background colours">
+  <h2>Focus treatments in the toolkit</h2>
+  {{ table({
+    responsive: true,
+    panel: false,
+    caption: "Focus treatments in the OFH toolkit",
+    head: [
+      {
+        text: "Mixin or token"
+      },
+      {
+        text: "Use for"
+      },
+      {
+        text: "Current treatment"
+      }
+    ],
+    rows: [
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-text</code>"
+        },
+        {
+          header: "Use for",
+          text: "Links, action links, details summaries and similar text-led controls"
+        },
+        {
+          header: "Current treatment",
+          text: "3px focus outline using the default focus token with a 1px offset"
+        }
+      ],
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-input</code>"
+        },
+        {
+          header: "Use for",
+          text: "Inputs, selects and textareas"
+        },
+        {
+          header: "Current treatment",
+          text: "Active input border plus a 4px focus outline offset by 4px"
+        }
+      ],
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-radio</code>"
+        },
+        {
+          header: "Use for",
+          text: "Radio controls"
+        },
+        {
+          header: "Current treatment",
+          text: "Active control border plus a 4px focus outline offset by 4px"
+        }
+      ],
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-checkbox</code>"
+        },
+        {
+          header: "Use for",
+          text: "Checkbox controls"
+        },
+        {
+          header: "Current treatment",
+          text: "Active control border plus a 4px focus outline offset by 4px"
+        }
+      ],
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-button</code>"
+        },
+        {
+          header: "Use for",
+          text: "Buttons and button-like interactive controls on light surfaces"
+        },
+        {
+          header: "Current treatment",
+          text: "4px default focus outline offset by 4px"
+        }
+      ],
+      [
+        {
+          header: "Mixin or token",
+          html: "<code>ofh-focused-button-inverted</code>"
+        },
+        {
+          header: "Use for",
+          text: "Inverted button variants on dark surfaces"
+        },
+        {
+          header: "Current treatment",
+          text: "4px inverted focus outline offset by 4px"
+        }
+      ]
+    ]
+  }) }}
 
-  <h2 id="form-input-focus-state-style">Form input focus state style</h2>
-  <p>When form inputs are focused, they have a yellow outline and a thick black border. If the element already has a border, the border gets thicker.</p>
-  <img class="app-image--border app-example--image" src="/assets/focus-example-input.png" alt="A text input labelled &quot;What is your name?&quot;. The example shows the text input both unfocused and focused.">
-  <p><a href="/design-system/components/radios">Radios</a> and <a href="/design-system/components/checkboxes">checkboxes</a> use the same style.</p>
-  <img class="app-image--border app-example--image" src="/assets/focus-example-radios.png" alt="Yes and no radio options to answer the question &quot;Do you know your NHS number?&quot;. In this example, the &quot;No&quot; option is focused.">
+  <h2>Live examples</h2>
+  <p>Click into an example, then use <code>Tab</code> inside it to move through the interactive elements and inspect the focus treatment.</p>
 
-  <h2 id="making-focus-states-accessible-for-extended-and-modified-components">Making focus states accessible for extended and modified components</h2>
-  <p>If you’ve extended or modified components in the NHS digital service manual, you can use service manual styles to make the focus states of these components accessible.</p>
-  <p>How you make focus states accessible depends on whether the component is:</p>
+  <h3>Text-based interactive elements</h3>
+  <p>Use <code>ofh-focused-text</code> for body links, action links, details summaries, pagination links and similar text-led controls.</p>
+  {{ designExample({
+    group: "styles",
+    item: "focus-state",
+    itemTitle: "focus state",
+    type: "text",
+    showCode: false
+  }) }}
+
+  <h3>Inputs, selects and textareas</h3>
+  <p>Use <code>ofh-focused-input</code> for input-based controls. The toolkit combines an active input border with the default focus outline so the control remains visible on light surfaces.</p>
+  {{ designExample({
+    group: "styles",
+    item: "focus-state",
+    itemTitle: "focus state",
+    type: "inputs",
+    showCode: false
+  }) }}
+
+  <h3>Radios and checkboxes</h3>
+  <p>Use <code>ofh-focused-radio</code> and <code>ofh-focused-checkbox</code> for selection controls rather than rebuilding the ring and border treatment manually.</p>
+  {{ designExample({
+    group: "styles",
+    item: "focus-state",
+    itemTitle: "focus state",
+    type: "choices",
+    showCode: false
+  }) }}
+
+  <h3>Buttons on light surfaces</h3>
+  <p>Use <code>ofh-focused-button</code> for the standard button variants. This is also the right treatment for other button-like controls on light surfaces.</p>
+  {{ designExample({
+    group: "styles",
+    item: "focus-state",
+    itemTitle: "focus state",
+    type: "buttons",
+    showCode: false
+  }) }}
+
+  <h3>Inverted buttons on dark surfaces</h3>
+  <p>Use <code>ofh-focused-button-inverted</code> for inverted button variants. These controls use the inverted focus token so the ring remains visible on dark backgrounds.</p>
+  {{ designExample({
+    group: "styles",
+    item: "focus-state",
+    itemTitle: "focus state",
+    type: "buttons-inverted",
+    showCode: false
+  }) }}
+
+  <h2>When building new components</h2>
+  <p>Use the mixin that matches the control type instead of rebuilding focus styles from raw values. That keeps the focus treatment aligned with the toolkit and the current design token model.</p>
   <ul>
-    <li>focusable text without a background colour or border</li>
-    <li>another focusable element with a background colour or border</li>
+    <li>text-like controls: <code>ofh-focused-text</code></li>
+    <li>inputs, selects and textareas: <code>ofh-focused-input</code></li>
+    <li>radios: <code>ofh-focused-radio</code></li>
+    <li>checkboxes: <code>ofh-focused-checkbox</code></li>
+    <li>buttons and button-like controls on light surfaces: <code>ofh-focused-button</code></li>
+    <li>inverted buttons on dark surfaces: <code>ofh-focused-button-inverted</code></li>
   </ul>
 
-  <h3 id="make-focusable-text-accessible">Make focusable text accessible</h3>
-  <p class="rich-text">If you use Sass, you should include the <code>ofh-focused-text</code> mixin in your component's <code>:focus</code> selector if that component is focusable text. For example, if the component is a link in body text, or the details component:</p>
-<pre class="app-pre"><code><span class="hljs-selector-class">.app-component</span><span class="hljs-selector-pseudo">:focus</span> {
-  <span class="hljs-variable">@include</span> ofh-focused-text;
-}</code></pre>
-
-  <h3 id="make-other-focusable-elements-accessible">Make other focusable elements accessible</h3>
-  <p>If you use Sass, you can use 3 NHS.UK frontend variables if your component has a background colour or border. For example, a text input or checkbox.</p>
-  <p>The 3 Sass variables are:</p>
+  <h2>If you are not using Sass</h2>
+  <p>Use the compiled CSS from the equivalent toolkit component as the source of truth. If you need to reproduce the treatment directly, use the current focus tokens from the toolkit rather than the older values previously documented on this page.</p>
   <ul>
-    <li class="rich-text"><code>$ofh-color-border-feedback-focus</code> - yellow background</li>
-    <li class="rich-text"><code>$ofh-focus-text-color</code> - black text</li>
-    <li class="rich-text"><code>$ofh-stroke-weight-4</code> - for consistent width</li>
-  </ul>
-
-  <p>Use these variables in your components instead of numeric values for the background, text and widths.</p>
-
-  <h2 id="if-you-do-not-use-sass">If you do not use Sass</h2>
-  <p>To make a component’s focus state accessible without using Sass, you can:</p>
-  <ul>
-    <li class="rich-text">see how the <code>ofh-focused-text</code> mixin works from the <a href="https://github.com/nhsuk/nhsuk-frontend/tree/master/packages/core/tools/_focused.scss#L12-L23">NHS.UK frontend source code</a></li>
-    <li class="rich-text">get the values for <code>$ofh-color-border-feedback-focus</code> and <code>$ofh-focus-text-color</code> from the <a href="/design-system/styles/colour">colour page</a></li>
+    <li><code>$ofh-color-border-feedback-focus</code> for the default focus ring</li>
+    <li><code>$ofh-color-border-feedback-focus-inverted</code> for inverted button focus on dark surfaces</li>
+    <li><code>$ofh-color-border-input-active</code> for the active input border on form controls</li>
+    <li><code>$ofh-stroke-weight-4</code> for the standard ring width on input and button treatments</li>
   </ul>
 
 {% endblock %}

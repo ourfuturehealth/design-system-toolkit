@@ -1,0 +1,21 @@
+{% from 'action-link/macro.njk' import actionLink %}
+{% from 'details/macro.njk' import details %}
+
+<div class="ofh-width-container">
+  <main class="ofh-main-wrapper" id="maincontent">
+    <p>Read our <a href="#" id="focus-state-text-target">screening guidance</a> before you continue.</p>
+
+    {{ actionLink({
+      "text": "Start your questionnaire",
+      "href": "#"
+    }) }}
+
+    {{ details({
+      "text": "How to find your NHS number",
+      "HTML": "
+      <p>An NHS number is a 10 digit number, like 485 777 3456.</p>
+      <p>You can find your NHS number on prescriptions, test results and appointment letters.</p>
+      "
+    }) }}
+  </main>
+</div>
