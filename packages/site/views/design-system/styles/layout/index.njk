@@ -99,10 +99,11 @@
   {% set caption = "Container and width references" %}
   {% set variant = "width" %}
   {% set classColumnLabel = "Use this class" %}
+  {% set showNotes = true %}
   {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3>Fixed-width container</h3>
-  <p class="rich-text">Use <code>.ofh-width-container</code> for a container with a maximum width of {{ foundationStyles.layout.widths[1].value }}.</p>
+  <p class="rich-text">Use <code>.ofh-width-container</code> for a container with a maximum width of {{ foundationStyles.layout.widthsById.content.value }}.</p>
 
   {{ designExample({
     group: "styles",
@@ -171,6 +172,7 @@
   {% set caption = "Grid column widths" %}
   {% set variant = "width" %}
   {% set classColumnLabel = "Grid class" %}
+  {% set showNotes = false %}
   {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3>Full width</h3>
@@ -260,7 +262,7 @@
 
   <h3>Reading width</h3>
   <p>Lines of text should be no longer than 70 to 80 characters.</p>
-  <p class="rich-text">Use <code>.ofh-u-reading-width</code> to apply a maximum width of {{ foundationStyles.layout.widths[3].value }} to longer blocks of content.</p>
+  <p class="rich-text">Use <code>.ofh-u-reading-width</code> to apply a maximum width of {{ foundationStyles.layout.widthsById.reading.value }} to longer blocks of content.</p>
 
   {{ designExample({
     group: "styles",
@@ -270,7 +272,7 @@
   }) }}
 
   <h3>Tablet and mobile-specific grid classes</h3>
-  <p>By default, grid columns go to 100% width of the container on screen sizes below the desktop breakpoint, which is {{ foundationStyles.layout.breakpoints[2].value }}. These utility classes will enforce column widths on all screen sizes.</p>
+  <p>By default, grid columns go to 100% width of the container on screen sizes below the desktop breakpoint, which is {{ foundationStyles.layout.breakpointsById.desktop.value }}. These utility classes will enforce column widths on all screen sizes.</p>
   <p class="rich-text">To define the column sizes, add the utility class <code>.ofh-u-</code> followed by the width to an existing grid column. For example <code>.ofh-u-one-half</code> sets your column width to one-half on all screen sizes.</p>
 
   {{ designExample({
@@ -281,7 +283,7 @@
   }) }}
 
   <h3>Tablet-specific grid classes</h3>
-  <p>These utility classes will enforce column widths from the tablet breakpoint upwards, which is {{ foundationStyles.layout.breakpoints[1].value }}.</p>
+  <p>These utility classes will enforce column widths from the tablet breakpoint upwards, which is {{ foundationStyles.layout.breakpointsById.tablet.value }}.</p>
   <p class="rich-text">To define your column sizes, add the utility class <code>.ofh-u-</code> followed by the width and the suffix <code>-tablet</code> to an existing grid column. For example, <code>.ofh-u-one-third-tablet</code> will set your column width to be one-third on screen sizes for tablet and larger.</p>
 
   {{ designExample({

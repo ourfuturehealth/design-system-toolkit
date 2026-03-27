@@ -18,7 +18,9 @@
           <th class="ofh-table__header" scope="col">Visual</th>
           <th class="ofh-table__header" scope="col">Value</th>
           <th class="ofh-table__header" scope="col">{{ classColumnLabel or "Class or token" }}</th>
-          <th class="ofh-table__header" scope="col">Notes</th>
+          {% if showNotes is not defined or showNotes %}
+            <th class="ofh-table__header" scope="col">Notes</th>
+          {% endif %}
         {% endif %}
       </tr>
     </thead>
@@ -48,7 +50,9 @@
             </td>
             <td class="ofh-table__cell">{{ item.value }}</td>
             <td class="ofh-table__cell"><code>{{ item.className }}</code></td>
-            <td class="ofh-table__cell">{{ item.note }}</td>
+            {% if showNotes is not defined or showNotes %}
+              <td class="ofh-table__cell">{{ item.note }}</td>
+            {% endif %}
           {% endif %}
         </tr>
       {% endfor %}
