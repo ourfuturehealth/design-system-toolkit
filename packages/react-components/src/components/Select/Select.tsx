@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconGlyph } from '../_internal/IconGlyph';
+import { Icon } from '../Icon';
 import { joinClassNames } from '../_internal/joinClassNames';
 
 export interface SelectItem {
@@ -137,7 +137,7 @@ export const Select = ({
           ))}
         </select>
         <span className="ofh-select__icon" aria-hidden="true">
-          <IconGlyph name="UnfoldMore" />
+          <Icon name="UnfoldMore" />
         </span>
       </div>
     </div>

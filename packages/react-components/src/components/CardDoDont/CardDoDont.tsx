@@ -4,7 +4,7 @@ import {
   joinClasses,
   type HeadingLevel,
 } from '../../internal/ofhUtils';
-import { OfhIcon } from '../../internal/OfhIcon';
+import { Icon } from '../Icon';
 
 export interface CardDoDontItem {
   item: React.ReactNode;
@@ -55,10 +55,10 @@ export const CardDoDont = ({
           <ul className="ofh-card-do-dont__items">
             {items.map((data, index) => (
               <li className="ofh-card-do-dont__item" key={index}>
-                <OfhIcon
+                <Icon
                   name={iconName}
                   size={32}
-                  classes={joinClasses(
+                  className={joinClasses(
                     'ofh-card-do-dont__icon',
                     `ofh-card-do-dont__icon--${type}`,
                   )}

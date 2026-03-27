@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconGlyph } from '../_internal/IconGlyph';
+import { Icon } from '../Icon';
 import { joinClassNames } from '../_internal/joinClassNames';
 import { useControllableState } from '../_internal/useControllableState';
 
@@ -266,7 +266,7 @@ export const Checkboxes = ({
                       value={String(item.value)}
                     />
                     <span className="ofh-checkboxes__controller" aria-hidden="true">
-                      <IconGlyph className="ofh-checkboxes__icon" name="Done" size={32} />
+                      <Icon className="ofh-checkboxes__icon" name="Done" size={32} />
                     </span>
                     <label
                       className={joinClassNames(
