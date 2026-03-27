@@ -58,8 +58,7 @@ body {
 
 .app-focus-state__button-row {
   align-items: flex-start;
-  column-gap: $ofh-size-24;
   display: flex;
   flex-wrap: wrap;
-  row-gap: $ofh-size-16;
+  gap: $ofh-size-16 $ofh-size-24;
 }
