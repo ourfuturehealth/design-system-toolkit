@@ -55,3 +55,10 @@ body {
   padding: 20px;
   text-align: center;
 }
+
+.app-focus-state__button-row {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $ofh-size-16 $ofh-size-24;
+}

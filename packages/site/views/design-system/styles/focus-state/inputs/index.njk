@@ -1,0 +1,49 @@
+{% from 'input/macro.njk' import input %}
+{% from 'select/macro.njk' import select %}
+{% from 'textarea/macro.njk' import textarea %}
+
+<div class="ofh-width-container">
+  <main class="ofh-main-wrapper" id="maincontent">
+    {{ input({
+      "label": {
+        "text": "Email address"
+      },
+      "id": "focus-state-input-target",
+      "name": "focus-state-input-target"
+    }) }}
+
+    {{ select({
+      "id": "focus-state-select",
+      "name": "focus-state-select",
+      "label": {
+        "text": "Preferred contact method"
+      },
+      "items": [
+        {
+          "value": "email",
+          "text": "Email"
+        },
+        {
+          "value": "phone",
+          "text": "Phone",
+          "selected": true
+        },
+        {
+          "value": "text",
+          "text": "Text message"
+        }
+      ]
+    }) }}
+
+    {{ textarea({
+      "name": "focus-state-textarea",
+      "id": "focus-state-textarea",
+      "label": {
+        "text": "Additional detail"
+      },
+      "hint": {
+        "text": "Use this field to describe anything else we should know."
+      }
+    }) }}
+  </main>
+</div>

@@ -39,7 +39,7 @@
 
     <li class="app-side-nav__item app-side-nav__item--current"><a class="app-side-nav__link" href="/design-system/styles/spacing">Spacing</a>
       <ul class="app-side-nav__list app-side-nav__list--nested">
-        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-scale">The responsive spacing scale</a></li>
+        <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-scale">The responsive spacing scales</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#spacing-on-custom-components">Spacing on custom components</a></li>
         <li class="app-side-nav__item"><a class="app-side-nav__link" href="#width-override-classes">Width override classes</a></li>
       </ul>
@@ -59,81 +59,15 @@
   <p>Desktop is the reference size for each spacing key. Values then either stay the same or collapse at smaller breakpoints.</p>
   <p>The responsive scales are split by direction. When you use the mixin with <code>all</code>, top and bottom use the vertical scale, while left and right use the horizontal scale.</p>
 
-  <h3>Horizontal spacing scale</h3>
+  {% set items = foundationStyles.spacing.horizontalScale %}
+  {% set caption = "Horizontal spacing scale" %}
+  {% set variant = "spacing" %}
+  {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
-  {{ table({
-    panel: false,
-    caption: "",
-    head: [
-      {
-        text: "Size key"
-      },
-      {
-        text: "Desktop",
-        format: "numeric"
-      },
-      {
-        text: "Tablet",
-        format: "numeric"
-      },
-      {
-        text: "Mobile",
-        format: "numeric"
-      }
-    ],
-    rows: [
-      [{ text: "0" }, { text: "0", format: "numeric" }, { text: "0", format: "numeric" }, { text: "0", format: "numeric" }],
-      [{ text: "2" }, { text: "2px", format: "numeric" }, { text: "2px", format: "numeric" }, { text: "2px", format: "numeric" }],
-      [{ text: "4" }, { text: "4px", format: "numeric" }, { text: "4px", format: "numeric" }, { text: "4px", format: "numeric" }],
-      [{ text: "8" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }],
-      [{ text: "12" }, { text: "12px", format: "numeric" }, { text: "12px", format: "numeric" }, { text: "12px", format: "numeric" }],
-      [{ text: "16" }, { text: "16px", format: "numeric" }, { text: "16px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "24" }, { text: "24px", format: "numeric" }, { text: "24px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "32" }, { text: "32px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "40" }, { text: "40px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "48" }, { text: "48px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "56" }, { text: "56px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "64" }, { text: "64px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "16px", format: "numeric" }]
-    ]
-  }) }}
-
-  <h3>Vertical spacing scale</h3>
-
-  {{ table({
-    panel: false,
-    caption: "",
-    head: [
-      {
-        text: "Size key"
-      },
-      {
-        text: "Desktop",
-        format: "numeric"
-      },
-      {
-        text: "Tablet",
-        format: "numeric"
-      },
-      {
-        text: "Mobile",
-        format: "numeric"
-      }
-    ],
-    rows: [
-      [{ text: "0" }, { text: "0", format: "numeric" }, { text: "0", format: "numeric" }, { text: "0", format: "numeric" }],
-      [{ text: "2" }, { text: "2px", format: "numeric" }, { text: "2px", format: "numeric" }, { text: "2px", format: "numeric" }],
-      [{ text: "4" }, { text: "4px", format: "numeric" }, { text: "4px", format: "numeric" }, { text: "4px", format: "numeric" }],
-      [{ text: "8" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }],
-      [{ text: "12" }, { text: "12px", format: "numeric" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }],
-      [{ text: "16" }, { text: "16px", format: "numeric" }, { text: "8px", format: "numeric" }, { text: "8px", format: "numeric" }],
-      [{ text: "24" }, { text: "24px", format: "numeric" }, { text: "16px", format: "numeric" }, { text: "16px", format: "numeric" }],
-      [{ text: "32" }, { text: "32px", format: "numeric" }, { text: "24px", format: "numeric" }, { text: "24px", format: "numeric" }],
-      [{ text: "40" }, { text: "40px", format: "numeric" }, { text: "32px", format: "numeric" }, { text: "32px", format: "numeric" }],
-      [{ text: "48" }, { text: "48px", format: "numeric" }, { text: "40px", format: "numeric" }, { text: "40px", format: "numeric" }],
-      [{ text: "56" }, { text: "56px", format: "numeric" }, { text: "48px", format: "numeric" }, { text: "48px", format: "numeric" }],
-      [{ text: "64" }, { text: "64px", format: "numeric" }, { text: "56px", format: "numeric" }, { text: "56px", format: "numeric" }]
-    ]
-  }) }}
+  {% set items = foundationStyles.spacing.verticalScale %}
+  {% set caption = "Vertical spacing scale" %}
+  {% set variant = "spacing" %}
+  {% include "design-system/styles/_partials/showcase-scale.njk" %}
 
   <h3 id="spacing-override-classes">Spacing override classes</h3>
   <p>Occasionally, you might need to make minor adjustments like adding spacing or removing it from elements of your design. You can use the responsive spacing override classes for this.</p>
@@ -142,12 +76,12 @@
   <p>The spacing override classes are structured to allow you to apply any size of the scale, using margin or padding in any direction.</p>
   <p class="rich-text">The class name gives you the spacing size key, not a single fixed pixel value at every breakpoint.</p>
   <p class="rich-text">To add padding use <code>-padding</code> instead of <code>-margin</code>.</p>
-  <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set margin-top, <code>-padding-right</code> will set padding-right. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
+  <p class="rich-text">If you want to add the margin or padding in a particular direction, add <code>left</code> for left, <code>right</code> for right, <code>top</code> for top, or <code>bottom</code> for bottom. For example, <code>-margin-top</code> will set margin-top and <code>-padding-right</code> will set padding-right. If you do not specify a direction, the margin or padding will be applied to all sides of the element.</p>
   <p class="rich-text">The last part of the class is the spacing size key. For example, <code>ofh-u-margin-56</code> uses the <code>56</code> responsive spacing key and then applies the matching values from the relevant horizontal or vertical scale.</p>
   <p class="rich-text">Examples:</p>
   <ul>
-    <li><p class="rich-text"><code>ofh-u-margin-bottom-56</code> uses the vertical scale, so it is 56px on desktop and 48px on tablet and mobile</p></li>
-    <li><p class="rich-text"><code>ofh-u-margin-right-56</code> uses the horizontal scale, so it is 56px on desktop, 32px on tablet, and 16px on mobile</p></li>
+    <li><p class="rich-text"><code>ofh-u-margin-bottom-56</code> uses the vertical scale, so it is {{ foundationStyles.spacing.byKey['56'].vertical.desktop }} on desktop and {{ foundationStyles.spacing.byKey['56'].vertical.tablet }} on tablet and mobile</p></li>
+    <li><p class="rich-text"><code>ofh-u-margin-right-56</code> uses the horizontal scale, so it is {{ foundationStyles.spacing.byKey['56'].horizontal.desktop }} on desktop, {{ foundationStyles.spacing.byKey['56'].horizontal.tablet }} on tablet, and {{ foundationStyles.spacing.byKey['56'].horizontal.mobile }} on mobile</p></li>
     <li><p class="rich-text"><code>ofh-u-margin-56</code> combines both scales, so top and bottom use the vertical values while left and right use the horizontal values</p></li>
   </ul>
   <p>Small spacing keys stay consistent across breakpoints. Larger keys reduce as the layout collapses.</p>
@@ -170,7 +104,8 @@
   }) }}
 
   <h2 id="spacing-on-custom-components">Spacing on custom components</h2>
-  <p>If you’re building your own components and want to reference spacing directly in SCSS, use the static size tokens for fixed geometry and the responsive spacing mixins for layout spacing.</p>
+  <p>If you are building your own components and want to reference spacing directly in SCSS, use the static size tokens for fixed geometry and the responsive spacing mixins for layout spacing.</p>
+  <p>The old <code>ofh-spacing()</code> helper was removed in toolkit v4.5.0, so fixed spacing values should now come from <code>$ofh-size-*</code> tokens.</p>
 
   <h3 id="using-the-static-spacing-function">Using the static spacing tokens</h3>
   <p>If you want a fixed value that does not change by breakpoint, use the matching <code>$ofh-size-*</code> token:</p>
@@ -180,8 +115,8 @@
   <p>If you want layout spacing that adapts by breakpoint, use the responsive mixin with a size key from the tables above.</p>
   <p>For example:</p>
   <ul>
-    <li><p class="rich-text">use <code>@include ofh-responsive-margin(40, "bottom");</code> for 40px margin-bottom on desktop and 32px on tablet and mobile</p></li>
-    <li><p class="rich-text">use <code>@include ofh-responsive-padding(40);</code> for 40px top and bottom on desktop, 32px top and bottom on tablet and mobile, and the matching horizontal scale on the left and right</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-margin(40, "bottom");</code> for {{ foundationStyles.spacing.byKey['40'].vertical.desktop }} margin-bottom on desktop and {{ foundationStyles.spacing.byKey['40'].vertical.tablet }} on tablet and mobile</p></li>
+    <li><p class="rich-text">use <code>@include ofh-responsive-padding(40);</code> for {{ foundationStyles.spacing.byKey['40'].vertical.desktop }} top and bottom on desktop, {{ foundationStyles.spacing.byKey['40'].vertical.tablet }} top and bottom on tablet and mobile, and the matching horizontal scale on the left and right</p></li>
   </ul>
 
   <h2 id="width-override-classes">Width override classes</h2>

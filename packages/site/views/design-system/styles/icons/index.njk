@@ -4,6 +4,7 @@
 {% set subSection = "Foundation styles" %}
 {% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "4" %}
+{% set hideContact = "true" %}
 
 {% extends "app-layout.njk" %}
 {% from "icon/macro.njk" import icon %}
@@ -24,31 +25,111 @@
   <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code></p>
   <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
 
-  <h3 id="material-icon-gallery">Material icon gallery</h3>
-  {% for group in materialIcons.iconsByCategory %}
-    <h4>{{ group.category }}</h4>
-    <table>
-      <thead>
+  <h3 id="responsive-size-behaviour">Responsive size behaviour</h3>
+  <p>Icons can be sized in 2 different ways. Use a fixed class when the icon should stay the same size at every breakpoint, or use the responsive mixin when the icon should follow the responsive iconography scale.</p>
+  <p>If you render the shared icon primitive without passing a size or adding a size class, it defaults to <code>24px</code>. Some components override that base behaviour in their own CSS, so treat <code>24px</code> as the icon primitive default rather than a guarantee for every component-level icon.</p>
+  <p>The fixed classes <code>.ofh-icon--16</code>, <code>.ofh-icon--24</code>, and <code>.ofh-icon--32</code> are backwards compatible and always render at the size you pick.</p>
+  <p>Responsive icon sizes are opt-in and come from <code>$ofh-iconography-responsive-scale</code> via <code>@include ofh-iconography-responsive(...)</code>.</p>
+
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Fixed icon sizes</caption>
+      <thead class="ofh-table__head">
         <tr>
-          <th>Name</th>
-          <th>16</th>
-          <th>24</th>
-          <th>32</th>
-          <th>Default</th>
+          <th class="ofh-table__header" scope="col">Fixed class</th>
+          <th class="ofh-table__header" scope="col">Preview</th>
+          <th class="ofh-table__header" scope="col">Rendered size</th>
+          <th class="ofh-table__header app-foundation-showcase__notes-header" scope="col">Behaviour</th>
         </tr>
       </thead>
-      <tbody>
-        {% for item in group.icons %}
-          <tr>
-            <td><code>{{ item.name }}</code></td>
-            <td>{{ icon({ "name": item.name, "size": 16 }) }}</td>
-            <td>{{ icon({ "name": item.name, "size": 24 }) }}</td>
-            <td>{{ icon({ "name": item.name, "size": 32 }) }}</td>
-            <td>{{ item.defaultSize }}</td>
+      <tbody class="ofh-table__body">
+        {% for row in foundationStyles.icons.sizeScale %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ row.fixedClass }}</code></th>
+            <td class="ofh-table__cell app-foundation-showcase__preview-cell">
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--icon">
+                {{ icon({ "name": row.iconName, "size": row.size, "title": row.iconName }) }}
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ row.size }}px</td>
+            <td class="ofh-table__cell app-foundation-showcase__notes-cell">Always {{ row.size }}px.</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
+
+  <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table">
+      <caption class="ofh-table__caption app-foundation-showcase__caption">Responsive icon scale</caption>
+      <thead class="ofh-table__head">
+        <tr>
+          <th class="ofh-table__header" scope="col">Responsive mixin</th>
+          <th class="ofh-table__header" scope="col">Preview</th>
+          <th class="ofh-table__header" scope="col">Desktop</th>
+          <th class="ofh-table__header" scope="col">Tablet</th>
+          <th class="ofh-table__header" scope="col">Mobile</th>
+          <th class="ofh-table__header app-foundation-showcase__notes-header" scope="col">Behaviour</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for row in foundationStyles.icons.sizeScale %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ row.responsiveMixin }}</code></th>
+            <td class="ofh-table__cell app-foundation-showcase__preview-cell">
+              <div class="app-foundation-showcase__preview app-foundation-showcase__preview--icon">
+                {{ icon({ "name": row.iconName, "size": row.size, "title": row.iconName }) }}
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ row.desktop }}</td>
+            <td class="ofh-table__cell">{{ row.tablet }}</td>
+            <td class="ofh-table__cell">{{ row.mobile }}</td>
+            <td class="ofh-table__cell app-foundation-showcase__notes-cell">
+              {% if row.mobile == row.tablet and row.tablet == row.desktop %}
+                {{ row.desktop }} at every breakpoint.
+              {% elseif row.mobile == row.tablet %}
+                {{ row.desktop }} desktop, {{ row.tablet }} tablet/mobile.
+              {% else %}
+                {{ row.desktop }} desktop, {{ row.tablet }} tablet, {{ row.mobile }} mobile.
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="material-icon-gallery">Material icon gallery</h3>
+  {% for group in materialIcons.iconsByCategory %}
+    <h4>{{ group.category }}</h4>
+    <div class="app-foundation-showcase__table-wrap">
+    <table class="ofh-table app-foundation-showcase__table app-foundation-showcase__icon-gallery-table">
+      <colgroup>
+        <col>
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+        <col class="app-foundation-showcase__icon-gallery-size-col">
+      </colgroup>
+      <thead class="ofh-table__head">
+        <tr>
+          <th class="ofh-table__header" scope="col">Name</th>
+          <th class="ofh-table__header" scope="col">16</th>
+          <th class="ofh-table__header" scope="col">24</th>
+          <th class="ofh-table__header" scope="col">32</th>
+        </tr>
+      </thead>
+      <tbody class="ofh-table__body">
+        {% for item in group.icons %}
+          <tr class="ofh-table__row">
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row"><code>{{ item.name }}</code></th>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 16 }) }}</td>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 24 }) }}</td>
+            <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 32 }) }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
   {% endfor %}
 
   <p>Legacy icon files have been removed. Use the Material icon macro and sprite for all icon usage.</p>
@@ -66,10 +147,10 @@
   <ul>
     <li>Search</li>
     <li>ChevronRight</li>
-    <li>ExpandMore and ExpandLess (for expandable sections)</li>
+    <li>ExpandMore and ExpandLess for expandable sections</li>
     <li>Close</li>
   </ul>
-  <p>Other icons needs an explanation. They include:</p>
+  <p>Other icons need an explanation. They include:</p>
   <ul>
     <li><a href="/design-system/components/action-link">action links</a> - tell the user what the link will help them do, for example: "Find a pharmacy"</li>
     <li>right and left arrows for <a href="/design-system/components/pagination">pagination</a> - add "Previous" or "Next"</li>
@@ -77,8 +158,7 @@
   </ul>
 
   <h3>Using SVG classes for icons</h3>
-  <p>We use scalable vector graphics (SVG) for icons, rather than images such as PNG. SVG are code snippets that you can drop directly into the HTML.</p>
-  <p>SVG icons are sharp, flexible, and load quickly - and you can control how they appear, for example their colour, with style sheets (CSS).</p>
+  <p>We use scalable vector graphics, SVG, for icons rather than images such as PNG. SVGs are sharp, flexible, and load quickly. You can also control how they appear with CSS.</p>
   <p class="rich-text">If you're using a server side or templating language, include icons with the shared macro, for example <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code>.</p>
   <p class="rich-text">The icon macro renders consistent <code>.ofh-icon</code> markup that references the Material sprite symbols.</p>
   <p class="rich-text">Legacy PNG fallbacks are not provided as part of this implementation.</p>
@@ -88,7 +168,7 @@
   <p>If you have any research or experience to share, please get in touch on the <a href="/slack">NHS.UK service manual Slack workspace</a> or email us at <a href="mailto:service-manual@nhs.net">service-manual@nhs.net</a>.</p>
 
   <h2 id="research">Research</h2>
-  <p>These icons seem to be universally recognisable. When we tested them, we found that people understood them. We tested them in context - not on their own, but in components on a full page.</p>
+  <p>These icons seem to be universally recognisable. When we tested them, we found that people understood them. We tested them in context, not on their own, but in components on a full page.</p>
   <p>Read more about the benefits of SVG icons:</p>
   <ul>
     <li><a href="https://css-tricks.com/pretty-good-svg-icon-system/">CSS Tricks - a pretty good SVG icon system</a></li>

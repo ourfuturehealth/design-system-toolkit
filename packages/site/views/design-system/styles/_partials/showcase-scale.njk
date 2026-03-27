@@ -1,0 +1,61 @@
+<div class="app-foundation-showcase__table-wrap">
+  <table class="ofh-table app-foundation-showcase__table">
+    {% if caption %}
+      <caption class="ofh-table__caption app-foundation-showcase__caption">{{ caption }}</caption>
+    {% endif %}
+    <thead class="ofh-table__head">
+      <tr>
+        {% if variant == "spacing" %}
+          <th class="ofh-table__header" scope="col">Spacing unit</th>
+          <th class="ofh-table__header" scope="col">Responsive preview</th>
+          <th class="ofh-table__header" scope="col">Desktop</th>
+          <th class="ofh-table__header" scope="col">Tablet</th>
+          <th class="ofh-table__header" scope="col">Mobile</th>
+          <th class="ofh-table__header" scope="col">Static token</th>
+          <th class="ofh-table__header" scope="col">Utility example</th>
+        {% else %}
+          <th class="ofh-table__header" scope="col">Reference</th>
+          <th class="ofh-table__header" scope="col">Visual</th>
+          <th class="ofh-table__header" scope="col">Value</th>
+          <th class="ofh-table__header" scope="col">{{ classColumnLabel or "Class or token" }}</th>
+          {% if showNotes is not defined or showNotes %}
+            <th class="ofh-table__header" scope="col">Notes</th>
+          {% endif %}
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody class="ofh-table__body">
+      {% for item in items %}
+        <tr class="ofh-table__row">
+          {% if variant == "spacing" %}
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row">{{ item.step }}</th>
+            <td class="ofh-table__cell">
+              <div class="app-foundation-showcase__spacing-bars" aria-hidden="true">
+                <span class="app-foundation-showcase__spacing-bar app-foundation-showcase__spacing-bar--desktop" style="height: {{ item.desktop }};"></span>
+                <span class="app-foundation-showcase__spacing-bar app-foundation-showcase__spacing-bar--tablet" style="height: {{ item.tablet }};"></span>
+                <span class="app-foundation-showcase__spacing-bar app-foundation-showcase__spacing-bar--mobile" style="height: {{ item.mobile }};"></span>
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ item.desktop }}</td>
+            <td class="ofh-table__cell">{{ item.tablet }}</td>
+            <td class="ofh-table__cell">{{ item.mobile }}</td>
+            <td class="ofh-table__cell"><code>{{ item.staticToken }}</code></td>
+            <td class="ofh-table__cell"><code>{{ item.utilityExample }}</code></td>
+          {% else %}
+            <th class="ofh-table__header app-foundation-showcase__row-heading" scope="row">{{ item.label }}</th>
+            <td class="ofh-table__cell">
+              <div class="app-foundation-showcase__width-track" aria-hidden="true">
+                <span class="app-foundation-showcase__width-fill" style="width: {{ item.visualPercent }}%;"></span>
+              </div>
+            </td>
+            <td class="ofh-table__cell">{{ item.value }}</td>
+            <td class="ofh-table__cell"><code>{{ item.className }}</code></td>
+            {% if showNotes is not defined or showNotes %}
+              <td class="ofh-table__cell">{{ item.note }}</td>
+            {% endif %}
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
