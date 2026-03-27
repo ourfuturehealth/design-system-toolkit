@@ -25,7 +25,9 @@
       "immutable": "5.1.5",
       "liquidjs": "10.25.0",
       "flatted": "3.4.2",
-      "undici": "7.24.0"
+      "undici": "7.24.0",
+      "picomatch@2.3.1": "2.3.2",
+      "picomatch@4.0.3": "4.0.4"
     }
   },
   "scripts": {
