@@ -3,7 +3,7 @@ import { TextInput } from '../TextInput';
 import { Radios } from './Radios';
 
 const meta: Meta<typeof Radios> = {
-  title: 'Components/Radios',
+  title: 'Components/Input/Radios',
   component: Radios,
   parameters: {
     layout: 'padded',

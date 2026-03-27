@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TextInput } from './TextInput';
 
 const meta: Meta<typeof TextInput> = {
-  title: 'Components/TextInput',
+  title: 'Components/Input/Text input',
   component: TextInput,
   parameters: {
     layout: 'padded',

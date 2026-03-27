@@ -4,7 +4,7 @@ import { Autocomplete } from './Autocomplete';
 const options = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
 
 const meta: Meta<typeof Autocomplete> = {
-  title: 'Components/Autocomplete',
+  title: 'Components/Input/Autocomplete',
   component: Autocomplete,
   parameters: {
     layout: 'padded',

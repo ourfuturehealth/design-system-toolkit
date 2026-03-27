@@ -9,7 +9,7 @@ const items = [
 ];
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Components/Input/Select',
   component: Select,
   parameters: {
     layout: 'padded',

@@ -28,7 +28,7 @@ const items = [
 ];
 
 const meta: Meta<typeof Checkboxes> = {
-  title: 'Components/Checkboxes',
+  title: 'Components/Input/Checkboxes',
   component: Checkboxes,
   parameters: {
     layout: 'padded',

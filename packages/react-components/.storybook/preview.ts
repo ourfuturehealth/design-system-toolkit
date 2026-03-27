@@ -5,6 +5,12 @@ import '../src/styles/main.scss';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        method: 'alphabetical',
+        locales: 'en-US',
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
