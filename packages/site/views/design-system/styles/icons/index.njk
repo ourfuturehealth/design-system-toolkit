@@ -14,6 +14,8 @@
 {% endblock %}
 
 {% block bodyContent %}
+  <p>This page is the reference guide for the icon sprite, token scale, and gallery. For practical toolkit usage in Nunjucks, see the <a href="/design-system/components/icon">Icon component page</a>.</p>
+
   <h2 id="material-svg-icons">Material SVG icons</h2>
   <p>New icon support is available using the shared <code>icon</code> macro and the Material SVG sprite.</p>
   <p class="rich-text">Sprite file: <a href="{{ materialIcons.spritePath }}" target="_blank" rel="noopener noreferrer"><code>{{ materialIcons.spritePath }}</code></a></p>
@@ -23,6 +25,23 @@
     {{ icon({ "name": "Search", "size": 32, "title": "Search" }) }}
   </div>
   <p class="rich-text">Example: <code>{% raw %}{{ icon({ "name": "Search", "size": 24 }) }}{% endraw %}</code></p>
+  <p>Choose one sizing mode for each icon:</p>
+  <ul>
+    <li><code>size</code> keeps the icon fixed at <code>16</code>, <code>24</code>, or <code>32</code> across every breakpoint</li>
+    <li><code>responsiveSize</code> uses the toolkit iconography scale so the icon can collapse on smaller screens</li>
+  </ul>
+  <p>The responsive iconography scale works like this:</p>
+  <ul>
+    <li><code>responsiveSize: 16</code> → <code>16 / 16 / 16</code> on mobile / tablet / desktop</li>
+    <li><code>responsiveSize: 24</code> → <code>16 / 16 / 24</code></li>
+    <li><code>responsiveSize: 32</code> → <code>24 / 24 / 32</code></li>
+  </ul>
+  <div class="ofh-u-margin-bottom-16">
+    {{ icon({ "name": "Search", "responsiveSize": 16, "title": "Search" }) }}
+    {{ icon({ "name": "Search", "responsiveSize": 24, "title": "Search" }) }}
+    {{ icon({ "name": "Search", "responsiveSize": 32, "title": "Search" }) }}
+  </div>
+  <p class="rich-text">Responsive example: <code>{% raw %}{{ icon({ "name": "Search", "responsiveSize": 24 }) }}{% endraw %}</code></p>
   <p>{{ materialIcons.total }} Material icons are currently available in the toolkit sprite.</p>
 
   <h3 id="responsive-size-behaviour">Responsive size behaviour</h3>

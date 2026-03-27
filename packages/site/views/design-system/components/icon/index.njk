@@ -1,0 +1,60 @@
+{% set pageTitle = "Icon" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use the Icon macro to render Material SVG icons from the shared toolkit sprite in Nunjucks and HTML-based toolkit components." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "March 2026" %}
+{% set backlog_issue_id = "4" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <p>Use Icon when a toolkit component or page needs one of the shared Material SVG icons from the sprite. For the full gallery, available names, and token reference, see <a href="/design-system/styles/icons">Icons in Foundation styles</a>.</p>
+  <p>If you are working in React instead of Nunjucks, use the React <code>Icon</code> component in Storybook. This page is the toolkit/Nunjucks usage guide.</p>
+
+  <h2 id="how-to-use-icon">How to use Icon</h2>
+  <p>Import the shared macro and pass the icon name in PascalCase, for example <code>Search</code> or <code>UnfoldMore</code>.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "icon",
+    type: "default"
+  }) }}
+
+  <h3 id="fixed-size-icons">Fixed size icons</h3>
+  <p>Use <code>size</code> when the icon should stay the same size across every breakpoint. Fixed sizes are <code>16</code>, <code>24</code>, and <code>32</code>.</p>
+
+  <h3 id="responsive-size-icons">Responsive size icons</h3>
+  <p>Use <code>responsiveSize</code> when the icon should follow the toolkit iconography scale instead of staying fixed.</p>
+  <ul>
+    <li><code>responsiveSize: 16</code> renders as <code>16 / 16 / 16</code> on mobile, tablet, and desktop</li>
+    <li><code>responsiveSize: 24</code> renders as <code>16 / 16 / 24</code></li>
+    <li><code>responsiveSize: 32</code> renders as <code>24 / 24 / 32</code></li>
+  </ul>
+  <p>Choose one sizing mode per icon. Do not pass both <code>size</code> and <code>responsiveSize</code>.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "icon",
+    type: "responsive"
+  }) }}
+
+  <h3 id="accessibility">Accessibility</h3>
+  <p>Leave <code>title</code> empty for decorative icons so the icon stays hidden from assistive technology. Add <code>title</code> when the icon needs its own accessible name.</p>
+  <p>If the icon is purely decorative inside another labelled control, do not give it a separate title.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "icon",
+    type: "with-title"
+  }) }}
+
+  <h3 id="colour">Colour</h3>
+  <p>Monochrome icons inherit <code>currentColor</code> by default. If a component needs a different monochrome colour, use the <code>color</code> option or component-specific CSS. Icons with baked-in fills may keep their own colours.</p>
+
+{% endblock %}
