@@ -221,7 +221,7 @@ const paletteColourGroups = [
       '$ofh-color-brand-blue-royal-1',
       '$ofh-color-brand-blue-royal-2',
       '$ofh-color-brand-blue-royal-3-main',
-      '$ofh-color-brand-blue-royal-3',
+      '$ofh-color-brand-blue-royal-4',
       '$ofh-color-brand-blue-royal-5',
       '$ofh-color-brand-blue-royal-6',
     ],
@@ -881,7 +881,11 @@ function buildLayoutData(registry) {
 
   return {
     breakpoints,
+    breakpointsById: Object.fromEntries(
+      breakpoints.map((breakpoint) => [breakpoint.label, breakpoint]),
+    ),
     widths,
+    widthsById: Object.fromEntries(widths.map((width) => [width.id, width])),
     gridColumns,
     mainWrapper,
   };
