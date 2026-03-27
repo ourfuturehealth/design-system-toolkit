@@ -11,6 +11,9 @@ export type { ComponentProps } from 'react';
 export { Button } from './components/Button';
 export type { ButtonProps } from './components/Button';
 
+export { Icon } from './components/Icon';
+export type { IconProps, IconSize } from './components/Icon';
+
 export { TextInput } from './components/TextInput';
 export type {
   TextInputFixedWidth,
