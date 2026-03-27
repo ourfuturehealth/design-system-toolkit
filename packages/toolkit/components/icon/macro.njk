@@ -2,12 +2,14 @@
   {% if not params.name %}
     {# Icon name is required #}
   {% else %}
-    {% set iconSize = params.size if params.size in [16, 24, 32] else 24 %}
+    {% set hasResponsiveSize = params.responsiveSize in [16, 24, 32] %}
+    {% set iconSize = params.responsiveSize if hasResponsiveSize else (params.size if params.size in [16, 24, 32] else 24) %}
+    {% set iconSizeClass = 'ofh-icon--responsive-' + iconSize if hasResponsiveSize else 'ofh-icon--' + iconSize %}
     {% set spritePath = params.spritePath if params.spritePath else '/assets/icons/icon-sprite.svg' %}
     {% set ariaHidden = 'true' if not params.title else 'false' %}
     {% set iconStyle = params.attributes.style if params.attributes and params.attributes.style else '' %}
 
-    <svg class="ofh-icon ofh-icon--material ofh-icon--{{ iconSize }} ofh-icon--{{ params.name }}{% if params.classes %} {{ params.classes }}{% endif %}"
+    <svg class="ofh-icon ofh-icon--material {{ iconSizeClass }} ofh-icon--{{ params.name }}{% if params.classes %} {{ params.classes }}{% endif %}"
       aria-hidden="{{ ariaHidden }}"
       {% if not params.title %}focusable="false"{% endif %}
       {% if params.title %}role="img"{% endif %}

@@ -27,6 +27,18 @@
   width: $ofh-iconography-32;
 }
 
+.ofh-icon--responsive-16 {
+  @include ofh-iconography-responsive(16);
+}
+
+.ofh-icon--responsive-24 {
+  @include ofh-iconography-responsive(24);
+}
+
+.ofh-icon--responsive-32 {
+  @include ofh-iconography-responsive(32);
+}
+
 .ofh-icon--material {
   overflow: visible;
 }
