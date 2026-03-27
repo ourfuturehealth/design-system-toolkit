@@ -107,7 +107,6 @@ This workflow also includes a temporary external-reference audit against the BSM
 - React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
 - Both versions should support the same user-facing capabilities, variants, and behaviors
 
-<<<<<<< HEAD
 ### 3. External React Reference Audit (MANDATORY, TEMPORARY)
 
 Inspect the BSM React repo before implementing or reshaping the React version of this component:
@@ -146,46 +145,6 @@ Inspect the BSM React repo before implementing or reshaping the React version of
 For each relevant finding, state what was useful and why, or why it should be rejected.
 
 ### 4. Dependency & Prerequisite Audit
-=======
-### 3. External React Reference Audit (MANDATORY, TEMPORARY)
-
-Inspect the BSM React repo before implementing or reshaping the React version of this component:
-
-- Repo: `https://github.com/ourfuturehealth/biosample-management-system/tree/main`
-- Storybook path: `apps/bsm-storybook`
-- Component path: `packages/components`
-
-**Purpose of this step:**
-
-- Speed up delivery while OFH React coverage is still behind toolkit
-- Check whether another OFH-adjacent implementation already solved part of the React API, structure, tests, or Storybook docs
-- Reuse only what helps without weakening OFH consistency
-
-**What to inspect:**
-
-- Look for the same component, a close analogue, or a shared dependency in `packages/components`
-- Look for the corresponding stories and docs patterns in `apps/bsm-storybook`
-- If the component uses icons or related affordances, inspect whether BSM has a reusable React icon pattern that is relevant
-
-**Decision rules (MANDATORY):**
-
-- OFH Figma, current OFH toolkit, and current OFH mainline patterns remain the source of truth
-- Treat BSM as a temporary acceleration source only, not as gospel
-- Prefer consistency of OFH implementation patterns and Storybook/docs behavior over copying quickly
-- Do not copy BSM code blindly if it conflicts with OFH Figma, toolkit semantics, naming, iconography, or better OFH docs conventions
-- If BSM is missing the component, stale, or not useful, ignore it and continue
-- Once OFH React reaches comparable component coverage, stop relying on BSM and remove this dependency from day-to-day workflow
-
-**Output required from this step:**
-
-- `useful to reuse`
-- `useful as inspiration only`
-- `reject because it conflicts with OFH`
-
-For each relevant finding, state what was useful and why, or why it should be rejected.
-
-### 4. Dependency & Prerequisite Audit
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 
 Identify any design-system components or shared primitives this component depends on in toolkit, React, docs/examples, or Storybook.
 
@@ -208,11 +167,7 @@ Identify any design-system components or shared primitives this component depend
 - Recommend updating the dependency first
 - Do not silently create an internal stand-in for a missing public component unless the user explicitly approves that as a temporary exception
 
-<<<<<<< HEAD
 ### 5. Gap Analysis
-=======
-### 5. Gap Analysis
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 
 Compare Figma ↔ Toolkit ↔ React:
 
@@ -223,11 +178,7 @@ Compare Figma ↔ Toolkit ↔ React:
 - React API simplification opportunities where toolkit-style class or macro APIs could become clearer semantic props
 - Documentation gaps
 
-<<<<<<< HEAD
 ### 6. Design Token & Pattern Alignment (MANDATORY)
-=======
-### 6. Design Token & Pattern Alignment (MANDATORY)
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 
 **This step is REQUIRED, not optional. Do not skip even if the JIRA ticket is narrow in scope.**
 
@@ -309,14 +260,11 @@ Review the entire component implementation against design system standards:
 
 1. Create a **comprehensive list** of all findings (not just JIRA ticket items)
 2. Categorize as: **MUST FIX** (breaks design system) vs. **SHOULD IMPROVE** (quality/consistency) vs. **NICE TO HAVE** (future enhancement)
-<<<<<<< HEAD
 3. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
 4. **Present this analysis to the user BEFORE implementing** and ask:
-=======
 3. Include the **external React reference audit results**, clearly stating what from BSM is worth reusing, what is inspiration only, and what should be rejected
 4. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
 5. **Present this analysis to the user BEFORE implementing** and ask:
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
    - "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
    - "If there is a blocking prerequisite dependency, should I pause this component and update that dependency first, or proceed with an explicitly temporary internal adapter?"
 
@@ -329,13 +277,10 @@ Review the entire component implementation against design system standards:
 0. **Blocking Dependencies First:** If the dependency audit surfaced a blocking prerequisite, update that dependency first unless the user explicitly approves a temporary internal adapter
 1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
 2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
-<<<<<<< HEAD
 3. **React Second:** Create/update React component to match polished toolkit
 4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
-=======
 3. **React Second:** Create/update React component to match polished toolkit, informed by the BSM reference audit where useful
-4. **Verify Parity:** Both versions have same API, variants, behavior, and functionality
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
+4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
 
 ### 1. Toolkit Component Update
 
@@ -650,7 +595,6 @@ Review the component's user-facing documentation surfaces and make sure they exp
 - Controls rule:
   - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
   - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
-<<<<<<< HEAD
 - For structured or nested props, do not default to raw JSON editing when a clearer control model is available
   - examples: `tag`, `icon`, `dismissButton`, `actionLink`, `metadataItems`
   - when the story only needs a stable subset of that object shape, add story-only args such as `tagText`, `tagVariant`, `iconName`, `iconSize`, `actionHref`, or similar and map them to the real prop in `render`
@@ -660,17 +604,12 @@ Review the component's user-facing documentation surfaces and make sure they exp
   - `select`, `radio`, `boolean`, `text`, or `number` instead of generic object editors whenever the value set is finite or easy to model
 - Do not expose controls for prop fields that the component visually ignores or overrides
   - example: if a component slot forces a fixed icon size or color, do not expose a misleading size or tone control for that story unless the story is explicitly demonstrating that constraint
-=======
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 - Check for misleading cases such as:
   - `All variants` stories showing one prop panel that does not affect the displayed variants
   - `Keyboard navigation` stories showing controls that do not apply to the demo content
   - multi-example stories where the controls affect none of the rendered examples
-<<<<<<< HEAD
   - nested object props that require raw JSON editing even though the story only needs a text/select/boolean subset
   - controls for values that appear editable in Storybook but do not produce any visual or behavioral change in the rendered story
-=======
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 
 **Prop documentation clarity review (MANDATORY):**
 
@@ -705,11 +644,8 @@ Review the component's user-facing documentation surfaces and make sure they exp
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
-<<<<<<< HEAD
 - Confirm that structured props are not exposed as raw JSON when a clearer story-specific control model would be more usable
 - Confirm that no story exposes controls for values the component visibly ignores or overrides
-=======
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 - Confirm that prop descriptions are written in plain language, not just implementation language
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
 
@@ -737,20 +673,14 @@ Before moving to the validation prompt, answer these checks explicitly:
 
 - [ ] Are any Storybook controls misleading for any story?
 - [ ] Does every story have an intentional controls policy?
-<<<<<<< HEAD
 - [ ] Are any nested or structured props still exposed as raw JSON even though the story could offer clearer text/select/boolean controls instead?
 - [ ] Do any story controls expose values that the component visually ignores or overrides?
-=======
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 - [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
-<<<<<<< HEAD
 - [ ] Has every meaningful spacing/typography token from Figma been checked against the actual mobile / tablet / desktop values in code?
 - [ ] Have semantic-element defaults (`p`, `ul`, `li`, `h*`, `a`) been checked so the component is not accidentally inheriting the wrong margins or typography?
-=======
->>>>>>> c533f2e4 (docs(prompts): add staged component workflow)
 
 If any answer is "no", fix it before moving to the QA prompt.
 
