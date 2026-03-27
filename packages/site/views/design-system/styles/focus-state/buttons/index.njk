@@ -2,31 +2,32 @@
 
 <div class="ofh-width-container">
   <main class="ofh-main-wrapper" id="maincontent">
-    {{ button({
-      "text": "Save and continue",
-      "type": "button",
-      "classes": "ofh-button--contained",
-      "attributes": {
-        "id": "focus-state-button-target"
-      }
-    }) }}
+    <div class="app-focus-state__button-row">
+      {{ button({
+        "text": "Save and continue",
+        "type": "button",
+        "classes": "ofh-button--contained",
+        "attributes": {
+          "id": "focus-state-button-target"
+        }
+      }) }}
 
-    {{ button({
-      "text": "Review answers",
-      "type": "button",
-      "classes": "ofh-button--outlined"
-    }) }}
+      {{ button({
+        "text": "Review answers",
+        "type": "button",
+        "classes": "ofh-button--outlined"
+      }) }}
+      {{ button({
+        "text": "Skip for now",
+        "type": "button",
+        "classes": "ofh-button--ghost"
+      }) }}
 
-    {{ button({
-      "text": "Skip for now",
-      "type": "button",
-      "classes": "ofh-button--ghost"
-    }) }}
-
-    {{ button({
-      "text": "Cancel",
-      "type": "button",
-      "classes": "ofh-button--text"
-    }) }}
+      {{ button({
+        "text": "Cancel",
+        "type": "button",
+        "classes": "ofh-button--text"
+      }) }}
+    </div>
   </main>
 </div>

@@ -126,58 +126,68 @@
     ]
   }) }}
 
-  <h2>Live examples</h2>
+  <h2 class="app-foundation-showcase__example-heading">Live examples</h2>
   <p>Click into an example, then use <code>Tab</code> inside it to move through the interactive elements and inspect the focus treatment.</p>
 
-  <h3>Text-based interactive elements</h3>
-  <p>Use <code>ofh-focused-text</code> for body links, action links, details summaries, pagination links and similar text-led controls.</p>
-  {{ designExample({
-    group: "styles",
-    item: "focus-state",
-    itemTitle: "focus state",
-    type: "text",
-    showCode: false
-  }) }}
+  <section class="app-foundation-showcase__example-section">
+    <h3>Text-based interactive elements</h3>
+    <p>Use <code>ofh-focused-text</code> for body links, action links, details summaries, pagination links and similar text-led controls.</p>
+    {{ designExample({
+      group: "styles",
+      item: "focus-state",
+      itemTitle: "focus state",
+      type: "text",
+      showCode: false
+    }) }}
+  </section>
 
-  <h3>Inputs, selects and textareas</h3>
-  <p>Use <code>ofh-focused-input</code> for input-based controls. The toolkit combines an active input border with the default focus outline so the control remains visible on light surfaces.</p>
-  {{ designExample({
-    group: "styles",
-    item: "focus-state",
-    itemTitle: "focus state",
-    type: "inputs",
-    showCode: false
-  }) }}
+  <section class="app-foundation-showcase__example-section">
+    <h3>Inputs, selects and textareas</h3>
+    <p>Use <code>ofh-focused-input</code> for input-based controls. The toolkit combines an active input border with the default focus outline so the control remains visible on light surfaces.</p>
+    {{ designExample({
+      group: "styles",
+      item: "focus-state",
+      itemTitle: "focus state",
+      type: "inputs",
+      showCode: false
+    }) }}
+  </section>
 
-  <h3>Radios and checkboxes</h3>
-  <p>Use <code>ofh-focused-radio</code> and <code>ofh-focused-checkbox</code> for selection controls rather than rebuilding the ring and border treatment manually.</p>
-  {{ designExample({
-    group: "styles",
-    item: "focus-state",
-    itemTitle: "focus state",
-    type: "choices",
-    showCode: false
-  }) }}
+  <section class="app-foundation-showcase__example-section">
+    <h3>Radios and checkboxes</h3>
+    <p>Use <code>ofh-focused-radio</code> and <code>ofh-focused-checkbox</code> for selection controls rather than rebuilding the ring and border treatment manually.</p>
+    {{ designExample({
+      group: "styles",
+      item: "focus-state",
+      itemTitle: "focus state",
+      type: "choices",
+      showCode: false
+    }) }}
+  </section>
 
-  <h3>Buttons on light surfaces</h3>
-  <p>Use <code>ofh-focused-button</code> for the standard button variants. This is also the right treatment for other button-like controls on light surfaces.</p>
-  {{ designExample({
-    group: "styles",
-    item: "focus-state",
-    itemTitle: "focus state",
-    type: "buttons",
-    showCode: false
-  }) }}
+  <section class="app-foundation-showcase__example-section">
+    <h3>Buttons on light surfaces</h3>
+    <p>Use <code>ofh-focused-button</code> for the standard button variants. This is also the right treatment for other button-like controls on light surfaces.</p>
+    {{ designExample({
+      group: "styles",
+      item: "focus-state",
+      itemTitle: "focus state",
+      type: "buttons",
+      showCode: false
+    }) }}
+  </section>
 
-  <h3>Inverted buttons on dark surfaces</h3>
-  <p>Use <code>ofh-focused-button-inverted</code> for inverted button variants. These controls use the inverted focus token so the ring remains visible on dark backgrounds.</p>
-  {{ designExample({
-    group: "styles",
-    item: "focus-state",
-    itemTitle: "focus state",
-    type: "buttons-inverted",
-    showCode: false
-  }) }}
+  <section class="app-foundation-showcase__example-section">
+    <h3>Inverted buttons on dark surfaces</h3>
+    <p>Use <code>ofh-focused-button-inverted</code> for inverted button variants. These controls use the inverted focus token so the ring remains visible on dark backgrounds.</p>
+    {{ designExample({
+      group: "styles",
+      item: "focus-state",
+      itemTitle: "focus state",
+      type: "buttons-inverted",
+      showCode: false
+    }) }}
+  </section>
 
   <h2>When building new components</h2>
   <p>Use the mixin that matches the control type instead of rebuilding focus styles from raw values. That keeps the focus treatment aligned with the toolkit and the current design token model.</p>

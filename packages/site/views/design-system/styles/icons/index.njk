@@ -27,6 +27,7 @@
 
   <h3 id="responsive-size-behaviour">Responsive size behaviour</h3>
   <p>Icons can be sized in 2 different ways. Use a fixed class when the icon should stay the same size at every breakpoint, or use the responsive mixin when the icon should follow the responsive iconography scale.</p>
+  <p>If you render the shared icon primitive without passing a size or adding a size class, it defaults to <code>24px</code>. Some components override that base behaviour in their own CSS, so treat <code>24px</code> as the icon primitive default rather than a guarantee for every component-level icon.</p>
   <p>The fixed classes <code>.ofh-icon--16</code>, <code>.ofh-icon--24</code>, and <code>.ofh-icon--32</code> are backwards compatible and always render at the size you pick.</p>
   <p>Responsive icon sizes are opt-in and come from <code>$ofh-iconography-responsive-scale</code> via <code>@include ofh-iconography-responsive(...)</code>.</p>
 
@@ -108,7 +109,6 @@
         <col class="app-foundation-showcase__icon-gallery-size-col">
         <col class="app-foundation-showcase__icon-gallery-size-col">
         <col class="app-foundation-showcase__icon-gallery-size-col">
-        <col class="app-foundation-showcase__icon-gallery-default-col">
       </colgroup>
       <thead class="ofh-table__head">
         <tr>
@@ -116,7 +116,6 @@
           <th class="ofh-table__header" scope="col">16</th>
           <th class="ofh-table__header" scope="col">24</th>
           <th class="ofh-table__header" scope="col">32</th>
-          <th class="ofh-table__header" scope="col">Default</th>
         </tr>
       </thead>
       <tbody class="ofh-table__body">
@@ -126,7 +125,6 @@
             <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 16 }) }}</td>
             <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 24 }) }}</td>
             <td class="ofh-table__cell">{{ icon({ "name": item.name, "size": 32 }) }}</td>
-            <td class="ofh-table__cell">{{ item.defaultSize }}</td>
           </tr>
         {% endfor %}
       </tbody>

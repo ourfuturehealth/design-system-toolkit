@@ -128,14 +128,18 @@
   height: 100%;
 }
 
+.app-foundation-showcase__example-heading {
+  margin-top: $ofh-size-48;
+}
+
+.app-foundation-showcase__example-section + .app-foundation-showcase__example-section {
+  margin-top: $ofh-size-40;
+}
+
 .app-foundation-showcase__icon-gallery-table {
   table-layout: fixed;
 }
 
 .app-foundation-showcase__icon-gallery-size-col {
   width: 96px;
-}
-
-.app-foundation-showcase__icon-gallery-default-col {
-  width: 120px;
 }
