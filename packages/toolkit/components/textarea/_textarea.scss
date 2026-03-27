@@ -16,11 +16,11 @@
   width: 100%;
 
   &:hover:not(:disabled, .ofh-textarea--error) {
-    border-width: $ofh-stroke-weight-4;
+    @include ofh-emphasised-input-border($ofh-color-border-input-default);
   }
 
   &:active:not(:disabled, .ofh-textarea--error) {
-    border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+    @include ofh-emphasised-input-border($ofh-color-border-input-active);
   }
 
   &:focus {
@@ -29,5 +29,5 @@
 }
 
 .ofh-textarea--error {
-  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
+  @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
 }

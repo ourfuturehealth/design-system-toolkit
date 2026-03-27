@@ -27,11 +27,11 @@
   position: relative;
 
   &:hover:not(:disabled, .autocomplete__input--error) {
-    border-width: $ofh-stroke-weight-4;
+    @include ofh-emphasised-input-border($ofh-color-border-input-default);
   }
 
   &:active:not(:disabled, .autocomplete__input--error) {
-    border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+    @include ofh-emphasised-input-border($ofh-color-border-input-active);
   }
 }
 
@@ -45,7 +45,7 @@
 }
 
 .autocomplete__input--error {
-  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
+  @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
 }
 
 .autocomplete__input--show-all-values {

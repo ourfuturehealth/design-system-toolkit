@@ -13,6 +13,15 @@
   text-decoration: none;
 }
 
+/// Emphasised input border
+///
+/// Creates a thicker visual input border without changing layout.
+
+@mixin ofh-emphasised-input-border($color) {
+  border-color: $color;
+  box-shadow: inset 0 0 0 $ofh-stroke-weight-2 $color;
+}
+
 /// Focused input (form elements)
 ///
 /// Provides an additional outline and border to clearly indicate when
@@ -20,7 +29,8 @@
 /// as text inputs.
 
 @mixin ofh-focused-input {
-  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+  @include ofh-emphasised-input-border($ofh-color-border-input-active);
+
   outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus; /* 1 */
   outline-offset: $ofh-stroke-weight-4;
 }
