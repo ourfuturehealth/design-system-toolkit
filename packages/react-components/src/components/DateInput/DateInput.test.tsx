@@ -53,15 +53,16 @@ describe('DateInput', () => {
           {
             name: 'day',
             label: 'Day',
-            value: '01',
-            className: 'ofh-input--width-2 ofh-input--error',
+            defaultValue: '01',
+            inputWidth: 2,
+            hasError: true,
             autoComplete: 'bday-day',
           },
           {
             name: 'month',
             label: 'Month',
-            value: '02',
-            className: 'ofh-input--width-2',
+            defaultValue: '02',
+            inputWidth: 2,
             inputProps: {
               placeholder: 'MM',
             },
@@ -69,8 +70,8 @@ describe('DateInput', () => {
           {
             name: 'year',
             label: 'Year',
-            value: '1990',
-            className: 'ofh-input--width-4',
+            defaultValue: '1990',
+            inputWidth: 4,
             inputMode: 'numeric',
           },
         ]}
@@ -80,12 +81,15 @@ describe('DateInput', () => {
     );
 
     expect(screen.getByLabelText(/^day$/i)).toHaveValue('01');
+    expect(screen.getByLabelText(/^day$/i)).toHaveClass('ofh-input--width-2');
     expect(screen.getByLabelText(/^day$/i)).toHaveClass('ofh-input--error');
     expect(screen.getByLabelText(/^day$/i)).toHaveAttribute(
       'autocomplete',
       'bday-day',
     );
     expect(screen.getByLabelText(/^month$/i)).toHaveAttribute('placeholder', 'MM');
+    expect(screen.getByLabelText(/^month$/i)).toHaveClass('ofh-input--width-2');
+    expect(screen.getByLabelText(/^year$/i)).toHaveClass('ofh-input--width-4');
     expect(screen.getByLabelText(/^year$/i)).toHaveValue('1990');
   });
 

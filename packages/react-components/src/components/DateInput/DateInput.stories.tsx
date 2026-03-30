@@ -9,7 +9,7 @@ const meta: Meta<typeof DateInput> = {
     docs: {
       description: {
         component:
-          'A grouped date input that reuses the toolkit fieldset, hint, error, and shared input-family box styles for day, month, and year fields. Use the default item set for standard day, month, and year fields, or pass `items` to customise labels, widths, and native input props through `inputProps`.',
+          'A grouped date input for day, month, and year fields. Use the default setup for a standard date-of-birth style question. Pass `items` only when you need to customise an individual field label, width, autocomplete token, or native input props.',
       },
     },
   },
@@ -51,12 +51,13 @@ const meta: Meta<typeof DateInput> = {
     },
     items: {
       control: false,
-      description: 'Date field items rendered inside the group. Each item can override the label, width classes, autocomplete, pattern, and additional native input props.',
+      description:
+        'Optional custom field definitions. Use this when you need to change a field label, width, autocomplete token, per-field error styling, or pass native input props.',
       table: {
         type: {
           summary: 'DateInputItem[]',
           detail:
-            "{ name: string; label?: ReactNode; className?: string; autoComplete?: string; inputMode?: string; pattern?: string; inputProps?: InputHTMLAttributes<HTMLInputElement> }[]",
+            "{ name: string; label?: ReactNode; inputWidth?: 2 | 3 | 4 | 5 | 10 | 20 | 30; hasError?: boolean; autoComplete?: string; inputMode?: string; pattern?: string; defaultValue?: string; inputProps?: InputHTMLAttributes<HTMLInputElement>; className?: string }[]",
         },
       },
     },
@@ -118,29 +119,41 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-default',
+    namePrefix: 'date-of-birth-default',
   },
 };
 
-export const WithAutocomplete: Story = {
+export const WithBrowserAutocomplete: Story = {
   args: {
     hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-browser-autocomplete',
     items: [
       {
         name: 'day',
-        className: 'ofh-input--width-2',
+        inputWidth: 2,
         autoComplete: 'bday-day',
       },
       {
         name: 'month',
-        className: 'ofh-input--width-2',
+        inputWidth: 2,
         autoComplete: 'bday-month',
       },
       {
         name: 'year',
-        className: 'ofh-input--width-4',
+        inputWidth: 4,
         autoComplete: 'bday-year',
       },
     ],
+    namePrefix: 'date-of-birth-browser-autocomplete',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Adds browser autocomplete tokens for day, month, and year so saved birth date details can be offered by the browser. The visible UI stays the same; the difference is in the generated input `autocomplete` attributes.',
+      },
+    },
   },
 };
 
@@ -148,20 +161,33 @@ export const WithErrors: Story = {
   args: {
     errorMessage: 'Enter your date of birth',
     hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-errors',
     items: [
       {
         name: 'day',
-        className: 'ofh-input--width-2 ofh-input--error',
+        inputWidth: 2,
+        hasError: true,
       },
       {
         name: 'month',
-        className: 'ofh-input--width-2 ofh-input--error',
+        inputWidth: 2,
+        hasError: true,
       },
       {
         name: 'year',
-        className: 'ofh-input--width-4 ofh-input--error',
+        inputWidth: 4,
+        hasError: true,
       },
     ],
+    namePrefix: 'date-of-birth-errors',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Apply `errorMessage` for the group-level validation message and `hasError` on each item when every field should show the red error styling.',
+      },
+    },
   },
 };
 
@@ -169,27 +195,40 @@ export const SingleFieldError: Story = {
   args: {
     errorMessage: 'Enter your date of birth',
     hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-single-field-error',
     items: [
       {
         name: 'day',
-        className: 'ofh-input--width-2 ofh-input--error',
+        inputWidth: 2,
+        hasError: true,
       },
       {
         name: 'month',
-        className: 'ofh-input--width-2',
+        inputWidth: 2,
       },
       {
         name: 'year',
-        className: 'ofh-input--width-4',
+        inputWidth: 4,
       },
     ],
+    namePrefix: 'date-of-birth-single-field-error',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `hasError` on a single item when only one part of the date is invalid.',
+      },
+    },
   },
 };
 
 export const AsPageHeading: Story = {
   args: {
     hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-page-heading',
     isPageHeading: true,
+    namePrefix: 'date-of-birth-page-heading',
   },
   parameters: {
     docs: {
@@ -224,15 +263,16 @@ export const FormExample: Story = {
         items={[
           {
             name: 'day',
-            className: 'ofh-input--width-2 ofh-input--error',
+            inputWidth: 2,
+            hasError: true,
           },
           {
             name: 'month',
-            className: 'ofh-input--width-2',
+            inputWidth: 2,
           },
           {
             name: 'year',
-            className: 'ofh-input--width-4',
+            inputWidth: 4,
           },
         ]}
         legend="What date is your appointment?"
