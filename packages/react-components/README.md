@@ -197,25 +197,3 @@ Runs `vite build --watch` to continuously rebuild the library distribution files
 ```bash
 pnpm --filter @ourfuturehealth/react-components build
 ```
-
-## Hosted Storybook (Netlify)
-
-The React Storybook is deployed as a separate Netlify project from the docs site. The repo-managed build settings live in [netlify.toml](./netlify.toml).
-
-Create the Netlify project with these settings:
-
-1. Connect the `ourfuturehealth/design-system-toolkit` repository.
-2. Leave the base directory unset.
-3. Set the package directory to `packages/react-components`.
-4. Set the production branch to `main`.
-5. Enable Deploy Previews and keep preview URLs on the default Netlify preview domain.
-
-After the site is created, configure these settings in Netlify UI:
-
-1. Set password protection at `Project configuration > Access & security > Visitor access > Password Protection`.
-2. Choose `Customize this site's protection settings` if team defaults exist.
-3. Choose `Basic password protection` with scope `All deploys`.
-4. Set a password that is different from the docs site password.
-5. Add the production domain `storybook.designsystem.ourfuturehealth.org.uk` in `Domain management`.
-
-If DNS is external to Netlify, create the DNS record shown by Netlify in the `Pending DNS verification` flow and wait for HTTPS provisioning to complete.
