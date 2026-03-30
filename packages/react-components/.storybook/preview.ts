@@ -13,9 +13,18 @@ function DocsNamespacedStory({
   context: Parameters<NonNullable<Preview['decorators']>[number]>[1];
 }) {
   const renderInstanceId = React.useId().replace(/:/g, '');
+  const argKeys = Array.isArray(context.parameters.docsNamespaceArgKeys)
+    ? context.parameters.docsNamespaceArgKeys.filter(
+        (key): key is string => typeof key === 'string',
+      )
+    : [];
 
   return Story({
-    args: namespaceStoryArgs(context.args, `${context.id}-${renderInstanceId}`),
+    args: namespaceStoryArgs(
+      context.args,
+      `${context.id}-${renderInstanceId}`,
+      argKeys,
+    ),
   });
 }
 

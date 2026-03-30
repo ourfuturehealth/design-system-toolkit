@@ -5,6 +5,7 @@ const meta: Meta<typeof DateInput> = {
   title: 'Components/Input/Date input',
   component: DateInput,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

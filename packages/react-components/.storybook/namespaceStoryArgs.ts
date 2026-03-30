@@ -1,5 +1,3 @@
-const namespacedArgKeys = new Set(['id', 'idPrefix', 'name', 'namePrefix']);
-
 function getStoryNamespace(storyId: string) {
   return storyId.replace(/[^a-z0-9-]+/gi, '-');
 }
@@ -7,8 +5,14 @@ function getStoryNamespace(storyId: string) {
 export function namespaceStoryArgs(
   args: Record<string, unknown>,
   storyId: string,
+  argKeys: string[],
 ) {
+  if (argKeys.length === 0) {
+    return args;
+  }
+
   const namespace = getStoryNamespace(storyId);
+  const namespacedArgKeys = new Set(argKeys);
 
   return Object.fromEntries(
     Object.entries(args).map(([key, value]) => {

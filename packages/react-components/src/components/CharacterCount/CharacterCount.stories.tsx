@@ -5,6 +5,7 @@ const meta: Meta<typeof CharacterCount> = {
   title: 'Components/Input/Character count',
   component: CharacterCount,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

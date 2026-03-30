@@ -5,6 +5,7 @@ const meta: Meta<typeof Textarea> = {
   title: 'Components/Input/Textarea',
   component: Textarea,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

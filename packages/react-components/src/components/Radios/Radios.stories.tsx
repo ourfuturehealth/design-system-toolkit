@@ -42,6 +42,7 @@ const meta: Meta<typeof Radios> = {
   title: 'Components/Input/Radios',
   component: Radios,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

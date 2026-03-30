@@ -67,6 +67,7 @@ const meta: Meta<typeof Checkboxes> = {
   title: 'Components/Input/Checkboxes',
   component: Checkboxes,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

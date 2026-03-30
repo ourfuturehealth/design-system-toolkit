@@ -7,6 +7,7 @@ const meta: Meta<typeof Autocomplete> = {
   title: 'Components/Input/Autocomplete',
   component: Autocomplete,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {
