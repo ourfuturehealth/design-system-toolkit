@@ -160,12 +160,37 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     hint: 'Choose one way for us to contact you.',
+    idPrefix: 'contact-method-default',
+    name: 'contact-method-default',
+  },
+};
+
+export const WithHint: Story = {
+  args: {
+    hint: 'This is a 10 digit number, like 485 777 3456. You can find it on NHS letters, prescriptions, or by logging in to a GP practice online service.',
+    items: [
+      { value: 'yes', label: 'Yes, I know my NHS number' },
+      { value: 'no', label: 'No, I do not know my NHS number' },
+      { value: 'not-sure', label: "I'm not sure" },
+    ],
+    legend: 'Do you know your NHS number?',
+    idPrefix: 'nhs-number-with-hint',
+    name: 'nhs-number',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use the group-level `hint` when the whole radio question needs extra supporting context before the options.',
+      },
+    },
   },
 };
 
 export const WithItemHints: Story = {
   args: {
     hint: 'Choose one way for us to contact you.',
+    idPrefix: 'contact-method-item-hints',
     items: [
       {
         value: 'email',
@@ -183,6 +208,7 @@ export const WithItemHints: Story = {
         hint: 'Choose this if you prefer printed letters.',
       },
     ],
+    name: 'contact-method-item-hints',
   },
   parameters: {
     docs: {
@@ -193,11 +219,35 @@ export const WithItemHints: Story = {
   },
 };
 
+export const WithDivider: Story = {
+  args: {
+    idPrefix: 'sign-in-method-divider',
+    items: [
+      { value: 'nhs-login', label: 'Use NHS login' },
+      { value: 'govuk-verify', label: 'Use GOV.UK Verify' },
+      { divider: 'or' as const },
+      { value: 'create-account', label: 'Create an account' },
+    ],
+    legend: 'How do you want to sign in?',
+    name: 'sign-in-method-divider',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use a divider when one option group is meaningfully different from the others.',
+      },
+    },
+  },
+};
+
 export const ConditionalContent: Story = {
   args: {
     hint: 'Choose one contact method.',
+    idPrefix: 'contact-method-conditional',
     items: conditionalItems,
     legend: 'How would you prefer to be contacted?',
+    name: 'contact-method-conditional',
   },
   parameters: {
     docs: {
@@ -210,13 +260,14 @@ export const ConditionalContent: Story = {
 
 export const Inline: Story = {
   args: {
+    idPrefix: 'age-inline',
     items: [
       { value: 'yes', label: 'Yes' },
       { value: 'no', label: 'No' },
     ],
     className: 'ofh-radios--inline',
     legend: 'Are you 18 or over?',
-    name: 'age',
+    name: 'age-inline',
   },
   parameters: {
     docs: {
@@ -231,6 +282,8 @@ export const WithError: Story = {
   args: {
     errorMessage: 'Select how we should contact you',
     hint: 'Choose one way for us to contact you.',
+    idPrefix: 'contact-method-error',
+    name: 'contact-method-error',
   },
   parameters: {
     docs: {

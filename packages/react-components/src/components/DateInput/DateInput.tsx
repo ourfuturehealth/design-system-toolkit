@@ -1,30 +1,28 @@
 import React from 'react';
 import { joinClassNames } from '../_internal/joinClassNames';
+import type { TextInputFixedWidth } from '../TextInput/TextInput';
 
 export interface DateInputItem {
   id?: string;
   name: string;
   label?: React.ReactNode;
-  value?: string;
+  /**
+   * Uncontrolled initial value for the input.
+   */
+  defaultValue?: string;
+  /**
+   * Fixed character-width modifier reused from text inputs.
+   */
+  inputWidth?: TextInputFixedWidth;
+  /**
+   * Apply the red error input styling to this individual field.
+   */
+  hasError?: boolean;
   className?: string;
   autoComplete?: string;
   inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
   pattern?: string;
   inputProps?: Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    | 'autoComplete'
-    | 'children'
-    | 'className'
-    | 'id'
-    | 'inputMode'
-    | 'name'
-    | 'ref'
-    | 'type'
-  >;
-  /**
-   * @deprecated Use `inputProps` instead.
-   */
-  attributes?: Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
     | 'autoComplete'
     | 'children'
@@ -59,18 +57,28 @@ export interface DateInputProps
   ref?: React.Ref<HTMLFieldSetElement>;
 }
 
+const inputWidthClassNames: Record<TextInputFixedWidth, string> = {
+  2: 'ofh-input--width-2',
+  3: 'ofh-input--width-3',
+  4: 'ofh-input--width-4',
+  5: 'ofh-input--width-5',
+  10: 'ofh-input--width-10',
+  20: 'ofh-input--width-20',
+  30: 'ofh-input--width-30',
+};
+
 const defaultItems: DateInputItem[] = [
   {
     name: 'day',
-    className: 'ofh-input--width-2',
+    inputWidth: 2,
   },
   {
     name: 'month',
-    className: 'ofh-input--width-2',
+    inputWidth: 2,
   },
   {
     name: 'year',
-    className: 'ofh-input--width-4',
+    inputWidth: 4,
   },
 ];
 
@@ -166,11 +174,14 @@ export const DateInput = ({
             const itemModifierClass = ['day', 'month', 'year'].includes(item.name)
               ? `ofh-date-input__item--${item.name}`
               : undefined;
-            const inputProps = item.inputProps ?? item.attributes;
+            const inputProps = item.inputProps;
+            const itemWidthClass = item.inputWidth
+              ? inputWidthClassNames[item.inputWidth]
+              : undefined;
             const inputDefaultValue =
               inputProps?.value === undefined &&
               inputProps?.defaultValue === undefined
-                ? item.value
+                ? item.defaultValue
                 : undefined;
 
             return (
@@ -185,6 +196,8 @@ export const DateInput = ({
                   className={joinClassNames(
                     'ofh-input',
                     'ofh-date-input__input',
+                    itemWidthClass,
+                    item.hasError ? 'ofh-input--error' : undefined,
                     item.className,
                   )}
                   id={inputId}

@@ -190,12 +190,36 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     hint: 'Select all contact methods that apply.',
+    idPrefix: 'contact-method-default',
+    name: 'contact-method-default',
+  },
+};
+
+export const WithHint: Story = {
+  args: {
+    hint: 'Select all options that are relevant to you.',
+    idPrefix: 'contact-method-with-hint',
+    items: [
+      { value: 'email', label: 'Email' },
+      { value: 'phone', label: 'Phone' },
+      { value: 'text', label: 'Text message' },
+    ],
+    name: 'contact-method-with-hint',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use the group-level `hint` when users need help understanding how many options they can select.',
+      },
+    },
   },
 };
 
 export const WithItemHints: Story = {
   args: {
     hint: 'Select all contact methods that apply.',
+    idPrefix: 'contact-method-item-hints',
     items: [
       {
         value: 'email',
@@ -213,6 +237,7 @@ export const WithItemHints: Story = {
         hint: 'We will only use this for short updates.',
       },
     ],
+    name: 'contact-method-item-hints',
   },
   parameters: {
     docs: {
@@ -226,8 +251,10 @@ export const WithItemHints: Story = {
 export const ConditionalContent: Story = {
   args: {
     hint: 'Select all options that are relevant to you.',
+    idPrefix: 'contact-method-conditional',
     items: conditionalItems,
     legend: 'How would you prefer to be contacted?',
+    name: 'contact-method-conditional',
   },
   parameters: {
     docs: {
@@ -242,9 +269,10 @@ export const ConditionalContent: Story = {
 export const WithExclusiveNoneOption: Story = {
   args: {
     hint: 'Select all the symptoms you have.',
+    idPrefix: 'symptoms-exclusive-none',
     items: exclusiveItems,
     legend: 'Do you have any of these symptoms?',
-    name: 'symptoms',
+    name: 'symptoms-exclusive-none',
   },
   parameters: {
     docs: {
@@ -260,6 +288,8 @@ export const WithError: Story = {
   args: {
     errorMessage: 'Select at least one contact method',
     hint: 'Select all contact methods that apply.',
+    idPrefix: 'contact-method-error',
+    name: 'contact-method-error',
   },
   parameters: {
     docs: {
