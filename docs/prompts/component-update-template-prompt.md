@@ -60,6 +60,7 @@ This workflow also includes a temporary external-reference audit against the BSM
 5. Create/update comprehensive docs-site examples so toolkit docs and Storybook teach the component equally well
 6. Add automated tests (functional + accessibility)
 7. Update all relevant documentation
+8. Ensure Storybook docs-page examples do not share IDs or form names across stories
 
 ---
 
@@ -107,6 +108,10 @@ This workflow also includes a temporary external-reference audit against the BSM
 - React component must achieve full feature and behavior parity with toolkit
 - React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
 - Both versions should support the same user-facing capabilities, variants, and behaviors
+- If the React component is brand new and has no existing consumers, do not add deprecated props, alias props, or compatibility shims preemptively
+- Only preserve backwards compatibility when there is a real existing React surface or real consumers to protect
+- Storybook docs pages render multiple examples together, so stories must not share effective `id`, `idPrefix`, `name`, or `namePrefix` values in a way that causes cross-example interference
+- Use the shared Storybook namespacing safeguard where available, and still give grouped-control stories explicit, readable IDs or names when that improves clarity
 - Do not carry toolkit progressive-enhancement mechanisms into React when React state should own the behavior directly
   - example: toolkit may rely on a global `.js-enabled` class to hide unrevealed conditional content
   - React components must not depend on `.js-enabled` or similar page-level enhancement flags for core behavior
