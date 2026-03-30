@@ -39,7 +39,7 @@ const meta: Meta<typeof Icon> = {
     title: {
       control: 'text',
       description:
-        'Accessible label for meaningful standalone icons. When set, the icon renders with `role=\"img\"`; leave it empty for decorative icons so it stays hidden from assistive technology.',
+        'Accessible label for meaningful standalone icons. When set, the icon renders with `role="img"`; leave it empty for decorative icons so it stays hidden from assistive technology.',
     },
     color: {
       control: 'color',

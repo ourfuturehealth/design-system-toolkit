@@ -3,10 +3,9 @@
    ========================================================================== */
 
 .ofh-date-input {
-  column-gap: ofh-px-to-rem(16px);
   display: grid;
+  gap: ofh-px-to-rem(8px) ofh-px-to-rem(16px);
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  row-gap: ofh-px-to-rem(8px);
 }
 
 .ofh-date-input__item {
