@@ -1,0 +1,50 @@
+{% from 'radios/macro.njk' import radios %}
+{% from 'checkboxes/macro.njk' import checkboxes %}
+
+<div class="ofh-width-container">
+  <main class="ofh-main-wrapper" id="maincontent">
+    <form>
+      {{ radios({
+        "idPrefix": "focus-state-radios",
+        "name": "focus-state-radios",
+        "fieldset": {
+          "legend": {
+            "text": "How would you like to hear from us?",
+            "classes": "ofh-fieldset__legend--m"
+          }
+        },
+        "items": [
+          {
+            "value": "email",
+            "text": "Email"
+          },
+          {
+            "value": "phone",
+            "text": "Phone"
+          }
+        ]
+      }) }}
+
+      {{ checkboxes({
+        "idPrefix": "focus-state-checkboxes",
+        "name": "focus-state-checkboxes",
+        "fieldset": {
+          "legend": {
+            "text": "Which updates would you like?",
+            "classes": "ofh-fieldset__legend--m"
+          }
+        },
+        "items": [
+          {
+            "value": "research",
+            "text": "Research news"
+          },
+          {
+            "value": "appointments",
+            "text": "Appointment reminders"
+          }
+        ]
+      }) }}
+    </form>
+  </main>
+</div>
