@@ -12,6 +12,7 @@ const meta: Meta<typeof Select> = {
   title: 'Components/Input/Select',
   component: Select,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {

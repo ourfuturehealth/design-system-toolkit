@@ -111,7 +111,7 @@ This workflow also includes a temporary external-reference audit against the BSM
 - If the React component is brand new and has no existing consumers, do not add deprecated props, alias props, or compatibility shims preemptively
 - Only preserve backwards compatibility when there is a real existing React surface or real consumers to protect
 - Storybook docs pages render multiple examples together, so stories must not share effective `id`, `idPrefix`, `name`, or `namePrefix` values in a way that causes cross-example interference
-- Use the shared Storybook namespacing safeguard where available, and still give grouped-control stories explicit, readable IDs or names when that improves clarity
+- Use the shared Storybook docs-page namespacing safeguard where available, opt stories into it when they expose `id` / `name`-style args, and still give grouped-control stories explicit, readable IDs or names when that improves clarity
 - Do not carry toolkit progressive-enhancement mechanisms into React when React state should own the behavior directly
   - example: toolkit may rely on a global `.js-enabled` class to hide unrevealed conditional content
   - React components must not depend on `.js-enabled` or similar page-level enhancement flags for core behavior

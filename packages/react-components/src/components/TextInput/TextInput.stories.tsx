@@ -5,6 +5,7 @@ const meta: Meta<typeof TextInput> = {
   title: 'Components/Input/Text input',
   component: TextInput,
   parameters: {
+    docsNamespaceArgKeys: ['id', 'idPrefix', 'name', 'namePrefix'],
     layout: 'padded',
     docs: {
       description: {
