@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | React input family refresh | 🟡 Medium - input API migration recommended |
+| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
 | [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
 | [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
@@ -26,11 +26,13 @@ This guide provides detailed migration instructions for upgrading between versio
 - `@ourfuturehealth/toolkit` v4.8.0+
 - `@ourfuturehealth/react-components` v0.6.0+
 
-### Breaking Changes
+### Release Overview
 
-Toolkit consumers do not have a migration-breaking API change in this release.
+This release does not introduce a supported breaking API change.
 
-React consumers should review the refreshed input-family API, especially if they used the earlier `TextInput` PoC.
+Toolkit consumers do not have a migration-breaking change in this release.
+
+React consumers should review the refreshed input-family API only if they experimented with the earlier `TextInput` prototype before this family was properly released.
 
 ### React input family refresh
 
@@ -46,7 +48,7 @@ React now exposes the public input-family components:
 - `Radios`
 - `Icon`
 
-`TextInput` has been rebuilt to align with the toolkit API more closely while keeping the React surface idiomatic.
+`TextInput` is now the released React implementation and aligns with the toolkit API while keeping the React surface idiomatic.
 
 | Previous usage | New usage |
 | -------------- | --------- |
@@ -55,7 +57,7 @@ React now exposes the public input-family components:
 | ad hoc page-heading markup around the label | `isPageHeading` |
 | manual `aria-describedby` stitching | `describedBy` |
 
-#### `TextInput` migration example
+#### Prototype-to-release `TextInput` example
 
 **Before (`react-v0.5.0`):**
 
@@ -95,9 +97,9 @@ React now exposes the public `Icon` component used across the refreshed input fa
 
 ### Migration checklist
 
-- Update `TextInput` usage from `error` to `errorMessage`
-- Replace fixed-width `maxLength` usage with `inputWidth`
-- Review any local input wrappers to make sure they still match the refreshed input-family structure
+- If you adopted the earlier `TextInput` prototype, update `error` to `errorMessage`
+- If you used `maxLength` to narrow the field, replace it with `inputWidth`
+- Review any local input wrappers to make sure they still match the released input-family structure
 - Prefer the public `Icon` component over any local sprite helpers
 
 ---

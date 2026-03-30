@@ -32,16 +32,10 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 #### @ourfuturehealth/react-components 0.6.0 (`react-v0.6.0`)
 
-##### ⚠️ BREAKING CHANGES
-
-- The existing `TextInput` PoC has been replaced with the toolkit-parity input API:
-  - `error` is no longer the primary error prop; use `errorMessage`
-  - `maxLength` is no longer used as a fixed-width API; use `inputWidth`
-  - new supporting props such as `describedBy` and `isPageHeading` now align with the toolkit input family
-
 ##### Added
 
-- New public input-family components:
+- First full public React input-family release, including:
+  - `TextInput`
   - `Autocomplete`
   - `CharacterCount`
   - `Checkboxes`
@@ -54,7 +48,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ##### Changed
 
-- Rebuilt `TextInput` to match the toolkit input-family structure and public API more closely
+- `TextInput` is now the production React implementation and matches the toolkit input-family structure and public API more closely
+- Any earlier local usage of the prototype `TextInput` should align to the released props such as `errorMessage`, `inputWidth`, `describedBy`, and `isPageHeading`
 - Replaced internal React icon helpers with the public `Icon` component in input and Card consumers
 - Refined Storybook docs and examples so the input family is easier to review and matches the docs site more closely
 - Fixed grouped-control docs-page collisions by isolating story `id` / `name` values where needed
