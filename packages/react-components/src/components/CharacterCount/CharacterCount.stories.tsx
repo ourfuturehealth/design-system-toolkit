@@ -9,7 +9,7 @@ const meta: Meta<typeof CharacterCount> = {
     docs: {
       description: {
         component:
-          'A textarea with live character or word count messaging that follows the toolkit character-count pattern and shared input-family styling.',
+          'A textarea with live character or word count messaging that follows the toolkit character-count pattern and shared input-family styling. Use `maxLength` for character counts or `maxWords` for word counts; only one limit mode should be active at a time.',
       },
     },
   },
@@ -22,27 +22,53 @@ const meta: Meta<typeof CharacterCount> = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Visible label content for the textarea.',
+      description: 'Question or field label shown above the textarea.',
     },
     hint: {
       control: 'text',
-      description: 'Optional hint text shown above the textarea.',
+      description: 'Optional supporting text shown below the label and above the count message.',
     },
     errorMessage: {
       control: 'text',
-      description: 'Optional validation message shown above the textarea.',
+      description: 'Validation message shown above the textarea. This is separate from the automatic over-limit count status.',
+    },
+    name: {
+      control: 'text',
+      description: 'HTML name submitted with the form.',
     },
     maxLength: {
       control: 'number',
-      description: 'Maximum number of characters allowed before the count goes over limit.',
+      description: 'Character limit before the count message switches to an over-limit state.',
     },
     maxWords: {
       control: 'number',
-      description: 'Maximum number of words allowed when using word-count mode.',
+      description: 'Word limit when using word-count mode instead of character-count mode.',
     },
     threshold: {
       control: 'number',
       description: 'Percentage of the limit at which the visible status message appears.',
+    },
+    rows: {
+      control: 'number',
+      description: 'Visible row count for the underlying textarea.',
+    },
+    describedBy: {
+      control: 'text',
+      description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
+    },
+    countMessageClassName: {
+      control: false,
+      description: 'Additional classes for the count message elements.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    className: {
+      control: false,
+      description: 'Additional classes for the underlying textarea element.',
+      table: {
+        category: 'Advanced',
+      },
     },
   },
 };
@@ -54,12 +80,26 @@ export const Default: Story = {
   args: {
     hint: 'Do not include personal details.',
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default character-count textarea with the visible count message shown from the start.',
+      },
+    },
+  },
 };
 
 export const WithThreshold: Story = {
   args: {
     hint: 'Do not include personal details.',
     threshold: 75,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The visible count message stays hidden until the user reaches 75% of the limit.',
+      },
+    },
   },
 };
 
@@ -69,6 +109,13 @@ export const WordCount: Story = {
     maxLength: undefined,
     maxWords: 50,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Switches the component from character counting to word counting.',
+      },
+    },
+  },
 };
 
 export const WithError: Story = {
@@ -77,5 +124,12 @@ export const WithError: Story = {
       'This starting value is intentionally long so the component opens in an over-limit state.',
     errorMessage: 'Summary must be 40 characters or less',
     maxLength: 40,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Example of an explicit validation error alongside the automatic over-limit state.',
+      },
+    },
   },
 };

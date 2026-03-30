@@ -6,11 +6,10 @@ import type {
   TextInputWidth,
 } from '../TextInput/TextInput';
 
-export interface AutocompleteProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    'children' | 'defaultValue' | 'onChange' | 'ref' | 'type' | 'value'
-  > {
+export interface AutocompleteProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'children' | 'defaultValue' | 'onChange' | 'ref' | 'type' | 'value'
+> {
   label: React.ReactNode;
   options: string[];
   hint?: React.ReactNode;
@@ -106,21 +105,21 @@ export const Autocomplete = ({
     value,
   });
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isFocused, setIsFocused] = React.useState(false);
   const [highlightedIndex, setHighlightedIndex] = React.useState(-1);
   const deferredInputValue = React.useDeferredValue(inputValue);
   const normalizedQuery = deferredInputValue.trim().toLowerCase();
+  const hasQuery = normalizedQuery.length > 0;
   const resolvedNoResultsText =
-    noResultsText ?? `No suggestions found. Enter a new ${getLabelText(label)}.`;
-  const filteredOptions = options.filter((option) => {
-    if (!normalizedQuery) {
-      return true;
-    }
-
-    return option.toLowerCase().includes(normalizedQuery);
-  });
+    noResultsText ??
+    `No suggestions found. Enter a new ${getLabelText(label)}.`;
+  const filteredOptions = hasQuery
+    ? options.filter((option) => option.toLowerCase().includes(normalizedQuery))
+    : [];
   const showSuggestions = filteredOptions.length > 0;
+  const showMenu = isOpen && hasQuery;
   const activeDescendantId =
-    highlightedIndex >= 0 && highlightedIndex < filteredOptions.length
+    showMenu && highlightedIndex >= 0 && highlightedIndex < filteredOptions.length
       ? `${inputId}-option-${highlightedIndex}`
       : undefined;
 
@@ -132,13 +131,25 @@ export const Autocomplete = ({
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    setIsOpen(true);
+    const nextValue = event.target.value;
+    const nextHasQuery = nextValue.trim().length > 0;
+
+    setInputValue(nextValue);
+    setIsOpen(nextHasQuery);
     setHighlightedIndex(-1);
     onChange?.(event);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!hasQuery) {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        setHighlightedIndex(-1);
+      }
+
+      return;
+    }
+
     if (!isOpen && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
       event.preventDefault();
       setIsOpen(true);
@@ -206,7 +217,11 @@ export const Autocomplete = ({
         )}
         {hint ? (
           <div
-            className={joinClassNames('ofh-hint', 'ofh-input__hint', hintClassName)}
+            className={joinClassNames(
+              'ofh-hint',
+              'ofh-input__hint',
+              hintClassName,
+            )}
             id={hintId}
           >
             {hint}
@@ -227,7 +242,13 @@ export const Autocomplete = ({
         ) : null}
       </div>
 
-      <div className="autocomplete__wrapper">
+      <div
+        className={joinClassNames(
+          'autocomplete__wrapper',
+          width ? widthClassNames[width] : undefined,
+          inputWidth ? inputWidthClassNames[inputWidth] : undefined,
+        )}
+      >
         <input
           {...props}
           ref={ref}
@@ -239,20 +260,20 @@ export const Autocomplete = ({
           aria-invalid={ariaInvalid ?? (errorMessage ? true : undefined)}
           className={joinClassNames(
             'autocomplete__input',
-            isOpen ? 'autocomplete__input--focused' : undefined,
+            isFocused ? 'autocomplete__input--focused' : undefined,
             errorMessage ? 'autocomplete__input--error' : undefined,
-            width ? widthClassNames[width] : undefined,
-            inputWidth ? inputWidthClassNames[inputWidth] : undefined,
             className,
           )}
           id={inputId}
           onBlur={() => {
+            setIsFocused(false);
             setIsOpen(false);
             setHighlightedIndex(-1);
           }}
           onChange={handleChange}
           onFocus={() => {
-            setIsOpen(true);
+            setIsFocused(true);
+            setIsOpen(inputValue.trim().length > 0);
           }}
           onKeyDown={handleKeyDown}
           role="combobox"
@@ -260,43 +281,45 @@ export const Autocomplete = ({
           value={inputValue}
         />
 
-        {isOpen ? (
+        {showMenu ? (
           <ul
             className={joinClassNames(
               'autocomplete__menu',
               'autocomplete__menu--inline',
               'autocomplete__menu--visible',
-              showSuggestions ? 'autocomplete__menu--with-suggestions' : undefined,
+              showSuggestions
+                ? 'autocomplete__menu--with-suggestions'
+                : undefined,
             )}
             id={listboxId}
             role="listbox"
           >
-            {showSuggestions
-              ? filteredOptions.map((option, index) => (
-                  <li
-                    aria-selected={index === highlightedIndex}
-                    className={joinClassNames(
-                      'autocomplete__option',
-                      index === highlightedIndex
-                        ? 'autocomplete__option--focused'
-                        : undefined,
-                    )}
-                    id={`${inputId}-option-${index}`}
-                    key={`${option}-${index}`}
-                    onMouseDown={(event) => {
-                      event.preventDefault();
-                      selectOption(option);
-                    }}
-                    role="option"
-                  >
-                    {option}
-                  </li>
-                ))
-              : (
-                <li className="autocomplete__option autocomplete__option--no-results">
-                  {resolvedNoResultsText}
+            {showSuggestions ? (
+              filteredOptions.map((option, index) => (
+                <li
+                  aria-selected={index === highlightedIndex}
+                  className={joinClassNames(
+                    'autocomplete__option',
+                    index === highlightedIndex
+                      ? 'autocomplete__option--focused'
+                      : undefined,
+                  )}
+                  id={`${inputId}-option-${index}`}
+                  key={`${option}-${index}`}
+                  onMouseDown={(event) => {
+                    event.preventDefault();
+                    selectOption(option);
+                  }}
+                  role="option"
+                >
+                  {option}
                 </li>
-                )}
+              ))
+            ) : (
+              <li className="autocomplete__option autocomplete__option--no-results">
+                {resolvedNoResultsText}
+              </li>
+            )}
           </ul>
         ) : null}
       </div>

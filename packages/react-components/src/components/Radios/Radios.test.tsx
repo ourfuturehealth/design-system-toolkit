@@ -93,15 +93,20 @@ describe('Radios', () => {
       />,
     );
 
-    await user.click(screen.getByLabelText('Phone'));
     const conditional = document.getElementById('conditional-contact-method-2');
 
+    expect(conditional).toHaveAttribute('hidden');
+
+    await user.click(screen.getByLabelText('Phone'));
+
     expect(screen.getByLabelText('Phone')).toBeChecked();
+    expect(conditional).not.toHaveAttribute('hidden');
     expect(conditional).not.toHaveClass('ofh-radios__conditional--hidden');
 
     await user.click(screen.getByLabelText('Post'));
 
     expect(screen.getByLabelText('Post')).toBeChecked();
+    expect(conditional).toHaveAttribute('hidden');
     expect(conditional).toHaveClass('ofh-radios__conditional--hidden');
   });
 

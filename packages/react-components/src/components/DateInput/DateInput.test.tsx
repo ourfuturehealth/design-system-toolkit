@@ -62,6 +62,9 @@ describe('DateInput', () => {
             label: 'Month',
             value: '02',
             className: 'ofh-input--width-2',
+            inputProps: {
+              placeholder: 'MM',
+            },
           },
           {
             name: 'year',
@@ -82,6 +85,7 @@ describe('DateInput', () => {
       'autocomplete',
       'bday-day',
     );
+    expect(screen.getByLabelText(/^month$/i)).toHaveAttribute('placeholder', 'MM');
     expect(screen.getByLabelText(/^year$/i)).toHaveValue('1990');
   });
 

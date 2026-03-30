@@ -7,6 +7,13 @@ export interface SelectItem {
   text: React.ReactNode;
   disabled?: boolean;
   selected?: boolean;
+  optionProps?: Omit<
+    React.OptionHTMLAttributes<HTMLOptionElement>,
+    'children' | 'disabled' | 'selected' | 'value'
+  >;
+  /**
+   * @deprecated Use `optionProps` instead.
+   */
   attributes?: Omit<
     React.OptionHTMLAttributes<HTMLOptionElement>,
     'children' | 'disabled' | 'selected' | 'value'
@@ -125,16 +132,20 @@ export const Select = ({
           aria-invalid={ariaInvalid ?? (errorMessage ? true : undefined)}
           {...props}
         >
-          {items.map((item, index) => (
-            <option
-              key={`${String(item.value ?? '')}-${index}`}
-              value={item.value ?? ''}
-              disabled={item.disabled}
-              {...item.attributes}
-            >
-              {item.text}
-            </option>
-          ))}
+          {items.map((item, index) => {
+            const optionProps = item.optionProps ?? item.attributes;
+
+            return (
+              <option
+                key={`${String(item.value ?? '')}-${index}`}
+                value={item.value ?? ''}
+                disabled={item.disabled}
+                {...optionProps}
+              >
+                {item.text}
+              </option>
+            );
+          })}
         </select>
         <span className="ofh-select__icon" aria-hidden="true">
           <Icon name="UnfoldMore" />

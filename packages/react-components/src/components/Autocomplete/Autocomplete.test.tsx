@@ -15,6 +15,19 @@ describe('Autocomplete', () => {
     expect(screen.getByText(/country/i)).toHaveClass('ofh-label--s');
   });
 
+  it('keeps the suggestions menu closed on focus until the user starts typing', async () => {
+    const user = userEvent.setup();
+
+    render(<Autocomplete label="Country" options={options} />);
+    const input = screen.getByRole('combobox');
+
+    await user.click(input);
+
+    expect(input).toHaveClass('autocomplete__input--focused');
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'England' })).not.toBeInTheDocument();
+  });
+
   it('wires hint, error, and describedBy content to the input', () => {
     render(
       <Autocomplete
@@ -67,6 +80,49 @@ describe('Autocomplete', () => {
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
 
+  it('closes the suggestions menu again when the query is cleared', async () => {
+    const user = userEvent.setup();
+
+    render(<Autocomplete label="Country" options={options} />);
+    const input = screen.getByRole('combobox');
+
+    await user.click(input);
+    await user.type(input, 'sc');
+
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+
+    await user.clear(input);
+
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(screen.queryByRole('option', { name: 'England' })).not.toBeInTheDocument();
+  });
+
+  it('reopens the suggestions menu on refocus when the current query is still valid', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <Autocomplete label="Country" options={options} />
+        <button type="button">Outside</button>
+      </div>,
+    );
+    const input = screen.getByRole('combobox');
+
+    await user.click(input);
+    await user.type(input, 'eng');
+
+    expect(screen.getByRole('option', { name: 'England' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Outside' }));
+
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+
+    await user.click(input);
+
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    expect(screen.getByRole('option', { name: 'England' })).toBeInTheDocument();
+  });
+
   it('uses the label text in the default no-results message', async () => {
     const user = userEvent.setup();
 
@@ -105,6 +161,23 @@ describe('Autocomplete', () => {
     render(<Autocomplete label="Country" options={options} ref={ref} />);
 
     expect(ref.current).toBe(screen.getByRole('combobox'));
+  });
+
+  it('applies width utilities to the shared wrapper so the input and menu stay aligned', () => {
+    const { container } = render(
+      <Autocomplete
+        inputWidth={20}
+        label="Country"
+        options={options}
+        width="two-thirds"
+      />,
+    );
+    const input = screen.getByRole('combobox');
+    const wrapper = container.querySelector('.autocomplete__wrapper');
+
+    expect(wrapper).toHaveClass('ofh-u-width-two-thirds', 'ofh-input--width-20');
+    expect(input).not.toHaveClass('ofh-u-width-two-thirds');
+    expect(input).not.toHaveClass('ofh-input--width-20');
   });
 
   it('has no accessibility violations', async () => {

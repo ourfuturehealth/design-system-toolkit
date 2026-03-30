@@ -9,7 +9,7 @@ const meta: Meta<typeof TextInput> = {
     docs: {
       description: {
         component:
-          'A single-line text input that reuses the toolkit markup and classes, including the input-family label, hint, error, and width treatments.',
+          'A single-line text input that reuses the toolkit markup and classes, including the shared input-family label, hint, error, and width treatments. Native input props such as `autoComplete`, `disabled`, `placeholder`, and `required` pass straight through to the underlying `<input>`.',
       },
     },
   },
@@ -22,21 +22,38 @@ const meta: Meta<typeof TextInput> = {
   argTypes: {
     label: {
       control: 'text',
-      description: 'Visible label content for the input.',
+      description: 'Question or field label shown above the input.',
     },
     hint: {
       control: 'text',
-      description: 'Optional hint text shown below the label.',
+      description: 'Optional supporting text shown below the label and above any error message.',
     },
     errorMessage: {
       control: 'text',
-      description: 'Optional error message shown above the input.',
+      description: 'Validation message shown above the input. When present, the input is marked invalid and linked with `aria-describedby`.',
     },
     error: {
       control: false,
       table: {
         disable: true,
       },
+    },
+    name: {
+      control: 'text',
+      description: 'HTML name submitted with the form.',
+    },
+    type: {
+      control: 'select',
+      options: ['text', 'email', 'tel', 'search', 'password', 'url', 'number'],
+      description: 'Native input type for the underlying `<input>` element.',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown when the input is empty.',
+    },
+    describedBy: {
+      control: 'text',
+      description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
     },
     width: {
       control: 'select',
@@ -48,17 +65,60 @@ const meta: Meta<typeof TextInput> = {
         'one-third',
         'one-quarter',
       ],
-      description: 'Fluid width utility applied to the input.',
+      description: 'Responsive width utility for broader layout sizing. Use this for layout width, not expected answer length.',
     },
     inputWidth: {
       control: 'select',
       options: [2, 3, 4, 5, 10, 20, 30],
-      description: 'Fixed character-width modifier class.',
+      description: 'Fixed character-width modifier that helps signal the expected answer length.',
     },
     isPageHeading: {
       control: 'boolean',
       description:
-        'Wrap the label in an h1 when the input question is the page heading.',
+        'Wrap the label in an `h1` when this question is also the page heading.',
+    },
+    className: {
+      control: false,
+      description:
+        'Additional classes for the input element itself. Use this only for integration hooks or layout overrides.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    formGroupClassName: {
+      control: false,
+      description: 'Additional classes for the outer form-group wrapper.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    labelClassName: {
+      control: false,
+      description: 'Additional classes for the label element.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    hintClassName: {
+      control: false,
+      description: 'Additional classes for the hint element.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    errorMessageClassName: {
+      control: false,
+      description: 'Additional classes for the error message element.',
+      table: {
+        category: 'Advanced',
+      },
+    },
+    ref: {
+      control: false,
+      description: 'React ref for the underlying input element.',
+      table: {
+        category: 'Advanced',
+      },
     },
   },
 };
@@ -109,6 +169,9 @@ export const FixedWidths: Story = {
     </div>
   ),
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -137,6 +200,9 @@ export const FluidWidths: Story = {
     </div>
   ),
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -150,8 +216,15 @@ export const AsPageHeading: Story = {
   args: {
     isPageHeading: true,
     label: 'What is your name?',
-    labelClassName: 'ofh-label--l',
     placeholder: 'Enter your full name',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `isPageHeading` when the question should also be announced as the page heading. The component applies the larger heading label treatment automatically.',
+      },
+    },
   },
 };
 
@@ -187,6 +260,9 @@ export const FormExample: Story = {
     </form>
   ),
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Example of how text inputs work together in a form.',

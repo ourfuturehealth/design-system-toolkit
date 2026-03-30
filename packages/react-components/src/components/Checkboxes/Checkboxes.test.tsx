@@ -102,10 +102,14 @@ describe('Checkboxes', () => {
       />,
     );
 
-    await user.click(screen.getByLabelText('Phone'));
-    await user.click(screen.getByLabelText('Newsletter'));
     const conditional = document.getElementById('conditional-contact-method-2');
 
+    expect(conditional).toHaveAttribute('hidden');
+
+    await user.click(screen.getByLabelText('Phone'));
+    await user.click(screen.getByLabelText('Newsletter'));
+
+    expect(conditional).not.toHaveAttribute('hidden');
     expect(conditional).not.toHaveClass('ofh-checkboxes__conditional--hidden');
     expect(screen.getByLabelText('Phone')).toBeChecked();
     expect(screen.getByLabelText('Newsletter')).toBeChecked();
@@ -115,6 +119,7 @@ describe('Checkboxes', () => {
     expect(screen.getByLabelText('Phone')).not.toBeChecked();
     expect(screen.getByLabelText('No contact')).toBeChecked();
     expect(screen.getByLabelText('Newsletter')).toBeChecked();
+    expect(conditional).toHaveAttribute('hidden');
     expect(conditional).toHaveClass('ofh-checkboxes__conditional--hidden');
   });
 

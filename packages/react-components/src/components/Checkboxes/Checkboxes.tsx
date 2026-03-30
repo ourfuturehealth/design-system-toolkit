@@ -295,10 +295,12 @@ export const Checkboxes = ({
 
                 {item.conditional ? (
                   <div
+                    aria-hidden={!checked}
                     className={joinClassNames(
                       'ofh-checkboxes__conditional',
                       checked ? undefined : 'ofh-checkboxes__conditional--hidden',
                     )}
+                    hidden={!checked}
                     id={conditionalId}
                   >
                     {item.conditional}

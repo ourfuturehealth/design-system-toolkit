@@ -12,13 +12,26 @@ const items = [
 
 describe('Select', () => {
   it('renders with a label and options', () => {
-    render(<Select items={items} label="Favourite fruit" />);
+    render(
+      <Select
+        items={[
+          { value: '', text: 'Choose an option' },
+          { value: 'apple', text: 'Apple', optionProps: { title: 'Fruit option' } },
+          { value: 'orange', text: 'Orange' },
+        ]}
+        label="Favourite fruit"
+      />,
+    );
 
     expect(screen.getByRole('combobox')).toBeInTheDocument();
     expect(screen.getByLabelText(/favourite fruit/i)).toBeInTheDocument();
     expect(screen.getAllByRole('option')).toHaveLength(3);
     expect(screen.getByText(/favourite fruit/i)).toHaveClass('ofh-label--s');
     expect(document.querySelector('.ofh-select__icon .ofh-icon')).toBeTruthy();
+    expect(screen.getByRole('option', { name: 'Apple' })).toHaveAttribute(
+      'title',
+      'Fruit option',
+    );
   });
 
   it('displays hint text', () => {
