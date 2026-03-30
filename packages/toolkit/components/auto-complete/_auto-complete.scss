@@ -46,6 +46,10 @@
 
 .autocomplete__input--error {
   @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
+
+  &.autocomplete__input--focused {
+    @include ofh-focused-input($ofh-color-border-feedback-error);
+  }
 }
 
 .autocomplete__input--show-all-values {
@@ -156,6 +160,9 @@
   border-top-width: 0;
   color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  min-height: ofh-px-to-rem(48px);
 }
 
 .autocomplete__option--no-results:hover {

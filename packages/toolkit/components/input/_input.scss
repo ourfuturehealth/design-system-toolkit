@@ -67,7 +67,7 @@
     @include ofh-emphasised-input-border($ofh-color-border-input-active);
   }
 
-  &:focus {
+  &:focus:not(.ofh-input--error) {
     @include ofh-focused-input;
   }
 }
@@ -85,6 +85,10 @@
 
 .ofh-input--error {
   @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
+
+  &:focus {
+    @include ofh-focused-input($ofh-color-border-feedback-error);
+  }
 }
 
 // The ex measurements are based on the number of W's that can fit inside the input

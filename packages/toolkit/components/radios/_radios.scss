@@ -97,6 +97,10 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
   @include ofh-focused-radio();
 }
 
+.ofh-form-group--error .ofh-radios__input:focus + .ofh-radios__controller {
+  @include ofh-focused-radio($ofh-color-border-feedback-error);
+}
+
 /* Selected state */
 
 .ofh-radios__input:checked + .ofh-radios__controller .ofh-radios__dot {

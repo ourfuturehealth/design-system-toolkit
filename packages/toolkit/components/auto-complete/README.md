@@ -63,9 +63,10 @@ The authored markup starts as a standard input-family text field. JavaScript the
 - `hint` and `errorMessage`: shared input-family supporting content.
 - `describedBy`: extra IDs appended to the input `aria-describedby`.
 - `formGroup.classes`: classes applied to the outer `.ofh-form-group`.
-- `classes`: classes applied to the underlying text input before enhancement.
-- `attributes`: extra HTML attributes added to the underlying text input.
+- `classes`: classes applied to the enhanced autocomplete field. Width classes also constrain the suggestions dropdown.
+- `attributes`: extra HTML attributes added to the enhanced autocomplete input.
 - `options`: string options used to populate the suggestions list.
+- `noResultsText`: optional custom message shown when the query has no matching suggestions.
 
 ## Thanks to the Government Digital Service (GDS)
 

@@ -20,4 +20,40 @@
     type: "default"
   }) }}
 
+  <h2>When to use autocomplete</h2>
+  <p>Use autocomplete when users need to choose from a long, known list and typing a few characters is faster than scanning every option manually.</p>
+
+  <h2>When not to use autocomplete</h2>
+  <p>Do not use autocomplete if the list is short enough to scan easily. In that case, use <a href="/design-system/components/select">select</a> instead.</p>
+
+  <h2>How to use autocomplete</h2>
+  <p>Write a clear label, provide hint text when users need extra context, and let users type enough of the answer to filter the list. The suggestions list only appears once the user starts typing.</p>
+
+  <h3 id="fixed-width-autocomplete">Fixed width autocomplete</h3>
+  <p>Use a fixed width when the expected answer length is known and you want the dropdown to match that smaller field width.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "auto-complete",
+    type: "fixed-width"
+  }) }}
+
+  <h3 id="error-messages">Error messages</h3>
+  <p>Show an error message when the user must enter or choose a valid value.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "auto-complete",
+    type: "error"
+  }) }}
+
+  <h3 id="custom-no-results-text">Custom no results text</h3>
+  <p>Use a custom no-results message when the default wording is not specific enough for the journey.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "auto-complete",
+    type: "custom-no-results-text"
+  }) }}
+
 {% endblock %}

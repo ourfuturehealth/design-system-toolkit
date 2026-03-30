@@ -26,10 +26,9 @@
     },
     {
       "name": "label",
-      "type": "object",
+      "type": "string",
       "required": true,
-      "description": "Options for the label component.",
-      "isComponent": true
+      "description": "Plain-text label used for the input and default no-results message."
     },
     {
       "name": "hint",
@@ -66,16 +65,22 @@
       "description": "Selectable string options for the auto-complete component."
     },
     {
+      "name": "noResultsText",
+      "type": "string",
+      "required": false,
+      "description": "Optional custom message shown when the query has no matching suggestions."
+    },
+    {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the underlying text input."
+      "description": "Classes to add to the enhanced autocomplete field. Width classes also constrain the suggestions dropdown."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to add to the underlying text input."
+      "description": "HTML attributes (for example placeholder, autocomplete or data attributes) to add to the enhanced autocomplete input."
     }
   ]
 }

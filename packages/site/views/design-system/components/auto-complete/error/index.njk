@@ -1,0 +1,14 @@
+{% from 'auto-complete/macro.njk' import autoComplete %}
+
+{{ autoComplete({
+  label: "Organisation name",
+  id: "affiliation_organisation_name_error",
+  name: "affiliation[organisation_name_error]",
+  hint: {
+    text: "Start typing to filter the list."
+  },
+  errorMessage: {
+    text: "Enter an organisation name"
+  },
+  options: ["Cambridge", "Department of Health", "KCL", "OFH", "Oxford", "UCL", "University of York"]
+}) }}

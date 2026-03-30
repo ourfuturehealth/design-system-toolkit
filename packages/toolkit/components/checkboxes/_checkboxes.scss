@@ -89,6 +89,10 @@ $ofh-checkboxes-gap: $ofh-size-16;
   @include ofh-focused-checkbox();
 }
 
+.ofh-form-group--error .ofh-checkboxes__input:focus + .ofh-checkboxes__controller {
+  @include ofh-focused-checkbox($ofh-color-border-feedback-error);
+}
+
 /* Selected state */
 
 .ofh-checkboxes__input:checked + .ofh-checkboxes__controller .ofh-checkboxes__icon {

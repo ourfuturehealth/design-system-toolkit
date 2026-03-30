@@ -6,18 +6,21 @@ jest.mock('accessible-autocomplete', () => jest.fn());
 describe('AutoComplete module', () => {
   beforeEach(() => {
     accessibleAutocomplete.mockImplementation(
-      ({ defaultValue, element, id, name }) => {
+      ({ defaultValue, id, name, element }) => {
+        const wrapper = document.createElement('div');
         const input = document.createElement('input');
         const menu = document.createElement('ul');
 
+        wrapper.className = 'autocomplete__wrapper';
         input.className = 'autocomplete__input';
         input.id = id;
         input.name = name;
         input.value = defaultValue;
         menu.className = 'autocomplete__menu autocomplete__menu--hidden';
 
-        element.appendChild(input);
-        element.appendChild(menu);
+        wrapper.appendChild(input);
+        wrapper.appendChild(menu);
+        element.appendChild(wrapper);
       },
     );
   });
@@ -27,7 +30,7 @@ describe('AutoComplete module', () => {
     delete window.organisation_options;
   });
 
-  it('replaces the original input and preserves the input accessibility attributes', () => {
+  it('replaces the original input and preserves the enhanced input attributes and width classes', () => {
     document.body.innerHTML = `
       <div class="ofh-js-autocomplete-element">
         <div class="ofh-form-group ofh-form-group--error">
@@ -37,11 +40,14 @@ describe('AutoComplete module', () => {
             <span class="ofh-error-message ofh-input__error-message" id="organisation-error">Enter an organisation</span>
           </div>
           <input
-            class="ofh-input ofh-input--error"
+            class="ofh-input ofh-input--error ofh-input--width-20 js-track-field"
             id="organisation"
             type="text"
             aria-describedby="organisation-hint organisation-error"
             aria-invalid="true"
+            autocomplete="organization"
+            placeholder="Start typing"
+            required
           />
         </div>
         <div
@@ -70,10 +76,46 @@ describe('AutoComplete module', () => {
       'organisation-hint organisation-error',
     );
     expect(autocompleteInput.getAttribute('aria-invalid')).toBe('true');
+    expect(autocompleteInput.getAttribute('autocomplete')).toBe('organization');
+    expect(autocompleteInput.getAttribute('placeholder')).toBe('Start typing');
+    expect(autocompleteInput.hasAttribute('required')).toBe(true);
     expect(autocompleteInput.classList.contains('autocomplete__input--error')).toBe(
       true,
     );
+    expect(autocompleteInput.classList.contains('js-track-field')).toBe(true);
+    expect(
+      document.querySelector('.autocomplete__wrapper').classList.contains(
+        'ofh-input--width-20',
+      ),
+    ).toBe(true);
     expect(document.querySelector('.ofh-form-group > .ofh-input')).toBeNull();
+  });
+
+  it('passes a custom no-results message to accessible autocomplete when provided', () => {
+    document.body.innerHTML = `
+      <div class="ofh-js-autocomplete-element">
+        <div class="ofh-form-group">
+          <div class="ofh-input__header">
+            <label class="ofh-label ofh-label--s ofh-input__label" for="organisation">Organisation</label>
+          </div>
+          <input class="ofh-input" id="organisation" type="text" />
+        </div>
+        <div
+          class="ofh-js-autocomplete-element-suggestions"
+          data-field-name="organisation"
+          data-no-results-text="No matching organisations. Enter a new organisation."
+        ></div>
+      </div>
+    `;
+    window.organisation_options = ['Acme'];
+
+    AutoComplete();
+
+    const [{ tNoResults }] = accessibleAutocomplete.mock.calls[0];
+
+    expect(tNoResults()).toBe(
+      'No matching organisations. Enter a new organisation.',
+    );
   });
 
   it('toggles the suggestions header class based on the rendered menu items', async () => {

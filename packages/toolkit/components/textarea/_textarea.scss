@@ -23,11 +23,15 @@
     @include ofh-emphasised-input-border($ofh-color-border-input-active);
   }
 
-  &:focus {
+  &:focus:not(.ofh-textarea--error) {
     @include ofh-focused-input;
   }
 }
 
 .ofh-textarea--error {
   @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
+
+  &:focus {
+    @include ofh-focused-input($ofh-color-border-feedback-error);
+  }
 }

@@ -15,7 +15,12 @@
     "classes": params.classes,
     "attributes": params.attributes
   }) }}
-  <div class="ofh-js-autocomplete-element-suggestions" data-default-value="{{params.value}}" data-field-name="{{params.name}}"></div>
+  <div
+    class="ofh-js-autocomplete-element-suggestions"
+    data-default-value="{{params.value}}"
+    data-field-name="{{params.name}}"
+    {% if params.noResultsText %}data-no-results-text="{{params.noResultsText}}"{% endif %}
+  ></div>
   <script>
     window.{{params.id}}_options = [{% for param in params.options %} "{{param}}", {% endfor %}]
   </script>
