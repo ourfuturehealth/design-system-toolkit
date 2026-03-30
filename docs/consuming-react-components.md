@@ -1,23 +1,21 @@
 # Consuming Our Future Health React Components
 
-This guide explains how to consume `@ourfuturehealth/react-components` in React applications.
+This guide explains how to consume the `@ourfuturehealth/react-components` package in your React applications.
 
 ## Prerequisites
 
-1. Node.js `20.19.0` or higher
-2. pnpm, npm, or Yarn
-3. A React application using React 19+
+1. **Node.js** 20.19.0 or higher (Node.js 24 LTS recommended)
+2. **pnpm** (recommended) or npm as package manager
+3. A React application (React 19+ required)
 
 ## Installation
 
 We do not publish `@ourfuturehealth/react-components` to the npm registry. Install the release tarball instead.
 
-Add the dependency to `package.json`:
-
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.5.0/ourfuturehealth-react-components-0.5.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.6.0/ourfuturehealth-react-components-0.6.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -51,6 +49,8 @@ Install the resulting local `.tgz` file in the consumer application.
 
 ## Usage Example
 
+Import components and styles in your React application:
+
 ```tsx
 import React from 'react';
 import { Button, TextInput } from '@ourfuturehealth/react-components';
@@ -60,8 +60,10 @@ function App() {
   return (
     <div>
       <TextInput
+        id="name"
         label="Your name"
         hint="Enter your full name"
+        inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
       />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
@@ -72,32 +74,64 @@ function App() {
 export default App;
 ```
 
-### Import styles
+### Import Styles
 
-Import one theme stylesheet once in your app entry point:
+Import the stylesheet once in your app's entry point:
+
+```tsx
+// main.tsx or App.tsx
+import '@ourfuturehealth/react-components/styles/participant';
+```
+
+The styles are based on the Our Future Health design system toolkit and include all component styles.
+
+## Theme Selection
+
+Each application should use one theme. Current theme bundles are:
+
+- `participant`
+- `research`
+
+### Squad C (React) using participant
+
+Use the participant styles export:
 
 ```tsx
 import '@ourfuturehealth/react-components/styles/participant';
 ```
 
-Available theme bundles:
+### Squad C (React) using research
 
-- `@ourfuturehealth/react-components/styles/participant`
-- `@ourfuturehealth/react-components/styles/research`
+Use the matching themed styles export:
 
-`@ourfuturehealth/react-components/styles` remains available as a backward-compatible alias for `participant`.
+```tsx
+import '@ourfuturehealth/react-components/styles/research';
+```
+
+For backward compatibility, `@ourfuturehealth/react-components/styles` remains available and maps to participant.
+
+To add a new custom React theme stylesheet export, follow `docs/theming/adding-a-new-theme.md`.
 
 ## Available Components
 
-The package currently provides:
+The React components package currently provides the following components:
 
-- `Button`
-- `TextInput`
-- `ErrorSummary`
-- `Tag`
-- `Card`
-- `CardCallout`
-- `CardDoDont`
+- `Button` - Call-to-action buttons and links
+- `TextInput` - Text input fields with toolkit-parity hint, error, and width support
+- `Fieldset` - Semantic fieldset wrapper for grouped form questions and legends
+- `Textarea` - Multi-line text input fields
+- `Select` - Native select inputs with toolkit styling and icon affordance
+- `DateInput` - Grouped day/month/year input fields
+- `Autocomplete` - Accessible text input with filtered suggestion list
+- `CharacterCount` - Text input and textarea variants with count feedback
+- `Checkboxes` - Grouped checkbox inputs with hints, exclusive options, and conditional reveals
+- `Radios` - Grouped radio inputs with hints and conditional reveals
+- `Icon` - Toolkit sprite icon component with fixed and responsive sizing
+- `ErrorSummary` - Page-level validation summaries with linked errors
+- `Tag` - Status tags aligned with toolkit Tag variants
+- `Card` - Content presentation cards for summaries, status, and next steps
+- `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
+- `CardDoDont` - Positive and negative recommendation lists
 
 For complete component documentation and live examples, run Storybook:
 
@@ -109,7 +143,7 @@ Or see the [example consumer app](../packages/example-react-consumer-app/) for a
 
 ## TypeScript Support
 
-The package includes TypeScript definitions. No additional `@types/` packages are required.
+The package includes full TypeScript definitions. No additional `@types/` packages needed.
 
 ```tsx
 import type { ButtonProps } from '@ourfuturehealth/react-components';
@@ -123,9 +157,10 @@ const MyButton: React.FC<ButtonProps> = (props) => {
 
 ### Vite
 
-The React components work out of the box with Vite.
+The React components work out of the box with Vite. No additional configuration needed.
 
 ```typescript
+// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -136,9 +171,10 @@ export default defineConfig({
 
 ### Webpack
 
-Ensure you have appropriate CSS loaders:
+If using Webpack, ensure you have appropriate loaders for CSS:
 
 ```javascript
+// webpack.config.js
 module.exports = {
   module: {
     rules: [
@@ -165,38 +201,73 @@ If you are testing unreleased code, build and pack the package locally instead.
 
 ### Module not found
 
-If `@ourfuturehealth/react-components` cannot be resolved:
+**Error**: `Cannot find module '@ourfuturehealth/react-components'`
 
-- verify the package is installed in `node_modules`
-- run your package-manager install again
-- confirm you are using the tarball URL install contract, not the old git-subdirectory syntax
+**Solution**:
+
+- Verify the package is installed: `ls node_modules/@ourfuturehealth/react-components`
+- Run `pnpm install` or `npm install` again
+- Confirm you are using the tarball URL install contract, not the old git-subdirectory syntax
 
 ### Styles not loading
 
-Import the stylesheet once in your entry point:
+**Error**: Components appear unstyled
+
+**Solution**: Ensure you import the styles:
 
 ```tsx
 import '@ourfuturehealth/react-components/styles/participant';
 ```
 
+Import this in your app's entry point (e.g., `main.tsx` or `App.tsx`).
+
 ### React version mismatch
 
-The React components require React 19+:
+**Error**: `Warning: Invalid hook call` or peer dependency warnings
+
+**Solution**: The React components require React 19+. Update your React version:
 
 ```bash
 pnpm add react@^19.2.4 react-dom@^19.2.4
 ```
 
+### TypeScript errors
+
+**Error**: Type definitions not found
+
+**Solution**:
+
+- Ensure `"moduleResolution": "bundler"` or `"moduleResolution": "node"` is set in your `tsconfig.json`
+- Run `pnpm install` to ensure type definitions are properly linked
+
 ## Development and Contributing
 
-For development:
+For development and contributing to the React components:
 
 1. Clone the repository
-2. Run `pnpm install`
-3. Run `pnpm storybook`
+2. Install dependencies: `pnpm install`
+3. Run Storybook: `pnpm storybook`
 4. Make changes in `packages/react-components/`
-5. Run `pnpm test:react-components`
-6. Run `pnpm lint:react-components`
-7. Run `pnpm build`
+5. Run tests: `pnpm test:react-components`
+6. Lint code: `pnpm lint:react-components`
+7. Build all packages: `pnpm build`
 
-See the main [README.md](../README.md) and [CONTRIBUTING.md](../CONTRIBUTING.md) for more detail.
+See the main [README.md](../README.md) for detailed setup instructions and the [contributing guide](../CONTRIBUTING.md) for guidelines.
+
+## Example Consumer App
+
+The monorepo includes an example consumer app demonstrating usage:
+
+```bash
+# Run the example app
+pnpm dev:react-consumer
+```
+
+The example app is located in `packages/example-react-consumer-app/` and shows how to consume the React components in a real application.
+
+## Need Help?
+
+1. Check the [Storybook](https://github.com/ourfuturehealth/design-system-toolkit#storybook) for component examples
+2. Review the [example consumer app](../packages/example-react-consumer-app/)
+3. Read the [upgrade guide](../UPGRADING.md) for migration instructions
+4. Open an issue on [GitHub](https://github.com/ourfuturehealth/design-system-toolkit/issues)

@@ -6,6 +6,59 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-03-30
+
+#### @ourfuturehealth/toolkit 4.8.0 (`toolkit-v4.8.0`)
+
+##### Added
+
+- First-class toolkit docs for the `icon` component, including fixed-size, responsive-size, and titled examples
+- Expanded docs-site examples for input-family components including autocomplete, date input, and select
+
+##### Changed
+
+- Refreshed the input family to the current Figma and token model across:
+  - text input
+  - textarea
+  - select
+  - date input
+  - autocomplete
+  - character count
+  - checkboxes
+  - radios
+- Updated shared input-family spacing, padding, state treatment, and fixed-width sizing
+- Added responsive icon sizing support to the toolkit icon API
+- Corrected input-family docs parity and README guidance after the refresh
+
+#### @ourfuturehealth/react-components 0.6.0 (`react-v0.6.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- The existing `TextInput` PoC has been replaced with the toolkit-parity input API:
+  - `error` is no longer the primary error prop; use `errorMessage`
+  - `maxLength` is no longer used as a fixed-width API; use `inputWidth`
+  - new supporting props such as `describedBy` and `isPageHeading` now align with the toolkit input family
+
+##### Added
+
+- New public input-family components:
+  - `Autocomplete`
+  - `CharacterCount`
+  - `Checkboxes`
+  - `DateInput`
+  - `Radios`
+  - `Select`
+  - `Textarea`
+- New public `Icon` component with fixed and responsive sizing support
+- Storybook coverage and unit/accessibility tests for the input family and `Icon`
+
+##### Changed
+
+- Rebuilt `TextInput` to match the toolkit input-family structure and public API more closely
+- Replaced internal React icon helpers with the public `Icon` component in input and Card consumers
+- Refined Storybook docs and examples so the input family is easier to review and matches the docs site more closely
+- Fixed grouped-control docs-page collisions by isolating story `id` / `name` values where needed
+
 ### 2026-03-25
 
 #### @ourfuturehealth/toolkit 4.7.0 (`toolkit-v4.7.0`)
