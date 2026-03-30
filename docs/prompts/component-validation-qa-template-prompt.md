@@ -38,6 +38,7 @@ Workflow I want you to follow:
    - a short pass/fail table
    - any Figma comparison notes I should keep in mind
    - any breakpoint-specific token expectations I should keep in mind for mobile / tablet / desktop
+   - any Storybook ↔ docs-site example parity checks that should be validated manually
 4. Then walk me through that QA script one step at a time.
 5. After each step, stop and wait for my response in the format:
    - `pass`
@@ -58,10 +59,12 @@ Important constraints:
 - Run `npm test` after modifying JavaScript or TypeScript files.
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
+- Treat Storybook ↔ docs-site example gaps as implementation misses when one surface teaches materially less than the other.
 - Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
 - Treat raw JSON controls for stable nested props as implementation misses when the story could reasonably offer clearer text/select/boolean controls instead.
 - Treat controls for values the component visibly ignores or overrides as implementation misses to be fixed before QA is considered complete.
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
+- Treat React components that depend on toolkit progressive-enhancement classes such as `.js-enabled` for core interactive behavior as implementation misses to be fixed before QA is considered complete.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.
