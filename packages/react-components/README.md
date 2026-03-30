@@ -20,12 +20,17 @@ npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-syst
 
 ```tsx
 import {
+  Autocomplete,
   Button,
   Card,
   CardCallout,
   CardDoDont,
+  CharacterCount,
+  Checkboxes,
+  DateInput,
   ErrorSummary,
   Icon,
+  Radios,
   Select,
   Tag,
   Textarea,
@@ -34,6 +39,18 @@ import {
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
+  const countryOptions = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
+  const contactCheckboxItems = [
+    { value: 'email', label: 'Email' },
+    { value: 'phone', label: 'Phone' },
+    { value: 'text', label: 'Text message' },
+  ];
+  const contactRadioItems = [
+    { value: 'email', label: 'Email' },
+    { value: 'phone', label: 'Phone' },
+    { value: 'post', label: 'Post' },
+  ];
+
   return (
     <div>
       <ErrorSummary
@@ -60,6 +77,38 @@ function App() {
           { value: '', label: 'Select an option' },
           { value: 'england', label: 'England' },
         ]}
+      />
+      <DateInput
+        id="date-of-birth"
+        legend="What is your date of birth?"
+        hint="For example, 31 3 1980"
+        namePrefix="date-of-birth"
+      />
+      <Autocomplete
+        id="country-autocomplete"
+        label="Country"
+        hint="Start typing to filter the list."
+        name="country-autocomplete"
+        options={countryOptions}
+      />
+      <CharacterCount
+        id="summary"
+        label="Short summary"
+        hint="Do not include personal details."
+        maxLength={200}
+        name="summary"
+      />
+      <Checkboxes
+        hint="Select all contact methods that apply."
+        items={contactCheckboxItems}
+        legend="How should we contact you?"
+        name="contact-methods"
+      />
+      <Radios
+        hint="Choose one way for us to contact you."
+        items={contactRadioItems}
+        legend="Preferred contact method"
+        name="preferred-contact-method"
       />
     </div>
   );
