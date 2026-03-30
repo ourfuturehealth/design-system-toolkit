@@ -229,10 +229,12 @@ export const Radios = ({
 
                 {item.conditional ? (
                   <div
+                    aria-hidden={!checked}
                     className={joinClassNames(
                       'ofh-radios__conditional',
                       checked ? undefined : 'ofh-radios__conditional--hidden',
                     )}
+                    hidden={!checked}
                     id={conditionalId}
                   >
                     {item.conditional}

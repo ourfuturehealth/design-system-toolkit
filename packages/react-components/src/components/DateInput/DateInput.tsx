@@ -10,6 +10,20 @@ export interface DateInputItem {
   autoComplete?: string;
   inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
   pattern?: string;
+  inputProps?: Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    | 'autoComplete'
+    | 'children'
+    | 'className'
+    | 'id'
+    | 'inputMode'
+    | 'name'
+    | 'ref'
+    | 'type'
+  >;
+  /**
+   * @deprecated Use `inputProps` instead.
+   */
   attributes?: Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
     | 'autoComplete'
@@ -152,9 +166,10 @@ export const DateInput = ({
             const itemModifierClass = ['day', 'month', 'year'].includes(item.name)
               ? `ofh-date-input__item--${item.name}`
               : undefined;
+            const inputProps = item.inputProps ?? item.attributes;
             const inputDefaultValue =
-              item.attributes?.value === undefined &&
-              item.attributes?.defaultValue === undefined
+              inputProps?.value === undefined &&
+              inputProps?.defaultValue === undefined
                 ? item.value
                 : undefined;
 
@@ -179,7 +194,7 @@ export const DateInput = ({
                   autoComplete={item.autoComplete}
                   pattern={item.pattern ?? '[0-9]*'}
                   defaultValue={inputDefaultValue}
-                  {...item.attributes}
+                  {...inputProps}
                 />
               </div>
             );
