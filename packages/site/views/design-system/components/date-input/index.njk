@@ -33,6 +33,15 @@
   <p class="rich-text">If you are asking just <a href="/content/how-to-write-good-questions-for-forms/get-the-questions-into-order#begin-prototyping-with-1-thing-per-page">1 question per page</a> as we recommend, you can set the contents of the <code>&lt;legend&gt;</code> as the page heading. This is good practice as it means that screen reader users will only hear the contents once.</p>
   <p>Read more on the GOV.UK Design System about how to <a href="https://design-system.service.gov.uk/patterns/dates/">ask users for dates</a> and <a href="https://design-system.service.gov.uk/get-started/labels-legends-headings/">making labels and legends headings</a>.</p>
 
+  <h3 id="browser-autocomplete">Browser autocomplete</h3>
+  <p>If you are asking for a known date of birth, add autocomplete tokens to the day, month, and year inputs so browsers can offer saved date details.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "date-input",
+    type: "with-browser-autocomplete"
+  }) }}
+
   <h2>Error messages</h2>
   <p>Style error messages like this:</p>
 
@@ -40,6 +49,15 @@
     group: "components",
     item: "date-input",
     type: "with-errors"
+  }) }}
+
+  <h3 id="single-field-error">Single field error styling</h3>
+  <p>If only one part of the date is wrong, keep the group-level error message and add the red error input styling only to the affected field.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "date-input",
+    type: "single-field-error"
   }) }}
 
   <p>Follow:</p>

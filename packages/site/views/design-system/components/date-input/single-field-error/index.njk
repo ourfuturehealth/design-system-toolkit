@@ -1,0 +1,30 @@
+{% from 'date-input/macro.njk' import dateInput %}
+
+{{ dateInput({
+  "id": "dob-single-error",
+  "fieldset": {
+    "legend": {
+      "text": "What is your date of birth?"
+    }
+  },
+  "hint": {
+    "text": "For example, 15 3 1984"
+  },
+  "errorMessage": {
+    "text": "Enter your date of birth"
+  },
+  "items": [
+    {
+      "name": "day",
+      "classes": "ofh-input--width-2 ofh-input--error"
+    },
+    {
+      "name": "month",
+      "classes": "ofh-input--width-2"
+    },
+    {
+      "name": "year",
+      "classes": "ofh-input--width-4"
+    }
+  ]
+}) }}

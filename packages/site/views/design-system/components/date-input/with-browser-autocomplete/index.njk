@@ -1,0 +1,31 @@
+{% from 'date-input/macro.njk' import dateInput %}
+
+{{ dateInput({
+  "id": "date-of-birth-autocomplete",
+  "namePrefix": "date-of-birth",
+  "fieldset": {
+    "legend": {
+      "text": "What is your date of birth?"
+    }
+  },
+  "hint": {
+    "text": "For example, 31 3 1980"
+  },
+  "items": [
+    {
+      "name": "day",
+      "classes": "ofh-input--width-2",
+      "autocomplete": "bday-day"
+    },
+    {
+      "name": "month",
+      "classes": "ofh-input--width-2",
+      "autocomplete": "bday-month"
+    },
+    {
+      "name": "year",
+      "classes": "ofh-input--width-4",
+      "autocomplete": "bday-year"
+    }
+  ]
+}) }}
