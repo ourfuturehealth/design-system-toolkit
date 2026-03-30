@@ -1,13 +1,14 @@
 {% from 'select/macro.njk' import select %}
 
 {{ select({
-  "id": "select-1",
-  "name": "select-1",
+  "id": "select-page-heading",
+  "name": "select-page-heading",
   "label": {
-    "text": "Preferred contact method"
+    "text": "How should we contact you?",
+    "isPageHeading": true
   },
   "hint": {
-    "text": "Choose how you would like us to contact you."
+    "text": "Choose one option."
   },
   "items": [
     {
@@ -23,9 +24,8 @@
       "text": "Phone"
     },
     {
-      "value": "text-message",
-      "text": "Text message",
-      "disabled": true
+      "value": "post",
+      "text": "Post"
     }
   ]
 }) }}

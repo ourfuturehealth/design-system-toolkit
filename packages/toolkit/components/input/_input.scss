@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 /* ==========================================================================
    COMPONENTS/ #INPUT
    ========================================================================== */
@@ -91,34 +93,56 @@
   }
 }
 
-// The ex measurements are based on the number of W's that can fit inside the input
-// Extra space is left on the right hand side to allow for the Safari prefill icon
-// Linear regression estimation based on visual tests: y = 1.76 + 1.81x
+// Fixed-width inputs are a legacy preset API used across toolkit and React.
+// Size them by visible character count, then add room for the shared input
+// chrome: horizontal padding, border, and a small browser affordance allowance.
+
+$ofh-input-fixed-width-horizontal-padding-scale: map.get(
+  $ofh-space-horizontal-responsive-scale,
+  16
+);
+$ofh-input-fixed-width-browser-affordance: ofh-px-to-rem($ofh-size-4);
+
+@mixin ofh-input-fixed-width($characters) {
+  @each $breakpoint, $padding in $ofh-input-fixed-width-horizontal-padding-scale {
+    $extra-space: ofh-px-to-rem(
+      $padding * 2 + $ofh-stroke-weight-2 * 2 + $ofh-size-4
+    );
+
+    @if not $breakpoint {
+      max-width: calc(#{$characters}ch + #{$extra-space});
+    } @else {
+      @include govuk-media-query($from: $breakpoint) {
+        max-width: calc(#{$characters}ch + #{$extra-space});
+      }
+    }
+  }
+}
 
 .ofh-input--width-30 {
-  max-width: 56ex + 3ex;
+  @include ofh-input-fixed-width(30);
 }
 
 .ofh-input--width-20 {
-  max-width: 38ex + 3ex;
+  @include ofh-input-fixed-width(20);
 }
 
 .ofh-input--width-10 {
-  max-width: 20ex + 3ex;
+  @include ofh-input-fixed-width(10);
 }
 
 .ofh-input--width-5 {
-  max-width: 10.8ex;
+  @include ofh-input-fixed-width(5);
 }
 
 .ofh-input--width-4 {
-  max-width: 9ex;
+  @include ofh-input-fixed-width(4);
 }
 
 .ofh-input--width-3 {
-  max-width: 7.2ex;
+  @include ofh-input-fixed-width(3);
 }
 
 .ofh-input--width-2 {
-  max-width: 5.4ex;
+  @include ofh-input-fixed-width(2);
 }

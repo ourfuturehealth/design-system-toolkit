@@ -1,13 +1,10 @@
 {% from 'select/macro.njk' import select %}
 
 {{ select({
-  "id": "select-1",
-  "name": "select-1",
+  "id": "select-selected-option",
+  "name": "select-selected-option",
   "label": {
     "text": "Preferred contact method"
-  },
-  "hint": {
-    "text": "Choose how you would like us to contact you."
   },
   "items": [
     {
@@ -16,7 +13,8 @@
     },
     {
       "value": "email",
-      "text": "Email"
+      "text": "Email",
+      "selected": true
     },
     {
       "value": "phone",
