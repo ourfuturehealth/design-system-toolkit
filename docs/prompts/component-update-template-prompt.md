@@ -57,8 +57,9 @@ This workflow also includes a temporary external-reference audit against the BSM
 2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS) and polish it
 3. **Ensure React component exists** and reaches feature/functional parity with toolkit (create if missing)
 4. Create/update comprehensive Storybook documentation
-5. Add automated tests (functional + accessibility)
-6. Update all relevant documentation
+5. Create/update comprehensive docs-site examples so toolkit docs and Storybook teach the component equally well
+6. Add automated tests (functional + accessibility)
+7. Update all relevant documentation
 
 ---
 
@@ -106,6 +107,10 @@ This workflow also includes a temporary external-reference audit against the BSM
 - React component must achieve full feature and behavior parity with toolkit
 - React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
 - Both versions should support the same user-facing capabilities, variants, and behaviors
+- Do not carry toolkit progressive-enhancement mechanisms into React when React state should own the behavior directly
+  - example: toolkit may rely on a global `.js-enabled` class to hide unrevealed conditional content
+  - React components must not depend on `.js-enabled` or similar page-level enhancement flags for core behavior
+  - if a section is conditionally revealed in React, hide or show it directly from component state and rendered attributes
 
 ### 3. External React Reference Audit (MANDATORY, TEMPORARY)
 
@@ -247,6 +252,8 @@ Review the entire component implementation against design system standards:
 - [ ] Keyboard navigation support (Tab, Enter, Space, Arrows where appropriate)
 - [ ] Color contrast ratios meet WCAG 2.1 AA
 - [ ] Focus indicators meet WCAG 2.1 AA (2px minimum, sufficient contrast)
+- [ ] React behavior does not depend on toolkit progressive-enhancement classes such as `.js-enabled`
+- [ ] React conditional reveals and other JS-driven states are controlled directly by React state, not by page-level enhancement flags
 
 **Code Quality Opportunities:**
 
@@ -501,6 +508,7 @@ it('should be keyboard accessible', async () => {
 - ✅ Component description from design system
 - ✅ Auto-generated prop table (via TypeScript)
 - ✅ Story controls that are ergonomic and honest about what the component actually supports
+- ✅ Example coverage that is intentionally compared against the docs site so one surface does not become much richer than the other
 
 **Story Pattern:**
 
@@ -641,6 +649,22 @@ Review the component's user-facing documentation surfaces and make sure they exp
   - component family names
   - deprecated vs preferred usage wording
 
+**Storybook ↔ Docs Site example parity review (MANDATORY):**
+
+- Compare Storybook example coverage against the docs-site examples for the same component
+- Do not treat either surface as optional:
+  - if Storybook demonstrates an important usage pattern, state, sizing option, validation state, or behavioral variant that the docs site does not show, add a docs-site example
+  - if the docs site demonstrates an important usage pattern, state, sizing option, validation state, or behavioral variant that Storybook does not show, add a Storybook story
+- Aim for parity in teaching value, not identical file counts
+- At minimum, both surfaces should cover the most important ways a consumer learns the component:
+  - default usage
+  - validation/error usage
+  - sizing/layout variants where relevant
+  - meaningful behavioral variants or interactive states
+  - any prop or option that materially changes how the component is used
+- If one surface intentionally omits an example because it would be redundant, state that explicitly in your implementation notes rather than leaving the gap unexplained
+- When a component has width, icon, action, conditional content, or custom messaging props, make sure both Storybook and the docs site include examples that show those props doing real work
+
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
@@ -648,6 +672,7 @@ Review the component's user-facing documentation surfaces and make sure they exp
 - Confirm that no story exposes controls for values the component visibly ignores or overrides
 - Confirm that prop descriptions are written in plain language, not just implementation language
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
+- Confirm that Storybook and docs-site examples are on the same teaching level and that any important example gap has been closed in one direction or the other
 
 ### 6. Documentation Updates
 
@@ -679,6 +704,8 @@ Before moving to the validation prompt, answer these checks explicitly:
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+- [ ] Do Storybook and docs-site examples cover the same important usage patterns, states, and props?
+- [ ] If one surface had weaker example coverage, was it brought up to the same teaching level?
 - [ ] Has every meaningful spacing/typography token from Figma been checked against the actual mobile / tablet / desktop values in code?
 - [ ] Have semantic-element defaults (`p`, `ul`, `li`, `h*`, `a`) been checked so the component is not accidentally inheriting the wrong margins or typography?
 
@@ -727,6 +754,7 @@ pnpm storybook
 2. Check Storybook documentation completeness
 3. Verify TypeScript types are exported
 4. Check that all examples work
+5. Check Storybook and docs-site example parity for important usage patterns
 
 ---
 
@@ -764,6 +792,7 @@ pnpm storybook
 - [ ] Each story has an intentional controls policy
 - [ ] Showcase/behavior-demo stories do not expose misleading controls
 - [ ] Prop descriptions explain visual vs semantic behavior clearly
+- [ ] Storybook and docs-site examples cover the same important usage patterns and props
 
 ### Testing
 
