@@ -47,9 +47,7 @@ React now exposes the public input-family components:
 - `Checkboxes`
 - `Radios`
 - `Icon`
-
 React also now exposes the public `Fieldset` component for grouped form questions and legends.
-
 `TextInput` is now the released React implementation and aligns with the toolkit API while keeping the React surface idiomatic.
 
 | Previous usage | New usage |
