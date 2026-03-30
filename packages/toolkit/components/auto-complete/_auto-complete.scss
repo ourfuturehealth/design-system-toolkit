@@ -156,12 +156,12 @@
 .autocomplete__option--no-results {
   @include ofh-font('paragraph-sm');
 
+  align-items: center;
   background-color: $ofh-color-background-secondary;
   border-top-width: 0;
   color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
   display: flex;
-  align-items: center;
   min-height: ofh-px-to-rem(48px);
 }
 

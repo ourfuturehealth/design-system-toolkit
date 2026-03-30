@@ -60,9 +60,10 @@ export const CharacterCount = ({
     defaultValue,
     value,
   });
+  const generatedId = React.useId().replace(/:/g, '');
   const limit = maxWords ?? maxLength ?? 0;
   const useWords = maxWords !== undefined;
-  const textareaId = props.id ?? React.useId().replace(/:/g, '');
+  const textareaId = props.id ?? generatedId;
   const countMessageId = `${textareaId}-info`;
   const visibleCount = getCount(currentValue, useWords);
   const remainingCount = limit - visibleCount;
