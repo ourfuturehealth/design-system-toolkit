@@ -7,13 +7,13 @@ React component library for the OFH Design System.
 Install from the monorepo using a package-specific Git tag and subdirectory.
 
 ```bash
-pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
+pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.6.0:packages/react-components
 ```
 
 or
 
 ```bash
-npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
+npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.6.0:packages/react-components
 ```
 
 ## Usage
@@ -25,7 +25,10 @@ import {
   CardCallout,
   CardDoDont,
   ErrorSummary,
+  Icon,
+  Select,
   Tag,
+  Textarea,
   TextInput,
 } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
@@ -44,10 +47,20 @@ function App() {
       />
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
+      <Icon name="Search" size={24} />
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
       <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />
-      <TextInput id="name" label="Your name" />
+      <TextInput id="name" label="Your name" hint="Enter your full name" inputWidth={20} />
+      <Textarea id="notes" label="Additional notes" />
+      <Select
+        id="country"
+        label="Country"
+        options={[
+          { value: '', label: 'Select an option' },
+          { value: 'england', label: 'England' },
+        ]}
+      />
     </div>
   );
 }
@@ -74,17 +87,32 @@ A flexible button component with multiple variants.
 
 ### TextInput
 
-A form input component with label, hint, and error support.
+A form input component with toolkit-parity label, hint, error, and width support.
 
 **Props:**
 
-- `label`: string (required)
-- `hint`: string
-- `error`: string
+- `label`: ReactNode (required)
+- `hint`: ReactNode
+- `errorMessage`: ReactNode
 - `required`: boolean
 - `width`: 'full' | 'three-quarters' | 'two-thirds' | 'one-half' | 'one-third' | 'one-quarter'
-- `maxLength`: 2 | 3 | 4 | 5 | 10 | 20
+- `inputWidth`: 2 | 3 | 4 | 5 | 10 | 20 | 30
+- `describedBy`: string
+- `isPageHeading`: boolean
 - `id`: string
+
+### Additional components
+
+The package also provides:
+
+- `Textarea`
+- `Select`
+- `DateInput`
+- `Autocomplete`
+- `CharacterCount`
+- `Checkboxes`
+- `Radios`
+- `Icon`
 
 ### ErrorSummary
 
@@ -140,7 +168,7 @@ A card for short do and don’t recommendation lists.
 
 ### Icons
 
-React components bundle the toolkit icon sprite automatically. Consumers do not need to copy `/assets/icons/icon-sprite.svg` into their own app to render Card icons.
+React components bundle the toolkit icon sprite automatically. Use the public `Icon` component rather than maintaining app-local sprite helpers or copying `/assets/icons/icon-sprite.svg` into your own app.
 
 ### Tag
 

@@ -89,8 +89,10 @@ This table is a visual aid for pre-monorepo vs post-monorepo release identificat
 | 13    | `toolkit-v4.5.0` | `4.5.0`         | N/A           | Monorepo       | Released               |
 | 14    | `toolkit-v4.6.0` | `4.6.0`         | N/A           | Monorepo       | Released               |
 | 15    | `react-v0.4.0`   | N/A             | `0.4.0`       | Monorepo       | Released               |
-| 16    | `toolkit-v4.7.0` | `4.7.0`         | N/A           | Monorepo       | Planned in this branch |
-| 17    | `react-v0.5.0`   | N/A             | `0.5.0`       | Monorepo       | Planned in this branch |
+| 16    | `toolkit-v4.7.0` | `4.7.0`         | N/A           | Monorepo       | Released               |
+| 17    | `react-v0.5.0`   | N/A             | `0.5.0`       | Monorepo       | Released               |
+| 18    | `toolkit-v4.8.0` | `4.8.0`         | N/A           | Monorepo       | Planned in this branch |
+| 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Planned in this branch |
 
 ## Release Output Expectations
 
