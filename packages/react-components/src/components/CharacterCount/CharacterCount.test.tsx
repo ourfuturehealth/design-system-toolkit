@@ -55,6 +55,7 @@ describe('CharacterCount', () => {
     expect(getVisibleStatusMessage()).toHaveTextContent(
       'You have 2 characters too many',
     );
+    expect(getVisibleStatusMessage()?.closest('.ofh-form-group')).not.toBeNull();
   });
 
   it('supports thresholded status visibility', async () => {

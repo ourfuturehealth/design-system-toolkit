@@ -24,6 +24,7 @@ describe('CharacterCount module', () => {
     expect(visibleStatus.textContent).toBe('You have 2 characters too many');
     expect(textarea.classList.contains('ofh-textarea--error')).toBe(true);
     expect(visibleStatus.classList.contains('ofh-error-message')).toBe(true);
+    expect(visibleStatus.closest('.ofh-form-group')).not.toBeNull();
   });
 
   it('keeps the visible status hidden until the threshold is reached', () => {

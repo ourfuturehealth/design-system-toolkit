@@ -1,5 +1,4 @@
 import React from 'react';
-import { Textarea } from '../Textarea';
 import type { TextareaProps } from '../Textarea';
 import { joinClassNames } from '../_internal/joinClassNames';
 import { useControllableState } from '../_internal/useControllableState';
@@ -45,15 +44,29 @@ function getCountMessage(remainingCount: number, useWords: boolean) {
 }
 
 export const CharacterCount = ({
+  className,
   countMessageClassName,
   defaultValue = '',
   describedBy,
+  errorMessage,
+  errorMessageClassName,
+  formGroupClassName,
+  hint,
+  hintClassName,
+  id,
+  isPageHeading = false,
+  label,
+  labelClassName,
   maxLength,
   maxWords,
   onChange,
+  ref,
+  rows = 5,
   threshold = 0,
   value,
-  ...props
+  'aria-describedby': ariaDescribedBy,
+  'aria-invalid': ariaInvalid,
+  ...textareaProps
 }: CharacterCountProps) => {
   const isControlled = value !== undefined;
   const [currentValue, setCurrentValue] = useControllableState({
@@ -63,8 +76,14 @@ export const CharacterCount = ({
   const generatedId = React.useId().replace(/:/g, '');
   const limit = maxWords ?? maxLength ?? 0;
   const useWords = maxWords !== undefined;
-  const textareaId = props.id ?? generatedId;
+  const textareaId = id ?? generatedId;
+  const hintId = hint ? `${textareaId}-hint` : undefined;
+  const errorId = errorMessage ? `${textareaId}-error` : undefined;
   const countMessageId = `${textareaId}-info`;
+  const describedByValue =
+    [hintId, errorId, countMessageId, describedBy, ariaDescribedBy]
+      .filter(Boolean)
+      .join(' ') || undefined;
   const visibleCount = getCount(currentValue, useWords);
   const remainingCount = limit - visibleCount;
   const thresholdReached =
@@ -83,42 +102,103 @@ export const CharacterCount = ({
 
   return (
     <div className="ofh-character-count">
-      <Textarea
-        {...props}
-        className={joinClassNames(
-          props.className,
-          remainingCount < 0 ? 'ofh-textarea--error' : undefined,
-        )}
-        defaultValue={isControlled ? undefined : defaultValue}
-        describedBy={
-          [describedBy, countMessageId].filter(Boolean).join(' ') || undefined
-        }
-        id={textareaId}
-        onChange={handleChange}
-        value={isControlled ? currentValue : undefined}
-      />
       <div
         className={joinClassNames(
-          'ofh-hint',
-          'ofh-character-count__message',
-          'ofh-u-visually-hidden',
-          countMessageClassName,
-        )}
-        id={countMessageId}
-      >
-        {descriptionText}
-      </div>
-      <div
-        aria-hidden="true"
-        className={joinClassNames(
-          'ofh-character-count__message',
-          'ofh-character-count__status',
-          thresholdReached ? undefined : 'ofh-character-count__message--disabled',
-          remainingCount < 0 ? 'ofh-error-message' : 'ofh-hint',
-          countMessageClassName,
+          'ofh-form-group',
+          errorMessage ? 'ofh-form-group--error' : undefined,
+          formGroupClassName,
         )}
       >
-        {countMessage}
+        <div className="ofh-input__header">
+          {isPageHeading ? (
+            <h1 className="ofh-label-wrapper">
+              <label
+                className={joinClassNames(
+                  'ofh-input__label',
+                  'ofh-label--l',
+                  labelClassName,
+                )}
+                htmlFor={textareaId}
+              >
+                {label}
+              </label>
+            </h1>
+          ) : (
+            <label
+              className={joinClassNames(
+                'ofh-input__label',
+                'ofh-label--s',
+                labelClassName,
+              )}
+              htmlFor={textareaId}
+            >
+              {label}
+            </label>
+          )}
+          {hint ? (
+            <div
+              className={joinClassNames('ofh-hint', 'ofh-input__hint', hintClassName)}
+              id={hintId}
+            >
+              {hint}
+            </div>
+          ) : null}
+          {errorMessage ? (
+            <span
+              className={joinClassNames(
+                'ofh-error-message',
+                'ofh-input__error-message',
+                errorMessageClassName,
+              )}
+              id={errorId}
+            >
+              <span className="ofh-u-visually-hidden">Error:</span>
+              {errorMessage}
+            </span>
+          ) : null}
+        </div>
+
+        <textarea
+          ref={ref}
+          className={joinClassNames(
+            'ofh-textarea',
+            errorMessage || remainingCount < 0 ? 'ofh-textarea--error' : undefined,
+            className,
+          )}
+          id={textareaId}
+          rows={rows}
+          aria-describedby={describedByValue}
+          aria-invalid={
+            ariaInvalid ?? (errorMessage || remainingCount < 0 ? true : undefined)
+          }
+          defaultValue={isControlled ? undefined : defaultValue}
+          onChange={handleChange}
+          value={isControlled ? currentValue : undefined}
+          {...textareaProps}
+        />
+        <div
+          className={joinClassNames(
+            'ofh-hint',
+            'ofh-character-count__message',
+            'ofh-u-visually-hidden',
+            countMessageClassName,
+          )}
+          id={countMessageId}
+        >
+          {descriptionText}
+        </div>
+        <div
+          aria-hidden="true"
+          className={joinClassNames(
+            'ofh-character-count__message',
+            'ofh-character-count__status',
+            thresholdReached ? undefined : 'ofh-character-count__message--disabled',
+            remainingCount < 0 ? 'ofh-error-message' : 'ofh-hint',
+            countMessageClassName,
+          )}
+        >
+          {countMessage}
+        </div>
       </div>
       <div
         aria-hidden={thresholdReached ? undefined : true}

@@ -26,10 +26,9 @@ Find out more about the character count component and when to use it in the [des
       rows="5"
       aria-describedby="more-detail-hint more-detail-info"
     ></textarea>
-  </div>
-
-  <div class="ofh-hint ofh-character-count__message" id="more-detail-info">
-    You can enter up to 200 characters
+    <div class="ofh-hint ofh-character-count__message" id="more-detail-info">
+      You can enter up to 200 characters
+    </div>
   </div>
 </div>
 ```
