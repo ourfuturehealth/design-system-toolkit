@@ -95,6 +95,7 @@ export const Card = ({
     'ofh-card__dismiss',
     dismissButtonAttributes.className,
   );
+  const iconAttributes = icon?.attributes ?? {};
 
   const handleCardClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
     onClick?.(event);
@@ -263,13 +264,13 @@ export const Card = ({
               size={icon.size ?? 32}
               title={icon.title}
               color={icon.color}
+              {...iconAttributes}
               className={joinClasses(
                 'ofh-card__icon',
                 icon.classes,
-                icon.attributes?.className,
+                iconAttributes.className,
               )}
               spritePath={icon.spritePath}
-              {...icon.attributes}
             />
           </div>
         ) : null}

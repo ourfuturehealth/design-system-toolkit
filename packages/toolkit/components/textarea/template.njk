@@ -65,5 +65,5 @@
   {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %}
   {%- if params.errorMessage %} aria-invalid="true"{% endif %}
   {%- if params.autocomplete %} autocomplete="{{ params.autocomplete}}"{% endif %}
-  {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>{{ params.value if params.value else '' }}</textarea>
+  {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>{% if params.value is defined and params.value != null %}{{ params.value }}{% endif %}</textarea>
 </div>

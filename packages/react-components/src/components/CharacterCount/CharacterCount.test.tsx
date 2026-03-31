@@ -115,6 +115,22 @@ describe('CharacterCount', () => {
     expect(ref.current).toBe(screen.getByRole('textbox'));
   });
 
+  it('does not show count state or error styling when no limit is configured', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <CharacterCount label="Summary" name="summary" />,
+    );
+
+    const textarea = screen.getByRole('textbox');
+
+    await user.type(textarea, 'No limit configured');
+
+    expect(textarea).not.toHaveClass('ofh-textarea--error');
+    expect(document.querySelector('.ofh-character-count__status')).toBeNull();
+    expect(textarea).not.toHaveAttribute('aria-invalid', 'true');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(
       <CharacterCount

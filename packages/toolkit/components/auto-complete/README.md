@@ -28,7 +28,7 @@ The authored markup starts as a standard input-family text field. JavaScript the
 
   <div class="ofh-js-autocomplete-element-suggestions" data-default-value="" data-field-name="organisation-name"></div>
   <script>
-    window.organisation_name_options = ["Cambridge", "Department of Health", "KCL", "OFH", "Oxford", "UCL", "University of York"];
+    window['organisation-name_options'] = ["Cambridge", "Department of Health", "KCL", "OFH", "Oxford", "UCL", "University of York"];
   </script>
 </div>
 ```

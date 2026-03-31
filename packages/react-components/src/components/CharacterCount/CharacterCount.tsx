@@ -74,26 +74,28 @@ export const CharacterCount = ({
     value,
   });
   const generatedId = React.useId().replace(/:/g, '');
-  const limit = maxWords ?? maxLength ?? 0;
+  const hasLimit = maxWords !== undefined || maxLength !== undefined;
+  const limit = hasLimit ? (maxWords ?? maxLength ?? 0) : 0;
   const useWords = maxWords !== undefined;
   const textareaId = id ?? generatedId;
   const hintId = hint ? `${textareaId}-hint` : undefined;
   const errorId = errorMessage ? `${textareaId}-error` : undefined;
-  const countMessageId = `${textareaId}-info`;
+  const countMessageId = hasLimit ? `${textareaId}-info` : undefined;
   const describedByValue =
-    [hintId, errorId, countMessageId, describedBy, ariaDescribedBy]
+    [hintId, errorId, hasLimit ? countMessageId : undefined, describedBy, ariaDescribedBy]
       .filter(Boolean)
       .join(' ') || undefined;
   const visibleCount = getCount(currentValue, useWords);
-  const remainingCount = limit - visibleCount;
-  const thresholdReached =
-    threshold === 0 || limit === 0
+  const remainingCount = hasLimit ? limit - visibleCount : 0;
+  const thresholdReached = hasLimit
+    ? threshold === 0
       ? true
-      : visibleCount >= (limit * threshold) / 100;
-  const countMessage = getCountMessage(remainingCount, useWords);
-  const descriptionText = `You can enter up to ${limit} ${
-    useWords ? 'words' : 'characters'
-  }`;
+      : visibleCount >= (limit * threshold) / 100
+    : false;
+  const countMessage = hasLimit ? getCountMessage(remainingCount, useWords) : '';
+  const descriptionText = hasLimit
+    ? `You can enter up to ${limit} ${useWords ? 'words' : 'characters'}`
+    : '';
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentValue(event.target.value);
@@ -162,51 +164,62 @@ export const CharacterCount = ({
           ref={ref}
           className={joinClassNames(
             'ofh-textarea',
-            errorMessage || remainingCount < 0 ? 'ofh-textarea--error' : undefined,
+            errorMessage || (hasLimit && remainingCount < 0)
+              ? 'ofh-textarea--error'
+              : undefined,
             className,
           )}
           id={textareaId}
           rows={rows}
           aria-describedby={describedByValue}
           aria-invalid={
-            ariaInvalid ?? (errorMessage || remainingCount < 0 ? true : undefined)
+            ariaInvalid ??
+            (errorMessage || (hasLimit && remainingCount < 0) ? true : undefined)
           }
           defaultValue={isControlled ? undefined : defaultValue}
           onChange={handleChange}
           value={isControlled ? currentValue : undefined}
           {...textareaProps}
         />
+        {hasLimit ? (
+          <>
+            <div
+              className={joinClassNames(
+                'ofh-hint',
+                'ofh-character-count__message',
+                'ofh-u-visually-hidden',
+                countMessageClassName,
+              )}
+              id={countMessageId}
+            >
+              {descriptionText}
+            </div>
+            <div
+              aria-hidden="true"
+              className={joinClassNames(
+                'ofh-character-count__message',
+                'ofh-character-count__status',
+                thresholdReached
+                  ? undefined
+                  : 'ofh-character-count__message--disabled',
+                remainingCount < 0 ? 'ofh-error-message' : 'ofh-hint',
+                countMessageClassName,
+              )}
+            >
+              {countMessage}
+            </div>
+          </>
+        ) : null}
+      </div>
+      {hasLimit ? (
         <div
-          className={joinClassNames(
-            'ofh-hint',
-            'ofh-character-count__message',
-            'ofh-u-visually-hidden',
-            countMessageClassName,
-          )}
-          id={countMessageId}
-        >
-          {descriptionText}
-        </div>
-        <div
-          aria-hidden="true"
-          className={joinClassNames(
-            'ofh-character-count__message',
-            'ofh-character-count__status',
-            thresholdReached ? undefined : 'ofh-character-count__message--disabled',
-            remainingCount < 0 ? 'ofh-error-message' : 'ofh-hint',
-            countMessageClassName,
-          )}
+          aria-hidden={thresholdReached ? undefined : true}
+          aria-live="polite"
+          className="ofh-character-count__sr-status ofh-u-visually-hidden"
         >
           {countMessage}
         </div>
-      </div>
-      <div
-        aria-hidden={thresholdReached ? undefined : true}
-        aria-live="polite"
-        className="ofh-character-count__sr-status ofh-u-visually-hidden"
-      >
-        {countMessage}
-      </div>
+      ) : null}
     </div>
   );
 };

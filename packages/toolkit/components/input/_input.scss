@@ -106,8 +106,9 @@ $ofh-input-fixed-width-browser-affordance: ofh-px-to-rem($ofh-size-4);
 @mixin ofh-input-fixed-width($characters) {
   @each $breakpoint, $padding in $ofh-input-fixed-width-horizontal-padding-scale {
     $extra-space: ofh-px-to-rem(
-      $padding * 2 + $ofh-stroke-weight-2 * 2 + $ofh-size-4
+      $padding * 2 + $ofh-stroke-weight-2 * 2
     );
+    $extra-space: $extra-space + $ofh-input-fixed-width-browser-affordance;
 
     @if not $breakpoint {
       max-width: calc(#{$characters}ch + #{$extra-space});

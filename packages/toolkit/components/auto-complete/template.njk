@@ -1,4 +1,5 @@
 {% from "../input/macro.njk" import input %}
+{% set optionsKey = params.id + '_options' %}
 
 <div class="ofh-js-autocomplete-element">
   {{ input({
@@ -22,6 +23,6 @@
     {% if params.noResultsText %}data-no-results-text="{{params.noResultsText}}"{% endif %}
   ></div>
   <script>
-    window.{{params.id}}_options = [{% for param in params.options %} "{{param}}", {% endfor %}]
+    window[{{ optionsKey | dump | safe }}] = {{ params.options | dump | safe }};
   </script>
 </div>
