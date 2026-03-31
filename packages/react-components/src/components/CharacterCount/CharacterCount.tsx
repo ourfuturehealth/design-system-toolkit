@@ -74,8 +74,8 @@ export const CharacterCount = ({
     value,
   });
   const generatedId = React.useId().replace(/:/g, '');
-  const hasLimit = maxWords !== undefined || maxLength !== undefined;
-  const limit = hasLimit ? (maxWords ?? maxLength ?? 0) : 0;
+  const limit = maxWords ?? maxLength;
+  const hasLimit = limit !== undefined;
   const useWords = maxWords !== undefined;
   const textareaId = id ?? generatedId;
   const hintId = hint ? `${textareaId}-hint` : undefined;
@@ -86,16 +86,20 @@ export const CharacterCount = ({
       .filter(Boolean)
       .join(' ') || undefined;
   const visibleCount = getCount(currentValue, useWords);
-  const remainingCount = hasLimit ? limit - visibleCount : 0;
-  const thresholdReached = hasLimit
-    ? threshold === 0
-      ? true
-      : visibleCount >= (limit * threshold) / 100
-    : false;
-  const countMessage = hasLimit ? getCountMessage(remainingCount, useWords) : '';
-  const descriptionText = hasLimit
-    ? `You can enter up to ${limit} ${useWords ? 'words' : 'characters'}`
-    : '';
+  let remainingCount = 0;
+  let thresholdReached = false;
+  let countMessage = '';
+  let descriptionText = '';
+
+  if (hasLimit) {
+    remainingCount = limit - visibleCount;
+    thresholdReached =
+      threshold === 0 || visibleCount >= (limit * threshold) / 100;
+    countMessage = getCountMessage(remainingCount, useWords);
+    descriptionText = `You can enter up to ${limit} ${
+      useWords ? 'words' : 'characters'
+    }`;
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentValue(event.target.value);

@@ -107,6 +107,7 @@ This workflow also includes a temporary external-reference audit against the BSM
 - **If missing:** This is a REQUIRED deliverable - you MUST create the React component
 - React component must achieve full feature and behavior parity with toolkit
 - React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
+- Prefer explicit conditionals, intermediate variables, and small helpers over nested ternaries or compressed one-liners when the logic stops being immediately readable
 - Both versions should support the same user-facing capabilities, variants, and behaviors
 - If the React component is brand new and has no existing consumers, do not add deprecated props, alias props, or compatibility shims preemptively
 - Only preserve backwards compatibility when there is a real existing React surface or real consumers to protect

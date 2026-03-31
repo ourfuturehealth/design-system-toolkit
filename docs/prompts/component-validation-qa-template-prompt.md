@@ -66,6 +66,7 @@ Important constraints:
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
 - Treat React components that depend on toolkit progressive-enhancement classes such as `.js-enabled` for core interactive behavior as implementation misses to be fixed before QA is considered complete.
 - Treat Storybook docs-page examples that share effective IDs or form names across stories and interfere with each other as implementation misses to be fixed before QA is considered complete.
+- Treat hard-to-follow nested ternaries or compressed logic as implementation misses when the same behavior can be expressed more clearly with explicit conditionals or small helper variables.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.
