@@ -1,5 +1,6 @@
 import React from 'react';
 import { FieldsetBase } from '../Fieldset/Fieldset';
+import { InputFieldsetHeader } from '../_internal/InputFieldsetHeader';
 import { joinClassNames } from '../_internal/joinClassNames';
 import type { TextInputFixedWidth } from '../TextInput/TextInput';
 
@@ -136,31 +137,14 @@ export const DateInput = ({
         isPageHeading={isPageHeading}
         role={fieldsetRole ?? 'group'}
       >
-        {hint || errorMessage ? (
-          <div className="ofh-input__header">
-            {hint ? (
-              <div
-                className={joinClassNames('ofh-hint', 'ofh-input__hint', hintClassName)}
-                id={hintId}
-              >
-                {hint}
-              </div>
-            ) : null}
-            {errorMessage ? (
-              <span
-                className={joinClassNames(
-                  'ofh-error-message',
-                  'ofh-input__error-message',
-                  errorMessageClassName,
-                )}
-                id={errorId}
-              >
-                <span className="ofh-u-visually-hidden">Error:</span>
-                {errorMessage}
-              </span>
-            ) : null}
-          </div>
-        ) : null}
+        <InputFieldsetHeader
+          errorId={errorId}
+          errorMessage={errorMessage}
+          errorMessageClassName={errorMessageClassName}
+          hint={hint}
+          hintClassName={hintClassName}
+          hintId={hintId}
+        />
 
         <div className={joinClassNames('ofh-date-input', className)} id={groupId}>
           {items.map((item) => {
