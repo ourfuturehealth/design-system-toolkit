@@ -27,7 +27,7 @@
 }
 
 .ofh-date-input__label {
-  @include ofh-font('paragraph-sm');
+  @include ofh-font('paragraph-md');
 
   display: block;
   font-weight: $ofh-typography-weight-regular;
