@@ -25,6 +25,7 @@ overrides:
   picomatch@2.3.1: 2.3.2
   picomatch@4.0.3: 4.0.4
   handlebars: 4.7.9
+  lodash: 4.18.0
 
 importers:
 
@@ -4150,8 +4151,9 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.0:
+    resolution: {integrity: sha512-l1mfj2atMqndAHI3ls7XqPxEjV2J9ZkcNyHpoZA3r2T1LLwDB69jgkMWh71YKwhBbK0G2f4WSn05ahmQXVxupA==}
+    deprecated: Bad release. Please use lodash@4.17.21 instead.
 
   loupe@3.2.1:
     resolution: {integrity: sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==}
@@ -7129,7 +7131,7 @@ snapshots:
       '@rushstack/terminal': 0.21.0(@types/node@25.2.3)
       '@rushstack/ts-command-line': 5.2.0(@types/node@25.2.3)
       diff: 8.0.3
-      lodash: 4.17.23
+      lodash: 4.18.0
       minimatch: 10.2.4
       resolve: 1.22.11
       semver: 7.5.4
@@ -8508,7 +8510,7 @@ snapshots:
     dependencies:
       chalk: 4.1.2
       date-fns: 2.30.0
-      lodash: 4.17.23
+      lodash: 4.18.0
       rxjs: 7.8.2
       shell-quote: 1.8.3
       spawn-command: 0.0.2
@@ -9518,7 +9520,7 @@ snapshots:
   i18n-js@4.5.2:
     dependencies:
       bignumber.js: 9.3.1
-      lodash: 4.17.23
+      lodash: 4.18.0
       make-plural: 7.5.0
 
   iconv-lite@0.6.3:
@@ -10246,7 +10248,7 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.0: {}
 
   loupe@3.2.1: {}
 
