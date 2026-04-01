@@ -1,7 +1,12 @@
 {% from 'fieldset/macro.njk' import fieldset %}
 {% from 'input/macro.njk' import input %}
 
+<p class="ofh-hint" id="contact-details-hint">
+  We will only use these details to contact you about your application.
+</p>
+
 {% call fieldset({
+  describedBy: "contact-details-hint",
   legend: {
     "text": "Contact details",
     "classes": "ofh-fieldset__legend--m"
@@ -9,7 +14,7 @@
 }) %}
 
   {{ input({
-    label: {
+    "label": {
       "text": "Email address"
     },
     "classes": "ofh-u-width-three-quarters",
@@ -19,7 +24,7 @@
   }) }}
 
   {{ input({
-    label: {
+    "label": {
       "text": "Phone number"
     },
     "classes": "ofh-u-width-two-thirds",

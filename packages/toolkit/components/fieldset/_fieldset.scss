@@ -21,11 +21,11 @@
 
 .ofh-fieldset__legend {
   @include ofh-font('paragraph-md');
+  @include ofh-responsive-margin(24, 'bottom');
 
   box-sizing: border-box; /* 1 */
   color: $ofh-color-foreground-primary;
   display: table; /* 2 */
-  margin-bottom: $ofh-size-8;
   margin-top: 0;
   max-width: 100%; /* 1 */
   padding: 0;
@@ -36,26 +36,18 @@
 
 .ofh-fieldset__legend--xl {
   @include ofh-font($size: 'heading-xl', $weight: bold);
-
-  margin-bottom: $ofh-size-16;
 }
 
 .ofh-fieldset__legend--l {
   @include ofh-font($size: 'heading-lg', $weight: bold);
-
-  margin-bottom: $ofh-size-16;
 }
 
 .ofh-fieldset__legend--m {
   @include ofh-font($size: 'heading-md', $weight: bold);
-
-  margin-bottom: $ofh-size-16;
 }
 
 .ofh-fieldset__legend--s {
   @include ofh-font($size: 'heading-xs', $weight: bold);
-
-  margin-bottom: $ofh-size-16;
 }
 
 .ofh-fieldset__heading {

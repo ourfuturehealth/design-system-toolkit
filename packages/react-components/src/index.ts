@@ -21,6 +21,9 @@ export type {
   TextInputWidth,
 } from './components/TextInput';
 
+export { Fieldset } from './components/Fieldset';
+export type { FieldsetProps } from './components/Fieldset';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 

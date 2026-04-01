@@ -1,4 +1,5 @@
 import React from 'react';
+import { FieldsetBase } from '../Fieldset/Fieldset';
 import { joinClassNames } from '../_internal/joinClassNames';
 import { useControllableState } from '../_internal/useControllableState';
 
@@ -41,7 +42,6 @@ export interface RadiosProps
   isPageHeading?: boolean;
   formGroupClassName?: string;
   fieldsetClassName?: string;
-  legendClassName?: string;
   hintClassName?: string;
   errorMessageClassName?: string;
   className?: string;
@@ -73,7 +73,6 @@ export const Radios = ({
   isPageHeading = false,
   formGroupClassName,
   fieldsetClassName,
-  legendClassName,
   hintClassName,
   errorMessageClassName,
   className,
@@ -104,9 +103,7 @@ export const Radios = ({
   );
   const legendClasses = joinClassNames(
     'ofh-input__legend',
-    isPageHeading ? 'ofh-fieldset__legend--l' : 'ofh-fieldset__legend--s',
     hint || errorMessage ? 'ofh-input__legend--with-supporting-text' : undefined,
-    legendClassName,
   );
 
   return (
@@ -117,20 +114,16 @@ export const Radios = ({
         formGroupClassName,
       )}
     >
-      <fieldset
-        ref={ref}
-        className={joinClassNames('ofh-fieldset', fieldsetClassName)}
-        aria-describedby={describedByValue}
+      <FieldsetBase
         {...fieldsetProps}
+        describedBy={describedByValue}
+        legend={legend}
+        legendClassName={legendClasses}
+        legendSize={isPageHeading ? 'large' : 'small'}
+        ref={ref}
+        className={fieldsetClassName}
+        isPageHeading={isPageHeading}
       >
-        <legend className={legendClasses}>
-          {isPageHeading ? (
-            <h1 className="ofh-fieldset__heading">{legend}</h1>
-          ) : (
-            legend
-          )}
-        </legend>
-
         {hint || errorMessage ? (
           <div className="ofh-input__header">
             {hint ? (
@@ -244,7 +237,7 @@ export const Radios = ({
             );
           })}
         </div>
-      </fieldset>
+      </FieldsetBase>
     </div>
   );
 };

@@ -52,6 +52,9 @@ describe('Checkboxes', () => {
       screen.getByText(/select all contact methods that apply/i),
     ).toBeInTheDocument();
     expect(screen.getByText('or')).toBeInTheDocument();
+    expect(
+      screen.getByText(/how should we contact you/i).closest('legend'),
+    ).toHaveClass('ofh-fieldset__legend', 'ofh-fieldset__legend--s', 'ofh-input__legend');
   });
 
   it('wires top-level supporting text to the fieldset', () => {

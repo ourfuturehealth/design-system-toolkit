@@ -124,13 +124,6 @@ const meta: Meta<typeof Radios> = {
         category: 'Advanced',
       },
     },
-    legendClassName: {
-      control: false,
-      description: 'Additional classes for the legend element.',
-      table: {
-        category: 'Advanced',
-      },
-    },
     hintClassName: {
       control: false,
       description: 'Additional classes for the group hint element.',

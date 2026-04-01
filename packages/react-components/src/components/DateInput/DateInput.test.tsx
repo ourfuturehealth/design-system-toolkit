@@ -21,6 +21,9 @@ describe('DateInput', () => {
     expect(screen.getByLabelText(/^month$/i)).toHaveAttribute('id', 'dob-month');
     expect(screen.getByLabelText(/^year$/i)).toHaveAttribute('id', 'dob-year');
     expect(screen.getByLabelText(/^day$/i)).toHaveAttribute('name', 'dob-day');
+    expect(
+      screen.getByText(/what is your date of birth/i).closest('legend'),
+    ).toHaveClass('ofh-fieldset__legend', 'ofh-fieldset__legend--s', 'ofh-input__legend');
   });
 
   it('displays hint text and error content and wires aria-describedby', () => {
