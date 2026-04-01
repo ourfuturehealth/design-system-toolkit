@@ -1,0 +1,52 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Fieldset with additional description' %}
+{% from 'input/macro.njk' import input %}
+{% from 'fieldset/macro.njk' import fieldset %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          <p class="ofh-hint" id="contact-details-hint">
+            We will only use these details to contact you about your application.
+          </p>
+
+          {% call fieldset({
+            describedBy: "contact-details-hint",
+            legend: {
+              text: "Contact details",
+              "classes": "ofh-fieldset__legend--m"
+            }
+          }) %}
+
+            {{ input({
+              "label": {
+                "text": "Email address"
+              },
+              "classes": "ofh-u-width-three-quarters",
+              "id": "input-email",
+              "name": "email",
+              "type": "email"
+            }) }}
+
+            {{ input({
+              "label": {
+                "text": "Phone number"
+              },
+              "classes": "ofh-u-width-two-thirds",
+              "id": "input-phone",
+              "name": "phone",
+              "type": "tel"
+            }) }}
+
+          {% endcall %}
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

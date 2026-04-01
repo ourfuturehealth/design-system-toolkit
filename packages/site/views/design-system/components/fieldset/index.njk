@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Use a fieldset to group related form inputs."%}
 {% set theme = "Form elements" %}
-{% set dateUpdated = "November 2019" %}
+{% set dateUpdated = "March 2026" %}
 {% set backlog_issue_id = "14" %}
 
 {% extends "app-layout.njk" %}
@@ -16,6 +16,7 @@
 
   <h2 id="when-to-use-this-component">When to use a fieldset</h2>
   <p>Use a fieldset when you need to show a relationship between multiple form inputs. For example, you may need to group a set of text inputs into a single fieldset when asking for an address.</p>
+  <p>Most fieldsets should have a legend that reads like a question or short section heading, so people understand why the grouped inputs belong together.</p>
 
   {{ designExample({
     group: "components",
@@ -23,10 +24,17 @@
     type: "default"
   }) }}
 
+  <h2 id="when-not-to-use-this-component">When not to use a fieldset</h2>
+  <p>Do not use a fieldset for a single standalone input. In that case, the input's label already provides the relationship and a fieldset adds unnecessary structure.</p>
+
   <h2 id="how-it-works">How to use a fieldset</h2>
   <p class="rich-text">The 1st element in a fieldset must be a <code>legend</code> which describes the group of inputs. This could be a question, such as "What is your address?" or a statement like "Personal details".</p>
+  <p class="rich-text">Place the related inputs immediately after the legend. The fieldset only provides grouping semantics and spacing, so each input still needs its own label, hint text, and error messaging where appropriate.</p>
   <p class="rich-text">If you are asking just <a href="/content/how-to-write-good-questions-for-forms/get-the-questions-into-order#begin-prototyping-with-1-thing-per-page">1 question per page</a> as we recommend, you can set the contents of the <code>&lt;legend&gt;</code> as the page heading. You can see an example below. This is good practice as it means that users of screen readers will only hear the contents once.</p>
   <p>Read more about <a href="https://design-system.service.gov.uk/get-started/labels-legends-headings/">why and how to set legends as headings</a> on the GOV.UK Design System.</p>
+
+  <h3 id="page-heading-legend">Fieldset as a page heading</h3>
+  <p>Use the page-heading pattern when the grouped question is the main purpose of the page. In that case, make the legend the page heading rather than repeating the same wording in a separate <code>&lt;h1&gt;</code>.</p>
 
   {{ designExample({
     group: "components",
@@ -34,8 +42,39 @@
     type: "as-heading"
   }) }}
 
+  <h3 id="grouped-text-inputs">Fieldset with grouped text inputs</h3>
+  <p>Use a fieldset around grouped text inputs when they all answer the same question. Address fields are a good example because the individual labels still need to be specific, but the user also needs the overall question context.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "fieldset",
+    type: "with-inputs"
+  }) }}
+
+  <h3 id="external-supporting-text">Adding supporting text with <code>describedBy</code></h3>
+  <p>Use <code>describedBy</code> when supporting text lives outside the fieldset but still needs to be announced together with the grouped question. This is useful for shared guidance or validation summaries that apply to the whole group.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "fieldset",
+    type: "with-describedby"
+  }) }}
+
+  <h3 id="legend-content-and-size">Legend content and size</h3>
+  <p>Use <code>legend.text</code> for plain text legends. Use <code>legend.html</code> when you need richer markup, for example visually hidden text that gives extra context to screen reader users.</p>
+  <p>By default the legend renders with the component's base legend styling and no size modifier class. Use <code>legend.classes</code> to apply the built-in legend size modifiers: <code>ofh-fieldset__legend--s</code>, <code>ofh-fieldset__legend--m</code>, <code>ofh-fieldset__legend--l</code>, and <code>ofh-fieldset__legend--xl</code>. Pick the size that matches the question hierarchy rather than the visual weight you happen to want.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "fieldset",
+    type: "legend-sizes"
+  }) }}
+
+  <h3 id="custom-classes-and-attributes">Custom classes and attributes</h3>
+  <p>Use the fieldset-level <code>classes</code> option for layout hooks on the outer <code>&lt;fieldset&gt;</code>. Use <code>attributes</code> for data attributes, analytics hooks, or other native HTML attributes that need to be attached to the fieldset itself.</p>
+
   <h3>Accessibility</h3>
   <p>On question pages containing a group of inputs, include the question as the legend as that helps screenreader users understand that the inputs are all related to that question.</p>
-  <p>Put any important general help text that cannot be written as <a href="/design-system/components/text-input#using-hint-text">hint text</a> in the legend, but try to keep it as concise as possible.</p>
+  <p>Put any important general help text that cannot be written as <a href="/design-system/components/text-input#using-hint-text">hint text</a> in the legend, or associate it through <code>describedBy</code> if it needs to sit outside the legend. Try to keep that supporting text concise.</p>
 
 {% endblock %}

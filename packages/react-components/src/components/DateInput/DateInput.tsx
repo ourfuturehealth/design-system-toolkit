@@ -1,4 +1,5 @@
 import React from 'react';
+import { FieldsetBase } from '../Fieldset/Fieldset';
 import { joinClassNames } from '../_internal/joinClassNames';
 import type { TextInputFixedWidth } from '../TextInput/TextInput';
 
@@ -50,7 +51,6 @@ export interface DateInputProps
   isPageHeading?: boolean;
   formGroupClassName?: string;
   fieldsetClassName?: string;
-  legendClassName?: string;
   hintClassName?: string;
   errorMessageClassName?: string;
   className?: string;
@@ -97,12 +97,12 @@ export const DateInput = ({
   isPageHeading = false,
   formGroupClassName,
   fieldsetClassName,
-  legendClassName,
   hintClassName,
   errorMessageClassName,
   className,
   ref,
   'aria-describedby': ariaDescribedBy,
+  role: fieldsetRole,
   ...fieldsetProps
 }: DateInputProps) => {
   const generatedId = React.useId().replace(/:/g, '');
@@ -114,9 +114,7 @@ export const DateInput = ({
     undefined;
   const legendClasses = joinClassNames(
     'ofh-input__legend',
-    isPageHeading ? 'ofh-fieldset__legend--l' : 'ofh-fieldset__legend--s',
     hint || errorMessage ? 'ofh-input__legend--with-supporting-text' : undefined,
-    legendClassName,
   );
 
   return (
@@ -127,21 +125,17 @@ export const DateInput = ({
         formGroupClassName,
       )}
     >
-      <fieldset
-        ref={ref}
-        className={joinClassNames('ofh-fieldset', fieldsetClassName)}
-        aria-describedby={describedByValue}
-        role="group"
+      <FieldsetBase
         {...fieldsetProps}
+        describedBy={describedByValue}
+        legend={legend}
+        legendClassName={legendClasses}
+        legendSize={isPageHeading ? 'large' : 'small'}
+        ref={ref}
+        className={fieldsetClassName}
+        isPageHeading={isPageHeading}
+        role={fieldsetRole ?? 'group'}
       >
-        <legend className={legendClasses}>
-          {isPageHeading ? (
-            <h1 className="ofh-fieldset__heading">{legend}</h1>
-          ) : (
-            legend
-          )}
-        </legend>
-
         {hint || errorMessage ? (
           <div className="ofh-input__header">
             {hint ? (
@@ -213,7 +207,7 @@ export const DateInput = ({
             );
           })}
         </div>
-      </fieldset>
+      </FieldsetBase>
     </div>
   );
 };

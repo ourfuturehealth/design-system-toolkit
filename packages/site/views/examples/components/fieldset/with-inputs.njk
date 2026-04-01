@@ -14,14 +14,14 @@
         {% call fieldset({
           legend: {
             text: "What is your address?",
-            "classes": "ofh-fieldset__legend--xl",
+            "classes": "ofh-fieldset__legend--l",
             "isPageHeading": true
           }
         }) %}
 
           {{ input({
             "label": {
-              "text": "Address line 1"
+              "html": 'Building and street <span class="ofh-u-visually-hidden">line 1 of 2</span>'
             },
             "id": "input-address1",
             "name": "address1"
@@ -29,7 +29,7 @@
 
           {{ input({
             "label": {
-              "text": "Address line 2"
+              "html": '<span class="ofh-u-visually-hidden">Building and street line 2 of 2</span>'
             },
             "id": "input-address2",
             "name": "address2"
@@ -39,6 +39,7 @@
             "label": {
               "text": "Town or city"
             },
+            "classes": "ofh-u-width-two-thirds",
             "id": "input-town-city",
             "name": "town"
           }) }}
@@ -47,8 +48,18 @@
             "label": {
               "text": "County"
             },
+            "classes": "ofh-u-width-two-thirds",
             "id": "input-county",
             "name": "county"
+          }) }}
+
+          {{ input({
+            "label": {
+              "text": "Postcode"
+            },
+            "classes": "ofh-input--width-10",
+            "id": "input-postcode",
+            "name": "postcode"
           }) }}
 
         {% endcall %}
