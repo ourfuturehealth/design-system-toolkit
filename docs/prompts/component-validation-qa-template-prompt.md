@@ -39,6 +39,11 @@ Workflow I want you to follow:
    - any Figma comparison notes I should keep in mind
    - any breakpoint-specific token expectations I should keep in mind for mobile / tablet / desktop
    - any Storybook ↔ docs-site example parity checks that should be validated manually
+   - exact statements of what changed in code and what that means in the rendered UI
+   - explicit size/spacing/token values I should be validating wherever they are knowable
+   - the before/after expectation when the QA is validating a recent change
+   - the exact reason those values are expected, not just a vague design note
+   - the exact element/class I should inspect in DevTools when visual validation is not enough
 4. Then walk me through that QA script one step at a time.
 5. After each step, stop and wait for my response in the format:
    - `pass`
@@ -68,6 +73,15 @@ Important constraints:
 - Treat Storybook docs-page examples that share effective IDs or form names across stories and interfere with each other as implementation misses to be fixed before QA is considered complete.
 - Treat hard-to-follow nested ternaries or compressed logic as implementation misses when the same behavior can be expressed more clearly with explicit conditionals or small helper variables.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
+- Do not use vague instructions like "looks shorter" or "feels closer to Figma" when the expected result can be stated precisely.
+- For each QA step, prefer this structure:
+  - what changed
+  - what exact values or behaviors should now be visible
+  - why those values/behaviors are expected
+  - how to inspect them if needed
+  - what counts as pass
+- If exact values are not knowable, say that plainly and explain what can be validated objectively instead.
+- If you introduce a temporary QA-only tweak to make inspection easier, call it out explicitly, keep it minimal, and revert it before moving on.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.
 - Leave unrelated modified or untracked files alone unless I explicitly ask you to include them.
@@ -77,6 +91,7 @@ Output style I want from you:
 - Be practical and direct.
 - Give me exact URLs for QA.
 - Drive the QA one step at a time.
+- Make each QA step specific enough that a reviewer can validate it without guessing what "good" looks like.
 - When something fails, explain it plainly and fix it before moving on.
 - Keep the summary concise and useful for handing off into PR-readiness work.
 ```
