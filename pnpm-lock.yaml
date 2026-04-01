@@ -24,6 +24,7 @@ overrides:
   undici: 7.24.0
   picomatch@2.3.1: 2.3.2
   picomatch@4.0.3: 4.0.4
+  handlebars: 4.7.9
 
 importers:
 
@@ -3496,8 +3497,8 @@ packages:
   hamljs@0.6.2:
     resolution: {integrity: sha512-/chXRp4WpL47I+HX1vCCdSbEXAljEG2FBMmgO7Am0bYsqgnEjreeWzUdX1onXqwZtcfgxbCg5WtEYYvuZ5muBg==}
 
-  handlebars@4.7.8:
-    resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
+  handlebars@4.7.9:
+    resolution: {integrity: sha512-4E71E0rpOaQuJR2A3xDZ+GM1HyWYv1clR58tC8emQNeQe3RH7MAzSbat+V0wG78LQBo6m6bzSG/L4pBuCsgnUQ==}
     engines: {node: '>=0.4.7'}
     hasBin: true
 
@@ -5886,7 +5887,7 @@ snapshots:
       graceful-fs: 4.2.11
       gray-matter: 4.0.3
       hamljs: 0.6.2
-      handlebars: 4.7.8
+      handlebars: 4.7.9
       is-glob: 4.0.3
       iso-639-1: 2.1.15
       kleur: 4.1.5
@@ -9402,7 +9403,7 @@ snapshots:
 
   hamljs@0.6.2: {}
 
-  handlebars@4.7.8:
+  handlebars@4.7.9:
     dependencies:
       minimist: 1.2.8
       neo-async: 2.6.2
