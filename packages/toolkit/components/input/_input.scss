@@ -48,7 +48,7 @@
 
 .ofh-input {
   @include ofh-font('paragraph-md');
-  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(8, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
   -moz-appearance: none; /* 1 */
@@ -80,7 +80,7 @@
   margin: 0;
 }
 
-.ofh-input[type="number"] {
+.ofh-input[type='number'] {
   /* stylelint-disable-line string-quotes */
   -moz-appearance: textfield;
 }
@@ -105,9 +105,7 @@ $ofh-input-fixed-width-browser-affordance: ofh-px-to-rem($ofh-size-4);
 
 @mixin ofh-input-fixed-width($characters) {
   @each $breakpoint, $padding in $ofh-input-fixed-width-horizontal-padding-scale {
-    $extra-space: ofh-px-to-rem(
-      $padding * 2 + $ofh-stroke-weight-2 * 2
-    );
+    $extra-space: ofh-px-to-rem($padding * 2 + $ofh-stroke-weight-2 * 2);
     $extra-space: $extra-space + $ofh-input-fixed-width-browser-affordance;
 
     @if not $breakpoint {

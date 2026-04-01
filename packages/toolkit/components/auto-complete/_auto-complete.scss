@@ -11,7 +11,7 @@
 .autocomplete__hint,
 .autocomplete__input {
   @include ofh-font('paragraph-md');
-  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(8, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
   appearance: none;
@@ -23,7 +23,7 @@
 }
 
 .autocomplete__input {
-  background-color: transparent;
+  background-color: $ofh-color-background-primary;
   position: relative;
 
   &:hover:not(:disabled, .autocomplete__input--error) {
@@ -155,6 +155,7 @@
 
 .autocomplete__option--no-results {
   @include ofh-font('paragraph-sm');
+  @include ofh-responsive-padding(8, 'vertical');
 
   align-items: center;
   background-color: $ofh-color-background-secondary;
@@ -162,7 +163,7 @@
   color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
   display: flex;
-  min-height: ofh-px-to-rem(48px);
+  min-height: ofh-px-to-rem(44px);
 }
 
 .autocomplete__option--no-results:hover {

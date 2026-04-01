@@ -23,7 +23,7 @@ Find out more about the character count component and when to use it in the [des
       class="ofh-textarea ofh-js-character-count"
       id="more-detail"
       name="more-detail"
-      rows="5"
+      rows="4"
       aria-describedby="more-detail-hint more-detail-info"
     ></textarea>
     <div class="ofh-hint ofh-character-count__message" id="more-detail-info">

@@ -22,7 +22,7 @@
       "name": "rows",
       "type": "string",
       "required": false,
-      "description": "Optional number of textarea rows (default is 5 rows)."
+      "description": "Optional number of textarea rows (default is 4 rows)."
     },
     {
       "name": "value",

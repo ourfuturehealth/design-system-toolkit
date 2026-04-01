@@ -4,7 +4,7 @@
 
 .ofh-textarea {
   @include ofh-font('paragraph-md');
-  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(8, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
   -webkit-appearance: none;

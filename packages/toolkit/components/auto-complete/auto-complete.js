@@ -22,6 +22,8 @@ export default () => {
     const labelText = input.labels[0]?.innerText || input.labels[0]?.textContent || 'value';
     const label = labelText.trim().toLowerCase();
     const options = `${id}_options`;
+    const resolvedNoResultsText =
+      noResultsText || `No suggestions found. Enter a new ${label}.`;
 
     accessibleAutocomplete({
       defaultValue: defaultValueOption,
@@ -29,8 +31,7 @@ export default () => {
       id,
       name: fieldName,
       source: window[options],
-      tNoResults: () =>
-        noResultsText || `No suggestions found. Enter a new ${label}.`,
+      tNoResults: () => resolvedNoResultsText,
     });
 
     // Move autocomplete to the form group containing the input to be replaced

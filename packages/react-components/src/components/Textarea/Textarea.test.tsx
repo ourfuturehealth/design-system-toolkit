@@ -13,10 +13,10 @@ describe('Textarea', () => {
     expect(screen.getByText(/tell us more/i)).toHaveClass('ofh-label--s');
   });
 
-  it('defaults to 5 rows', () => {
+  it('defaults to 4 rows', () => {
     render(<Textarea label="Tell us more" />);
 
-    expect(screen.getByRole('textbox')).toHaveAttribute('rows', '5');
+    expect(screen.getByRole('textbox')).toHaveAttribute('rows', '4');
   });
 
   it('supports custom rows', () => {

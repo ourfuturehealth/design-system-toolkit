@@ -18,13 +18,13 @@ Find out more about the textarea component and when to use it in the [design sys
       Do not include personal or financial information.
     </div>
   </div>
-  <textarea
-    class="ofh-textarea"
-    id="more-detail"
-    name="more-detail"
-    rows="5"
-    aria-describedby="more-detail-hint"
-  ></textarea>
+    <textarea
+      class="ofh-textarea"
+      id="more-detail"
+      name="more-detail"
+      rows="4"
+      aria-describedby="more-detail-hint"
+    ></textarea>
 </div>
 ```
 
@@ -47,7 +47,7 @@ Find out more about the textarea component and when to use it in the [design sys
 
 ## Common options
 
-- `rows`: visible row count. Defaults to `5`.
+- `rows`: visible row count. Defaults to `4`.
 - `label`: label content and optional `isPageHeading` support.
 - `hint`: supporting text rendered inside the shared `.ofh-input__header`.
 - `errorMessage`: in-context validation message rendered above the textarea.

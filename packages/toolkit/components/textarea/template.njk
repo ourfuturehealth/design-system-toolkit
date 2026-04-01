@@ -61,7 +61,7 @@
 {% endif %}
   <textarea class="ofh-textarea
   {%- if params.errorMessage %} ofh-textarea--error{% endif %}
-  {%- if params.classes %} {{ params.classes }}{% endif %}" id="{{ params.id }}" name="{{ params.name }}" rows="{{ params.rows | default('5') }}"
+  {%- if params.classes %} {{ params.classes }}{% endif %}" id="{{ params.id }}" name="{{ params.name }}" rows="{{ params.rows | default('4') }}"
   {%- if describedBy %} aria-describedby="{{ describedBy }}"{% endif %}
   {%- if params.errorMessage %} aria-invalid="true"{% endif %}
   {%- if params.autocomplete %} autocomplete="{{ params.autocomplete}}"{% endif %}

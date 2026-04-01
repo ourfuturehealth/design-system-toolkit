@@ -30,7 +30,7 @@ export const Textarea = ({
   errorMessageClassName,
   className,
   id,
-  rows = 5,
+  rows = 4,
   ref,
   'aria-describedby': ariaDescribedBy,
   'aria-invalid': ariaInvalid,

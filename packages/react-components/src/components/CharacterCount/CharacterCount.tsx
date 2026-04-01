@@ -61,7 +61,7 @@ export const CharacterCount = ({
   maxWords,
   onChange,
   ref,
-  rows = 5,
+  rows = 4,
   threshold = 0,
   value,
   'aria-describedby': ariaDescribedBy,
