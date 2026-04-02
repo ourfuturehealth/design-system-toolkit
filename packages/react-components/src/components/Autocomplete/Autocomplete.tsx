@@ -119,7 +119,9 @@ export const Autocomplete = ({
   const showSuggestions = filteredOptions.length > 0;
   const showMenu = isOpen && hasQuery;
   const activeDescendantId =
-    showMenu && highlightedIndex >= 0 && highlightedIndex < filteredOptions.length
+    showMenu &&
+    highlightedIndex >= 0 &&
+    highlightedIndex < filteredOptions.length
       ? `${inputId}-option-${highlightedIndex}`
       : undefined;
 

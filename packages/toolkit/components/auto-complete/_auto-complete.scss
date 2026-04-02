@@ -68,8 +68,8 @@
 }
 
 .autocomplete__menu--with-suggestions::before {
-  @include ofh-font('paragraph-sm');
-  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-font('paragraph-md');
+  @include ofh-responsive-padding(8, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
   background-color: $ofh-color-background-secondary;
@@ -105,20 +105,11 @@
   border-top: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   cursor: pointer;
   display: block;
-  min-height: ofh-px-to-rem(56px);
   position: relative;
 }
 
 .autocomplete__option > * {
   pointer-events: none;
-}
-
-.autocomplete__menu--with-suggestions .autocomplete__option:first-of-type {
-  border-top-width: 0;
-}
-
-.autocomplete__menu:not(.autocomplete__menu--with-suggestions) .autocomplete__option:first-of-type {
-  border-top-width: 0;
 }
 
 .autocomplete__option--focused,
@@ -154,7 +145,7 @@
 }
 
 .autocomplete__option--no-results {
-  @include ofh-font('paragraph-sm');
+  @include ofh-font('paragraph-md');
   @include ofh-responsive-padding(8, 'vertical');
 
   align-items: center;
@@ -163,7 +154,6 @@
   color: $ofh-color-foreground-secondary;
   cursor: not-allowed;
   display: flex;
-  min-height: ofh-px-to-rem(44px);
 }
 
 .autocomplete__option--no-results:hover {
