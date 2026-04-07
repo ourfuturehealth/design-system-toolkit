@@ -78,7 +78,7 @@ if search_fixed "${stale_pre_monorepo_version}" "${tracked_text_files[@]}"; then
   echo 'Monorepo migration docs must use v3.4.2 as the last pre-monorepo toolkit tag.' >&2
   exit 1
 fi
-print_success 'No stale v3.4.3 references found'
+print_success 'No stale pre-monorepo toolkit version references found'
 
 toolkit_notes_file=$(mktemp)
 react_notes_file=$(mktemp)
