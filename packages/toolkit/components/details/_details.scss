@@ -22,37 +22,39 @@
   @include ofh-responsive-margin(16, 'bottom');
   @include ofh-typography-responsive('paragraph-md');
 
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
 }
 
 .ofh-details__summary {
+  align-items: center;
+  background: transparent;
   color: $ofh-color-foreground-link-default;
   cursor: pointer;
-  display: inline-block; /* [2] */
-  padding-left: $ofh-size-24;
-  position: relative; /* [3] */
+  display: inline-flex;
+  gap: $ofh-size-8;
+  max-width: 100%;
+  position: relative;
+  list-style: none;
+  text-decoration: underline;
+
+  &--details {
+    width: auto;
+  }
+
+  &--expander {
+    width: 100%;
+  }
 
   &:hover {
     color: $ofh-color-foreground-link-hover;
   }
 
-  &::before {
-    bottom: 0;
-    content: '';
-    left: 0;
-    margin: auto;
-    position: absolute;
-    top: 0;
-
-    @include govuk-shape-arrow($direction: right, $base: 14px);
-  }
-
   &:focus {
     @include ofh-focused-text();
-
-    .ofh-icon {
-      fill: $ofh-color-foreground-brand-blue-navy;
-    }
+    color: $ofh-color-foreground-link-hover;
   }
 
   &:hover,
@@ -63,36 +65,60 @@
   }
 }
 
-.ofh-details[open] > .ofh-details__summary::before {
-  @include govuk-shape-arrow($direction: down, $base: 14px);
+.ofh-details__summary::-webkit-details-marker {
+  display: none;
 }
 
 .ofh-details__summary-text {
-  text-decoration: underline; /* [4] */
+  text-decoration: underline;
 }
 
-.ofh-details__summary::-webkit-details-marker {
-  display: none; /* [5] */
+.ofh-details__summary-icon {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.ofh-details__summary-icon-svg {
+  display: block;
+}
+
+.ofh-details__summary-icon--details-open,
+.ofh-details__summary-icon--expander-open {
+  display: none;
+}
+
+.ofh-details[open] .ofh-details__summary-icon--details-closed,
+.ofh-details[open] .ofh-details__summary-icon--expander-closed {
+  display: none;
+}
+
+.ofh-details[open] .ofh-details__summary-icon--details-open,
+.ofh-details[open] .ofh-details__summary-icon--expander-open {
+  display: inline-flex;
+}
+
+.ofh-details[open] {
+  gap: $ofh-size-8;
 }
 
 .ofh-details__text {
-  border-left: $ofh-size-4 solid $ofh-color-greyscale-5;
-  margin-top: $ofh-size-8;
-  padding: $ofh-size-16;
-  padding-left: 20px; /* [6] */
+  width: 100%;
+}
 
-  @include top-and-bottom();
+.ofh-details__panel {
+  color: $ofh-color-foreground-primary;
+}
+
+.ofh-details__panel--details {
+  border-left: $ofh-size-4 solid $ofh-color-greyscale-5;
+  padding: $ofh-size-16;
+  padding-left: 20px;
 }
 
 /**
  * Expander variation.
  *
- * 1. !important used because the icon is populated
- *    by the JavaScript polyfill
- * 2. Remove the default hover, focus and active
- *    styles for this component.
- * 3. -2px left margin to align the icon to the content.
- * 4. When a group of details is used reduce the
+ * 1. When a group of details is used reduce the
  *    margin between them so they sit together.
  */
 
@@ -105,6 +131,7 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
   background-color: $ofh-color-greyscale-white;
   border: $expander-border-width solid $expander-border-color;
   border-bottom-width: $expander-border-bottom-width;
+  padding: $ofh-size-24;
 
   &:hover {
     border-color: $expander-border-hover-color;
@@ -112,94 +139,36 @@ $expander-border-hover-color: $ofh-color-greyscale-4;
 
   .ofh-details__summary {
     background-color: $ofh-color-greyscale-white;
-    border-top: $ofh-stroke-weight-4 solid transparent;
-    display: block;
-    padding: $ofh-size-24 - $ofh-stroke-weight-4 $ofh-size-24 $ofh-size-24;
-
-    @include mq($until: tablet) {
-      padding: $ofh-size-16 - $ofh-stroke-weight-4 $ofh-size-16 $ofh-size-16;
-    }
-
-    &::before {
-      display: none !important; /* stylelint-disable-line declaration-no-important */ /* [1] */
-    }
-
-    &:hover {
-      .ofh-details__summary-text {
-        color: $ofh-color-foreground-link-hover;
-      }
-    }
-
-    &:focus {
-      box-shadow: none;
-      outline: none;
-
-      .ofh-details__summary-text {
-        @include ofh-focused-text();
-      }
-
-      .ofh-details__expander-icon {
-        color: $ofh-color-foreground-brand-blue-navy;
-      }
-    }
+    display: flex;
+    width: 100%;
   }
 
-  .ofh-details__summary-text {
-    cursor: pointer;
-    display: inline-block;
-    padding: $ofh-size-4 $ofh-size-4 $ofh-size-4 $ofh-size-32;
-    position: relative;
+  .ofh-details__summary:hover {
+    .ofh-details__summary-text {
+      color: $ofh-color-foreground-link-hover;
+    }
   }
 
   .ofh-details__text {
-    @include ofh-responsive-padding(16, 'bottom');
-    @include ofh-responsive-padding(16, 'left');
-    @include ofh-responsive-padding(16, 'right');
-    @include ofh-responsive-padding(0, 'top');
+    padding-left: $ofh-size-16;
+  }
 
-    border-left: 0;
-    margin-left: 0;
-    margin-top: 0;
+  .ofh-details__panel {
+    padding: $ofh-size-24;
+  }
+
+  .ofh-details__summary-text {
+    flex: 1 1 auto;
   }
 }
 
 .ofh-expander[open] {
-  border-bottom-width: $expander-border-width;
-
-  .ofh-details__summary {
-    &:focus {
-      &:hover {
-        .ofh-details__summary-text {
-          text-decoration: none;
-        }
-      }
-    }
-  }
-}
-
-.ofh-details__expander-icon {
-  color: $ofh-color-foreground-link-default;
-  height: 32px;
-  left: -2px;
-  position: absolute;
-  top: calc(50% - 16px);
-  width: 32px;
-}
-
-.ofh-details__expander-icon--collapse {
-  display: none;
-}
-
-.ofh-expander[open] .ofh-details__expander-icon--expand {
-  display: none;
-}
-
-.ofh-expander[open] .ofh-details__expander-icon--collapse {
-  display: inline-block;
+  border-bottom-width: $expander-border-bottom-width;
+  gap: $ofh-size-24;
 }
 
 .ofh-expander-group {
-  /* [4] */
+  /* [1] */
 
   > .ofh-details {
     @include ofh-responsive-margin(4, 'bottom');
