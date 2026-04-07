@@ -13,6 +13,7 @@
     "components",
     "core",
     "common",
+    "common.js",
     "assets",
     "ofh.js",
     "ofh.scss",

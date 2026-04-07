@@ -419,18 +419,22 @@ grep -r "ofh-u-padding-" --include="*.html" --include="*.njk" .
 
 ### Overview
 
-The toolkit was restructured from a single-package repository into a monorepo with separate packages. This change improves maintainability and separation of concerns, but requires updates to how consuming projects install and reference the toolkit.
+The toolkit moved from a single-package repository layout to a monorepo with separate packages. The main consumer-facing change is the install contract:
+
+- pre-monorepo consumers continue to use immutable `v3.4.2` and earlier tags
+- monorepo consumers install the packaged release tarball
+- consumers should not use the old git-subdirectory install syntax
 
 ### ⚠️ Will This Break My Project?
 
 **No, existing consumers will NOT automatically break.**
 
-If your project uses a version tag from v3.4.3 or earlier, it will continue to work indefinitely:
+If your project uses a version tag from `v3.4.2` or earlier, it will continue to work indefinitely:
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
   }
 }
 ```
@@ -443,18 +447,18 @@ You'll need to update your installation syntax if:
 
 | Scenario                                        | Will Break? | When to Update                           |
 | ----------------------------------------------- | ----------- | ---------------------------------------- |
-| Using `#v3.4.3` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
+| Using `#v3.4.2` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
 | Using `#main` branch (no version)               | ✅ Yes      | Immediately after merge                  |
-| Trying to upgrade to `#toolkit-v4.0.0` or newer | 🔄 Yes      | Must use new syntax (see below)          |
+| Trying to upgrade to `toolkit-v4.0.0` or newer  | 🔄 Yes      | Must use the tarball install contract    |
 | No version specified in package.json            | ✅ Yes      | Immediately after merge                  |
 
-**Bottom line:** If you're using a version tag from v3.4.3 or earlier, you're safe and can upgrade on your own timeline.
+**Bottom line:** If you're using a version tag from `v3.4.2` or earlier, you're safe and can upgrade on your own timeline.
 
 ### What Changed
 
 #### Repository Structure
 
-**Before v3.4.3 (single-package):**
+**Before `v3.4.2` (single-package):**
 
 ```
 design-system-toolkit/
@@ -500,39 +504,44 @@ design-system-toolkit/
 
 #### Step 1: Update Package Dependency
 
-**Before v3.4.3:**
+**Before `v3.4.2`:**
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
   }
 }
 ```
 
 **After v4.0.0:**
 
-Install from specific release tag (recommended):
+Install the toolkit package tarball from the GitHub release:
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.5.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.0/ourfuturehealth-toolkit-4.0.0.tgz"
   }
 }
 ```
 
-Or install from branch:
+Then run your package-manager install:
 
-```json
-{
-  "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#main:packages/toolkit"
-  }
-}
+```bash
+pnpm install
+# or
+npm install
+# or
+yarn install
 ```
 
-**Note**: The `:packages/toolkit` suffix is required to install the toolkit package from the monorepo subdirectory.
+For unreleased maintainer testing, build and pack locally instead of pointing consumers at a git branch:
+
+```bash
+pnpm --filter=@ourfuturehealth/toolkit run zip
+npm pack ./packages/toolkit --ignore-scripts
+```
 
 #### Step 2: Update Template Imports (Nunjucks/Eleventy)
 
@@ -604,8 +613,7 @@ module.exports = function configuration(eleventyConfig) {
 **After:**
 
 ```scss
-// Import from toolkit package
-@import '@ourfuturehealth/toolkit/ofh.scss'; // All styles
+@import '@ourfuturehealth/toolkit/ofh'; // All styles
 
 // Or import specific components
 @import '@ourfuturehealth/toolkit/core/all';
@@ -627,15 +635,15 @@ module.exports = function configuration(eleventyConfig) {
 **Before:**
 
 ```javascript
-import { Button } from '../packages/components/button/button.js';
+import Button from '../packages/components/button/button.js';
 ```
 
 **After:**
 
 ```javascript
-import { Button } from '@ourfuturehealth/toolkit/components/button/button.js';
+import Button from '@ourfuturehealth/toolkit/components/button/button';
 
-// Or use the compiled bundle
+// Or import the compiled bundle
 import '@ourfuturehealth/toolkit/dist/ofh-design-system-toolkit.js';
 ```
 
@@ -672,7 +680,7 @@ eleventyConfig.addPassthroughCopy({
 
 ### Component Distribution Methods
 
-The toolkit provides three main outputs:
+The toolkit now exposes three distinct outputs:
 
 #### 1. Compiled Assets (Bundles)
 
@@ -686,7 +694,7 @@ Pre-built, minified files ready for production use:
 
 #### 2. Source Files (Module Imports)
 
-Individual component source files for modern build tools:
+Individual source files for modern build tools:
 
 - **SCSS**: `packages/toolkit/components/**/*.scss`, `packages/toolkit/core/**/*.scss`
 - **JavaScript modules**: `packages/toolkit/components/**/*.js`
@@ -704,18 +712,20 @@ Server-side rendering templates for generating HTML:
 
 ### Release Process Changes
 
-**Before v3.4.3 (single package):**
+**Before `v3.4.2` (single package):**
 
 - Single `package.json` at root with version
-- One version number for everything: `v3.4.3`, `v3.4.2`, etc.
-- Tag format: `v*` (e.g., `v3.4.3`)
+- One version number for everything: `v3.4.2`, `v3.4.1`, and earlier
+- Tag format: `v*` (for example `v3.4.2`)
 
 **After v4.0.0 (monorepo):**
 
 - Each package has its own `package.json` with **independent versioning**
   - Toolkit: `4.0.0`, `4.0.1`, `4.1.0`...
   - React Components: `0.0.1`, `0.0.2`, `0.1.0`...
-- Git installations must specify subdirectory: `:packages/toolkit` or `:packages/react-components`
+- Release installations use packaged tarballs:
+  - toolkit: `https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz`
+  - react-components: `https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz`
 - **Packages can be released independently**
 - Tag format:
   - Toolkit: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
@@ -730,7 +740,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.5.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.0/ourfuturehealth-toolkit-4.0.0.tgz"
   }
 }
 ```
@@ -740,7 +750,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.5.0/ourfuturehealth-react-components-0.5.0.tgz"
   }
 }
 ```
@@ -759,7 +769,7 @@ Each package in the monorepo can be installed independently:
 
 - **Cleaner imports**: No need to know internal directory structure
 - **Standard npm package**: Toolkit can be consumed like any npm package
-- **Flexible consumption**: Use compiled assets, source files, or templates as needed
+- **Flexible consumption**: Use packaged tarballs for modules and Sass, or `.zip` for compiled files only
 - **Better IDE support**: Standard package structure improves autocomplete and imports
 - **Selective installation**: Install only the packages you need
 
@@ -777,7 +787,7 @@ Each package in the monorepo can be installed independently:
 
 **Error**: `Error: Can't find stylesheet to import.`
 
-**Solution**: Add `--load-path ./node_modules/@ourfuturehealth/toolkit` to your Sass compilation command, or configure your bundler's resolve paths.
+**Solution**: Add `--load-path ./node_modules/@ourfuturehealth/toolkit` to your Sass compilation command, or configure your bundler's resolve paths. Also confirm you installed the toolkit tarball rather than the compiled `.zip` asset.
 
 ### Assets Not Copying
 
@@ -845,7 +855,7 @@ module.exports = function configuration(eleventyConfig) {
     "dev": "concurrently 'npm:watch:css' 'npm:watch:eleventy'"
   },
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit",
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.0/ourfuturehealth-toolkit-4.0.0.tgz",
     "@11ty/eleventy": "^2.0.0",
     "nunjucks": "^3.2.4",
     "sass": "^1.60.0"

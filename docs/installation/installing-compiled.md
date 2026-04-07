@@ -1,6 +1,6 @@
 # Installing using compiled files
 
-When installing Our Future Health design system toolkit using compiled files, you are using compiled and minified versions of the stylesheet and JavaScript.
+When installing Our Future Health design system toolkit using compiled files, you are using the compiled `.zip` release asset with prebuilt stylesheet, JavaScript, and assets.
 
 This means that you will not be able to:
 
@@ -8,13 +8,13 @@ This means that you will not be able to:
 - build your own styles or components based on the colour variables or typography and spacing mixins.
 - use the component Nunjucks templates.
 
-If you require any of this functionality, you should [install using npm](/docs/installation/installing-with-npm.md) instead.
+If you require any of this functionality, you should [install using a package manager](/docs/installation/installing-with-npm.md) instead and use the toolkit `.tgz` release asset.
 
 ## Installation
 
 1. Download the compiled files
 
-    [Download the latest CSS, JavaScript and assets from GitHub (zip file)](https://github.com/ourfuturehealth/design-system-toolkit/releases)
+    [Download the latest toolkit compiled files from GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases)
 
 2. Include resources
 

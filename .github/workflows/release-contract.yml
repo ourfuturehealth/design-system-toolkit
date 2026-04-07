@@ -1,0 +1,42 @@
+name: Release contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/release.yml'
+      - '.github/workflows/release-contract.yml'
+      - 'README.md'
+      - 'UPGRADING.md'
+      - 'docs/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'packages/toolkit/package.json'
+      - 'packages/react-components/package.json'
+      - 'packages/react-components/README.md'
+      - 'scripts/release/**'
+
+jobs:
+  validate:
+    name: Validate release contract
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Validate docs and release templates
+        run: pnpm docs:release-contract
+
+      - name: Smoke test current release artifacts
+        run: pnpm smoke:release-artifacts

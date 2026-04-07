@@ -1,53 +1,69 @@
-# Installing using pnpm (or npm)
+# Installing with a package manager
+
+This guide covers package-manager installation for `@ourfuturehealth/toolkit`.
+The supported install contract is the toolkit release tarball URL, which is smoke-tested against Yarn 1, npm, and pnpm.
 
 ## Requirements
 
-To use Our Future Health design system toolkit in your projects you must:
+To use the toolkit in your project you must:
 
-1. Have [Node.js](https://nodejs.org/en/) installed (version 20.19.0 or higher). We recommend using Node.js 24 LTS and [pnpm](https://pnpm.io/) as the package manager.
+1. Have [Node.js](https://nodejs.org/en/) installed (`20.19.0` or higher). We recommend Node.js 24 LTS.
+2. Have a `package.json` file in your project.
+3. Have a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS if you are importing toolkit Sass.
+4. Install [Nunjucks](https://mozilla.github.io/nunjucks/) if you want to use toolkit macros.
 
-2. Have a [package.json file](https://docs.npmjs.com/files/package.json) within your project. You can create a default `package.json` file by running `pnpm init` (or `npm init -y`) from the root of your project.
-
-3. Have a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS.
-
-4. (Optional) If you want to use our [Nunjucks](https://mozilla.github.io/nunjucks/) macros, you will need to install Nunjucks. [Nunjucks macros](https://mozilla.github.io/nunjucks/templating.html#macro) allows you to define reusable chunks of content. It is similar to a function in a programming language.
-
-   ```bash
-   pnpm add nunjucks
-   # or with npm:
-   npm install nunjucks --save
-   ```
+```bash
+pnpm add nunjucks
+# or
+npm install nunjucks --save
+```
 
 ## Installation
 
-> **Note:** As of v4.0.0, this repository is a monorepo. You must specify the package subdirectory when installing.
+We do not publish `@ourfuturehealth/toolkit` to the npm registry. Install the packaged GitHub release artifact instead.
 
-We don't publish to npm registry. Instead, install directly from GitHub using git with the subdirectory syntax:
+Add the dependency to `package.json`:
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.0/ourfuturehealth-toolkit-4.0.0.tgz"
   }
 }
 ```
 
-Then run:
+Then install with your package manager:
 
 ```bash
 pnpm install
-# or with npm:
+# or
 npm install
+# or
+yarn install
 ```
 
-**Version pinning:**
+Use a specific tag for production upgrades. Replace `4.0.0` with the toolkit version you intend to consume.
 
-- Use specific version tags (e.g., `toolkit-v4.0.0`) for production
-- For development, you can use `#main:packages/toolkit` but ensure your lockfile pins a specific commit
+### Unreleased maintainer testing
+
+Do not point consumers at `#main` or the old git-subdirectory install syntax.
+
+For unreleased testing:
+
+```bash
+pnpm --filter=@ourfuturehealth/toolkit run zip
+npm pack ./packages/toolkit --ignore-scripts
+```
+
+Install the resulting local `.tgz` file in the consumer application.
+
+### Compiled files only
+
+If your project only needs prebuilt CSS, JavaScript, and assets, use the toolkit `.zip` release asset instead. Compiled-file installs do not support toolkit Sass imports, JavaScript module imports, or Nunjucks macros. See [Installing using compiled files](./installing-compiled.md).
 
 ## Configuration
 
-You will need to import a couple of things into your project before you can start using Our Future Health design system toolkit:
+You will usually need these pieces:
 
 - [Importing styles](#importing-styles)
 - [Importing JavaScript](#importing-javascript)
@@ -55,9 +71,7 @@ You will need to import a couple of things into your project before you can star
 
 ## Importing styles
 
-To build the stylesheet you will need a pipeline set up to compile [Sass](https://sass-lang.com/) files to CSS. We recommend using the [sass](https://www.npmjs.com/package/sass) package.
-
-Import the Our Future Health design system toolkit styles into the main Sass file in your project. Place this before your own Sass rules.
+Place toolkit imports before your own Sass rules.
 
 ### Choose a theme (recommended)
 
@@ -69,71 +83,55 @@ Each application should pick one theme:
 Use the matching theme entrypoint:
 
 ```scss
-// Participant theme
-@import 'node_modules/@ourfuturehealth/toolkit/ofh-participant';
+@import '@ourfuturehealth/toolkit/ofh-participant';
 ```
 
 ```scss
-// Research theme
-@import 'node_modules/@ourfuturehealth/toolkit/ofh-research';
+@import '@ourfuturehealth/toolkit/ofh-research';
 ```
 
 To add a new custom theme, follow `docs/theming/adding-a-new-theme.md`.
 
 ### Default entrypoint (legacy-compatible)
 
-If you import `ofh`, it currently resolves to the participant theme by default:
+`@ourfuturehealth/toolkit/ofh` currently resolves to the participant theme:
 
 ```scss
-@import 'node_modules/@ourfuturehealth/toolkit/ofh';
+@import '@ourfuturehealth/toolkit/ofh';
 ```
 
-Alternatively you can import components individually:
+You can also import toolkit layers individually:
 
 ```scss
-// Core (required)
-@import 'node_modules/@ourfuturehealth/toolkit/core/all';
-
-// Individual component (optional)
-@import 'node_modules/@ourfuturehealth/toolkit/components/action-link/action-link';
+@import '@ourfuturehealth/toolkit/core/all';
+@import '@ourfuturehealth/toolkit/components/action-link/action-link';
 ```
 
 ## Importing JavaScript
 
-Some of our components require JavaScript to function properly, others need JavaScript to improve the usability and accessibility.
-
-You should include Our Future Health design system toolkit JavaScript in your project to ensure that all users can use it successfully.
+Some toolkit components require JavaScript for behaviour, usability, and accessibility.
 
 Add the following JavaScript to the top of the `<body>` section of your page template:
 
-```
-document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+```html
+<script>
+  document.body.className = document.body.className ? `${document.body.className} js-enabled` : 'js-enabled';
+</script>
 ```
 
 ### Option 1: Include compiled JavaScript
 
-Include the compiled JavaScript in the `<head>` of your page using the `defer` attribute.
-
-> The defer attribute is used for performance benefits as the browser loads the JavaScript file as soon as possible, due to it being in the `<head>`, but will not run until after the page has loaded.
-
-You can copy the file into your project or reference it from node_modules:
+Reference the compiled bundle from the installed package:
 
 ```html
-    <script src="path-to-assets/ofh-design-system-toolkit.min.js" defer></script>
-  </head>
-```
-
-```html
-    <script src="node_modules/@ourfuturehealth/toolkit/dist/ofh-design-system-toolkit.min.js" defer></script>
-  </head>
+<script src="node_modules/@ourfuturehealth/toolkit/dist/ofh-design-system-toolkit.min.js" defer></script>
 ```
 
 ### Option 2: Import JavaScript using modules
 
-If you're using a bundler such as [Webpack](https://webpack.js.org/) or [Vite](https://vitejs.dev/), you can import components using ES6 modules:
+If you use a bundler such as Webpack, Vite, or esbuild, import the modules you need:
 
 ```javascript
-// Components
 import Card from '@ourfuturehealth/toolkit/components/card/card';
 import Checkboxes from '@ourfuturehealth/toolkit/components/checkboxes/checkboxes';
 import Details from '@ourfuturehealth/toolkit/components/details/details';
@@ -141,11 +139,8 @@ import ErrorSummary from '@ourfuturehealth/toolkit/components/error-summary/erro
 import Header from '@ourfuturehealth/toolkit/components/header/header';
 import Radios from '@ourfuturehealth/toolkit/components/radios/radios';
 import SkipLink from '@ourfuturehealth/toolkit/components/skip-link/skip-link';
-
-// Polyfills
 import '@ourfuturehealth/toolkit/polyfills';
 
-// Initialize components
 document.addEventListener('DOMContentLoaded', () => {
   Card();
   Checkboxes();
@@ -159,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ## Importing assets (optional)
 
-If you want to import assets such as the Our Future Health logo, favicons and SVG icons, copy the files from `node_modules/@ourfuturehealth/toolkit/assets/` or reference them directly:
+Toolkit assets are available under `node_modules/@ourfuturehealth/toolkit/assets/`.
 
 ```html
 <link rel="shortcut icon" href="path-to-assets/favicons/favicon.ico" type="image/x-icon" />
@@ -172,4 +167,4 @@ If you want to import assets such as the Our Future Health logo, favicons and SV
 
 ## Thanks to the Government Digital Service (GDS)
 
-This documentation has been taken from [Installing GOV.UK Frontend with node package manager (NPM)](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md) with a few major adaptations.
+This documentation was originally adapted from [Installing GOV.UK Frontend with node package manager (NPM)](https://github.com/alphagov/govuk-frontend/blob/master/docs/installation/installing-with-npm.md).
