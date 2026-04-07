@@ -55,6 +55,7 @@ import {
   Fieldset,
   Footer,
   InsetText,
+  Image,
   Icon,
   LinkAction,
   LinkIcon,
@@ -150,6 +151,11 @@ function App() {
         heading="Information"
         text="You can report any suspected side effect to the Yellow Card safety scheme."
         actionLink={{ text: 'Report a side effect', href: '#report-a-side-effect' }}
+      />
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg"
+        alt="Picture of allergic conjunctivitis"
+        caption="Itchy, red, watering eyes."
       />
       <Fieldset legend="Contact details" legendSize="medium">
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
@@ -257,6 +263,7 @@ The package also provides:
 - `CharacterCount`
 - `Checkboxes`
 - `InsetText`
+- `Image`
 - `Radios`
 - `TaskList`
 - `Icon`
@@ -344,6 +351,16 @@ A lightweight content callout with feedback border variants, background options,
 - `heading`, `headingHtml`, `headingLevel`
 - `text` or `html`
 - `actionLink`
+
+### Image
+
+A content image with optional caption and responsive image-source support.
+
+**Props:**
+
+- `src`, `alt`
+- `caption`
+- `sizes`, `srcSet`
 
 ### Icons
 
