@@ -49,6 +49,7 @@ import {
   DateInput,
   ErrorSummary,
   Fieldset,
+  Footer,
   Icon,
   Radios,
   Select,
@@ -92,6 +93,13 @@ function App() {
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
         <TextInput id="phone" label="Phone number" type="tel" width="two-thirds" />
       </Fieldset>
+      <Footer
+        links={[
+          { href: '#privacy', label: 'Privacy' },
+          { href: 'https://example.com/careers', label: 'Careers', external: true, openInNewWindow: true },
+        ]}
+        smallPrint="© Our Future Health 2026"
+      />
       <TextInput id="name" label="Your name" hint="Enter your full name" inputWidth={20} />
       <Textarea id="notes" label="Additional notes" />
       <Select
@@ -179,6 +187,7 @@ A form input component with toolkit-parity label, hint, error, and width support
 The package also provides:
 
 - `Fieldset`
+- `Footer`
 - `Textarea`
 - `Select`
 - `DateInput`

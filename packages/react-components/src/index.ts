@@ -24,6 +24,14 @@ export type {
 export { Fieldset } from './components/Fieldset';
 export type { FieldsetProps } from './components/Fieldset';
 
+export { Footer } from './components/Footer';
+export type {
+  FooterLinkItem,
+  FooterProps,
+  FooterSocialLinkItem,
+  FooterSocialPlatform,
+} from './components/Footer';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 
