@@ -1,9 +1,8 @@
 {
-  "name": "@ourfuturehealth/example-react-consumer-app",
+  "name": "example-react-consumer-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "packageManager": "pnpm@10.29.2",
   "scripts": {
     "dev": "vite",
     "dev:verbose": "VERBOSE=true vite",
@@ -13,9 +12,9 @@
     "lint": "eslint . --ignore-pattern '*.config.js'"
   },
   "dependencies": {
-    "@ourfuturehealth/react-components": "workspace:*",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.5.0/ourfuturehealth-react-components-0.5.0.tgz",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

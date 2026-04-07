@@ -24,6 +24,7 @@ bower_components
 # Lock files (using pnpm, so ignore npm/yarn lock files)
 package-lock.json
 yarn.lock
+!packages/example-react-consumer-app/package-lock.json
 
 # Editors
 .idea
