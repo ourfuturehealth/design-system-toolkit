@@ -131,8 +131,7 @@ To add input fields inside the fieldset, use the `call` block.
 {% call fieldset({
   legend: {
     text: "What is your address?",
-    "classes": "ofh-fieldset__legend--l",
-    "isPageHeading": true
+    "classes": "ofh-fieldset__legend--l"
   }
 }) %}
 
@@ -159,15 +158,6 @@ To add input fields inside the fieldset, use the `call` block.
     "classes": "ofh-u-width-two-thirds",
     "id": "input-town-city",
     "name": "town"
-  }) }}
-
-  {{ input({
-    "label": {
-      "text": "County"
-    },
-    "classes": "ofh-u-width-two-thirds",
-    "id": "input-county",
-    "name": "county"
   }) }}
 
   {{ input({

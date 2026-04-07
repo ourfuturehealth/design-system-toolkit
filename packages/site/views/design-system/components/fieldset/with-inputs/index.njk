@@ -4,8 +4,7 @@
 {% call fieldset({
   legend: {
     "text": "What is your address?",
-    "classes": "ofh-fieldset__legend--l",
-    "isPageHeading": true
+    "classes": "ofh-fieldset__legend--l"
   }
 }) %}
 
@@ -32,15 +31,6 @@
     "classes": "ofh-u-width-two-thirds",
     "id": "address-town",
     "name": "address-town"
-  }) }}
-
-  {{ input({
-    label: {
-      "text": "County"
-    },
-    "classes": "ofh-u-width-two-thirds",
-    "id": "address-county",
-    "name": "address-county"
   }) }}
 
   {{ input({

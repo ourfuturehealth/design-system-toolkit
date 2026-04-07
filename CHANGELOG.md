@@ -14,10 +14,12 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - First-class toolkit docs for the `icon` component, including fixed-size, responsive-size, and titled examples
 - Expanded docs-site examples for input-family components including autocomplete, date input, and select
+- First-class toolkit docs for the `fieldset` component
 
 ##### Changed
 
 - Refreshed the input family to the current Figma and token model across:
+  - fieldset
   - text input
   - textarea
   - select
@@ -43,6 +45,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
   - `Radios`
   - `Select`
   - `Textarea`
+- New public `Fieldset` component for grouped form questions and legends
 - New public `Icon` component with fixed and responsive sizing support
 - Storybook coverage and unit/accessibility tests for the input family and `Icon`
 

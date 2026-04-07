@@ -3,7 +3,7 @@ import { TextInput } from '../TextInput';
 import { Fieldset } from './Fieldset';
 
 const meta: Meta<typeof Fieldset> = {
-  title: 'Components/Input/Fieldset',
+  title: 'Components/Fieldset',
   component: Fieldset,
   parameters: {
     layout: 'padded',
@@ -30,7 +30,8 @@ const meta: Meta<typeof Fieldset> = {
     },
     describedBy: {
       control: 'text',
-      description: 'Additional element IDs to append to the fieldset `aria-describedby` value.',
+      description:
+        'Additional element IDs to append to the fieldset `aria-describedby` value.',
       table: {
         type: {
           summary: 'string',
@@ -60,7 +61,8 @@ const meta: Meta<typeof Fieldset> = {
     },
     children: {
       control: false,
-      description: 'Inputs or other grouped content rendered inside the fieldset.',
+      description:
+        'Inputs or other grouped content rendered inside the fieldset.',
     },
     className: {
       control: false,
@@ -109,27 +111,12 @@ export const AsPageHeading: Story = {
     isPageHeading: true,
     legendSize: 'large',
   },
-  render: (args) => (
-    <Fieldset {...args}>
-      <TextInput
-        label={
-          <>
-            Building and street <span className="ofh-u-visually-hidden">line 1 of 2</span>
-          </>
-        }
-      />
-      <TextInput
-        label={<span className="ofh-u-visually-hidden">Building and street line 2 of 2</span>}
-      />
-      <TextInput label="Town or city" width="two-thirds" />
-      <TextInput inputWidth={10} label="Postcode" />
-    </Fieldset>
-  ),
+  render: (args) => <Fieldset {...args} />,
   parameters: {
     docs: {
       description: {
         story:
-          'Use `isPageHeading` when the fieldset question is also the page heading. This mirrors the docs-site address example, including visually hidden text for the split address-line labels.',
+          'Use `isPageHeading` when the fieldset question is also the page heading. This mirrors the docs-site example where the legend is the page heading and no extra grouped content is needed yet.',
       },
     },
   },
@@ -145,12 +132,17 @@ export const WithAddressInputs: Story = {
       <TextInput
         label={
           <>
-            Building and street <span className="ofh-u-visually-hidden">line 1 of 2</span>
+            Building and street{' '}
+            <span className="ofh-u-visually-hidden">line 1 of 2</span>
           </>
         }
       />
       <TextInput
-        label={<span className="ofh-u-visually-hidden">Building and street line 2 of 2</span>}
+        label={
+          <span className="ofh-u-visually-hidden">
+            Building and street line 2 of 2
+          </span>
+        }
       />
       <TextInput label="Town or city" width="two-thirds" />
       <TextInput inputWidth={10} label="Postcode" />
@@ -210,15 +202,16 @@ export const WithDescribedBy: Story = {
   args: {
     describedBy: 'fieldset-hint',
     legend: 'Contact details',
+    legendSize: 'medium',
   },
   render: (args) => (
-    <div style={{ maxWidth: '32rem' }}>
+    <div style={{ maxWidth: '64rem' }}>
       <p className="ofh-hint" id="fieldset-hint">
         We will only use these details to contact you about your application.
       </p>
       <Fieldset {...args}>
-        <TextInput label="Email address" type="email" width="three-quarters" />
-        <TextInput label="Phone number" type="tel" width="two-thirds" />
+        <TextInput label="Email address" type="email" />
+        <TextInput label="Phone number" type="tel" />
       </Fieldset>
     </div>
   ),
