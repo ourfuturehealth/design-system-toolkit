@@ -66,3 +66,6 @@ export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
+
+export { TaskList } from './components/TaskList';
+export type { TaskListItemProps, TaskListProps } from './components/TaskList';

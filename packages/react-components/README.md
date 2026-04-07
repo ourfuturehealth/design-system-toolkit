@@ -54,6 +54,7 @@ import {
   Icon,
   Radios,
   Select,
+  TaskList,
   Tag,
   Textarea,
   TextInput,
@@ -85,6 +86,26 @@ function App() {
         ]}
       />
       <Tag variant="brand">Beta</Tag>
+      <TaskList
+        items={[
+          {
+            title: 'Company directors',
+            href: '#directors',
+            status: {
+              children: 'Complete',
+              variant: 'green',
+            },
+          },
+          {
+            title: 'Registered company details',
+            href: '#company-details',
+            status: {
+              children: 'Incomplete',
+              variant: 'blue',
+            },
+          },
+        ]}
+      />
       <Button variant="contained">Click me</Button>
       <Icon name="Search" size={24} />
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
@@ -188,6 +209,7 @@ The package also provides:
 - `CharacterCount`
 - `Checkboxes`
 - `Radios`
+- `TaskList`
 - `Icon`
 
 ### ErrorSummary
@@ -239,6 +261,15 @@ A card for short do and don’t recommendation lists.
 **Props:**
 
 - `type`: 'do' | 'dont'
+
+### TaskList
+
+A task list that reuses the shared `Tag` component for the status column.
+
+**Props:**
+
+- `items`: `{ title: ReactNode; href?: string; hint?: ReactNode; status: TagProps; className?: string; titleClassName?: string; hintClassName?: string }[]`
+- `idPrefix`: string
 - `heading`, `headingLevel`
 - `items`
 
