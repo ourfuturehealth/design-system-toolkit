@@ -37,6 +37,12 @@ export type {
 export { Fieldset } from './components/Fieldset';
 export type { FieldsetProps } from './components/Fieldset';
 
+export { Details } from './components/Details';
+export type { DetailsProps } from './components/Details';
+
+export { Expander } from './components/Expander';
+export type { ExpanderProps } from './components/Expander';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 
