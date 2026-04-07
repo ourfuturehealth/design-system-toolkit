@@ -1,0 +1,37 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Link icon' %}
+{% from 'link-icon/macro.njk' import linkIcon %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          <div style="display: grid; gap: 1.5rem;">
+            {{ linkIcon({
+              "href": "#",
+              "text": "Go back",
+              "iconName": "ChevronLeft",
+              "iconPosition": "left",
+              "size": "small"
+            }) }}
+
+            {{ linkIcon({
+              "href": "https://example.com",
+              "text": "Open in a new tab",
+              "iconName": "Launch",
+              "iconPosition": "right",
+              "size": "medium",
+              "openInNewWindow": true
+            }) }}
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+{% endblock %}

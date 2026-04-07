@@ -2,49 +2,40 @@
    COMPONENTS/ #ACTION-LINK
    ========================================================================== */
 
-/**
- * 1. Display is inline-block so the top and bottom margins/paddings are
- *    respected.
- * 2. 'Random number' is used to properly have sufficient space between icon
- *    and text.
- * 3. Position is relative so the arrow icon can display absolute.
- * 4. Text decoration none used to override default <a> styling.
- * 5. Box shadow 8px used instead of the default 4px.
- * 6. Text decoration underline used to override default <a> styling.
- */
-
 .ofh-action-link {
-  @include ofh-responsive-margin(32, 'bottom');
+  @include ofh-responsive-margin(24, 'bottom');
 }
 
 .ofh-action-link__link {
-  @include ofh-font('heading-sm');
+  @include ofh-font('heading-sm', $weight: bold);
 
-  display: inline-block; /* [1] */
-  font-weight: $ofh-typography-weight-semibold;
-  padding-left: 38px; /* [2] */
-  position: relative; /* [3] */
-  text-decoration: none; /* [4] */
+  align-items: center;
+  color: $ofh-color-foreground-link-default;
+  display: inline-flex;
+  gap: $ofh-size-8;
+  text-decoration: none;
+
+  &:visited {
+    color: $ofh-color-foreground-link-default;
+  }
 
   &:hover {
+    color: $ofh-color-foreground-link-hover;
+    text-decoration: underline;
+
     .ofh-action-link__text {
-      text-decoration: underline; /* [6] */
+      text-decoration: underline;
     }
   }
 
   &:focus {
-    @include ofh-focused-text();
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
+    text-decoration: none;
 
-    &:hover {
-      .ofh-action-link__text {
-        color: $ofh-color-foreground-brand-blue-navy;
-        text-decoration: none;
-      }
+    .ofh-action-link__text {
+      text-decoration: none;
     }
-  }
-
-  @include mq($until: tablet) {
-    padding-left: 26px; /* [2] */
   }
 
   @include mq($media-type: print) {
@@ -54,23 +45,11 @@
       color: $ofh-color-foreground-primary;
     }
   }
+}
 
-  .ofh-action-link__icon {
-    @include print-color($ofh-color-foreground-primary);
+.ofh-action-link__icon {
+  @include print-color($ofh-color-foreground-primary);
 
-    color: $ofh-color-brand-yellow-3-main;
-    height: 32px;
-    left: -3px;
-    position: absolute;
-    top: -2px;
-    width: 32px;
-
-    @include mq($until: tablet) {
-      height: 24px;
-      left: -2px;
-      margin-bottom: 0;
-      top: 2px;
-      width: 24px;
-    }
-  }
+  color: $ofh-color-brand-yellow-3-main;
+  flex: none;
 }

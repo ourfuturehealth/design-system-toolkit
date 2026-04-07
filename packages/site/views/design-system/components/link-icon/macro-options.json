@@ -1,0 +1,52 @@
+{
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Text to display within the link icon component."
+    },
+    {
+      "name": "html",
+      "type": "string",
+      "required": false,
+      "description": "HTML to display within the link icon component. If `html` is provided, the `text` argument will be ignored."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": true,
+      "description": "The value of the link href attribute."
+    },
+    {
+      "name": "iconName",
+      "type": "string",
+      "required": false,
+      "description": "Toolkit icon name to render. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+    },
+    {
+      "name": "iconPosition",
+      "type": "string",
+      "required": false,
+      "description": "Icon placement relative to the text. Use `left` or `right`."
+    },
+    {
+      "name": "size",
+      "type": "string",
+      "required": false,
+      "description": "Link icon size. Use `small` or `medium`."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the root container."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes (for example data attributes) to add to the anchor tag."
+    }
+  ]
+}

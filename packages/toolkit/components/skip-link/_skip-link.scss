@@ -9,12 +9,16 @@
 
 .ofh-skip-link {
   background-color: $ofh-color-greyscale-white;
+  color: $ofh-color-foreground-link-default;
   left: -9999px; /* [1] */
   padding: $ofh-size-8;
   position: absolute;
+  text-decoration: none;
 
   &:active,
   &:focus {
+    outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    outline-offset: $ofh-stroke-weight-4;
     left: $ofh-size-16; /* [2] */
     top: $ofh-size-16;
     z-index: 2;

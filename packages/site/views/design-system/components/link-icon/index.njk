@@ -1,0 +1,34 @@
+{% set pageTitle = "Link icon" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use link icons to pair directional or external-action icons with prominent navigation links." %}
+{% set theme = "Navigation" %}
+{% set dateUpdated = "April 2026" %}
+{% set backlog_issue_id = "335" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "link-icon",
+    type: "default"
+  }) }}
+
+  <h2>When to use link icons</h2>
+  <p>Use link icons when a prominent text link needs a clear directional cue, such as going back or opening something externally.</p>
+  <p>The canonical link icon component supports left and right icon positions so teams can keep the same underlying pattern for back links and outward links.</p>
+
+  <h2>How to use link icons</h2>
+  <p>Keep the text short and specific. Use a left icon for back-navigation style links and a right icon for external or forward-moving links.</p>
+  <p>Choose the small size for compact inline usage and the medium size when the link needs more visual emphasis.</p>
+
+  <h3>Accessibility</h3>
+  <p>Make sure the text still describes the action on its own. The icon should support the message, not replace it.</p>
+
+{% endblock %}

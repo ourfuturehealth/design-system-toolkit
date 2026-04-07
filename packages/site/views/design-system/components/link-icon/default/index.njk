@@ -1,0 +1,12 @@
+{% from 'link-icon/macro.njk' import linkIcon %}
+{% extends "app-layout-example.njk" %}
+
+{% block example %}
+  {{ linkIcon({
+    "href": "#",
+    "text": "Go back",
+    "iconName": "ChevronLeft",
+    "iconPosition": "left",
+    "size": "small"
+  }) }}
+{% endblock %}
