@@ -3,24 +3,66 @@
    ========================================================================== */
 
 /**
- * 1. Removes top margin from first element and bottom margin from last,
- *    to ensure correct spacing within the component.
- * 2. Restricts the width of the text to optimise the line length for
+ * 1. Restricts the width of the text to optimise the line length for
  *    readability.
  */
 
 .ofh-inset-text {
-  @include top-and-bottom(); /* [1] */
-  @include reading-width(); /* [2] */
+  @include reading-width(); /* [1] */
+  @include ofh-font('paragraph-md');
+  @include ofh-responsive-gap(16);
   @include ofh-responsive-margin(40, 'bottom');
   @include ofh-responsive-margin(40, 'top');
-  @include ofh-responsive-padding(16);
+  @include ofh-responsive-padding(24);
 
-  background-color: $ofh-color-greyscale-white;
-  border-left: $ofh-stroke-weight-8 solid
-    $ofh-color-brand-blue-royal-3-main;
+  background-color: $ofh-color-background-secondary-grey;
+  border-left: $ofh-stroke-weight-8 solid $ofh-color-border-feedback-info;
+  color: $ofh-color-foreground-primary;
+  display: flex;
+  flex-direction: column;
+
+  &.ofh-inset-text--success {
+    border-left-color: $ofh-color-border-feedback-success;
+  }
+
+  &.ofh-inset-text--warning {
+    border-left-color: $ofh-color-border-feedback-warning;
+  }
+
+  &.ofh-inset-text--error {
+    border-left-color: $ofh-color-border-feedback-error;
+  }
+
+  &.ofh-inset-text--background-yellow {
+    background-color: $ofh-color-background-secondary-yellow;
+  }
+
+  &.ofh-inset-text--background-blue {
+    background-color: $ofh-color-background-secondary-blue;
+  }
 
   @include mq($media-type: print) {
     border-color: $ofh-color-foreground-primary;
   }
+}
+
+.ofh-inset-text__heading {
+  @include ofh-font('heading-md', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-inset-text__body {
+  @include top-and-bottom();
+
+  width: 100%;
+}
+
+.ofh-inset-text__action {
+  margin: 0;
+  width: 100%;
+}
+
+.ofh-inset-text__action-link {
+  @include ofh-font('paragraph-md');
 }

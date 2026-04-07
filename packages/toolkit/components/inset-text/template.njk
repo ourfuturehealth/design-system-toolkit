@@ -1,6 +1,58 @@
-<div class="ofh-inset-text
+{% set headingLevel = params.headingLevel if params.headingLevel else 3 %}
+{% set variant = params.variant if params.variant else 'info' %}
+{% set background = params.background if params.background else 'grey' %}
+{% set contentHtml = params.html if params.html else params.HTML %}
+{% set hasHeading = params.heading or params.headingHtml %}
+
+{% if params.visuallyHiddenText is defined %}
+  {% set visuallyHiddenText = params.visuallyHiddenText %}
+{% elif not hasHeading %}
+  {% if variant == 'error' %}
+    {% set visuallyHiddenText = 'Error' %}
+  {% elif variant == 'success' %}
+    {% set visuallyHiddenText = 'Success' %}
+  {% elif variant == 'warning' %}
+    {% set visuallyHiddenText = 'Warning' %}
+  {% else %}
+    {% set visuallyHiddenText = 'Information' %}
+  {% endif %}
+{% else %}
+  {% set visuallyHiddenText = false %}
+{% endif %}
+
+<div class="ofh-inset-text ofh-inset-text--{{ variant }} ofh-inset-text--background-{{ background }}
 {%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
-  <span class="ofh-u-visually-hidden">Information: </span>
-  {{ params.HTML | safe }}
+{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  {% if visuallyHiddenText %}
+    <span class="ofh-u-visually-hidden">{{ visuallyHiddenText }}:</span>
+  {% endif %}
+
+  {% if params.headingHtml or params.heading %}
+    <h{{ headingLevel }} class="ofh-inset-text__heading">
+      {% if params.headingHtml %}
+        <span>{{ params.headingHtml | safe }}</span>
+      {% else %}
+        {{ params.heading | safe }}
+      {% endif %}
+    </h{{ headingLevel }}>
+  {% endif %}
+
+  {% if contentHtml %}
+    <div class="ofh-inset-text__body">{{ contentHtml | safe }}</div>
+  {% elif params.text %}
+    <div class="ofh-inset-text__body">
+      <p>{{ params.text | safe }}</p>
+    </div>
+  {% endif %}
+
+  {% if params.actionLink %}
+    <p class="ofh-inset-text__action">
+      <a
+        class="ofh-inset-text__action-link"
+        href="{{ params.actionLink.href }}"
+        {%- for attribute, value in params.actionLink.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+        {{ params.actionLink.text | safe }}
+      </a>
+    </p>
+  {% endif %}
 </div>

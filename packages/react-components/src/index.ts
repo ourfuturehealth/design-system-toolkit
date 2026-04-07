@@ -107,3 +107,11 @@ export type {
 
 export { TaskList } from './components/TaskList';
 export type { TaskListItemProps, TaskListProps } from './components/TaskList';
+
+export { InsetText } from './components/InsetText';
+export type {
+  InsetTextActionLink,
+  InsetTextBackground,
+  InsetTextProps,
+  InsetTextVariant,
+} from './components/InsetText';
