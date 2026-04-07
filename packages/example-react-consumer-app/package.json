@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:verbose": "VERBOSE=true vite",
+    "dev:verbose": "vite --logLevel info",
     "watch": "vite",
-    "watch:verbose": "VERBOSE=true vite",
+    "watch:verbose": "vite --logLevel info",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ignore-pattern '*.config.js'"
   },

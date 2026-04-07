@@ -635,13 +635,13 @@ module.exports = function configuration(eleventyConfig) {
 **Before:**
 
 ```javascript
-import Button from '../packages/components/button/button.js';
+import Card from '../packages/components/card/card.js';
 ```
 
 **After:**
 
 ```javascript
-import Button from '@ourfuturehealth/toolkit/components/button/button';
+import Card from '@ourfuturehealth/toolkit/components/card/card';
 
 // Or import the compiled bundle
 import '@ourfuturehealth/toolkit/dist/ofh-design-system-toolkit.js';

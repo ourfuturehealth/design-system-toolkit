@@ -673,7 +673,7 @@ pnpm storybook
 4. Visual comparison with Figma specs
 5. Test in `example-react-consumer-app` when you need an external-style React consumer check
 6. If the install contract changed, also run the tarball smoke tests
-6. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
+7. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
 
 ### Documentation Review
 

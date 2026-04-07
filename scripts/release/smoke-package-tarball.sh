@@ -116,7 +116,7 @@ run_yarn_add() {
   shift
   (
     cd "${install_dir}"
-    npx -y yarn@1.22.22 add "$@"
+    npx -y yarn@1.22.22 add --ignore-scripts "$@"
   )
 }
 
