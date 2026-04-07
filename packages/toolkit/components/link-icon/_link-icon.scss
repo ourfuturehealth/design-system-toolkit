@@ -65,14 +65,6 @@
   }
 }
 
-.ofh-link-icon--icon-right,
-.ofh-back-link--icon-right {
-  .ofh-link-icon__link,
-  .ofh-back-link__link {
-    flex-direction: row-reverse;
-  }
-}
-
 @include mq($media-type: print) {
   .ofh-link-icon__link,
   .ofh-back-link__link {
