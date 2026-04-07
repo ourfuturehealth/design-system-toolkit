@@ -1,17 +1,104 @@
+{% from '../icon/macro.njk' import icon %}
+
+{%- macro _footerLink(item) -%}
+  {% set href = item.url if item.url else item.URL %}
+  <a class="ofh-footer__link"
+    href="{{ href if href else '#' }}"
+    {%- if item.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
+    {%- if item.attributes %}{% for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}{% endif %}>
+    <span class="ofh-footer__link-text">{{ item.label }}</span>
+    {%- if item.external %}
+      {{ icon({ "name": "Launch", "size": 16, "classes": "ofh-footer__link-icon" }) }}
+    {%- endif %}
+  </a>
+{%- endmacro -%}
+
+{%- macro _socialIcon(item, platform) -%}
+  {% set iconName = '' %}
+  {% set hoverIconName = '' %}
+  {% set label = item.label if item.label else platform %}
+
+  {%- if platform == 'linkedin' -%}
+    {% set iconName = 'LinkedIn' %}
+    {% set hoverIconName = 'LinkedInHover' %}
+    {% set label = item.label if item.label else 'LinkedIn' %}
+  {%- elif platform == 'x' -%}
+    {% set iconName = 'X' %}
+    {% set hoverIconName = 'XHover' %}
+    {% set label = item.label if item.label else 'X' %}
+  {%- elif platform == 'facebook' -%}
+    {% set iconName = 'Facebook' %}
+    {% set hoverIconName = 'FacebookHover' %}
+    {% set label = item.label if item.label else 'Facebook' %}
+  {%- elif platform == 'youtube' -%}
+    {% set iconName = 'Youtube' %}
+    {% set hoverIconName = 'YoutubeHover' %}
+    {% set label = item.label if item.label else 'YouTube' %}
+  {%- elif platform == 'instagram' -%}
+    {% set iconName = 'Instagram' %}
+    {% set hoverIconName = 'InstagramHover' %}
+    {% set label = item.label if item.label else 'Instagram' %}
+  {%- elif platform == 'tiktok' -%}
+    {% set iconName = 'Tiktok' %}
+    {% set hoverIconName = 'TiktokHover' %}
+    {% set label = item.label if item.label else 'TikTok' %}
+  {%- endif -%}
+
+  <a class="ofh-footer__social-link"
+    href="{{ item.href if item.href else '#' }}"
+    {%- if item.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
+    {%- if item.attributes %}{% for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}{% endif %}>
+    <span class="ofh-footer__social-icon ofh-footer__social-icon--default" aria-hidden="true">
+      {{ icon({ "name": iconName, "size": 32, "classes": "ofh-footer__social-icon-svg" }) }}
+    </span>
+    <span class="ofh-footer__social-icon ofh-footer__social-icon--hover" aria-hidden="true">
+      {{ icon({ "name": hoverIconName, "size": 32, "classes": "ofh-footer__social-icon-svg" }) }}
+    </span>
+    <span class="ofh-u-visually-hidden">{{ label }}</span>
+  </a>
+{%- endmacro -%}
+
+{% set smallPrint = params.smallPrint if params.smallPrint else (params.copyright if params.copyright else '&copy; Crown copyright') %}
+{% set socialLabel = params.socialLabel if params.socialLabel else 'Follow us' %}
+
 <footer role="contentinfo">
-  <div class="ofh-footer
-    {%- if params.classes %} {{ params.classes }}{% endif %}" id="ofh-footer"
+  <div class="ofh-footer{%- if params.classes %} {{ params.classes }}{% endif %}" id="ofh-footer"
     {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-    <div class="ofh-width-container">
-      {%- if params.links %}
-      <h2 class="ofh-u-visually-hidden">Support links</h2>
-      <ul class="ofh-footer__list">
-        {%- for item in params.links %}
-        <li class="ofh-footer__list-item"><a class="ofh-footer__list-item-link" href="{{ item.URL }}">{{ item.label }}</a></li>
-        {%- endfor %}
-      </ul>
-      {% endif %}
-      <p class="ofh-footer__copyright">{% if params.copyright %}{{ params.copyright | safe }}{% else %}&copy; Crown copyright{% endif %}</p>
+    <div class="ofh-footer__main">
+      <div class="ofh-width-container">
+        <div class="ofh-footer__main-inner">
+          <div class="ofh-footer__meta">
+            {% if params.links %}
+              <h2 class="ofh-u-visually-hidden">Support links</h2>
+              <ul class="ofh-footer__links">
+                {%- for item in params.links %}
+                  <li class="ofh-footer__links-item">{{ _footerLink(item) | trim }}</li>
+                {%- endfor %}
+              </ul>
+            {% endif %}
+            <p class="ofh-footer__small-print">{{ smallPrint | safe }}</p>
+          </div>
+          {% if params.legalHtml or params.legalText %}
+            <p class="ofh-footer__legal">{{ params.legalHtml | safe if params.legalHtml else params.legalText }}</p>
+          {% endif %}
+        </div>
+      </div>
     </div>
+
+    {% if params.socialLinks %}
+      <div class="ofh-footer__social">
+        <div class="ofh-width-container">
+          <div class="ofh-footer__social-inner">
+            <p class="ofh-footer__social-title">{{ socialLabel }}</p>
+            <ul class="ofh-footer__social-list">
+              {%- for item in params.socialLinks %}
+                {% set platform = item.platform | lower %}
+                <li class="ofh-footer__social-item">{{ _socialIcon(item, platform) | trim }}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </footer>
