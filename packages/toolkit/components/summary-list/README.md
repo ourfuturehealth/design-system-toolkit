@@ -251,7 +251,7 @@
 #### HTML markup
 
 ```html
-<dl class="ofh-summary-list ofh-summary-list--no-border">
+<dl class="ofh-summary-list ofh-summary-list--compact ofh-summary-list--no-border">
   <div class="ofh-summary-list__row">
     <dt class="ofh-summary-list__key">
       Name
@@ -296,6 +296,7 @@
 {% from "components/summary-list/macro.njk" import summaryList %}
 
 {{ summaryList({
+  padded: false,
   classes: 'ofh-summary-list--no-border',
   rows: [
     {

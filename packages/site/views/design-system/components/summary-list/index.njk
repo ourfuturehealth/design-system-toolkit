@@ -41,9 +41,10 @@
     type: "default"
   }) }}
 
-  <h3 id="label-text-inputs">Summary list with actions</h3>
+  <h3 id="summary-list-with-actions">Summary list with actions</h3>
   <p>You can add actions to a summary list, like a "Change" link to let users go back and edit their answer.</p>
   <p>People who use assistive technology, like a screen reader, may hear the action links out of context and not know what they do. To give more context, add visually hidden text to the links. This means a screen reader user will hear a meaningful action, like "Change name" or "Change date of birth".</p>
+  <p>On larger screens, the list uses a three-column layout with the key taking about one quarter of the width, the value taking about two quarters, and the actions taking the remaining quarter. The default layout keeps the row spacing padded; set <code>padded: false</code> for the denser version.</p>
 
   {{ designExample({
     group: "components",
@@ -51,7 +52,7 @@
     type: "default"
   }) }}
 
-  <h3 id="label-text-inputs">Summary list without actions</h3>
+  <h3 id="summary-list-without-actions">Summary list without actions</h3>
 
   {{ designExample({
     group: "components",
@@ -59,8 +60,8 @@
     type: "without-action"
   }) }}
 
-  <h3 id="label-text-inputs">Summary list without actions or borders</h3>
-  <p class="rich-text">If you do not include actions in your summary list and it would be better for your design to remove the separating borders, use the <code>nhsuk-summary-list--no-border</code> class.</p>
+  <h3 id="summary-list-without-actions-or-borders">Summary list without actions or borders</h3>
+  <p class="rich-text">If you want the denser spacing from the compact layout, set <code>padded: false</code>. If you also want to remove the separating borders, add the <code>ofh-summary-list--no-border</code> class.</p>
 
   {{ designExample({
     group: "components",
