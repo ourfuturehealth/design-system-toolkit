@@ -66,3 +66,6 @@ export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
+
+export { Image } from './components/Image';
+export type { ImageProps } from './components/Image';

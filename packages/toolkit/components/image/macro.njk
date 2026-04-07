@@ -1,0 +1,5 @@
+{% from '../images/macro.njk' import image as legacyImage %}
+
+{% macro image(params) %}
+  {{- legacyImage(params) -}}
+{% endmacro %}

@@ -49,6 +49,7 @@ import {
   DateInput,
   ErrorSummary,
   Fieldset,
+  Image,
   Icon,
   Radios,
   Select,
@@ -88,6 +89,11 @@ function App() {
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
       <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg"
+        alt="Picture of allergic conjunctivitis"
+        caption="Itchy, red, watering eyes."
+      />
       <Fieldset legend="Contact details" legendSize="medium">
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
         <TextInput id="phone" label="Phone number" type="tel" width="two-thirds" />
@@ -185,6 +191,7 @@ The package also provides:
 - `Autocomplete`
 - `CharacterCount`
 - `Checkboxes`
+- `Image`
 - `Radios`
 - `Icon`
 
@@ -239,6 +246,16 @@ A card for short do and don’t recommendation lists.
 - `type`: 'do' | 'dont'
 - `heading`, `headingLevel`
 - `items`
+
+### Image
+
+A content image with optional caption and responsive image-source support.
+
+**Props:**
+
+- `src`, `alt`
+- `caption`
+- `sizes`, `srcSet`
 
 ### Icons
 
