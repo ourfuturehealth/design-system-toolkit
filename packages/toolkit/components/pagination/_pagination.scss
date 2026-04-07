@@ -24,7 +24,7 @@
   width: 50%;
 
   .ofh-icon {
-    left: -6px;
+    left: -4px;
   }
 
   .ofh-pagination__title {
@@ -38,7 +38,7 @@
   width: 50%;
 
   .ofh-icon {
-    right: -6px;
+    right: -4px;
   }
 
   .ofh-pagination__title {
@@ -47,6 +47,7 @@
 }
 
 .ofh-pagination__link {
+  color: $ofh-color-foreground-brand-blue-navy;
   display: block;
   position: relative;
   text-decoration: none;
@@ -58,7 +59,7 @@
 
   .ofh-icon {
     position: absolute;
-    top: -2px;
+    top: 0;
 
     @include mq($media-type: print) {
       color: $ofh-color-foreground-primary;
@@ -67,53 +68,44 @@
   }
 
   &:hover {
-    color: $ofh-color-foreground-link-hover;
-
-    .ofh-icon {
-      color: $ofh-color-foreground-link-hover;
-      fill: $ofh-color-foreground-link-hover;
-    }
-
     .ofh-pagination__page {
+      color: $ofh-color-foreground-link-hover;
       text-decoration: none;
     }
   }
 
   &:focus {
-    @include ofh-focused-text;
+    @include ofh-focused-button;
 
     .ofh-pagination__page {
+      color: $ofh-color-foreground-link-active;
       text-decoration: none;
-    }
-
-    &:visited,
-    &:hover,
-    &:active {
-      .ofh-icon {
-        color: $ofh-color-foreground-brand-blue-navy;
-        fill: $ofh-color-foreground-brand-blue-navy;
-      }
     }
   }
 
   &:visited {
-    .ofh-icon {
+    .ofh-pagination__page {
       color: $ofh-color-foreground-link-visited;
-      fill: $ofh-color-foreground-link-visited;
     }
 
     &:hover {
-      .ofh-icon {
+      .ofh-pagination__page {
         color: $ofh-color-foreground-link-hover;
-        fill: $ofh-color-foreground-link-hover;
+        text-decoration: none;
       }
     }
 
     &:focus {
-      .ofh-icon {
-        color: $ofh-color-foreground-brand-blue-navy;
-        fill: $ofh-color-foreground-brand-blue-navy;
+      .ofh-pagination__page {
+        color: $ofh-color-foreground-link-active;
+        text-decoration: none;
       }
+    }
+  }
+
+  &:active {
+    .ofh-pagination__page {
+      color: $ofh-color-foreground-link-active;
     }
   }
 }
@@ -134,6 +126,7 @@
 .ofh-pagination__page {
   @include ofh-typography-responsive('paragraph-sm');
 
+  color: $ofh-color-foreground-link-default;
   display: block;
   text-decoration: underline;
 }

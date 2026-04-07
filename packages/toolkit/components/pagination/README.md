@@ -3,6 +3,8 @@
 ## Guidance
 
 > Icon migration: this component now renders icons using `components/icon/macro.njk` and the Material SVG sprite.
+>
+> The pagination link uses a 4px icon gap and a 4px focus outline offset to match the current design spec.
 
 
 Find out more about the pagination component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/pagination).
@@ -23,8 +25,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Previous</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Treatments</span>
-        <svg class="ofh-icon ofh-icon__arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
-          <path d="M4.1 12.3l2.7 3c.2.2.5.2.7 0 .1-.1.1-.2.1-.3v-2h11c.6 0 1-.4 1-1s-.4-1-1-1h-11V9c0-.2-.1-.4-.3-.5h-.2c-.1 0-.3.1-.4.2l-2.7 3c0 .2 0 .4.1.6z"></path>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--West ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-West"></use>
         </svg>
       </a>
     </li>
@@ -33,8 +35,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Next</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Symptoms</span>
-        <svg class="ofh-icon ofh-icon__arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
-          <path d="M19.6 11.66l-2.73-3A.51.51 0 0 0 16 9v2H5a1 1 0 0 0 0 2h11v2a.5.5 0 0 0 .32.46.39.39 0 0 0 .18 0 .52.52 0 0 0 .37-.16l2.73-3a.5.5 0 0 0 0-.64z"></path>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--East ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-East"></use>
         </svg>
       </a>
     </li>
@@ -69,8 +71,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Next</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Symptoms</span>
-        <svg class="ofh-icon ofh-icon__arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
-          <path d="M19.6 11.66l-2.73-3A.51.51 0 0 0 16 9v2H5a1 1 0 0 0 0 2h11v2a.5.5 0 0 0 .32.46.39.39 0 0 0 .18 0 .52.52 0 0 0 .37-.16l2.73-3a.5.5 0 0 0 0-.64z"></path>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--East ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-East"></use>
         </svg>
       </a>
     </li>
@@ -104,8 +106,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Previous</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Treatments</span>
-        <svg class="ofh-icon ofh-icon__arrow-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34">
-          <path d="M4.1 12.3l2.7 3c.2.2.5.2.7 0 .1-.1.1-.2.1-.3v-2h11c.6 0 1-.4 1-1s-.4-1-1-1h-11V9c0-.2-.1-.4-.3-.5h-.2.1 0-.3.1-.4.2l-2.7 3c0 .2 0 .4.1.6z"></path>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--West ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-West"></use>
         </svg>
       </a>
     </li>
