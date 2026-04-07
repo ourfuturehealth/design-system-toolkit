@@ -31,7 +31,9 @@ const categoryOrders = {
     "CancelOutlined",
     // Add/Remove
     "AddCircle",
+    "AddCircleOutlineOutlined",
     "RemoveCircle",
+    "RemoveCircleOutlineOutlined",
   ],
   Action: [
     "Search",
