@@ -3,23 +3,12 @@
    ========================================================================== */
 
 /**
- * Custom table for the colour palette
+ * Colour table enhancements
  */
 
 .app-colour-list {
   margin-top: 0;
-
-  th,
-  td {
-    @include ofh-typography-responsive('paragraph-sm');
-
-    border: 0;
-  }
-
-  .app-colour-list__column--name code,
-  .app-colour-list__column--colour code {
-    white-space: nowrap;
-  }
+  width: 100%;
 }
 
 .app-colour-list__swatch {
@@ -27,44 +16,31 @@
   border: 1px solid transparent;
   border-radius: 50%;
   display: inline-block;
+  flex: 0 0 auto;
   height: $ofh-size-32;
-  margin-right: $ofh-size-4;
-  vertical-align: middle;
   width: $ofh-size-32;
-
-  @include mq($until: tablet) {
-    height: $ofh-size-24;
-    left: 0;
-    position: absolute;
-    width: $ofh-size-24;
-  }
 }
 
-.app-colour-list__column {
+.app-colour-list__token {
+  align-items: center;
+  display: flex;
+  gap: $ofh-size-8;
+}
+
+.app-colour-list__token-cell,
+.app-colour-list__source,
+.app-colour-list__hex {
   vertical-align: middle;
-
-  @include mq($until: tablet) {
-    display: block;
-    position: relative;
-  }
 }
 
-.app-colour-list__row {
-  .app-colour-list__column {
-    @include ofh-responsive-padding(8);
-
-    // Use a dedicated row tint so light swatches (for example #e8e8e8 and #ffffff)
-    // remain distinguishable against the documentation surface.
-    background-color: $ofh-color-background-secondary-grey;
-  }
-
-  .app-colour-list__column--colour code {
-    background-color: transparent;
-  }
+.app-colour-list__token-cell code,
+.app-colour-list__source code {
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
-.app-colour-list__column--name {
-  font-weight: normal;
+.app-colour-list__hex code {
+  white-space: nowrap;
 }
 
 .app-colour-list__swatch--border {

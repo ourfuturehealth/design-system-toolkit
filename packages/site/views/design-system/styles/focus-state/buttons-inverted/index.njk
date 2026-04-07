@@ -1,0 +1,20 @@
+{% from 'button/macro.njk' import button %}
+
+<div style="background-color: #011D4B; padding: 24px;">
+  <div class="app-focus-state__button-row">
+    {{ button({
+      "text": "Find my location",
+      "type": "button",
+      "classes": "ofh-button--ghost-inverted",
+      "attributes": {
+        "id": "focus-state-button-inverted-target"
+      }
+    }) }}
+
+    {{ button({
+      "text": "Cancel",
+      "type": "button",
+      "classes": "ofh-button--text-inverted"
+    }) }}
+  </div>
+</div>
