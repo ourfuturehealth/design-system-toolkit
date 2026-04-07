@@ -66,3 +66,11 @@ export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
+
+export { InsetText } from './components/InsetText';
+export type {
+  InsetTextActionLink,
+  InsetTextBackground,
+  InsetTextProps,
+  InsetTextVariant,
+} from './components/InsetText';

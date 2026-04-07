@@ -1,10 +1,64 @@
 {
   "params": [
     {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "description": "Optional heading text shown above the body content."
+    },
+    {
+      "name": "headingHtml",
+      "type": "string",
+      "required": false,
+      "description": "Trusted HTML for the heading contents."
+    },
+    {
+      "name": "headingLevel",
+      "type": "integer",
+      "required": false,
+      "description": "Semantic heading level for the optional heading. Defaults to 3."
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "description": "Feedback border variant: info, success, warning, or error."
+    },
+    {
+      "name": "background",
+      "type": "string",
+      "required": false,
+      "description": "Background variant: grey, yellow, or blue."
+    },
+    {
       "name": "html",
       "type": "string",
-      "required": true,
-      "description": "HTML content to be used within the inset text component."
+      "required": false,
+      "description": "Trusted HTML content to be used within the inset text body."
+    },
+    {
+      "name": "HTML",
+      "type": "string",
+      "required": false,
+      "description": "Deprecated alias for html, retained for backward compatibility."
+    },
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Plain text content to be used within the inset text body."
+    },
+    {
+      "name": "actionLink",
+      "type": "object",
+      "required": false,
+      "description": "Optional action link object with text, href, and attributes."
+    },
+    {
+      "name": "visuallyHiddenText",
+      "type": "string",
+      "required": false,
+      "description": "Optional override for the hidden accessible prefix."
     },
     {
       "name": "classes",
