@@ -512,12 +512,12 @@ The toolkit was restructured from a single-package repository into a monorepo wi
 
 **No, existing consumers will NOT automatically break.**
 
-If your project uses a version tag from v3.4.3 or earlier, it will continue to work indefinitely:
+If your project uses a version tag from v3.4.2 or earlier, it will continue to work indefinitely:
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
   }
 }
 ```
@@ -530,18 +530,18 @@ You'll need to update your installation syntax if:
 
 | Scenario                                        | Will Break? | When to Update                           |
 | ----------------------------------------------- | ----------- | ---------------------------------------- |
-| Using `#v3.4.3` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
+| Using `#v3.4.2` or older version tag            | ❌ No       | Only when you want to upgrade to v4.0.0+ |
 | Using `#main` branch (no version)               | ✅ Yes      | Immediately after merge                  |
 | Trying to upgrade to `#toolkit-v4.0.0` or newer | 🔄 Yes      | Must use new syntax (see below)          |
 | No version specified in package.json            | ✅ Yes      | Immediately after merge                  |
 
-**Bottom line:** If you're using a version tag from v3.4.3 or earlier, you're safe and can upgrade on your own timeline.
+**Bottom line:** If you're using a version tag from v3.4.2 or earlier, you're safe and can upgrade on your own timeline.
 
 ### What Changed
 
 #### Repository Structure
 
-**Before v3.4.3 (single-package):**
+**Before v3.4.2 (single-package):**
 
 ```
 design-system-toolkit/
@@ -587,39 +587,38 @@ design-system-toolkit/
 
 #### Step 1: Update Package Dependency
 
-**Before v3.4.3:**
+**Before v3.4.2:**
 
 ```json
 {
   "dependencies": {
-    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.3"
+    "ofh-design-system-toolkit": "github:ourfuturehealth/design-system-toolkit#v3.4.2"
   }
 }
 ```
 
 **After v4.0.0:**
 
-Install from specific release tag (recommended):
+Install the published toolkit release tarball:
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.8.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
 
-Or install from branch:
+Replace `{version}` with the toolkit release you want to install.
 
-```json
-{
-  "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#main:packages/toolkit"
-  }
-}
+For unreleased maintainer testing, build and pack the toolkit locally instead of pointing consumers at a branch:
+
+```bash
+pnpm --filter=@ourfuturehealth/toolkit run zip
+npm pack ./packages/toolkit --ignore-scripts
 ```
 
-**Note**: The `:packages/toolkit` suffix is required to install the toolkit package from the monorepo subdirectory.
+Install the resulting local `.tgz` file in the consumer application.
 
 #### Step 2: Update Template Imports (Nunjucks/Eleventy)
 
@@ -791,18 +790,18 @@ Server-side rendering templates for generating HTML:
 
 ### Release Process Changes
 
-**Before v3.4.3 (single package):**
+**Before v3.4.2 (single package):**
 
 - Single `package.json` at root with version
-- One version number for everything: `v3.4.3`, `v3.4.2`, etc.
-- Tag format: `v*` (e.g., `v3.4.3`)
+- One version number for everything: `v3.4.2`, `v3.4.1`, etc.
+- Tag format: `v*` (e.g., `v3.4.2`)
 
 **After v4.0.0 (monorepo):**
 
 - Each package has its own `package.json` with **independent versioning**
   - Toolkit: `4.0.0`, `4.0.1`, `4.1.0`...
   - React Components: `0.0.1`, `0.0.2`, `0.1.0`...
-- Git installations must specify subdirectory: `:packages/toolkit` or `:packages/react-components`
+- Consumers install package release tarballs rather than git subdirectories
 - **Packages can be released independently**
 - Tag format:
   - Toolkit: `toolkit-v*` (e.g., `toolkit-v4.0.0`)
@@ -817,7 +816,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.8.0:packages/toolkit"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
@@ -827,7 +826,7 @@ Each package in the monorepo can be installed independently:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "github:ourfuturehealth/design-system-toolkit#react-v0.6.0:packages/react-components"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz"
   }
 }
 ```
@@ -932,7 +931,7 @@ module.exports = function configuration(eleventyConfig) {
     "dev": "concurrently 'npm:watch:css' 'npm:watch:eleventy'"
   },
   "dependencies": {
-    "@ourfuturehealth/toolkit": "github:ourfuturehealth/design-system-toolkit#toolkit-v4.0.0:packages/toolkit",
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz",
     "@11ty/eleventy": "^2.0.0",
     "nunjucks": "^3.2.4",
     "sass": "^1.60.0"

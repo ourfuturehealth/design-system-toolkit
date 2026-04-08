@@ -18,6 +18,23 @@ print_success() {
   printf ' ✓ %s\n' "$1"
 }
 
+run_quiet_step() {
+  local description=$1
+  shift
+
+  local log_file
+  log_file=$(mktemp)
+  cleanup_files+=("${log_file}")
+
+  if "$@" >"${log_file}" 2>&1; then
+    return 0
+  fi
+
+  printf '\n✗ %s\n' "${description}" >&2
+  cat "${log_file}" >&2
+  return 1
+}
+
 on_error() {
   printf 'Smoke testing current release artifacts failed while %s.\n' "${current_step}" >&2
 }
@@ -71,7 +88,9 @@ if [[ "${package_scope}" == 'toolkit' || "${package_scope}" == 'all' ]]; then
   print_summary 'toolkit'
   current_step='building toolkit release artifacts'
   print_step 'Building toolkit compiled artifacts with pnpm'
-  pnpm --filter=@ourfuturehealth/toolkit run zip >/dev/null
+  run_quiet_step \
+    'Building toolkit compiled artifacts failed' \
+    pnpm --filter=@ourfuturehealth/toolkit run zip
   print_success 'Built toolkit compiled artifacts'
 
   current_step='packing toolkit tarball'
@@ -93,7 +112,9 @@ if [[ "${package_scope}" == 'react-components' || "${package_scope}" == 'all' ]]
   print_summary 'react-components'
   current_step='building react-components release artifacts'
   print_step 'Building react-components library with pnpm'
-  pnpm --filter=@ourfuturehealth/react-components run build >/dev/null
+  run_quiet_step \
+    'Building react-components release artifacts failed' \
+    pnpm --filter=@ourfuturehealth/react-components run build
   print_success 'Built react-components library'
 
   current_step='packing react-components tarball'
