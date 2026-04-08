@@ -84,6 +84,9 @@ This workflow also includes a temporary external-reference audit against the BSM
 - Do not assume that a same-number static token is equivalent to a responsive Figma token
   - example: `ofh/space/vertical/16` is **not** automatically the same as `$ofh-size-16`
   - example: `paragraph/md` in Figma should map to the responsive typography mixin, not rely on inherited browser or global text styles
+- Preserve the token type during implementation
+  - if Figma specifies a responsive spacing token, implement it with the responsive helper even when the current desktop value matches a static token
+  - do not substitute static tokens just because the resolved number looks correct at one breakpoint
 
 ### 2. Current Implementation Review
 
@@ -99,6 +102,10 @@ This workflow also includes a temporary external-reference audit against the BSM
   - check `p`, `ul`, `ol`, `li`, `h1-h6`, `a`, `button`, and similar elements used inside the component
   - identify where the component is intentionally relying on global typography or list spacing
   - identify where those inherited styles must be overridden to match Figma exactly
+- Review how the component interacts with **shared primitives and layout objects**
+  - check whether older shared primitives such as labels, hints, form groups, lists, or wrappers are still affecting the rendered output inside the component
+  - inspect computed margins, gaps, and typography in the browser; do not assume newer component-level resets win the CSS cascade
+  - only remove legacy rules globally when they are truly obsolete; otherwise scope overrides so older primitives stop interfering with the updated component
 
 **React (`packages/react-components/src/components/{ComponentName}/`):**
 
@@ -235,6 +242,10 @@ Review the entire component implementation against design system standards:
 - [ ] Audit semantic-element inheritance:
   - check whether global `ul > li`, `p`, `h*`, or link styles are adding margins/typography the component did not ask for
   - add explicit overrides when Figma requires component-specific spacing or typography
+- [ ] Audit shared-primitives inheritance:
+  - check whether reused primitives such as labels, hints, error messages, form groups, or wrappers are contributing margins, gaps, or typography that compound with the component's own layout rules
+  - verify the computed browser output, not just the source SCSS intent
+  - if a shared primitive is still needed elsewhere, prefer a scoped override in the component rather than a broad removal
 
 **Responsive Pattern Audit:**
 
