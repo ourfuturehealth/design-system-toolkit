@@ -1,107 +1,177 @@
 import React from 'react';
-import styles from './TextInput.module.scss';
+import { joinClassNames } from '../_internal/joinClassNames';
 
-export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export type TextInputWidth =
+  | 'full'
+  | 'three-quarters'
+  | 'two-thirds'
+  | 'one-half'
+  | 'one-third'
+  | 'one-quarter';
+
+export type TextInputFixedWidth = 2 | 3 | 4 | 5 | 10 | 20 | 30;
+
+export interface TextInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'children' | 'ref'> {
   /**
-   * Input label
+   * Input label content.
    */
-  label: string;
+  label: React.ReactNode;
   /**
-   * Input hint text
+   * Optional hint content.
    */
-  hint?: string;
+  hint?: React.ReactNode;
   /**
-   * Error message
+   * Optional error content.
    */
-  error?: string;
+  errorMessage?: React.ReactNode;
   /**
-   * Whether the input is required
+   * Deprecated alias for `errorMessage`.
    */
-  required?: boolean;
+  error?: React.ReactNode;
   /**
-   * Input width variant
+   * One or more element IDs to append to `aria-describedby`.
    */
-  width?:
-    | 'full'
-    | 'three-quarters'
-    | 'two-thirds'
-    | 'one-half'
-    | 'one-third'
-    | 'one-quarter';
+  describedBy?: string;
   /**
-   * Character limit for the input (from 2,3,4,5,10,20)
+   * Fluid width utility class.
    */
-  maxLength?: 2 | 3 | 4 | 5 | 10 | 20;
+  width?: TextInputWidth;
   /**
-   * Optional id for the input element
+   * Fixed character-width modifier.
    */
-  id?: string;
+  inputWidth?: TextInputFixedWidth;
+  /**
+   * Whether the label also acts as the page heading.
+   */
+  isPageHeading?: boolean;
+  /**
+   * Optional classes for the wrapper, label, hint, and error message.
+   */
+  formGroupClassName?: string;
+  labelClassName?: string;
+  hintClassName?: string;
+  errorMessageClassName?: string;
+  /**
+   * Ref forwarding for the underlying input element.
+   */
+  ref?: React.Ref<HTMLInputElement>;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({
+const widthClassNames: Record<TextInputWidth, string> = {
+  full: 'ofh-u-width-full',
+  'three-quarters': 'ofh-u-width-three-quarters',
+  'two-thirds': 'ofh-u-width-two-thirds',
+  'one-half': 'ofh-u-width-one-half',
+  'one-third': 'ofh-u-width-one-third',
+  'one-quarter': 'ofh-u-width-one-quarter',
+};
+
+const inputWidthClassNames: Record<TextInputFixedWidth, string> = {
+  2: 'ofh-input--width-2',
+  3: 'ofh-input--width-3',
+  4: 'ofh-input--width-4',
+  5: 'ofh-input--width-5',
+  10: 'ofh-input--width-10',
+  20: 'ofh-input--width-20',
+  30: 'ofh-input--width-30',
+};
+
+export const TextInput = ({
   label,
   hint,
+  errorMessage,
   error,
-  required = false,
-  width = 'full',
-  maxLength,
-  className = '',
+  describedBy,
+  width,
+  inputWidth,
+  isPageHeading = false,
+  formGroupClassName,
+  labelClassName,
+  hintClassName,
+  errorMessageClassName,
+  className,
   id,
+  type = 'text',
+  ref,
+  'aria-describedby': ariaDescribedBy,
+  'aria-invalid': ariaInvalid,
   ...props
-}) => {
-  const inputId =
-    id || `input-${crypto.randomUUID().replace(/-/g, '').slice(0, 9)}`;
+}: TextInputProps) => {
+  const generatedId = React.useId().replace(/:/g, '');
+  const inputId = id ?? generatedId;
+  const resolvedErrorMessage = errorMessage ?? error;
   const hintId = hint ? `${inputId}-hint` : undefined;
-  const errorId = error ? `${inputId}-error` : undefined;
-
-  const inputClasses = [
-    'ofh-input', // OFH design system class
-    styles.input,
-    width && `ofh-u-width-${width}`,
-    maxLength && `ofh-input--width-${maxLength}`,
-    error && 'ofh-input--error',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  const formGroupClasses = ['ofh-form-group', error && 'ofh-form-group--error']
-    .filter(Boolean)
-    .join(' ');
+  const errorId = resolvedErrorMessage ? `${inputId}-error` : undefined;
+  const describedByValue =
+    [hintId, errorId, describedBy, ariaDescribedBy].filter(Boolean).join(' ') ||
+    undefined;
+  const labelClasses = joinClassNames(
+    'ofh-label',
+    'ofh-input__label',
+    isPageHeading ? 'ofh-label--l' : 'ofh-label--s',
+    labelClassName,
+  );
+  const labelElement = (
+    <label className={labelClasses} htmlFor={inputId}>
+      {label}
+    </label>
+  );
 
   return (
-    <div className={formGroupClasses}>
-      <label className="ofh-label" htmlFor={inputId}>
-        {label}
-        {required && (
-          <span className={styles.required} aria-label="required">
-            *
-          </span>
+    <div
+      className={joinClassNames(
+        'ofh-form-group',
+        resolvedErrorMessage ? 'ofh-form-group--error' : undefined,
+        formGroupClassName,
+      )}
+    >
+      <div className="ofh-input__header">
+        {isPageHeading ? (
+          <h1 className="ofh-label-wrapper">{labelElement}</h1>
+        ) : (
+          labelElement
         )}
-      </label>
-
-      {hint && (
-        <div className="ofh-hint" id={hintId}>
-          {hint}
-        </div>
-      )}
-
-      {error && (
-        <span className="ofh-error-message" id={errorId}>
-          <span className="ofh-u-visually-hidden">Error:</span>
-          {error}
-        </span>
-      )}
+        {hint ? (
+          <div
+            className={joinClassNames('ofh-hint', 'ofh-input__hint', hintClassName)}
+            id={hintId}
+          >
+            {hint}
+          </div>
+        ) : null}
+        {resolvedErrorMessage ? (
+          <span
+            className={joinClassNames(
+              'ofh-error-message',
+              'ofh-input__error-message',
+              errorMessageClassName,
+            )}
+            id={errorId}
+          >
+            <span className="ofh-u-visually-hidden">Error:</span>
+            {resolvedErrorMessage}
+          </span>
+        ) : null}
+      </div>
 
       <input
-        className={inputClasses}
+        ref={ref}
+        className={joinClassNames(
+          'ofh-input',
+          width ? widthClassNames[width] : undefined,
+          inputWidth ? inputWidthClassNames[inputWidth] : undefined,
+          resolvedErrorMessage ? 'ofh-input--error' : undefined,
+          className,
+        )}
         id={inputId}
-        aria-describedby={
-          [hintId, errorId].filter(Boolean).join(' ') || undefined
-        }
-        aria-invalid={error ? 'true' : undefined}
+        type={type}
+        aria-describedby={describedByValue}
+        aria-invalid={ariaInvalid ?? (resolvedErrorMessage ? true : undefined)}
         {...props}
       />
     </div>
   );
 };
+
+TextInput.displayName = 'TextInput';

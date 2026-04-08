@@ -2,25 +2,36 @@
    COMPONENTS/ #DATE-INPUT
    ========================================================================== */
 
-/**
- * 1. font-size: 0 removes whitespace caused by inline-block
- */
-
 .ofh-date-input {
-  @include clearfix;
-
-  font-size: 0; /* 1 */
+  display: inline-grid;
+  gap: ofh-px-to-rem(8px) ofh-px-to-rem(16px);
+  grid-template-columns: repeat(4, auto);
+  max-width: 100%;
 }
 
 .ofh-date-input__item {
-  display: inline-block;
   margin-bottom: 0;
-  margin-right: $ofh-size-24;
-  vertical-align: baseline;
+  min-width: 0;
+}
+
+.ofh-date-input__item--day {
+  grid-column: 1;
+}
+
+.ofh-date-input__item--month {
+  grid-column: 2;
+}
+
+.ofh-date-input__item--year {
+  grid-column: 3 / span 2;
 }
 
 .ofh-date-input__label {
+  @include ofh-font('paragraph-md');
+
   display: block;
+  font-weight: $ofh-typography-weight-regular;
+  margin-bottom: $ofh-size-8;
 }
 
 .ofh-date-input__input {

@@ -38,6 +38,14 @@ Workflow I want you to follow:
    - a short pass/fail table
    - any Figma comparison notes I should keep in mind
    - any breakpoint-specific token expectations I should keep in mind for mobile / tablet / desktop
+   - any Storybook ↔ docs-site example parity checks that should be validated manually
+   - exact statements of what changed in code and what that means in the rendered UI
+   - explicit size/spacing/token values I should be validating wherever they are knowable
+   - the exact token names involved, and whether each one is static or responsive
+   - the before/after expectation when the QA is validating a recent change
+   - the exact reason those values are expected, not just a vague design note
+   - the exact element/class I should inspect in DevTools when visual validation is not enough
+   - any shared primitive or layout-object classes whose computed margins/gaps should also be inspected because they might still be affecting the rendered result
 4. Then walk me through that QA script one step at a time.
 5. After each step, stop and wait for my response in the format:
    - `pass`
@@ -58,11 +66,27 @@ Important constraints:
 - Run `npm test` after modifying JavaScript or TypeScript files.
 - If Storybook examples are misleading or make validation harder, improve them.
 - If docs/examples are missing what is needed to validate behavior, improve them too.
+- Treat Storybook ↔ docs-site example gaps as implementation misses when one surface teaches materially less than the other.
 - Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
 - Treat raw JSON controls for stable nested props as implementation misses when the story could reasonably offer clearer text/select/boolean controls instead.
 - Treat controls for values the component visibly ignores or overrides as implementation misses to be fixed before QA is considered complete.
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
+- Treat spacing or typography contributed by reused shared primitives or layout objects (`label`, `hint`, `error-message`, `fieldset`, `form-group`, list wrappers, etc.) as implementation misses when they make the rendered output diverge from Figma.
+- Treat React components that depend on toolkit progressive-enhancement classes such as `.js-enabled` for core interactive behavior as implementation misses to be fixed before QA is considered complete.
+- Treat Storybook docs-page examples that share effective IDs or form names across stories and interfere with each other as implementation misses to be fixed before QA is considered complete.
+- Treat hard-to-follow nested ternaries or compressed logic as implementation misses when the same behavior can be expressed more clearly with explicit conditionals or small helper variables.
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
+- Do not use vague instructions like "looks shorter" or "feels closer to Figma" when the expected result can be stated precisely.
+- Do not describe spacing or typography only by numeric values when token identity matters; say whether the implementation should be using a responsive helper or a static token.
+- For each QA step, prefer this structure:
+  - what changed
+  - what exact values or behaviors should now be visible
+  - why those values/behaviors are expected
+  - how to inspect them if needed
+  - what counts as pass
+- If exact values are not knowable, say that plainly and explain what can be validated objectively instead.
+- When a component composes older shared primitives, inspect the computed margins/gaps on both the wrapper container and the child primitives instead of trusting source-level resets.
+- If you introduce a temporary QA-only tweak to make inspection easier, call it out explicitly, keep it minimal, and revert it before moving on.
 - Include exact URLs for every QA step.
 - Keep the flow interactive. Do not skip ahead after giving me a step.
 - Leave unrelated modified or untracked files alone unless I explicitly ask you to include them.
@@ -72,6 +96,7 @@ Output style I want from you:
 - Be practical and direct.
 - Give me exact URLs for QA.
 - Drive the QA one step at a time.
+- Make each QA step specific enough that a reviewer can validate it without guessing what "good" looks like.
 - When something fails, explain it plainly and fix it before moving on.
 - Keep the summary concise and useful for handing off into PR-readiness work.
 ```

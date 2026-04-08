@@ -1,0 +1,31 @@
+{% from 'select/macro.njk' import select %}
+
+{{ select({
+  "id": "select-error",
+  "name": "select-error",
+  "label": {
+    "text": "Preferred contact method"
+  },
+  "errorMessage": {
+    "text": "Select how you would like us to contact you"
+  },
+  "items": [
+    {
+      "value": "",
+      "text": "Choose an option"
+    },
+    {
+      "value": "email",
+      "text": "Email"
+    },
+    {
+      "value": "phone",
+      "text": "Phone"
+    },
+    {
+      "value": "text-message",
+      "text": "Text message",
+      "disabled": true
+    }
+  ]
+}) }}

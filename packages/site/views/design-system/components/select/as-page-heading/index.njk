@@ -1,0 +1,31 @@
+{% from 'select/macro.njk' import select %}
+
+{{ select({
+  "id": "select-page-heading",
+  "name": "select-page-heading",
+  "label": {
+    "text": "How should we contact you?",
+    "isPageHeading": true
+  },
+  "hint": {
+    "text": "Choose one option."
+  },
+  "items": [
+    {
+      "value": "",
+      "text": "Choose an option"
+    },
+    {
+      "value": "email",
+      "text": "Email"
+    },
+    {
+      "value": "phone",
+      "text": "Phone"
+    },
+    {
+      "value": "post",
+      "text": "Post"
+    }
+  ]
+}) }}

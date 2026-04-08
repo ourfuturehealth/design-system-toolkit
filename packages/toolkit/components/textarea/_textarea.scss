@@ -4,22 +4,34 @@
 
 .ofh-textarea {
   @include ofh-font('paragraph-md');
+  @include ofh-responsive-padding(8, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
 
   -webkit-appearance: none;
   border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
   border-radius: 0;
   box-sizing: border-box;
   display: block;
-  min-height: 40px;
-  padding: $ofh-size-4;
   resize: vertical;
   width: 100%;
 
-  &:focus {
+  &:hover:not(:disabled, .ofh-textarea--error) {
+    @include ofh-emphasised-input-border($ofh-color-border-input-default);
+  }
+
+  &:active:not(:disabled, .ofh-textarea--error) {
+    @include ofh-emphasised-input-border($ofh-color-border-input-active);
+  }
+
+  &:focus:not(.ofh-textarea--error) {
     @include ofh-focused-input;
   }
 }
 
 .ofh-textarea--error {
-  border: $ofh-stroke-weight-4 solid $ofh-color-feedback-error-2-main;
+  @include ofh-emphasised-input-border($ofh-color-border-feedback-error);
+
+  &:focus {
+    @include ofh-focused-input($ofh-color-border-feedback-error);
+  }
 }

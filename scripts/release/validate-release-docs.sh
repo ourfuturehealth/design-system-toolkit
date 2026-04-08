@@ -12,6 +12,14 @@ print_success() {
   printf ' ✓ %s\n' "$1"
 }
 
+print_failure_block() {
+  local heading=$1
+  local matches=$2
+
+  printf '\n✗ %s\n' "${heading}" >&2
+  printf '%s\n' "${matches}" >&2
+}
+
 on_error() {
   printf 'Release-contract docs validation failed while %s.\n' "${current_step}" >&2
 }
@@ -66,7 +74,11 @@ stale_pre_monorepo_version='v3.4.''3'
 
 current_step='checking for broken git subdirectory install syntax'
 print_step 'Checking tracked docs and workflows for broken git-subdirectory install syntax'
-if search_fixed "${broken_git_subdir_pattern}" "${tracked_text_files[@]}"; then
+broken_git_subdir_matches=$(search_fixed "${broken_git_subdir_pattern}" "${tracked_text_files[@]}" || true)
+if [[ -n "${broken_git_subdir_matches}" ]]; then
+  print_failure_block \
+    'Found broken git-subdirectory install syntax in tracked docs or workflows:' \
+    "${broken_git_subdir_matches}"
   echo 'Public docs and release templates must not use git subdirectory install syntax.' >&2
   exit 1
 fi
@@ -74,7 +86,11 @@ print_success 'No broken git-subdirectory install syntax found'
 
 current_step='checking for stale pre-monorepo version references'
 print_step 'Checking tracked docs for stale pre-monorepo toolkit version references'
-if search_fixed "${stale_pre_monorepo_version}" "${tracked_text_files[@]}"; then
+stale_pre_monorepo_matches=$(search_fixed "${stale_pre_monorepo_version}" "${tracked_text_files[@]}" || true)
+if [[ -n "${stale_pre_monorepo_matches}" ]]; then
+  print_failure_block \
+    'Found stale pre-monorepo toolkit version references:' \
+    "${stale_pre_monorepo_matches}"
   echo 'Monorepo migration docs must use v3.4.2 as the last pre-monorepo toolkit tag.' >&2
   exit 1
 fi

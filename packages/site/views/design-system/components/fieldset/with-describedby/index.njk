@@ -1,0 +1,36 @@
+{% from 'fieldset/macro.njk' import fieldset %}
+{% from 'input/macro.njk' import input %}
+
+<p class="ofh-hint" id="contact-details-hint">
+  We will only use these details to contact you about your application.
+</p>
+
+{% call fieldset({
+  describedBy: "contact-details-hint",
+  legend: {
+    "text": "Contact details",
+    "classes": "ofh-fieldset__legend--m"
+  }
+}) %}
+
+  {{ input({
+    "label": {
+      "text": "Email address"
+    },
+    "classes": "ofh-u-width-three-quarters",
+    "id": "contact-email",
+    "name": "contact-email",
+    "type": "email"
+  }) }}
+
+  {{ input({
+    "label": {
+      "text": "Phone number"
+    },
+    "classes": "ofh-u-width-two-thirds",
+    "id": "contact-phone",
+    "name": "contact-phone",
+    "type": "tel"
+  }) }}
+
+{% endcall %}

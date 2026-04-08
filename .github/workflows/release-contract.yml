@@ -32,8 +32,8 @@ jobs:
           corepack enable
           corepack prepare pnpm@10.29.2 --activate
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install dependencies for release-contract checks
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Validate docs and release templates
         run: pnpm docs:release-contract

@@ -3,53 +3,29 @@
 
 {% call fieldset({
   legend: {
-    "text": "What is your address?",
-    "classes": "ofh-fieldset__legend--l",
-    "isPageHeading": true
+    "text": "Contact details",
+    "classes": "ofh-fieldset__legend--m"
   }
 }) %}
 
   {{ input({
     label: {
-      "html": 'Building and street <span class="ofh-u-visually-hidden">line 1 of 2</span>'
+      "text": "Email address"
     },
-    "id": "address-line-1",
-    "name": "address-line-1"
+    "classes": "ofh-u-width-three-quarters",
+    "id": "contact-email",
+    "name": "contact-email",
+    "type": "email"
   }) }}
 
   {{ input({
     label: {
-      "html": '<span class="ofh-u-visually-hidden">Building and street line 2 of 2</span>'
-    },
-    "id": "address-line-2",
-    "name": "address-line-2"
-  }) }}
-
-  {{ input({
-    label: {
-      "text": "Town or city"
+      "text": "Phone number"
     },
     "classes": "ofh-u-width-two-thirds",
-    "id": "address-town",
-    "name": "address-town"
-  }) }}
-
-  {{ input({
-    label: {
-      "text": "County"
-    },
-    "classes": "ofh-u-width-two-thirds",
-    "id": "address-county",
-    "name": "address-county"
-  }) }}
-
-  {{ input({
-    label: {
-      "text": "Postcode"
-    },
-    "classes": "ofh-input--width-10",
-    "id": "address-postcode",
-    "name": "address-postcode"
+    "id": "contact-phone",
+    "name": "contact-phone",
+    "type": "tel"
   }) }}
 
 {% endcall %}

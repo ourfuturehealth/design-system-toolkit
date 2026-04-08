@@ -26,6 +26,7 @@ Follow this with the dedicated finish-up prompts:
 
 **💡 Best Practice:** Keep this file as your master template. Don't create component-specific files.
 After implementation is mostly done, move to the dedicated validation and PR-readiness prompts instead of trying to do everything in one long session.
+This workflow also includes a temporary external-reference audit against the BSM React repo to speed up component work while OFH React coverage is still catching up. Once OFH React reaches comparable coverage, stop relying on that external repo.
 
 ---
 
@@ -44,6 +45,8 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
   ```
 - **Figma Component:** {Figma URL with node-id}
 - **Dependency Figma Components:** {optional Figma URLs for any dependent components that may need auditing, for example Tag, Button, Inset text}
+- **External React Reference Repo:** `https://github.com/ourfuturehealth/biosample-management-system/tree/main`
+- **External Reference Paths:** `apps/bsm-storybook`, `packages/components`
 - **Related PRs:** {any dependencies or related work}
 
 ---
@@ -54,8 +57,10 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 2. Implement/update toolkit component (HTML/Nunjucks/SCSS/JS) and polish it
 3. **Ensure React component exists** and reaches feature/functional parity with toolkit (create if missing)
 4. Create/update comprehensive Storybook documentation
-5. Add automated tests (functional + accessibility)
-6. Update all relevant documentation
+5. Create/update comprehensive docs-site examples so toolkit docs and Storybook teach the component equally well
+6. Add automated tests (functional + accessibility)
+7. Update all relevant documentation
+8. Ensure Storybook docs-page examples do not share IDs or form names across stories
 
 ---
 
@@ -79,6 +84,9 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - Do not assume that a same-number static token is equivalent to a responsive Figma token
   - example: `ofh/space/vertical/16` is **not** automatically the same as `$ofh-size-16`
   - example: `paragraph/md` in Figma should map to the responsive typography mixin, not rely on inherited browser or global text styles
+- Preserve the token type during implementation
+  - if Figma specifies a responsive spacing token, implement it with the responsive helper even when the current desktop value matches a static token
+  - do not substitute static tokens just because the resolved number looks correct at one breakpoint
 
 ### 2. Current Implementation Review
 
@@ -94,6 +102,10 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
   - check `p`, `ul`, `ol`, `li`, `h1-h6`, `a`, `button`, and similar elements used inside the component
   - identify where the component is intentionally relying on global typography or list spacing
   - identify where those inherited styles must be overridden to match Figma exactly
+- Review how the component interacts with **shared primitives and layout objects**
+  - check whether older shared primitives such as labels, hints, form groups, lists, or wrappers are still affecting the rendered output inside the component
+  - inspect computed margins, gaps, and typography in the browser; do not assume newer component-level resets win the CSS cascade
+  - only remove legacy rules globally when they are truly obsolete; otherwise scope overrides so older primitives stop interfering with the updated component
 
 **React (`packages/react-components/src/components/{ComponentName}/`):**
 
@@ -102,9 +114,55 @@ After implementation is mostly done, move to the dedicated validation and PR-rea
 - **If missing:** This is a REQUIRED deliverable - you MUST create the React component
 - React component must achieve full feature and behavior parity with toolkit
 - React API does not need to mirror toolkit/macro API exactly if a more idiomatic and simpler React API would be clearer for consumers
+- Prefer explicit conditionals, intermediate variables, and small helpers over nested ternaries or compressed one-liners when the logic stops being immediately readable
 - Both versions should support the same user-facing capabilities, variants, and behaviors
+- If the React component is brand new and has no existing consumers, do not add deprecated props, alias props, or compatibility shims preemptively
+- Only preserve backwards compatibility when there is a real existing React surface or real consumers to protect
+- Storybook docs pages render multiple examples together, so stories must not share effective `id`, `idPrefix`, `name`, or `namePrefix` values in a way that causes cross-example interference
+- Use the shared Storybook docs-page namespacing safeguard where available, opt stories into it when they expose `id` / `name`-style args, and still give grouped-control stories explicit, readable IDs or names when that improves clarity
+- Do not carry toolkit progressive-enhancement mechanisms into React when React state should own the behavior directly
+  - example: toolkit may rely on a global `.js-enabled` class to hide unrevealed conditional content
+  - React components must not depend on `.js-enabled` or similar page-level enhancement flags for core behavior
+  - if a section is conditionally revealed in React, hide or show it directly from component state and rendered attributes
 
-### 3. Dependency & Prerequisite Audit
+### 3. External React Reference Audit (MANDATORY, TEMPORARY)
+
+Inspect the BSM React repo before implementing or reshaping the React version of this component:
+
+- Repo: `https://github.com/ourfuturehealth/biosample-management-system/tree/main`
+- Storybook path: `apps/bsm-storybook`
+- Component path: `packages/components`
+
+**Purpose of this step:**
+
+- Speed up delivery while OFH React coverage is still behind toolkit
+- Check whether another OFH-adjacent implementation already solved part of the React API, structure, tests, or Storybook docs
+- Reuse only what helps without weakening OFH consistency
+
+**What to inspect:**
+
+- Look for the same component, a close analogue, or a shared dependency in `packages/components`
+- Look for the corresponding stories and docs patterns in `apps/bsm-storybook`
+- If the component uses icons or related affordances, inspect whether BSM has a reusable React icon pattern that is relevant
+
+**Decision rules (MANDATORY):**
+
+- OFH Figma, current OFH toolkit, and current OFH mainline patterns remain the source of truth
+- Treat BSM as a temporary acceleration source only, not as gospel
+- Prefer consistency of OFH implementation patterns and Storybook/docs behavior over copying quickly
+- Do not copy BSM code blindly if it conflicts with OFH Figma, toolkit semantics, naming, iconography, or better OFH docs conventions
+- If BSM is missing the component, stale, or not useful, ignore it and continue
+- Once OFH React reaches comparable component coverage, stop relying on BSM and remove this dependency from day-to-day workflow
+
+**Output required from this step:**
+
+- `useful to reuse`
+- `useful as inspiration only`
+- `reject because it conflicts with OFH`
+
+For each relevant finding, state what was useful and why, or why it should be rejected.
+
+### 4. Dependency & Prerequisite Audit
 
 Identify any design-system components or shared primitives this component depends on in toolkit, React, docs/examples, or Storybook.
 
@@ -127,7 +185,7 @@ Identify any design-system components or shared primitives this component depend
 - Recommend updating the dependency first
 - Do not silently create an internal stand-in for a missing public component unless the user explicitly approves that as a temporary exception
 
-### 4. Gap Analysis
+### 5. Gap Analysis
 
 Compare Figma ↔ Toolkit ↔ React:
 
@@ -138,7 +196,7 @@ Compare Figma ↔ Toolkit ↔ React:
 - React API simplification opportunities where toolkit-style class or macro APIs could become clearer semantic props
 - Documentation gaps
 
-### 5. Design Token & Pattern Alignment (MANDATORY)
+### 6. Design Token & Pattern Alignment (MANDATORY)
 
 **This step is REQUIRED, not optional. Do not skip even if the JIRA ticket is narrow in scope.**
 
@@ -184,6 +242,10 @@ Review the entire component implementation against design system standards:
 - [ ] Audit semantic-element inheritance:
   - check whether global `ul > li`, `p`, `h*`, or link styles are adding margins/typography the component did not ask for
   - add explicit overrides when Figma requires component-specific spacing or typography
+- [ ] Audit shared-primitives inheritance:
+  - check whether reused primitives such as labels, hints, error messages, form groups, or wrappers are contributing margins, gaps, or typography that compound with the component's own layout rules
+  - verify the computed browser output, not just the source SCSS intent
+  - if a shared primitive is still needed elsewhere, prefer a scoped override in the component rather than a broad removal
 
 **Responsive Pattern Audit:**
 
@@ -207,6 +269,8 @@ Review the entire component implementation against design system standards:
 - [ ] Keyboard navigation support (Tab, Enter, Space, Arrows where appropriate)
 - [ ] Color contrast ratios meet WCAG 2.1 AA
 - [ ] Focus indicators meet WCAG 2.1 AA (2px minimum, sufficient contrast)
+- [ ] React behavior does not depend on toolkit progressive-enhancement classes such as `.js-enabled`
+- [ ] React conditional reveals and other JS-driven states are controlled directly by React state, not by page-level enhancement flags
 
 **Code Quality Opportunities:**
 
@@ -222,6 +286,9 @@ Review the entire component implementation against design system standards:
 2. Categorize as: **MUST FIX** (breaks design system) vs. **SHOULD IMPROVE** (quality/consistency) vs. **NICE TO HAVE** (future enhancement)
 3. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
 4. **Present this analysis to the user BEFORE implementing** and ask:
+3. Include the **external React reference audit results**, clearly stating what from BSM is worth reusing, what is inspiration only, and what should be rejected
+4. Include the **dependency audit results**, clearly identifying any dependency that is `needs update`, `missing`, or a `blocking prerequisite`
+5. **Present this analysis to the user BEFORE implementing** and ask:
    - "Should I implement the JIRA ticket only, or include the MUST FIX items as well?"
    - "If there is a blocking prerequisite dependency, should I pause this component and update that dependency first, or proceed with an explicitly temporary internal adapter?"
 
@@ -235,6 +302,8 @@ Review the entire component implementation against design system standards:
 1. **Toolkit First:** Update toolkit component (HTML/Nunjucks/SCSS/JS) with all changes
 2. **Polish Toolkit:** Test, refine, ensure it works perfectly and matches Figma
 3. **React Second:** Create/update React component to match polished toolkit
+4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
+3. **React Second:** Create/update React component to match polished toolkit, informed by the BSM reference audit where useful
 4. **Verify Parity:** Both versions support the same variants, behavior, and functionality, while React keeps an idiomatic, easy-to-use API
 
 ### 1. Toolkit Component Update
@@ -272,6 +341,7 @@ Review the entire component implementation against design system standards:
 **Requirements:**
 
 - ✅ **Component must exist** - create from scratch if missing
+- ✅ Review the BSM repo first for reusable implementation and Storybook patterns, but only adopt what still matches OFH Figma, toolkit, and current mainline conventions
 - ✅ TypeScript with strict mode
 - ✅ Extend appropriate HTML element props interface
 - ✅ **Match toolkit functionality and capability** - same supported variants, same behavior, same element selection logic where relevant
@@ -455,6 +525,7 @@ it('should be keyboard accessible', async () => {
 - ✅ Component description from design system
 - ✅ Auto-generated prop table (via TypeScript)
 - ✅ Story controls that are ergonomic and honest about what the component actually supports
+- ✅ Example coverage that is intentionally compared against the docs site so one surface does not become much richer than the other
 
 **Story Pattern:**
 
@@ -595,6 +666,22 @@ Review the component's user-facing documentation surfaces and make sure they exp
   - component family names
   - deprecated vs preferred usage wording
 
+**Storybook ↔ Docs Site example parity review (MANDATORY):**
+
+- Compare Storybook example coverage against the docs-site examples for the same component
+- Do not treat either surface as optional:
+  - if Storybook demonstrates an important usage pattern, state, sizing option, validation state, or behavioral variant that the docs site does not show, add a docs-site example
+  - if the docs site demonstrates an important usage pattern, state, sizing option, validation state, or behavioral variant that Storybook does not show, add a Storybook story
+- Aim for parity in teaching value, not identical file counts
+- At minimum, both surfaces should cover the most important ways a consumer learns the component:
+  - default usage
+  - validation/error usage
+  - sizing/layout variants where relevant
+  - meaningful behavioral variants or interactive states
+  - any prop or option that materially changes how the component is used
+- If one surface intentionally omits an example because it would be redundant, state that explicitly in your implementation notes rather than leaving the gap unexplained
+- When a component has width, icon, action, conditional content, or custom messaging props, make sure both Storybook and the docs site include examples that show those props doing real work
+
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
@@ -602,6 +689,7 @@ Review the component's user-facing documentation surfaces and make sure they exp
 - Confirm that no story exposes controls for values the component visibly ignores or overrides
 - Confirm that prop descriptions are written in plain language, not just implementation language
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
+- Confirm that Storybook and docs-site examples are on the same teaching level and that any important example gap has been closed in one direction or the other
 
 ### 6. Documentation Updates
 
@@ -633,6 +721,8 @@ Before moving to the validation prompt, answer these checks explicitly:
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
+- [ ] Do Storybook and docs-site examples cover the same important usage patterns, states, and props?
+- [ ] If one surface had weaker example coverage, was it brought up to the same teaching level?
 - [ ] Has every meaningful spacing/typography token from Figma been checked against the actual mobile / tablet / desktop values in code?
 - [ ] Have semantic-element defaults (`p`, `ul`, `li`, `h*`, `a`) been checked so the component is not accidentally inheriting the wrong margins or typography?
 
@@ -681,6 +771,7 @@ pnpm storybook
 2. Check Storybook documentation completeness
 3. Verify TypeScript types are exported
 4. Check that all examples work
+5. Check Storybook and docs-site example parity for important usage patterns
 
 ---
 
@@ -718,6 +809,7 @@ pnpm storybook
 - [ ] Each story has an intentional controls policy
 - [ ] Showcase/behavior-demo stories do not expose misleading controls
 - [ ] Prop descriptions explain visual vs semantic behavior clearly
+- [ ] Storybook and docs-site examples cover the same important usage patterns and props
 
 ### Testing
 

@@ -10,6 +10,21 @@
 {#- a record of other elements that we need to associate with the input using
    aria-describedby – for example hints or error messages -#}
 {% set describedBy = "" %}
+{% set legendClasses = params.fieldset.legend.classes if params.fieldset and params.fieldset.legend else "" %}
+{% if params.fieldset and params.fieldset.legend %}
+  {% if not legendClasses %}
+    {% if params.fieldset.legend.isPageHeading %}
+      {% set legendClasses = "ofh-fieldset__legend--l ofh-input__legend" %}
+    {% else %}
+      {% set legendClasses = "ofh-fieldset__legend--s ofh-input__legend" %}
+    {% endif %}
+  {% else %}
+    {% set legendClasses = legendClasses + " ofh-input__legend" %}
+  {% endif %}
+  {% if params.hint or params.errorMessage %}
+    {% set legendClasses = legendClasses + " ofh-input__legend--with-supporting-text" %}
+  {% endif %}
+{% endif %}
 
 {% set isConditional = false %}
 {% for item in params.items %}
@@ -20,26 +35,30 @@
 
 {#- Capture the HTML so we can optionally nest it in a fieldset -#}
 {% set innerHtml %}
-{% if params.hint %}
-  {% set hintId = idPrefix + '-hint' %}
-  {% set describedBy = describedBy + ' ' + hintId if describedBy else hintId %}
-  {{ hint({
-    id: hintId,
-    classes: params.hint.classes,
-    attributes: params.hint.attributes,
-    html: params.hint.html,
-    text: params.hint.text
-  }) | indent(2) | trim }}
-{% endif %}
-{%- if params.errorMessage %}
-  {%- set errorId = idPrefix + '-error' %}
-  {%- set describedBy = describedBy + ' ' + errorId if describedBy else errorId %}
-  {{ errorMessage({
-    id: errorId,
-    classes: params.errorMessage.classes,
-    html: params.errorMessage.html,
-    text: params.errorMessage.text
-  }) | indent(2) | trim }}
+{% if params.hint or params.errorMessage %}
+  <div class="ofh-input__header">
+  {% if params.hint %}
+    {% set hintId = idPrefix + '-hint' %}
+    {% set describedBy = describedBy + ' ' + hintId if describedBy else hintId %}
+    {{ hint({
+      id: hintId,
+      classes: 'ofh-input__hint' + (' ' + params.hint.classes if params.hint.classes),
+      attributes: params.hint.attributes,
+      html: params.hint.html,
+      text: params.hint.text
+    }) | indent(4) | trim }}
+  {% endif %}
+  {%- if params.errorMessage %}
+    {%- set errorId = idPrefix + '-error' %}
+    {%- set describedBy = describedBy + ' ' + errorId if describedBy else errorId %}
+    {{ errorMessage({
+      id: errorId,
+      classes: 'ofh-input__error-message' + (' ' + params.errorMessage.classes if params.errorMessage.classes),
+      html: params.errorMessage.html,
+      text: params.errorMessage.text
+    }) | indent(4) | trim }}
+  {% endif %}
+  </div>
 {% endif %}
   <div class="ofh-radios
   {%- if params.classes %} {{ params.classes }}{% endif %} {%- if isConditional %} ofh-radios--conditional{% endif -%}"
@@ -53,27 +72,32 @@
     {%- set hasHint = true if item.hint.text or item.hint.html %}
     {%- set itemHintId = id + '-item-hint' %}
     <div class="ofh-radios__item">
-      <input class="ofh-radios__input" id="{{ id }}" name="{{ params.name }}" type="radio" value="{{ item.value }}"
-      {{-" checked" if item.checked }}
-      {{-" disabled" if item.disabled }}
-      {%- if item.conditional.html %} aria-controls="{{ conditionalId }}" aria-expanded="{{"true" if item.checked else "false"}}"{% endif -%}
-      {%- if hasHint %} aria-describedby="{{ itemHintId }}"{% endif -%}
-      {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor -%}>
-      {{ label({
-        html: item.html,
-        text: item.text,
-        classes: 'ofh-radios__label' + (' ' + item.label.classes if item.label.classes),
-        attributes: item.label.attributes,
-        for: id
-      }) | indent(6) | trim }}
+      <div class="ofh-radios__row">
+        <input class="ofh-radios__input" id="{{ id }}" name="{{ params.name }}" type="radio" value="{{ item.value }}"
+        {{-" checked" if item.checked }}
+        {{-" disabled" if item.disabled }}
+        {%- if item.conditional.html %} aria-controls="{{ conditionalId }}"{% endif -%}
+        {%- if hasHint %} aria-describedby="{{ itemHintId }}"{% endif -%}
+        {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor -%}>
+        <span class="ofh-radios__controller" aria-hidden="true">
+          <span class="ofh-radios__dot"></span>
+        </span>
+        {{ label({
+          html: item.html,
+          text: item.text,
+          classes: 'ofh-radios__label' + (' ' + item.label.classes if item.label.classes),
+          attributes: item.label.attributes,
+          for: id
+        }) | indent(8) | trim }}
+      </div>
       {%- if hasHint %}
-      {{ hint({
-        id: itemHintId,
-        classes: 'ofh-radios__hint',
-        attributes: item.hint.attributes,
-        html: item.hint.html,
-        text: item.hint.text
-      }) | indent(6) | trim }}
+        {{ hint({
+          id: itemHintId,
+          classes: 'ofh-radios__hint',
+          attributes: item.hint.attributes,
+          html: item.hint.html,
+          text: item.hint.text
+        }) | indent(6) | trim }}
       {%- endif %}
     </div>
     {% if item.conditional.html %}
@@ -92,7 +116,12 @@
     describedBy: describedBy,
     classes: params.fieldset.classes,
     attributes: params.fieldset.attributes,
-    legend: params.fieldset.legend
+    legend: {
+      html: params.fieldset.legend.html,
+      text: params.fieldset.legend.text,
+      classes: legendClasses,
+      isPageHeading: params.fieldset.legend.isPageHeading
+    }
   }) %}
   {{ innerHtml | trim | safe }}
   {% endcall %}

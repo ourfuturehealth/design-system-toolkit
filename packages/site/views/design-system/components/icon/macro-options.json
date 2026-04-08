@@ -1,0 +1,52 @@
+{
+  "params": [
+    {
+      "name": "name",
+      "type": "string",
+      "required": true,
+      "description": "Required. Material sprite icon name in PascalCase, for example `Search` or `UnfoldMore`."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "required": false,
+      "description": "Fixed icon size. Use `16`, `24`, or `32` when the icon should stay the same size across every breakpoint. Do not use this together with `responsiveSize`."
+    },
+    {
+      "name": "responsiveSize",
+      "type": "number",
+      "required": false,
+      "description": "Responsive icon size. Use `16`, `24`, or `32` to follow the toolkit iconography scale instead of a fixed size. Do not use this together with `size`."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "required": false,
+      "description": "Accessible label for meaningful standalone icons. Leave this empty for decorative icons."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "description": "Optional CSS colour value applied through `currentColor` for monochrome icons."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Additional classes for the rendered `<svg>` element."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes for the `<svg>` element, for example `data-*` attributes."
+    },
+    {
+      "name": "spritePath",
+      "type": "string",
+      "required": false,
+      "description": "Advanced override for the sprite URL. Defaults to `/assets/icons/icon-sprite.svg`."
+    }
+  ]
+}

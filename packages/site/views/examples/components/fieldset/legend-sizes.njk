@@ -1,0 +1,99 @@
+{% set html_style = 'background-color: #f0f4f5;' %}
+{% set pageTitle = 'Fieldset legend sizes' %}
+{% from 'fieldset/macro.njk' import fieldset %}
+{% from 'input/macro.njk' import input %}
+{% extends 'standalone-example-layout.njk' %}
+
+{% block body %}
+
+  <div class="ofh-width-container">
+    <main class="ofh-main-wrapper" id="maincontent">
+      <div class="ofh-grid-row">
+        <div class="ofh-grid-column-two-thirds">
+          <div class="ofh-u-margin-bottom-32">
+            {% call fieldset({
+              legend: {
+                "text": "Default legend"
+              }
+            }) %}
+              {{ input({
+                "label": {
+                  "text": "Example field"
+                },
+                "id": "example-default-legend",
+                "name": "example-default-legend"
+              }) }}
+            {% endcall %}
+          </div>
+
+          <div class="ofh-u-margin-bottom-32">
+            {% call fieldset({
+              legend: {
+                "text": "Small legend",
+                "classes": "ofh-fieldset__legend--s"
+              }
+            }) %}
+              {{ input({
+                "label": {
+                  "text": "Example field"
+                },
+                "id": "example-small-legend",
+                "name": "example-small-legend"
+              }) }}
+            {% endcall %}
+          </div>
+
+          <div class="ofh-u-margin-bottom-32">
+            {% call fieldset({
+              legend: {
+                "text": "Medium legend",
+                "classes": "ofh-fieldset__legend--m"
+              }
+            }) %}
+              {{ input({
+                "label": {
+                  "text": "Example field"
+                },
+                "id": "example-medium-legend",
+                "name": "example-medium-legend"
+              }) }}
+            {% endcall %}
+          </div>
+
+          <div class="ofh-u-margin-bottom-32">
+            {% call fieldset({
+              legend: {
+                "text": "Large legend",
+                "classes": "ofh-fieldset__legend--l"
+              }
+            }) %}
+              {{ input({
+                "label": {
+                  "text": "Example field"
+                },
+                "id": "example-large-legend",
+                "name": "example-large-legend"
+              }) }}
+            {% endcall %}
+          </div>
+
+          {% call fieldset({
+            legend: {
+              "text": "Extra large legend",
+              "classes": "ofh-fieldset__legend--xl"
+            }
+          }) %}
+            {{ input({
+              "label": {
+                "text": "Example field"
+              },
+              "id": "example-extra-large-legend",
+              "name": "example-extra-large-legend"
+            }) }}
+          {% endcall %}
+        </div>
+      </div>
+    </main>
+  </div>
+
+{% endblock %}

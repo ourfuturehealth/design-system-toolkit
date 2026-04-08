@@ -13,6 +13,12 @@
       "description": "Name property for the select."
     },
     {
+      "name": "describedBy",
+      "type": "string",
+      "required": false,
+      "description": "One or more element IDs to add to the `aria-describedby` attribute, used to provide additional descriptive information for screenreader users."
+    },
+    {
       "name": "items",
       "type": "array",
       "required": true,
@@ -70,6 +76,20 @@
       "required": false,
       "description": "Options for the error message component. The error message component will not display if you use a falsy value for `errorMessage`, for example `false` or `null`.",
       "isComponent": true
+    },
+    {
+      "name": "formGroup",
+      "type": "object",
+      "required": false,
+      "description": "Options for the form-group wrapper.",
+      "params": [
+        {
+          "name": "classes",
+          "type": "string",
+          "required": false,
+          "description": "Classes to add to the form-group wrapper."
+        }
+      ]
     },
     {
       "name": "classes",

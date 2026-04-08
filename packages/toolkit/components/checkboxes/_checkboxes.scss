@@ -7,23 +7,29 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$ofh-checkboxes-size: $ofh-size-40;
-$ofh-checkboxes-label-padding-left-right: 12px;
+$ofh-checkboxes-size: $ofh-size-48;
+$ofh-checkboxes-gap: $ofh-size-16;
 
 .ofh-checkboxes__item {
   @include ofh-font('paragraph-md');
 
   clear: left;
   display: block;
-  margin-bottom: $ofh-size-8;
-  min-height: $ofh-checkboxes-size;
-  padding: 0 0 0 $ofh-checkboxes-size;
+  margin-bottom: $ofh-size-12;
   position: relative;
 }
 
 .ofh-checkboxes__item:last-child,
 .ofh-checkboxes__item:last-of-type {
   margin-bottom: 0;
+}
+
+.ofh-checkboxes__row {
+  align-items: center;
+  display: flex;
+  gap: $ofh-checkboxes-gap;
+  min-height: $ofh-checkboxes-size;
+  position: relative;
 }
 
 .ofh-checkboxes__input {
@@ -38,48 +44,37 @@ $ofh-checkboxes-label-padding-left-right: 12px;
   z-index: 1;
 }
 
+.ofh-checkboxes__controller {
+  align-items: center;
+  background: $ofh-color-background-primary;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  height: $ofh-checkboxes-size;
+  justify-content: center;
+  pointer-events: none;
+  width: $ofh-checkboxes-size;
+}
+
+.ofh-checkboxes__icon {
+  color: $ofh-color-foreground-primary;
+  opacity: 0;
+}
+
 .ofh-checkboxes__label {
   cursor: pointer;
-  display: inline-block;
+  flex: 1 1 auto;
   margin-bottom: 0;
-  padding: 8px $ofh-checkboxes-label-padding-left-right $ofh-size-4;
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation;
 }
 
 .ofh-checkboxes__hint {
   display: block;
-  padding-left: $ofh-checkboxes-label-padding-left-right;
-  padding-right: $ofh-checkboxes-label-padding-left-right;
-}
-
-.ofh-checkboxes__input + .ofh-checkboxes__label::before {
-  background: $ofh-color-background-primary;
-  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
-  box-sizing: border-box;
-  content: '';
-  height: $ofh-checkboxes-size;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: $ofh-checkboxes-size;
-}
-
-.ofh-checkboxes__input + .ofh-checkboxes__label::after {
-  background: transparent;
-  border: solid;
-  border-top-color: transparent;
-  border-width: 0 0 $ofh-stroke-weight-4 $ofh-stroke-weight-4;
-  content: '';
-  height: 10px;
-  left: 10px;
-  opacity: 0; /* 2 */
-  position: absolute;
-  top: 13px;
-  -ms-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  width: 22px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: $ofh-checkboxes-size + $ofh-checkboxes-gap;
 }
 
 /*
@@ -90,25 +85,53 @@ $ofh-checkboxes-label-padding-left-right: 12px;
  *    https://accessibility.blog.gov.uk/2017/03/27/how-users-change-colours-on-websites/
  */
 
-.ofh-checkboxes__input:focus + .ofh-checkboxes__label::before {
+.ofh-checkboxes__input:focus + .ofh-checkboxes__controller {
   @include ofh-focused-checkbox();
+}
+
+.ofh-form-group--error .ofh-checkboxes__input:focus + .ofh-checkboxes__controller {
+  @include ofh-focused-checkbox($ofh-color-border-feedback-error);
 }
 
 /* Selected state */
 
-.ofh-checkboxes__input:checked + .ofh-checkboxes__label::after {
+.ofh-checkboxes__input:checked + .ofh-checkboxes__controller .ofh-checkboxes__icon {
   opacity: 1;
+}
+
+.ofh-checkboxes__row:hover .ofh-checkboxes__controller {
+  border-width: $ofh-stroke-weight-4;
+}
+
+.ofh-checkboxes__row:active .ofh-checkboxes__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+}
+
+.ofh-form-group--error .ofh-checkboxes__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
+}
+
+.ofh-form-group--error .ofh-checkboxes__row:hover .ofh-checkboxes__controller,
+.ofh-form-group--error .ofh-checkboxes__row:active .ofh-checkboxes__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
 }
 
 /* Disabled state */
 
 .ofh-checkboxes__input:disabled,
-.ofh-checkboxes__input:disabled + .ofh-checkboxes__label {
+.ofh-checkboxes__input:disabled ~ .ofh-checkboxes__label {
   cursor: default;
 }
 
-.ofh-checkboxes__input:disabled + .ofh-checkboxes__label {
+.ofh-checkboxes__input:disabled + .ofh-checkboxes__controller,
+.ofh-checkboxes__input:disabled ~ .ofh-checkboxes__label,
+.ofh-checkboxes__input:disabled ~ .ofh-checkboxes__hint {
   opacity: 0.5;
+}
+
+.ofh-checkboxes__row:hover .ofh-checkboxes__input:disabled + .ofh-checkboxes__controller,
+.ofh-checkboxes__row:active .ofh-checkboxes__input:disabled + .ofh-checkboxes__controller {
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
 }
 
 /* Divider variant */
@@ -136,7 +159,7 @@ $ofh-checkboxes-label-padding-left-right: 12px;
 $conditional-border-width: $ofh-stroke-weight-4;
 $conditional-border-padding: ($ofh-checkboxes-size * 0.5) - ($conditional-border-width * 0.5); /* 1 */
 $conditional-margin-left: $conditional-border-padding; /* 2 */
-$conditional-padding-left: $conditional-border-padding + $ofh-checkboxes-label-padding-left-right; /* 3 */
+$conditional-padding-left: $ofh-checkboxes-size + $ofh-checkboxes-gap; /* 3 */
 
 .ofh-checkboxes__conditional {
   @include ofh-responsive-margin(16, 'bottom');

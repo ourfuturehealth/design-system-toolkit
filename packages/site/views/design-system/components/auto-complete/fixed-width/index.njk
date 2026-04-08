@@ -1,0 +1,12 @@
+{% from 'auto-complete/macro.njk' import autoComplete %}
+
+{{ autoComplete({
+  label: "Organisation name",
+  id: "affiliation_organisation_name_fixed_width",
+  name: "affiliation[organisation_name_fixed_width]",
+  hint: {
+    text: "Start typing to filter the list."
+  },
+  classes: "ofh-input--width-20",
+  options: ["Cambridge", "Department of Health", "KCL", "OFH", "Oxford", "UCL", "University of York"]
+}) }}

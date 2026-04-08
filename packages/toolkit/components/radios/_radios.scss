@@ -7,8 +7,8 @@
  * 2. Fix bug in IE11 caused by transform rotate (-45deg).
  */
 
-$ofh-radios-size: $ofh-size-40;
-$ofh-radios-label-padding-left-right: 12px;
+$ofh-radios-size: $ofh-size-48;
+$ofh-radios-gap: $ofh-size-16;
 
 // When the default focus width is used on a curved edge it looks visually smaller.
 // So for the circular radios we bump the default to make it look visually consistent.
@@ -19,9 +19,7 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
 
   clear: left;
   display: block;
-  margin-bottom: $ofh-size-8;
-  min-height: $ofh-radios-size;
-  padding: 0 0 0 $ofh-radios-size;
+  margin-bottom: $ofh-size-12;
   position: relative;
 }
 
@@ -42,45 +40,49 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
   z-index: 1;
 }
 
+.ofh-radios__row {
+  align-items: center;
+  display: flex;
+  gap: $ofh-radios-gap;
+  min-height: $ofh-radios-size;
+  position: relative;
+}
+
+.ofh-radios__controller {
+  align-items: center;
+  background: $ofh-color-background-primary;
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  height: $ofh-radios-size;
+  justify-content: center;
+  pointer-events: none;
+  width: $ofh-radios-size;
+}
+
+.ofh-radios__dot {
+  background: $ofh-color-border-input-default;
+  border-radius: 50%;
+  display: block;
+  height: ofh-px-to-rem(24px);
+  opacity: 0;
+  width: ofh-px-to-rem(24px);
+}
+
 .ofh-radios__label {
   cursor: pointer;
-  display: inline-block;
+  flex: 1 1 auto;
   margin-bottom: 0;
-  padding: 8px $ofh-radios-label-padding-left-right $ofh-size-4;
   -ms-touch-action: manipulation; /* 1 */
   touch-action: manipulation; /* 1 */
 }
 
 .ofh-radios__hint {
   display: block;
-  padding-left: $ofh-radios-label-padding-left-right;
-  padding-right: $ofh-radios-label-padding-left-right;
-}
-
-.ofh-radios__input + .ofh-radios__label::before {
-  background: $ofh-color-background-primary;
-  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
-  border-radius: 50%;
-  box-sizing: border-box;
-  content: '';
-  height: $ofh-radios-size;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: $ofh-radios-size;
-}
-
-.ofh-radios__input + .ofh-radios__label::after {
-  background: $ofh-color-border-input-default;
-  border: 10px solid $ofh-color-foreground-primary;
-  border-radius: 50%;
-  content: '';
-  height: 0;
-  left: 10px;
-  opacity: 0;
-  position: absolute;
-  top: 10px;
-  width: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: $ofh-radios-size + $ofh-radios-gap;
 }
 
 /**
@@ -91,25 +93,53 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
  *    https://accessibility.blog.gov.uk/2017/03/27/how-users-change-colours-on-websites/
  */
 
-.ofh-radios__input:focus + .ofh-radios__label::before {
+.ofh-radios__input:focus + .ofh-radios__controller {
   @include ofh-focused-radio();
+}
+
+.ofh-form-group--error .ofh-radios__input:focus + .ofh-radios__controller {
+  @include ofh-focused-radio($ofh-color-border-feedback-error);
 }
 
 /* Selected state */
 
-.ofh-radios__input:checked + .ofh-radios__label::after {
+.ofh-radios__input:checked + .ofh-radios__controller .ofh-radios__dot {
   opacity: 1;
+}
+
+.ofh-radios__row:hover .ofh-radios__controller {
+  border-width: $ofh-stroke-weight-4;
+}
+
+.ofh-radios__row:active .ofh-radios__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-input-active;
+}
+
+.ofh-form-group--error .ofh-radios__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
+}
+
+.ofh-form-group--error .ofh-radios__row:hover .ofh-radios__controller,
+.ofh-form-group--error .ofh-radios__row:active .ofh-radios__controller {
+  border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-error;
 }
 
 /* Disabled state */
 
 .ofh-radios__input:disabled,
-.ofh-radios__input:disabled + .ofh-radios__label {
+.ofh-radios__input:disabled ~ .ofh-radios__label {
   cursor: default;
 }
 
-.ofh-radios__input:disabled + .ofh-radios__label {
+.ofh-radios__input:disabled + .ofh-radios__controller,
+.ofh-radios__input:disabled ~ .ofh-radios__label,
+.ofh-radios__input:disabled ~ .ofh-radios__hint {
   opacity: 0.5;
+}
+
+.ofh-radios__row:hover .ofh-radios__input:disabled + .ofh-radios__controller,
+.ofh-radios__row:active .ofh-radios__input:disabled + .ofh-radios__controller {
+  border: $ofh-stroke-weight-2 solid $ofh-color-border-input-default;
 }
 
 /*
@@ -162,7 +192,7 @@ $conditional-border-padding: ($ofh-radios-size * 0.5) - ($conditional-border-wid
 $conditional-margin-left: $conditional-border-padding;
 
 // Move the contents of the conditional inline with the label
-$conditional-padding-left: $conditional-border-padding + $ofh-radios-label-padding-left-right;
+$conditional-padding-left: $ofh-radios-size + $ofh-radios-gap;
 
 .ofh-radios__conditional {
   @include ofh-responsive-margin(16, 'bottom');

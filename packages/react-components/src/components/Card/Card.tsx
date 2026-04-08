@@ -3,10 +3,9 @@ import {
   getHeadingTag,
   joinClasses,
   type HeadingLevel,
-  type OfhIconProps,
 } from '../../internal/ofhUtils';
+import { Icon, type IconSize } from '../Icon';
 import { Tag, type TagProps } from '../Tag';
-import { OfhIcon } from '../../internal/OfhIcon';
 
 const interactiveSelector =
   'a, button, input, select, textarea, summary, [role="button"], [role="link"]';
@@ -29,7 +28,15 @@ export interface CardActionLink {
 }
 
 export type CardTag = Omit<TagProps, 'ref'>;
-export type CardIcon = OfhIconProps;
+export interface CardIcon {
+  name: string;
+  size?: IconSize;
+  title?: string;
+  color?: string;
+  classes?: string;
+  attributes?: React.SVGAttributes<SVGSVGElement>;
+  spritePath?: string;
+}
 
 export interface CardProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children' | 'ref'> {
@@ -88,6 +95,7 @@ export const Card = ({
     'ofh-card__dismiss',
     dismissButtonAttributes.className,
   );
+  const iconAttributes = icon?.attributes ?? {};
 
   const handleCardClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
     onClick?.(event);
@@ -208,10 +216,10 @@ export const Card = ({
                     className="ofh-card__metadata-icon-container"
                     aria-hidden="true"
                   >
-                    <OfhIcon
+                    <Icon
                       name={item.icon}
                       size={item.size ?? 24}
-                      classes="ofh-card__metadata-icon"
+                      className="ofh-card__metadata-icon"
                     />
                   </span>
                   <span className="ofh-card__metadata-text">{item.text}</span>
@@ -251,13 +259,18 @@ export const Card = ({
 
         {icon ? (
           <div className="ofh-card__aside">
-            <OfhIcon
+            <Icon
               name={icon.name}
               size={icon.size ?? 32}
               title={icon.title}
               color={icon.color}
-              classes={joinClasses('ofh-card__icon', icon.classes)}
-              attributes={icon.attributes}
+              {...iconAttributes}
+              className={joinClasses(
+                'ofh-card__icon',
+                icon.classes,
+                iconAttributes.className,
+              )}
+              spritePath={icon.spritePath}
             />
           </div>
         ) : null}
@@ -273,10 +286,10 @@ export const Card = ({
           <span className="ofh-u-visually-hidden">
             {dismissButton.label ?? 'Dismiss card'}
           </span>
-          <OfhIcon
+          <Icon
             name="Close"
             size={32}
-            classes="ofh-card__dismiss-icon"
+            className="ofh-card__dismiss-icon"
           />
         </button>
       ) : null}
