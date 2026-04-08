@@ -10,9 +10,11 @@ on:
       - 'docs/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'packages/toolkit/gulpfile.js'
       - 'packages/toolkit/package.json'
       - 'packages/react-components/package.json'
       - 'packages/react-components/README.md'
+      - 'packages/react-components/scripts/**'
       - 'scripts/release/**'
 
 jobs:
@@ -38,5 +40,5 @@ jobs:
       - name: Validate docs and release templates
         run: pnpm docs:release-contract
 
-      - name: Smoke test current release artifacts
+      - name: Prepare and smoke test current release artifacts
         run: pnpm smoke:release-artifacts

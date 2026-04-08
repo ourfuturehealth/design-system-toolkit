@@ -74,12 +74,11 @@ When a release tag is pushed, [.github/workflows/release.yml](../.github/workflo
 1. installs dependencies with pnpm
 2. runs linting and tests
 3. validates the release-contract docs
-4. builds the package being released
-5. packs the package with `npm pack --ignore-scripts`
-6. smoke-tests the tarball with Yarn 1, npm, and pnpm
-7. renders release notes with the tarball install URL
-8. creates or updates the GitHub release
-9. uploads release assets
+4. prepares the package release assets in a dedicated staging directory outside the package tree
+5. smoke-tests the tarball with Yarn 1, npm, and pnpm
+6. renders release notes with the tarball install URL
+7. creates or updates the GitHub release
+8. uploads release assets
 
 Toolkit releases upload:
 
@@ -145,6 +144,7 @@ pnpm smoke:release-artifacts
 ```
 
 This validates the public docs and then tests the current branch tarballs with Yarn 1, npm, and pnpm.
+It uses the same staged-asset preparation path as the tag-driven release workflow, so PR validation exercises the same artifact handoff that production releases rely on.
 
 For local iteration you can scope this wrapper to one package and one or more package managers:
 
@@ -152,6 +152,17 @@ For local iteration you can scope this wrapper to one package and one or more pa
 ./scripts/release/smoke-current-release-artifacts.sh toolkit --managers yarn
 ./scripts/release/smoke-current-release-artifacts.sh react-components --managers npm,pnpm
 ```
+
+### Prepare release assets directly
+
+If you need to inspect the exact staged assets before tagging:
+
+```bash
+./scripts/release/prepare-release-artifacts.sh toolkit
+./scripts/release/prepare-release-artifacts.sh react-components
+```
+
+The script prints the package, version, and staged asset paths. Toolkit releases must stage both the versioned `.zip` and the package tarball before the workflow can create or update the GitHub release.
 
 ### Test unreleased changes locally in another consumer
 
@@ -183,6 +194,18 @@ Common causes:
 - package build failures
 - smoke test failures for the tarball install contract
 - stale docs or release templates that still mention the old git-subdirectory syntax
+
+### Why release assets are staged outside the package tree
+
+The release workflow deliberately copies built assets into a dedicated staging directory before it runs `npm pack`.
+
+This is intentional. CI previously showed the toolkit `createZip` step completing successfully, then failed later when the workflow tried to rediscover the versioned zip from `packages/toolkit/dist/`. Local reproduction did not show the same disappearance, and the local/CI npm versions differed, so the release flow now treats the package working tree as unstable across later packaging steps.
+
+The staged asset copy is the source of truth for:
+
+- tarball smoke testing
+- toolkit compiled-file uploads
+- release note asset references
 
 ### Consumer installation failed
 

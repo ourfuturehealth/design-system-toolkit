@@ -47,51 +47,29 @@ jobs:
           TAG=${GITHUB_REF#refs/tags/}
           if [[ $TAG == react-v* ]]; then
             echo "PACKAGE=react-components" >> $GITHUB_OUTPUT
-            echo "PACKAGE_SCOPE=@ourfuturehealth/react-components" >> $GITHUB_OUTPUT
             echo "PACKAGE_DIR=packages/react-components" >> $GITHUB_OUTPUT
-            echo "VERSION=${TAG#react-v}" >> $GITHUB_OUTPUT
           elif [[ $TAG == toolkit-v* ]]; then
             echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
-            echo "PACKAGE_SCOPE=@ourfuturehealth/toolkit" >> $GITHUB_OUTPUT
             echo "PACKAGE_DIR=packages/toolkit" >> $GITHUB_OUTPUT
-            echo "VERSION=${TAG#toolkit-v}" >> $GITHUB_OUTPUT
           else
             # Assume v* tags are toolkit (backward compatibility)
             echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
-            echo "PACKAGE_SCOPE=@ourfuturehealth/toolkit" >> $GITHUB_OUTPUT
             echo "PACKAGE_DIR=packages/toolkit" >> $GITHUB_OUTPUT
-            echo "VERSION=${TAG#v}" >> $GITHUB_OUTPUT
           fi
 
-      - name: Build release artifacts
+      - name: Prepare release assets
+        id: release_assets
         run: |
-          if [ "${{ steps.package_info.outputs.PACKAGE }}" == "toolkit" ]; then
-            pnpm --filter=@ourfuturehealth/toolkit run zip
-          else
-            pnpm --filter=@ourfuturehealth/react-components run build
-          fi
-
-      - name: Pack release tarball
-        id: tarball
-        run: |
-          TARBALL_NAME=$(npm pack "./${{ steps.package_info.outputs.PACKAGE_DIR }}" --ignore-scripts | tail -n 1)
-          echo "ASSET_NAME=${TARBALL_NAME}" >> $GITHUB_OUTPUT
-          echo "ASSET_PATH=${GITHUB_WORKSPACE}/${TARBALL_NAME}" >> $GITHUB_OUTPUT
-
-      - name: Resolve toolkit asset details
-        if: steps.package_info.outputs.PACKAGE == 'toolkit'
-        id: toolkit_asset
-        run: |
-          ASSET_PATH=$(ls -1 ./packages/toolkit/dist/ofh-design-system-toolkit-*.zip | head -n 1)
-          ASSET_NAME=$(basename "$ASSET_PATH")
-          echo "ASSET_PATH=$ASSET_PATH" >> $GITHUB_OUTPUT
-          echo "ASSET_NAME=$ASSET_NAME" >> $GITHUB_OUTPUT
+          ./scripts/release/prepare-release-artifacts.sh \
+            "${{ steps.package_info.outputs.PACKAGE }}" \
+            --stage-dir "${RUNNER_TEMP}/release-assets-${{ github.run_id }}-${{ github.run_attempt }}-${{ steps.package_info.outputs.PACKAGE }}" \
+            --github-output "${GITHUB_OUTPUT}"
 
       - name: Smoke test release tarball
         run: |
           ./scripts/release/smoke-package-tarball.sh \
             --package-dir "${{ github.workspace }}/${{ steps.package_info.outputs.PACKAGE_DIR }}" \
-            --tarball "${{ steps.tarball.outputs.ASSET_PATH }}" \
+            --tarball "${{ steps.release_assets.outputs.TARBALL_PATH }}" \
             --managers 'yarn,npm,pnpm'
 
       - name: Render release notes
@@ -102,15 +80,15 @@ jobs:
             ./scripts/release/render-release-notes.sh \
               --package "${{ steps.package_info.outputs.PACKAGE }}" \
               --tag "${GITHUB_REF_NAME}" \
-              --version "${{ steps.package_info.outputs.VERSION }}" \
-              --tarball "${{ steps.tarball.outputs.ASSET_NAME }}" \
-              --zip "${{ steps.toolkit_asset.outputs.ASSET_NAME }}" > "${NOTES_PATH}"
+              --version "${{ steps.release_assets.outputs.VERSION }}" \
+              --tarball "${{ steps.release_assets.outputs.TARBALL_NAME }}" \
+              --zip "${{ steps.release_assets.outputs.ZIP_NAME }}" > "${NOTES_PATH}"
           else
             ./scripts/release/render-release-notes.sh \
               --package "${{ steps.package_info.outputs.PACKAGE }}" \
               --tag "${GITHUB_REF_NAME}" \
-              --version "${{ steps.package_info.outputs.VERSION }}" \
-              --tarball "${{ steps.tarball.outputs.ASSET_NAME }}" > "${NOTES_PATH}"
+              --version "${{ steps.release_assets.outputs.VERSION }}" \
+              --tarball "${{ steps.release_assets.outputs.TARBALL_NAME }}" > "${NOTES_PATH}"
           fi
           echo "NOTES_PATH=${NOTES_PATH}" >> $GITHUB_OUTPUT
 
@@ -136,7 +114,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${GITHUB_REF_NAME}" "${{ steps.toolkit_asset.outputs.ASSET_PATH }}" \
+          gh release upload "${GITHUB_REF_NAME}" "${{ steps.release_assets.outputs.ZIP_PATH }}" \
             --clobber \
             --repo "${GITHUB_REPOSITORY}"
 
@@ -144,6 +122,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "${GITHUB_REF_NAME}" "${{ steps.tarball.outputs.ASSET_PATH }}" \
+          gh release upload "${GITHUB_REF_NAME}" "${{ steps.release_assets.outputs.TARBALL_PATH }}" \
             --clobber \
             --repo "${GITHUB_REPOSITORY}"

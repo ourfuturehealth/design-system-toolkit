@@ -98,8 +98,12 @@ NODE
 
 case "$package" in
   toolkit)
+    if [[ -z "${zip_asset}" ]]; then
+      echo 'Toolkit release notes require a compiled zip asset via --zip.' >&2
+      exit 1
+    fi
     current_step='emitting toolkit release notes'
-    log_step "Emitting toolkit release notes with tarball ${tarball}"
+    log_step "Emitting toolkit release notes with tarball ${tarball} and zip ${zip_asset}"
     cat <<EOF
 Release of **toolkit** version ${version}
 
