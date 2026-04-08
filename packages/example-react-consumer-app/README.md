@@ -53,7 +53,7 @@ If you need to validate unreleased React package changes in this app:
 2. In this directory, temporarily install that local tarball:
 
    ```bash
-   npm install ../../ourfuturehealth-react-components-0.5.0.tgz
+   npm install ../../ourfuturehealth-react-components-<version>.tgz
    ```
 
 3. Run the app again with `npm run dev` or `npm run build`.

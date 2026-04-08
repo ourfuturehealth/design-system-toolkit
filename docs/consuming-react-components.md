@@ -5,22 +5,24 @@ This guide explains how to consume the `@ourfuturehealth/react-components` packa
 ## Prerequisites
 
 1. **Node.js** 20.19.0 or higher (Node.js 24 LTS recommended)
-2. **pnpm** (recommended) or npm as package manager
+2. A package manager that can install tarball dependencies (`pnpm`, `npm`, or Yarn)
 3. A React application (React 19+ required)
 
 ## Installation
 
-We do not publish `@ourfuturehealth/react-components` to the npm registry. Install the release tarball instead.
+We do not publish `@ourfuturehealth/react-components` to the npm registry. Install a GitHub release tarball instead.
 
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.6.0/ourfuturehealth-react-components-0.6.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
 }
 ```
+
+Replace `{version}` with the published React package version you want to install.
 
 Then install with your package manager:
 
@@ -33,6 +35,8 @@ yarn install
 ```
 
 This tarball-based install path is smoke-tested against Yarn 1, npm, and pnpm.
+
+You do not need `pnpm` to consume the published package. `pnpm` is only required when working inside this monorepo.
 
 ### Unreleased maintainer testing
 
@@ -92,7 +96,7 @@ Each application should use one theme. Current theme bundles are:
 - `participant`
 - `research`
 
-### Squad C (React) using participant
+### Participant theme
 
 Use the participant styles export:
 
@@ -100,7 +104,7 @@ Use the participant styles export:
 import '@ourfuturehealth/react-components/styles/participant';
 ```
 
-### Squad C (React) using research
+### Research theme
 
 Use the matching themed styles export:
 
@@ -133,7 +137,7 @@ The React components package currently provides the following components:
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
 
-For complete component documentation and live examples, run Storybook:
+For complete component documentation and live examples, run Storybook locally from this repository:
 
 ```bash
 pnpm storybook
@@ -206,7 +210,7 @@ If you are testing unreleased code, build and pack the package locally instead.
 **Solution**:
 
 - Verify the package is installed: `ls node_modules/@ourfuturehealth/react-components`
-- Run `pnpm install` or `npm install` again
+- Run your package-manager install command again
 - Confirm you are using the tarball URL install contract, not the old git-subdirectory syntax
 
 ### Styles not loading
@@ -225,10 +229,10 @@ Import this in your app's entry point (e.g., `main.tsx` or `App.tsx`).
 
 **Error**: `Warning: Invalid hook call` or peer dependency warnings
 
-**Solution**: The React components require React 19+. Update your React version:
+**Solution**: The React components require React 19+. Update your React version with your package manager, for example:
 
 ```bash
-pnpm add react@^19.2.4 react-dom@^19.2.4
+npm install react@^19.2.4 react-dom@^19.2.4
 ```
 
 ### TypeScript errors
@@ -238,36 +242,36 @@ pnpm add react@^19.2.4 react-dom@^19.2.4
 **Solution**:
 
 - Ensure `"moduleResolution": "bundler"` or `"moduleResolution": "node"` is set in your `tsconfig.json`
-- Run `pnpm install` to ensure type definitions are properly linked
+- Run your package-manager install command again to ensure type definitions are properly linked
 
-## Development and Contributing
+## Contributing in this repository
 
-For development and contributing to the React components:
+If you are contributing to the React library inside this monorepo rather than consuming the published package, use the local development guide instead:
 
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Run Storybook: `pnpm storybook`
-4. Make changes in `packages/react-components/`
-5. Run tests: `pnpm test:react-components`
-6. Lint code: `pnpm lint:react-components`
-7. Build all packages: `pnpm build`
-
-See the main [README.md](../README.md) for detailed setup instructions and the [contributing guide](../CONTRIBUTING.md) for guidelines.
+- [Running locally](./contributing/running-locally.md)
+- [Main repository README](../README.md)
+- [Contributing guide](../CONTRIBUTING.md)
 
 ## Example Consumer App
 
-The monorepo includes an example consumer app demonstrating usage:
+The monorepo includes `packages/example-react-consumer-app/`, a small standalone app pinned to the latest published React release. It is useful when you want to verify the package in a real consumer setup rather than through a workspace dependency.
 
 ```bash
-# Run the example app
+# from the repository root
 pnpm dev:react-consumer
 ```
 
-The example app is located in `packages/example-react-consumer-app/` and shows how to consume the React components in a real application.
+Or run it directly from the app directory:
+
+```bash
+cd packages/example-react-consumer-app
+npm install
+npm run dev
+```
 
 ## Need Help?
 
-1. Check the [Storybook](https://github.com/ourfuturehealth/design-system-toolkit#storybook) for component examples
-2. Review the [example consumer app](../packages/example-react-consumer-app/)
+1. Review the [React package README](../packages/react-components/README.md)
+2. Review the [example consumer app README](../packages/example-react-consumer-app/README.md)
 3. Read the [upgrade guide](../UPGRADING.md) for migration instructions
 4. Open an issue on [GitHub](https://github.com/ourfuturehealth/design-system-toolkit/issues)
