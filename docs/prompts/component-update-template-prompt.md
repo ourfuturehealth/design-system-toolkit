@@ -671,8 +671,9 @@ pnpm storybook
 2. Test keyboard navigation (Tab, Enter, Space, Arrow keys)
 3. Test with screen reader (if complex component)
 4. Visual comparison with Figma specs
-5. Test in `example-react-consumer-app`
-6. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
+5. Test in `example-react-consumer-app` when you need an external-style React consumer check
+6. If the install contract changed, also run the tarball smoke tests
+7. For components using responsive spacing or typography tokens, spot-check mobile, tablet, and desktop values in DevTools for the highest-risk subelements
 
 ### Documentation Review
 

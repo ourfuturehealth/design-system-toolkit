@@ -13,7 +13,7 @@ This repository is organized as a monorepo containing:
 
 - **Core toolkit** - SCSS/CSS design system and vanilla JavaScript components
 - **React components** (`packages/react-components/`) - React implementation of the design system
-- **Example consumer app** (`packages/example-react-consumer-app/`) - Demonstration of consuming React components
+- **Example consumer app** (`packages/example-react-consumer-app/`) - Standalone in-repo example of consuming the published React tarball contract
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ pnpm install
 # Development workflows
 pnpm storybook                  # React component documentation (Storybook)
 pnpm dev:react-components       # React component library development
-pnpm dev:react-consumer         # Example consumer app with library watch
+pnpm dev:react-consumer         # Example consumer app dev server (run npm install in that directory first)
 pnpm dev:site                   # Documentation site development
 pnpm dev:toolkit                # Core toolkit development
 pnpm dev                        # Run all dev servers concurrently

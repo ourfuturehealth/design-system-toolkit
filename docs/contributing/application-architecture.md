@@ -30,7 +30,7 @@ This repository is organized as a **pnpm workspace monorepo** containing multipl
 
 **`packages/example-react-consumer-app/`** - Example Consumer App
 
-- Demonstrates how to consume the React components library
+- Demonstrates how an external-style consumer installs and uses the published React tarball contract
 - Built with Vite
 - Not versioned (example only)
 

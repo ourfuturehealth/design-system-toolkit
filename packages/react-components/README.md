@@ -4,17 +4,28 @@ React component library for the OFH Design System.
 
 ## Installation
 
-Install from the monorepo using a package-specific Git tag and subdirectory.
+Install the packaged GitHub release artifact:
 
-```bash
-pnpm add @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.5.0/ourfuturehealth-react-components-0.5.0.tgz",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  }
+}
 ```
 
-or
+Then run your package manager install command. This release-tarball contract is smoke-tested against Yarn 1, npm, and pnpm.
+
+For unreleased maintainer testing:
 
 ```bash
-npm install @ourfuturehealth/react-components@github:ourfuturehealth/design-system-toolkit#react-v0.5.0:packages/react-components
+pnpm --filter=@ourfuturehealth/react-components run build
+npm pack ./packages/react-components --ignore-scripts
 ```
+
+Install the resulting local `.tgz` in the consumer application.
 
 ## Usage
 
@@ -66,133 +77,82 @@ Choose one theme stylesheet import per application:
 
 ### Button
 
-A flexible button component with multiple variants.
+Props:
 
-**Props:**
-
-- `variant`: 'contained' | 'outlined' | 'ghost' | 'ghost-inverted' | 'text' | 'text-inverted'
+- `variant`: `'contained' | 'outlined' | 'ghost' | 'ghost-inverted' | 'text' | 'text-inverted'`
 
 ### TextInput
 
-A form input component with label, hint, and error support.
+Props:
 
-**Props:**
-
-- `label`: string (required)
-- `hint`: string
-- `error`: string
-- `required`: boolean
-- `width`: 'full' | 'three-quarters' | 'two-thirds' | 'one-half' | 'one-third' | 'one-quarter'
-- `maxLength`: 2 | 3 | 4 | 5 | 10 | 20
-- `id`: string
+- `label`
+- `hint`
+- `error`
+- `required`
+- `width`
+- `maxLength`
+- `id`
 
 ### ErrorSummary
 
-An error summary component for page-level validation messages.
-
-**Security note:** `titleHtml`, `descriptionHtml`, and `errorList[].html` are rendered as raw HTML. Only pass trusted or properly sanitised content to these props. Do not pass untrusted user input directly into them.
-
-**Props:**
-
-- `titleText`: string
-- `titleHtml`: string
-- `descriptionText`: string
-- `descriptionHtml`: string
-- `errorList`: { href?: string; text?: string; html?: string; attributes?: object }[]
-- `classes`: string
-- `attributes`: object
-- `idPrefix`: string
+Security note: `titleHtml`, `descriptionHtml`, and `errorList[].html` are rendered as raw HTML. Only pass trusted or sanitised content.
 
 ### Card
 
-A content-presentation card for summary, status, and next-step content.
+Props:
 
-**Props:**
-
-- `variant`: 'basic' | 'clickable'
+- `variant`
 - `heading`, `headingHtml`, `headingLevel`
 - `description`, `descriptionHtml`
 - `icon`, `dismissButton`, `number`, `tag`
 - `metadataItems`, `helperText`, `helperHtml`, `actionLink`
 - `imgURL`, `imgALT`
 
-`tag` uses the React `Tag` component API, so nested tag content is passed with `children` plus optional Tag props such as `variant` and `className`.
-
 ### CardCallout
 
-A feedback-style card for contextual info, warning, success, and error content.
+Props:
 
-**Props:**
-
-- `variant`: 'info' | 'warning' | 'success' | 'error'
+- `variant`: `'info' | 'warning' | 'success' | 'error'`
 - `heading`, `headingHtml`, `headingLevel`
 - `text` or `html`
 
 ### CardDoDont
 
-A card for short do and don’t recommendation lists.
+Props:
 
-**Props:**
-
-- `type`: 'do' | 'dont'
+- `type`: `'do' | 'dont'`
 - `heading`, `headingLevel`
 - `items`
 
-### Icons
-
-React components bundle the toolkit icon sprite automatically. Consumers do not need to copy `/assets/icons/icon-sprite.svg` into their own app to render Card icons.
-
 ### Tag
 
-A status tag component with a simple React API that maps to the toolkit variants.
+Props:
 
-**Props:**
-
-- `children`: React.ReactNode
-- `variant`: 'neutral' | 'brand' | 'blue' | 'green' | 'yellow' | 'red'
-- `className`: string
+- `children`
+- `variant`: `'neutral' | 'brand' | 'blue' | 'green' | 'yellow' | 'red'`
+- `className`
 
 ## Development
 
-This package has three development modes:
-
-### Storybook (Recommended)
+Storybook:
 
 ```bash
 pnpm --filter @ourfuturehealth/react-components storybook
-# or from root: pnpm storybook
 ```
 
-Interactive component documentation and testing environment. This is the **primary tool** for developing and showcasing components with full documentation, accessibility tests, and interactive controls.
-
-**When to use**: Component development, documentation, and visual testing.
-
-### Quick Dev Server (Temporary)
+Quick dev server:
 
 ```bash
 pnpm --filter @ourfuturehealth/react-components dev
-# or from root: pnpm dev:react-components
 ```
 
-Runs a Vite dev server serving [src/dev.tsx](src/dev.tsx) - a minimal playground for quick component iteration.
-
-> **Note**: This is a temporary development aid. Once Storybook stories are complete for all components, dev.tsx will be removed as it duplicates Storybook's functionality.
-
-**When to use**: Very quick component prototyping when Storybook feels too heavy-handed.
-
-### Library Build Watch
+Library build watch:
 
 ```bash
 pnpm --filter @ourfuturehealth/react-components watch:lib
 ```
 
-Runs `vite build --watch` to continuously rebuild the library distribution files (`dist/`) when source files change. This compiles components and toolkit styles into the consumable library format.
-
-**When to use**: When developing with [example-react-consumer-app](../example-react-consumer-app/) to see changes reflected in the consumer app immediately.
-
-**Note**: The `dev:react-consumer` root script automatically runs this alongside the consumer app.
-
-### Build
+Build:
 
 ```bash
 pnpm --filter @ourfuturehealth/react-components build

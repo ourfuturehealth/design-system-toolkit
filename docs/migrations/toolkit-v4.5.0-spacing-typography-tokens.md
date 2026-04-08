@@ -19,7 +19,7 @@ Use the track that matches the version you are currently on:
 Notes:
 
 - `v3.4.2` is the last pre-monorepo toolkit tag available in this repository checkout.
-- If your team refers to `v3.4.3` in external notes, use the `v3.4.2` API surface in this guide as the local baseline.
+- If your team refers to the last pre-monorepo toolkit release in external notes, use the `v3.4.2` API surface in this guide as the local baseline.
 
 ## What changed?
 

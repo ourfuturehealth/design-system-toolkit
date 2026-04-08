@@ -106,10 +106,12 @@ This runs gulp watch to rebuild toolkit distribution files.
 Test consuming the React components library:
 
 ```bash
+cd packages/example-react-consumer-app
+npm install
 pnpm dev:react-consumer
 ```
 
-This runs both the library build watch and the consumer app dev server at [http://localhost:5174](http://localhost:5174).
+This runs the standalone example consumer app dev server at [http://localhost:5174](http://localhost:5174) using the published tarball contract rather than a workspace dependency.
 
 ### Option E: Everything
 
@@ -145,7 +147,7 @@ Or run verbose mode directly in specific packages:
 
 - **Toolkit**: `pnpm --filter=@ourfuturehealth/toolkit run watch:verbose`
 - **React Components**: `pnpm --filter=@ourfuturehealth/react-components run watch:lib:verbose`
-- **React Consumer App**: `pnpm --filter=@ourfuturehealth/example-react-consumer-app run watch:verbose`
+- **React Consumer App**: `npm --prefix packages/example-react-consumer-app run watch:verbose`
 - **Site (Eleventy)**: `pnpm --filter=site run watch:eleventy:verbose`
 - **Site (Sass)**: `pnpm --filter=site run watch:css:verbose`
 
@@ -170,7 +172,7 @@ The monorepo contains:
 - **`packages/toolkit/`** - Core design system (SCSS, JS, templates)
 - **`packages/react-components/`** - React component library
 - **`packages/site/`** - Documentation website (Eleventy)
-- **`packages/example-react-consumer-app/`** - Example React consumer app
+- **`packages/example-react-consumer-app/`** - Standalone example React consumer app that uses the published tarball contract
 
 See the main [README](../../README.md) for more details on the monorepo structure.
 

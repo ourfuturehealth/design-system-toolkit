@@ -1,46 +1,68 @@
 # Example React Consumer App
 
-Example application demonstrating how to consume `@ourfuturehealth/react-components` in a React project.
+Example application demonstrating how an external React application consumes `@ourfuturehealth/react-components`.
 
-## Development
+This app is intentionally configured as a standalone published-consumer example:
+
+- it installs the released `@ourfuturehealth/react-components` tarball
+- it imports the published theme stylesheet bundle
+- it does not use the monorepo workspace protocol
+
+## Install and run
+
+This app is validated with the repository's recommended Node LTS setup and npm 10.x.
+
+```bash
+cd packages/example-react-consumer-app
+npm install
+npm run dev
+```
+
+Or from the repository root:
 
 ```bash
 pnpm dev:react-consumer
-# or from this directory: pnpm dev
 ```
 
-This runs **two concurrent processes**:
+## What this app proves
 
-1. **Library watch** - Rebuilds `@ourfuturehealth/react-components/dist/` when source files change
-2. **App dev server** - Vite dev server for this consumer app (port 5174)
+- a published tarball install works in a real consumer app
+- the exported React components render in a Vite application
+- the published stylesheet entrypoints load correctly
 
-### Why library watch is needed
+This makes it useful as guidance for future React consumers outside the toolkit repo.
 
-This consumer app imports the **built library** from `@ourfuturehealth/react-components` workspace dependency:
+## What this app does not prove
 
-```tsx
-import { Button } from "@ourfuturehealth/react-components";
-```
+- it is not the workspace-linked hot-reload development harness for the React library
+- it does not automatically reflect unreleased local changes in `packages/react-components`
 
-When you make changes to:
+For local library development, use Storybook or the React package directly.
 
-- Toolkit styles (e.g., button background colors)
-- React component implementations
-- Component TypeScript definitions
+## Testing against an unreleased local tarball
 
-The react-components library must rebuild its `dist/` directory for this consumer app to see the changes. Running `dev:react-consumer` ensures both the library rebuilds and the consumer's dev server picks up those changes automatically.
+If you need to validate unreleased React package changes in this app:
 
-### Development without library watch
+1. From the repository root, build and pack the React package:
 
-```bash
-pnpm --filter @ourfuturehealth/example-react-consumer-app dev
-```
+   ```bash
+   pnpm --filter=@ourfuturehealth/react-components run build
+   npm pack ./packages/react-components --ignore-scripts
+   ```
 
-Runs only the consumer app's dev server. Use this when you're **not** modifying the library, and only working on consumer app code.
+2. In this directory, temporarily install that local tarball:
+
+   ```bash
+   npm install ../../ourfuturehealth-react-components-0.5.0.tgz
+   ```
+
+3. Run the app again with `npm run dev` or `npm run build`.
+
+Revert the dependency change afterwards if you want to return to the published release example.
 
 ## Architecture
 
 - **Vite 7** - Build tool and dev server
 - **React 19** - UI framework
 - **TypeScript 5.9** - Type checking
-- Imports `@ourfuturehealth/react-components` via pnpm workspace protocol
+- Installs `@ourfuturehealth/react-components` via the published tarball contract
