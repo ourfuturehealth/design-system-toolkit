@@ -98,7 +98,7 @@ Output style I want from you:
 - Drive the QA one step at a time.
 - Make each QA step specific enough that a reviewer can validate it without guessing what "good" looks like.
 - When something fails, explain it plainly and fix it before moving on.
-- Keep the summary concise and useful for handing off into PR-readiness work.
+- Keep the summary concise and useful for handing off into merge-readiness work.
 ```
 
 ---
@@ -106,4 +106,4 @@ Output style I want from you:
 ## Notes
 
 - This template is intentionally focused on human-in-the-loop validation.
-- Use `component-pr-readiness-template-prompt.md` after this when you want the final cleanup, release-doc refresh, commits, and branch handoff.
+- Use `component-pr-readiness-template-prompt.md` after this when you want the final merge-readiness pass: cleanup, release-doc refresh, commits, PR metadata, and branch handoff.
