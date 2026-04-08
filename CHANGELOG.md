@@ -6,6 +6,14 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-08
+
+#### @ourfuturehealth/toolkit 4.8.1 (`toolkit-v4.8.1`)
+
+##### Added
+
+- Added `AddCircleOutlineOutlined` and `RemoveCircleOutlineOutlined` to the toolkit icon set, generated sprite, and docs gallery
+
 ### 2026-03-30
 
 #### @ourfuturehealth/toolkit 4.8.0 (`toolkit-v4.8.0`)
