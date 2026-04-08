@@ -56,3 +56,11 @@
   font-weight: inherit;
   margin: 0;
 }
+
+.ofh-fieldset > .ofh-form-group {
+  @include ofh-responsive-margin(24, 'bottom');
+}
+
+.ofh-fieldset > .ofh-form-group:last-of-type {
+  margin-bottom: 0;
+}

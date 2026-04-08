@@ -63,6 +63,7 @@ export const Select = ({
     [hintId, errorId, describedBy, ariaDescribedBy].filter(Boolean).join(' ') ||
     undefined;
   const labelClasses = joinClassNames(
+    'ofh-label',
     'ofh-input__label',
     isPageHeading ? 'ofh-label--l' : 'ofh-label--s',
     labelClassName,

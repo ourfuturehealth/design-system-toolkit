@@ -10,6 +10,7 @@ describe('TextInput', () => {
 
     expect(screen.getByLabelText(/full name/i)).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByText(/full name/i)).toHaveClass('ofh-label');
     expect(screen.getByText(/full name/i)).toHaveClass('ofh-label--s');
   });
 

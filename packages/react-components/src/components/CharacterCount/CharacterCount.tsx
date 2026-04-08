@@ -120,6 +120,7 @@ export const CharacterCount = ({
             <h1 className="ofh-label-wrapper">
               <label
                 className={joinClassNames(
+                  'ofh-label',
                   'ofh-input__label',
                   'ofh-label--l',
                   labelClassName,
@@ -132,6 +133,7 @@ export const CharacterCount = ({
           ) : (
             <label
               className={joinClassNames(
+                'ofh-label',
                 'ofh-input__label',
                 'ofh-label--s',
                 labelClassName,
