@@ -24,7 +24,7 @@ Find out more about the checkboxes component and when to use it in the [design s
         <div class="ofh-checkboxes__row">
           <input class="ofh-checkboxes__input" id="nationality-1" name="nationality" type="checkbox" value="british">
           <span class="ofh-checkboxes__controller" aria-hidden="true">
-            <!-- Done icon -->
+            <!-- Check icon -->
           </span>
           <label class="ofh-label ofh-checkboxes__label" for="nationality-1">
             British
@@ -35,7 +35,7 @@ Find out more about the checkboxes component and when to use it in the [design s
         <div class="ofh-checkboxes__row">
           <input class="ofh-checkboxes__input" id="nationality-2" name="nationality" type="checkbox" value="irish">
           <span class="ofh-checkboxes__controller" aria-hidden="true">
-            <!-- Done icon -->
+            <!-- Check icon -->
           </span>
           <label class="ofh-label ofh-checkboxes__label" for="nationality-2">
             Irish

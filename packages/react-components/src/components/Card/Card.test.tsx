@@ -124,11 +124,11 @@ describe('Card', () => {
       <Card
         heading="Profile complete"
         description="All required information is now saved."
-        icon={{ name: 'Done', size: 32 }}
+        icon={{ name: 'Check', size: 32 }}
         tag={{ children: 'New', variant: 'blue' }}
         metadataItems={[
-          { icon: 'AccessTime', text: '5 minute read' },
-          { icon: 'CalendarTodayOutlined', text: 'Updated today' },
+          { icon: 'ClockOutline', text: '5 minute read' },
+          { icon: 'CalendarOutline', text: 'Updated today' },
         ]}
         helperText="Recommended for new participants."
       />,
@@ -148,7 +148,7 @@ describe('Card', () => {
       <Card
         heading="Profile complete"
         description="All required information is now saved."
-        icon={{ name: 'Done', color: '#00725F' }}
+        icon={{ name: 'Check', color: '#00725F' }}
       />,
     );
 

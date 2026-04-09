@@ -5,7 +5,7 @@ This template provides a complete workflow for updating/creating design system c
 Follow this with the dedicated finish-up prompts:
 
 - `component-validation-qa-template-prompt.md` for interactive manual QA
-- `component-pr-readiness-template-prompt.md` for final cleanup, release-doc refresh, commits, and PR prep
+- `component-pr-readiness-template-prompt.md` for the final merge-readiness pass: cleanup, release-doc refresh, commits, and PR prep
 
 ---
 
@@ -25,7 +25,7 @@ Follow this with the dedicated finish-up prompts:
 4. The agent will follow the structured workflow automatically
 
 **💡 Best Practice:** Keep this file as your master template. Don't create component-specific files.
-After implementation is mostly done, move to the dedicated validation and PR-readiness prompts instead of trying to do everything in one long session.
+After implementation is mostly done, move to the dedicated validation and merge-readiness prompts instead of trying to do everything in one long session.
 This workflow also includes a temporary external-reference audit against the BSM React repo to speed up component work while OFH React coverage is still catching up. Once OFH React reaches comparable coverage, stop relying on that external repo.
 
 ---

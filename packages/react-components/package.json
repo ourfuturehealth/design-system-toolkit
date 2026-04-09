@@ -1,6 +1,6 @@
 {
   "name": "@ourfuturehealth/react-components",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "description": "React component library for OFH Design System",
   "packageManager": "pnpm@10.29.2",

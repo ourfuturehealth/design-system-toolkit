@@ -83,7 +83,7 @@
         {%- if hasHint %} aria-describedby="{{ itemHintId }}"{% endif -%}
         {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor -%}>
         <span class="ofh-checkboxes__controller" aria-hidden="true">
-          {{ icon({ "name": "Done", "size": 32, "classes": "ofh-checkboxes__icon" }) }}
+          {{ icon({ "name": "Check", "size": 32, "classes": "ofh-checkboxes__icon" }) }}
         </span>
         {{ label({
           html: item.html,

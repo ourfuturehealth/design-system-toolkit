@@ -28,7 +28,9 @@ const tagVariantOptions: TagVariant[] = [
   'red',
 ];
 
-const iconNameOptions = iconManifest.icons.map(({ name }) => name);
+const iconNameOptions = iconManifest.icons
+  .map(({ name }) => name)
+  .sort((left, right) => left.localeCompare(right));
 
 const renderCard = ({
   tagText,
@@ -71,19 +73,19 @@ const renderCard = ({
       ? [
           metadataItem1Text
             ? {
-                icon: metadataItem1Icon ?? 'FmdGoodOutlined',
+                icon: metadataItem1Icon ?? 'LocationOutline',
                 text: metadataItem1Text,
               }
             : null,
           metadataItem2Text
             ? {
-                icon: metadataItem2Icon ?? 'CalendarTodayOutlined',
+                icon: metadataItem2Icon ?? 'CalendarOutline',
                 text: metadataItem2Text,
               }
             : null,
           metadataItem3Text
             ? {
-                icon: metadataItem3Icon ?? 'AccessTime',
+                icon: metadataItem3Icon ?? 'ClockOutline',
                 text: metadataItem3Text,
               }
             : null,
@@ -307,7 +309,7 @@ export const BasicWithIcon: Story = {
   args: {
     heading: 'Profile complete',
     description: 'You’ve completed all the required profile details.',
-    iconName: 'Done',
+    iconName: 'Check',
     iconColor: '#00725F',
   },
   argTypes: {
@@ -364,11 +366,11 @@ export const ClickableAction: Story = {
     tagVariant: 'blue',
     description:
       'A quick guide for people who have care and support needs and their carers.',
-    metadataItem1Icon: 'FmdGoodOutlined',
+    metadataItem1Icon: 'LocationOutline',
     metadataItem1Text: 'Online',
-    metadataItem2Icon: 'CalendarTodayOutlined',
+    metadataItem2Icon: 'CalendarOutline',
     metadataItem2Text: 'Updated today',
-    metadataItem3Icon: 'AccessTime',
+    metadataItem3Icon: 'ClockOutline',
     metadataItem3Text: '5 minute read',
     helperText: 'Recommended for new participants.',
     iconName: 'ArrowCircleRightColour',

@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Icon } from './Icon';
 
-const iconNameOptions = iconManifest.icons.map(({ name }) => name);
+const iconNameOptions = iconManifest.icons
+  .map(({ name }) => name)
+  .sort((left, right) => left.localeCompare(right));
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
@@ -80,7 +82,7 @@ const meta: Meta<typeof Icon> = {
     },
   },
   args: {
-    name: 'Done',
+    name: 'Check',
     size: 24,
   },
 };
@@ -103,9 +105,9 @@ export const StaticSizes: Story = {
     <div
       style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
     >
-      <Icon name="Done" size={16} />
-      <Icon name="Done" size={24} />
-      <Icon name="Done" size={32} />
+      <Icon name="Check" size={16} />
+      <Icon name="Check" size={24} />
+      <Icon name="Check" size={32} />
     </div>
   ),
   parameters: {
@@ -115,7 +117,7 @@ export const StaticSizes: Story = {
 
 export const ResponsiveScale: Story = {
   args: {
-    name: 'Done',
+    name: 'Check',
     responsiveSize: 24,
   },
   parameters: {
@@ -134,15 +136,15 @@ export const ResponsiveScaleComparison: Story = {
       style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
     >
       <div>
-        <Icon name="Done" responsiveSize={16} />
+        <Icon name="Check" responsiveSize={16} />
         <div>16 / 16 / 16</div>
       </div>
       <div>
-        <Icon name="Done" responsiveSize={24} />
+        <Icon name="Check" responsiveSize={24} />
         <div>16 / 16 / 24</div>
       </div>
       <div>
-        <Icon name="Done" responsiveSize={32} />
+        <Icon name="Check" responsiveSize={32} />
         <div>24 / 24 / 32</div>
       </div>
     </div>

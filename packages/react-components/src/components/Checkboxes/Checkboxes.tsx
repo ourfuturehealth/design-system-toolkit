@@ -243,7 +243,7 @@ export const Checkboxes = ({
                       value={String(item.value)}
                     />
                     <span className="ofh-checkboxes__controller" aria-hidden="true">
-                      <Icon className="ofh-checkboxes__icon" name="Done" size={32} />
+                      <Icon className="ofh-checkboxes__icon" name="Check" size={32} />
                     </span>
                     <label
                       className={joinClassNames(
