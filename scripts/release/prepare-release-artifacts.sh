@@ -77,13 +77,19 @@ run_quiet_capture_stdout() {
 write_output() {
   local key=$1
   local value=$2
+  local delimiter
 
   if [[ -n "${metadata_file}" ]]; then
     printf '%s=%q\n' "${key}" "${value}" >> "${metadata_file}"
   fi
 
   if [[ -n "${github_output}" ]]; then
-    printf '%s=%s\n' "${key}" "${value}" >> "${github_output}"
+    delimiter="OFH_RELEASE_OUTPUT_${key}"
+    {
+      printf '%s<<%s\n' "${key}" "${delimiter}"
+      printf '%s\n' "${value}"
+      printf '%s\n' "${delimiter}"
+    } >> "${github_output}"
   fi
 }
 
@@ -230,14 +236,30 @@ tarball_name=$(node - <<'NODE' "${pack_output}"
 const fs = require('fs');
 const outputPath = process.argv[2];
 const raw = fs.readFileSync(outputPath, 'utf8');
-const parsed = JSON.parse(raw);
+const candidateStarts = [];
 
-if (!Array.isArray(parsed) || parsed.length === 0 || typeof parsed[0].filename !== 'string') {
-  console.error('npm pack did not return a tarball filename in JSON output');
-  process.exit(1);
+for (let index = 0; index < raw.length; index += 1) {
+  const char = raw[index];
+  if (char === '[' || char === '{') {
+    candidateStarts.push(index);
+  }
 }
 
-process.stdout.write(parsed[0].filename);
+for (const start of candidateStarts) {
+  try {
+    const parsed = JSON.parse(raw.slice(start).trim());
+
+    if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0].filename === 'string') {
+      process.stdout.write(parsed[0].filename);
+      process.exit(0);
+    }
+  } catch (error) {
+    // Keep scanning in case npm mixed lifecycle logs into stdout before the JSON payload.
+  }
+}
+
+console.error('npm pack did not return a tarball filename in JSON output');
+process.exit(1);
 NODE
 )
 

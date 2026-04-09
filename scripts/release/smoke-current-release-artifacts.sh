@@ -90,6 +90,17 @@ load_prepared_artifacts() {
     --metadata-file "${metadata_file}"
   # shellcheck disable=SC1090
   source "${metadata_file}"
+
+  if [[ -z "${PACKAGE_DIR:-}" ]]; then
+    printf 'Missing required metadata variable: PACKAGE_DIR\n' >&2
+    exit 1
+  fi
+
+  if [[ -z "${TARBALL_PATH:-}" ]]; then
+    printf 'Missing required metadata variable: TARBALL_PATH\n' >&2
+    exit 1
+  fi
+
   print_success "Prepared ${package_name} release artifacts"
 }
 

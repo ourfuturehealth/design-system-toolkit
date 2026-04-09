@@ -41,7 +41,7 @@ jobs:
       - name: Validate release contract docs
         run: pnpm docs:release-contract
 
-      - name: Determine package and version
+      - name: Determine package from tag
         id: package_info
         run: |
           TAG=${GITHUB_REF#refs/tags/}
@@ -64,6 +64,24 @@ jobs:
             "${{ steps.package_info.outputs.PACKAGE }}" \
             --stage-dir "${RUNNER_TEMP}/release-assets-${{ github.run_id }}-${{ github.run_attempt }}-${{ steps.package_info.outputs.PACKAGE }}" \
             --github-output "${GITHUB_OUTPUT}"
+
+      - name: Validate tag version matches package version
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [[ "${TAG}" == react-v* ]]; then
+            EXPECTED_VERSION="${TAG#react-v}"
+          elif [[ "${TAG}" == toolkit-v* ]]; then
+            EXPECTED_VERSION="${TAG#toolkit-v}"
+          else
+            EXPECTED_VERSION="${TAG#v}"
+          fi
+
+          ACTUAL_VERSION="${{ steps.release_assets.outputs.VERSION }}"
+
+          if [[ "${EXPECTED_VERSION}" != "${ACTUAL_VERSION}" ]]; then
+            echo "Tag version '${EXPECTED_VERSION}' does not match package version '${ACTUAL_VERSION}' for tag '${TAG}'." >&2
+            exit 1
+          fi
 
       - name: Smoke test release tarball
         run: |
