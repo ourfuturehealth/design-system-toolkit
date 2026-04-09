@@ -196,6 +196,33 @@ Compare Figma ↔ Toolkit ↔ React:
 - React API simplification opportunities where toolkit-style class or macro APIs could become clearer semantic props
 - Documentation gaps
 
+### 5a. Token Alignment Report (MANDATORY OUTPUT BEFORE IMPLEMENTATION)
+
+Before you change code, produce a short token-alignment report for every public subcomponent or public variant surface being updated.
+
+For each surface, list at minimum:
+
+- typography token(s) used in Figma
+- spacing token(s) used in Figma, including icon gaps and invisible hit-area spacing
+- icon size token(s) used in Figma
+- color tokens used for default, hover, focus, active, disabled, and visited states where applicable
+- whether each token is expected to be static or responsive
+- the current code primitive used today
+- whether that current code primitive is correct, incorrect, or inherited implicitly
+
+Format the report as:
+
+- `aligned`
+- `must fix before QA`
+- `acceptable inherited behavior`
+
+Rules:
+
+- Do not treat implicit inheritance from global `a`, `p`, `ul`, `li`, `h*`, or page/body styles as aligned unless you explicitly verified that Figma intends the component to inherit that token rather than declare it itself.
+- If Figma defines an explicit component typography or spacing token and the implementation only reaches that value by accident through global inheritance, treat that as `must fix before QA`.
+- If a component has multiple public surfaces in one review unit, do not stop after auditing only the primary one.
+- Do not move to implementation summary or manual QA handoff until every `must fix before QA` item is either fixed or explicitly escalated to the user as intentional follow-up scope.
+
 ### 6. Design Token & Pattern Alignment (MANDATORY)
 
 **This step is REQUIRED, not optional. Do not skip even if the JIRA ticket is narrow in scope.**
@@ -223,6 +250,7 @@ Review the entire component implementation against design system standards:
   - Hover states change correct properties (color, background, border)
   - Active states are visually distinct from focus states
 - [ ] **Document design spec vs. code discrepancies** before any implementation
+- [ ] **Produce the Token Alignment Report** described above and keep it updated as you implement
 
 **Design Tokens Audit:**
 
@@ -242,6 +270,9 @@ Review the entire component implementation against design system standards:
 - [ ] Audit semantic-element inheritance:
   - check whether global `ul > li`, `p`, `h*`, or link styles are adding margins/typography the component did not ask for
   - add explicit overrides when Figma requires component-specific spacing or typography
+- [ ] Audit inherited state colors:
+  - check whether focus/active/visited colors are coming from generic global link styling rather than the component spec
+  - if the first visible state in Figma uses a different token from the default inherited link token, implement that component-level override explicitly
 - [ ] Audit shared-primitives inheritance:
   - check whether reused primitives such as labels, hints, error messages, form groups, or wrappers are contributing margins, gaps, or typography that compound with the component's own layout rules
   - verify the computed browser output, not just the source SCSS intent

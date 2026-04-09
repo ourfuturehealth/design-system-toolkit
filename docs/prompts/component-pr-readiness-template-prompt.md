@@ -57,12 +57,16 @@ Workflow I want you to follow:
    - explain the reasoning briefly in user-facing terms
    - if this branch is expected to be independently releasable, apply the version bump instead of only suggesting it
    - if no package version, changelog entry, or migration guidance is updated for an affected releasable package, treat that as a merge-readiness failure and fix it before sign-off
-6. Check public API and migration clarity:
+6. Check public API, token conformance, and migration clarity:
    - confirm deprecated compatibility paths exist only where intended
    - confirm toolkit vs React consumer expectations are documented clearly
    - confirm Storybook controls policy and prop docs are still coherent after any late changes
    - confirm no interactive single-component stories are still relying on raw JSON controls for stable nested props when clearer story-specific controls would be more usable
    - confirm no story is exposing controls for values the component visibly ignores or overrides
+   - do a final token conformance pass for every public surface changed in this review unit, even if the ticket was not framed as a token migration
+   - verify typography, spacing, icon sizing, and state-color tokens against the Figma token map used during implementation
+   - do not treat inherited global styles as acceptable by default; confirm whether any inherited `a`, `p`, `ul`, `li`, `h*`, or body styles are intentional
+   - if the rendered result only matches Figma because of accidental inheritance, treat that as a merge-readiness failure and fix it
    - if the component was touched by a spacing/typography token migration, do a final spot-check for same-number static-token substitutions where Figma expected responsive tokens
    - do a final spot-check for accidental semantic-element inheritance (`p`, `ul`, `li`, `h*`, `a`) that may have reintroduced wrong spacing or typography
    - confirm release/version metadata is internally consistent for every affected releasable package:
@@ -136,6 +140,7 @@ Important constraints:
 - Keep toolkit and React parity in scope where that is part of the intended component API.
 - If docs/examples are missing what is needed for consumers or reviewers, improve them.
 - If release or migration docs are expected for this repo, include them so the PR is review-ready rather than code-only.
+- Do not rely on lint, tests, or build checks to prove token correctness; they only confirm mechanical health, not design-token conformance.
 - Do not leave temporary dependency stand-ins implicit. Remove them if the real dependency is now available, or document them clearly if they must remain temporarily.
 - If the branch depends on another PR landing first, do not force a merge from the wrong base just to satisfy the workflow.
 - Leave unrelated modified or untracked files alone unless I explicitly ask you to include them.

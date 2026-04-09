@@ -46,21 +46,28 @@ Workflow I want you to follow:
    - the exact reason those values are expected, not just a vague design note
    - the exact element/class I should inspect in DevTools when visual validation is not enough
    - any shared primitive or layout-object classes whose computed margins/gaps should also be inspected because they might still be affecting the rendered result
-4. Then walk me through that QA script one step at a time.
-5. After each step, stop and wait for my response in the format:
+4. Before giving me QA steps, give me a concise agent-side token conformance summary for the review unit:
+   - each public component surface reviewed
+   - typography token status
+   - spacing/icon-gap token status
+   - state-color token status
+   - any inherited-style overrides added or still missing
+   - whether there are any remaining MUST FIX token mismatches
+5. Then walk me through that QA script one step at a time.
+6. After each step, stop and wait for my response in the format:
    - `pass`
    - `fail - ...`
    - `other - ...`
-6. Treat `other` as feedback for refinement, missing demo clarity, missing docs clarity, Storybook demo issues, or follow-up questions.
-7. If I report `other` or `fail`, make the necessary code/story/docs refinements, run the required targeted checks, then resume the same QA step.
-8. Keep going until all QA steps pass.
-9. Once all QA is validated on my side, summarize:
+7. Treat `other` as feedback for refinement, missing demo clarity, missing docs clarity, Storybook demo issues, or follow-up questions.
+8. If I report `other` or `fail`, make the necessary code/story/docs refinements, run the required targeted checks, then resume the same QA step.
+9. Keep going until all QA steps pass.
+10. Once all QA is validated on my side, summarize:
    - what was validated
    - any fixes made during QA
    - whether any temporary internal adapter or dependency workaround was introduced during implementation
    - any residual risks or follow-ups
    - whether the branch is ready for the PR-readiness prompt
-10. Do not create final commits or PR text unless I explicitly ask for that in this session.
+11. Do not create final commits or PR text unless I explicitly ask for that in this session.
 
 Important constraints:
 - Run `npm test` after modifying JavaScript or TypeScript files.
@@ -71,6 +78,7 @@ Important constraints:
 - Treat raw JSON controls for stable nested props as implementation misses when the story could reasonably offer clearer text/select/boolean controls instead.
 - Treat controls for values the component visibly ignores or overrides as implementation misses to be fixed before QA is considered complete.
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
+- Treat missing explicit component-level typography, spacing, or state-color tokens as implementation misses when the current appearance only works because of inherited global styles.
 - Treat spacing or typography contributed by reused shared primitives or layout objects (`label`, `hint`, `error-message`, `fieldset`, `form-group`, list wrappers, etc.) as implementation misses when they make the rendered output diverge from Figma.
 - Treat React components that depend on toolkit progressive-enhancement classes such as `.js-enabled` for core interactive behavior as implementation misses to be fixed before QA is considered complete.
 - Treat Storybook docs-page examples that share effective IDs or form names across stories and interfere with each other as implementation misses to be fixed before QA is considered complete.
