@@ -7,12 +7,9 @@ $app-container-size: 1280px;
 
 .app-width-container,
 .app-breadcrumb .ofh-width-container {
-  margin: 0 $ofh-size-16;
-  max-width: $app-container-size;
+  @include ofh-responsive-margin(32, 'horizontal');
 
-  @include govuk-media-query($from: desktop) {
-    margin: 0 $ofh-size-32;
-  }
+  max-width: $app-container-size;
 
   @include govuk-media-query($and: '(min-width: #{($app-container-size + $ofh-size-32 * 2)})') {
     margin: 0 auto;
