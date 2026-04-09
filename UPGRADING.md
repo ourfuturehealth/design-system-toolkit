@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
-| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
+| [v4.10.0 / React v0.8.0](#upgrading-to-v4100--react-v080) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment    | 🟡 Medium - API migration recommended    |
@@ -20,55 +20,74 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
-## Upgrading to React v0.8.0
+## Upgrading to v4.10.0 / React v0.8.0
 
 **Planned:** April 2026
 **Affected packages:**
 
+- `@ourfuturehealth/toolkit` v4.10.0+
 - `@ourfuturehealth/react-components` v0.8.0+
 
 ### Breaking Changes
 
 `@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
 
+Toolkit macro paths and site routes now teach the canonical names below, while compatibility aliases remain available in this release:
+
+| Preferred toolkit name | Compatibility alias |
+| ---------------------- | ------------------- |
+| `link-action` | `action-link` |
+| `link-icon` | `back-link` |
+| `link-skip` | `skip-link` |
+
+### Release Overview
+
+This release introduces the public React link family and aligns the toolkit link-family naming and IA to the current design-system terminology used in Figma and Jira.
+
+- React consumers can adopt the new public `LinkAction`, `LinkIcon`, and `LinkSkip` components directly.
+- Toolkit consumers can continue using the old macro paths temporarily, but new usage should move to the canonical names above.
+- The canonical docs, examples, and Storybook surfaces now teach `Link action`, `Link icon`, and `Link skip`.
+
 ### Migration Steps
 
-1. Remove any `spritePath` prop from `Icon` usage.
-2. Remove any `spritePath` field from `Card` icon configuration objects.
-3. Re-run visual checks for icon-bearing surfaces such as `Icon`, `Select`, `Card`, and `Checkboxes`.
+1. Remove any `spritePath` prop from `Icon` usage and any `spritePath` field from `Card` icon configuration objects.
+2. Adopt the new public React `LinkAction`, `LinkIcon`, and `LinkSkip` components where you want React parity for the link family.
+3. Prefer the canonical toolkit macro paths and macro names when touching existing templates.
+4. Re-run manual QA for keyboard and focus behavior, especially for `LinkSkip`, `LinkIcon`, and any icon-bearing surfaces such as `Icon`, `Select`, and `Card`.
 
 #### React example
 
-**Before:**
+**New in `react-v0.8.0`:**
 
 ```tsx
-<Icon name="Search" spritePath="/assets/icons/icon-sprite.svg" />
-
-<Card
-  icon={{
-    name: 'Search',
-    spritePath: '/assets/icons/icon-sprite.svg',
-  }}
-/>
+import {
+  LinkAction,
+  LinkIcon,
+  LinkSkip,
+} from '@ourfuturehealth/react-components';
 ```
-
-**After:**
-
-```tsx
-<Icon name="Search" />
-
-<Card
-  icon={{
-    name: 'Search',
-  }}
-/>
-```
-
-If an application previously passed `spritePath` in React, that prop should now be removed.
 
 ### Toolkit reminder
 
 Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
+
+#### Toolkit example
+
+**Before (`toolkit-v4.9.0`):**
+
+```njk
+{% from "components/action-link/macro.njk" import actionLink %}
+{% from "components/back-link/macro.njk" import backLink %}
+{% from "components/skip-link/macro.njk" import skipLink %}
+```
+
+**After (`toolkit-v4.10.0`):**
+
+```njk
+{% from "components/link-action/macro.njk" import linkAction %}
+{% from "components/link-icon/macro.njk" import linkIcon %}
+{% from "components/link-skip/macro.njk" import linkSkip %}
+```
 
 ## Upgrading to v4.9.0 / React v0.7.0
 

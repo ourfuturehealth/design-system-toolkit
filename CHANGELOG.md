@@ -6,7 +6,19 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### Unreleased
+### 2026-04-09
+
+#### @ourfuturehealth/toolkit 4.10.0 (`toolkit-v4.10.0`)
+
+##### Changed
+
+- Renamed the public link-family docs, examples, and canonical toolkit component paths to match Figma and Jira terminology:
+  - `action-link` is now taught as `link-action`
+  - `back-link` is now taught as `link-icon`
+  - `skip-link` is now taught as `link-skip`
+- Preserved low-risk toolkit compatibility aliases for the previous macro paths and examples while moving docs navigation, examples, and site templates to the canonical names
+- Expanded the canonical `link-icon` guidance to cover usage, placement, accessibility notes, and the broader icon-led link pattern instead of only back-navigation
+- Aligned link-family spacing, typography, focus, and visible-state token usage with the current Figma spec
 
 #### @ourfuturehealth/react-components 0.8.0 (`react-v0.8.0`)
 
@@ -14,11 +26,22 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - React `Icon` and `Card` icon configuration no longer accept `spritePath`. React icons now always render from bundled toolkit SVG data.
 
+##### Changed
+
+- Reorganized React Storybook so the link family is taught under `Components / Link / ...`
+- Expanded `LinkIcon` stories to support the full icon set and an optional icon-colour override while keeping the default icon behaviour aligned with the label colour
+- Updated React docs, stories, and tests to use the canonical `LinkAction`, `LinkIcon`, and `LinkSkip` names
+
+##### Added
+
+- First public React release of the link family:
+  - `LinkAction`
+  - `LinkIcon`
+  - `LinkSkip`
+
 ##### Fixed
 
 - React icons now render correctly in published-consumer installs by inlining the requested bundled SVG symbol instead of referencing a bundled `data:` sprite URL.
-
-### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)
 
