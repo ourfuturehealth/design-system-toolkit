@@ -23,7 +23,7 @@ This prompt assumes the implementation phase already included the main template'
 I'm working on the `[ComponentName]` update in this worktree.
 
 Context:
-- Ticket: `[JIRA URL or ID]`
+- Ticket: `[JIRA URL or ID]` (preserve the full Jira key exactly, for example `DSE-335`, not a shortened `DS-335`)
 - Intended base branch: `[origin/main or another branch/PR]`
 - Local site/docs server: `[http://localhost:8080]`
 - Local Storybook server: `[http://localhost:6006]`
@@ -129,6 +129,8 @@ Workflow I want you to follow:
      - add a second context paragraph only when it genuinely helps, for example rebases, stacked dependencies, release baseline shifts, or why the branch goes beyond a narrow ticket interpretation
      - keep the body review-oriented: explain what changed, why it changed, release impact, and where reviewers should focus
      - avoid padding the PR with empty, repetitive, or low-information sections just to match a template
+     - when linking Jira tickets, preserve the exact key and use the full browse URL, for example `https://ourfuturehealth.atlassian.net/browse/DSE-335`
+     - never silently shorten or rewrite Jira keys when drafting PR metadata
 14. Do not push. Give me the exact `git push` command(s) to run manually.
 
 Important constraints:
