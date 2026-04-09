@@ -1,5 +1,5 @@
-{% from 'skip-link/macro.njk' import skipLink %}
-{% from 'action-link/macro.njk' import actionLink %}
+{% from 'link-skip/macro.njk' import linkSkip %}
+{% from 'link-action/macro.njk' import linkAction %}
 {% from 'breadcrumb/macro.njk' import breadcrumb %}
 {% from 'contents-list/macro.njk' import contentsList %}
 {% from 'details/macro.njk' import details %}
@@ -7,7 +7,7 @@
 {% from 'do-dont-list/macro.njk' import list %}
 {% from 'images/macro.njk' import image %}
 {% from 'pagination/macro.njk' import pagination %}
-{% from 'skip-link/macro.njk' import skipLink %}
+{% from 'link-skip/macro.njk' import linkSkip %}
 {% from 'tables/macro.njk' import table %}
 {% from 'warning-callout/macro.njk' import warningCallout %}
 {% from 'back-link/macro.njk' import backLink %}
@@ -67,7 +67,10 @@
   <body class="body-ds">
     <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-    <a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
+    {{ linkSkip({
+      href: '#maincontent',
+      text: 'Skip to main content'
+    }) }}
 
     {% include "_header.njk" %}
 

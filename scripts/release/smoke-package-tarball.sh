@@ -215,9 +215,9 @@ import Checkboxes from '@ourfuturehealth/toolkit/components/checkboxes/checkboxe
 import Details from '@ourfuturehealth/toolkit/components/details/details';
 import MenuToggle from '@ourfuturehealth/toolkit/components/header/menuToggle';
 import Radios from '@ourfuturehealth/toolkit/components/radios/radios';
-import SkipLink from '@ourfuturehealth/toolkit/components/skip-link/skip-link';
+import LinkSkip from '@ourfuturehealth/toolkit/components/link-skip/link-skip';
 import '@ourfuturehealth/toolkit/polyfills';
-console.log(Boolean(Card && Checkboxes && Details && MenuToggle && Radios && SkipLink));" \
+console.log(Boolean(Card && Checkboxes && Details && MenuToggle && Radios && LinkSkip));" \
     "@import '@ourfuturehealth/toolkit/ofh';
 body { color: red; }"
 }
