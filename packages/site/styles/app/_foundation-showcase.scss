@@ -121,11 +121,12 @@
 }
 
 .app-foundation-showcase__cards > li {
-  height: 100%;
+  display: flex;
 }
 
 .app-foundation-showcase__landing-card {
-  height: 100%;
+  flex: 1 1 auto;
+  margin-bottom: 0;
 }
 
 .app-foundation-showcase__example-heading {
