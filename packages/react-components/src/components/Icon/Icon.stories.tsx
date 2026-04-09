@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Icon } from './Icon';
 
-const iconNameOptions = iconManifest.icons.map(({ name }) => name);
+const iconNameOptions = iconManifest.icons
+  .map(({ name }) => name)
+  .sort((left, right) => left.localeCompare(right));
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',

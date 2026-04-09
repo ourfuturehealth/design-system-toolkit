@@ -28,7 +28,9 @@ const tagVariantOptions: TagVariant[] = [
   'red',
 ];
 
-const iconNameOptions = iconManifest.icons.map(({ name }) => name);
+const iconNameOptions = iconManifest.icons
+  .map(({ name }) => name)
+  .sort((left, right) => left.localeCompare(right));
 
 const renderCard = ({
   tagText,
