@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.8.1](#upgrading-to-v481)                            | April 2026    | No breaking changes | 🟢 None - optional icon additions only |
+| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
 | [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
@@ -19,25 +19,100 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
-## Upgrading to v4.8.1
+## Upgrading to v4.9.0 / React v0.7.0
 
 **Released:** April 2026
 **Affected packages:**
 
-- `@ourfuturehealth/toolkit` v4.8.1+
+- `@ourfuturehealth/toolkit` v4.9.0+
+- `@ourfuturehealth/react-components` v0.7.0+
 
 ### Breaking Changes
 
-None.
+Toolkit and React icon names now match the current Figma icon set directly. This is a hard rename with no backward-compatible aliases.
+
+| Category | Previous name | New name |
+| -------- | ------------- | -------- |
+| DataValidation | `CancelOutlined` | `CancelOutline` |
+| DataValidation | `Done` | `Check` |
+| DataValidation | `AddCircleOutlineOutlined` | `AddCircleOutline` |
+| DataValidation | `RemoveCircle` | `MinusCircle` |
+| DataValidation | `RemoveCircleOutlineOutlined` | `MinusCircleOutline` |
+| Action | `AccountCircleOutlined` | `AccountCircleOutline` |
+| Action | `FileDownloadOutlined` | `FileDownloadOutline` |
+| Action | `FavoriteBorderOutlined` | `FavoriteOutline` |
+| Action | `CalendarTodayOutlined` | `CalendarOutline` |
+| Action | `CalendarToday` | `Calendar` |
+| Arrows | `ExpandLess` | `ChevronUp` |
+| Arrows | `ExpandMore` | `ChevronDown` |
+| Arrows | `East` | `ArrowRight` |
+| Arrows | `West` | `ArrowLeft` |
+| Graphical | `InfoOutlined` | `InfoOutline` |
+| Graphical | `WorkOutlined` | `WorkOutline` |
+| Graphical | `HealthCrossOutlined` | `HealthCrossOutline` |
+| Graphical | `ListAltOutlined` | `ListAltOutline` |
+| Graphical | `HealthAndSafetyOutlined` | `HealthAndSafetyOutline` |
+| Graphical | `ListAltCheckedOutlined` | `ListAltCheckedOutline` |
+| Graphical | `TestTubeOutlined` | `TestTubeOutline` |
+| Graphical | `AccessTime` | `ClockOutline` |
+| Graphical | `WatchLater` | `Clock` |
+| Graphical | `FmdGoodOutlined` | `LocationOutline` |
+| Stepper | `LooksZero` | `ListZero` |
+| Stepper | `LooksOne` | `ListOne` |
+| Stepper | `LooksTwo` | `ListTwo` |
+| Stepper | `LooksThree` | `ListThree` |
+| Stepper | `LooksFour` | `ListFour` |
+| Stepper | `LooksFive` | `ListFive` |
+| Stepper | `LooksSix` | `ListSix` |
+| Stepper | `LooksSeven` | `ListSeven` |
+| Stepper | `LooksEight` | `ListEight` |
+| Stepper | `LooksNine` | `ListNine` |
+| Socials | `LinkedIn` | `Linkedin` |
+| Socials | `LinkedInHover` | `LinkedinHover` |
 
 ### Release Overview
 
-This patch release adds two new toolkit icon names:
+This breaking release removes the older icon names and replaces them with the Figma-aligned public set across toolkit and React.
 
-- `AddCircleOutlineOutlined`
-- `RemoveCircleOutlineOutlined`
+Current toolkit component templates, docs examples, React stories, and tests have already been moved to the renamed icon surface in this branch.
 
-No migration is required for existing consumers.
+### Migration Steps
+
+1. Search for old icon names in toolkit macros, Nunjucks data, React `Icon` props, and any manifest-driven tests.
+2. Replace each old name with the corresponding Figma-aligned name from the table above.
+3. Re-run any tests or visual checks that assert icon symbol ids or class names such as `ofh-icon--Done`.
+
+#### Toolkit example
+
+**Before (`toolkit-v4.8.0`):**
+
+```njk
+{{ icon({ "name": "Done", "size": 24 }) }}
+{{ icon({ "name": "ExpandMore", "size": 24 }) }}
+```
+
+**After (`toolkit-v4.9.0`):**
+
+```njk
+{{ icon({ "name": "Check", "size": 24 }) }}
+{{ icon({ "name": "ChevronDown", "size": 24 }) }}
+```
+
+#### React example
+
+**Before (`react-v0.6.0`):**
+
+```tsx
+<Icon name="AccessTime" size={24} />
+<Icon name="LinkedIn" size={24} />
+```
+
+**After (`react-v0.7.0`):**
+
+```tsx
+<Icon name="ClockOutline" size={24} />
+<Icon name="Linkedin" size={24} />
+```
 
 ---
 

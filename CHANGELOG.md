@@ -6,13 +6,39 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-04-08
+### 2026-04-09
 
-#### @ourfuturehealth/toolkit 4.8.1 (`toolkit-v4.8.1`)
+#### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)
 
-##### Added
+##### ⚠️ BREAKING CHANGES
 
-- Added `AddCircleOutlineOutlined` and `RemoveCircleOutlineOutlined` to the toolkit icon set, generated sprite, and docs gallery
+- **Icon naming aligned with Figma**: hard-renamed the public toolkit icon names to the current design-system set with no backward-compatible aliases
+  - `Done` → `Check`
+  - `ExpandLess` → `ChevronUp`
+  - `ExpandMore` → `ChevronDown`
+  - `CalendarTodayOutlined` → `CalendarOutline`
+  - `FmdGoodOutlined` → `LocationOutline`
+  - see [UPGRADING.md](UPGRADING.md#upgrading-to-v490--react-v070) for the full rename table
+
+##### Changed
+
+- Renamed the toolkit icon SVG files, manifest entries, sprite symbols, docs gallery entries, and current component/example usages to the Figma-aligned public names
+- Folded the earlier circle-outline addition into the renamed public surface as `AddCircleOutline` and `MinusCircleOutline`
+- Updated the icon docs page and contributor guidance to reflect the renamed toolkit and React icon APIs
+
+#### @ourfuturehealth/react-components 0.7.0 (`react-v0.7.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- **React Icon names aligned with toolkit/Figma**: any React consumer using the old `Icon` names must migrate to the renamed public set
+  - `Done` → `Check`
+  - `AccessTime` → `ClockOutline`
+  - `LinkedIn` → `Linkedin`
+  - see [UPGRADING.md](UPGRADING.md#upgrading-to-v490--react-v070) for the full rename table
+
+##### Changed
+
+- Updated the public React `Icon` stories/tests and current component consumers to use the renamed icon surface
 
 ### 2026-03-30
 
