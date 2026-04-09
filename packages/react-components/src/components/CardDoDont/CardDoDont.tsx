@@ -31,7 +31,7 @@ export const CardDoDont = ({
   ...props
 }: CardDoDontProps) => {
   const resolvedHeading = heading ?? (type === 'dont' ? 'Don’t' : 'Do');
-  const iconName = type === 'dont' ? 'Close' : 'Done';
+  const iconName = type === 'dont' ? 'Close' : 'Check';
 
   return (
     <div

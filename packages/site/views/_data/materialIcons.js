@@ -22,43 +22,43 @@ const icons = [...manifest.icons];
 const categoryOrders = {
   DataValidation: [
     // Positive/Success
-    "Done",
+    "Check",
     "CheckCircle",
     "CheckCircleOutline",
     // Negative/Cancel
     "Close",
     "Cancel",
-    "CancelOutlined",
+    "CancelOutline",
     // Add/Remove
     "AddCircle",
-    "AddCircleOutlineOutlined",
-    "RemoveCircle",
-    "RemoveCircleOutlineOutlined",
+    "AddCircleOutline",
+    "MinusCircle",
+    "MinusCircleOutline",
   ],
   Action: [
     "Search",
     // Account
     "AccountCircle",
-    "AccountCircleOutlined",
+    "AccountCircleOutline",
     // Favorites
     "Favorite",
-    "FavoriteBorderOutlined",
+    "FavoriteOutline",
     // Calendar
-    "CalendarToday",
-    "CalendarTodayOutlined",
+    "Calendar",
+    "CalendarOutline",
     // Other actions
-    "FileDownloadOutlined",
+    "FileDownloadOutline",
     "Launch",
   ],
   Arrows: [
     // Horizontal navigation
     "ChevronRight",
     "ChevronLeft",
-    "East",
-    "West",
+    "ArrowRight",
+    "ArrowLeft",
     // Vertical expand/collapse
-    "ExpandMore",
-    "ExpandLess",
+    "ChevronDown",
+    "ChevronUp",
     "UnfoldMore",
     "UnfoldLess",
     // Special arrows
@@ -68,26 +68,26 @@ const categoryOrders = {
   Graphical: [
     // Location/Places
     "FamilyHome",
-    "WorkOutlined",
+    "WorkOutline",
     "HospitalOutlined",
-    "FmdGoodOutlined",
+    "LocationOutline",
     // Health/Medical
-    "HealthCrossOutlined",
-    "HealthAndSafetyOutlined",
-    "TestTubeOutlined",
+    "HealthCrossOutline",
+    "HealthAndSafetyOutline",
+    "TestTubeOutline",
     // Lists
-    "ListAltOutlined",
-    "ListAltCheckedOutlined",
+    "ListAltOutline",
+    "ListAltCheckedOutline",
     // Time
-    "AccessTime",
-    "WatchLater",
+    "ClockOutline",
+    "Clock",
     // Info
-    "InfoOutlined",
+    "InfoOutline",
   ],
   Socials: [
     // Group each platform with its hover state
-    "LinkedIn",
-    "LinkedInHover",
+    "Linkedin",
+    "LinkedinHover",
     "X",
     "XHover",
     "Facebook",
@@ -105,7 +105,7 @@ const iconsByCategory = categoryOrder
   .map((category) => {
     const categoryIcons = icons.filter((icon) => icon.category === category);
     
-    // Stepper: preserve manifest order (numerical LooksZero-LooksNine)
+    // Stepper: preserve manifest order (numerical ListZero-ListNine)
     if (category === "Stepper") {
       // No sorting needed
     } else if (categoryOrders[category]) {

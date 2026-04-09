@@ -121,17 +121,20 @@ Example usage:
 
 Core icon styles are in [`packages/toolkit/core/styles/_icons-material.scss`](../../packages/toolkit/core/styles/_icons-material.scss) and imported in [`packages/toolkit/core/all.scss`](../../packages/toolkit/core/all.scss).
 
-### React components (future)
+### React components
 
-Current status: the React package does not yet have a shared icon component.
+The React package now exposes a shared `Icon` component:
 
-When React icon support is added, this doc should be updated with the final approach. Recommended baseline:
+- [`packages/react-components/src/components/Icon/Icon.tsx`](../../packages/react-components/src/components/Icon/Icon.tsx)
+- [`packages/react-components/src/components/Icon/Icon.stories.tsx`](../../packages/react-components/src/components/Icon/Icon.stories.tsx)
 
-- Keep icon names aligned with toolkit `manifest.json`
-- Reuse the same icon semantics (`name`, `size`, decorative vs titled)
-- Decide implementation explicitly:
-  - Sprite-based `<use>` approach (consistency with toolkit/docs), or
-  - Build-time inlined SVG components
+React icon names should stay aligned with toolkit `manifest.json` and the generated sprite symbols.
+
+Current React approach:
+
+- Reuses the toolkit sprite semantics (`name`, `size`, responsive sizing, decorative vs titled)
+- Defaults to the bundled toolkit sprite asset and references symbols with `<use>`
+- Treats icon-name changes as consumer-facing API changes that must be documented in release notes and the upgrading guide
 
 Related package: [`packages/react-components/`](../../packages/react-components/)
 
@@ -172,7 +175,7 @@ Most icons should use `currentColor` to inherit CSS colors, but some icons need 
 
 **Icons that need brand colors preserved:**
 
-- Social media icons (LinkedIn, X, Facebook, Youtube, Instagram, Tiktok) and their hover states
+- Social media icons (Linkedin, X, Facebook, Youtube, Instagram, Tiktok) and their hover states
 - `ArrowCircleRightColour` (uses `#011D4B` and `#FFC62C`)
 
 **Solution**: For brand-colored icons, keep the original Figma fill colors. For all other icons, replace fill colors with `currentColor`.

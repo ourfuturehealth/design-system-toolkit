@@ -54,7 +54,7 @@ Find out more about the Card component and when to use it in the [design system 
   headingLevel: 3,
   description: 'You’ve completed all the required profile details.',
   icon: {
-    name: 'Done',
+    name: 'Check',
     size: 32,
     color: '#00725F'
   }
