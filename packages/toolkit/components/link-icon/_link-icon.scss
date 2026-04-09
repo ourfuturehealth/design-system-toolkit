@@ -27,6 +27,7 @@
   }
 
   &:focus {
+    color: $ofh-color-foreground-link-active;
     outline: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
     outline-offset: $ofh-stroke-weight-4;
     text-decoration: none;
@@ -39,8 +40,8 @@
 
 .ofh-link-icon__icon,
 .ofh-back-link__icon {
-  flex: none;
   color: currentColor;
+  flex: none;
 }
 
 .ofh-link-icon--small {

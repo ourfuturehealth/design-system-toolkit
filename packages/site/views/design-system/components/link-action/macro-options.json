@@ -4,7 +4,7 @@
       "name": "text",
       "type": "string",
       "required": true,
-      "description": "Text to use within the action link component."
+      "description": "Text to use within the link action component."
     },
     {
       "name": "href",

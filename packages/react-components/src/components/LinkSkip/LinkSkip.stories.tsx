@@ -1,15 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { SkipLink, type SkipLinkProps } from './SkipLink';
+import { LinkSkip, type LinkSkipProps } from './LinkSkip';
 
-const meta: Meta<SkipLinkProps> = {
-  title: 'Components/Skip link',
-  component: SkipLink,
+const renderLinkSkipStory = (args: LinkSkipProps) => (
+  <div style={{ position: 'relative', minHeight: '6rem' }}>
+    <p style={{ marginBottom: '1rem' }}>
+      To view the link skip, press Tab or move focus into this example and
+      press Tab.
+    </p>
+    <LinkSkip {...args} />
+  </div>
+);
+
+const meta: Meta<LinkSkipProps> = {
+  title: 'Components/Link/Skip',
+  component: LinkSkip,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component:
-          'SkipLink is the purpose-built React surface for the hidden skip link. It mirrors the toolkit behaviour by defaulting to `#maincontent` and "Skip to main content" while still allowing standard anchor attributes when needed.',
+          'LinkSkip is the canonical React surface for the Link / Skip pattern. It mirrors the toolkit behaviour by defaulting to `#maincontent` and "Skip to main content" while still allowing standard anchor attributes when needed.',
       },
     },
   },
@@ -46,23 +56,26 @@ const meta: Meta<SkipLinkProps> = {
 };
 
 export default meta;
-type Story = StoryObj<SkipLinkProps>;
+type Story = StoryObj<LinkSkipProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: renderLinkSkipStory,
+};
 
 export const CustomLabel: Story = {
   args: {
     children: 'Skip to results',
     href: '#results',
   },
+  render: renderLinkSkipStory,
 };
 
 export const Showcase: Story = {
-  render: () => (
-    <div style={{ position: 'relative', minHeight: '6rem' }}>
-      <SkipLink href="#maincontent">Skip to main content</SkipLink>
-    </div>
-  ),
+  render: () =>
+    renderLinkSkipStory({
+      children: 'Skip to main content',
+      href: '#maincontent',
+    }),
   parameters: {
     controls: {
       disable: true,

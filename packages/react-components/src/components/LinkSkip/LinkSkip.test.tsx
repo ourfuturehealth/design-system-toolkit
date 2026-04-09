@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { describe, expect, it, vi } from 'vitest';
-import { SkipLink } from './SkipLink';
+import { LinkSkip } from './LinkSkip';
 
-describe('SkipLink', () => {
+describe('LinkSkip', () => {
   it('renders the default skip link copy and destination', () => {
-    render(<SkipLink />);
+    render(<LinkSkip />);
 
     const link = screen.getByRole('link', {
       name: /skip to main content/i,
@@ -18,7 +18,7 @@ describe('SkipLink', () => {
   });
 
   it('accepts custom label and href', () => {
-    render(<SkipLink href="#results">Skip to results</SkipLink>);
+    render(<LinkSkip href="#results">Skip to results</LinkSkip>);
 
     const link = screen.getByRole('link', { name: /skip to results/i });
 
@@ -28,7 +28,7 @@ describe('SkipLink', () => {
   it('forwards refs to the anchor element', () => {
     const ref = createRef<HTMLAnchorElement>();
 
-    render(<SkipLink ref={ref}>Skip to content</SkipLink>);
+    render(<LinkSkip ref={ref}>Skip to content</LinkSkip>);
 
     expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
   });
@@ -37,13 +37,13 @@ describe('SkipLink', () => {
     const onClick = vi.fn();
 
     render(
-      <SkipLink
+      <LinkSkip
         data-track="skip-link"
         aria-label="Skip navigation"
         onClick={onClick}
       >
         Skip to main content
-      </SkipLink>,
+      </LinkSkip>,
     );
 
     const link = screen.getByRole('link', { name: /skip navigation/i });
@@ -55,7 +55,7 @@ describe('SkipLink', () => {
     const onClick = vi.fn();
     const user = userEvent.setup();
 
-    render(<SkipLink onClick={onClick}>Skip to main content</SkipLink>);
+    render(<LinkSkip onClick={onClick}>Skip to main content</LinkSkip>);
 
     await user.click(screen.getByRole('link'));
 
@@ -63,7 +63,7 @@ describe('SkipLink', () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<SkipLink />);
+    const { container } = render(<LinkSkip />);
 
     const results = await axe(container);
 

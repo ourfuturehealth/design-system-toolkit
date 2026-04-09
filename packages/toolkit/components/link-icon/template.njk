@@ -2,6 +2,7 @@
 
 {% set iconPosition = params.iconPosition if params.iconPosition else 'left' %}
 {% set iconName = params.iconName if params.iconName else ('Launch' if iconPosition == 'right' else 'ChevronLeft') %}
+{% set iconColor = params.iconColor if params.iconColor else '' %}
 {% set size = params.size if params.size else 'small' %}
 {% set iconSize = 24 if size == 'medium' else 16 %}
 {% set textContent = params.html if params.html else (params.text if params.text else '') %}
@@ -12,11 +13,11 @@
     {%- if params.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
     {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
     {%- if iconPosition == 'left' %}
-      {{ icon({ "name": iconName, "size": iconSize, "classes": "ofh-link-icon__icon" }) }}
+      {{ icon({ "name": iconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
     {%- endif %}
     <span class="ofh-link-icon__text">{{ params.html | safe if params.html else textContent }}</span>
     {%- if iconPosition == 'right' %}
-      {{ icon({ "name": iconName, "size": iconSize, "classes": "ofh-link-icon__icon" }) }}
+      {{ icon({ "name": iconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
     {%- endif %}
   </a>
 </div>

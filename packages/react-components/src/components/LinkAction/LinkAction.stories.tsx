@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ActionLink, type ActionLinkProps } from './ActionLink';
+import { LinkAction, type LinkActionProps } from './LinkAction';
 
-const meta: Meta<ActionLinkProps> = {
-  title: 'Components/Action link',
-  component: ActionLink,
+const meta: Meta<LinkActionProps> = {
+  title: 'Components/Link/Action',
+  component: LinkAction,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component:
-          'ActionLink is the purpose-built React surface for the prominent action-link pattern. It always renders the coloured circular arrow icon, keeps the toolkit structure, and uses the newer focus treatment from the Figma design.',
+          'LinkAction is the canonical React surface for the prominent Link / Action pattern. It always renders the coloured circular arrow icon, keeps the toolkit structure, and uses the newer focus treatment from the Figma design.',
       },
     },
   },
@@ -25,7 +25,7 @@ const meta: Meta<ActionLinkProps> = {
     },
     href: {
       control: 'text',
-      description: 'Destination URL for the action link.',
+      description: 'Destination URL for the link action.',
     },
     openInNewWindow: {
       control: 'boolean',
@@ -51,7 +51,7 @@ const meta: Meta<ActionLinkProps> = {
 };
 
 export default meta;
-type Story = StoryObj<ActionLinkProps>;
+type Story = StoryObj<LinkActionProps>;
 
 export const Default: Story = {};
 
@@ -64,10 +64,10 @@ export const OpenInNewWindow: Story = {
 export const Showcase: Story = {
   render: () => (
     <div style={{ display: 'grid', gap: '1rem' }}>
-      <ActionLink href="#service-a">Find a minor injuries unit</ActionLink>
-      <ActionLink href="#service-b" openInNewWindow>
+      <LinkAction href="#service-a">Find a minor injuries unit</LinkAction>
+      <LinkAction href="#service-b" openInNewWindow>
         Open service search
-      </ActionLink>
+      </LinkAction>
     </div>
   ),
   parameters: {

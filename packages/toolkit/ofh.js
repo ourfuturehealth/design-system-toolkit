@@ -5,7 +5,7 @@ import Details from './components/details/details';
 import ErrorSummary from './components/error-summary/error-summary';
 import Header from './components/header/header';
 import Radios from './components/radios/radios';
-import SkipLink from './components/skip-link/skip-link';
+import LinkSkip from './components/link-skip/link-skip';
 import AutoComplete from './components/auto-complete/auto-complete';
 import CharacterCount from './components/character-count/character-count';
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ErrorSummary();
   Header();
   Radios();
-  SkipLink();
+  LinkSkip();
   AutoComplete();
   CharacterCount();
 });

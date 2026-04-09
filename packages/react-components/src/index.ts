@@ -14,8 +14,8 @@ export type { ButtonProps } from './components/Button';
 export { Icon } from './components/Icon';
 export type { IconProps, IconSize } from './components/Icon';
 
-export { ActionLink } from './components/ActionLink';
-export type { ActionLinkProps } from './components/ActionLink';
+export { LinkAction } from './components/LinkAction';
+export type { LinkActionProps } from './components/LinkAction';
 
 export { LinkIcon } from './components/LinkIcon';
 export type {
@@ -24,8 +24,8 @@ export type {
   LinkIconSize,
 } from './components/LinkIcon';
 
-export { SkipLink } from './components/SkipLink';
-export type { SkipLinkProps } from './components/SkipLink';
+export { LinkSkip } from './components/LinkSkip';
+export type { LinkSkipProps } from './components/LinkSkip';
 
 export { TextInput } from './components/TextInput';
 export type {

@@ -24,11 +24,26 @@
   <p>Use link icons when a prominent text link needs a clear directional cue, such as going back or opening something externally.</p>
   <p>The canonical link icon component supports left and right icon positions so teams can keep the same underlying pattern for back links and outward links.</p>
 
+  <h2>When not to use link icons</h2>
+  <p>Do not use link icons for the primary action in a form or transactional step. Use the <a href="/design-system/components/button">Button</a> component instead.</p>
+  <p>Do not add icons to ordinary inline text links just to make them look more decorative. Reserve this pattern for navigation links where the icon adds meaning, such as returning to a previous step or signposting an external destination.</p>
+  <p>For back-navigation variants, do not use a link icon with <a href="/design-system/components/breadcrumb">breadcrumb</a> navigation on the same page.</p>
+
   <h2>How to use link icons</h2>
   <p>Keep the text short and specific. Use a left icon for back-navigation style links and a right icon for external or forward-moving links.</p>
   <p>Choose the small size for compact inline usage and the medium size when the link needs more visual emphasis.</p>
+  <p>For back-navigation patterns, make sure the text reflects the action clearly, for example "Go back" or "Change your previous answer". The icon should support the action, not replace it.</p>
+  <p>If a link icon takes people back through a transaction, it should return them to the page in the state they last saw it.</p>
+  <p>Consider where you place the link. Avoid putting it too close to other links or buttons where it could distract from the main task.</p>
 
   <h3>Accessibility</h3>
   <p>Make sure the text still describes the action on its own. The icon should support the message, not replace it.</p>
+  <p>If the right-icon variant opens a new tab or takes users outside the current journey, make that clear in the visible link text or surrounding context.</p>
+  <p>For back-navigation variants, think about screen reader users when choosing placement. In some journeys it may work better below the primary action rather than at the very top of the page.</p>
+
+  <h2>Research</h2>
+  <p>Back-navigation guidance in this pattern comes from earlier back-link research across transactional services.</p>
+  <p><a href="https://111.nhs.uk/">NHS 111 online</a> found that some users wanted to revisit and change their previous answers, so they used explicit back-navigation wording rather than relying on the icon alone.</p>
+  <p>The <a href="https://digitalaccessibilitycentre.org/">Digital Accessibility Centre</a> also found that some screen reader users were confused when a back-navigation link appeared too early in the page order, so placement should be chosen intentionally.</p>
 
 {% endblock %}

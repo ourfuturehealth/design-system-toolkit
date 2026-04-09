@@ -22,6 +22,7 @@ export interface LinkIconProps
   > {
   children: React.ReactNode;
   href: string;
+  iconColor?: string;
   iconName?: string;
   iconPosition?: LinkIconIconPosition;
   openInNewWindow?: boolean;
@@ -32,6 +33,7 @@ export interface LinkIconProps
 export const LinkIcon = ({
   children,
   href,
+  iconColor,
   iconName,
   iconPosition = 'left',
   openInNewWindow = false,
@@ -68,6 +70,7 @@ export const LinkIcon = ({
             name={resolvedIconName}
             size={resolvedIconSize}
             className="ofh-link-icon__icon"
+            color={iconColor}
           />
         ) : null}
         <span className="ofh-link-icon__text">{children}</span>
@@ -76,6 +79,7 @@ export const LinkIcon = ({
             name={resolvedIconName}
             size={resolvedIconSize}
             className="ofh-link-icon__icon"
+            color={iconColor}
           />
         ) : null}
       </a>

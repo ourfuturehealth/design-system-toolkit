@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '../Icon';
 import { joinClassNames } from '../_internal/joinClassNames';
 
-export interface ActionLinkProps
+export interface LinkActionProps
   extends Omit<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     'children' | 'ref'
@@ -13,7 +13,7 @@ export interface ActionLinkProps
   ref?: React.Ref<HTMLAnchorElement>;
 }
 
-export const ActionLink = ({
+export const LinkAction = ({
   children,
   href,
   openInNewWindow = false,
@@ -22,7 +22,7 @@ export const ActionLink = ({
   rel,
   target,
   ...props
-}: ActionLinkProps) => {
+}: LinkActionProps) => {
   const rootClassName = joinClassNames('ofh-action-link', className);
   const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
   const resolvedTarget = openInNewWindow ? '_blank' : target;
@@ -48,4 +48,4 @@ export const ActionLink = ({
   );
 };
 
-ActionLink.displayName = 'ActionLink';
+LinkAction.displayName = 'LinkAction';

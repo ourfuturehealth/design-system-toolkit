@@ -3,6 +3,7 @@
 ## Guidance
 
 Use link icons for prominent navigation links that need a clear directional or external-action cue.
+You can use any icon from the shared sprite when the pattern needs it, though `ChevronLeft` and `Launch` remain the common defaults for back-navigation and external-link patterns.
 
 Find out more about the link icon component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/link-icon).
 
@@ -32,6 +33,7 @@ Find out more about the link icon component and when to use it in the [design sy
   "href": "#",
   "text": "Go back",
   "iconName": "ChevronLeft",
+  "iconColor": "#005eb8",
   "iconPosition": "left",
   "size": "small"
 }) }}
@@ -46,7 +48,8 @@ The link icon Nunjucks macro takes the following arguments:
 | text             | string   | No       | Text to display inside the link icon component. |
 | html             | string   | No       | HTML to display inside the link icon component. If provided, `text` is ignored. |
 | href             | string   | Yes      | The value of the link href attribute. |
-| iconName         | string   | No       | Toolkit icon name to render. Defaults to `ChevronLeft` for left icons and `Launch` for right icons. |
+| iconName         | string   | No       | Toolkit icon name to render. You can use any icon from the generated sprite manifest. Defaults to `ChevronLeft` for left icons and `Launch` for right icons. |
+| iconColor        | string   | No       | Optional icon-only color override. Leave unset to inherit the surrounding link text colour. |
 | iconPosition     | string   | No       | Icon placement relative to the text. Use `left` or `right`. Defaults to `left`. |
 | size             | string   | No       | Icon/text sizing. Use `small` or `medium`. Defaults to `small`. |
 | openInNewWindow   | boolean  | No       | If set to true, then the link will open in a new window. |

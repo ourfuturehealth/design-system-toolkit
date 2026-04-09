@@ -53,6 +53,18 @@ describe('LinkIcon', () => {
     expect(icon).toHaveClass('ofh-icon--24');
   });
 
+  it('supports icon-only colour overrides', () => {
+    const { container } = render(
+      <LinkIcon href="#search" iconName="Search" iconColor="#005eb8">
+        Search results
+      </LinkIcon>,
+    );
+
+    const icon = container.querySelector('svg');
+
+    expect(icon).toHaveStyle({ color: 'rgb(0, 94, 184)' });
+  });
+
   it('opens in a new window when requested', () => {
     render(
       <LinkIcon href="https://example.com" openInNewWindow>

@@ -1,3 +1,4 @@
+import LinkSkip from '../../components/link-skip/link-skip';
 import SkipLink from '../../components/skip-link/skip-link';
 
 // Mock HTML
@@ -13,10 +14,10 @@ const initTest = (html = '') => {
   document.body.innerHTML = html;
   heading = document.querySelector('h1');
   skipLink = document.querySelector('.ofh-skip-link');
-  SkipLink();
+  LinkSkip();
 };
 
-describe('Our Future Health skiplink', () => {
+describe('Our Future Health link skip', () => {
   describe('Does not throw an error', () => {
     it('if no skiplink exists', () => {
       initTest(headingHtml);
@@ -70,5 +71,11 @@ describe('Our Future Health skiplink', () => {
 
   describe('Is initialised by ofh.js', () => {
 
+  });
+});
+
+describe('SkipLink compatibility alias', () => {
+  it('re-exports the canonical link skip initialiser', () => {
+    expect(SkipLink).toBe(LinkSkip);
   });
 });

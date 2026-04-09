@@ -2,32 +2,17 @@
 
 ## Guidance
 
-Find out more about the skip link component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/skip-link).
+> Compatibility note: this is now a legacy alias for the canonical `link-skip` component surface.
 
-## Dependencies
-
-There is an [in-page link bug in VoiceOver on iOS](https://bugs.webkit.org/show_bug.cgi?id=179011) whereby focus remains on the skip link anchor rather than
-the next focusable element of the jumped to content.
-
-This can be fixed by either including the compiled JavaScript for all components `ofh-design-system-toolkit.min.js` or the individual component JavaScript `skip-link.js`.
-
-The fix focuses on the first `H1` on the page if one exists. If one does not exist, then the default action for in-page links will take place.
-
-Ensure the correct `id` value has been added to your main content for the skip link to work.
+Find out more about the canonical link skip component and when to use it in the [design system docs website](https://designsystem.ourfuturehealth.org.uk/design-system/components/link-skip).
 
 ## Quick start example
 
-[Preview the skip link component](https://ourfuturehealth.github.io/design-system-toolkit/components/skip-link/index.html)
-
-### HTML markup
-
-```html
-<a class="ofh-skip-link" href="#maincontent">Skip to main content</a>
-```
+[Preview the skip link alias](https://ourfuturehealth.github.io/design-system-toolkit/components/skip-link/index.html)
 
 ### Nunjucks macro
 
-```html
+```njk
 {% from 'components/skip-link/macro.njk' import skipLink %}
 
 {{ skipLink({
@@ -36,15 +21,4 @@ Ensure the correct `id` value has been added to your main content for the skip l
 }) }}
 ```
 
-### Nunjucks arguments
-
-The skip link Nunjucks macro takes the following arguments:
-
-| Name                | Type     | Required  | Description  |
-| --------------------|----------|-----------|--------------|
-| **href**            | string   | No        | The value of the skip link href attribute. Default: "#maincontent". |
-| **text**            | string   | No        | The text of the skip link. Default: "Skip to main content". |
-| **classes**         | string   | No        | Optional additional classes to add to the skip link. Separate each class with a space. |
-| **attributes**      | object   | No        | Any extra HTML attributes (for example data attributes) to add to the skip link. |
-
-If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).
+This alias is retained for compatibility while the canonical implementation and documentation move to the `link-skip` component.

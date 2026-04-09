@@ -22,7 +22,13 @@
       "name": "iconName",
       "type": "string",
       "required": false,
-      "description": "Toolkit icon name to render. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+      "description": "Toolkit icon name to render. You can use any icon from the generated sprite manifest. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+    },
+    {
+      "name": "iconColor",
+      "type": "string",
+      "required": false,
+      "description": "Optional icon-only color override. Leave unset to inherit the surrounding link text colour."
     },
     {
       "name": "iconPosition",

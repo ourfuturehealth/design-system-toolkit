@@ -1,7 +1,7 @@
 import React from 'react';
 import { joinClassNames } from '../_internal/joinClassNames';
 
-export interface SkipLinkProps
+export interface LinkSkipProps
   extends Omit<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     'children' | 'ref'
@@ -11,13 +11,13 @@ export interface SkipLinkProps
   ref?: React.Ref<HTMLAnchorElement>;
 }
 
-export const SkipLink = ({
+export const LinkSkip = ({
   children = 'Skip to main content',
   href = '#maincontent',
   className = '',
   ref,
   ...props
-}: SkipLinkProps) => (
+}: LinkSkipProps) => (
   <a
     {...props}
     ref={ref}
@@ -28,4 +28,4 @@ export const SkipLink = ({
   </a>
 );
 
-SkipLink.displayName = 'SkipLink';
+LinkSkip.displayName = 'LinkSkip';

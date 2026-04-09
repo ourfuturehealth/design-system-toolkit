@@ -1,0 +1,28 @@
+{
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Text to use within the link skip component. Defaults to `Skip to main content` if you do not provide a value."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "description": "The value of the link skip component’s `href` attribute. Defaults to `#maincontent` if you do not provide a value."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the link skip."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes (for example data attributes) to add to the link skip."
+    }
+  ]
+}

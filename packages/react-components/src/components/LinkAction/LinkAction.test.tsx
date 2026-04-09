@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { describe, expect, it, vi } from 'vitest';
-import { ActionLink } from './ActionLink';
+import { LinkAction } from './LinkAction';
 
-describe('ActionLink', () => {
+describe('LinkAction', () => {
   it('renders the action-link surface with the coloured arrow icon', () => {
     const { container } = render(
-      <ActionLink href="https://example.com">Find a service</ActionLink>,
+      <LinkAction href="https://example.com">Find a service</LinkAction>,
     );
 
     const link = screen.getByRole('link', { name: /find a service/i });
@@ -23,9 +23,9 @@ describe('ActionLink', () => {
 
   it('opens in a new window when requested', () => {
     render(
-      <ActionLink href="https://example.com" openInNewWindow>
+      <LinkAction href="https://example.com" openInNewWindow>
         External service
-      </ActionLink>,
+      </LinkAction>,
     );
 
     const link = screen.getByRole('link', { name: /external service/i });
@@ -38,9 +38,9 @@ describe('ActionLink', () => {
     const ref = createRef<HTMLAnchorElement>();
 
     render(
-      <ActionLink ref={ref} href="#service">
+      <LinkAction ref={ref} href="#service">
         Service
-      </ActionLink>,
+      </LinkAction>,
     );
 
     expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
@@ -51,9 +51,9 @@ describe('ActionLink', () => {
     const user = userEvent.setup();
 
     render(
-      <ActionLink href="#service" onClick={onClick}>
+      <LinkAction href="#service" onClick={onClick}>
         Service
-      </ActionLink>,
+      </LinkAction>,
     );
 
     await user.click(screen.getByRole('link'));
@@ -63,7 +63,7 @@ describe('ActionLink', () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <ActionLink href="#service">Service</ActionLink>,
+      <LinkAction href="#service">Service</LinkAction>,
     );
 
     const results = await axe(container);

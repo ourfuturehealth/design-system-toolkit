@@ -1,0 +1,10 @@
+{% from '../icon/macro.njk' import icon %}
+
+<div class="ofh-action-link{%- if params.classes %} {{ params.classes }}{% endif %}">
+  <a class="ofh-action-link__link" href="{% if params.href %}{{ params.href }}{% else %}#{% endif %}"
+    {%- if params.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
+    {%- for attribute, value in params.attributes %} {{attribute}}="{{ value }}"{% endfor %}>
+    {{ icon({ "name": "ArrowCircleRightColour", "responsiveSize": 32, "classes": "ofh-action-link__icon" }) }}
+    <span class="ofh-action-link__text">{{ params.text }}</span>
+  </a>
+</div>
