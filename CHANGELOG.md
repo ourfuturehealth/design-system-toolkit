@@ -18,6 +18,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
   - `ExpandMore` → `ChevronDown`
   - `CalendarTodayOutlined` → `CalendarOutline`
   - `FmdGoodOutlined` → `LocationOutline`
+  - `HospitalOutlined` → `HospitalOutline`
   - see [UPGRADING.md](UPGRADING.md#upgrading-to-v490--react-v070) for the full rename table
 
 ##### Changed
@@ -34,6 +35,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
   - `Done` → `Check`
   - `AccessTime` → `ClockOutline`
   - `LinkedIn` → `Linkedin`
+  - `HospitalOutlined` → `HospitalOutline`
   - see [UPGRADING.md](UPGRADING.md#upgrading-to-v490--react-v070) for the full rename table
 
 ##### Changed

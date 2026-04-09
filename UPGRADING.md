@@ -57,6 +57,7 @@ Toolkit and React icon names now match the current Figma icon set directly. This
 | Graphical | `AccessTime` | `ClockOutline` |
 | Graphical | `WatchLater` | `Clock` |
 | Graphical | `FmdGoodOutlined` | `LocationOutline` |
+| Graphical | `HospitalOutlined` | `HospitalOutline` |
 | Stepper | `LooksZero` | `ListZero` |
 | Stepper | `LooksOne` | `ListOne` |
 | Stepper | `LooksTwo` | `ListTwo` |

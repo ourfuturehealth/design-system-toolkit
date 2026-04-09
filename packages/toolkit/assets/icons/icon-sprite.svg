@@ -92,7 +92,7 @@
   <symbol id="ofh-icon-HealthCrossOutline" viewBox="0 0 24 24">
     <path d="M8 21V16H3V8H8V3H16V8H21V16H16V21H8ZM10 19H14V14H19V10H14V5H10V10H5V14H10V19Z" fill="currentColor"/>
   </symbol>
-  <symbol id="ofh-icon-HospitalOutlined" viewBox="0 0 24 24">
+  <symbol id="ofh-icon-HospitalOutline" viewBox="0 0 24 24">
     <path d="M10.5 17H13.5V14.5H16V11.5H13.5V9H10.5V11.5H8V14.5H10.5V17ZM4 21V9L12 3L20 9V21H4ZM6 19H18V10L12 5.5L6 10V19Z" fill="currentColor"/>
   </symbol>
   <symbol id="ofh-icon-InfoOutline" viewBox="0 0 24 24">

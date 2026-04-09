@@ -43,7 +43,7 @@
     { "name": "ClockOutline", "category": "Graphical", "defaultSize": 24 },
     { "name": "Clock", "category": "Graphical", "defaultSize": 24 },
     { "name": "LocationOutline", "category": "Graphical", "defaultSize": 24 },
-    { "name": "HospitalOutlined", "category": "Graphical", "defaultSize": 24 },
+    { "name": "HospitalOutline", "category": "Graphical", "defaultSize": 24 },
     { "name": "ListZero", "category": "Stepper", "defaultSize": 16 },
     { "name": "ListOne", "category": "Stepper", "defaultSize": 16 },
     { "name": "ListTwo", "category": "Stepper", "defaultSize": 16 },
