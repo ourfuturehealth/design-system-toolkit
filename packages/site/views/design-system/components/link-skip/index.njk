@@ -31,6 +31,23 @@
   <p>Place the link skip near the top of the page so it becomes available as one of the first keyboard interactions.</p>
   <p>The destination should point to the main content area of the page. If the target is not normally focusable, make sure your page implementation still moves keyboard focus to a useful location.</p>
   <p>Keep the text short and obvious. In most cases, "Skip to main content" is the clearest option.</p>
+  <p>The macro defaults to <code>#maincontent</code> and "Skip to main content", so you usually only need to change the text or target when the page has a different destination.</p>
+
+  <h3 id="customise-link-skips">Customise link skips</h3>
+  <ul>
+    <li>Use <code>text</code> to make the destination clear when users need to skip to something more specific than the main content.</li>
+    <li>Use <code>href</code> to point to the id of the section users should jump to.</li>
+    <li>Use <code>classes</code> and <code>attributes</code> for integration hooks such as <code>data-*</code> or extra ARIA attributes. Do not use them to change how the pattern behaves.</li>
+  </ul>
+
+  <h3 id="custom-target-and-label">Custom target and label</h3>
+  <p>Retarget the skip link when people need to jump past repeated controls, for example to search results or a long form section.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "link-skip",
+    type: "custom-target"
+  }) }}
 
   <h3>Accessibility</h3>
   <p>The link skip is only helpful if it works with a real target on the page. Always check that the destination exists and that keyboard users can continue from the skipped-to content without getting lost.</p>

@@ -1,13 +1,29 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LinkSkip, type LinkSkipProps } from './LinkSkip';
 
+const getSkipTargetId = (href?: string) =>
+  href?.startsWith('#') ? href.slice(1) : undefined;
+
 const renderLinkSkipStory = (args: LinkSkipProps) => (
-  <div style={{ position: 'relative', minHeight: '6rem' }}>
+  <div style={{ position: 'relative', minHeight: '10rem' }}>
     <p style={{ marginBottom: '1rem' }}>
       To view the link skip, press Tab or move focus into this example and
       press Tab.
     </p>
     <LinkSkip {...args} />
+    {getSkipTargetId(args.href) ? (
+      <div
+        id={getSkipTargetId(args.href)}
+        tabIndex={-1}
+        style={{
+          marginTop: '3.5rem',
+          border: '1px dashed #768692',
+          padding: '1rem',
+        }}
+      >
+        Example target: {getSkipTargetId(args.href)}
+      </div>
+    ) : null}
   </div>
 );
 
@@ -19,7 +35,7 @@ const meta: Meta<LinkSkipProps> = {
     docs: {
       description: {
         component:
-          'LinkSkip is the canonical React surface for the Link / Skip pattern. It mirrors the toolkit behaviour by defaulting to `#maincontent` and "Skip to main content" while still allowing standard anchor attributes when needed.',
+          'LinkSkip is the canonical React surface for the Link / Skip pattern. It defaults to `#maincontent` and "Skip to main content", and you normally only change the label or target when users need to skip somewhere more specific. Standard anchor attributes still pass through when you need them.',
       },
     },
   },
@@ -31,11 +47,13 @@ const meta: Meta<LinkSkipProps> = {
   argTypes: {
     children: {
       control: 'text',
-      description: 'Visible skip-link label.',
+      description:
+        'Visible skip-link label. Defaults to `Skip to main content`.',
     },
     href: {
       control: 'text',
-      description: 'Target id or URL for the skip link.',
+      description:
+        'Target id or URL for the skip link. Defaults to `#maincontent`.',
     },
     className: {
       control: false,
@@ -60,25 +78,54 @@ type Story = StoryObj<LinkSkipProps>;
 
 export const Default: Story = {
   render: renderLinkSkipStory,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive default example. Use the controls to change the skip-link label and fragment target.',
+      },
+    },
+  },
 };
 
-export const CustomLabel: Story = {
+export const CustomTargetAndLabel: Story = {
   args: {
     children: 'Skip to results',
     href: '#results',
   },
   render: renderLinkSkipStory,
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Retarget the skip link when people need to bypass repeated controls and jump to a more specific section, such as search results or filters.',
+      },
+    },
+  },
 };
 
 export const Showcase: Story = {
-  render: () =>
-    renderLinkSkipStory({
-      children: 'Skip to main content',
-      href: '#maincontent',
-    }),
+  render: () => (
+    <div style={{ display: 'grid', gap: '1.5rem' }}>
+      {renderLinkSkipStory({
+        children: 'Skip to main content',
+        href: '#maincontent',
+      })}
+      {renderLinkSkipStory({
+        children: 'Skip to results',
+        href: '#results',
+      })}
+    </div>
+  ),
   parameters: {
     controls: {
       disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Side-by-side examples of the default skip-link target and a custom target for journeys with repeated filters or other long blocks of controls.',
+      },
     },
   },
 };

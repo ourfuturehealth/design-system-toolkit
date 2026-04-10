@@ -36,6 +36,36 @@
   <p>If a link icon takes people back through a transaction, it should return them to the page in the state they last saw it.</p>
   <p>Consider where you place the link. Avoid putting it too close to other links or buttons where it could distract from the main task.</p>
 
+  <h3 id="customise-link-icons">Customise link icons</h3>
+  <p>The same macro can cover back-navigation, outward links and other prominent navigation links.</p>
+  <ul>
+    <li>Use <code>text</code> for plain labels, or <code>html</code> if the label needs trusted inline markup.</li>
+    <li>Use <code>iconPosition</code> to place the icon on the left or right of the text.</li>
+    <li>Use <code>iconName</code> to choose any toolkit icon. If you leave it unset, the macro uses <code>ChevronLeft</code> for left icons and <code>Launch</code> for right icons.</li>
+    <li>Use <code>size</code> to switch between <code>small</code> and <code>medium</code>.</li>
+    <li>Use <code>openInNewWindow</code> when the destination should open in a new tab. The macro adds the safe <code>rel</code> value for you.</li>
+    <li>Use <code>iconColor</code> only when the icon needs to differ from the text colour.</li>
+    <li>Use <code>classes</code> and <code>attributes</code> for integration hooks rather than creating new visual variants.</li>
+  </ul>
+
+  <h3 id="right-icon-and-medium-size">Right icon and medium size</h3>
+  <p>Use a right icon when the link points outward to another destination or signals forward movement through a journey.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "link-icon",
+    type: "right-icon"
+  }) }}
+
+  <h3 id="custom-icon-and-colour">Custom icon and colour</h3>
+  <p>Choose a different icon when it adds meaning to the link, and only override the icon colour when the icon should not inherit the text colour.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "link-icon",
+    type: "custom-icon-colour"
+  }) }}
+
   <h3>Accessibility</h3>
   <p>Make sure the text still describes the action on its own. The icon should support the message, not replace it.</p>
   <p>If the right-icon variant opens a new tab or takes users outside the current journey, make that clear in the visible link text or surrounding context.</p>

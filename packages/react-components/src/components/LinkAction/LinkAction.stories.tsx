@@ -9,7 +9,7 @@ const meta: Meta<LinkActionProps> = {
     docs: {
       description: {
         component:
-          'LinkAction is the canonical React surface for the prominent Link / Action pattern. It always renders the coloured circular arrow icon, keeps the toolkit structure, and uses the newer focus treatment from the Figma design.',
+          'LinkAction is the canonical React surface for the prominent Link / Action pattern. It keeps the toolkit structure, always renders the coloured circular arrow icon, and lets you customise the visible label, destination, and whether the link opens in a new tab. Standard anchor attributes still pass through when you need them.',
       },
     },
   },
@@ -21,16 +21,16 @@ const meta: Meta<LinkActionProps> = {
   argTypes: {
     children: {
       control: 'text',
-      description: 'Visible link text.',
+      description: 'Visible link text. Keep it short and action-led.',
     },
     href: {
       control: 'text',
-      description: 'Destination URL for the link action.',
+      description: 'Destination URL or fragment for the link action.',
     },
     openInNewWindow: {
       control: 'boolean',
       description:
-        'Opens the link in a new tab and adds the safe `rel` values when enabled.',
+        'Opens the link in a new tab and adds `target="_blank"` plus the safe `rel` values when enabled.',
     },
     className: {
       control: false,
@@ -53,11 +53,28 @@ const meta: Meta<LinkActionProps> = {
 export default meta;
 type Story = StoryObj<LinkActionProps>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive link action example. Use the controls to change the label, destination, and `openInNewWindow` behaviour.',
+      },
+    },
+  },
+};
 
 export const OpenInNewWindow: Story = {
   args: {
     openInNewWindow: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Use `openInNewWindow` when the destination should open in a new tab or window. The component sets `target="_blank"` and `rel="noopener noreferrer"` for you.',
+      },
+    },
   },
 };
 
@@ -73,6 +90,12 @@ export const Showcase: Story = {
   parameters: {
     controls: {
       disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Common link action combinations: a standard in-journey destination and a version that opens an external journey in a new tab.',
+      },
     },
   },
 };

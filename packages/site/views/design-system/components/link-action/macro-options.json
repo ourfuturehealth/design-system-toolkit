@@ -4,31 +4,31 @@
       "name": "text",
       "type": "string",
       "required": true,
-      "description": "Text to use within the link action component."
+      "description": "Visible link label. Keep it short and action-led."
     },
     {
       "name": "href",
       "type": "string",
       "required": true,
-      "description": "The value of the link href attribute."
+      "description": "Destination URL or fragment for the link action."
     },
     {
       "name": "openInNewWindow",
       "type": "boolean",
       "required": false,
-      "description": "If set to true, then the link will open in a new window."
+      "description": "If `true`, opens the link in a new tab and adds `target=\"_blank\"` plus `rel=\"noopener noreferrer\"`."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the anchor tag."
+      "description": "Extra classes applied to the anchor element. Use for layout or integration hooks rather than changing the component pattern."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to add to the anchor tag."
+      "description": "Additional HTML attributes for the anchor element, for example `data-*` or `aria-*` attributes."
     }
   ]
 }
