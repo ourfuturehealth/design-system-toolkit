@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Make a page easier to scan by letting users reveal more detailed information only if they need it." %}
 {% set theme = "Content presentation" %}
-{% set dateUpdated = "November 2019" %}
+{% set dateUpdated = "April 2026" %}
 {% set backlog_issue_id = "30" %}
 
 {% extends "app-layout.njk" %}
@@ -34,6 +34,15 @@
   <h2 id="how-it-works">How to use details</h2>
   <p>The details component is a short link that expands to show more text when a user clicks on it.</p>
   <p>Make the link text short and descriptive so users can quickly work out if they need to click on it.</p>
+
+  <h3 id="details-with-rich-content">Details with rich content</h3>
+  <p>Details can contain more than a single sentence. Use paragraphs, lists, and links inside the revealed panel when that helps explain supporting information clearly.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "details",
+    type: "rich-content"
+  }) }}
 
   <h2 id="details-and-expanders">Details and expanders</h2>
   <p>Details and expanders both hide sections of content which a user can choose to reveal.</p>

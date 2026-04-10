@@ -1,18 +1,39 @@
 {% from '../icon/macro.njk' import icon %}
 
-<details class="ofh-details
-{%- if params.classes %} {{ params.classes }}{% endif %}"
+{% set isExpander = params.classes and 'ofh-expander' in params.classes %}
+{% set contentHtml = params.html if params.html else params.HTML %}
+
+<details class="ofh-details{% if params.classes %} {{ params.classes }}{% endif %}"
 {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
-  <summary class="ofh-details__summary">
+  <summary class="ofh-details__summary{% if isExpander %} ofh-details__summary--expander{% else %} ofh-details__summary--details{% endif %}">
+    {%- if isExpander -%}
+      <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-closed" aria-hidden="true">
+        {{ icon({ "name": "AddCircle", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+      </span>
+      <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-open" aria-hidden="true">
+        {{ icon({ "name": "MinusCircle", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+      </span>
+    {%- else -%}
+      <span class="ofh-details__summary-icon ofh-details__summary-icon--details-closed" aria-hidden="true">
+        {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+      </span>
+      <span class="ofh-details__summary-icon ofh-details__summary-icon--details-open" aria-hidden="true">
+        {{ icon({ "name": "ChevronDown", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+      </span>
+    {%- endif -%}
     <span class="ofh-details__summary-text">
-      {%- if params.classes and 'ofh-expander' in params.classes -%}
-        {{ icon({ "name": "AddCircle", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--expand" }) }}
-        {{ icon({ "name": "MinusCircle", "size": 32, "classes": "ofh-details__expander-icon ofh-details__expander-icon--collapse" }) }}
-      {%- endif -%}
       {{ params.text }}
     </span>
   </summary>
   <div class="ofh-details__text">
-    {{- params.HTML | safe }}
+    {%- if isExpander -%}
+      <div class="ofh-details__panel ofh-details__panel--expander">
+        {{- contentHtml | safe }}
+      </div>
+    {%- else -%}
+      <div class="ofh-details__panel ofh-details__panel--details">
+        {{- contentHtml | safe }}
+      </div>
+    {%- endif -%}
   </div>
 </details>
