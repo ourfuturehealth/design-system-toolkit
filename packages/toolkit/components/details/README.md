@@ -27,8 +27,8 @@ For this component to be accessible and compatible with older browsers, include 
       </svg>
     </span>
     <span class="ofh-details__summary-icon ofh-details__summary-icon--details-open" aria-hidden="true">
-      <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ExpandMore ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
-        <use href="/assets/icons/icon-sprite.svg#ofh-icon-ExpandMore"></use>
+      <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ChevronDown ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
+        <use href="/assets/icons/icon-sprite.svg#ofh-icon-ChevronDown"></use>
       </svg>
     </span>
     <span class="ofh-details__summary-text">Where can I find my NHS number?</span>
@@ -93,8 +93,8 @@ Find out more about the expander component and when to use it in the [design sys
       </svg>
     </span>
     <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-open" aria-hidden="true">
-      <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--RemoveCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
-        <use href="/assets/icons/icon-sprite.svg#ofh-icon-RemoveCircle"></use>
+      <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--MinusCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
+        <use href="/assets/icons/icon-sprite.svg#ofh-icon-MinusCircle"></use>
       </svg>
     </span>
     <span class="ofh-details__summary-text">Opening times</span>
@@ -208,8 +208,8 @@ Find out more about the expander component and when to use it in the [design sys
         </svg>
       </span>
       <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-open" aria-hidden="true">
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--RemoveCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-RemoveCircle"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--MinusCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-MinusCircle"></use>
         </svg>
       </span>
       <span class="ofh-details__summary-text">How to measure your blood glucose levels</span>
@@ -235,8 +235,8 @@ Find out more about the expander component and when to use it in the [design sys
         </svg>
       </span>
       <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-open" aria-hidden="true">
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--RemoveCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-RemoveCircle"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--MinusCircle ofh-details__summary-icon-svg" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-MinusCircle"></use>
         </svg>
       </span>
       <span class="ofh-details__summary-text">When to check your blood glucose level</span>

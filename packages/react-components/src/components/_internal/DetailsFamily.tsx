@@ -13,11 +13,11 @@ const summaryIcons: Record<
 > = {
   details: {
     closed: 'ChevronRight',
-    open: 'ExpandMore',
+    open: 'ChevronDown',
   },
   expander: {
     closed: 'AddCircle',
-    open: 'RemoveCircle',
+    open: 'MinusCircle',
   },
 };
 
