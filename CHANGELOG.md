@@ -6,6 +6,27 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-10
+
+#### @ourfuturehealth/toolkit 4.11.0 (`toolkit-v4.11.0`)
+
+##### Changed
+
+- Refreshed the toolkit `details` and `expander` components to match the current Figma treatment for icon states, responsive spacing, and revealed-content layout
+- Corrected the open `details` content-rule alignment so the left rule sits on the intended inset edge
+- Expanded the docs-site coverage for `details` with a rich-content example and refreshed the component-page metadata for the details family
+
+#### @ourfuturehealth/react-components 0.9.0 (`react-v0.9.0`)
+
+##### Added
+
+- First public React `Details` and `Expander` components using the shared details-family renderer
+- Storybook docs, grouped expander coverage, and unit tests for the React details family
+
+##### Changed
+
+- Aligned the React details-family icon names and teaching copy with the current toolkit and docs-site surfaces
+
 ### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)

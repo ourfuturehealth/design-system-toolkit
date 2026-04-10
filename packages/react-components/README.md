@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.7.0/ourfuturehealth-react-components-0.7.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.9.0/ourfuturehealth-react-components-0.9.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -47,7 +47,9 @@ import {
   CharacterCount,
   Checkboxes,
   DateInput,
+  Details,
   ErrorSummary,
+  Expander,
   Fieldset,
   Icon,
   Radios,
@@ -82,6 +84,13 @@ function App() {
           },
         ]}
       />
+      <Details summary="Why we ask for this">
+        We use your answers to tailor the information you see next.
+      </Details>
+      <Expander summary="What happens next">
+        We will review your answers and let you know if we need any more
+        information.
+      </Expander>
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <Icon name="Search" size={24} />
