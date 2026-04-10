@@ -18,7 +18,7 @@ describe('Details', () => {
     expect(container.querySelector('.ofh-details')).toBeInTheDocument();
     expect(container.querySelector('.ofh-details__summary--details')).toBeInTheDocument();
     expect(container.querySelector('.ofh-icon--ChevronRight')).toBeInTheDocument();
-    expect(container.querySelector('.ofh-icon--ExpandMore')).toBeInTheDocument();
+    expect(container.querySelector('.ofh-icon--ChevronDown')).toBeInTheDocument();
     expect(container.querySelector('.ofh-details__panel--details')).toBeInTheDocument();
   });
 

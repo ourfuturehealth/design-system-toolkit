@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Details } from './Details';
 
 const meta: Meta<typeof Details> = {
-  title: 'Components/Content presentation/Details',
+  title: 'Components/Details',
   component: Details,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component:
-          'Use Details for a small amount of supporting information that is helpful for some users but not most. The React component uses the same shared details family renderer as Expander, but keeps a separate public entry point so consumers can choose the more compact disclosure pattern when they need it.',
+          'Use Details to make a page easier to scan when only some users need the supporting information. Prefer Expander when the content is more important, aimed at a wider audience, or needs more visual prominence.',
       },
     },
   },

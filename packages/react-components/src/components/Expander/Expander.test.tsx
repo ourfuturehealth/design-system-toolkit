@@ -19,7 +19,7 @@ describe('Expander', () => {
     expect(container.querySelector('.ofh-expander')).toBeInTheDocument();
     expect(container.querySelector('.ofh-details__summary--expander')).toBeInTheDocument();
     expect(container.querySelector('.ofh-icon--AddCircle')).toBeInTheDocument();
-    expect(container.querySelector('.ofh-icon--RemoveCircle')).toBeInTheDocument();
+    expect(container.querySelector('.ofh-icon--MinusCircle')).toBeInTheDocument();
     expect(container.querySelector('.ofh-details__panel--expander')).toBeInTheDocument();
   });
 

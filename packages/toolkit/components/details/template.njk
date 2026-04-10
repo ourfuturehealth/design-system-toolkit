@@ -1,6 +1,7 @@
 {% from '../icon/macro.njk' import icon %}
 
 {% set isExpander = params.classes and 'ofh-expander' in params.classes %}
+{% set contentHtml = params.html if params.html else params.HTML %}
 
 <details class="ofh-details{% if params.classes %} {{ params.classes }}{% endif %}"
 {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
@@ -10,14 +11,14 @@
         {{ icon({ "name": "AddCircle", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
       </span>
       <span class="ofh-details__summary-icon ofh-details__summary-icon--expander-open" aria-hidden="true">
-        {{ icon({ "name": "RemoveCircle", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+        {{ icon({ "name": "MinusCircle", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
       </span>
     {%- else -%}
       <span class="ofh-details__summary-icon ofh-details__summary-icon--details-closed" aria-hidden="true">
         {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
       </span>
       <span class="ofh-details__summary-icon ofh-details__summary-icon--details-open" aria-hidden="true">
-        {{ icon({ "name": "ExpandMore", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
+        {{ icon({ "name": "ChevronDown", "size": 32, "classes": "ofh-details__summary-icon-svg" }) }}
       </span>
     {%- endif -%}
     <span class="ofh-details__summary-text">
@@ -27,11 +28,11 @@
   <div class="ofh-details__text">
     {%- if isExpander -%}
       <div class="ofh-details__panel ofh-details__panel--expander">
-        {{- params.HTML | safe }}
+        {{- contentHtml | safe }}
       </div>
     {%- else -%}
       <div class="ofh-details__panel ofh-details__panel--details">
-        {{- params.HTML | safe }}
+        {{- contentHtml | safe }}
       </div>
     {%- endif -%}
   </div>
