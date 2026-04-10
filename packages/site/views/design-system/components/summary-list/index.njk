@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Use the summary list to summarise information, for example, a user’s responses at the end of a form." %}
 {% set theme = "Content presentation" %}
-{% set dateUpdated = "August 2020" %}
+{% set dateUpdated = "April 2026" %}
 {% set backlog_issue_id = "36" %}
 
 {% extends "app-layout.njk" %}
@@ -35,22 +35,10 @@
   <h2>How to use summary lists</h2>
   <p>There are 2 ways to use the summary list component. You can use HTML or, if you’re using <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> or the <a href="https://nhsuk-prototype-kit.azurewebsites.net/docs">NHS.UK prototype kit</a>, you can use the Nunjucks macro.</p>
 
-  {{ designExample({
-    group: "components",
-    item: "summary-list",
-    type: "default"
-  }) }}
-
   <h3 id="summary-list-with-actions">Summary list with actions</h3>
-  <p>You can add actions to a summary list, like a "Change" link to let users go back and edit their answer.</p>
+  <p>The default example above shows the summary list with actions, including the standard "Change" links that let users go back and edit an answer.</p>
   <p>People who use assistive technology, like a screen reader, may hear the action links out of context and not know what they do. To give more context, add visually hidden text to the links. This means a screen reader user will hear a meaningful action, like "Change name" or "Change date of birth".</p>
   <p>On larger screens, the list uses a three-column layout with the key taking about one quarter of the width, the value taking about two quarters, and the actions taking the remaining quarter. The default layout keeps the row spacing padded; set <code>padded: false</code> for the denser version.</p>
-
-  {{ designExample({
-    group: "components",
-    item: "summary-list",
-    type: "default"
-  }) }}
 
   <h3 id="summary-list-without-actions">Summary list without actions</h3>
 
