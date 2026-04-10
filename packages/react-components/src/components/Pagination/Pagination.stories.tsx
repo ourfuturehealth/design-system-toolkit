@@ -76,23 +76,3 @@ export const PreviousOnly: Story = {
 export const NextOnly: Story = {
   render: () => <Pagination nextUrl="/section/symptoms" nextPage="Symptoms" />,
 };
-
-export const AllVariants: Story = {
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  render: () => (
-    <div style={{ display: 'grid', gap: '1.5rem', maxWidth: '32rem' }}>
-      <Pagination
-        previousUrl="/section/treatments"
-        previousPage="Treatments"
-        nextUrl="/section/symptoms"
-        nextPage="Symptoms"
-      />
-      <Pagination previousUrl="/section/treatments" previousPage="Treatments" />
-      <Pagination nextUrl="/section/symptoms" nextPage="Symptoms" />
-    </div>
-  ),
-};
