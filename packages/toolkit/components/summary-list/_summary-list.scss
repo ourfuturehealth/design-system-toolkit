@@ -14,7 +14,9 @@
 
 .ofh-summary-list {
   @include ofh-font($size: 'paragraph-md');
+
   margin: 0; /* [2] */
+
   @include ofh-responsive-margin(32, 'bottom');
 }
 
@@ -52,6 +54,7 @@
 
 .ofh-summary-list__key {
   @include ofh-typography-weight-bold;
+
   margin-bottom: $ofh-size-4;
 
   @include mq($from: tablet) {
