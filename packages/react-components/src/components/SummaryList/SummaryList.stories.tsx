@@ -37,7 +37,7 @@ const defaultRows = [
 ];
 
 const meta: Meta<typeof SummaryList> = {
-  title: 'Components/SummaryList',
+  title: 'Components/Summary list',
   component: SummaryList,
   parameters: {
     layout: 'padded',
