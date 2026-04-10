@@ -27,7 +27,7 @@ Ensure the correct `id` value has been added to your main content for the skip l
 
 ### Nunjucks macro
 
-```html
+```njk
 {% from 'components/link-skip/macro.njk' import linkSkip %}
 
 {{ linkSkip({

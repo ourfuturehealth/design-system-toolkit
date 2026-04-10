@@ -14,12 +14,12 @@ Find out more about the canonical link icon component and when to use it in the 
 ### HTML markup
 
 ```html
-<div class="ofh-back-link">
-  <a class="ofh-link-icon__link" href="#">
-    <svg class="ofh-icon ofh-icon--material ofh-icon--16 ofh-icon--ChevronLeft ofh-link-icon__icon" aria-hidden="true" focusable="false" width="16" height="16">
+<div class="ofh-back-link ofh-link-icon ofh-link-icon--small ofh-link-icon--icon-left">
+  <a class="ofh-back-link__link ofh-link-icon__link" href="#">
+    <svg class="ofh-icon ofh-icon--material ofh-icon--16 ofh-icon--ChevronLeft ofh-back-link__icon ofh-link-icon__icon" aria-hidden="true" focusable="false" width="16" height="16">
       ...
     </svg>
-    Go back
+    <span class="ofh-link-icon__text">Go back</span>
   </a>
 </div>
 ```
@@ -43,8 +43,8 @@ The back link Nunjucks macro takes the following arguments:
 | --------------------|----------|-----------|-------------------------|
 | **text (or) html**  | string   | Yes       | Text or HTML to use within the back link component. If `html` is provided, the `text` argument will be ignored. |
 | **href**            | string   | Yes       | The value of the link href attribute. |
-| **classes**         | string   | No        | Optional additional classes to add to the button element. Separate each class with a space. |
-| **attributes**      | object   | No        | Any extra HTML attributes (for example data attributes) to add to the textarea tag. |
+| **classes**         | string   | No        | Optional additional classes to add to the root container. Separate each class with a space. |
+| **attributes**      | object   | No        | Any extra HTML attributes (for example data attributes) to add to the anchor tag. |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).
 

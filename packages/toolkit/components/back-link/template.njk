@@ -1,11 +1,10 @@
-{% set params = {
-  "href": params.href,
-  "text": params.text if params.text else "Back",
-  "html": params.html,
-  "iconName": "ChevronLeft",
-  "iconPosition": "left",
-  "size": "small",
-  "classes": params.classes,
-  "attributes": params.attributes
-} %}
-{% include "../link-icon/template.njk" %}
+{% from '../icon/macro.njk' import icon %}
+
+<div class="ofh-back-link ofh-link-icon ofh-link-icon--small ofh-link-icon--icon-left{%- if params.classes %} {{ params.classes }}{% endif %}">
+  <a class="ofh-back-link__link ofh-link-icon__link"
+    href="{% if params.href %}{{ params.href }}{% else %}#{% endif %}"
+    {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    {{ icon({ "name": "ChevronLeft", "size": 16, "classes": "ofh-back-link__icon ofh-link-icon__icon" }) }}
+    <span class="ofh-link-icon__text">{{ params.html | safe if params.html else (params.text if params.text else 'Back') }}</span>
+  </a>
+</div>
