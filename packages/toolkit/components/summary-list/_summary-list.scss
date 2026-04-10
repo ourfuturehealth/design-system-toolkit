@@ -77,7 +77,7 @@
 }
 
 .ofh-summary-list__actions {
-  margin-top: $ofh-size-4;
+  @include ofh-responsive-margin(16, 'top');
 
   @include mq($from: tablet) {
     margin-top: 0;
