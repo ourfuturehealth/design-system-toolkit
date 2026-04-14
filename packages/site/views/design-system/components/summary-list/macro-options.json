@@ -82,6 +82,12 @@
               "type": "string",
               "required": false,
               "description": "Actions rely on context from the surrounding content so may require additional accessible text, text supplied to this option is appended to the end, use `html` for more complicated scenarios."
+            },
+            {
+              "name": "attributes",
+              "type": "object",
+              "required": false,
+              "description": "HTML attributes (for example data attributes) to add to the action link."
             }
           ]
         }
@@ -98,6 +104,18 @@
       "type": "object",
       "required": false,
       "description": "HTML attributes (for example data attributes) to add to the summary list container."
+    },
+    {
+      "name": "padded",
+      "type": "boolean",
+      "required": false,
+      "description": "Use the default padded spacing on larger screens. Set to `false` for the denser compact layout."
+    },
+    {
+      "name": "noBorder",
+      "type": "boolean",
+      "required": false,
+      "description": "Remove the separator line between rows while keeping the rest of the summary list structure intact."
     }
   ]
 }

@@ -6,6 +6,27 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-14
+
+#### @ourfuturehealth/toolkit 4.12.0 (`toolkit-v4.12.0`)
+
+##### Changed
+
+- Refreshed the toolkit `summary-list` component to the current Figma structure, including padded and compact row treatments, clearer stacked action spacing, and the no-border compact variant
+- Expanded the toolkit summary-list macro to support explicit `padded` and `noBorder` options while preserving class-based compatibility for existing no-border usage
+- Updated the summary-list docs page, examples, macro options, and README guidance so the compact and no-border variants are taught consistently
+
+#### @ourfuturehealth/react-components 0.10.0 (`react-v0.10.0`)
+
+##### Added
+
+- First public React `SummaryList` component with toolkit-parity row structure, optional action links, compact spacing, and no-border support
+- Storybook docs and unit/accessibility coverage for the React summary-list variants
+
+##### Changed
+
+- Aligned the React summary-list teaching surface with the toolkit docs so reviewers and consumers see the same default, compact, without-actions, and without-border variants
+
 ### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)
