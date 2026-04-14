@@ -10,8 +10,8 @@
 
 .ofh-footer__main {
   background-color: $ofh-color-background-tertiary;
-  padding-bottom: $ofh-size-32;
-  padding-top: $ofh-size-32;
+
+  @include ofh-responsive-padding(32, 'vertical');
 }
 
 .ofh-footer__main-inner {
@@ -19,13 +19,15 @@
 
   display: flex;
   flex-direction: column;
-  gap: $ofh-size-32;
+
+  @include ofh-responsive-gap-y(32);
 }
 
 .ofh-footer__meta {
   display: flex;
   flex-direction: column;
-  gap: $ofh-size-16;
+
+  @include ofh-responsive-gap-y(16);
 }
 
 .ofh-footer__links,
@@ -38,7 +40,9 @@
 .ofh-footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: $ofh-size-16 $ofh-size-32;
+  row-gap: $ofh-size-16;
+
+  @include ofh-responsive-gap-x(32);
 }
 
 .ofh-footer__link {
@@ -81,8 +85,8 @@
 
 .ofh-footer__social {
   background-color: $ofh-color-background-secondary;
-  padding-bottom: $ofh-size-32;
-  padding-top: $ofh-size-32;
+
+  @include ofh-responsive-padding(32, 'vertical');
 }
 
 .ofh-footer__social-inner {
