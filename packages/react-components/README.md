@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.10.0/ourfuturehealth-react-components-0.10.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.11.0/ourfuturehealth-react-components-0.11.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -59,6 +59,7 @@ import {
   LinkSkip,
   Radios,
   Select,
+  SummaryList,
   Tag,
   Textarea,
   TextInput,
@@ -76,6 +77,15 @@ function App() {
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
     { value: 'post', label: 'Post' },
+  ];
+  const summaryRows = [
+    {
+      key: { text: 'Name' },
+      value: { text: 'Sarah Philips' },
+      actions: {
+        items: [{ href: '#name', text: 'Change', visuallyHiddenText: 'name' }],
+      },
+    },
   ];
 
   return (
@@ -96,6 +106,15 @@ function App() {
         We will review your answers and let you know if we need any more
         information.
       </Expander>
+      <SummaryList rows={summaryRows} />
+      <Details summary="Why we ask for this">
+        We use your answers to tailor the information you see next.
+      </Details>
+      <Expander summary="What happens next">
+        We will review your answers and let you know if we need any more
+        information.
+      </Expander>
+      <SummaryList rows={summaryRows} />
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <Icon name="Search" size={24} />
@@ -204,6 +223,7 @@ The package also provides:
 - `Checkboxes`
 - `Radios`
 - `Icon`
+- `SummaryList`
 
 ### ErrorSummary
 
