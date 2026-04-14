@@ -82,6 +82,12 @@
               "type": "string",
               "required": false,
               "description": "Actions rely on context from the surrounding content so may require additional accessible text, text supplied to this option is appended to the end, use `html` for more complicated scenarios."
+            },
+            {
+              "name": "attributes",
+              "type": "object",
+              "required": false,
+              "description": "HTML attributes (for example data attributes) to add to the action link."
             }
           ]
         }
