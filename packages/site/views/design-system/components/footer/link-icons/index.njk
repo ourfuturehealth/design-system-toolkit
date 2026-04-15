@@ -1,0 +1,29 @@
+{% from 'footer/macro.njk' import footer %}
+
+{{ footer({
+  "links": [
+    {
+      "url": "#overview",
+      "label": "Back to overview",
+      "iconName": "ChevronLeft",
+      "iconPosition": "left"
+    },
+    {
+      "url": "#search",
+      "label": "Search site",
+      "iconName": "Search",
+      "iconPosition": "left"
+    },
+    {
+      "url": "#privacy",
+      "label": "Privacy"
+    },
+    {
+      "url": "https://example.com/guidance",
+      "label": "External guidance",
+      "external": true,
+      "openInNewWindow": true
+    }
+  ],
+  "smallPrint": "&copy; Our Future Health 2026"
+}) }}

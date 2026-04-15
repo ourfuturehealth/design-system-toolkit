@@ -1,14 +1,12 @@
 /* ==========================================================================
-   COMPONENTS/ #LINK-ICON
+   COMPONENTS / #LINK-ICON
    ========================================================================== */
 
-.ofh-link-icon,
-.ofh-back-link {
+.ofh-link-icon {
   @include ofh-responsive-margin(16, 'bottom');
 }
 
-.ofh-link-icon__link,
-.ofh-back-link__link {
+.ofh-link-icon__link {
   @include ofh-typography-responsive('paragraph-sm');
 
   align-items: center;
@@ -38,8 +36,7 @@
   white-space: normal;
 }
 
-.ofh-link-icon__icon,
-.ofh-back-link__icon {
+.ofh-link-icon__icon {
   color: currentColor;
   flex: none;
 }
@@ -67,8 +64,7 @@
 }
 
 @include mq($media-type: print) {
-  .ofh-link-icon__link,
-  .ofh-back-link__link {
+  .ofh-link-icon__link {
     color: $ofh-color-foreground-primary;
 
     &:visited {

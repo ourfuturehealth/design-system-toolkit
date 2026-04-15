@@ -1,12 +1,26 @@
 import React from 'react';
 import { joinClasses } from '../../internal/ofhUtils';
 import { Icon } from '../Icon';
+import { LinkIcon, type LinkIconProps } from '../LinkIcon';
+
+type FooterLinkIconProps = Pick<
+  LinkIconProps,
+  | 'iconColor'
+  | 'iconName'
+  | 'iconPosition'
+  | 'leftIconName'
+  | 'rightIconName'
+  | 'showIconLeft'
+  | 'showIconRight'
+  | 'size'
+>;
 
 export interface FooterLinkItem
   extends Omit<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     'children' | 'className' | 'href' | 'ref'
-  > {
+  >,
+    FooterLinkIconProps {
   href: string;
   label: React.ReactNode;
   external?: boolean;
@@ -40,7 +54,7 @@ export interface FooterProps
   socialLabel?: React.ReactNode;
   socialLinks?: FooterSocialLinkItem[];
   classes?: string;
-  ref?: React.Ref<HTMLFooterElement>;
+  ref?: React.Ref<HTMLElement>;
 }
 
 const socialIcons: Record<
@@ -52,8 +66,8 @@ const socialIcons: Record<
   }
 > = {
   linkedin: {
-    defaultIcon: 'LinkedIn',
-    hoverIcon: 'LinkedInHover',
+    defaultIcon: 'Linkedin',
+    hoverIcon: 'LinkedinHover',
     label: 'LinkedIn',
   },
   x: {
@@ -88,32 +102,54 @@ const renderFooterLink = (link: FooterLinkItem, index: number) => {
     href,
     label,
     external = false,
+    iconColor,
+    iconName,
+    iconPosition,
+    leftIconName,
     openInNewWindow = false,
     rel,
+    rightIconName,
+    showIconLeft,
+    showIconRight,
+    size,
     target,
     ...props
   } = link;
+  const usesCustomLinkIconDisplay =
+    iconPosition !== undefined ||
+    iconName !== undefined ||
+    leftIconName !== undefined ||
+    rightIconName !== undefined ||
+    showIconLeft !== undefined ||
+    showIconRight !== undefined;
+  const resolvedIconPosition = iconPosition ?? (external ? 'right' : 'left');
   const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
+  const resolvedShowIconLeft =
+    showIconLeft ?? (usesCustomLinkIconDisplay ? undefined : false);
+  const resolvedShowIconRight =
+    showIconRight ?? (usesCustomLinkIconDisplay ? undefined : external);
   const resolvedTarget = openInNewWindow ? '_blank' : target;
 
   return (
     <li className="ofh-footer__links-item" key={`footer-link-${index}`}>
-      <a
+      <LinkIcon
         {...props}
-        className="ofh-footer__link"
+        className="ofh-footer__link-component"
         href={href}
+        iconColor={iconColor}
+        iconName={iconName}
+        iconPosition={resolvedIconPosition}
+        leftIconName={leftIconName}
         rel={resolvedRel}
+        openInNewWindow={openInNewWindow}
+        rightIconName={rightIconName}
+        showIconLeft={resolvedShowIconLeft}
+        showIconRight={resolvedShowIconRight}
+        size={size}
         target={resolvedTarget}
       >
-        <span className="ofh-footer__link-text">{label}</span>
-        {external ? (
-          <Icon
-            name="Launch"
-            size={16}
-            className="ofh-footer__link-icon"
-          />
-        ) : null}
-      </a>
+        {label}
+      </LinkIcon>
     </li>
   );
 };
@@ -169,7 +205,7 @@ const renderSocialLink = (link: FooterSocialLinkItem, index: number) => {
 
 export const Footer = ({
   links = [],
-  smallPrint = '© Crown copyright',
+  smallPrint,
   legalText,
   socialLabel = 'Follow us',
   socialLinks = [],
@@ -178,47 +214,57 @@ export const Footer = ({
   ref,
   role = 'contentinfo',
   ...props
-}: FooterProps) => (
-  <footer
-    {...props}
-    ref={ref}
-    role={role}
-    className={joinClasses('ofh-footer', classes, className)}
-  >
-    <div className="ofh-footer__main">
-      <div className="ofh-width-container">
-        <div className="ofh-footer__main-inner">
-          <div className="ofh-footer__meta">
-            {links.length ? (
-              <>
-                <h2 className="ofh-u-visually-hidden">Support links</h2>
-                <ul className="ofh-footer__links">
-                  {links.map(renderFooterLink)}
-                </ul>
-              </>
-            ) : null}
-            <p className="ofh-footer__small-print">{smallPrint}</p>
-          </div>
-          {legalText ? (
-            <p className="ofh-footer__legal">{legalText}</p>
-          ) : null}
-        </div>
-      </div>
-    </div>
+}: FooterProps) => {
+  const resolvedSmallPrint =
+    smallPrint === undefined ? '© Crown copyright' : smallPrint;
+  const hasMeta = links.length > 0 || Boolean(resolvedSmallPrint);
 
-    {socialLinks.length ? (
-      <div className="ofh-footer__social">
+  return (
+    <footer
+      {...props}
+      ref={ref}
+      role={role}
+      className={joinClasses('ofh-footer', classes, className)}
+    >
+      <div className="ofh-footer__main">
         <div className="ofh-width-container">
-          <div className="ofh-footer__social-inner">
-            <p className="ofh-footer__social-title">{socialLabel}</p>
-            <ul className="ofh-footer__social-list">
-              {socialLinks.map(renderSocialLink)}
-            </ul>
+          <div className="ofh-footer__main-inner">
+            {hasMeta ? (
+              <div className="ofh-footer__meta">
+                {links.length ? (
+                  <>
+                    <h2 className="ofh-u-visually-hidden">Support links</h2>
+                    <ul className="ofh-footer__links">
+                      {links.map(renderFooterLink)}
+                    </ul>
+                  </>
+                ) : null}
+                {resolvedSmallPrint ? (
+                  <p className="ofh-footer__small-print">{resolvedSmallPrint}</p>
+                ) : null}
+              </div>
+            ) : null}
+            {legalText ? (
+              <p className="ofh-footer__legal">{legalText}</p>
+            ) : null}
           </div>
         </div>
       </div>
-    ) : null}
-  </footer>
-);
+
+      {socialLinks.length ? (
+        <div className="ofh-footer__social">
+          <div className="ofh-width-container">
+            <div className="ofh-footer__social-inner">
+              <p className="ofh-footer__social-title">{socialLabel}</p>
+              <ul className="ofh-footer__social-list">
+                {socialLinks.map(renderSocialLink)}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </footer>
+  );
+};
 
 Footer.displayName = 'Footer';
