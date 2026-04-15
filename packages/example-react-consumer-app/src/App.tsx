@@ -1,41 +1,107 @@
-import { useId, useMemo, useState } from 'react';
+import { useId, useState } from 'react';
 import {
   Button,
   Card,
   CardCallout,
   CardDoDont,
+  Checkboxes,
   ErrorSummary,
+  Icon,
+  Radios,
+  Select,
   Tag,
   TextInput,
+  Textarea,
 } from '@ourfuturehealth/react-components';
 import './App.css';
+
+const serviceItems = [
+  { text: 'Choose a support topic', value: '' },
+  { text: 'Participant support', value: 'participant-support' },
+  { text: 'Appointments and logistics', value: 'appointments' },
+  { text: 'Results and follow-up', value: 'results' },
+];
+
+const contactMethodItems = [
+  {
+    value: 'email',
+    label: 'Email',
+    hint: 'Best when you want a written response with links and next steps.',
+  },
+  {
+    value: 'phone',
+    label: 'Phone call',
+    hint: 'Useful for time-sensitive requests or more complex questions.',
+  },
+];
+
+const updatePreferenceItems = [
+  {
+    value: 'appointments',
+    label: 'Appointment reminders',
+    hint: 'Get reminders before booked research visits.',
+  },
+  {
+    value: 'results',
+    label: 'Results updates',
+    hint: 'Hear when new information is available in your OFH account.',
+  },
+  {
+    value: 'research',
+    label: 'Research opportunities',
+    hint: 'Receive invitations to relevant studies and follow-up surveys.',
+  },
+];
+
+const iconExamples = [
+  { name: 'UnfoldMore', label: 'Select affordance' },
+  { name: 'CalendarOutline', label: 'Scheduling' },
+  { name: 'CheckCircle', label: 'Success state' },
+] as const;
+
+type ErrorSummaryItem = {
+  href: string;
+  text: string;
+};
 
 function App() {
   const nameId = useId();
   const emailId = useId();
+  const serviceId = useId();
+  const notesId = useId();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [service, setService] = useState('');
+  const [notes, setNotes] = useState('');
+  const [contactMethod, setContactMethod] = useState('email');
+  const [updatePreferences, setUpdatePreferences] = useState<string[]>([
+    'appointments',
+    'results',
+  ]);
   const [showErrors, setShowErrors] = useState(false);
 
-  const errors = useMemo(() => {
-    const nextErrors = [];
+  const errors: ErrorSummaryItem[] = [];
 
-    if (!name.trim()) {
-      nextErrors.push({
-        href: `#${nameId}`,
-        text: 'Enter your full name',
-      });
-    }
+  if (!name.trim()) {
+    errors.push({
+      href: `#${nameId}`,
+      text: 'Enter your full name',
+    });
+  }
 
-    if (!email.trim()) {
-      nextErrors.push({
-        href: `#${emailId}`,
-        text: 'Enter your email address',
-      });
-    }
+  if (!email.trim()) {
+    errors.push({
+      href: `#${emailId}`,
+      text: 'Enter your email address',
+    });
+  }
 
-    return nextErrors;
-  }, [email, emailId, name, nameId]);
+  if (!service) {
+    errors.push({
+      href: `#${serviceId}`,
+      text: 'Choose a support topic',
+    });
+  }
 
   const hasSubmissionErrors = showErrors && errors.length > 0;
 
@@ -46,18 +112,25 @@ function App() {
   const handleReset = () => {
     setName('');
     setEmail('');
+    setService('');
+    setNotes('');
+    setContactMethod('email');
+    setUpdatePreferences(['appointments', 'results']);
     setShowErrors(false);
   };
 
   return (
     <main className="consumer-app">
       <header className="consumer-app__hero">
-        <Tag variant="brand">Published tarball consumer</Tag>
+        <div className="consumer-app__tag-row">
+          <Tag variant="brand">Published tarball consumer</Tag>
+        </div>
         <h1 className="consumer-app__title">React consumer example</h1>
         <p className="consumer-app__lede">
           This app demonstrates how an external React application consumes the
           published <code>@ourfuturehealth/react-components</code> package and
-          one of its theme stylesheets.
+          one of its theme stylesheets. It now exercises direct icons, icon-led
+          cards, selection controls, and the input family more thoroughly.
         </p>
       </header>
 
@@ -72,10 +145,18 @@ function App() {
       <section className="consumer-app__grid">
         <div className="consumer-app__stack">
           <Card
-            heading="Profile details"
-            description="This section shows TextInput, ErrorSummary, Button, and Tag working together in a consumer app."
-            helperText="The form is intentionally simple and is here to validate basic interactive states."
-            tag={{ variant: 'blue', children: 'Interactive demo' }}
+            heading="Support request"
+            description="This card validates icon rendering, metadata icons, tags, and action-link treatment in a published-consumer setup."
+            helperText="Use the form below to exercise current input and selection states."
+            tag={{ variant: 'blue', children: 'Smoke test' }}
+            icon={{
+              name: 'CalendarOutline',
+              title: 'Scheduling icon',
+            }}
+            metadataItems={[
+              { icon: 'ClockOutline', text: 'Approx. 3 minute completion' },
+              { icon: 'LocationOutline', text: 'Participant services team' },
+            ]}
           />
 
           <section className="consumer-app__panel">
@@ -88,7 +169,7 @@ function App() {
                 hint="Enter the name that appears on your OFH account"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                error={hasSubmissionErrors && !name.trim() ? 'Enter your full name' : ''}
+                errorMessage={hasSubmissionErrors && !name.trim() ? 'Enter your full name' : ''}
                 required
               />
             </div>
@@ -101,9 +182,34 @@ function App() {
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                error={hasSubmissionErrors && !email.trim() ? 'Enter your email address' : ''}
+                errorMessage={
+                  hasSubmissionErrors && !email.trim() ? 'Enter your email address' : ''
+                }
                 width="three-quarters"
                 required
+              />
+            </div>
+
+            <div className="consumer-app__field">
+              <Select
+                id={serviceId}
+                label="Support topic"
+                hint="Select shows the published Select chevron and current option styling."
+                items={serviceItems}
+                value={service}
+                onChange={(event) => setService(String(event.target.value))}
+                errorMessage={hasSubmissionErrors && !service ? 'Choose a support topic' : ''}
+              />
+            </div>
+
+            <div className="consumer-app__field">
+              <Textarea
+                id={notesId}
+                label="Additional notes"
+                hint="Textarea is included here as another current input-family component."
+                rows={5}
+                value={notes}
+                onChange={(event) => setNotes(event.target.value)}
               />
             </div>
 
@@ -129,12 +235,54 @@ function App() {
             text="This example is intended to mirror an external consumer using the published release tarball, not a workspace dependency."
           />
 
+          <section className="consumer-app__panel">
+            <h2 className="consumer-app__section-title">Selection controls</h2>
+
+            <Radios
+              name="contact-method"
+              legend="Preferred contact method"
+              hint="This validates radio inputs and legend support in the published app."
+              value={contactMethod}
+              onChange={(value) => setContactMethod(String(value))}
+              items={contactMethodItems}
+            />
+
+            <div className="consumer-app__field">
+              <Checkboxes
+                name="updates"
+                legend="Updates you would like to receive"
+                hint="Checkboxes exercise another icon-bearing control because the check mark uses the shared React Icon."
+                value={updatePreferences}
+                onChange={(values) =>
+                  setUpdatePreferences(values.map((value) => String(value)))
+                }
+                items={updatePreferenceItems}
+              />
+            </div>
+          </section>
+
+          <section className="consumer-app__panel">
+            <h2 className="consumer-app__section-title">Icon showcase</h2>
+            <div className="consumer-app__icon-row">
+              {iconExamples.map((iconExample) => (
+                <div className="consumer-app__icon-swatch" key={iconExample.name}>
+                  <Icon
+                    name={iconExample.name}
+                    title={iconExample.label}
+                    responsiveSize={24}
+                  />
+                  <span className="consumer-app__icon-label">{iconExample.label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <CardDoDont
             type="do"
             items={[
               { item: 'Import one published theme stylesheet in your app entry point' },
-              { item: 'Install the release tarball rather than using git subdirectory syntax' },
-              { item: 'Keep React and React DOM aligned with the package peer dependencies' },
+              { item: 'Install the release tarball rather than using a workspace dependency' },
+              { item: 'Exercise at least one icon-bearing component when smoke testing a release' },
             ]}
           />
         </div>
