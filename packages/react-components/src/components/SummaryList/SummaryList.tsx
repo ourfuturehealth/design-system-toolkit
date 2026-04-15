@@ -99,7 +99,12 @@ export const SummaryList = ({
   );
 
   return (
-    <dl {...attributes} {...props} ref={ref} className={summaryListClasses}>
+    <dl
+      {...(attributes as React.HTMLAttributes<HTMLDListElement>)}
+      {...props}
+      ref={ref}
+      className={summaryListClasses}
+    >
       {rows.map((row, rowIndex) => {
         const rowClasses = joinClasses(
           'ofh-summary-list__row',
