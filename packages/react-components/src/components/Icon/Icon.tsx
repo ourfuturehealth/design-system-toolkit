@@ -52,9 +52,12 @@ export const Icon = ({
   style,
   ...props
 }: IconProps) => {
-  const { spritePath: _spritePath, ...svgProps } = props as React.SVGAttributes<SVGSVGElement> & {
-    spritePath?: string;
+  const svgProps = {
+    ...(props as React.SVGAttributes<SVGSVGElement> & {
+      spritePath?: string;
+    }),
   };
+  delete svgProps.spritePath;
   const iconSize = [16, 24, 32].includes(responsiveSize ?? size)
     ? (responsiveSize ?? size)
     : 24;
