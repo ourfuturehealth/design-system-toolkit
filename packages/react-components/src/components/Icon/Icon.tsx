@@ -1,4 +1,4 @@
-import defaultSpritePath from '@ourfuturehealth/toolkit/assets/icons/icon-sprite.svg?url';
+import bundledSpriteContent from '@ourfuturehealth/toolkit/assets/icons/icon-sprite.svg?raw';
 import type React from 'react';
 import { joinClasses } from '../../internal/ofhUtils';
 
@@ -9,7 +9,6 @@ interface BaseIconProps
   name: string;
   title?: string;
   color?: string;
-  spritePath?: string;
   ref?: React.Ref<SVGSVGElement>;
 }
 
@@ -28,24 +27,57 @@ export type IconProps = BaseIconProps & (
   | ResponsiveIconSizeProps
 );
 
+type BundledIconDefinition = {
+  body: string;
+  viewBox: string;
+};
+
+const bundledIcons = new Map<string, BundledIconDefinition>(
+  Array.from(
+    bundledSpriteContent.matchAll(
+      /<symbol\b([^>]*)>([\s\S]*?)<\/symbol>/g,
+    ),
+    ([, attributes, body]) => {
+      const idMatch = attributes.match(/\bid="ofh-icon-([^"]+)"/);
+      const viewBoxMatch = attributes.match(/\bviewBox="([^"]+)"/);
+
+      if (!idMatch || !viewBoxMatch) {
+        return null;
+      }
+
+      return [idMatch[1], { body, viewBox: viewBoxMatch[1] }] as const;
+    },
+  ).filter(
+    (
+      icon,
+    ): icon is readonly [string, BundledIconDefinition] => icon !== null,
+  ),
+);
+
 export const Icon = ({
   name,
   size = 24,
   responsiveSize,
   title,
   color,
-  spritePath = defaultSpritePath,
   ref,
   className = '',
   style,
   ...props
 }: IconProps) => {
+  const svgProps = {
+    ...(props as React.SVGAttributes<SVGSVGElement> & {
+      spritePath?: string;
+    }),
+  };
+  delete svgProps.spritePath;
   const iconSize = [16, 24, 32].includes(responsiveSize ?? size)
     ? (responsiveSize ?? size)
     : 24;
   const sizeClass = responsiveSize
     ? `ofh-icon--responsive-${iconSize}`
     : `ofh-icon--${iconSize}`;
+  const bundledIcon = bundledIcons.get(name);
   const iconStyle =
     color || style
       ? {
@@ -56,7 +88,7 @@ export const Icon = ({
 
   return (
     <svg
-      {...props}
+      {...svgProps}
       ref={ref}
       className={joinClasses(
         'ofh-icon',
@@ -70,10 +102,13 @@ export const Icon = ({
       role={title ? 'img' : undefined}
       width={iconSize}
       height={iconSize}
+      viewBox={bundledIcon?.viewBox}
       style={iconStyle}
     >
       {title ? <title>{title}</title> : null}
-      <use href={`${spritePath}#ofh-icon-${name}`}></use>
+      {bundledIcon ? (
+        <g dangerouslySetInnerHTML={{ __html: bundledIcon.body }}></g>
+      ) : null}
     </svg>
   );
 };

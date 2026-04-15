@@ -7,6 +7,9 @@ This app is intentionally configured as a standalone published-consumer example:
 - it installs the released `@ourfuturehealth/react-components` tarball
 - it imports the published theme stylesheet bundle
 - it does not use the monorepo workspace protocol
+- it exercises icon-bearing components such as `Icon`, `Select`, `Card`, and `Checkboxes`
+
+The dependency in `package.json` intentionally stays on the current published release tag. For unreleased branch validation, use the local tarball workflow below.
 
 ## Install and run
 
@@ -29,6 +32,7 @@ pnpm dev:react-consumer
 - a published tarball install works in a real consumer app
 - the exported React components render in a Vite application
 - the published stylesheet entrypoints load correctly
+- current input-family and icon-bearing components can be smoke-tested outside Storybook
 
 This makes it useful as guidance for future React consumers outside the toolkit repo.
 

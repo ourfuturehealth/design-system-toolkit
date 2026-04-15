@@ -46,7 +46,7 @@
       "name": "spritePath",
       "type": "string",
       "required": false,
-      "description": "Advanced override for the sprite URL. Defaults to `/assets/icons/icon-sprite.svg`."
+      "description": "Advanced override for the public toolkit sprite URL. Use this when your app serves `icon-sprite.svg` somewhere other than `/assets/icons/icon-sprite.svg`."
     }
   ]
 }

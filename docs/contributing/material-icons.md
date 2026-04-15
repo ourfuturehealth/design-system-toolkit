@@ -111,6 +111,8 @@ The macro renders:
 - An `<svg>` element with `.ofh-icon` classes
 - A `<use href="/assets/icons/icon-sprite.svg#ofh-icon-<name>">`
 
+Toolkit consumers must make that sprite file available at a public URL the browser can request. Installing the package places the file in `node_modules/@ourfuturehealth/toolkit/assets/icons/icon-sprite.svg`, but the consuming app still needs to copy or serve it as `/assets/icons/icon-sprite.svg`, or override the URL with `spritePath`.
+
 Example usage:
 
 ```njk
@@ -133,7 +135,7 @@ React icon names should stay aligned with toolkit `manifest.json` and the genera
 Current React approach:
 
 - Reuses the toolkit sprite semantics (`name`, `size`, responsive sizing, decorative vs titled)
-- Defaults to the bundled toolkit sprite asset and references symbols with `<use>`
+- Bundles toolkit icon data into the React package and renders the requested symbol inline
 - Treats icon-name changes as consumer-facing API changes that must be documented in release notes and the upgrading guide
 
 Related package: [`packages/react-components/`](../../packages/react-components/)

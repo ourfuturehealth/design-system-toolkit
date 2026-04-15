@@ -6,18 +6,69 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ## Breaking Changes by Version
 
-| Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
-| ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
-| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
-| [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
-| [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
+| Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
+| ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
+| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
+| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
+| [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment    | 🟡 Medium - API migration recommended    |
+| [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming       | 🟡 Medium - Search/replace recommended   |
 | [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
-| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming | 🟡 Medium - Find/replace required     |
-| [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices | 🟡 Medium - Index updates required    |
-| [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
+| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
+| [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
+| [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
 
 ---
+
+## Upgrading to React v0.8.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/react-components` v0.8.0+
+
+### Breaking Changes
+
+`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+
+### Migration Steps
+
+1. Remove any `spritePath` prop from `Icon` usage.
+2. Remove any `spritePath` field from `Card` icon configuration objects.
+3. Re-run visual checks for icon-bearing surfaces such as `Icon`, `Select`, `Card`, and `Checkboxes`.
+
+#### React example
+
+**Before:**
+
+```tsx
+<Icon name="Search" spritePath="/assets/icons/icon-sprite.svg" />
+
+<Card
+  icon={{
+    name: 'Search',
+    spritePath: '/assets/icons/icon-sprite.svg',
+  }}
+/>
+```
+
+**After:**
+
+```tsx
+<Icon name="Search" />
+
+<Card
+  icon={{
+    name: 'Search',
+  }}
+/>
+```
+
+If an application previously passed `spritePath` in React, that prop should now be removed.
+
+### Toolkit reminder
+
+Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
 
 ## Upgrading to v4.9.0 / React v0.7.0
 

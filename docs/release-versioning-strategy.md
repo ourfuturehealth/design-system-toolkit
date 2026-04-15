@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.9.0/ourfuturehealth-toolkit-4.9.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.7.0/ourfuturehealth-react-components-0.7.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz"
   }
 }
 ```
@@ -126,8 +126,9 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 17    | `react-v0.5.0`   | N/A             | `0.5.0`       | Monorepo       | Released               |
 | 18    | `toolkit-v4.8.0` | `4.8.0`         | N/A           | Monorepo       | Released               |
 | 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Released               |
-| 20    | `toolkit-v4.9.0` | `4.9.0`         | N/A           | Monorepo       | Planned in this branch |
-| 21    | `react-v0.7.0`   | N/A             | `0.7.0`       | Monorepo       | Planned in this branch |
+| 20    | `toolkit-v4.9.0` | `4.9.0`         | N/A           | Monorepo       | Released               |
+| 21    | `react-v0.7.0`   | N/A             | `0.7.0`       | Monorepo       | Released               |
+| 22    | `react-v0.8.0`   | N/A             | `0.8.0`       | Monorepo       | Planned in this branch |
 
 ## References
 

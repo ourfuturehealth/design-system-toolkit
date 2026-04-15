@@ -27,7 +27,7 @@ Add the dependency to `package.json`:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.0/ourfuturehealth-toolkit-4.0.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
@@ -42,7 +42,7 @@ npm install
 yarn install
 ```
 
-Use a specific tag for production upgrades. Replace `4.0.0` with the toolkit version you intend to consume.
+Use a specific tag for production upgrades. Replace `{version}` with the toolkit version you intend to consume.
 
 ### Unreleased maintainer testing
 
@@ -67,7 +67,7 @@ You will usually need these pieces:
 
 - [Importing styles](#importing-styles)
 - [Importing JavaScript](#importing-javascript)
-- [Importing assets (optional)](#importing-assets-optional)
+- [Importing assets](#importing-assets)
 
 ## Importing styles
 
@@ -152,9 +152,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-## Importing assets (optional)
+## Importing assets
 
 Toolkit assets are available under `node_modules/@ourfuturehealth/toolkit/assets/`.
+
+If you use the toolkit `icon` macro or any toolkit component that renders an icon, your app must also publish the sprite file at a browser-visible URL. The default toolkit path is `/assets/icons/icon-sprite.svg`, so the usual setup is to copy:
+
+- `node_modules/@ourfuturehealth/toolkit/assets/icons/icon-sprite.svg`
+
+to:
+
+- `/assets/icons/icon-sprite.svg`
+
+The browser cannot read files directly from `node_modules`, so installing the package is not enough on its own.
+
+If your app serves the sprite from a different public URL, pass that URL to the toolkit icon macro with `spritePath`.
 
 ```html
 <link rel="shortcut icon" href="path-to-assets/favicons/favicon.ico" type="image/x-icon" />

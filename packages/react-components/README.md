@@ -9,12 +9,14 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.7.0/ourfuturehealth-react-components-0.7.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
 }
 ```
+
+Replace `{version}` with the React release you intend to consume.
 
 Then run your package manager install command. This release-tarball contract is smoke-tested against Yarn 1, npm, and pnpm.
 
@@ -242,7 +244,8 @@ A card for short do and don’t recommendation lists.
 
 ### Icons
 
-React components bundle the toolkit icon sprite automatically. Use the public `Icon` component rather than maintaining app-local sprite helpers or copying `/assets/icons/icon-sprite.svg` into your own app.
+React components bundle the toolkit icon data automatically. Use the public `Icon` component rather than maintaining app-local sprite helpers or copying `/assets/icons/icon-sprite.svg` into your own app.
+React `Icon` no longer supports overriding the sprite asset path.
 
 ### Tag
 
