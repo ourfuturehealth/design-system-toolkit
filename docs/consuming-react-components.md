@@ -123,6 +123,7 @@ The React components package currently provides the following components:
 - `Button` - Call-to-action buttons and links
 - `TextInput` - Text input fields with toolkit-parity hint, error, and width support
 - `Fieldset` - Semantic fieldset wrapper for grouped form questions and legends
+- `Footer` - Page footer with support links, optional small print and legal copy, and optional social links
 - `Textarea` - Multi-line text input fields
 - `Select` - Native select inputs with toolkit styling and icon affordance
 - `DateInput` - Grouped day/month/year input fields
