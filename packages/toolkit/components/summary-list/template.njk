@@ -13,7 +13,7 @@
 {% else %}
   {% set summaryListClasses = summaryListClasses + ' ofh-summary-list--compact' %}
 {% endif %}
-{% if params.noBorder or 'ofh-summary-list--no-border' in (params.classes or '') %}
+{% if params.noBorder and 'ofh-summary-list--no-border' not in (params.classes or '') %}
   {% set summaryListClasses = summaryListClasses + ' ofh-summary-list--no-border' %}
 {% endif %}
 {% if params.classes %}
