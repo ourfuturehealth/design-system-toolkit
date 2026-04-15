@@ -25,6 +25,54 @@
           "description": "Adds a right-side launch icon for external links."
         },
         {
+          "name": "iconName",
+          "type": "string",
+          "required": false,
+          "description": "Optional shared icon name for the footer link. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+        },
+        {
+          "name": "iconPosition",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon placement for the footer link. Use `left` or `right`."
+        },
+        {
+          "name": "iconLeftName",
+          "type": "string",
+          "required": false,
+          "description": "Optional explicit icon name for the left side of the footer link."
+        },
+        {
+          "name": "iconRightName",
+          "type": "string",
+          "required": false,
+          "description": "Optional explicit icon name for the right side of the footer link."
+        },
+        {
+          "name": "showIconLeft",
+          "type": "boolean",
+          "required": false,
+          "description": "Forces the left icon on or off for the footer link."
+        },
+        {
+          "name": "showIconRight",
+          "type": "boolean",
+          "required": false,
+          "description": "Forces the right icon on or off for the footer link."
+        },
+        {
+          "name": "iconColor",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon-only colour override for the footer link."
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon/text size for the footer link. Use `small` or `medium`."
+        },
+        {
           "name": "openInNewWindow",
           "type": "boolean",
           "required": false,
@@ -36,7 +84,7 @@
       "name": "smallPrint",
       "type": "string",
       "required": false,
-      "description": "Small-print line shown below the support links."
+      "description": "Small-print line shown below the support links. Set it to an empty string or `null` to hide it."
     },
     {
       "name": "copyright",

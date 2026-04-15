@@ -2,10 +2,14 @@ import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'vitest-axe';
 import { describe, expect, it } from 'vitest';
-import { Footer } from './Footer';
+import {
+  Footer,
+  type FooterLinkItem,
+  type FooterSocialLinkItem,
+} from './Footer';
 
 describe('Footer', () => {
-  const links = [
+  const links: FooterLinkItem[] = [
     {
       href: '#help',
       label: 'Help and Support',
@@ -16,9 +20,9 @@ describe('Footer', () => {
       external: true,
       openInNewWindow: true,
     },
-  ] as const;
+  ];
 
-  const socialLinks = [
+  const socialLinks: FooterSocialLinkItem[] = [
     {
       platform: 'linkedin',
       href: 'https://www.linkedin.com/company/our-future-health/',
@@ -29,7 +33,7 @@ describe('Footer', () => {
       href: 'https://x.com/',
       openInNewWindow: true,
     },
-  ] as const;
+  ];
 
   it('renders footer links, copy, and social links', () => {
     const { container } = render(
@@ -50,11 +54,13 @@ describe('Footer', () => {
     expect(screen.getByText('© Our Future Health 2026')).toBeInTheDocument();
     expect(screen.getByText('Organisation legal text.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument();
+    expect(container.querySelector('.ofh-icon--ChevronLeft')).toBeNull();
+    expect(container.querySelector('.ofh-icon--Linkedin')).toBeInTheDocument();
     expect(container.querySelector('.ofh-icon--Launch')).toBeInTheDocument();
   });
 
   it('forwards refs and extra classes to the footer element', () => {
-    const ref = createRef<HTMLFooterElement>();
+    const ref = createRef<HTMLElement>();
 
     render(
       <Footer
@@ -73,6 +79,33 @@ describe('Footer', () => {
 
     expect(screen.queryByText('Follow us')).toBeNull();
     expect(screen.queryByRole('link', { name: 'LinkedIn' })).toBeNull();
+  });
+
+  it('supports custom footer link icons and lets small print be hidden', () => {
+    const { container } = render(
+      <Footer
+        links={[
+          {
+            href: '#overview',
+            label: 'Back to overview',
+            iconName: 'ChevronLeft',
+            iconPosition: 'left',
+          },
+          {
+            href: '#search',
+            label: 'Search site',
+            iconName: 'Search',
+            iconPosition: 'left',
+          },
+        ]}
+        smallPrint={null}
+      />,
+    );
+
+    expect(screen.getByRole('link', { name: 'Back to overview' })).toBeInTheDocument();
+    expect(container.querySelector('.ofh-icon--ChevronLeft')).toBeInTheDocument();
+    expect(container.querySelector('.ofh-icon--Search')).toBeInTheDocument();
+    expect(container.querySelector('.ofh-footer__small-print')).toBeNull();
   });
 
   it('has no accessibility violations', async () => {

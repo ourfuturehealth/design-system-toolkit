@@ -1,16 +1,27 @@
 {% from '../icon/macro.njk' import icon %}
+{% from '../link-icon/macro.njk' import linkIcon %}
 
 {%- macro _footerLink(item) -%}
   {% set href = item.url if item.url else item.URL %}
-  <a class="ofh-footer__link"
-    href="{{ href if href else '#' }}"
-    {%- if item.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
-    {%- if item.attributes %}{% for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}{% endif %}>
-    <span class="ofh-footer__link-text">{{ item.label }}</span>
-    {%- if item.external %}
-      {{ icon({ "name": "Launch", "size": 16, "classes": "ofh-footer__link-icon" }) }}
-    {%- endif %}
-  </a>
+  {% set usesCustomLinkIconDisplay = item.iconPosition is defined or item.iconName is defined or item.iconLeftName is defined or item.iconRightName is defined or item.showIconLeft is defined or item.showIconRight is defined %}
+  {% set resolvedIconPosition = item.iconPosition if item.iconPosition else ('right' if item.external else 'left') %}
+  {% set resolvedShowIconLeft = item.showIconLeft if item.showIconLeft is defined else (true if usesCustomLinkIconDisplay and resolvedIconPosition == 'left' else false) %}
+  {% set resolvedShowIconRight = item.showIconRight if item.showIconRight is defined else (true if usesCustomLinkIconDisplay and resolvedIconPosition == 'right' else (true if item.external else false)) %}
+  {{ linkIcon({
+    "href": href if href else '#',
+    "text": item.label,
+    "iconColor": item.iconColor,
+    "iconName": item.iconName,
+    "iconPosition": resolvedIconPosition,
+    "iconLeftName": item.iconLeftName,
+    "iconRightName": item.iconRightName,
+    "showIconLeft": resolvedShowIconLeft,
+    "showIconRight": resolvedShowIconRight,
+    "size": item.size if item.size else 'small',
+    "openInNewWindow": true if item.openInNewWindow else false,
+    "classes": "ofh-footer__link-component",
+    "attributes": item.attributes
+  }) }}
 {%- endmacro -%}
 
 {%- macro _socialIcon(item, platform) -%}
@@ -19,8 +30,8 @@
   {% set label = item.label if item.label else platform %}
 
   {%- if platform == 'linkedin' -%}
-    {% set iconName = 'LinkedIn' %}
-    {% set hoverIconName = 'LinkedInHover' %}
+    {% set iconName = 'Linkedin' %}
+    {% set hoverIconName = 'LinkedinHover' %}
     {% set label = item.label if item.label else 'LinkedIn' %}
   {%- elif platform == 'x' -%}
     {% set iconName = 'X' %}
@@ -58,7 +69,13 @@
   </a>
 {%- endmacro -%}
 
-{% set smallPrint = params.smallPrint if params.smallPrint else (params.copyright if params.copyright else '&copy; Crown copyright') %}
+{% if params.smallPrint is defined %}
+  {% set smallPrint = params.smallPrint %}
+{% elif params.copyright is defined %}
+  {% set smallPrint = params.copyright %}
+{% else %}
+  {% set smallPrint = '&copy; Crown copyright' %}
+{% endif %}
 {% set socialLabel = params.socialLabel if params.socialLabel else 'Follow us' %}
 
 <footer role="contentinfo">
@@ -67,17 +84,21 @@
     <div class="ofh-footer__main">
       <div class="ofh-width-container">
         <div class="ofh-footer__main-inner">
-          <div class="ofh-footer__meta">
-            {% if params.links %}
-              <h2 class="ofh-u-visually-hidden">Support links</h2>
-              <ul class="ofh-footer__links">
-                {%- for item in params.links %}
-                  <li class="ofh-footer__links-item">{{ _footerLink(item) | trim }}</li>
-                {%- endfor %}
-              </ul>
-            {% endif %}
-            <p class="ofh-footer__small-print">{{ smallPrint | safe }}</p>
-          </div>
+          {% if params.links or smallPrint %}
+            <div class="ofh-footer__meta">
+              {% if params.links %}
+                <h2 class="ofh-u-visually-hidden">Support links</h2>
+                <ul class="ofh-footer__links">
+                  {%- for item in params.links %}
+                    <li class="ofh-footer__links-item">{{ _footerLink(item) | trim }}</li>
+                  {%- endfor %}
+                </ul>
+              {% endif %}
+              {% if smallPrint %}
+                <p class="ofh-footer__small-print">{{ smallPrint | safe }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
           {% if params.legalHtml or params.legalText %}
             <p class="ofh-footer__legal">{{ params.legalHtml | safe if params.legalHtml else params.legalText }}</p>
           {% endif %}
