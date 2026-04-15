@@ -108,6 +108,8 @@
 
 .ofh-details__panel {
   color: $ofh-color-foreground-primary;
+
+  @include top-and-bottom();
 }
 
 .ofh-details__summary--details + .ofh-details__text {

@@ -123,7 +123,7 @@ export const Grouped: Story = {
     },
   },
   render: () => (
-    <div style={{ display: 'grid', gap: '0.75rem', maxWidth: '42rem' }}>
+    <div className="ofh-expander-group" style={{ maxWidth: '42rem' }}>
       <Expander summary="How to measure your blood glucose levels">
         <p>
           Wash your hands and use the blood glucose monitor as described in

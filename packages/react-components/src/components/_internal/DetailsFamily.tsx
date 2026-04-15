@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Icon } from '../Icon/Icon';
+import { Icon } from '../Icon';
 import { joinClasses } from '../../internal/ofhUtils';
 
 export type DetailsFamilyVariant = 'details' | 'expander';
