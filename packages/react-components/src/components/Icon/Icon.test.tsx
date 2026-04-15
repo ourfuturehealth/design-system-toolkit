@@ -5,11 +5,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { Icon } from './Icon';
 
 describe('Icon', () => {
-  it('renders the default 24px sprite icon classes and href', () => {
+  it('renders the default 24px icon classes and bundled SVG body', () => {
     const { container } = render(<Icon name="Check" />);
 
     const icon = container.querySelector('svg');
     const use = container.querySelector('use');
+    const group = container.querySelector('g');
 
     expect(icon).toHaveClass(
       'ofh-icon',
@@ -17,7 +18,9 @@ describe('Icon', () => {
       'ofh-icon--24',
       'ofh-icon--Check',
     );
-    expect(use).toHaveAttribute('href', expect.stringContaining('#ofh-icon-Check'));
+    expect(icon).toHaveAttribute('viewBox', '0 0 24 24');
+    expect(use).toBeNull();
+    expect(group?.innerHTML).toContain('<path');
   });
 
   it('renders the requested fixed size class and dimensions', () => {
@@ -70,14 +73,13 @@ describe('Icon', () => {
     });
   });
 
-  it('passes through advanced svg props, spritePath, and event handlers', () => {
+  it('passes through advanced svg props and event handlers', () => {
     const handleClick = vi.fn();
 
     const { container } = render(
       <Icon
         name="Check"
         title="Completed"
-        spritePath="/custom/sprite.svg"
         data-track="icon-usage"
         aria-describedby="icon-help"
         tabIndex={-1}
@@ -87,13 +89,15 @@ describe('Icon', () => {
 
     const icon = screen.getByRole('img', { name: 'Completed' });
     const use = container.querySelector('use');
+    const group = container.querySelector('g');
 
     fireEvent.click(icon);
 
     expect(icon).toHaveAttribute('data-track', 'icon-usage');
     expect(icon).toHaveAttribute('aria-describedby', 'icon-help');
     expect(icon).toHaveAttribute('tabindex', '-1');
-    expect(use).toHaveAttribute('href', '/custom/sprite.svg#ofh-icon-Check');
+    expect(use).toBeNull();
+    expect(group?.innerHTML).toContain('<path');
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 

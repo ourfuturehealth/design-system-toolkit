@@ -35,7 +35,6 @@ export interface CardIcon {
   color?: string;
   classes?: string;
   attributes?: React.SVGAttributes<SVGSVGElement>;
-  spritePath?: string;
 }
 
 export interface CardProps
@@ -270,7 +269,6 @@ export const Card = ({
                 icon.classes,
                 iconAttributes.className,
               )}
-              spritePath={icon.spritePath}
             />
           </div>
         ) : null}

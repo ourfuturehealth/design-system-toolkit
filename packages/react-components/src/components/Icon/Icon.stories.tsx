@@ -14,7 +14,7 @@ const meta: Meta<typeof Icon> = {
     docs: {
       description: {
         component:
-          'Use Icon to render toolkit sprite icons in React. Choose exactly one sizing mode: `size` for a fixed 16/24/32 icon, or `responsiveSize` to follow the toolkit iconography scale. The responsive scale maps `16` to `16/16/16`, `24` to `16/16/24`, and `32` to `24/24/32` across mobile, tablet, and desktop. Leave `title` empty for decorative icons. Any other SVG props, such as `aria-*`, `data-*`, or event handlers, are passed straight to the rendered `<svg>` element.',
+          'Use Icon to render toolkit icons in React. Choose exactly one sizing mode: `size` for a fixed 16/24/32 icon, or `responsiveSize` to follow the toolkit iconography scale. The responsive scale maps `16` to `16/16/16`, `24` to `16/16/24`, and `32` to `24/24/32` across mobile, tablet, and desktop. Leave `title` empty for decorative icons. Any other SVG props, such as `aria-*`, `data-*`, or event handlers, are passed straight to the rendered `<svg>` element.',
       },
     },
   },
@@ -24,7 +24,7 @@ const meta: Meta<typeof Icon> = {
       control: 'select',
       options: iconNameOptions,
       description:
-        'Toolkit icon name from the generated sprite manifest. This maps directly to a symbol in `icon-sprite.svg`.',
+        'Toolkit icon name from the generated manifest. This maps directly to bundled toolkit icon data in the React package.',
     },
     size: {
       control: 'radio',
@@ -60,14 +60,6 @@ const meta: Meta<typeof Icon> = {
       control: false,
       description:
         'Optional inline SVG styles. This merges with the `color` prop when both are provided.',
-      table: {
-        category: 'Advanced',
-      },
-    },
-    spritePath: {
-      control: false,
-      description:
-        'Advanced override for the generated icon sprite asset path. In normal app usage this should come from the default toolkit asset import.',
       table: {
         category: 'Advanced',
       },
