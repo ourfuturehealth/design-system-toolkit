@@ -130,7 +130,7 @@ The React components package currently provides the following components:
 - `CharacterCount` - Text input and textarea variants with count feedback
 - `Checkboxes` - Grouped checkbox inputs with hints, exclusive options, and conditional reveals
 - `Radios` - Grouped radio inputs with hints and conditional reveals
-- `Icon` - Toolkit sprite icon component with fixed and responsive sizing
+- `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
 - `ErrorSummary` - Page-level validation summaries with linked errors
 - `Tag` - Status tags aligned with toolkit Tag variants
 - `Card` - Content presentation cards for summaries, status, and next steps

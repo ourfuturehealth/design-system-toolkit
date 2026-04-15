@@ -6,6 +6,18 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### Unreleased
+
+#### @ourfuturehealth/react-components 0.8.0 (`react-v0.8.0`)
+
+##### ⚠️ BREAKING CHANGES
+
+- React `Icon` and `Card` icon configuration no longer accept `spritePath`. React icons now always render from bundled toolkit SVG data.
+
+##### Fixed
+
+- React icons now render correctly in published-consumer installs by inlining the requested bundled SVG symbol instead of referencing a bundled `data:` sprite URL.
+
 ### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)
