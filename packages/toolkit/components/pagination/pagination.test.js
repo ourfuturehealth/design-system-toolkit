@@ -21,8 +21,8 @@ describe('Our Future Health pagination macro', () => {
     expect(links).toHaveLength(2);
     expect(links[0].classList.contains('ofh-pagination__link--prev')).toBe(true);
     expect(links[1].classList.contains('ofh-pagination__link--next')).toBe(true);
-    expect(icons[0].classList.contains('ofh-icon--West')).toBe(true);
-    expect(icons[1].classList.contains('ofh-icon--East')).toBe(true);
+    expect(icons[0].classList.contains('ofh-icon--ArrowLeft')).toBe(true);
+    expect(icons[1].classList.contains('ofh-icon--ArrowRight')).toBe(true);
   });
 
   it('renders the previous-only variant without the next link', () => {

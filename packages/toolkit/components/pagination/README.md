@@ -25,8 +25,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Previous</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Treatments</span>
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--West ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-West"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ArrowLeft ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-ArrowLeft"></use>
         </svg>
       </a>
     </li>
@@ -35,8 +35,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Next</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Symptoms</span>
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--East ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-East"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ArrowRight ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-ArrowRight"></use>
         </svg>
       </a>
     </li>
@@ -71,8 +71,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Next</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Symptoms</span>
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--East ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-East"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ArrowRight ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-ArrowRight"></use>
         </svg>
       </a>
     </li>
@@ -106,8 +106,8 @@ Find out more about the pagination component and when to use it in the [design s
         <span class="ofh-pagination__title">Previous</span>
         <span class="ofh-u-visually-hidden">:</span>
         <span class="ofh-pagination__page">Treatments</span>
-        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--West ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
-          <use href="/assets/icons/icon-sprite.svg#ofh-icon-West"></use>
+        <svg class="ofh-icon ofh-icon--material ofh-icon--32 ofh-icon--ArrowLeft ofh-pagination__icon" aria-hidden="true" focusable="false" width="32" height="32">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-ArrowLeft"></use>
         </svg>
       </a>
     </li>
