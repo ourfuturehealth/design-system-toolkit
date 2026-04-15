@@ -35,9 +35,22 @@ type BundledIconDefinition = {
 const bundledIcons = new Map<string, BundledIconDefinition>(
   Array.from(
     bundledSpriteContent.matchAll(
-      /<symbol id="ofh-icon-([^"]+)" viewBox="([^"]+)">([\s\S]*?)<\/symbol>/g,
+      /<symbol\b([^>]*)>([\s\S]*?)<\/symbol>/g,
     ),
-    ([, name, viewBox, body]) => [name, { body, viewBox }],
+    ([, attributes, body]) => {
+      const idMatch = attributes.match(/\bid="ofh-icon-([^"]+)"/);
+      const viewBoxMatch = attributes.match(/\bviewBox="([^"]+)"/);
+
+      if (!idMatch || !viewBoxMatch) {
+        return null;
+      }
+
+      return [idMatch[1], { body, viewBox: viewBoxMatch[1] }] as const;
+    },
+  ).filter(
+    (
+      icon,
+    ): icon is readonly [string, BundledIconDefinition] => icon !== null,
   ),
 );
 

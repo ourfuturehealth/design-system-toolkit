@@ -50,6 +50,24 @@ describe('Icon', () => {
     expect(icon).toHaveAttribute('height', '32');
   });
 
+  it('renders no bundled SVG body for an unknown icon name', () => {
+    const { container } = render(<Icon name="NotARealIcon" />);
+
+    const icon = container.querySelector('svg');
+    const use = container.querySelector('use');
+    const group = container.querySelector('g');
+
+    expect(icon).toHaveClass(
+      'ofh-icon',
+      'ofh-icon--material',
+      'ofh-icon--24',
+      'ofh-icon--NotARealIcon',
+    );
+    expect(icon).not.toHaveAttribute('viewBox');
+    expect(use).toBeNull();
+    expect(group).toBeNull();
+  });
+
   it('renders an accessible image when title is provided', () => {
     render(<Icon name="Check" title="Completed" />);
 

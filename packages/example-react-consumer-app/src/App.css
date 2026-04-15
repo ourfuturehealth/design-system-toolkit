@@ -1,8 +1,12 @@
+/*
+ * This published-consumer example uses plain CSS instead of toolkit Sass imports,
+ * so these values mirror the closest design-system static tokens directly.
+ */
 #root {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(0, 102, 102, 0.08), transparent 28rem),
-    linear-gradient(180deg, #f5f7f8 0%, #ffffff 100%);
+    radial-gradient(circle at top left, rgba(0, 160, 138, 0.08), transparent 28rem),
+    linear-gradient(180deg, #f4f4f4 0%, #ffffff 100%);
 }
 
 body {
@@ -43,10 +47,10 @@ body {
 
 .consumer-app__panel {
   padding: 1.5rem;
-  border: 1px solid #d8dde0;
+  border: 1px solid #d1d1d1;
   border-radius: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1.5rem rgba(18, 38, 49, 0.06);
+  box-shadow: 0 0.5rem 1.5rem rgba(27, 27, 27, 0.06);
 }
 
 .consumer-app__section-title {
@@ -66,7 +70,7 @@ body {
 
 .consumer-app__status {
   margin: 1rem 0 0;
-  color: #0f766e;
+  color: #00725f;
   font-weight: 600;
 }
 
@@ -88,9 +92,9 @@ body {
   gap: 0.5rem;
   min-width: 8rem;
   padding: 0.75rem 1rem;
-  border: 1px solid #d8dde0;
+  border: 1px solid #d1d1d1;
   border-radius: 0.75rem;
-  background-color: #f8fafb;
+  background-color: #e8e8e8;
 }
 
 .consumer-app__icon-label {
