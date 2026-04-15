@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
-| [v4.10.0 / React v0.8.0](#upgrading-to-v4100--react-v080) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment    | 🟡 Medium - API migration recommended    |
@@ -20,13 +20,13 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
-## Upgrading to v4.10.0 / React v0.8.0
+## Upgrading to v4.10.0 / React v0.9.0
 
 **Planned:** April 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.10.0+
-- `@ourfuturehealth/react-components` v0.8.0+
+- `@ourfuturehealth/react-components` v0.9.0+
 
 ### Breaking Changes
 
@@ -57,7 +57,7 @@ This release introduces the public React link family and aligns the toolkit link
 
 #### React example
 
-**New in `react-v0.8.0`:**
+**New in `react-v0.9.0`:**
 
 ```tsx
 import {

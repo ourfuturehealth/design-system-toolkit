@@ -20,7 +20,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Expanded the canonical `link-icon` guidance to cover usage, placement, accessibility notes, and the broader icon-led link pattern instead of only back-navigation
 - Aligned link-family spacing, typography, focus, and visible-state token usage with the current Figma spec
 
-#### @ourfuturehealth/react-components 0.8.0 (`react-v0.8.0`)
+#### @ourfuturehealth/react-components 0.9.0 (`react-v0.9.0`)
 
 ##### ⚠️ BREAKING CHANGES
 
