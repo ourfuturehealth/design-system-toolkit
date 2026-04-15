@@ -5,7 +5,7 @@
 .ofh-footer {
   @include print-hide();
 
-  border-top: $ofh-size-4 solid $ofh-color-brand-yellow-3-main;
+  border-top: $ofh-size-4 solid $ofh-color-border-accent-2;
 }
 
 .ofh-footer__main {
