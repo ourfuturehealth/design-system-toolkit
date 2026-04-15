@@ -16,7 +16,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Expanded the toolkit summary-list macro to support explicit `padded` and `noBorder` options while preserving class-based compatibility for existing no-border usage
 - Updated the summary-list docs page, examples, macro options, and README guidance so the compact and no-border variants are taught consistently
 
-#### @ourfuturehealth/react-components 0.10.0 (`react-v0.10.0`)
+#### @ourfuturehealth/react-components 0.11.0 (`react-v0.11.0`)
 
 ##### Added
 
