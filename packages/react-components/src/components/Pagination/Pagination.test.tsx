@@ -26,8 +26,8 @@ describe('Pagination', () => {
       'href',
       '/section/symptoms',
     );
-    expect(container.querySelectorAll('.ofh-icon--West')).toHaveLength(1);
-    expect(container.querySelectorAll('.ofh-icon--East')).toHaveLength(1);
+    expect(container.querySelectorAll('.ofh-icon--ArrowLeft')).toHaveLength(1);
+    expect(container.querySelectorAll('.ofh-icon--ArrowRight')).toHaveLength(1);
   });
 
   it('renders only the previous link when next props are missing', () => {

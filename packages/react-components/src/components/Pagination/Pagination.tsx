@@ -46,7 +46,7 @@ const renderPaginationLink = ({
         <span className="ofh-u-visually-hidden">:</span>
         <span className="ofh-pagination__page">{page}</span>
         <Icon
-          name={isPrevious ? 'West' : 'East'}
+          name={isPrevious ? 'ArrowLeft' : 'ArrowRight'}
           size={32}
           className="ofh-pagination__icon"
         />
