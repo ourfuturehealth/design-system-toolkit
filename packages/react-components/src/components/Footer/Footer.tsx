@@ -1,4 +1,5 @@
 import React from 'react';
+import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import { joinClasses } from '../../internal/ofhUtils';
 import { Icon } from '../Icon';
 import { LinkIcon, type LinkIconProps } from '../LinkIcon';
@@ -123,12 +124,10 @@ const renderFooterLink = (link: FooterLinkItem, index: number) => {
     showIconLeft !== undefined ||
     showIconRight !== undefined;
   const resolvedIconPosition = iconPosition ?? (external ? 'right' : 'left');
-  const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
   const resolvedShowIconLeft =
     showIconLeft ?? (usesCustomLinkIconDisplay ? undefined : false);
   const resolvedShowIconRight =
     showIconRight ?? (usesCustomLinkIconDisplay ? undefined : external);
-  const resolvedTarget = openInNewWindow ? '_blank' : target;
 
   return (
     <li className="ofh-footer__links-item" key={`footer-link-${index}`}>
@@ -140,13 +139,13 @@ const renderFooterLink = (link: FooterLinkItem, index: number) => {
         iconName={iconName}
         iconPosition={resolvedIconPosition}
         leftIconName={leftIconName}
-        rel={resolvedRel}
+        rel={rel}
         openInNewWindow={openInNewWindow}
         rightIconName={rightIconName}
         showIconLeft={resolvedShowIconLeft}
         showIconRight={resolvedShowIconRight}
         size={size}
-        target={resolvedTarget}
+        target={target}
       >
         {label}
       </LinkIcon>
@@ -165,7 +164,7 @@ const renderSocialLink = (link: FooterSocialLinkItem, index: number) => {
     ...props
   } = link;
   const iconNames = socialIcons[platform];
-  const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
+  const resolvedRel = mergeRelTokens(rel, openInNewWindow);
   const resolvedTarget = openInNewWindow ? '_blank' : target;
 
   return (

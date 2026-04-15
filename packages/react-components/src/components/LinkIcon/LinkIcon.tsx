@@ -1,6 +1,7 @@
 import React from 'react';
 import type { IconProps } from '../Icon';
 import { Icon } from '../Icon';
+import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import { joinClassNames } from '../_internal/joinClassNames';
 
 export type LinkIconSize = 'small' | 'medium';
@@ -65,7 +66,7 @@ export const LinkIcon = ({
     `ofh-link-icon--icon-${iconPosition}`,
     className,
   );
-  const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
+  const resolvedRel = mergeRelTokens(rel, openInNewWindow);
   const resolvedTarget = openInNewWindow ? '_blank' : target;
 
   return (
