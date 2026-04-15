@@ -16,7 +16,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Corrected the open `details` content-rule alignment so the left rule sits on the intended inset edge
 - Expanded the docs-site coverage for `details` with a rich-content example and refreshed the component-page metadata for the details family
 
-#### @ourfuturehealth/react-components 0.9.0 (`react-v0.9.0`)
+#### @ourfuturehealth/react-components 0.10.0 (`react-v0.10.0`)
 
 ##### Added
 

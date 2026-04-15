@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.11.0 / React v0.9.0](#upgrading-to-v4110--react-v090) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
+| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
@@ -20,13 +20,13 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
-## Upgrading to v4.11.0 / React v0.9.0
+## Upgrading to v4.11.0 / React v0.10.0
 
 **Released:** April 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.11.0+
-- `@ourfuturehealth/react-components` v0.9.0+
+- `@ourfuturehealth/react-components` v0.10.0+
 
 ### Breaking Changes
 
