@@ -16,7 +16,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Composed footer support links from the shared `link-icon` pattern so directional and external cues can be enabled with footer data instead of bespoke markup
 - Expanded the footer macro, docs page, macro options, and README guidance to cover minimal, icon-led support-link, and legal-plus-social variants while preserving legacy `URL` and `copyright` compatibility
 
-#### @ourfuturehealth/react-components 0.11.0 (`react-v0.11.0`)
+#### @ourfuturehealth/react-components 0.12.0 (`react-v0.12.0`)
 
 ##### Added
 
