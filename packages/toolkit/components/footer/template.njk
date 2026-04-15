@@ -1,5 +1,6 @@
 {% from '../icon/macro.njk' import icon %}
 {% from '../link-icon/macro.njk' import linkIcon %}
+{% set supportedSocialPlatforms = ['linkedin', 'x', 'facebook', 'youtube', 'instagram', 'tiktok'] %}
 
 {%- macro _footerLink(item) -%}
   {% set href = item.url if item.url else item.URL %}
@@ -114,7 +115,9 @@
             <ul class="ofh-footer__social-list">
               {%- for item in params.socialLinks %}
                 {% set platform = item.platform | lower %}
-                <li class="ofh-footer__social-item">{{ _socialIcon(item, platform) | trim }}</li>
+                {%- if platform in supportedSocialPlatforms %}
+                  <li class="ofh-footer__social-item">{{ _socialIcon(item, platform) | trim }}</li>
+                {%- endif %}
               {%- endfor %}
             </ul>
           </div>

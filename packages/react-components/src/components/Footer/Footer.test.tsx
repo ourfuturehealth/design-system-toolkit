@@ -108,6 +108,39 @@ describe('Footer', () => {
     expect(container.querySelector('.ofh-footer__small-print')).toBeNull();
   });
 
+  it('preserves caller rel tokens when links open in a new window', () => {
+    render(
+      <Footer
+        links={[
+          {
+            href: 'https://example.com/guidance',
+            label: 'External guidance',
+            external: true,
+            openInNewWindow: true,
+            rel: 'nofollow',
+          },
+        ]}
+        socialLinks={[
+          {
+            platform: 'linkedin',
+            href: 'https://www.linkedin.com/company/our-future-health/',
+            openInNewWindow: true,
+            rel: 'me',
+          },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole('link', { name: 'External guidance' })).toHaveAttribute(
+      'rel',
+      'nofollow noopener noreferrer',
+    );
+    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute(
+      'rel',
+      'me noopener noreferrer',
+    );
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(
       <Footer
