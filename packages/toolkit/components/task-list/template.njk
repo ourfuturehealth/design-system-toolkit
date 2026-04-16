@@ -35,7 +35,7 @@
   </li>
 {%- endmacro %}
 
-<ul class="ofh-task-list {%- if params.classes %} {{ params.classes }}{% endif %}"
+<ul class="ofh-task-list {%- if params.classes %} {{ params.classes }}{% endif %}">
   {% for item in params.items %}
     {{- _taskListItem(params, item, loop.index) }}
   {% endfor %}

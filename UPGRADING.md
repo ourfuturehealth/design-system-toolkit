@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the new Task List APIs only if relevant |
 | [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
@@ -19,6 +20,56 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
 
 ---
+
+## Upgrading to v4.15.0 / React v0.14.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.15.0+
+- `@ourfuturehealth/react-components` v0.14.0+
+
+### Release Overview
+
+This release does not introduce a supported breaking API change.
+
+Toolkit consumers should review the refreshed `task-list` layout and docs examples if they already use the task list component.
+
+React consumers can now adopt the public `TaskList` component when they need long-form task navigation with right-aligned status tags.
+
+### Task List
+
+- Toolkit `task-list` rows now match the current Figma treatment more closely, including the first-row divider removal and responsive row gap
+- React now exposes `TaskList` as a public component with an `items` array and optional `idPrefix`
+- Storybook and docs-site examples now cover default, hints, and status-variant task list usage
+
+#### React example
+
+```tsx
+import { TaskList } from '@ourfuturehealth/react-components';
+
+const items = [
+  {
+    title: 'Company directors',
+    href: '/company/directors',
+    status: {
+      children: 'Complete',
+      variant: 'green',
+    },
+  },
+  {
+    title: 'Financial history',
+    href: '/company/financial-history',
+    hint: 'Include 5 years of the company’s relevant financial information.',
+    status: {
+      children: 'Incomplete',
+      variant: 'blue',
+    },
+  },
+];
+
+<TaskList items={items} idPrefix="company-task-list" />;
+```
 
 ## Upgrading to React v0.8.0
 
