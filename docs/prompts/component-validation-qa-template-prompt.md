@@ -68,8 +68,11 @@ Important constraints:
 - If docs/examples are missing what is needed to validate behavior, improve them too.
 - Treat Storybook ↔ docs-site example gaps as implementation misses when one surface teaches materially less than the other.
 - Treat misleading Storybook controls or vague prop documentation as implementation misses to be fixed before QA is considered complete.
+- Treat Storybook docs pages that mix story-only helper args into the real React API as implementation misses to be fixed before QA is considered complete.
+- Treat Storybook surfaces that do not clearly separate `Docs`, `Default`, `Builder`, and fixed showcase stories as implementation misses unless there is a strong reason for a different shape.
 - Treat raw JSON controls for stable nested props as implementation misses when the story could reasonably offer clearer text/select/boolean controls instead.
 - Treat controls for values the component visibly ignores or overrides as implementation misses to be fixed before QA is considered complete.
+- Treat copyable example snippets that hide structured prop shapes behind undeclared variables as implementation misses when that makes the API harder to follow.
 - Treat responsive token mismatches or accidental inherited element styles (`p`, `ul`, `li`, `h*`, `a`) as implementation misses to be fixed before QA is considered complete.
 - Treat spacing or typography contributed by reused shared primitives or layout objects (`label`, `hint`, `error-message`, `fieldset`, `form-group`, list wrappers, etc.) as implementation misses when they make the rendered output diverge from Figma.
 - Treat React components that depend on toolkit progressive-enhancement classes such as `.js-enabled` for core interactive behavior as implementation misses to be fixed before QA is considered complete.
@@ -78,6 +81,11 @@ Important constraints:
 - If implementation used a temporary internal adapter because a dependency was missing, call that out clearly during QA and include the affected surfaces in the validation script.
 - Do not use vague instructions like "looks shorter" or "feels closer to Figma" when the expected result can be stated precisely.
 - Do not describe spacing or typography only by numeric values when token identity matters; say whether the implementation should be using a responsive helper or a static token.
+- When validating Storybook docs, check that the Docs page teaches the real React API in plain language:
+  - what the actual props are
+  - what they do
+  - what shape they take
+  - which controls are Storybook-only helpers rather than real component props
 - For each QA step, prefer this structure:
   - what changed
   - what exact values or behaviors should now be visible
@@ -97,6 +105,7 @@ Output style I want from you:
 - Give me exact URLs for QA.
 - Drive the QA one step at a time.
 - Make each QA step specific enough that a reviewer can validate it without guessing what "good" looks like.
+- Treat Storybook docs usability as part of the QA target, not a separate follow-up.
 - When something fails, explain it plainly and fix it before moving on.
 - Keep the summary concise and useful for handing off into merge-readiness work.
 ```

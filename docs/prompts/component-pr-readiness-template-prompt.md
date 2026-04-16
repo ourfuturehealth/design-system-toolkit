@@ -61,8 +61,11 @@ Workflow I want you to follow:
    - confirm deprecated compatibility paths exist only where intended
    - confirm toolkit vs React consumer expectations are documented clearly
    - confirm Storybook controls policy and prop docs are still coherent after any late changes
+   - confirm the Storybook surface still follows the intended `Docs` / `Default` / `Builder` / showcase shape, or explain clearly why a component needs a different pattern
+   - confirm the Docs page still teaches the real React API rather than a mixture of real props and story-only helper args
    - confirm no interactive single-component stories are still relying on raw JSON controls for stable nested props when clearer story-specific controls would be more usable
    - confirm no story is exposing controls for values the component visibly ignores or overrides
+   - confirm copyable example snippets still show meaningful structured-prop shapes instead of hiding them behind undeclared variables
    - if the component was touched by a spacing/typography token migration, do a final spot-check for same-number static-token substitutions where Figma expected responsive tokens
    - do a final spot-check for accidental semantic-element inheritance (`p`, `ul`, `li`, `h*`, `a`) that may have reintroduced wrong spacing or typography
    - confirm release/version metadata is internally consistent for every affected releasable package:

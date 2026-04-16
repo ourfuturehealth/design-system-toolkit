@@ -1,5 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { CardCallout } from './CardCallout';
+
+const cardCalloutUsageExample = `import { CardCallout } from '@ourfuturehealth/react-components';
+
+<CardCallout
+  heading="Information"
+  text="This is additional context to help the user understand the next step."
+  variant="info"
+/>;
+`;
 
 const meta: Meta<typeof CardCallout> = {
   title: 'Components/Card/Callout',
@@ -11,6 +21,32 @@ const meta: Meta<typeof CardCallout> = {
         component:
           'Use Card / Callout to highlight contextual information such as informational, warning, success or error messages. `heading` changes the colored label text. `headingLevel` changes the semantic heading tag used for that label, but does not change the visual styling.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>CardCallout</code> when you need a short message block
+            with stronger visual emphasis than a standard paragraph.
+          </p>
+          <p>
+            Pass the message label through <code>heading</code>, the body copy
+            through <code>text</code>, and choose a <code>variant</code> that
+            matches the message type.
+          </p>
+          <Source code={cardCalloutUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={['variant', 'heading', 'headingLevel', 'text']}
+          />
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -20,11 +56,17 @@ const meta: Meta<typeof CardCallout> = {
       options: ['info', 'error', 'success', 'warning'],
       description:
         'Changes the callout color scheme to match the type of message: informational, warning, success, or error.',
+      table: {
+        category: 'CardCalloutProps',
+      },
     },
     heading: {
       control: 'text',
       description:
         'Text shown in the colored label block at the top of the callout.',
+      table: {
+        category: 'CardCalloutProps',
+      },
     },
     headingHtml: {
       control: false,
@@ -39,6 +81,9 @@ const meta: Meta<typeof CardCallout> = {
       options: [2, 3, 4, 5, 6],
       description:
         'Changes the semantic heading element for the label, for example `h2` or `h3`. This helps the callout fit the page heading hierarchy, but does not change the visual appearance.',
+      table: {
+        category: 'CardCalloutProps',
+      },
     },
     html: {
       control: false,
@@ -51,6 +96,9 @@ const meta: Meta<typeof CardCallout> = {
     text: {
       control: 'text',
       description: 'Plain text body content shown inside the callout.',
+      table: {
+        category: 'CardCalloutProps',
+      },
     },
     classes: {
       control: false,
@@ -93,6 +141,11 @@ export const Info: Story = {
       <CardCallout {...args} />
     </div>
   ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const Warning: Story = {
@@ -106,6 +159,11 @@ export const Warning: Story = {
       <CardCallout {...args} />
     </div>
   ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const Success: Story = {
@@ -119,6 +177,11 @@ export const Success: Story = {
       <CardCallout {...args} />
     </div>
   ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const Error: Story = {
@@ -126,6 +189,59 @@ export const Error: Story = {
     heading: 'Error',
     variant: 'error',
     text: 'There is a problem with the information in this section.',
+  },
+  render: (args) => (
+    <div style={{ maxWidth: '32rem' }}>
+      <CardCallout {...args} />
+    </div>
+  ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+};
+
+export const Default: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'A realistic informational callout example. Use this as the default pattern when you need a simple explanatory message.',
+      },
+    },
+  },
+  render: () => (
+    <div style={{ maxWidth: '32rem' }}>
+      <CardCallout
+        heading="Information"
+        variant="info"
+        text="This is additional context to help the user understand the next step."
+      />
+    </div>
+  ),
+};
+
+export const Builder: Story = {
+  args: {
+    heading: 'Information',
+    headingLevel: 2,
+    text: 'This is additional context to help the user understand the next step.',
+    variant: 'info',
+  },
+  parameters: {
+    controls: {
+      include: ['variant', 'heading', 'text', 'headingLevel'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the Card / Callout API interactively. It is the quickest way to compare the message type, label text, and heading semantics.',
+      },
+    },
   },
   render: (args) => (
     <div style={{ maxWidth: '32rem' }}>
