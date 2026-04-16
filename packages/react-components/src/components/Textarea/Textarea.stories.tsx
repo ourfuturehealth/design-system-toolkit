@@ -106,6 +106,44 @@ export const Default: Story = {
   args: {
     hint: 'Do not include personal or financial information.',
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'A realistic multiline text area example.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    hint: 'Do not include personal or financial information.',
+    label: 'Can you provide more detail?',
+    name: 'details',
+    rows: 4,
+  },
+  parameters: {
+    controls: {
+      include: [
+        'label',
+        'hint',
+        'errorMessage',
+        'name',
+        'placeholder',
+        'rows',
+        'isPageHeading',
+      ],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the friendly controls here to explore the main textarea props without editing code.',
+      },
+    },
+  },
 };
 
 export const WithError: Story = {
@@ -113,12 +151,22 @@ export const WithError: Story = {
     errorMessage: 'You must provide an explanation.',
     label: "Why can't you provide a National Insurance number?",
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const Longer: Story = {
   args: {
     hint: 'Do not include personal or financial information.',
     rows: 10,
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
 };
 
@@ -133,6 +181,9 @@ export const AsPageHeading: Story = {
         story:
           'Use `isPageHeading` when the textarea question should also be announced as the page heading.',
       },
+    },
+    controls: {
+      disable: true,
     },
   },
 };

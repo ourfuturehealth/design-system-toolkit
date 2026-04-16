@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
-import { ErrorSummary } from './ErrorSummary';
+import { ErrorSummary, type ErrorSummaryProps } from './ErrorSummary';
+
+type ErrorSummaryStoryArgs = ErrorSummaryProps & {
+  scenario?: 'default' | 'with-description' | 'multiple-errors' | 'html-content' | 'in-form';
+};
 
 const defaultErrorList = [
   {
@@ -42,21 +47,132 @@ const inFormList = [
   },
 ];
 
-const meta: Meta<typeof ErrorSummary> = {
-  title: 'Components/ErrorSummary',
-  component: ErrorSummary,
-  render: (args) => (
+const renderErrorSummaryBuilderStory = ({
+  scenario,
+  ...args
+}: ErrorSummaryStoryArgs) => {
+  const resolvedArgs = (() => {
+    switch (scenario) {
+      case 'with-description':
+        return {
+          ...args,
+          descriptionText:
+            args.descriptionText ??
+            'Check each answer and update the fields that are highlighted below.',
+          errorList: args.errorList ?? defaultErrorList,
+        };
+      case 'multiple-errors':
+        return {
+          ...args,
+          errorList: multipleErrorsList,
+          descriptionText:
+            args.descriptionText ??
+            'Check each answer and update the fields that are highlighted below.',
+        };
+      case 'html-content':
+        return {
+          ...args,
+          titleHtml: args.titleHtml ?? '<span>There is a problem</span>',
+          descriptionHtml:
+            args.descriptionHtml ??
+            'Review the <strong>highlighted answers</strong> and update each field before continuing.',
+          errorList: htmlContentList,
+        };
+      case 'in-form':
+        return {
+          ...args,
+          errorList: inFormList,
+        };
+      case 'default':
+      default:
+        return {
+          ...args,
+          errorList: args.errorList ?? defaultErrorList,
+        };
+    }
+  })();
+
+  return (
     <div style={{ maxWidth: '40rem' }}>
       <ErrorSummary
-        {...args}
+        {...resolvedArgs}
         onClick={(event) => {
           if (event.target instanceof Element && event.target.closest('a')) {
             event.preventDefault();
           }
         }}
       />
+      {scenario === 'multiple-errors' ? (
+        <form>
+          <TextInput
+            id="multiple-errors-first-name"
+            label="First name"
+            error="Enter your first name"
+          />
+          <div style={{ height: '24rem' }} />
+          <TextInput
+            id="multiple-errors-last-name"
+            label="Last name"
+            error="Enter your last name"
+          />
+        </form>
+      ) : null}
+      {scenario === 'html-content' ? (
+        <form>
+          <TextInput
+            id="html-content-email"
+            label="Email address"
+            error="Email address is required"
+          />
+          <TextInput
+            id="html-content-phone"
+            label="Phone number"
+            error="Phone number must include 11 digits"
+          />
+        </form>
+      ) : null}
+      {scenario === 'in-form' ? (
+        <form noValidate>
+          <TextInput
+            id="in-form-email"
+            label="Email address"
+            type="email"
+            hint="We will use this to send updates about your application."
+            defaultValue="alex@example.com"
+          />
+          <TextInput
+            id="in-form-first-name"
+            label="First name"
+            hint="Enter your given name."
+            error="Enter your first name"
+          />
+          <TextInput
+            id="in-form-phone"
+            label="Phone number"
+            type="tel"
+            hint="Optional. Include this if you want SMS updates."
+          />
+          <TextInput
+            id="in-form-last-name"
+            label="Last name"
+            hint="Enter your family name."
+            error="Enter your last name"
+          />
+          <TextInput
+            id="in-form-postcode"
+            label="Postcode"
+            hint="For example, SW1A 1AA."
+            width="one-half"
+          />
+        </form>
+      ) : null}
     </div>
-  ),
+  );
+};
+
+const meta: Meta<ErrorSummaryStoryArgs> = {
+  title: 'Components/ErrorSummary',
+  component: ErrorSummary,
   parameters: {
     layout: 'padded',
     docs: {
@@ -64,10 +180,27 @@ const meta: Meta<typeof ErrorSummary> = {
         component:
           'Use the Error Summary component to summarise validation errors at the top of a page and link each error back to the relevant answer. `titleHtml` replaces `titleText`, and `descriptionHtml` replaces `descriptionText`. Use `idPrefix` when you need more than one summary on the same page so each summary gets a unique heading id.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <ArgTypes exclude={['scenario']} />
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
   argTypes: {
+    scenario: {
+      control: 'select',
+      options: ['default', 'with-description', 'multiple-errors', 'html-content', 'in-form'],
+      description:
+        'Builder-only Storybook helper. Switches between the common error-summary example shapes.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     titleText: {
       control: 'text',
       description:
@@ -147,13 +280,22 @@ const meta: Meta<typeof ErrorSummary> = {
     titleText: 'There is a problem',
     errorList: defaultErrorList,
   },
+  render: renderErrorSummaryBuilderStory,
 };
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    titleText: 'There is a problem',
+    errorList: defaultErrorList,
+    scenario: 'default',
+  },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -163,12 +305,32 @@ export const Default: Story = {
   },
 };
 
+export const Builder: Story = {
+  args: {
+    scenario: 'default',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive error-summary example. Switch between the common summary shapes and edit the real props without rebuilding the example by hand.',
+      },
+    },
+  },
+};
+
 export const WithDescription: Story = {
   args: {
     descriptionText:
       'Check each answer and update the fields that are highlighted below.',
+    scenario: 'with-description',
+    errorList: defaultErrorList,
+    titleText: 'There is a problem',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -181,6 +343,8 @@ export const WithDescription: Story = {
 export const MultipleErrors: Story = {
   args: {
     errorList: multipleErrorsList,
+    scenario: 'multiple-errors',
+    titleText: 'There is a problem',
   },
   parameters: {
     controls: {
@@ -219,6 +383,7 @@ export const HtmlContent: Story = {
     descriptionHtml:
       'Review the <strong>highlighted answers</strong> and update each field before continuing.',
     errorList: htmlContentList,
+    scenario: 'html-content',
   },
   parameters: {
     controls: {
@@ -253,6 +418,8 @@ export const HtmlContent: Story = {
 export const InForm: Story = {
   args: {
     errorList: inFormList,
+    scenario: 'in-form',
+    titleText: 'There is a problem',
   },
   parameters: {
     controls: {

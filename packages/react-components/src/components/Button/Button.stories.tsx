@@ -78,12 +78,50 @@ const meta: Meta<ButtonProps> = {
 export default meta;
 type Story = StoryObj<ButtonProps>;
 
-// Variant stories
+export const Default: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'A realistic contained button example. Use this as the first thing to copy when you need the default button pattern.',
+      },
+    },
+  },
+  render: () => <Button variant="contained">Continue</Button>,
+};
+
+export const Builder: Story = {
+  args: {
+    variant: 'contained',
+    children: 'Continue',
+    type: 'button',
+  },
+  parameters: {
+    controls: {
+      include: ['variant', 'children', 'href', 'type', 'disabled'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the button API interactively. It is the place to change the visible label, switch between link and button behaviour, and inspect the simple state controls.',
+      },
+    },
+  },
+};
+
 export const Contained: Story = {
   args: {
     variant: 'contained',
     children: 'Contained Button',
     onClick: () => {},
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
 };
 
@@ -93,6 +131,11 @@ export const Outlined: Story = {
     children: 'Outlined Button',
     onClick: () => {},
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const Ghost: Story = {
@@ -101,6 +144,11 @@ export const Ghost: Story = {
     children: 'Ghost Button',
     onClick: () => {},
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const GhostInverted: Story = {
@@ -108,6 +156,11 @@ export const GhostInverted: Story = {
     variant: 'ghost-inverted',
     children: 'Ghost Inverted Button',
     onClick: () => {},
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
   globals: {
     backgrounds: { value: 'dark' },
@@ -120,6 +173,11 @@ export const Text: Story = {
     children: 'Text Button',
     onClick: () => {},
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const TextInverted: Story = {
@@ -127,6 +185,11 @@ export const TextInverted: Story = {
     variant: 'text-inverted',
     children: 'Text Inverted Button',
     onClick: () => {},
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
   globals: {
     backgrounds: { value: 'dark' },
@@ -168,10 +231,13 @@ export const AsLink: Story = {
     children: 'Link Button',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'When an href prop is provided, the button renders as an anchor tag (<a>) instead of a button element.',
+          'A fixed example showing the button rendered as a link when `href` is provided.',
       },
     },
   },

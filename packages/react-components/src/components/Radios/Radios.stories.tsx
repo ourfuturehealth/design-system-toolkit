@@ -1,8 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
-import { Radios } from './Radios';
+import { Radios, type RadiosProps } from './Radios';
 
-const conditionalItems = [
+type RadiosStoryArgs = RadiosProps & {
+  itemSet?: 'contact' | 'conditional' | 'divider' | 'inline';
+};
+
+const contactItems: RadiosProps['items'] = [
+  { value: 'email', label: 'Email' },
+  { value: 'phone', label: 'Phone' },
+  { divider: 'or' as const },
+  { value: 'post', label: 'Post' },
+];
+
+const conditionalItems: RadiosProps['items'] = [
   {
     value: 'email',
     label: 'Email',
@@ -38,7 +50,40 @@ const conditionalItems = [
   },
 ];
 
-const meta: Meta<typeof Radios> = {
+const dividerItems: RadiosProps['items'] = [
+  { value: 'nhs-login', label: 'Use NHS login' },
+  { value: 'govuk-verify', label: 'Use GOV.UK Verify' },
+  { divider: 'or' as const },
+  { value: 'create-account', label: 'Create an account' },
+];
+
+const inlineItems: RadiosProps['items'] = [
+  { value: 'yes', label: 'Yes' },
+  { value: 'no', label: 'No' },
+];
+
+const radioItemSets: Record<
+  NonNullable<RadiosStoryArgs['itemSet']>,
+  RadiosProps['items']
+> = {
+  contact: contactItems,
+  conditional: conditionalItems,
+  divider: dividerItems,
+  inline: inlineItems,
+};
+
+const renderRadiosBuilderStory = ({ itemSet, ...args }: RadiosStoryArgs) => {
+  const items = itemSet ? radioItemSets[itemSet] : args.items ?? contactItems;
+
+  return (
+    <Radios
+      {...args}
+      items={items}
+    />
+  );
+};
+
+const meta: Meta<RadiosStoryArgs> = {
   title: 'Components/Input/Radios',
   component: Radios,
   parameters: {
@@ -49,20 +94,31 @@ const meta: Meta<typeof Radios> = {
         component:
           'A radio group that reuses the toolkit fieldset, input-family supporting text, updated 48px controllers, and conditional reveal patterns. Items can include hints or conditional content that is revealed for the selected option.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <ArgTypes exclude={['itemSet']} />
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
   args: {
-    items: [
-      { value: 'email', label: 'Email' },
-      { value: 'phone', label: 'Phone' },
-      { divider: 'or' as const },
-      { value: 'post', label: 'Post' },
-    ],
     legend: 'How should we contact you?',
     name: 'contact-method',
   },
   argTypes: {
+    itemSet: {
+      control: 'select',
+      options: ['contact', 'conditional', 'divider', 'inline'],
+      description:
+        'Builder-only Storybook helper. Switches between the contact, conditional, divider, and inline radio presets.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     legend: {
       control: 'text',
       description: 'Question shown as the fieldset legend for the radio group.',
@@ -146,6 +202,7 @@ const meta: Meta<typeof Radios> = {
       },
     },
   },
+  render: renderRadiosBuilderStory,
 };
 
 export default meta;
@@ -155,7 +212,39 @@ export const Default: Story = {
   args: {
     hint: 'Choose one way for us to contact you.',
     idPrefix: 'contact-method-default',
+    items: contactItems,
     name: 'contact-method-default',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'Default contact-method radio group with a divider between contact options and the sign-in path.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    hint: 'Choose one way for us to contact you.',
+    idPrefix: 'contact-method-builder',
+    itemSet: 'contact',
+    legend: 'How should we contact you?',
+    name: 'contact-method-builder',
+  },
+  parameters: {
+    controls: {
+      include: ['itemSet', 'legend', 'hint', 'errorMessage', 'name', 'idPrefix', 'isPageHeading'],
+    },
+    docs: {
+      description: {
+        story:
+          'Interactive radio example. Switch between the preset item sets and adjust the real group props without editing raw JSON.',
+      },
+    },
   },
 };
 
@@ -172,6 +261,9 @@ export const WithHint: Story = {
     name: 'nhs-number',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -205,6 +297,9 @@ export const WithItemHints: Story = {
     name: 'contact-method-item-hints',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Each radio item can carry its own hint text under the main label.',
@@ -226,6 +321,9 @@ export const WithDivider: Story = {
     name: 'sign-in-method-divider',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -244,6 +342,9 @@ export const ConditionalContent: Story = {
     name: 'contact-method-conditional',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Radio items can reveal conditional content for the currently selected option. This matches the docs-site example with email, phone, and text-message follow-up fields.',
@@ -264,6 +365,9 @@ export const Inline: Story = {
     name: 'age-inline',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'For short two-option choices, radios can be displayed inline to match the toolkit docs example.',
@@ -280,6 +384,9 @@ export const WithError: Story = {
     name: 'contact-method-error',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Example of a group-level validation error for radio questions.',

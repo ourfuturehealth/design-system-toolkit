@@ -83,12 +83,48 @@ export default meta;
 
 type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'A realistic decorative icon example. Use it as the default copyable pattern when the icon is decorative and does not need an accessible label.',
+      },
+    },
+  },
+  render: () => <Icon name="Check" size={24} />,
+};
+
+export const Builder: Story = {
+  args: {
+    name: 'Check',
+    size: 24,
+  },
+  parameters: {
+    controls: {
+      include: ['name', 'size', 'responsiveSize', 'title', 'color'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the icon API interactively. It is the quickest way to test icon names, sizes, labels, and tinting together.',
+      },
+    },
+  },
+};
 
 export const WithTitle: Story = {
   args: {
     name: 'UnfoldMore',
     title: 'Expand options',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
 };
 
@@ -113,10 +149,13 @@ export const ResponsiveScale: Story = {
     responsiveSize: 24,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'Responsive icons follow the toolkit iconography scale instead of staying fixed. Resize the preview viewport to see `responsiveSize={24}` collapse to 16 on mobile and tablet, then return to 24 on desktop.',
+          'A fixed responsive-size example that shows the toolkit iconography scale collapsing and expanding at breakpoint boundaries.',
       },
     },
   },

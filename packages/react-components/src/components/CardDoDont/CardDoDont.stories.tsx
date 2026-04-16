@@ -54,7 +54,8 @@ const meta: Meta<CardDoDontStoryArgs> = {
     type: {
       control: 'select',
       options: ['do', 'dont'],
-      description: 'List type.',
+      description:
+        'Chooses whether the card presents a positive do list or a negative don’t list.',
     },
     heading: {
       control: 'text',
@@ -69,12 +70,16 @@ const meta: Meta<CardDoDontStoryArgs> = {
     },
     items: {
       control: 'object',
-      description: 'Array of list items rendered in the card body.',
+      description:
+        'Array of list items rendered in the card body. Pass one object per bullet.',
     },
     itemsText: {
       control: 'text',
       description:
         'List items as newline-separated text for this story. Each non-empty line becomes one bullet.',
+      table: {
+        disable: true,
+      },
     },
     classes: {
       control: false,
@@ -106,7 +111,7 @@ const meta: Meta<CardDoDontStoryArgs> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Do: Story = {
+export const Default: Story = {
   args: {
     type: 'do',
     itemsText: defaultDoItems.join('\n'),
@@ -120,6 +125,17 @@ export const Do: Story = {
     },
   },
   render: renderCardDoDont,
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'A realistic do-list example. Use this as the default pattern when you need a short, scannable positive recommendation list.',
+      },
+    },
+  },
 };
 
 export const Dont: Story = {
@@ -132,6 +148,38 @@ export const Dont: Story = {
       control: false,
       table: {
         disable: true,
+      },
+    },
+  },
+  render: renderCardDoDont,
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    type: 'do',
+    itemsText: defaultDoItems.join('\n'),
+  },
+  argTypes: {
+    items: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+  },
+  parameters: {
+    controls: {
+      include: ['type', 'heading', 'headingLevel', 'itemsText'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the Card / Do & Don’t API interactively. It is the easiest way to change the list type and swap the bullet content without editing raw JSON.',
       },
     },
   },

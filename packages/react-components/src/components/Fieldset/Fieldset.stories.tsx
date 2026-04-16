@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
 import { Fieldset } from './Fieldset';
 
@@ -12,6 +13,14 @@ const meta: Meta<typeof Fieldset> = {
         component:
           'A semantic fieldset wrapper for grouped form questions. Use it when several inputs belong to the same question and supply the question text through the legend.\n\nThe React component mirrors the toolkit fieldset macro while smoothing over the toolkit class names:\n- `legend` supplies the legend content and accepts plain text or richer React nodes.\n- `legendSize` applies the built-in legend hierarchy with friendly values: `none`, `small`, `medium`, `large`, and `extraLarge`.\n- `isPageHeading` wraps that legend content in an `h1` when the grouped question is also the page heading.\n- `describedBy` appends external hint or error IDs to the fieldset `aria-describedby` attribute.\n- Native fieldset attributes such as `id`, `role`, `disabled`, and data attributes pass through to the underlying `<fieldset>`.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <ArgTypes />
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -89,6 +98,24 @@ export const Default: Story = {
     legend: 'Contact details',
     legendSize: 'medium',
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Use a standard legend when the page already has its own heading and the fieldset is grouping a smaller set of related inputs within that page.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    legend: 'Contact details',
+    legendSize: 'medium',
+  },
   render: (args) => (
     <Fieldset {...args}>
       <TextInput label="Email address" type="email" width="three-quarters" />
@@ -99,7 +126,7 @@ export const Default: Story = {
     docs: {
       description: {
         story:
-          'Use a standard legend when the page already has its own heading and the fieldset is grouping a smaller set of related inputs within that page.',
+          'Interactive fieldset example. Change the real props to see how the legend, page-heading state, and legend size affect the grouped inputs.',
       },
     },
   },
@@ -113,6 +140,9 @@ export const AsPageHeading: Story = {
   },
   render: (args) => <Fieldset {...args} />,
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -216,6 +246,9 @@ export const WithDescribedBy: Story = {
     </div>
   ),
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
