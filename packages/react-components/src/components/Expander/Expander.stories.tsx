@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Expander } from './Expander';
 
 const defaultExpanderCode = `import { Expander } from '@ourfuturehealth/react-components';
@@ -41,6 +42,13 @@ const groupedExpanderCode = `import { Expander } from '@ourfuturehealth/react-co
 </div>;
 `;
 
+const expanderUsageExample = `import { Expander } from '@ourfuturehealth/react-components';
+
+<Expander summary="Opening times">
+  We are open Monday to Friday, 9am to 6pm.
+</Expander>;
+`;
+
 const meta: Meta<typeof Expander> = {
   title: 'Components/Expander',
   component: Expander,
@@ -51,6 +59,32 @@ const meta: Meta<typeof Expander> = {
         component:
           'Use Expander when users may feel overwhelmed by the amount of information and need it broken into smaller sections. The React API is intentionally small: `summary` is the clickable label, `open` controls the initial expanded state, and `children` is the content shown inside the disclosure panel. Prefer Details when only some users need the content and the disclosure should stay visually lighter.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Expander</code> when a larger block of information needs
+            to be broken into smaller sections without losing prominence. Pass
+            the clickable label through <code>summary</code> and the disclosure
+            content through <code>children</code>.
+          </p>
+          <p>
+            Set <code>open</code> when the section should be expanded on first
+            render. If the disclosure is lighter-weight supporting information,
+            prefer <code>Details</code>.
+          </p>
+          <Source code={expanderUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes of={Expander} exclude={['ref']} />
+
+          <h2>Examples</h2>
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],

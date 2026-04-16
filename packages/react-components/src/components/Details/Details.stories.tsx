@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Details } from './Details';
 
 const defaultDetailsCode = `import { Details } from '@ourfuturehealth/react-components';
@@ -29,6 +30,13 @@ const richContentDetailsCode = `import { Details } from '@ourfuturehealth/react-
 </Details>;
 `;
 
+const detailsUsageExample = `import { Details } from '@ourfuturehealth/react-components';
+
+<Details summary="Where can I find my NHS number?">
+  An NHS number is a 10 digit number, like 485 777 3456.
+</Details>;
+`;
+
 const meta: Meta<typeof Details> = {
   title: 'Components/Details',
   component: Details,
@@ -39,6 +47,32 @@ const meta: Meta<typeof Details> = {
         component:
           'Use Details to make a page easier to scan when only some users need supporting information. The React API is intentionally small: `summary` is the clickable label, `open` controls the initial expanded state, and `children` is the content shown inside the disclosure panel. Prefer Expander when the content is more important, aimed at a wider audience, or needs more visual prominence.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Details</code> when the disclosure is supporting
+            information that only some users will need. Pass the clickable
+            label through <code>summary</code> and the hidden content through{' '}
+            <code>children</code>.
+          </p>
+          <p>
+            Set <code>open</code> only when the content should be expanded on
+            first render. If the content is more prominent or intended for a
+            wider audience, use <code>Expander</code> instead.
+          </p>
+          <Source code={detailsUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes of={Details} exclude={['ref']} />
+
+          <h2>Examples</h2>
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
