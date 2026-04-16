@@ -57,7 +57,7 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, Pagination, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -69,6 +69,12 @@ function App() {
         hint="Enter your full name"
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
+      />
+      <Pagination
+        previousUrl="/section/treatments"
+        previousPage="Treatments"
+        nextUrl="/section/symptoms"
+        nextPage="Symptoms"
       />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
@@ -136,6 +142,7 @@ The React components package currently provides the following components:
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
+- `Pagination` - Previous/next page navigation for a small related sequence
 
 For complete component documentation and live examples, run Storybook locally from this repository:
 

@@ -52,6 +52,7 @@ import {
   ErrorSummary,
   Fieldset,
   Icon,
+  Pagination,
   Radios,
   Select,
   Tag,
@@ -86,6 +87,12 @@ function App() {
       />
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
+      <Pagination
+        previousUrl="/section/treatments"
+        previousPage="Treatments"
+        nextUrl="/section/symptoms"
+        nextPage="Symptoms"
+      />
       <Icon name="Search" size={24} />
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
@@ -189,6 +196,7 @@ The package also provides:
 - `Checkboxes`
 - `Radios`
 - `Icon`
+- `Pagination`
 
 ### ErrorSummary
 

@@ -128,7 +128,17 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Released               |
 | 20    | `toolkit-v4.9.0` | `4.9.0`         | N/A           | Monorepo       | Released               |
 | 21    | `react-v0.7.0`   | N/A             | `0.7.0`       | Monorepo       | Released               |
-| 22    | `react-v0.8.0`   | N/A             | `0.8.0`       | Monorepo       | Planned in this branch |
+| 22    | `react-v0.8.0`   | N/A             | `0.8.0`       | Monorepo       | Released               |
+| 23    | `toolkit-v4.10.0` | `4.10.0`       | N/A           | Monorepo       | Planned in DSE-335     |
+| 24    | `react-v0.9.0`   | N/A             | `0.9.0`       | Monorepo       | Planned in DSE-335     |
+| 25    | `toolkit-v4.11.0` | `4.11.0`       | N/A           | Monorepo       | Planned in DSE-326 / DSE-328 |
+| 26    | `react-v0.10.0`  | N/A             | `0.10.0`      | Monorepo       | Planned in DSE-326 / DSE-328 |
+| 27    | `toolkit-v4.12.0` | `4.12.0`       | N/A           | Monorepo       | Planned in DSE-331     |
+| 28    | `react-v0.11.0`  | N/A             | `0.11.0`      | Monorepo       | Planned in DSE-331     |
+| 29    | `toolkit-v4.13.0` | `4.13.0`       | N/A           | Monorepo       | Planned in DSE-337     |
+| 30    | `react-v0.12.0`  | N/A             | `0.12.0`      | Monorepo       | Planned in DSE-337     |
+| 31    | `toolkit-v4.14.0` | `4.14.0`       | N/A           | Monorepo       | Planned in this branch |
+| 32    | `react-v0.13.0`  | N/A             | `0.13.0`      | Monorepo       | Planned in this branch |
 
 ## References
 
