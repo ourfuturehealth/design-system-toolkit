@@ -1,7 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
 import { Fieldset } from './Fieldset';
+
+const fieldsetUsageExample = `import { Fieldset, TextInput } from '@ourfuturehealth/react-components';
+
+<Fieldset
+  legend="Contact details"
+  legendSize="medium"
+>
+  <TextInput label="Email address" type="email" width="three-quarters" />
+  <TextInput label="Phone number" type="tel" width="two-thirds" />
+</Fieldset>;
+`;
 
 const meta: Meta<typeof Fieldset> = {
   title: 'Components/Fieldset',
@@ -17,7 +28,32 @@ const meta: Meta<typeof Fieldset> = {
         <>
           <Title />
           <Description />
-          <ArgTypes />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Fieldset</code> when several inputs belong to the same
+            question. Pass the question text through <code>legend</code>, then
+            render the grouped fields as <code>children</code>.
+          </p>
+          <p>
+            Use <code>legendSize</code> when the grouped question needs a
+            stronger heading treatment, and use <code>isPageHeading</code> when
+            the legend should also be announced as the page heading.
+          </p>
+          <Source code={fieldsetUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'legend',
+              'describedBy',
+              'isPageHeading',
+              'legendSize',
+              'className',
+            ]}
+          />
+
           <Stories title="Examples" />
         </>
       ),
@@ -35,6 +71,7 @@ const meta: Meta<typeof Fieldset> = {
         type: {
           summary: 'ReactNode',
         },
+        category: 'FieldsetProps',
       },
     },
     describedBy: {
@@ -45,6 +82,7 @@ const meta: Meta<typeof Fieldset> = {
         type: {
           summary: 'string',
         },
+        category: 'FieldsetProps',
       },
     },
     isPageHeading: {
@@ -55,6 +93,7 @@ const meta: Meta<typeof Fieldset> = {
         type: {
           summary: 'boolean',
         },
+        category: 'FieldsetProps',
       },
     },
     legendSize: {
@@ -66,6 +105,7 @@ const meta: Meta<typeof Fieldset> = {
         type: {
           summary: "'none' | 'small' | 'medium' | 'large' | 'extraLarge'",
         },
+        category: 'FieldsetProps',
       },
     },
     children: {
@@ -113,6 +153,8 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    describedBy: '',
+    isPageHeading: false,
     legend: 'Contact details',
     legendSize: 'medium',
   },
@@ -123,6 +165,9 @@ export const Builder: Story = {
     </Fieldset>
   ),
   parameters: {
+    controls: {
+      include: ['legend', 'describedBy', 'isPageHeading', 'legendSize'],
+    },
     docs: {
       description: {
         story:

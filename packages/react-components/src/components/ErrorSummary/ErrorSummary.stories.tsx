@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
 import { ErrorSummary, type ErrorSummaryProps } from './ErrorSummary';
 
@@ -47,18 +47,46 @@ const inFormList = [
   },
 ];
 
+const errorSummaryUsageExample = `import { ErrorSummary } from '@ourfuturehealth/react-components';
+
+const errorList = [
+  { text: 'Enter your first name', href: '#first-name' },
+  { text: 'Enter your last name', href: '#last-name' },
+];
+
+<ErrorSummary
+  descriptionText="Check each answer and update the fields that are highlighted below."
+  errorList={errorList}
+  titleText="There is a problem"
+/>;
+`;
+
+const errorListShapeExample = `type ErrorSummaryItem = {
+  href?: string;
+  text?: string;
+  html?: string;
+  attributes?: Record<string, string | number | boolean | null | undefined>;
+};
+`;
+
 const renderErrorSummaryBuilderStory = ({
   scenario,
   ...args
 }: ErrorSummaryStoryArgs) => {
+  const normalizedDescriptionText =
+    args.descriptionText === '' ? undefined : args.descriptionText;
+  const normalizedIdPrefix =
+    args.idPrefix === '' ? undefined : args.idPrefix;
+
   const resolvedArgs = (() => {
     switch (scenario) {
       case 'with-description':
         return {
           ...args,
           descriptionText:
-            args.descriptionText ??
+            normalizedDescriptionText ??
             'Check each answer and update the fields that are highlighted below.',
+          idPrefix: normalizedIdPrefix,
           errorList: args.errorList ?? defaultErrorList,
         };
       case 'multiple-errors':
@@ -66,8 +94,9 @@ const renderErrorSummaryBuilderStory = ({
           ...args,
           errorList: multipleErrorsList,
           descriptionText:
-            args.descriptionText ??
+            normalizedDescriptionText ??
             'Check each answer and update the fields that are highlighted below.',
+          idPrefix: normalizedIdPrefix,
         };
       case 'html-content':
         return {
@@ -76,17 +105,21 @@ const renderErrorSummaryBuilderStory = ({
           descriptionHtml:
             args.descriptionHtml ??
             'Review the <strong>highlighted answers</strong> and update each field before continuing.',
+          idPrefix: normalizedIdPrefix,
           errorList: htmlContentList,
         };
       case 'in-form':
         return {
           ...args,
+          idPrefix: normalizedIdPrefix,
           errorList: inFormList,
         };
       case 'default':
       default:
         return {
           ...args,
+          descriptionText: normalizedDescriptionText,
+          idPrefix: normalizedIdPrefix,
           errorList: args.errorList ?? defaultErrorList,
         };
     }
@@ -184,7 +217,48 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
         <>
           <Title />
           <Description />
-          <ArgTypes exclude={['scenario']} />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass an <code>errorList</code> array and a heading through{' '}
+            <code>titleText</code>. Each error can link back to the relevant
+            field using <code>href</code>.
+          </p>
+          <p>
+            Add <code>descriptionText</code> when you want supporting guidance
+            below the heading. Use the HTML variants only when you need trusted
+            markup rather than plain text.
+          </p>
+          <Source code={errorSummaryUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'titleText',
+              'descriptionText',
+              'errorList',
+              'idPrefix',
+              'className',
+            ]}
+          />
+
+          <h2>
+            <code>errorList</code> shape
+          </h2>
+          <p>
+            Each entry in the <code>errorList</code> array follows this shape:
+          </p>
+          <Source code={errorListShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>scenario</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can switch between realistic error
+            summary examples without rebuilding the linked form markup by hand.
+            It is not a React prop accepted by <code>ErrorSummary</code>.
+          </p>
+
           <Stories title="Examples" />
         </>
       ),
@@ -205,6 +279,9 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
       control: 'text',
       description:
         'Plain text heading content for the summary. Ignored if `titleHtml` is provided.',
+      table: {
+        category: 'ErrorSummaryProps',
+      },
     },
     titleHtml: {
       control: false,
@@ -218,6 +295,9 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
       control: 'text',
       description:
         'Optional supporting text shown below the heading. Ignored if `descriptionHtml` is provided.',
+      table: {
+        category: 'ErrorSummaryProps',
+      },
     },
     descriptionHtml: {
       control: false,
@@ -228,7 +308,7 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
       },
     },
     errorList: {
-      control: 'object',
+      control: false,
       description:
         'List of linked or unlinked errors shown in the summary. Each item supports `href`, `text`, `html`, and `attributes`. In stories that render linked fields, keep each `href` aligned with the field ids shown in the story.',
       table: {
@@ -236,6 +316,7 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
           summary:
             'Array<{ href?: string; text?: string; html?: string; attributes?: Record<string, string | number | boolean | null | undefined> }>',
         },
+        category: 'ErrorSummaryProps',
       },
     },
     classes: {
@@ -266,6 +347,9 @@ const meta: Meta<ErrorSummaryStoryArgs> = {
       control: 'text',
       description:
         'Optional prefix used to generate the title id referenced by `aria-labelledby`. Use this when rendering more than one error summary on the same page.',
+      table: {
+        category: 'ErrorSummaryProps',
+      },
     },
     ref: {
       control: false,
@@ -307,9 +391,15 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    descriptionText: '',
+    idPrefix: '',
     scenario: 'default',
+    titleText: 'There is a problem',
   },
   parameters: {
+    controls: {
+      include: ['scenario', 'titleText', 'descriptionText', 'idPrefix'],
+    },
     docs: {
       description: {
         story:

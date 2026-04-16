@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Select, type SelectProps } from './Select';
 
 type SelectItemSet = 'contact-methods' | 'contact-methods-selected' | 'countries';
@@ -103,14 +104,45 @@ const countryItems = [
 />;
 `;
 
+const selectUsageExample = `import { Select } from '@ourfuturehealth/react-components';
+
+const items = [
+  { value: '', text: 'Choose an option' },
+  { value: 'email', text: 'Email' },
+  { value: 'phone', text: 'Phone' },
+];
+
+<Select
+  hint="Choose how you would like us to contact you."
+  items={items}
+  label="Preferred contact method"
+  name="contact-method"
+/>;
+`;
+
+const selectItemsShapeExample = `type SelectItem = {
+  text: React.ReactNode;
+  value?: string | number;
+  disabled?: boolean;
+  selected?: boolean;
+  optionProps?: React.OptionHTMLAttributes<HTMLOptionElement>;
+};
+`;
+
 const renderSelectStory = ({
   itemSet,
   items = contactMethodItems,
   ...args
 }: SelectStoryArgs) => {
   const resolvedItems = itemSet === undefined ? items : itemSets[itemSet];
+  const resolvedArgs = {
+    ...args,
+    describedBy: args.describedBy || undefined,
+    errorMessage: args.errorMessage || undefined,
+    hint: args.hint || undefined,
+  };
 
-  return <Select {...args} items={resolvedItems} />;
+  return <Select {...resolvedArgs} items={resolvedItems} />;
 };
 
 const meta: Meta<SelectStoryArgs> = {
@@ -124,6 +156,58 @@ const meta: Meta<SelectStoryArgs> = {
         component:
           'Use Select for a native dropdown where the choices are known up front. The React API is intentionally small: pass a label, an ordered array of items, and the usual input-style props such as hint, error message, and `isPageHeading` when the question is also the page heading. Use the `Builder` story to explore the component with friendly preset item sets.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass a required <code>label</code>, <code>name</code>, and an{' '}
+            <code>items</code> array. Each item becomes one native{' '}
+            <code>{'<option>'}</code> inside the dropdown.
+          </p>
+          <p>
+            Add <code>hint</code> or <code>errorMessage</code> when the field
+            needs extra guidance or validation feedback. Use{' '}
+            <code>isPageHeading</code> when the select question should also be
+            announced as the page heading.
+          </p>
+          <Source code={selectUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'label',
+              'hint',
+              'errorMessage',
+              'name',
+              'items',
+              'describedBy',
+              'isPageHeading',
+            ]}
+          />
+
+          <h2>
+            <code>items</code> shape
+          </h2>
+          <p>
+            Each entry in the <code>items</code> array follows this shape:
+          </p>
+          <Source code={selectItemsShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>itemSet</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can try realistic option lists
+            without editing the real <code>items</code> prop directly. It is not
+            a React prop accepted by <code>Select</code>.
+          </p>
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -136,30 +220,48 @@ const meta: Meta<SelectStoryArgs> = {
     label: {
       control: 'text',
       description: 'Question or field label shown above the select.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     hint: {
       control: 'text',
       description:
         'Optional supporting text shown below the label and above any error message.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description:
         'Validation message shown above the select. When present, the select is marked invalid and linked with `aria-describedby`.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     name: {
       control: 'text',
       description: 'HTML name submitted with the form.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     describedBy: {
       control: 'text',
       description:
         'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     isPageHeading: {
       control: 'boolean',
       description:
         'Wrap the label in an `h1` when this question is also the page heading.',
+      table: {
+        category: 'SelectProps',
+      },
     },
     items: {
       control: false,
@@ -171,6 +273,7 @@ const meta: Meta<SelectStoryArgs> = {
           detail:
             "{ text: ReactNode; value?: string | number; disabled?: boolean; selected?: boolean; optionProps?: OptionHTMLAttributes<HTMLOptionElement> }[]",
         },
+        category: 'SelectProps',
       },
     },
     itemSet: {
@@ -183,7 +286,7 @@ const meta: Meta<SelectStoryArgs> = {
       description:
         'Storybook-only helper for the Builder story. Switches between preset item arrays without editing the real `items` prop directly.',
       table: {
-        disable: true,
+        category: 'Builder story only',
       },
     },
     className: {
@@ -257,6 +360,9 @@ export const Default: Story = {
 export const Builder: Story = {
   args: {
     hint: 'Choose how you would like us to contact you.',
+    describedBy: '',
+    errorMessage: '',
+    isPageHeading: false,
     itemSet: 'contact-methods',
     items: contactMethodItems,
     label: 'Preferred contact method',

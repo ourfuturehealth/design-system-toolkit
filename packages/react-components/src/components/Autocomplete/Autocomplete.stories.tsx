@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Autocomplete, type AutocompleteProps } from './Autocomplete';
 
 type AutocompleteOptionSet = 'countries' | 'cities' | 'empty';
@@ -74,6 +75,26 @@ const countriesOptions = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
 />;
 `;
 
+const autocompleteUsageExample = `import { Autocomplete } from '@ourfuturehealth/react-components';
+
+const options = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
+
+<Autocomplete
+  hint="Start typing to filter the list."
+  label="Country"
+  name="country"
+  options={options}
+/>;
+`;
+
+const autocompleteOptionsShapeExample = `const options = [
+  'England',
+  'Scotland',
+  'Wales',
+  'Northern Ireland',
+];
+`;
+
 const renderAutocompleteStory = ({
   optionSet,
   options = countriesOptions,
@@ -81,8 +102,15 @@ const renderAutocompleteStory = ({
 }: AutocompleteStoryArgs) => {
   const resolvedOptions =
     optionSet === undefined ? options : optionSets[optionSet];
+  const resolvedArgs = {
+    ...args,
+    describedBy: args.describedBy || undefined,
+    errorMessage: args.errorMessage || undefined,
+    hint: args.hint || undefined,
+    noResultsText: args.noResultsText || undefined,
+  };
 
-  return <Autocomplete {...args} options={resolvedOptions} />;
+  return <Autocomplete {...resolvedArgs} options={resolvedOptions} />;
 };
 
 const meta: Meta<AutocompleteStoryArgs> = {
@@ -96,6 +124,62 @@ const meta: Meta<AutocompleteStoryArgs> = {
         component:
           'Use Autocomplete for a text field that suggests matches while the user types. The React API stays small: pass a label, an array of suggestion strings, and the usual form-field props such as hint, error message, width, and `defaultValue` or `value` when you need them. Use the `Builder` story to explore the component with friendly preset controls, and use the other stories as fixed examples.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass a required <code>label</code>, <code>name</code>, and an{' '}
+            <code>options</code> array of suggestion strings. Add{' '}
+            <code>hint</code> when the user needs extra guidance, and use{' '}
+            <code>errorMessage</code> when you need to show validation feedback.
+          </p>
+          <p>
+            Use <code>noResultsText</code> when your service needs custom empty
+            state wording, and use <code>width</code> or <code>inputWidth</code>{' '}
+            to control the visible field width.
+          </p>
+          <Source code={autocompleteUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'label',
+              'hint',
+              'errorMessage',
+              'name',
+              'options',
+              'noResultsText',
+              'width',
+              'inputWidth',
+              'describedBy',
+              'isPageHeading',
+            ]}
+          />
+
+          <h2>
+            <code>options</code> shape
+          </h2>
+          <p>
+            Pass a plain array of strings. Each string becomes one suggestion in
+            the filtered results list.
+          </p>
+          <Source code={autocompleteOptionsShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>optionSet</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can swap between preset suggestion
+            lists without editing the real <code>options</code> prop. It is not
+            a React prop accepted by <code>Autocomplete</code>.
+          </p>
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -108,20 +192,32 @@ const meta: Meta<AutocompleteStoryArgs> = {
     label: {
       control: 'text',
       description: 'Question or field label shown above the autocomplete input.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     hint: {
       control: 'text',
       description:
         'Optional supporting text shown below the label and above any error message.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description:
         'Validation message shown above the input. When present, the input is marked invalid and linked with `aria-describedby`.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     name: {
       control: 'text',
       description: 'HTML name submitted with the form.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     options: {
       control: false,
@@ -131,6 +227,7 @@ const meta: Meta<AutocompleteStoryArgs> = {
         type: {
           summary: 'string[]',
         },
+        category: 'AutocompleteProps',
       },
     },
     optionSet: {
@@ -139,13 +236,16 @@ const meta: Meta<AutocompleteStoryArgs> = {
       description:
         'Storybook-only helper for the Builder story. Switches between preset suggestion lists without editing the real `options` array.',
       table: {
-        disable: true,
+        category: 'Builder story only',
       },
     },
     noResultsText: {
       control: 'text',
       description:
         'Override for the no-results message shown when the query matches no suggestions.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     width: {
       control: 'select',
@@ -159,22 +259,34 @@ const meta: Meta<AutocompleteStoryArgs> = {
       ],
       description:
         'Responsive width utility for the autocomplete field, including its suggestions dropdown.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     inputWidth: {
       control: 'select',
       options: [2, 3, 4, 5, 10, 20, 30],
       description:
         'Fixed character-width modifier that helps signal the expected answer length and also constrains the suggestions dropdown width.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     describedBy: {
       control: 'text',
       description:
         'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     isPageHeading: {
       control: 'boolean',
       description:
         'Wrap the label in an `h1` when this question is also the page heading.',
+      table: {
+        category: 'AutocompleteProps',
+      },
     },
     onOptionSelect: {
       control: false,
@@ -257,6 +369,10 @@ export const Builder: Story = {
     hint: 'Start typing to filter the list.',
     label: 'Country',
     name: 'country',
+    describedBy: '',
+    errorMessage: '',
+    isPageHeading: false,
+    noResultsText: '',
     optionSet: 'countries',
     options: countriesOptions,
   },

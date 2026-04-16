@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
 import { Radios, type RadiosProps } from './Radios';
 
@@ -72,12 +72,50 @@ const radioItemSets: Record<
   inline: inlineItems,
 };
 
+const radiosUsageExample = `import { Radios } from '@ourfuturehealth/react-components';
+
+const items = [
+  { value: 'email', label: 'Email' },
+  { value: 'phone', label: 'Phone' },
+  { divider: 'or' },
+  { value: 'post', label: 'Post' },
+];
+
+<Radios
+  hint="Choose one way for us to contact you."
+  items={items}
+  legend="How should we contact you?"
+  name="contact-method"
+/>;
+`;
+
+const radioItemsShapeExample = `type RadioItem =
+  | {
+      value: string | number;
+      label: React.ReactNode;
+      hint?: React.ReactNode;
+      checked?: boolean;
+      disabled?: boolean;
+      conditional?: React.ReactNode;
+      inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+    }
+  | {
+      divider: React.ReactNode;
+    };
+`;
+
 const renderRadiosBuilderStory = ({ itemSet, ...args }: RadiosStoryArgs) => {
   const items = itemSet ? radioItemSets[itemSet] : args.items ?? contactItems;
+  const resolvedArgs = {
+    ...args,
+    describedBy: args.describedBy || undefined,
+    errorMessage: args.errorMessage || undefined,
+    hint: args.hint || undefined,
+  };
 
   return (
     <Radios
-      {...args}
+      {...resolvedArgs}
       items={items}
     />
   );
@@ -98,7 +136,53 @@ const meta: Meta<RadiosStoryArgs> = {
         <>
           <Title />
           <Description />
-          <ArgTypes exclude={['itemSet']} />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass a required <code>legend</code>, <code>name</code>, and an{' '}
+            <code>items</code> array. Each item becomes one radio row, and you
+            can add a divider row where the list needs a visual break.
+          </p>
+          <p>
+            Use <code>hint</code> for group-level guidance,{' '}
+            <code>errorMessage</code> for validation feedback, and use{' '}
+            <code>idPrefix</code> when you want predictable generated IDs for
+            the inputs and any conditional content.
+          </p>
+          <Source code={radiosUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'legend',
+              'hint',
+              'errorMessage',
+              'name',
+              'idPrefix',
+              'items',
+              'describedBy',
+              'isPageHeading',
+            ]}
+          />
+
+          <h2>
+            <code>items</code> shape
+          </h2>
+          <p>
+            Each entry in the <code>items</code> array is either a radio item
+            object or a divider row:
+          </p>
+          <Source code={radioItemsShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>itemSet</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can switch between realistic radio
+            examples without editing the real <code>items</code> prop. It is not
+            a React prop accepted by <code>Radios</code>.
+          </p>
+
           <Stories title="Examples" />
         </>
       ),
@@ -122,22 +206,37 @@ const meta: Meta<RadiosStoryArgs> = {
     legend: {
       control: 'text',
       description: 'Question shown as the fieldset legend for the radio group.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     hint: {
       control: 'text',
       description: 'Optional supporting text shown below the legend and above any error message.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description: 'Validation message shown above the radio items. When present, the fieldset is linked with `aria-describedby`.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     name: {
       control: 'text',
       description: 'HTML name shared by all radio inputs in the group.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     idPrefix: {
       control: 'text',
       description: 'Optional prefix used when generating radio IDs.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     items: {
       control: false,
@@ -148,16 +247,23 @@ const meta: Meta<RadiosStoryArgs> = {
           detail:
             "{ value: string | number; label: ReactNode; hint?: ReactNode; checked?: boolean; disabled?: boolean; conditional?: ReactNode; inputProps?: InputHTMLAttributes<HTMLInputElement> }[] | { divider: ReactNode }[]",
         },
+        category: 'RadiosProps',
       },
     },
     describedBy: {
       control: 'text',
       description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     isPageHeading: {
       control: 'boolean',
       description:
         'Wrap the legend content in an `h1` when this question is also the page heading.',
+      table: {
+        category: 'RadiosProps',
+      },
     },
     onChange: {
       control: false,
@@ -229,8 +335,11 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    describedBy: '',
+    errorMessage: '',
     hint: 'Choose one way for us to contact you.',
     idPrefix: 'contact-method-builder',
+    isPageHeading: false,
     itemSet: 'contact',
     legend: 'How should we contact you?',
     name: 'contact-method-builder',

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Tag, type TagVariant } from './Tag';
 
 const variantOptions: TagVariant[] = [
@@ -10,6 +11,13 @@ const variantOptions: TagVariant[] = [
   'red',
 ];
 
+const tagUsageExample = `import { Tag } from '@ourfuturehealth/react-components';
+
+<Tag variant="neutral">
+  Inactive
+</Tag>;
+`;
+
 const meta: Meta<typeof Tag> = {
   title: 'Components/Tag',
   component: Tag,
@@ -20,6 +28,31 @@ const meta: Meta<typeof Tag> = {
         component:
           'Use Tag to show short status labels. The default Tag style is neutral. Choose a supported variant through the `variant` prop. Toolkit markup still supports the deprecated `ofh-tag--grey` class as an alias of neutral, but React uses the canonical `neutral` variant name.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Tag</code> for short, non-interactive status labels or
+            contextual markers.
+          </p>
+          <p>
+            Pass the visible label as <code>children</code> and choose a{' '}
+            <code>variant</code> when you need a different color treatment.
+          </p>
+          <Source code={tagUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={['children', 'variant', 'className']}
+          />
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -27,17 +60,26 @@ const meta: Meta<typeof Tag> = {
     children: {
       control: 'text',
       description: 'Tag content.',
+      table: {
+        category: 'TagProps',
+      },
     },
     variant: {
       control: 'select',
       options: variantOptions,
       description:
         'Visual style variant. Use `neutral`, `brand`, `blue`, `green`, `yellow`, or `red`.',
+      table: {
+        category: 'TagProps',
+      },
     },
     className: {
       control: 'text',
       description:
         'Additional classes added alongside the toolkit classes. Use this for integration hooks rather than choosing a Tag variant.',
+      table: {
+        category: 'TagProps',
+      },
     },
   },
   args: {

@@ -1,5 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Button, type ButtonProps } from './Button';
+
+const buttonUsageExample = `import { Button } from '@ourfuturehealth/react-components';
+
+<Button variant="contained">
+  Continue
+</Button>;
+`;
 
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button',
@@ -11,6 +19,33 @@ const meta: Meta<ButtonProps> = {
         component:
           'A flexible button component based on the OFH Design System with multiple variants and states. If `href` is provided, the component renders as an anchor instead of a button. The `variant` changes the visual prominence only, not the semantic element.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Button</code> for the main action on a page or step. Pass
+            the visible label as <code>children</code> and choose a{' '}
+            <code>variant</code> when you need a different visual emphasis.
+          </p>
+          <p>
+            Add <code>href</code> when the action should navigate to another
+            page. Leave <code>href</code> unset when the action should behave as
+            a real button inside your app or form.
+          </p>
+          <Source code={buttonUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={['variant', 'children', 'href', 'type', 'disabled']}
+          />
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -27,21 +62,33 @@ const meta: Meta<ButtonProps> = {
       ],
       description:
         'Changes the visual style and prominence of the button. It does not change whether the component renders as a button or link.',
+      table: {
+        category: 'ButtonProps',
+      },
     },
     children: {
       control: 'text',
       description: 'Visible label content for the button or link.',
+      table: {
+        category: 'ButtonProps',
+      },
     },
     href: {
       control: 'text',
       description:
         'Navigation destination. When this is set, the component renders as an anchor (`<a>`) instead of a button.',
+      table: {
+        category: 'ButtonProps',
+      },
     },
     type: {
       control: 'select',
       options: ['button', 'submit', 'reset'],
       description:
         'Button type for real `<button>` elements. This has no effect when `href` is set and the component renders as a link.',
+      table: {
+        category: 'ButtonProps',
+      },
     },
     onClick: {
       control: false,
@@ -55,6 +102,9 @@ const meta: Meta<ButtonProps> = {
       control: 'boolean',
       description:
         'Disables the button. This only applies to real `<button>` elements and has no effect when `href` is set.',
+      table: {
+        category: 'ButtonProps',
+      },
     },
     className: {
       control: false,
@@ -95,9 +145,11 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
-    variant: 'contained',
     children: 'Continue',
+    disabled: false,
+    href: '',
     type: 'button',
+    variant: 'contained',
   },
   parameters: {
     controls: {

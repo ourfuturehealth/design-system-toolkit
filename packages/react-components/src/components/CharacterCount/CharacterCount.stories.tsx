@@ -1,6 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { CharacterCount } from './CharacterCount';
+
+const characterCountUsageExample = `import { CharacterCount } from '@ourfuturehealth/react-components';
+
+<CharacterCount
+  hint="Do not include personal details."
+  label="Summary"
+  maxLength={200}
+  name="summary"
+/>;
+`;
 
 const meta: Meta<typeof CharacterCount> = {
   title: 'Components/Input/Character count',
@@ -17,7 +27,37 @@ const meta: Meta<typeof CharacterCount> = {
         <>
           <Title />
           <Description />
-          <ArgTypes />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>CharacterCount</code> when you need a textarea with a
+            live count message. Pass a required <code>label</code> and{' '}
+            <code>name</code>, then choose either <code>maxLength</code> for a
+            character limit or <code>maxWords</code> for a word limit.
+          </p>
+          <p>
+            Use <code>threshold</code> when you want the visible status message
+            to stay hidden until the user gets close to the limit, and use{' '}
+            <code>rows</code> to control the initial textarea height.
+          </p>
+          <Source code={characterCountUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'label',
+              'hint',
+              'errorMessage',
+              'name',
+              'maxLength',
+              'maxWords',
+              'threshold',
+              'rows',
+              'describedBy',
+            ]}
+          />
+
           <Stories title="Examples" />
         </>
       ),
@@ -33,40 +73,67 @@ const meta: Meta<typeof CharacterCount> = {
     label: {
       control: 'text',
       description: 'Question or field label shown above the textarea.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     hint: {
       control: 'text',
       description: 'Optional supporting text shown below the label and above the count message.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description:
         'Validation message shown above the textarea. This is separate from the automatic over-limit count status.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     name: {
       control: 'text',
       description: 'HTML name submitted with the form.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     maxLength: {
       control: 'number',
       description: 'Character limit before the count message switches to an over-limit state.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     maxWords: {
       control: 'number',
       description: 'Word limit when using word-count mode instead of character-count mode.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     threshold: {
       control: 'number',
       description: 'Percentage of the limit at which the visible status message appears.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     rows: {
       control: 'number',
       description: 'Visible row count for the underlying textarea.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     describedBy: {
       control: 'text',
       description:
         'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'CharacterCountProps',
+      },
     },
     countMessageClassName: {
       control: false,
@@ -107,12 +174,30 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    describedBy: '',
+    errorMessage: '',
     hint: 'Do not include personal details.',
     label: 'Summary',
     maxLength: 200,
+    maxWords: undefined,
     name: 'summary',
+    rows: 5,
+    threshold: 0,
   },
   parameters: {
+    controls: {
+      include: [
+        'label',
+        'hint',
+        'errorMessage',
+        'name',
+        'maxLength',
+        'maxWords',
+        'threshold',
+        'rows',
+        'describedBy',
+      ],
+    },
     docs: {
       description: {
         story:
