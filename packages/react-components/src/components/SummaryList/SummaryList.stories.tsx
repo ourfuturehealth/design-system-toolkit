@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { SummaryList } from './SummaryList';
 
 type SummaryListStoryArgs = ComponentProps<typeof SummaryList> & {
@@ -189,6 +190,44 @@ const defaultRows = [
 <SummaryList rows={defaultRows} padded={false} noBorder />;
 `;
 
+const summaryListUsageExample = `import { SummaryList } from '@ourfuturehealth/react-components';
+
+const rows = [
+  {
+    key: { text: 'Name' },
+    value: { text: 'Sarah Philips' },
+    actions: {
+      items: [
+        {
+          href: '#name',
+          text: 'Change',
+          visuallyHiddenText: 'name',
+        },
+      ],
+    },
+  },
+  {
+    key: { text: 'Date of birth' },
+    value: { text: '5 January 1978' },
+  },
+];
+
+<SummaryList rows={rows} padded />;
+`;
+
+const summaryListRowsShapeExample = `type SummaryListRow = {
+  key: { text?: string; html?: string };
+  value: { text?: string; html?: string };
+  actions?: {
+    items: Array<{
+      href: string;
+      text: string;
+      visuallyHiddenText?: string;
+    }>;
+  };
+};
+`;
+
 const meta: Meta<SummaryListStoryArgs> = {
   title: 'Components/Summary list',
   component: SummaryList,
@@ -199,6 +238,52 @@ const meta: Meta<SummaryListStoryArgs> = {
         component:
           'Use Summary List to show key-value pairs such as review answers. The React API is intentionally small: `rows` defines the content, `padded` switches between the roomier and denser layouts, and `noBorder` removes the separators between rows. `classes`, `className`, `attributes`, and `ref` are integration props rather than the main consumer API. The Builder story uses a Storybook-only `showActions` helper so you can flip row actions on and off without editing raw JSON.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>SummaryList</code> to show key-value answers such as
+            review information before submission. Pass the content through the{' '}
+            <code>rows</code> array, then use <code>padded</code> and{' '}
+            <code>noBorder</code> to switch between the published layout
+            variants.
+          </p>
+          <p>
+            Add row <code>actions</code> only when users need a clear way to
+            change an answer. Use HTML values sparingly when the value cell
+            needs richer markup such as stacked contact details.
+          </p>
+          <Source code={summaryListUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={SummaryList}
+            include={['rows', 'padded', 'noBorder', 'classes', 'className', 'attributes']}
+          />
+
+          <h2>
+            <code>rows</code> shape
+          </h2>
+          <p>
+            Each entry in the <code>rows</code> array follows this shape:
+          </p>
+          <Source code={summaryListRowsShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>showActions</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can toggle the row actions on and
+            off without editing the real <code>rows</code> prop directly. It is
+            not a React prop accepted by <code>SummaryList</code>.
+          </p>
+
+          <h2>Examples</h2>
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
