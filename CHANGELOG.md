@@ -8,6 +8,25 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-20
 
+#### @ourfuturehealth/toolkit 4.14.0 (`toolkit-v4.14.0`)
+
+##### Changed
+
+- Refreshed the toolkit `pagination` component to the current design-system treatment, including 4px arrow spacing, the boxed focus style, and state coloring that keeps the title and arrow in the brand color while the page label carries the link-state change
+- Changed pagination links to hug their content instead of owning 50% click zones, while keeping the existing responsive outer margin pending broader design confirmation
+- Expanded the pagination docs page and examples to cover default, previous-only, and next-only sequence edges
+
+#### @ourfuturehealth/react-components 0.13.0 (`react-v0.13.0`)
+
+##### Added
+
+- First public React `Pagination` component with toolkit-parity previous/next link structure and support for previous-only and next-only variants
+- Storybook coverage and unit/accessibility tests for the React pagination component
+
+##### Changed
+
+- Aligned the React pagination arrows, focus treatment, and state coloring with the refreshed toolkit component and current design spec
+
 #### @ourfuturehealth/toolkit 4.13.0 (`toolkit-v4.13.0`)
 
 ##### Changed
