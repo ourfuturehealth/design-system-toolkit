@@ -1,10 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Icon } from './Icon';
 
 const iconNameOptions = iconManifest.icons
   .map(({ name }) => name)
   .sort((left, right) => left.localeCompare(right));
+
+const iconUsageExample = `import { Icon } from '@ourfuturehealth/react-components';
+
+<Icon
+  name="Check"
+  size={24}
+/>;
+`;
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
@@ -16,6 +25,33 @@ const meta: Meta<typeof Icon> = {
         component:
           'Use Icon to render toolkit icons in React. Choose exactly one sizing mode: `size` for a fixed 16/24/32 icon, or `responsiveSize` to follow the toolkit iconography scale. The responsive scale maps `16` to `16/16/16`, `24` to `16/16/24`, and `32` to `24/24/32` across mobile, tablet, and desktop. Leave `title` empty for decorative icons. Any other SVG props, such as `aria-*`, `data-*`, or event handlers, are passed straight to the rendered `<svg>` element.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Icon</code> to render one of the bundled toolkit icons in
+            React. Pass the icon <code>name</code> and choose one sizing mode:
+            fixed <code>size</code> or <code>responsiveSize</code>.
+          </p>
+          <p>
+            Leave <code>title</code> empty when the icon is decorative. Add a{' '}
+            <code>title</code> only when the icon needs to be announced as
+            meaningful content on its own.
+          </p>
+          <Source code={iconUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={['name', 'size', 'responsiveSize', 'title', 'color']}
+          />
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -25,28 +61,43 @@ const meta: Meta<typeof Icon> = {
       options: iconNameOptions,
       description:
         'Toolkit icon name from the generated manifest. This maps directly to bundled toolkit icon data in the React package.',
+      table: {
+        category: 'IconProps',
+      },
     },
     size: {
       control: 'radio',
       options: [16, 24, 32],
       description:
         'Fixed icon size. Use this when the icon should stay at 16, 24, or 32 across every breakpoint. Mutually exclusive with `responsiveSize`.',
+      table: {
+        category: 'IconProps',
+      },
     },
     responsiveSize: {
       control: 'radio',
       options: [16, 24, 32],
       description:
         'Responsive icon size from the toolkit iconography scale. `16` stays 16 everywhere, `24` becomes 16/16/24, and `32` becomes 24/24/32 across mobile, tablet, and desktop. Mutually exclusive with `size`.',
+      table: {
+        category: 'IconProps',
+      },
     },
     title: {
       control: 'text',
       description:
         'Accessible label for meaningful standalone icons. When set, the icon renders with `role="img"`; leave it empty for decorative icons so it stays hidden from assistive technology.',
+      table: {
+        category: 'IconProps',
+      },
     },
     color: {
       control: 'color',
       description:
         'Optional color override applied through inline style. Use this for monochrome icons that should not inherit surrounding text colour.',
+      table: {
+        category: 'IconProps',
+      },
     },
     className: {
       control: false,
@@ -100,8 +151,11 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    color: '',
     name: 'Check',
+    responsiveSize: undefined,
     size: 24,
+    title: '',
   },
   parameters: {
     controls: {

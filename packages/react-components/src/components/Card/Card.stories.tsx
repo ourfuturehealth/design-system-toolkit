@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Card } from './Card';
 import type { TagVariant } from '../Tag';
@@ -31,6 +32,30 @@ const tagVariantOptions: TagVariant[] = [
 const iconNameOptions = iconManifest.icons
   .map(({ name }) => name)
   .sort((left, right) => left.localeCompare(right));
+
+const cardUsageExample = `import { Card } from '@ourfuturehealth/react-components';
+
+<Card
+  description="Go to 111.nhs.uk or call 111 for urgent help that does not need emergency care."
+  heading="If you need help now, but it’s not an emergency"
+/>;
+`;
+
+const cardNestedPropsExample = `const tag = {
+  children: 'New',
+  variant: 'blue',
+};
+
+const metadataItems = [
+  { icon: 'LocationOutline', text: 'Online' },
+  { icon: 'CalendarOutline', text: 'Updated today' },
+];
+
+const actionLink = {
+  text: 'Open tasks',
+  href: '/tasks',
+};
+`;
 
 const renderCard = ({
   tagText,
@@ -126,6 +151,64 @@ const meta: Meta<CardStoryArgs> = {
         component:
           'Use a card to present short, scannable summaries of content, status or next steps. `headingLevel` changes the semantic heading tag used for the card title, but does not change the visual styling on its own. The React component mirrors the toolkit Card family markup and classes. Storybook-only helper args such as `tagText`, `iconName`, and `metadataItem1Text` exist only to make the Builder story easier to use and are not part of `CardProps`.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Use <code>Card</code> for short, scannable summaries of content,
+            status, or next steps. Pass the main title through <code>heading</code>{' '}
+            and the supporting copy through <code>description</code>.
+          </p>
+          <p>
+            Add <code>href</code> and set <code>variant="clickable"</code> when
+            the card should behave like a linked summary. Add nested props like{' '}
+            <code>tag</code>, <code>metadataItems</code>, and{' '}
+            <code>actionLink</code> only when the card needs those extra parts.
+          </p>
+          <Source code={cardUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'variant',
+              'heading',
+              'headingLevel',
+              'description',
+              'href',
+              'number',
+              'tag',
+              'metadataItems',
+              'helperText',
+              'actionLink',
+              'imgURL',
+              'imgALT',
+            ]}
+          />
+
+          <h2>Common nested prop shapes</h2>
+          <p>
+            When you need richer card content, these are the main nested object
+            shapes used by the React API:
+          </p>
+          <Source code={cardNestedPropsExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>tagText</code>, <code>tagVariant</code>, <code>iconName</code>,{' '}
+            <code>iconColor</code>, <code>metadataItem1Text</code>, and the
+            related metadata/action helper args are only used by the Storybook{' '}
+            <code>Builder</code> story. They exist to make the card easier to
+            explore without editing nested JSON, and they are not React props
+            accepted by <code>Card</code>.
+          </p>
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -135,11 +218,17 @@ const meta: Meta<CardStoryArgs> = {
       options: ['basic', 'clickable'],
       description:
         'Changes the card behavior. `basic` is a static content card. `clickable` keeps a real link inside the card and expands the card hit area to that primary link.',
+      table: {
+        category: 'CardProps',
+      },
     },
     heading: {
       control: 'text',
       description:
         'Main heading content for the card. This is usually the most prominent text and can include a link when `href` is provided.',
+      table: {
+        category: 'CardProps',
+      },
     },
     headingHtml: {
       control: false,
@@ -162,10 +251,16 @@ const meta: Meta<CardStoryArgs> = {
       options: [2, 3, 4, 5, 6],
       description:
         'Changes the semantic heading element for the title, for example `h2` or `h3`. This helps the card fit the page heading hierarchy, but does not change the visual appearance by itself.',
+      table: {
+        category: 'CardProps',
+      },
     },
     description: {
       control: 'text',
       description: 'Plain text body copy shown below the heading.',
+      table: {
+        category: 'CardProps',
+      },
     },
     descriptionHtml: {
       control: false,
@@ -179,11 +274,17 @@ const meta: Meta<CardStoryArgs> = {
       control: 'text',
       description:
         'Primary link destination. In clickable cards, this makes the heading link the main interactive target for the whole card.',
+      table: {
+        category: 'CardProps',
+      },
     },
     icon: {
       control: 'object',
       description:
         'Optional trailing icon shown to the right of the card content. The card keeps this slot at a fixed 32px size. Monochrome icons can be tinted with `icon.color`, while icons with baked-in fills keep their own colours.',
+      table: {
+        category: 'CardProps',
+      },
     },
     dismissButton: {
       control: false,
@@ -194,21 +295,33 @@ const meta: Meta<CardStoryArgs> = {
       control: 'text',
       description:
         'Large numeric value used in dashboard-style cards where the number is the main message.',
+      table: {
+        category: 'CardProps',
+      },
     },
     tag: {
       control: 'object',
       description:
         'Optional contextual tag shown above the body copy. This uses the React `Tag` API, for example `children`, `variant`, and `className`.',
+      table: {
+        category: 'CardProps',
+      },
     },
     metadataItems: {
       control: 'object',
       description:
         'Optional metadata rows with an icon and text, used for supporting details like location, date, or reading time.',
+      table: {
+        category: 'CardProps',
+      },
     },
     helperText: {
       control: 'text',
       description:
         'Supporting helper text shown after the main body and metadata.',
+      table: {
+        category: 'CardProps',
+      },
     },
     helperHtml: {
       control: false,
@@ -222,15 +335,24 @@ const meta: Meta<CardStoryArgs> = {
       control: 'object',
       description:
         'Optional secondary action link shown at the bottom of the card. In clickable numeric cards without `href`, this can act as the primary link target.',
+      table: {
+        category: 'CardProps',
+      },
     },
     imgURL: {
       control: 'text',
       description: 'Optional image shown at the top of the card.',
+      table: {
+        category: 'CardProps',
+      },
     },
     imgALT: {
       control: 'text',
       description:
         'Alternative text for the image. Use an empty string when the image is decorative.',
+      table: {
+        category: 'CardProps',
+      },
     },
     classes: {
       control: false,

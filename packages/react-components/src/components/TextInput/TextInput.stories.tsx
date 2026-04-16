@@ -1,5 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from './TextInput';
+
+const textInputUsageExample = `import { TextInput } from '@ourfuturehealth/react-components';
+
+<TextInput
+  hint="Tell us the name you use on official documents."
+  label="Full name"
+  name="full-name"
+  placeholder="Enter your full name"
+  type="text"
+/>;
+`;
 
 const meta: Meta<typeof TextInput> = {
   title: 'Components/Input/Text input',
@@ -12,6 +24,45 @@ const meta: Meta<typeof TextInput> = {
         component:
           'A single-line text input that reuses the toolkit markup and classes, including the shared input-family label, hint, error, and width treatments. Native input props such as `autoComplete`, `disabled`, `placeholder`, and `required` pass straight through to the underlying `<input>`.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass a required <code>label</code> and <code>name</code>. Set{' '}
+            <code>type</code> to the native input type you need, such as{' '}
+            <code>text</code>, <code>email</code>, or <code>tel</code>.
+          </p>
+          <p>
+            Add <code>hint</code> for supporting guidance,{' '}
+            <code>errorMessage</code> for validation feedback, and use{' '}
+            <code>width</code> or <code>inputWidth</code> when you need to guide
+            layout or expected answer length.
+          </p>
+          <Source code={textInputUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'label',
+              'hint',
+              'errorMessage',
+              'name',
+              'type',
+              'placeholder',
+              'describedBy',
+              'width',
+              'inputWidth',
+              'isPageHeading',
+            ]}
+          />
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -24,14 +75,23 @@ const meta: Meta<typeof TextInput> = {
     label: {
       control: 'text',
       description: 'Question or field label shown above the input.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     hint: {
       control: 'text',
       description: 'Optional supporting text shown below the label and above any error message.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description: 'Validation message shown above the input. When present, the input is marked invalid and linked with `aria-describedby`.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     error: {
       control: false,
@@ -42,19 +102,31 @@ const meta: Meta<typeof TextInput> = {
     name: {
       control: 'text',
       description: 'HTML name submitted with the form.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     type: {
       control: 'select',
       options: ['text', 'email', 'tel', 'search', 'password', 'url', 'number'],
       description: 'Native input type for the underlying `<input>` element.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     placeholder: {
       control: 'text',
       description: 'Placeholder text shown when the input is empty.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     describedBy: {
       control: 'text',
       description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     width: {
       control: 'select',
@@ -67,16 +139,25 @@ const meta: Meta<typeof TextInput> = {
         'one-quarter',
       ],
       description: 'Responsive width utility for broader layout sizing. Use this for layout width, not expected answer length.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     inputWidth: {
       control: 'select',
       options: [2, 3, 4, 5, 10, 20, 30],
       description: 'Fixed character-width modifier that helps signal the expected answer length.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     isPageHeading: {
       control: 'boolean',
       description:
         'Wrap the label in an `h1` when this question is also the page heading.',
+      table: {
+        category: 'TextInputProps',
+      },
     },
     className: {
       control: false,
@@ -145,7 +226,10 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    describedBy: '',
+    errorMessage: '',
     hint: 'Tell us the name you use on official documents.',
+    isPageHeading: false,
     label: 'Full name',
     name: 'full-name',
     placeholder: 'Enter your full name',
@@ -178,6 +262,7 @@ export const WithHint: Story = {
   args: {
     label: 'Email address',
     hint: "We'll never share your email with anyone else",
+    name: 'email-address',
     type: 'email',
     placeholder: 'name@example.com',
   },
@@ -191,6 +276,7 @@ export const WithHint: Story = {
 export const WithError: Story = {
   args: {
     label: 'Email address',
+    name: 'email-address',
     type: 'email',
     errorMessage: 'Enter a valid email address',
     defaultValue: 'invalid-email',
