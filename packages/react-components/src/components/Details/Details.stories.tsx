@@ -1,6 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Details } from './Details';
 
+const defaultDetailsCode = `import { Details } from '@ourfuturehealth/react-components';
+
+<Details summary="Where can I find my NHS number?">
+  An NHS number is a 10 digit number, like 485 777 3456.
+</Details>;
+`;
+
+const openDetailsCode = `import { Details } from '@ourfuturehealth/react-components';
+
+<Details summary="Where can I find my NHS number?" open>
+  An NHS number is a 10 digit number, like 485 777 3456.
+</Details>;
+`;
+
+const richContentDetailsCode = `import { Details } from '@ourfuturehealth/react-components';
+
+<Details summary="What can I use my NHS number for?">
+  <p>
+    The number helps different NHS services match your records correctly.
+  </p>
+  <ul>
+    <li>book appointments</li>
+    <li>view test results</li>
+    <li>share records between services</li>
+  </ul>
+</Details>;
+`;
+
 const meta: Meta<typeof Details> = {
   title: 'Components/Details',
   component: Details,
@@ -9,7 +37,7 @@ const meta: Meta<typeof Details> = {
     docs: {
       description: {
         component:
-          'Use Details to make a page easier to scan when only some users need the supporting information. Prefer Expander when the content is more important, aimed at a wider audience, or needs more visual prominence.',
+          'Use Details to make a page easier to scan when only some users need supporting information. The React API is intentionally small: `summary` is the clickable label, `open` controls the initial expanded state, and `children` is the content shown inside the disclosure panel. Prefer Expander when the content is more important, aimed at a wider audience, or needs more visual prominence.',
       },
     },
   },
@@ -17,31 +45,36 @@ const meta: Meta<typeof Details> = {
   args: {
     summary: 'Where can I find my NHS number?',
     open: false,
+    children: 'An NHS number is a 10 digit number, like 485 777 3456.',
   },
   argTypes: {
     summary: {
       control: 'text',
-      description: 'Summary text shown in the clickable header.',
+      description:
+        'Clickable label shown in the closed state. Keep it short and descriptive so users know what the disclosure contains.',
     },
     open: {
       control: 'boolean',
-      description: 'Sets the native `<details open>` state.',
+      description:
+        'Opens the disclosure on first render. Use this when the supporting content is important enough to show immediately.',
     },
     children: {
-      control: false,
-      description: 'Content shown when the details element is expanded.',
+      control: 'text',
+      description:
+        'Content shown inside the disclosure panel after the summary. This can be plain text or richer React content.',
     },
     className: {
       control: false,
       description:
-        'Additional classes added to the root `<details>` element for layout or integration hooks.',
+        'Additional classes added to the root `<details>` element. Use this for layout or integration hooks, not to change the built-in Details behaviour.',
       table: {
         category: 'Advanced',
       },
     },
     ref: {
       control: false,
-      description: 'React ref for the underlying `<details>` element.',
+      description:
+        'React ref for the underlying `<details>` element when you need direct DOM access.',
       table: {
         category: 'Advanced',
       },
@@ -53,44 +86,73 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (args) => (
-    <Details {...args}>
-      <p>
-        An NHS number is a 10 digit number, like 485 777 3456.
-      </p>
-      <p>
-        You can find your NHS number on any document sent to you by the NHS.
-      </p>
-    </Details>
-  ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      source: {
+        code: defaultDetailsCode,
+      },
+      description: {
+        story:
+          'A realistic collapsed Details example with short, plain text content inside the disclosure panel.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  parameters: {
+    controls: {
+      include: ['summary', 'open', 'children'],
+    },
+    docs: {
+      description: {
+        story:
+          'Interactive builder story. Use the real `summary`, `open`, and `children` props to explore the component without switching to raw JSON editing.',
+      },
+    },
+  },
 };
 
 export const Open: Story = {
   args: {
     open: true,
     summary: 'Where can I find my NHS number?',
+    children: 'An NHS number is a 10 digit number, like 485 777 3456.',
   },
-  render: (args) => (
-    <Details {...args}>
-      <p>
-        An NHS number is a 10 digit number, like 485 777 3456.
-      </p>
-      <p>
-        You can find your NHS number on any document sent to you by the NHS.
-      </p>
-    </Details>
-  ),
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
+      source: {
+        code: openDetailsCode,
+      },
       description: {
         story:
-          'Open state example for the details variant. Use this when you want the disclosure pre-expanded on first render.',
+          'Open state example for the Details variant. Use this when you want the disclosure pre-expanded on first render.',
       },
     },
   },
 };
 
 export const WithRichContent: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      source: {
+        code: richContentDetailsCode,
+      },
+      description: {
+        story:
+          'Example content with paragraphs and a list. The component keeps the summary compact while still supporting richer disclosure content below it.',
+      },
+    },
+  },
   render: () => (
     <Details summary="What can I use my NHS number for?">
       <p>
@@ -103,15 +165,4 @@ export const WithRichContent: Story = {
       </ul>
     </Details>
   ),
-  parameters: {
-    controls: {
-      disable: true,
-    },
-    docs: {
-      description: {
-        story:
-          'Example content with paragraphs and a list. The component keeps the summary compact while still supporting richer disclosure content below it.',
-      },
-    },
-  },
 };
