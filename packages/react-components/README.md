@@ -269,9 +269,8 @@ A task list that reuses the shared `Tag` component for the status column.
 **Props:**
 
 - `items`: `{ title: ReactNode; href?: string; hint?: ReactNode; status: TagProps; className?: string; titleClassName?: string; hintClassName?: string }[]`
-- `idPrefix`: string
-- `heading`, `headingLevel`
-- `items`
+- `idPrefix?`: string
+- `className?`: string
 
 ### Icons
 
