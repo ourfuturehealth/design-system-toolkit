@@ -2,7 +2,7 @@
 {% set pageSection = "Design system" %}
 {% set subSection = "Components" %}
 {% set pageDescription = "The task list component displays all the tasks a user needs to do, and allows users to easily identify which ones are done and which they still need to do." %}
-{% set theme = "Content Presentation" %}
+{% set theme = "Navigation" %}
 {% set dateUpdated = "March 2024" %}
 {% set backlog_issue_id = "5" %}
 
@@ -18,6 +18,24 @@
     group: "components",
     item: "task-list",
     type: "default"
+  }) }}
+
+  <h3>Task list with hints</h3>
+  <p>Use hint text sparingly when users need a small amount of extra context before they open a task.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "task-list",
+    type: "with-hints"
+  }) }}
+
+  <h3>Status variants</h3>
+  <p>Use short, consistent status labels so users can quickly scan what is complete, incomplete, or still pending.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "task-list",
+    type: "status-variants"
   }) }}
 
   <h2>When to use task lists</h2>

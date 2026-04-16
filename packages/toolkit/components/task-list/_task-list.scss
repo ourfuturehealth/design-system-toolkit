@@ -19,19 +19,16 @@
 }
 
 .ofh-task-list__item {
+  align-items: flex-start;
   border-bottom: 1px solid $ofh-color-border-primary;
   display: flex;
-  gap: $ofh-size-24;
-  align-items: flex-start;
   margin-bottom: 0;
   padding-bottom: $ofh-size-8;
   padding-top: $ofh-size-8;
   position: relative;
   width: 100%;
-}
 
-.ofh-task-list__item:first-child {
-  border-top: 1px solid $ofh-color-border-primary;
+  @include ofh-responsive-gap-x(24);
 }
 
 .ofh-task-list__name-and-hint {
