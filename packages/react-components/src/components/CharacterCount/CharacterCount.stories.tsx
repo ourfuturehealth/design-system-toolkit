@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { CharacterCount } from './CharacterCount';
 
+type CharacterCountStoryArgs = React.ComponentProps<typeof CharacterCount> & {
+  countMode?: 'characters' | 'words';
+  limit?: number;
+};
+
 const characterCountUsageExample = `import { CharacterCount } from '@ourfuturehealth/react-components';
 
 <CharacterCount
@@ -12,7 +17,38 @@ const characterCountUsageExample = `import { CharacterCount } from '@ourfuturehe
 />;
 `;
 
-const meta: Meta<typeof CharacterCount> = {
+const renderCharacterCountBuilderStory = ({
+  countMode = 'characters',
+  limit = 200,
+  ...args
+}: CharacterCountStoryArgs) => {
+  const normalizedArgs = {
+    ...args,
+    describedBy: args.describedBy || undefined,
+    errorMessage: args.errorMessage || undefined,
+    hint: args.hint || undefined,
+  };
+
+  if (countMode === 'words') {
+    return (
+      <CharacterCount
+        {...normalizedArgs}
+        maxLength={undefined}
+        maxWords={limit}
+      />
+    );
+  }
+
+  return (
+    <CharacterCount
+      {...normalizedArgs}
+      maxLength={limit}
+      maxWords={undefined}
+    />
+  );
+};
+
+const meta = {
   title: 'Components/Input/Character count',
   component: CharacterCount,
   parameters: {
@@ -57,6 +93,15 @@ const meta: Meta<typeof CharacterCount> = {
               'describedBy',
             ]}
           />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>countMode</code> and <code>limit</code> are only used by the
+            Storybook <code>Builder</code> story so you can try character and
+            word counting without activating both real limit props at the same
+            time. They are not React props accepted by{' '}
+            <code>CharacterCount</code>.
+          </p>
 
           <Stories title="Examples" />
         </>
@@ -113,6 +158,23 @@ const meta: Meta<typeof CharacterCount> = {
         category: 'CharacterCountProps',
       },
     },
+    countMode: {
+      control: 'radio',
+      options: ['characters', 'words'],
+      description:
+        'Storybook-only helper for the Builder story. Chooses whether the example maps the limit to `maxLength` or `maxWords`.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
+    limit: {
+      control: 'number',
+      description:
+        'Storybook-only helper for the Builder story. Supplies the active character or word limit value.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     threshold: {
       control: 'number',
       description: 'Percentage of the limit at which the visible status message appears.',
@@ -150,10 +212,10 @@ const meta: Meta<typeof CharacterCount> = {
       },
     },
   },
-};
+} satisfies Meta<CharacterCountStoryArgs>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<CharacterCountStoryArgs>;
 
 export const Default: Story = {
   args: {
@@ -174,16 +236,17 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    countMode: 'characters',
     describedBy: '',
     errorMessage: '',
     hint: 'Do not include personal details.',
     label: 'Summary',
-    maxLength: 200,
-    maxWords: undefined,
+    limit: 200,
     name: 'summary',
     rows: 5,
     threshold: 0,
   },
+  render: renderCharacterCountBuilderStory,
   parameters: {
     controls: {
       include: [
@@ -191,8 +254,8 @@ export const Builder: Story = {
         'hint',
         'errorMessage',
         'name',
-        'maxLength',
-        'maxWords',
+        'countMode',
+        'limit',
         'threshold',
         'rows',
         'describedBy',
@@ -201,7 +264,7 @@ export const Builder: Story = {
     docs: {
       description: {
         story:
-          'Interactive character-count example. Adjust the real props to see how the counter changes with character or word limits.',
+          'Interactive character-count example. Use the friendly Builder helpers to swap between character and word limits without editing both real limit props at once.',
       },
     },
   },

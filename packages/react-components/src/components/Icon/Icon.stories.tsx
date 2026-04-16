@@ -3,6 +3,13 @@ import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { Icon } from './Icon';
 
+type IconSize = 16 | 24 | 32;
+
+type IconStoryArgs = React.ComponentProps<typeof Icon> & {
+  builderSize?: IconSize;
+  sizingMode?: 'fixed' | 'responsive';
+};
+
 const iconNameOptions = iconManifest.icons
   .map(({ name }) => name)
   .sort((left, right) => left.localeCompare(right));
@@ -15,7 +22,27 @@ const iconUsageExample = `import { Icon } from '@ourfuturehealth/react-component
 />;
 `;
 
-const meta: Meta<typeof Icon> = {
+const renderIconBuilderStory = ({
+  builderSize = 24,
+  color,
+  name = 'Check',
+  sizingMode = 'fixed',
+  title,
+}: IconStoryArgs) => {
+  const sharedProps = {
+    color: color || undefined,
+    name,
+    title: title || undefined,
+  };
+
+  if (sizingMode === 'responsive') {
+    return <Icon {...sharedProps} responsiveSize={builderSize} />;
+  }
+
+  return <Icon {...sharedProps} size={builderSize} />;
+};
+
+const meta = {
   title: 'Components/Icon',
   component: Icon,
   parameters: {
@@ -48,6 +75,14 @@ const meta: Meta<typeof Icon> = {
             of={Default}
             include={['name', 'size', 'responsiveSize', 'title', 'color']}
           />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>sizingMode</code> and <code>builderSize</code> are only used
+            by the Storybook <code>Builder</code> story so you can try one
+            sizing approach at a time. They are not React props accepted by{' '}
+            <code>Icon</code>.
+          </p>
 
           <Stories title="Examples" />
         </>
@@ -99,6 +134,24 @@ const meta: Meta<typeof Icon> = {
         category: 'IconProps',
       },
     },
+    sizingMode: {
+      control: 'radio',
+      options: ['fixed', 'responsive'],
+      description:
+        'Storybook-only helper for the Builder story. Chooses whether the example drives the real `size` prop or the real `responsiveSize` prop.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
+    builderSize: {
+      control: 'radio',
+      options: [16, 24, 32],
+      description:
+        'Storybook-only helper for the Builder story. Sets the active fixed or responsive size value without exposing both sizing props at once.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     className: {
       control: false,
       description:
@@ -128,11 +181,11 @@ const meta: Meta<typeof Icon> = {
     name: 'Check',
     size: 24,
   },
-};
+} satisfies Meta<IconStoryArgs>;
 
 export default meta;
 
-type Story = StoryObj<typeof Icon>;
+type Story = StoryObj<IconStoryArgs>;
 
 export const Default: Story = {
   parameters: {
@@ -151,15 +204,16 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    builderSize: 24,
     color: '',
     name: 'Check',
-    responsiveSize: undefined,
-    size: 24,
+    sizingMode: 'fixed',
     title: '',
   },
+  render: renderIconBuilderStory,
   parameters: {
     controls: {
-      include: ['name', 'size', 'responsiveSize', 'title', 'color'],
+      include: ['name', 'sizingMode', 'builderSize', 'title', 'color'],
     },
     docs: {
       description: {
