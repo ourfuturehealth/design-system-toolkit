@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.13.0/ourfuturehealth-react-components-0.13.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.14.0/ourfuturehealth-react-components-0.14.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -313,9 +313,8 @@ A task list that reuses the shared `Tag` component for the status column.
 **Props:**
 
 - `items`: `{ title: ReactNode; href?: string; hint?: ReactNode; status: TagProps; className?: string; titleClassName?: string; hintClassName?: string }[]`
-- `idPrefix`: string
-- `heading`, `headingLevel`
-- `items`
+- `idPrefix?`: string
+- `className?`: string
 
 ### Icons
 

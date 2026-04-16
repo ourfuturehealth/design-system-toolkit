@@ -142,6 +142,7 @@ The React components package currently provides the following components:
 - `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
 - `ErrorSummary` - Page-level validation summaries with linked errors
 - `Tag` - Status tags aligned with toolkit Tag variants
+- `TaskList` - Ordered service tasks with optional hint text and shared Tag-based statuses
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
