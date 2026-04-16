@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import { LinkSkip, type LinkSkipProps } from './LinkSkip';
 
 const getSkipTargetId = (href?: string) =>
@@ -32,11 +33,36 @@ const meta: Meta<LinkSkipProps> = {
   component: LinkSkip,
   parameters: {
     layout: 'padded',
+    docsNamespaceArgKeys: ['href'],
     docs: {
       description: {
         component:
           'LinkSkip is the canonical React surface for the Link / Skip pattern. It defaults to `#maincontent` and "Skip to main content", and you normally only change the label or target when users need to skip somewhere more specific. Standard anchor attributes still pass through when you need them.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use LinkSkip</h2>
+          <p>
+            Use <code>LinkSkip</code> as the first focusable element on the
+            page. Pass the visible label with <code>children</code> and the
+            target with <code>href</code>.
+          </p>
+          <p>
+            Most consumers only need the default <code>#maincontent</code>{' '}
+            target. Change it only when the page needs to jump somewhere more
+            specific, such as search results or a filtered section.
+          </p>
+
+          <h2>Props</h2>
+          <ArgTypes of={LinkSkip} exclude={['ref']} />
+
+          <h2>Examples</h2>
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -58,14 +84,15 @@ const meta: Meta<LinkSkipProps> = {
     className: {
       control: false,
       description:
-        'Additional classes applied to the anchor element. Use this only for layout hooks.',
+        'Additional classes applied to the anchor element. Use this only for layout hooks or integration targets.',
       table: {
         category: 'Advanced',
       },
     },
     ref: {
       control: false,
-      description: 'React ref for the rendered anchor element.',
+      description:
+        'React ref for the rendered anchor element when you need direct DOM access.',
       table: {
         category: 'Advanced',
       },
@@ -77,12 +104,38 @@ export default meta;
 type Story = StoryObj<LinkSkipProps>;
 
 export const Default: Story = {
+  args: {
+    children: 'Skip to main content',
+    href: '#maincontent',
+  },
   render: renderLinkSkipStory,
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'Interactive default example. Use the controls to change the skip-link label and fragment target.',
+          'The standard skip link that jumps straight to the main content region.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    children: 'Skip to main content',
+    href: '#maincontent',
+  },
+  render: renderLinkSkipStory,
+  parameters: {
+    controls: {
+      include: ['children', 'href'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder controls to change the skip-link label and fragment target.',
       },
     },
   },
@@ -95,6 +148,9 @@ export const CustomTargetAndLabel: Story = {
   },
   render: renderLinkSkipStory,
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:

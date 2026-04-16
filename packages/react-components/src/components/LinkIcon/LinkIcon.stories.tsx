@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import iconManifest from '@ourfuturehealth/toolkit/assets/icons/manifest.json';
 import { LinkIcon, type LinkIconProps } from './LinkIcon';
 
@@ -16,6 +17,32 @@ const meta: Meta<LinkIconProps> = {
         component:
           'LinkIcon is the canonical React surface for the Link / Icon pattern. Use `iconPosition` to switch between back-navigation and forward or external link patterns, choose any toolkit sprite icon with `iconName`, change the emphasis with `size`, and use `openInNewWindow` when the destination should open in a new tab. If you leave `iconName` unset, the component defaults to `ChevronLeft` on the left and `Launch` on the right.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use LinkIcon</h2>
+          <p>
+            Use <code>LinkIcon</code> when the icon is part of the link
+            pattern. Pass the visible label with <code>children</code>, the
+            destination with <code>href</code>, and choose the icon side with
+            <code>iconPosition</code>.
+          </p>
+          <p>
+            Leave <code>iconName</code> unset to use the default icon for the
+            chosen position. Set <code>openInNewWindow</code> when the link
+            opens externally, and use <code>size</code> to choose compact or
+            medium emphasis.
+          </p>
+
+          <h2>Props</h2>
+          <ArgTypes of={LinkIcon} exclude={['ref']} />
+
+          <h2>Examples</h2>
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -28,7 +55,8 @@ const meta: Meta<LinkIconProps> = {
   argTypes: {
     children: {
       control: 'text',
-      description: 'Visible link text. The icon should support the label, not replace it.',
+      description:
+        'Visible link text. The icon should support the label, not replace it.',
     },
     href: {
       control: 'text',
@@ -38,7 +66,7 @@ const meta: Meta<LinkIconProps> = {
       control: 'select',
       options: iconNameOptions,
       description:
-        'Toolkit icon name from the generated sprite manifest. Defaults to `ChevronLeft` for left icons and `Launch` for right icons.',
+        'Toolkit icon name from the generated sprite manifest. Leave it unset to use `ChevronLeft` for left icons and `Launch` for right icons.',
     },
     iconColor: {
       control: 'color',
@@ -65,14 +93,15 @@ const meta: Meta<LinkIconProps> = {
     className: {
       control: false,
       description:
-        'Additional classes applied to the wrapper element. Use this for layout hooks only.',
+        'Additional classes applied to the wrapper element. Use this for layout hooks or integration targets only.',
       table: {
         category: 'Advanced',
       },
     },
     ref: {
       control: false,
-      description: 'React ref for the rendered anchor element.',
+      description:
+        'React ref for the rendered anchor element when you need direct DOM access.',
       table: {
         category: 'Advanced',
       },
@@ -84,11 +113,42 @@ export default meta;
 type Story = StoryObj<LinkIconProps>;
 
 export const Default: Story = {
+  args: {
+    children: 'Go back',
+    href: '#',
+    iconPosition: 'left',
+    size: 'small',
+  },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'Interactive back-navigation example. Use the controls to explore `iconPosition`, `iconName`, `size`, and `openInNewWindow`.',
+          'A realistic back-navigation example using the default left icon and compact size.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  parameters: {
+    controls: {
+      include: [
+        'children',
+        'href',
+        'iconName',
+        'iconColor',
+        'iconPosition',
+        'openInNewWindow',
+        'size',
+      ],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder controls to explore the icon position, icon name, icon colour, size, and new-window behaviour.',
       },
     },
   },
@@ -104,6 +164,9 @@ export const RightIcon: Story = {
     openInNewWindow: true,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -124,6 +187,9 @@ export const CustomIconColour: Story = {
     openInNewWindow: true,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
