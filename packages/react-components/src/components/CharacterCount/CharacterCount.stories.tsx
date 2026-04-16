@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
 import { CharacterCount } from './CharacterCount';
 
 const meta: Meta<typeof CharacterCount> = {
@@ -12,6 +13,14 @@ const meta: Meta<typeof CharacterCount> = {
         component:
           'A textarea with live character or word count messaging that follows the toolkit character-count pattern and shared input-family styling. Use `maxLength` for character counts or `maxWords` for word counts; only one limit mode should be active at a time.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <ArgTypes />
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -31,7 +40,8 @@ const meta: Meta<typeof CharacterCount> = {
     },
     errorMessage: {
       control: 'text',
-      description: 'Validation message shown above the textarea. This is separate from the automatic over-limit count status.',
+      description:
+        'Validation message shown above the textarea. This is separate from the automatic over-limit count status.',
     },
     name: {
       control: 'text',
@@ -55,7 +65,8 @@ const meta: Meta<typeof CharacterCount> = {
     },
     describedBy: {
       control: 'text',
-      description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      description:
+        'Additional element IDs to append to the component-generated `aria-describedby` value.',
     },
     countMessageClassName: {
       control: false,
@@ -82,9 +93,30 @@ export const Default: Story = {
     hint: 'Do not include personal details.',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
-        story: 'Default character-count textarea with the visible count message shown from the start.',
+        story:
+          'Default character-count textarea with the visible count message shown from the start.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    hint: 'Do not include personal details.',
+    label: 'Summary',
+    maxLength: 200,
+    name: 'summary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Interactive character-count example. Adjust the real props to see how the counter changes with character or word limits.',
       },
     },
   },
@@ -96,9 +128,13 @@ export const WithThreshold: Story = {
     threshold: 75,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
-        story: 'The visible count message stays hidden until the user reaches 75% of the limit.',
+        story:
+          'The visible count message stays hidden until the user reaches 75% of the limit.',
       },
     },
   },
@@ -111,6 +147,9 @@ export const WordCount: Story = {
     maxWords: 50,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Switches the component from character counting to word counting.',
@@ -127,9 +166,13 @@ export const WithError: Story = {
     maxLength: 40,
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
-        story: 'Example of an explicit validation error alongside the automatic over-limit state.',
+        story:
+          'Example of an explicit validation error alongside the automatic over-limit state.',
       },
     },
   },

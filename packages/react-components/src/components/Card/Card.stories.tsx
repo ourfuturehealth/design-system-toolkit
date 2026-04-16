@@ -124,7 +124,7 @@ const meta: Meta<CardStoryArgs> = {
     docs: {
       description: {
         component:
-          'Use a card to present short, scannable summaries of content, status or next steps. `headingLevel` changes the semantic heading tag used for the card title, but does not change the visual styling on its own. The React component mirrors the toolkit Card family markup and classes.',
+          'Use a card to present short, scannable summaries of content, status or next steps. `headingLevel` changes the semantic heading tag used for the card title, but does not change the visual styling on its own. The React component mirrors the toolkit Card family markup and classes. Storybook-only helper args such as `tagText`, `iconName`, and `metadataItem1Text` exist only to make the Builder story easier to use and are not part of `CardProps`.',
       },
     },
   },
@@ -266,11 +266,22 @@ const meta: Meta<CardStoryArgs> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {
+export const Default: Story = {
   args: {
     heading: 'If you need help now, but it’s not an emergency',
     description:
       'Go to 111.nhs.uk or call 111 for urgent help that does not need emergency care.',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'A realistic basic card example. Use this as the first thing to copy when you need a short summary card.',
+      },
+    },
   },
   render: (args) => (
     <div style={{ maxWidth: '32rem' }}>
@@ -279,12 +290,71 @@ export const Basic: Story = {
   ),
 };
 
+export const Builder: Story = {
+  args: {
+    variant: 'clickable',
+    href: '#card-action',
+    heading: 'Introduction to care and support',
+    tagText: 'New',
+    tagVariant: 'blue',
+    description:
+      'A quick guide for people who have care and support needs and their carers.',
+    metadataItem1Icon: 'LocationOutline',
+    metadataItem1Text: 'Online',
+    metadataItem2Icon: 'CalendarOutline',
+    metadataItem2Text: 'Updated today',
+    metadataItem3Icon: 'ClockOutline',
+    metadataItem3Text: '5 minute read',
+    helperText: 'Recommended for new participants.',
+    iconName: 'ArrowCircleRightColour',
+    iconColor: '#FFC62C',
+  },
+  parameters: {
+    controls: {
+      include: [
+        'variant',
+        'heading',
+        'href',
+        'description',
+        'tagText',
+        'tagVariant',
+        'metadataItem1Icon',
+        'metadataItem1Text',
+        'metadataItem2Icon',
+        'metadataItem2Text',
+        'metadataItem3Icon',
+        'metadataItem3Text',
+        'helperText',
+        'iconName',
+        'iconColor',
+      ],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the Card API interactively. It keeps the complex nested props behind simple text, select, and color controls so you can explore the component without editing raw JSON.',
+      },
+    },
+  },
+  render: renderCard,
+};
+
 export const BasicDismissible: Story = {
   args: {
     heading: 'Update available',
     description: 'A newer version of this content is available for review.',
     dismissButton: {
       label: 'Dismiss update message',
+    },
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'Fixed showcase of a dismissible card.',
+      },
     },
   },
   render: renderCard,
@@ -302,6 +372,11 @@ export const BasicDismissibleWithImage: Story = {
       label: 'Dismiss guidance update',
     },
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
   render: renderCard,
 };
 
@@ -312,30 +387,14 @@ export const BasicWithIcon: Story = {
     iconName: 'Check',
     iconColor: '#00725F',
   },
-  argTypes: {
-    icon: {
-      control: false,
-      table: {
-        disable: true,
-      },
-    },
-    iconName: {
-      control: 'select',
-      options: iconNameOptions,
-      description:
-        'Glyph name for the fixed 32px trailing icon slot.',
-    },
-    iconColor: {
-      control: 'color',
-      description:
-        'Colour applied to monochrome icons in the trailing slot. Icons with baked-in fills may ignore it.',
-    },
-  },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'Use the `icon` prop to add a supporting icon to a basic card. Success is one common use, but the same pattern can support other short icon-led messages too. This story lets you swap the glyph and tint monochrome icons, while the Card component keeps the trailing icon slot at its built-in 32px size.',
+          'Fixed showcase of a basic card with a supporting trailing icon.',
       },
     },
   },
@@ -349,6 +408,11 @@ export const Clickable: Story = {
     heading: 'Introduction to care and support',
     description:
       'A quick guide for people who have care and support needs and their carers.',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
   render: (args) => (
     <div style={{ maxWidth: '32rem' }}>
@@ -386,11 +450,17 @@ export const ClickableAction: Story = {
     tagText: {
       control: 'text',
       description: 'Text content for the supporting tag.',
+      table: {
+        disable: true,
+      },
     },
     tagVariant: {
       control: 'select',
       options: tagVariantOptions,
       description: 'Visual style variant for the tag.',
+      table: {
+        disable: true,
+      },
     },
     icon: {
       control: false,
@@ -408,46 +478,73 @@ export const ClickableAction: Story = {
       control: 'select',
       options: iconNameOptions,
       description: 'Icon for the first metadata row.',
+      table: {
+        disable: true,
+      },
     },
     metadataItem1Text: {
       control: 'text',
       description: 'Text for the first metadata row.',
+      table: {
+        disable: true,
+      },
     },
     metadataItem2Icon: {
       control: 'select',
       options: iconNameOptions,
       description: 'Icon for the second metadata row.',
+      table: {
+        disable: true,
+      },
     },
     metadataItem2Text: {
       control: 'text',
       description: 'Text for the second metadata row.',
+      table: {
+        disable: true,
+      },
     },
     metadataItem3Icon: {
       control: 'select',
       options: iconNameOptions,
       description: 'Icon for the third metadata row.',
+      table: {
+        disable: true,
+      },
     },
     metadataItem3Text: {
       control: 'text',
       description: 'Text for the third metadata row.',
+      table: {
+        disable: true,
+      },
     },
     iconName: {
       control: 'select',
       options: iconNameOptions,
       description:
         'Trailing icon glyph from the toolkit icon set.',
+      table: {
+        disable: true,
+      },
     },
     iconColor: {
       control: 'color',
       description:
         'Colour applied to monochrome trailing icons. Icons with baked-in fills, such as `ArrowCircleRightColour`, may ignore it.',
+      table: {
+        disable: true,
+      },
     },
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'This story exposes simpler controls for the nested tag, metadata rows, and trailing icon props. The tag can be edited as text plus variant, the metadata rows can be edited without raw JSON, and the trailing icon control lets you change the glyph and tint monochrome icons while the Card component keeps that slot at its built-in 32px size.',
+          'Fixed showcase of a clickable card with nested content, metadata, and a trailing icon.',
       },
     },
   },
@@ -462,10 +559,13 @@ export const ClickableNumeric: Story = {
     actionLinkHref: '#card-numeric',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'This story uses simple text controls for the numeric action link instead of exposing the nested `actionLink` object directly.',
+          'Fixed showcase of a numeric action card. Use it to see how the action link sits with the large number treatment.',
       },
     },
   },
@@ -479,10 +579,16 @@ export const ClickableNumeric: Story = {
     actionLinkText: {
       control: 'text',
       description: 'Link text for the numeric card action.',
+      table: {
+        disable: true,
+      },
     },
     actionLinkHref: {
       control: 'text',
       description: 'Destination for the numeric card action link.',
+      table: {
+        disable: true,
+      },
     },
   },
   render: ({
@@ -524,6 +630,11 @@ export const WithImage: Story = {
       <Card {...args} />
     </div>
   ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const KeyboardNavigation: Story = {

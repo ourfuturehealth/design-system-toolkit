@@ -131,6 +131,47 @@ export const Default: Story = {
   args: {
     placeholder: 'Enter your full name',
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'A realistic single-line text input example.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    hint: 'Tell us the name you use on official documents.',
+    label: 'Full name',
+    name: 'full-name',
+    placeholder: 'Enter your full name',
+    type: 'text',
+  },
+  parameters: {
+    controls: {
+      include: [
+        'label',
+        'hint',
+        'errorMessage',
+        'name',
+        'type',
+        'placeholder',
+        'width',
+        'inputWidth',
+        'isPageHeading',
+      ],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the friendly controls here to explore the most useful text-input props without editing code.',
+      },
+    },
+  },
 };
 
 export const WithHint: Story = {
@@ -140,6 +181,11 @@ export const WithHint: Story = {
     type: 'email',
     placeholder: 'name@example.com',
   },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
 export const WithError: Story = {
@@ -148,6 +194,11 @@ export const WithError: Story = {
     type: 'email',
     errorMessage: 'Enter a valid email address',
     defaultValue: 'invalid-email',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
 };
 
@@ -225,6 +276,9 @@ export const AsPageHeading: Story = {
         story:
           'Use `isPageHeading` when the question should also be announced as the page heading. The component applies the larger heading label treatment automatically.',
       },
+    },
+    controls: {
+      disable: true,
     },
   },
 };

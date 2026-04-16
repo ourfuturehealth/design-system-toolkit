@@ -1,7 +1,106 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DateInput } from './DateInput';
+import { ArgTypes, Description, Stories, Title } from '@storybook/addon-docs/blocks';
+import { DateInput, type DateInputProps } from './DateInput';
 
-const meta: Meta<typeof DateInput> = {
+type DateInputStoryArgs = DateInputProps & {
+  itemSet?: 'default' | 'browser-autocomplete' | 'errors' | 'single-field-error' | 'page-heading';
+};
+
+const defaultItems: NonNullable<DateInputStoryArgs['items']> = [
+  {
+    name: 'day',
+    inputWidth: 2,
+  },
+  {
+    name: 'month',
+    inputWidth: 2,
+  },
+  {
+    name: 'year',
+    inputWidth: 4,
+  },
+];
+
+const browserAutocompleteItems: NonNullable<DateInputStoryArgs['items']> = [
+  {
+    name: 'day',
+    inputWidth: 2,
+    autoComplete: 'bday-day',
+  },
+  {
+    name: 'month',
+    inputWidth: 2,
+    autoComplete: 'bday-month',
+  },
+  {
+    name: 'year',
+    inputWidth: 4,
+    autoComplete: 'bday-year',
+  },
+];
+
+const errorItems: NonNullable<DateInputStoryArgs['items']> = [
+  {
+    name: 'day',
+    inputWidth: 2,
+    hasError: true,
+  },
+  {
+    name: 'month',
+    inputWidth: 2,
+    hasError: true,
+  },
+  {
+    name: 'year',
+    inputWidth: 4,
+    hasError: true,
+  },
+];
+
+const singleFieldErrorItems: NonNullable<DateInputStoryArgs['items']> = [
+  {
+    name: 'day',
+    inputWidth: 2,
+    hasError: true,
+  },
+  {
+    name: 'month',
+    inputWidth: 2,
+  },
+  {
+    name: 'year',
+    inputWidth: 4,
+  },
+];
+
+const pageHeadingItems: NonNullable<DateInputStoryArgs['items']> = defaultItems;
+
+const dateInputItemSets: Record<
+  NonNullable<DateInputStoryArgs['itemSet']>,
+  NonNullable<DateInputStoryArgs['items']>
+> = {
+  default: defaultItems,
+  'browser-autocomplete': browserAutocompleteItems,
+  errors: errorItems,
+  'single-field-error': singleFieldErrorItems,
+  'page-heading': pageHeadingItems,
+};
+
+const renderDateInputBuilderStory = ({
+  itemSet,
+  ...args
+}: DateInputStoryArgs) => {
+  const items = itemSet ? dateInputItemSets[itemSet] : args.items ?? defaultItems;
+
+  return (
+    <DateInput
+      {...args}
+      items={items}
+    />
+  );
+};
+
+const meta: Meta<DateInputStoryArgs> = {
   title: 'Components/Input/Date input',
   component: DateInput,
   parameters: {
@@ -12,6 +111,14 @@ const meta: Meta<typeof DateInput> = {
         component:
           'A grouped date input for day, month, and year fields. Use the default setup for a standard date-of-birth style question. Pass `items` only when you need to customise an individual field label, width, autocomplete token, or native input props.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+          <ArgTypes exclude={['itemSet']} />
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
@@ -21,6 +128,15 @@ const meta: Meta<typeof DateInput> = {
     namePrefix: 'date-of-birth',
   },
   argTypes: {
+    itemSet: {
+      control: 'select',
+      options: ['default', 'browser-autocomplete', 'errors', 'single-field-error', 'page-heading'],
+      description:
+        'Builder-only Storybook helper. Switches between the default, autocomplete, error, and page-heading date presets.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     legend: {
       control: 'text',
       description: 'Question shown as the fieldset legend for the grouped date fields.',
@@ -105,6 +221,7 @@ const meta: Meta<typeof DateInput> = {
       },
     },
   },
+  render: renderDateInputBuilderStory,
 };
 
 export default meta;
@@ -114,7 +231,40 @@ export const Default: Story = {
   args: {
     hint: 'For example, 31 3 1980',
     id: 'date-of-birth-default',
+    items: defaultItems,
     namePrefix: 'date-of-birth-default',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Default date input for a standard date-of-birth question with the built-in day, month, and year fields.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    hint: 'For example, 31 3 1980',
+    id: 'date-of-birth-builder',
+    itemSet: 'default',
+    legend: 'What is your date of birth?',
+    namePrefix: 'date-of-birth-builder',
+  },
+  parameters: {
+    controls: {
+      include: ['itemSet', 'legend', 'hint', 'errorMessage', 'id', 'namePrefix', 'isPageHeading'],
+    },
+    docs: {
+      description: {
+        story:
+          'Interactive date input example. Switch between the preset field configurations and adjust the real props without editing raw JSON.',
+      },
+    },
   },
 };
 
@@ -122,26 +272,13 @@ export const WithBrowserAutocomplete: Story = {
   args: {
     hint: 'For example, 31 3 1980',
     id: 'date-of-birth-browser-autocomplete',
-    items: [
-      {
-        name: 'day',
-        inputWidth: 2,
-        autoComplete: 'bday-day',
-      },
-      {
-        name: 'month',
-        inputWidth: 2,
-        autoComplete: 'bday-month',
-      },
-      {
-        name: 'year',
-        inputWidth: 4,
-        autoComplete: 'bday-year',
-      },
-    ],
+    items: browserAutocompleteItems,
     namePrefix: 'date-of-birth-browser-autocomplete',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -156,26 +293,13 @@ export const WithErrors: Story = {
     errorMessage: 'Enter your date of birth',
     hint: 'For example, 31 3 1980',
     id: 'date-of-birth-errors',
-    items: [
-      {
-        name: 'day',
-        inputWidth: 2,
-        hasError: true,
-      },
-      {
-        name: 'month',
-        inputWidth: 2,
-        hasError: true,
-      },
-      {
-        name: 'year',
-        inputWidth: 4,
-        hasError: true,
-      },
-    ],
+    items: errorItems,
     namePrefix: 'date-of-birth-errors',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -190,24 +314,13 @@ export const SingleFieldError: Story = {
     errorMessage: 'Enter your date of birth',
     hint: 'For example, 31 3 1980',
     id: 'date-of-birth-single-field-error',
-    items: [
-      {
-        name: 'day',
-        inputWidth: 2,
-        hasError: true,
-      },
-      {
-        name: 'month',
-        inputWidth: 2,
-      },
-      {
-        name: 'year',
-        inputWidth: 4,
-      },
-    ],
+    items: singleFieldErrorItems,
     namePrefix: 'date-of-birth-single-field-error',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -222,9 +335,13 @@ export const AsPageHeading: Story = {
     hint: 'For example, 31 3 1980',
     id: 'date-of-birth-page-heading',
     isPageHeading: true,
+    items: pageHeadingItems,
     namePrefix: 'date-of-birth-page-heading',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:

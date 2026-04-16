@@ -51,10 +51,32 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
-          'Interactive single-tag example. Use the `variant` control to inspect each supported Tag style.',
+          'A realistic neutral tag example. Use this as the default pattern when you want a short, non-interactive label.',
+      },
+    },
+  },
+  render: () => <Tag variant="neutral">Inactive</Tag>,
+};
+
+export const Builder: Story = {
+  args: {
+    children: 'Inactive',
+    variant: 'neutral',
+  },
+  parameters: {
+    controls: {
+      include: ['children', 'variant'],
+    },
+    docs: {
+      description: {
+        story:
+          'Use the Builder story to try the Tag API interactively. It is the simplest place to change the label text and visual variant.',
       },
     },
   },
