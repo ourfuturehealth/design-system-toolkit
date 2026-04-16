@@ -329,6 +329,7 @@ const meta: Meta<FooterStoryArgs> = {
             Use the shared <code>LinkIcon</code> capabilities on support links
             only when a left or right icon genuinely adds meaning.
           </p>
+          <Source code={defaultFooterSource} language="tsx" />
 
           <h2>Component props</h2>
           <ArgTypes of={Footer} />
