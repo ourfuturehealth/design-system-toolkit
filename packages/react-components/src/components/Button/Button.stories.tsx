@@ -2,6 +2,26 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { Button, type ButtonProps } from './Button';
 
+type ButtonVariant =
+  | 'contained'
+  | 'outlined'
+  | 'ghost'
+  | 'ghost-inverted'
+  | 'text'
+  | 'text-inverted';
+
+type ButtonStoryArgs = {
+  actionType?: 'button' | 'link';
+  children?: React.ReactNode;
+  className?: string;
+  disabled?: boolean;
+  href?: string;
+  onClick?: ButtonProps['onClick'];
+  ref?: React.Ref<HTMLButtonElement | HTMLAnchorElement>;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: ButtonVariant;
+};
+
 const buttonUsageExample = `import { Button } from '@ourfuturehealth/react-components';
 
 <Button variant="contained">
@@ -9,9 +29,36 @@ const buttonUsageExample = `import { Button } from '@ourfuturehealth/react-compo
 </Button>;
 `;
 
-const meta: Meta<ButtonProps> = {
+const renderButtonBuilderStory = ({
+  actionType = 'button',
+  children = 'Continue',
+  disabled,
+  href,
+  type,
+  variant,
+}: ButtonStoryArgs) => {
+  if (actionType === 'link') {
+    return (
+      <Button href={href || '/your-next-step'} variant={variant}>
+        {children}
+      </Button>
+    );
+  }
+
+  return (
+    <Button
+      disabled={disabled}
+      type={type}
+      variant={variant}
+    >
+      {children}
+    </Button>
+  );
+};
+
+const meta: Meta<ButtonStoryArgs> = {
   title: 'Components/Button',
-  component: Button,
+  component: Button as unknown as React.ComponentType<ButtonStoryArgs>,
   parameters: {
     layout: 'centered',
     docs: {
@@ -42,6 +89,14 @@ const meta: Meta<ButtonProps> = {
             of={Default}
             include={['variant', 'children', 'href', 'type', 'disabled']}
           />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>actionType</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can switch between button and
+            link behaviour without juggling incompatible controls. It is not a
+            React prop accepted by <code>Button</code>.
+          </p>
 
           <Stories title="Examples" />
         </>
@@ -126,7 +181,7 @@ const meta: Meta<ButtonProps> = {
 };
 
 export default meta;
-type Story = StoryObj<ButtonProps>;
+type Story = StoryObj<ButtonStoryArgs>;
 
 export const Default: Story = {
   parameters: {
@@ -145,15 +200,46 @@ export const Default: Story = {
 
 export const Builder: Story = {
   args: {
+    actionType: 'button',
     children: 'Continue',
     disabled: false,
-    href: '',
+    href: '/your-next-step',
     type: 'button',
     variant: 'contained',
   },
+  render: renderButtonBuilderStory,
+  argTypes: {
+    actionType: {
+      control: 'radio',
+      options: ['button', 'link'],
+      description:
+        'Storybook-only helper for the Builder story. Switches the example between real button behaviour and link behaviour.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
+    disabled: {
+      if: {
+        arg: 'actionType',
+        eq: 'button',
+      },
+    },
+    href: {
+      if: {
+        arg: 'actionType',
+        eq: 'link',
+      },
+    },
+    type: {
+      if: {
+        arg: 'actionType',
+        eq: 'button',
+      },
+    },
+  },
   parameters: {
     controls: {
-      include: ['variant', 'children', 'href', 'type', 'disabled'],
+      include: ['actionType', 'variant', 'children', 'href', 'type', 'disabled'],
     },
     docs: {
       description: {

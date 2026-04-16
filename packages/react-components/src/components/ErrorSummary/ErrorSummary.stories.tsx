@@ -130,7 +130,25 @@ const renderErrorSummaryBuilderStory = ({
       <ErrorSummary
         {...resolvedArgs}
         onClick={(event) => {
-          if (event.target instanceof Element && event.target.closest('a')) {
+          const anchor =
+            event.target instanceof Element
+              ? event.target.closest<HTMLAnchorElement>('a[href]')
+              : null;
+
+          if (anchor === null) {
+            return;
+          }
+
+          const href = anchor.getAttribute('href') || '';
+
+          if (!href.startsWith('#')) {
+            event.preventDefault();
+            return;
+          }
+
+          const targetId = href.slice(1);
+
+          if (targetId === '' || document.getElementById(targetId) === null) {
             event.preventDefault();
           }
         }}

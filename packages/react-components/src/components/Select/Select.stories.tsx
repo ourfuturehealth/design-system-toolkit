@@ -99,8 +99,8 @@ const countryItems = [
 <Select
   isPageHeading
   items={countryItems}
-  label="How should we contact you?"
-  name="contact-method"
+  label="Which country do you live in?"
+  name="country"
 />;
 `;
 
@@ -433,7 +433,9 @@ export const WithSelectedOption: Story = {
 export const AsPageHeading: Story = {
   args: {
     isPageHeading: true,
-    label: 'How should we contact you?',
+    items: countryItems,
+    label: 'Which country do you live in?',
+    name: 'country',
   },
   parameters: {
     controls: {
