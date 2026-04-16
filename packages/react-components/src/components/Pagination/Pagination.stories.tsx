@@ -49,6 +49,7 @@ const meta: Meta<PaginationProps> = {
             label plus URL pairs, or provide just one side when you only need a
             previous-only or next-only navigation pattern.
           </p>
+          <Source code={defaultPaginationSource} language="tsx" />
 
           <h2>Component props</h2>
           <ArgTypes of={Pagination} />
