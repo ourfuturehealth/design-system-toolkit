@@ -43,7 +43,7 @@ describe('Image', () => {
   });
 
   it('forwards ref and supports custom class names', () => {
-    const ref = createRef<HTMLFigureElement>();
+    const ref = createRef<HTMLElement>();
 
     render(
       <Image
