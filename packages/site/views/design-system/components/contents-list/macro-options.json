@@ -4,39 +4,39 @@
       "name": "items",
       "type": "array",
       "required": true,
-      "description": "Array of content list items objects.",
+      "description": "Array of contents list item objects shown in order.",
       "params": [
-        {
-          "name": "href",
-          "type": "string",
-          "required": true,
-          "description": "href value to use within each content list item label."
-        },
         {
           "name": "text",
           "type": "string",
           "required": true,
-          "description": "Text to use within each content list item label."
+          "description": "Visible label for the contents list item."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": false,
+          "description": "Link destination for the item. Omit it when the item is the current page."
+        },
+        {
+          "name": "current",
+          "type": "boolean",
+          "required": false,
+          "description": "When true, renders the item as the current page instead of a link."
         }
       ]
-    },
-    {
-      "name": "current",
-      "type": "boolean",
-      "required": false,
-      "description": "Set the current active page."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the content list container."
+      "description": "Classes to add to the contents list container."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to items in the content list."
+      "description": "HTML attributes (for example data attributes) to add to the root contents list element."
     }
   ]
 }

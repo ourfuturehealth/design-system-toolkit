@@ -91,6 +91,12 @@ export type { CardCalloutProps } from './components/CardCallout';
 export { CardDoDont } from './components/CardDoDont';
 export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
+export { ContentsList } from './components/ContentsList';
+export type {
+  ContentsListItem,
+  ContentsListProps,
+} from './components/ContentsList';
+
 export { Pagination } from './components/Pagination';
 export type { PaginationProps } from './components/Pagination';
 
