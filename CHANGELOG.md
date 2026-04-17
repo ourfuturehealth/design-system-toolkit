@@ -8,6 +8,29 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-30
 
+#### @ourfuturehealth/toolkit 4.19.0 (`toolkit-v4.19.0`)
+
+##### Added
+
+- Expanded docs-site coverage for the `breadcrumb` component, including a deeper trail example and clearer macro guidance
+
+##### Changed
+
+- Refined the toolkit `breadcrumb` component to match the current Figma chevron sizing, spacing, color tokens, and responsive collapse behaviour more closely
+- Updated the tablet/mobile collapsed breadcrumb to use the breadcrumb label directly instead of `Back to ...`
+- Improved the breadcrumb docs page so it teaches the toolkit/Nunjucks usage more clearly and points React consumers to Storybook
+
+#### @ourfuturehealth/react-components 0.18.0 (`react-v0.18.0`)
+
+##### Added
+
+- New public `Breadcrumb` component with ancestor `items`, optional `current`, mobile back-link behaviour, and anchor passthrough support
+- Storybook coverage for `Breadcrumb`, including `Default`, `Builder`, `DeepTrail`, and `WithoutCurrent`
+
+##### Changed
+
+- Refined the Breadcrumb Storybook docs page so it teaches the React API clearly and separates Builder-only helpers from real props
+
 #### @ourfuturehealth/toolkit 4.18.0 (`toolkit-v4.18.0`)
 
 ##### Added

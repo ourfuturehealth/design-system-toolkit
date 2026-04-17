@@ -57,10 +57,14 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, Table, TextInput } from '@ourfuturehealth/react-components';
+import { Breadcrumb, Button, Table, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
+  const breadcrumbItems = [
+    { text: 'Health A to Z', href: '/health-a-to-z' },
+    { text: 'Conditions', href: '/health-a-to-z/conditions' },
+  ];
   const symptomsHead = [
     { content: 'Symptom' },
     { content: 'Self-care' },
@@ -78,6 +82,13 @@ function App() {
 
   return (
     <div>
+      <Breadcrumb
+        items={breadcrumbItems}
+        current={{
+          text: 'Eczema',
+          href: '/health-a-to-z/conditions/eczema',
+        }}
+      />
       <TextInput
         id="name"
         label="Your name"
@@ -138,6 +149,7 @@ The React components package currently provides the following components:
 
 - `Button` - Call-to-action buttons and links
 - `TextInput` - Text input fields with toolkit-parity hint, error, and width support
+- `Breadcrumb` - Breadcrumb trails that collapse to a single back link on tablet and mobile
 - `Fieldset` - Semantic fieldset wrapper for grouped form questions and legends
 - `Footer` - Page footer with support links, optional small print and legal copy, and optional social links
 - `Textarea` - Multi-line text input fields
