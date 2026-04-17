@@ -4,19 +4,19 @@
 			"name": "items",
 			"type": "array",
 			"required": true,
-			"description": "Array of breadcrumbs item objects.",
+			"description": "Array of breadcrumb item objects shown in the full desktop trail.",
 			"params": [
 				{
 					"name": "text",
 					"type": "string",
 					"required": true,
-					"description": "Text to use within the breadcrumbs item."
+					"description": "Text to use within the breadcrumb item."
 				},
 				{
 					"name": "href",
 					"type": "string",
 					"required": false,
-					"description": "The value of the breadcrumb item link href attribute."
+					"description": "Link for the breadcrumb item. If omitted, the item is rendered as text only."
 				},
 				{
 					"name": "attributes",
@@ -29,20 +29,20 @@
     {
       "name": "text",
       "type": "string",
-      "required": true,
-      "description": "Text to use for the current page."
+      "required": false,
+      "description": "Text for the final breadcrumb item and the tablet/mobile back link label."
     },
     {
       "name": "href",
       "type": "string",
-      "required": true,
-      "description": "The value of the current page link href attribute."
+      "required": false,
+      "description": "Link for the final breadcrumb item and the tablet/mobile back link target."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the container."
+      "description": "Classes to add to the breadcrumb container."
     },
     {
       "name": "attributes",

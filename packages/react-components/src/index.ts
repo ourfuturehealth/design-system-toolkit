@@ -126,3 +126,6 @@ export type {
   TableHeadCell,
   TableProps,
 } from './components/Table';
+
+export { Breadcrumb } from './components/Breadcrumb';
+export type { BreadcrumbItem, BreadcrumbProps } from './components/Breadcrumb';
