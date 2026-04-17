@@ -57,7 +57,7 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, InsetText, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -69,6 +69,14 @@ function App() {
         hint="Enter your full name"
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
+      />
+      <InsetText
+        heading="Information"
+        text="You can report any suspected side effect to the Yellow Card safety scheme."
+        actionLink={{
+          text: 'Report a side effect',
+          href: '/report-side-effect',
+        }}
       />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
@@ -133,6 +141,7 @@ The React components package currently provides the following components:
 - `Icon` - Toolkit sprite icon component with fixed and responsive sizing
 - `ErrorSummary` - Page-level validation summaries with linked errors
 - `Tag` - Status tags aligned with toolkit Tag variants
+- `InsetText` - Supporting content blocks with semantic feedback borders, optional headings, and one action link
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists

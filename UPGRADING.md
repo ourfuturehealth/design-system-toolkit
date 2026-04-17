@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026    | No breaking changes | 🟢 Low - adopt the new InsetText APIs only if relevant |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
 | [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
@@ -17,6 +18,45 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
 
 ---
+
+## Upgrading to v4.16.0 / React v0.15.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.16.0+
+- `@ourfuturehealth/react-components` v0.15.0+
+
+### Release Overview
+
+This release does not introduce a supported breaking API change.
+
+Toolkit consumers should review the refreshed `inset-text` structure and docs examples if they already use inset text.
+
+React consumers can now adopt the public `InsetText` component when they need short supporting information with a semantic feedback border, optional heading, and one action link.
+
+### Inset Text
+
+- Toolkit `inset-text` now matches the current Figma treatment more closely, including the refreshed border/background combinations and content structure
+- React now exposes `InsetText` as a public component with support for `heading`, `text` or `html`, variant/background selection, and an optional `actionLink`
+- Storybook and docs-site examples now cover default, without-heading, and rich-text inset text usage
+
+#### React example
+
+```tsx
+import { InsetText } from '@ourfuturehealth/react-components';
+
+<InsetText
+  heading="Information"
+  variant="info"
+  background="grey"
+  text="You can report any suspected side effect to the Yellow Card safety scheme."
+  actionLink={{
+    text: 'Report a side effect',
+    href: '/report-side-effect',
+  }}
+/>;
+```
 
 ## Upgrading to v4.8.0 / React v0.6.0
 

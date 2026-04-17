@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.6.0/ourfuturehealth-react-components-0.6.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.15.0/ourfuturehealth-react-components-0.15.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }

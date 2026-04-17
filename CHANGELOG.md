@@ -6,6 +6,30 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### Unreleased
+
+#### @ourfuturehealth/toolkit 4.16.0 (`toolkit-v4.16.0`)
+
+##### Added
+
+- Inset text docs-site examples for `without-heading` and `html-content`
+
+##### Changed
+
+- Refreshed the toolkit `inset-text` component to the current Figma-aligned border, background, and content structure
+- Updated inset-text docs-site guidance so it better explains heading, rich-text, and action-link usage
+
+#### @ourfuturehealth/react-components 0.15.0 (`react-v0.15.0`)
+
+##### Added
+
+- New public `InsetText` component with support for visible headings, rich-text body content, and one action link
+- Storybook coverage for `InsetText` including `Default`, `Builder`, `WithoutHeading`, `HtmlContent`, and `AllVariants`
+
+##### Changed
+
+- Refined the Inset Text Storybook docs page so it teaches the React API, `actionLink` shape, and Builder-only helper controls more clearly
+
 ### 2026-03-30
 
 #### @ourfuturehealth/toolkit 4.8.0 (`toolkit-v4.8.0`)
