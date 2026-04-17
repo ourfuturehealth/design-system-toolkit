@@ -6,6 +6,28 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-17
+
+#### @ourfuturehealth/toolkit 4.20.0 (`toolkit-v4.20.0`)
+
+##### Changed
+
+- Refreshed the toolkit `contents-list` spacing, marker treatment, and typography to match the current Figma component more closely
+- Rewrote the toolkit `contents-list` docs page to better explain usage, macro options, and the React parity surface
+- Expanded toolkit docs-site coverage for `contents-list` with `Current page in the middle` and `Contents list with all links` examples
+- Updated the toolkit `contents-list` README and macro options to match the current component behavior more accurately
+
+#### @ourfuturehealth/react-components 0.19.0 (`react-v0.19.0`)
+
+##### Added
+
+- First public React release of `ContentsList`
+
+##### Changed
+
+- Added Storybook docs, builder, and showcase coverage for the new React `ContentsList` component
+- Added unit and accessibility coverage for the React `ContentsList` component
+
 ### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.10.0 (`toolkit-v4.10.0`)

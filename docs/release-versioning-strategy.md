@@ -31,8 +31,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 | Package                             | Canonical tag pattern | Example tag      |
 | ----------------------------------- | --------------------- | ---------------- |
-| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.10.0` |
-| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.9.0`   |
+| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.20.0` |
+| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.19.0`   |
 
 The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 
@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.10.0/ourfuturehealth-toolkit-4.10.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.20.0/ourfuturehealth-toolkit-4.20.0.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.9.0/ourfuturehealth-react-components-0.9.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.19.0/ourfuturehealth-react-components-0.19.0.tgz"
   }
 }
 ```
@@ -128,8 +128,10 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Released               |
 | 20    | `toolkit-v4.9.0` | `4.9.0`         | N/A           | Monorepo       | Released               |
 | 21    | `react-v0.7.0`   | N/A             | `0.7.0`       | Monorepo       | Released               |
-| 22    | `toolkit-v4.10.0` | `4.10.0`       | N/A           | Monorepo       | Planned in this branch |
-| 23    | `react-v0.9.0`   | N/A             | `0.9.0`       | Monorepo       | Planned in this branch |
+| 22    | `toolkit-v4.10.0` | `4.10.0`       | N/A           | Monorepo       | Released               |
+| 23    | `react-v0.9.0`   | N/A             | `0.9.0`       | Monorepo       | Released               |
+| 24    | `toolkit-v4.20.0` | `4.20.0`       | N/A           | Monorepo       | Planned in this branch |
+| 25    | `react-v0.19.0`  | N/A             | `0.19.0`      | Monorepo       | Planned in this branch |
 
 ## References
 

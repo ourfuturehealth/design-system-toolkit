@@ -57,12 +57,18 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, ContentsList, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
     <div>
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
+      />
       <TextInput
         id="name"
         label="Your name"
@@ -136,6 +142,7 @@ The React components package currently provides the following components:
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
+- `ContentsList` - Navigation lists for small groups of related content pages
 
 For complete component documentation and live examples, run Storybook locally from this repository:
 
