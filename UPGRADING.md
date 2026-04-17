@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
 | [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
 | [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React InsetText if needed and use the refreshed toolkit inset-text APIs when relevant |
 | [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
@@ -25,6 +26,59 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.18.0 / React v0.17.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.18.0+
+- `@ourfuturehealth/react-components` v0.17.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `table` component to the current design-system treatment and introduces the first public React `Table` component.
+
+- Toolkit consumers should review the refreshed responsive/mobile stacked-row treatment, the `2px` closing border, and the expanded docs examples for row headers, numeric values, and merged cells.
+- React consumers can now adopt the public `Table` component when they need toolkit-parity content tables with optional captions, responsive stacking, row headers, numeric cells, and merged cells.
+
+### Migration Steps
+
+1. Adopt the public React `Table` component where you need toolkit-parity content tables in React.
+2. Prefer the refreshed toolkit table API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local table overrides, especially around responsive stacked rows, row-header emphasis, numeric alignment, and merged-cell layouts.
+
+#### React example
+
+**New in `react-v0.17.0`:**
+
+```tsx
+import { Table } from '@ourfuturehealth/react-components';
+
+<Table
+  caption="Symptoms and self-care"
+  head={[
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ]}
+  rows={[
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
+  ]}
+/>;
+```
 
 ---
 
