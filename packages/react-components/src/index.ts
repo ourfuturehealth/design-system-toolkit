@@ -14,6 +14,19 @@ export type { ButtonProps } from './components/Button';
 export { Icon } from './components/Icon';
 export type { IconProps, IconSize } from './components/Icon';
 
+export { LinkAction } from './components/LinkAction';
+export type { LinkActionProps } from './components/LinkAction';
+
+export { LinkIcon } from './components/LinkIcon';
+export type {
+  LinkIconIconPosition,
+  LinkIconProps,
+  LinkIconSize,
+} from './components/LinkIcon';
+
+export { LinkSkip } from './components/LinkSkip';
+export type { LinkSkipProps } from './components/LinkSkip';
+
 export { TextInput } from './components/TextInput';
 export type {
   TextInputFixedWidth,

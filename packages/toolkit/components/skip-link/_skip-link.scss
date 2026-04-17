@@ -1,26 +1,3 @@
-/* ==========================================================================
-   COMPONENTS / #SKIP-LINK
-   ========================================================================== */
+/* Skip link is now a compatibility alias. Styles live in link-skip. */
 
-/**
- * 1. Hides the skip link off the page,
- * 2. until the link gains focus from keyboard tabbing.
- */
-
-.ofh-skip-link {
-  background-color: $ofh-color-greyscale-white;
-  left: -9999px; /* [1] */
-  padding: $ofh-size-8;
-  position: absolute;
-
-  &:active,
-  &:focus {
-    left: $ofh-size-16; /* [2] */
-    top: $ofh-size-16;
-    z-index: 2;
-  }
-
-  &:visited {
-    color: $ofh-color-foreground-primary;
-  }
-}
+@import '../link-skip/link-skip';

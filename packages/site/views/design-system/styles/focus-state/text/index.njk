@@ -1,11 +1,11 @@
-{% from 'action-link/macro.njk' import actionLink %}
+{% from 'link-action/macro.njk' import linkAction %}
 {% from 'details/macro.njk' import details %}
 
 <div class="ofh-width-container">
   <main class="ofh-main-wrapper" id="maincontent">
     <p>Read our <a href="#" id="focus-state-text-target">screening guidance</a> before you continue.</p>
 
-    {{ actionLink({
+    {{ linkAction({
       "text": "Start your questionnaire",
       "href": "#"
     }) }}

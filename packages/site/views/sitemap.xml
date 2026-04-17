@@ -110,13 +110,13 @@
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/styles/typography</loc>
   </url>
   <url>
-    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/action-link</loc>
+    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/link-action</loc>
+  </url>
+  <url>
+    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/link-icon</loc>
   </url>
   <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/auto-complete</loc>
-  </url>
-  <url>
-    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/back-link</loc>
   </url>
   <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/breadcrumbs</loc>
@@ -191,7 +191,7 @@
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/select</loc>
   </url>
   <url>
-    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/skip-link</loc>
+    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/link-skip</loc>
   </url>
   <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/summary-list</loc>

@@ -1,6 +1,6 @@
 {% from 'header/macro.njk' import header %}
 {% from 'footer/macro.njk' import footer %}
-{% from 'skip-link/macro.njk' import skipLink %}
+{% from 'link-skip/macro.njk' import linkSkip %}
 
 <!DOCTYPE html>
   <html lang="en">
@@ -47,7 +47,7 @@
     {% block bodyStart %}{% endblock %}
 
       {% block skipLink %}
-        {{ skipLink({
+        {{ linkSkip({
           href: '#maincontent',
           text: 'Skip to main content'
         }) }}

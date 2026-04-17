@@ -52,6 +52,9 @@ import {
   ErrorSummary,
   Fieldset,
   Icon,
+  LinkAction,
+  LinkIcon,
+  LinkSkip,
   Radios,
   Select,
   Tag,
@@ -87,6 +90,9 @@ function App() {
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
       <Icon name="Search" size={24} />
+      <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
+      <LinkIcon href="/previous-step">Go back</LinkIcon>
+      <LinkSkip href="#maincontent" />
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
       <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />

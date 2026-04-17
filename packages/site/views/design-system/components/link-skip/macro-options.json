@@ -1,0 +1,28 @@
+{
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Visible skip-link label. Defaults to `Skip to main content` if you do not provide a value."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": false,
+      "description": "Target fragment or URL for the link skip. Defaults to `#maincontent` if you do not provide a value."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Extra classes applied to the anchor element. Use for layout or integration hooks rather than changing the component pattern."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes for the anchor element, for example `data-*` or `aria-*` attributes."
+    }
+  ]
+}

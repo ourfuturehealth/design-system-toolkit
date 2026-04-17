@@ -1,0 +1,58 @@
+{% set pageTitle = "Link skip" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use a link skip to help keyboard-only users skip to the main content on a page." %}
+{% set theme = "Navigation" %}
+{% set dateUpdated = "April 2026" %}
+{% set backlog_issue_id = "33" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "link-skip",
+    type: "default"
+  }) }}
+
+  <h2>When to use a link skip</h2>
+  <p>All nhs.uk pages must include a link skip in the header, following <a href="https://design-system.service.gov.uk/components/skip-link/">guidance in the GOV.UK Design System</a>.</p>
+
+  <h2 id="how-it-works">How link skips work</h2>
+  <p>Some people use the tab key on their keyboard to navigate through the links and form elements on a web page. Including a link skip gives users the option to bypass the top-level navigation links and jump to the main content on the page.</p>
+  <p>The link skip component is visually hidden until a keyboard press activates it.</p>
+
+  <h2>How to use a link skip</h2>
+  <p>Place the link skip near the top of the page so it becomes available as one of the first keyboard interactions.</p>
+  <p>The destination should point to the main content area of the page. If the target is not normally focusable, make sure your page implementation still moves keyboard focus to a useful location.</p>
+  <p>Keep the text short and obvious. In most cases, "Skip to main content" is the clearest option.</p>
+  <p>The macro defaults to <code>#maincontent</code> and "Skip to main content", so you usually only need to change the text or target when the page has a different destination.</p>
+
+  <h3 id="customise-link-skips">Customise link skips</h3>
+  <ul>
+    <li>Use <code>text</code> to make the destination clear when users need to skip to something more specific than the main content.</li>
+    <li>Use <code>href</code> to point to the id of the section users should jump to.</li>
+    <li>Use <code>classes</code> and <code>attributes</code> for integration hooks such as <code>data-*</code> or extra ARIA attributes. Do not use them to change how the pattern behaves.</li>
+  </ul>
+
+  <h3 id="custom-target-and-label">Custom target and label</h3>
+  <p>Retarget the skip link when people need to jump past repeated controls, for example to search results or a long form section.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "link-skip",
+    type: "custom-target"
+  }) }}
+
+  <h3>Accessibility</h3>
+  <p>The link skip is only helpful if it works with a real target on the page. Always check that the destination exists and that keyboard users can continue from the skipped-to content without getting lost.</p>
+
+  <h2>Research</h2>
+  <p>If you have used link skips, please share your user research findings.</p>
+
+{% endblock %}

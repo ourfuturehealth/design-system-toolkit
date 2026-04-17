@@ -104,7 +104,7 @@ You can also import toolkit layers individually:
 
 ```scss
 @import '@ourfuturehealth/toolkit/core/all';
-@import '@ourfuturehealth/toolkit/components/action-link/action-link';
+@import '@ourfuturehealth/toolkit/components/link-action/link-action';
 ```
 
 ## Importing JavaScript
@@ -138,7 +138,7 @@ import Details from '@ourfuturehealth/toolkit/components/details/details';
 import ErrorSummary from '@ourfuturehealth/toolkit/components/error-summary/error-summary';
 import Header from '@ourfuturehealth/toolkit/components/header/header';
 import Radios from '@ourfuturehealth/toolkit/components/radios/radios';
-import SkipLink from '@ourfuturehealth/toolkit/components/skip-link/skip-link';
+import LinkSkip from '@ourfuturehealth/toolkit/components/link-skip/link-skip';
 import '@ourfuturehealth/toolkit/polyfills';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ErrorSummary();
   Header();
   Radios();
-  SkipLink();
+  LinkSkip();
 });
 ```
 

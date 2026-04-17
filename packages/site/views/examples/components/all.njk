@@ -1,6 +1,6 @@
 {% set pageTitle = 'Components' %}
 {% set parent = 'Library' %}
-{% from 'action-link/macro.njk' import actionLink %}
+{% from 'link-action/macro.njk' import linkAction %}
 {% from 'breadcrumb/macro.njk' import breadcrumb %}
 {% from 'card/macro.njk' import card %}
 {% from 'contents-list/macro.njk' import contentsList %}
@@ -11,7 +11,7 @@
 {% from 'images/macro.njk' import image %}
 {% from 'inset-text/macro.njk' import insetText %}
 {% from 'pagination/macro.njk' import pagination %}
-{% from 'skip-link/macro.njk' import skipLink %}
+{% from 'link-skip/macro.njk' import linkSkip %}
 {% from 'summary-list/macro.njk' import summaryList %}
 {% from 'tables/macro.njk' import table %}
 {% from 'tag/macro.njk' import tag %}
@@ -28,9 +28,9 @@
 {% extends 'standalone-example-layout.njk' %}
 
 {% block body %}
-  {{ skipLink({
-    "URL": "#maincontent",
-    "heading": "Skip to main content"
+  {{ linkSkip({
+    "href": "#maincontent",
+    "text": "Skip to main content"
   }) }}
 
   {{ header({
@@ -337,7 +337,7 @@
             "caption": "Itchy, red, watering eyes"
           }) }}
 
-          {{ actionLink({
+          {{ linkAction({
             "text": "Find a minor injuries unit",
             "href": "https://www.nhs.uk/service-search/minor-injuries-unit/locationsearch/551"
           }) }}

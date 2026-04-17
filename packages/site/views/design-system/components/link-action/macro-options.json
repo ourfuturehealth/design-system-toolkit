@@ -1,0 +1,34 @@
+{
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": true,
+      "description": "Visible link label. Keep it short and action-led."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": true,
+      "description": "Destination URL or fragment for the link action."
+    },
+    {
+      "name": "openInNewWindow",
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, opens the link in a new tab and adds `target=\"_blank\"` plus `rel=\"noopener noreferrer\"`."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Extra classes applied to the anchor element. Use for layout or integration hooks rather than changing the component pattern."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes for the anchor element, for example `data-*` or `aria-*` attributes."
+    }
+  ]
+}

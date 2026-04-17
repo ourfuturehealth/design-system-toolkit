@@ -1,0 +1,13 @@
+<p class="ofh-body-m">To view the link skip, tab to this example, or click inside this example and press tab.</p>
+
+{% from 'link-skip/macro.njk' import linkSkip %}
+
+{{ linkSkip({
+  "href": "#maincontent",
+  "text": "Skip to main content"
+}) }}
+
+<div class="ofh-u-padding-top-32">
+  <h3 id="maincontent" class="ofh-heading-m">Main content</h3>
+  <p class="ofh-body-m">This heading is the default target for the link skip.</p>
+</div>

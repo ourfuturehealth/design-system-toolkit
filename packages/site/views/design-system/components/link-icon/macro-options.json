@@ -1,0 +1,64 @@
+{
+  "params": [
+    {
+      "name": "text",
+      "type": "string",
+      "required": false,
+      "description": "Visible text label for the link icon. Use this for plain text content."
+    },
+    {
+      "name": "html",
+      "type": "string",
+      "required": false,
+      "description": "Trusted HTML to display within the link icon component. If `html` is provided, `text` is ignored."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "required": true,
+      "description": "Destination URL or fragment for the link icon."
+    },
+    {
+      "name": "iconName",
+      "type": "string",
+      "required": false,
+      "description": "Toolkit icon name to render. You can use any icon from the generated sprite manifest. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+    },
+    {
+      "name": "iconColor",
+      "type": "string",
+      "required": false,
+      "description": "Optional icon-only colour override. Leave unset to inherit the surrounding link text colour."
+    },
+    {
+      "name": "iconPosition",
+      "type": "string",
+      "required": false,
+      "description": "Icon placement relative to the text. Use `left` for back-navigation patterns and `right` for forward or external links."
+    },
+    {
+      "name": "size",
+      "type": "string",
+      "required": false,
+      "description": "Link icon size. Use `small` for compact inline usage or `medium` when the link needs more emphasis."
+    },
+    {
+      "name": "openInNewWindow",
+      "type": "boolean",
+      "required": false,
+      "description": "If `true`, opens the link in a new tab and adds `target=\"_blank\"` plus `rel=\"noopener noreferrer\"`."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Extra classes applied to the root container. Use for layout or integration hooks rather than changing the component pattern."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes for the anchor element, for example `data-*` or `aria-*` attributes."
+    }
+  ]
+}
