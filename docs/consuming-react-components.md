@@ -57,7 +57,7 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, InsetText, TextInput } from '@ourfuturehealth/react-components';
+import { Button, Image, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -70,13 +70,10 @@ function App() {
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
       />
-      <InsetText
-        heading="Information"
-        text="You can report any suspected side effect to the Yellow Card safety scheme."
-        actionLink={{
-          text: 'Report a side effect',
-          href: '/report-side-effect',
-        }}
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
+        alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
+        caption="It can affect large areas of the body or limbs."
       />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
@@ -138,6 +135,7 @@ The React components package currently provides the following components:
 - `Autocomplete` - Accessible text input with filtered suggestion list
 - `CharacterCount` - Text input and textarea variants with count feedback
 - `Checkboxes` - Grouped checkbox inputs with hints, exclusive options, and conditional reveals
+- `Image` - Content images with optional captions and advanced responsive-source support
 - `Radios` - Grouped radio inputs with hints and conditional reveals
 - `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
 - `SummaryList` - Review-answer and key-value summary rows with optional actions
