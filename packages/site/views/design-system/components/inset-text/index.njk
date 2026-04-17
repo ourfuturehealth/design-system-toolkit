@@ -45,6 +45,24 @@
   <p>Use the grey, yellow, or blue background that fits the surrounding layout while keeping the feedback border colour consistent.</p>
   <p>Optional headings work well for short labels such as “Information” or “Warning”. Optional action links should offer one clear next step, not a list of competing actions.</p>
 
+  <h3 id="without-a-visible-heading">Without a visible heading</h3>
+  <p>You can omit the visible heading when the surrounding context already makes the message clear. In that case the component still includes a hidden message type for screen reader users.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "inset-text",
+    type: "without-heading"
+  }) }}
+
+  <h3 id="rich-text-content">Rich text content</h3>
+  <p>Use rich text when the body needs links or other inline formatting, but keep the message short and focused.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "inset-text",
+    type: "html-content"
+  }) }}
+
   <h3>Accessibility</h3>
   <p>People with visual disabilities may not be able to see the colour that marks out inset text. Instead they may rely on hidden labels to recognise it.</p>
   <p class="rich-text">When inset text has no visible heading, we add a hidden prefix such as <code>Information:</code>, <code>Warning:</code>, <code>Success:</code>, or <code>Error:</code> so screen reader users still get the message type.</p>
