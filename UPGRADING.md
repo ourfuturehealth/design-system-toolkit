@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the new Breadcrumb APIs only if relevant |
 | [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
@@ -17,6 +18,60 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.19.0 / React v0.18.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.19.0+
+- `@ourfuturehealth/react-components` v0.18.0+
+
+### Release Overview
+
+This release does not introduce a supported breaking API change.
+
+Toolkit consumers should review the refreshed `breadcrumb` component spacing, chevron treatment, and responsive collapse behaviour if they already use breadcrumb navigation.
+
+React consumers can now adopt the public `Breadcrumb` component when they need a desktop breadcrumb trail that collapses to a single back link on tablet and mobile.
+
+### Breadcrumb
+
+- Toolkit `breadcrumb` now matches the current Figma chevron sizing, spacing, and mobile collapse behaviour more closely
+- React now exposes `Breadcrumb` as a public component with `items`, optional `current`, and anchor passthrough support
+- Storybook and docs-site examples now cover default, deep-trail, and no-current breadcrumb usage
+
+#### React example
+
+```tsx
+import { Breadcrumb } from '@ourfuturehealth/react-components';
+
+const items = [
+  { text: 'Health A to Z', href: '/health-a-to-z' },
+  { text: 'Conditions', href: '/health-a-to-z/conditions' },
+];
+
+<Breadcrumb
+  items={items}
+  current={{
+    text: 'Eczema',
+    href: '/health-a-to-z/conditions/eczema',
+  }}
+/>;
+```
+
+#### Ancestors-only example
+
+```tsx
+<Breadcrumb
+  items={[
+    { text: 'Health A to Z', href: '/health-a-to-z' },
+    { text: 'Conditions', href: '/health-a-to-z/conditions' },
+  ]}
+/>
+```
 
 ---
 
