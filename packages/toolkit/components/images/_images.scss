@@ -11,9 +11,9 @@
 
 .ofh-image {
   background-color: $ofh-color-greyscale-white;
-  border-bottom: 1px solid $ofh-color-greyscale-5;
   margin-left: 0; /* [1] */
   margin-right: 0; /* [1] */
+  position: relative;
 
   @include ofh-responsive-margin(32, 'bottom');
   @include ofh-responsive-margin(32, 'top');
@@ -29,6 +29,16 @@
   & + .ofh-image {
     @include ofh-responsive-margin(0, 'top'); /* [4] */
   }
+
+  &::after {
+    background-color: $ofh-color-border-primary;
+    bottom: -0.5px;
+    content: '';
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
 }
 
 .ofh-image__img {
@@ -39,5 +49,5 @@
 .ofh-image__caption {
   @include ofh-typography-responsive('paragraph-sm');
 
-  padding: $ofh-size-16;
+  padding: $ofh-size-8 $ofh-size-16;
 }
