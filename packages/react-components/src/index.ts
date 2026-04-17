@@ -97,6 +97,7 @@ export type { PaginationProps } from './components/Pagination';
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
 
+<<<<<<< HEAD
 export { SummaryList } from './components/SummaryList';
 export type {
   SummaryListActionItem,
@@ -118,3 +119,20 @@ export type {
 
 export { Image } from './components/Image';
 export type { ImageProps } from './components/Image';
+
+export { Table } from './components/Table';
+export type {
+  TableCell,
+  TableCellFormat,
+  TableHeadCell,
+  TableProps,
+} from './components/Table';
+=======
+export { Table } from './components/Table';
+export type {
+  TableCell,
+  TableCellFormat,
+  TableHeadCell,
+  TableProps,
+} from './components/Table';
+>>>>>>> 8bb6ee11 (feat: add table react parity)

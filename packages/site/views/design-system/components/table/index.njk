@@ -14,7 +14,11 @@
 
 {% block bodyContent %}
 
+  <p>Use a table when users need to compare or scan related data. Do not use tables for page layout.</p>
+  <p>If you are working in React instead of Nunjucks, use the React <code>Table</code> component in Storybook. This page is the toolkit/Nunjucks usage guide.</p>
+
   <h2 id="2-column-table">2 column table</h2>
+  <p>Use a simple 2 column table when each row compares a label with a value.</p>
 
   {{ designExample({
     group: "components",
@@ -30,7 +34,7 @@
   </ul>
 
   <h2 id="3-or-more-column-table">3 or more column table</h2>
-  <p>On large screens this table looks like a 2 column table. However, on smaller screens it collapses.</p>
+  <p>Use <code>responsive: true</code> when a table has 3 or more columns and needs to collapse into a stacked layout on smaller screens.</p>
 
   {{ designExample({
     group: "components",
@@ -38,14 +42,46 @@
     type: "responsive"
   }) }}
 
-  <h3 id="when-not-to-use-a-3-or-more-column-table">When not to use a 3 or more column table</h3>
-  <p>Do not use a 3 or more column table:</p>
-  <ul>
-    <li>to layout content on a page, use the <a href="/design-system/styles/layout#grid">grid system</a> instead</li>
-    <li>if you have 2 columns, use the <a href="#2-column-table">2 column table</a> instead</li>
-  </ul>
+  <h2 id="first-cell-as-a-row-header">First cell as a row header</h2>
+  <p>Use <code>firstCellIsHeader: true</code> when the first cell in each body row is acting as the row label.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "table",
+    type: "first-cell-is-header"
+  }) }}
+
+  <h2 id="numeric-values">Numeric values</h2>
+  <p>Use <code>format: "numeric"</code> on matching head and row cells when a column contains numbers that should align to the right.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "table",
+    type: "numeric-values"
+  }) }}
+
+  <h2 id="column-and-row-spans">Column and row spans</h2>
+  <p>Use <code>colspan</code> and <code>rowspan</code> sparingly. They are useful for grouped schedule-style data, but simple comparison tables are easier to scan without merged cells.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "table",
+    type: "spans"
+  }) }}
 
   <h2 id="how-it-works">How tables work</h2>
+  <p>Use these options when configuring the table macro:</p>
+  <ul>
+    <li><code>caption</code>: the visible title of the table. Always include one where possible.</li>
+    <li><code>head</code>: the column headers shown in the <code>&lt;thead&gt;</code>.</li>
+    <li><code>rows</code>: the table body data. Each row is an array of cells.</li>
+    <li><code>firstCellIsHeader</code>: changes the first body cell in each row from a <code>&lt;td&gt;</code> to a row header <code>&lt;th scope="row"&gt;</code>.</li>
+    <li><code>responsive</code>: uses the stacked mobile layout for wider tables.</li>
+    <li><code>header</code> on a row cell: overrides the mobile label shown for that cell in a responsive table.</li>
+    <li><code>format: "numeric"</code>: right aligns numeric columns.</li>
+    <li><code>colspan</code> and <code>rowspan</code>: merge cells across neighbouring columns or rows.</li>
+  </ul>
+
   <h3>Accessibility</h3>
   <p>Follow <a href="https://webaim.org/techniques/tables/data">WebAIM's guidance for tables</a> and</p>
   <ul>
@@ -59,15 +95,5 @@
 
   <h3 id="table-headers">Table headers</h3>
   <p>Use table headers to tell users what the rows and columns represent.</p>
-
-  <h2 id="reseach">Research</h2>
-  <h3>2 column table</h3>
-  <p>This table tested well with users of health information on the NHS website.</p>
-
-  <h3>3 or more column table</h3>
-  <p>This table was tested at HM Revenue &amp; Customs.</p>
-
-  <h3>Table with panel</h3>
-  <p>We have also designed a table with a panel. You can see <a href="https://nhsuk.github.io/nhsuk-frontend/components/tables/tables-panel.html">an example in the frontend library</a>. We haven't included it in this list of components yet because it needs more testing.</p>
 
 {% endblock %}

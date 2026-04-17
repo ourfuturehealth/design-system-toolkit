@@ -1,0 +1,32 @@
+{% from 'tables/macro.njk' import table %}
+
+{{ table({
+  caption: "Treatment types and uses",
+  firstCellIsHeader: true,
+  head: [
+    {
+      text: "Treatment"
+    },
+    {
+      text: "Uses"
+    }
+  ],
+  rows: [
+    [
+      {
+        text: "Antibiotics"
+      },
+      {
+        text: "Treat bacterial infections"
+      }
+    ],
+    [
+      {
+        text: "Antihistamines"
+      },
+      {
+        text: "Ease allergic symptoms"
+      }
+    ]
+  ]
+}) }}
