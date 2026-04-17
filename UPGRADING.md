@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes | 🟢 Low - adopt the new Image APIs only if relevant |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
 | [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
@@ -17,6 +18,51 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure  | 🔴 High - Installation & paths change |
 
 ---
+
+## Upgrading to v4.17.0 / React v0.16.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.17.0+
+- `@ourfuturehealth/react-components` v0.16.0+
+
+### Release Overview
+
+This release does not introduce a supported breaking API change.
+
+Toolkit consumers should review the refreshed `image` component styling and the new docs-site guidance for the no-caption case if they already use content images.
+
+React consumers can now adopt the public `Image` component when they need a content image with optional caption support and, where needed, responsive image sources.
+
+### Image
+
+- Toolkit `image` now matches the current Figma treatment more closely, including the caption spacing and bottom-edge treatment
+- React now exposes `Image` as a public component with required `src` and `alt`, optional `caption`, and advanced `sizes` / `srcSet` support for responsive sources
+- Storybook and docs-site examples now cover default, without-caption, and responsive-source image usage
+
+#### React example
+
+```tsx
+import { Image } from '@ourfuturehealth/react-components';
+
+<Image
+  src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
+  alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
+  caption="It can affect large areas of the body or limbs."
+/>;
+```
+
+#### Responsive sources example
+
+```tsx
+<Image
+  src="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg"
+  alt="Picture of allergic conjunctivitis"
+  sizes="(min-width: 1020px) 320px, (min-width: 768px) 50vw, 100vw"
+  srcSet="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-640x427.jpg 640w, https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-767x511.jpg 767w"
+/>
+```
 
 ## Upgrading to v4.8.0 / React v0.6.0
 

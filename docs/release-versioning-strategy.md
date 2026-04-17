@@ -31,8 +31,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 | Package                             | Canonical tag pattern | Example tag      |
 | ----------------------------------- | --------------------- | ---------------- |
-| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.1.0` |
-| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.6.0`   |
+| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.17.0` |
+| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.16.0`   |
 
 The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 
@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.1.0/ourfuturehealth-toolkit-4.1.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.17.0/ourfuturehealth-toolkit-4.17.0.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.6.0/ourfuturehealth-react-components-0.6.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.16.0/ourfuturehealth-react-components-0.16.0.tgz"
   }
 }
 ```
@@ -124,8 +124,10 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 15    | `react-v0.4.0`   | N/A             | `0.4.0`       | Monorepo       | Released               |
 | 16    | `toolkit-v4.7.0` | `4.7.0`         | N/A           | Monorepo       | Released               |
 | 17    | `react-v0.5.0`   | N/A             | `0.5.0`       | Monorepo       | Released               |
-| 18    | `toolkit-v4.8.0` | `4.8.0`         | N/A           | Monorepo       | Planned in this branch |
-| 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Planned in this branch |
+| 18    | `toolkit-v4.8.0` | `4.8.0`         | N/A           | Monorepo       | Released               |
+| 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Released               |
+| 20    | `toolkit-v4.17.0` | `4.17.0`       | N/A           | Monorepo       | Planned in this branch |
+| 21    | `react-v0.16.0`   | N/A            | `0.16.0`      | Monorepo       | Planned in this branch |
 
 ## References
 

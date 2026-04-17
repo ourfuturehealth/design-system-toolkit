@@ -57,7 +57,7 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, Image, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
@@ -69,6 +69,11 @@ function App() {
         hint="Enter your full name"
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
+      />
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
+        alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
+        caption="It can affect large areas of the body or limbs."
       />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
@@ -129,6 +134,7 @@ The React components package currently provides the following components:
 - `Autocomplete` - Accessible text input with filtered suggestion list
 - `CharacterCount` - Text input and textarea variants with count feedback
 - `Checkboxes` - Grouped checkbox inputs with hints, exclusive options, and conditional reveals
+- `Image` - Content images with optional captions and advanced responsive-source support
 - `Radios` - Grouped radio inputs with hints and conditional reveals
 - `Icon` - Toolkit sprite icon component with fixed and responsive sizing
 - `ErrorSummary` - Page-level validation summaries with linked errors

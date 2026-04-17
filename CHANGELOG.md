@@ -6,6 +6,31 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### Unreleased
+
+#### @ourfuturehealth/toolkit 4.17.0 (`toolkit-v4.17.0`)
+
+##### Added
+
+- Image docs-site example for the `without-caption` case
+
+##### Changed
+
+- Refreshed the toolkit `image` component to the current Figma-aligned caption spacing and bottom-edge treatment
+- Updated image docs-site guidance so it better explains when to omit the caption entirely
+
+#### @ourfuturehealth/react-components 0.16.0 (`react-v0.16.0`)
+
+##### Added
+
+- New public `Image` component with optional `caption` plus responsive `sizes` and `srcSet` support
+- Storybook coverage for `Image` including `Default`, `Builder`, `Without Caption`, and `Responsive Sources`
+
+##### Changed
+
+- Refined the Image Storybook docs page so it teaches the React API more clearly and treats responsive sources as an advanced case
+- Removed the duplicate React `srcset` alias in favour of the standard React `srcSet` prop
+
 ### 2026-03-30
 
 #### @ourfuturehealth/toolkit 4.8.0 (`toolkit-v4.8.0`)
