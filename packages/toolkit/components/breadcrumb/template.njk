@@ -1,23 +1,34 @@
 {% from '../icon/macro.njk' import icon %}
 
+{% set mobileItem = null %}
+{% if params.href and params.text %}
+  {% set mobileItem = { "href": params.href, "text": params.text } %}
+{% elif params.items and params.items.length %}
+  {% set mobileItem = params.items[params.items.length - 1] %}
+{% endif %}
+
 <nav class="ofh-breadcrumb{% if params.classes %} {{ params.classes }}{% endif %}" aria-label="Breadcrumb"
 {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
   <div class="ofh-width-container">
     <ol class="ofh-breadcrumb__list">
   {%- for item in params.items %}
-    {%- if item.href %}
+    {%- if item.text %}
       <li class="ofh-breadcrumb__item">
-        <a class="ofh-breadcrumb__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>{{ item.text }}</a>
-        {% if not loop.last or params.href %}{{ icon({ "name": "ChevronRight", "size": 24, "classes": "ofh-breadcrumb__separator" }) }}{% endif %}
+        {% if item.href %}
+          <a class="ofh-breadcrumb__link" href="{{ item.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>{{ item.text }}</a>
+        {% else %}
+          <span class="ofh-breadcrumb__link">{{ item.text }}</span>
+        {% endif %}
+        {% if not loop.last or (params.href and params.text) %}{{ icon({ "name": "ChevronRight", "size": 16, "classes": "ofh-breadcrumb__separator" }) }}{% endif %}
       </li>
     {%- endif -%}
   {% endfor %}
       {%- if params.href and params.text %}
-      <li class="ofh-breadcrumb__item"><a class="ofh-breadcrumb__link" href="{{ params.href }}"{% for attribute, value in item.attributes %} {{attribute}}="{{value}}"{% endfor %}>{{ params.text}}</a></li>
+      <li class="ofh-breadcrumb__item"><a class="ofh-breadcrumb__link" href="{{ params.href }}">{{ params.text}}</a></li>
       {%- endif %}
     </ol>
-    {%- if params.href and params.text %}
-    <p class="ofh-breadcrumb__back"><a class="ofh-breadcrumb__backlink" href="{{ params.href }}">{{ icon({ "name": "ChevronLeft", "size": 24, "classes": "ofh-breadcrumb__back-icon" }) }}Back to {{ params.text }}</a></p>
+    {%- if mobileItem and mobileItem.href and mobileItem.text %}
+    <p class="ofh-breadcrumb__back"><a class="ofh-breadcrumb__backlink" href="{{ mobileItem.href }}"{% for attribute, value in mobileItem.attributes %} {{attribute}}="{{value}}"{% endfor %}>{{ icon({ "name": "ChevronLeft", "size": 16, "classes": "ofh-breadcrumb__back-icon" }) }}{{ mobileItem.text }}</a></p>
     {%- endif %}
   </div>
 </nav>
