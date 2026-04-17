@@ -29,7 +29,7 @@
  * Table row hover is used to aid readability for users.
  */
 
-.ofh-table__row {
+.ofh-table__body .ofh-table__row {
   &:hover {
     background-color: $ofh-color-greyscale-6;
   }
@@ -70,10 +70,10 @@
  * 2. Displaying the thead on desktop
  * 3. Removing default screen reader behaviour
  * 4. Assigning role of table-row on desktop to give default screen reader behaviour
- * 5. Using justify content to space out elements in the row on mobile
+ * 5. Aligning the mobile row content vertically
  * 6. Assigning a minimum width in case of black cell
  * 7. Aligning content to the right on mobile
- * 8. Aligning mobile header to left to split it from the data
+ * 8. Splitting mobile headings and content into equal columns
  * 9. Hiding mobile specific header from desktop view
  * 10. Adding a display block value due to IE 11 not having full flex support
  */
@@ -122,9 +122,9 @@
       }
 
       td {
+        align-items: center;
         display: block; // For browsers that don't support flexbox
         display: flex;
-        justify-content: space-between; /* [5] */
         min-width: 1px; /* [6] */
 
         @media all and (-ms-high-contrast: none) {
@@ -137,10 +137,21 @@
         }
 
         @include mq($until: desktop) {
+          border-bottom: 1px solid $ofh-color-border-primary;
           padding-right: 0;
-          text-align: right; /* [7] */
+
+          .ofh-table-responsive__content,
+          .ofh-table-responsive__heading {
+            flex: 1 0 0;
+            min-width: 1px;
+          }
+
+          .ofh-table-responsive__content {
+            text-align: right; /* [7] */
+          }
+
           &:last-child {
-            border-bottom: 3px solid $ofh-color-greyscale-5;
+            border-bottom-width: 2px;
           }
         }
       }

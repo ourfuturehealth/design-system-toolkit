@@ -66,3 +66,11 @@ export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
+
+export { Table } from './components/Table';
+export type {
+  TableCell,
+  TableCellFormat,
+  TableHeadCell,
+  TableProps,
+} from './components/Table';

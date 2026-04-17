@@ -55,6 +55,7 @@ import {
   Radios,
   Select,
   Tag,
+  Table,
   Textarea,
   TextInput,
 } from '@ourfuturehealth/react-components';
@@ -71,6 +72,20 @@ function App() {
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
     { value: 'post', label: 'Post' },
+  ];
+  const symptomsHead = [
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ];
+  const symptomsRows = [
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
   ];
 
   return (
@@ -136,6 +151,7 @@ function App() {
         legend="Preferred contact method"
         name="preferred-contact-method"
       />
+      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
     </div>
   );
 }
@@ -189,6 +205,7 @@ The package also provides:
 - `Checkboxes`
 - `Radios`
 - `Icon`
+- `Table`
 
 ### ErrorSummary
 
