@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
-| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
+| [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the new Table APIs only if relevant |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment    | 🟡 Medium - API migration recommended    |
@@ -20,55 +20,80 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
-## Upgrading to React v0.8.0
+## Upgrading to v4.18.0 / React v0.17.0
 
 **Planned:** April 2026
 **Affected packages:**
 
-- `@ourfuturehealth/react-components` v0.8.0+
+- `@ourfuturehealth/toolkit` v4.18.0+
+- `@ourfuturehealth/react-components` v0.17.0+
 
-### Breaking Changes
+### Release Overview
 
-`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+This release does not introduce a supported breaking API change.
 
-### Migration Steps
+Toolkit consumers should review the refreshed `table` component responsive treatment and the expanded docs-site examples if they already use content tables.
 
-1. Remove any `spritePath` prop from `Icon` usage.
-2. Remove any `spritePath` field from `Card` icon configuration objects.
-3. Re-run visual checks for icon-bearing surfaces such as `Icon`, `Select`, `Card`, and `Checkboxes`.
+React consumers can now adopt the public `Table` component when they need a structured content table with optional caption, responsive stacking, row headers, numeric cells, and merged cells.
+
+### Table
+
+- Toolkit `table` now matches the current Figma responsive/mobile treatment more closely, including the stacked label/value layout and `2px` closing border
+- React now exposes `Table` as a public component with `caption`, `head`, `rows`, `responsive`, and `firstCellIsHeader` support
+- Storybook and docs-site examples now cover default, responsive, row-header, numeric, and merged-cell table usage
 
 #### React example
 
-**Before:**
-
 ```tsx
-<Icon name="Search" spritePath="/assets/icons/icon-sprite.svg" />
+import { Table } from '@ourfuturehealth/react-components';
 
-<Card
-  icon={{
-    name: 'Search',
-    spritePath: '/assets/icons/icon-sprite.svg',
-  }}
-/>
+<Table
+  caption="Symptoms and self-care"
+  head={[
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ]}
+  rows={[
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
+  ]}
+/>;
 ```
 
-**After:**
+#### Responsive example
 
 ```tsx
-<Icon name="Search" />
-
-<Card
-  icon={{
-    name: 'Search',
-  }}
+<Table
+  caption="Clinic availability by day"
+  responsive
+  head={[
+    { content: 'Day' },
+    { content: 'Morning clinic' },
+    { content: 'Afternoon clinic' },
+    { content: 'Notes' },
+  ]}
+  rows={[
+    [
+      { content: 'Monday' },
+      { content: 'Children' },
+      { content: 'Adults' },
+      { content: 'Walk-ins available' },
+    ],
+    [
+      { content: 'Tuesday' },
+      { content: 'Respiratory' },
+      { content: 'Diabetes' },
+      { content: 'Pre-booked only' },
+    ],
+  ]}
 />
 ```
-
-If an application previously passed `spritePath` in React, that prop should now be removed.
-
-### Toolkit reminder
-
-Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
 
 ## Upgrading to v4.9.0 / React v0.7.0
 

@@ -57,10 +57,25 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, Table, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
+  const symptomsHead = [
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ];
+  const symptomsRows = [
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
+  ];
+
   return (
     <div>
       <TextInput
@@ -70,6 +85,7 @@ function App() {
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
       />
+      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
   );
@@ -136,6 +152,7 @@ The React components package currently provides the following components:
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
+- `Table` - Structured content tables with caption, responsive stacking, numeric cells, row headers, and merged-cell support
 
 For complete component documentation and live examples, run Storybook locally from this repository:
 
