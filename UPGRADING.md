@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
 | [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
 | [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
 | [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
@@ -27,6 +28,49 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.20.0 / React v0.19.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.20.0+
+- `@ourfuturehealth/react-components` v0.19.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `contents-list` component to the current design-system treatment and introduces the first public React `ContentsList` component.
+
+- Toolkit consumers should review the refreshed contents-list spacing, marker treatment, and typography, especially where local overrides depend on the older styling.
+- Toolkit docs now show explicit default, current-in-middle, and all-links examples.
+- React consumers can now adopt the public `ContentsList` component when they need toolkit-parity navigation lists for small groups of related content pages.
+
+### Migration Steps
+
+1. Adopt the public React `ContentsList` component where you need toolkit-parity content navigation in React.
+2. Prefer the refreshed toolkit contents-list API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local contents-list overrides, especially around marker contrast, spacing, and current-item placement.
+
+#### React example
+
+**New in `react-v0.19.0`:**
+
+```tsx
+import { ContentsList } from '@ourfuturehealth/react-components';
+
+const items = [
+  { text: 'What is AMD?', current: true },
+  { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+];
+
+<ContentsList items={items} />;
+```
 
 ---
 ## Upgrading to v4.19.0 / React v0.18.0

@@ -57,37 +57,17 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Breadcrumb, Button, Table, TextInput } from '@ourfuturehealth/react-components';
+import { Button, ContentsList, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
-  const breadcrumbItems = [
-    { text: 'Health A to Z', href: '/health-a-to-z' },
-    { text: 'Conditions', href: '/health-a-to-z/conditions' },
-  ];
-  const symptomsHead = [
-    { content: 'Symptom' },
-    { content: 'Self-care' },
-  ];
-  const symptomsRows = [
-    [
-      { content: 'Dry eyes' },
-      { content: 'Use artificial tears' },
-    ],
-    [
-      { content: 'Headache' },
-      { content: 'Rest and keep hydrated' },
-    ],
-  ];
-
   return (
     <div>
-      <Breadcrumb
-        items={breadcrumbItems}
-        current={{
-          text: 'Eczema',
-          href: '/health-a-to-z/conditions/eczema',
-        }}
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
       />
       <TextInput
         id="name"
@@ -96,7 +76,6 @@ function App() {
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
       />
-      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
   );
@@ -170,6 +149,7 @@ The React components package currently provides the following components:
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
+- `ContentsList` - Navigation lists for small groups of related content pages
 - `Pagination` - Previous/next page navigation for a small related sequence
 
 For complete component documentation and live examples, run Storybook locally from this repository:
