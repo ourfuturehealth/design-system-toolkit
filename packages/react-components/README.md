@@ -48,6 +48,7 @@ import {
   CardDoDont,
   CharacterCount,
   Checkboxes,
+  ContentsList,
   DateInput,
   ErrorSummary,
   Fieldset,
@@ -89,6 +90,12 @@ function App() {
       />
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
+      />
       <Icon name="Search" size={24} />
       <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
       <LinkIcon href="/previous-step">Go back</LinkIcon>
@@ -195,6 +202,7 @@ The package also provides:
 - `Checkboxes`
 - `Radios`
 - `Icon`
+- `ContentsList`
 
 ### ErrorSummary
 

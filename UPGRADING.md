@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the new React `ContentsList` where needed |
 | [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes        | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
@@ -19,6 +20,47 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
 
 ---
+
+## Upgrading to v4.20.0 / React v0.19.0
+
+**Planned:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.20.0+
+- `@ourfuturehealth/react-components` v0.19.0+
+
+### Breaking Changes
+
+There are no breaking changes in this release.
+
+### Release Overview
+
+This release refreshes the toolkit `contents-list` component to the current Figma spacing, marker, and typography treatment, and introduces the first public React `ContentsList` component.
+
+- Toolkit consumers get clearer docs and example coverage for different current-page arrangements.
+- React consumers can now adopt `ContentsList` directly instead of building bespoke navigation lists.
+- Storybook and the toolkit docs page now teach the same pattern family more clearly.
+
+### Migration Steps
+
+1. If you use toolkit `contents-list`, recheck spacing and marker rendering against your current layouts.
+2. If you want React parity, adopt the new public `ContentsList` component.
+3. Re-run visual QA for pages that use contents lists, especially where the current page sits in the middle of the list.
+
+#### React example
+
+**New in `react-v0.19.0`:**
+
+```tsx
+import { ContentsList } from '@ourfuturehealth/react-components';
+
+const items = [
+  { text: 'What is AMD?', current: true },
+  { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+];
+
+<ContentsList items={items} />;
+```
 
 ## Upgrading to v4.10.0 / React v0.9.0
 
