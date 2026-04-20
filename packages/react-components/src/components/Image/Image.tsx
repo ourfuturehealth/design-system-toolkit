@@ -23,6 +23,12 @@ export const Image = ({
   ref,
   ...props
 }: ImageProps) => {
+  const hasCaption =
+    caption !== undefined &&
+    caption !== null &&
+    caption !== false &&
+    !(typeof caption === 'string' && caption === '');
+
   return (
     <figure
       {...props}
@@ -35,7 +41,7 @@ export const Image = ({
         alt={alt}
         {...(sizes && srcSet ? { sizes, srcSet } : undefined)}
       />
-      {caption !== undefined && caption !== null ? (
+      {hasCaption ? (
         <figcaption className="ofh-image__caption">{caption}</figcaption>
       ) : null}
     </figure>

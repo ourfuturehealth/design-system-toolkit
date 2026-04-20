@@ -42,6 +42,18 @@ describe('Image', () => {
     expect(document.querySelector('.ofh-image__caption')).toBeNull();
   });
 
+  it('omits the caption when an empty string is provided', () => {
+    render(
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg"
+        alt="Picture of allergic conjunctivitis"
+        caption=""
+      />,
+    );
+
+    expect(document.querySelector('.ofh-image__caption')).toBeNull();
+  });
+
   it('forwards ref and supports custom class names', () => {
     const ref = createRef<HTMLElement>();
 
