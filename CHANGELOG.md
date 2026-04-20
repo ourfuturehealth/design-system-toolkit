@@ -8,6 +8,12 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-20
 
+#### @ourfuturehealth/toolkit 4.12.1 (`toolkit-v4.12.1`)
+
+##### Changed
+
+- Updated the monorepo dependency overrides so toolkit release preparation resolves `lodash` and `lodash-es` to `4.18.1`, addressing the latest lodash code injection advisory in this repo
+
 #### @ourfuturehealth/toolkit 4.12.0 (`toolkit-v4.12.0`)
 
 ##### Changed

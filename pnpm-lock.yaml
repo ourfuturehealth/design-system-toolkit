@@ -26,7 +26,7 @@ overrides:
   picomatch@4.0.3: 4.0.4
   handlebars: 4.7.9
   lodash: 4.18.1
-  lodash-es: 4.18.0
+  lodash-es: 4.18.1
 
 importers:
 
@@ -4075,9 +4075,8 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.18.0:
-    resolution: {integrity: sha512-koAgswPPA+UTaPN64Etp+PGP+WT6oqOS2NMi5yDkMaiGw9qY4VxQbQF0mtKMyr4BlTznWyzePV5UpECTJQmSUA==}
-    deprecated: Bad release. Please use lodash-es@4.17.23 instead.
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash.clone@4.5.0:
     resolution: {integrity: sha512-GhrVeweiTD6uTmmn5hV/lzgCQhccwReIVRLHp7LT4SopOjqEZ5BbX8b5WWEtAKasjmy8hR7ZPwsYlxRCku5odg==}
@@ -10165,7 +10164,7 @@ snapshots:
     dependencies:
       p-locate: 6.0.0
 
-  lodash-es@4.18.0: {}
+  lodash-es@4.18.1: {}
 
   lodash.clone@4.5.0: {}
 
@@ -11661,7 +11660,7 @@ snapshots:
       axe-core: 4.11.1
       chalk: 5.6.2
       dom-accessibility-api: 0.5.16
-      lodash-es: 4.18.0
+      lodash-es: 4.18.1
       redent: 3.0.0
       vitest: 4.0.18(@types/node@25.2.3)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jsdom@28.0.0)(sass@1.97.3)(terser@5.46.0)
 
