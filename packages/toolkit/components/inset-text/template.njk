@@ -32,7 +32,7 @@
       {% if params.headingHtml %}
         <span>{{ params.headingHtml | safe }}</span>
       {% else %}
-        {{ params.heading | safe }}
+        {{ params.heading }}
       {% endif %}
     </h{{ headingLevel }}>
   {% endif %}
@@ -41,7 +41,7 @@
     <div class="ofh-inset-text__body">{{ contentHtml | safe }}</div>
   {% elif params.text %}
     <div class="ofh-inset-text__body">
-      <p>{{ params.text | safe }}</p>
+      <p>{{ params.text }}</p>
     </div>
   {% endif %}
 
@@ -51,7 +51,7 @@
         class="ofh-inset-text__action-link"
         href="{{ params.actionLink.href }}"
         {%- for attribute, value in params.actionLink.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-        {{ params.actionLink.text | safe }}
+        {{ params.actionLink.text }}
       </a>
     </p>
   {% endif %}

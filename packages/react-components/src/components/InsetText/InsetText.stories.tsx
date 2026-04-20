@@ -65,10 +65,12 @@ const htmlContentSource = `import { InsetText } from '@ourfuturehealth/react-com
 />;
 `;
 
-const actionLinkShapeSource = `type InsetTextActionLink = {
-  text: React.ReactNode;
+const actionLinkShapeSource = `import type { AnchorHTMLAttributes, ReactNode } from 'react';
+
+type InsetTextActionLink = {
+  text: ReactNode;
   href: string;
-  attributes?: React.AnchorHTMLAttributes<HTMLAnchorElement>;
+  attributes?: AnchorHTMLAttributes<HTMLAnchorElement>;
 };
 
 const actionLink = {
