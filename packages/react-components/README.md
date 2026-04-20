@@ -305,16 +305,26 @@ A card for short do and don’t recommendation lists.
 **Props:**
 
 - `type`: 'do' | 'dont'
+- `heading?`: React.ReactNode
+- `headingLevel?`: 1 | 2 | 3 | 4 | 5 | 6
+- `items`: `{ item: ReactNode }[]`
+- `classes?`: string
+- `className?`: string
+- `ref?`: React ref forwarded to the root card element
 
 ### TaskList
 
 A task list that reuses the shared `Tag` component for the status column.
+
+Commonly used props are listed below. `TaskListProps` also includes optional `classes` and `ref` props.
 
 **Props:**
 
 - `items`: `{ title: ReactNode; href?: string; hint?: ReactNode; status: TagProps; className?: string; titleClassName?: string; hintClassName?: string }[]`
 - `idPrefix?`: string
 - `className?`: string
+- `classes?`: styling override classes for the root task list element
+- `ref?`: React ref forwarded to the root task list element
 
 ### Icons
 
