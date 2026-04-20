@@ -4,7 +4,11 @@
 {% if params.href and params.text %}
   {% set mobileItem = { "href": params.href, "text": params.text } %}
 {% elif params.items and params.items.length %}
-  {% set mobileItem = params.items[params.items.length - 1] %}
+  {% for item in params.items | reverse %}
+    {% if not mobileItem and item.href and item.text %}
+      {% set mobileItem = item %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
 
 <nav class="ofh-breadcrumb{% if params.classes %} {{ params.classes }}{% endif %}" aria-label="Breadcrumb"
