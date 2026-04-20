@@ -11,6 +11,7 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
 | [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
 | [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
+| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
@@ -166,6 +167,57 @@ import {
 ### Toolkit reminder
 
 Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
+
+## Upgrading to React v0.8.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/react-components` v0.8.0+
+
+### Breaking Changes
+
+`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+
+### Migration Steps
+
+1. Remove any `spritePath` prop from `Icon` usage.
+2. Remove any `spritePath` field from `Card` icon configuration objects.
+3. Re-run visual checks for icon-bearing surfaces such as `Icon`, `Select`, `Card`, and `Checkboxes`.
+
+#### React example
+
+**Before:**
+
+```tsx
+<Icon name="Search" spritePath="/assets/icons/icon-sprite.svg" />
+
+<Card
+  icon={{
+    name: 'Search',
+    spritePath: '/assets/icons/icon-sprite.svg',
+  }}
+/>
+```
+
+**After:**
+
+```tsx
+<Icon name="Search" />
+
+<Card
+  icon={{
+    name: 'Search',
+  }}
+/>
+```
+
+If an application previously passed `spritePath` in React, that prop should now be removed.
+
+### Toolkit reminder
+
+Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
+
 ## Upgrading to v4.9.0 / React v0.7.0
 
 **Released:** April 2026
