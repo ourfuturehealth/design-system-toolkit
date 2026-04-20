@@ -10,7 +10,7 @@ This guide provides detailed migration instructions for upgrading between versio
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
 | [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
 | [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
-| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes | 🟢 Low - Adopt the public link family and canonical names for new usage |
 | [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
@@ -127,7 +127,7 @@ import {
 
 ### Breaking Changes
 
-`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+None.
 
 Toolkit macro paths and site routes now teach the canonical names below, while compatibility aliases remain available in this release:
 
@@ -147,10 +147,9 @@ This release introduces the public React link family and aligns the toolkit link
 
 ### Migration Steps
 
-1. Remove any `spritePath` prop from `Icon` usage and any `spritePath` field from `Card` icon configuration objects.
-2. Adopt the new public React `LinkAction`, `LinkIcon`, and `LinkSkip` components where you want React parity for the link family.
-3. Prefer the canonical toolkit macro paths and macro names when touching existing templates.
-4. Re-run manual QA for keyboard and focus behavior, especially for `LinkSkip`, `LinkIcon`, and any icon-bearing surfaces such as `Icon`, `Select`, and `Card`.
+1. Adopt the new public React `LinkAction`, `LinkIcon`, and `LinkSkip` components where you want React parity for the link family.
+2. Prefer the canonical toolkit macro paths and macro names when touching existing templates.
+3. Re-run manual QA for keyboard and focus behavior, especially for `LinkSkip`, `LinkIcon`, and any icon-bearing surfaces such as `Icon`, `Select`, and `Card`.
 
 #### React example
 
@@ -163,10 +162,6 @@ import {
   LinkSkip,
 } from '@ourfuturehealth/react-components';
 ```
-
-### Toolkit reminder
-
-Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
 
 ## Upgrading to React v0.8.0
 
