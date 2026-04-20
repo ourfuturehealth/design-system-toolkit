@@ -218,7 +218,7 @@ Find out more about the table component and when to use it in the [design system
       </td>
       <td role="cell" class="ofh-table__cell">
         <span class="ofh-table-responsive__heading">How much?</span>
-        <span class="ofh-table-responsive__content">2.5l</span>
+        <span class="ofh-table-responsive__content">2.5ml</span>
       </td>
       <td role="cell" class="ofh-table__cell">
         <span class="ofh-table-responsive__heading">How often?</span>

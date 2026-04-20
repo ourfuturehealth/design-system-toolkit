@@ -10,19 +10,19 @@
           "name": "header",
           "type": "string",
           "required": false,
-          "description": "Optional responsive label override for a cell. If omitted in a responsive table, the matching `head[].text` value is used when available."
+          "description": "Optional responsive label override for a cell. If omitted in a responsive table, the matching `head[].text` value is used when available, otherwise plain text is derived from `head[].html`."
         },
         {
           "name": "text",
           "type": "string",
-          "required": true,
-          "description": "Plain text cell content. If `html` is provided, `text` is ignored."
+          "required": false,
+          "description": "Plain text cell content. Optional when `html` is provided."
         },
         {
           "name": "html",
           "type": "string",
-          "required": true,
-          "description": "Trusted HTML cell content. If provided, it replaces `text`."
+          "required": false,
+          "description": "Trusted HTML cell content. Optional when `text` is provided."
         },
         {
           "name": "format",
@@ -34,13 +34,13 @@
           "name": "colspan",
           "type": "integer",
           "required": false,
-          "description": "How many columns this cell should span."
+          "description": "How many columns this cell should span. Supported in standard and responsive table markup."
         },
         {
           "name": "rowspan",
           "type": "integer",
           "required": false,
-          "description": "How many rows this cell should span."
+          "description": "How many rows this cell should span. Supported in standard and responsive table markup."
         }
       ]
     },
