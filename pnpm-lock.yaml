@@ -25,8 +25,8 @@ overrides:
   picomatch@2.3.1: 2.3.2
   picomatch@4.0.3: 4.0.4
   handlebars: 4.7.9
-  lodash: 4.18.0
-  lodash-es: 4.18.0
+  lodash: 4.18.1
+  lodash-es: 4.18.1
 
 importers:
 
@@ -4075,9 +4075,8 @@ packages:
     resolution: {integrity: sha512-gvVijfZvn7R+2qyPX8mAuKcFGDf6Nc61GdvGafQsHL0sBIxfKzA+usWn4GFC/bk+QdwPUD4kWFJLhElipq+0VA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  lodash-es@4.18.0:
-    resolution: {integrity: sha512-koAgswPPA+UTaPN64Etp+PGP+WT6oqOS2NMi5yDkMaiGw9qY4VxQbQF0mtKMyr4BlTznWyzePV5UpECTJQmSUA==}
-    deprecated: Bad release. Please use lodash-es@4.17.23 instead.
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash.clone@4.5.0:
     resolution: {integrity: sha512-GhrVeweiTD6uTmmn5hV/lzgCQhccwReIVRLHp7LT4SopOjqEZ5BbX8b5WWEtAKasjmy8hR7ZPwsYlxRCku5odg==}
@@ -4101,9 +4100,8 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
-  lodash@4.18.0:
-    resolution: {integrity: sha512-l1mfj2atMqndAHI3ls7XqPxEjV2J9ZkcNyHpoZA3r2T1LLwDB69jgkMWh71YKwhBbK0G2f4WSn05ahmQXVxupA==}
-    deprecated: Bad release. Please use lodash@4.17.21 instead.
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   loupe@3.2.1:
     resolution: {integrity: sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==}
@@ -7081,7 +7079,7 @@ snapshots:
       '@rushstack/terminal': 0.21.0(@types/node@25.2.3)
       '@rushstack/ts-command-line': 5.2.0(@types/node@25.2.3)
       diff: 8.0.3
-      lodash: 4.18.0
+      lodash: 4.18.1
       minimatch: 10.2.4
       resolve: 1.22.11
       semver: 7.5.4
@@ -8140,7 +8138,7 @@ snapshots:
       '@babel/core': 7.29.0
       find-cache-dir: 4.0.0
       schema-utils: 4.3.3
-      webpack: 5.105.1
+      webpack: 5.105.1(webpack-cli@5.1.4)
 
   babel-plugin-istanbul@6.1.1:
     dependencies:
@@ -8444,7 +8442,7 @@ snapshots:
     dependencies:
       chalk: 4.1.2
       date-fns: 2.30.0
-      lodash: 4.18.0
+      lodash: 4.18.1
       rxjs: 7.8.2
       shell-quote: 1.8.3
       spawn-command: 0.0.2
@@ -9454,7 +9452,7 @@ snapshots:
   i18n-js@4.5.2:
     dependencies:
       bignumber.js: 9.3.1
-      lodash: 4.18.0
+      lodash: 4.18.1
       make-plural: 7.5.0
 
   iconv-lite@0.6.3:
@@ -10166,7 +10164,7 @@ snapshots:
     dependencies:
       p-locate: 6.0.0
 
-  lodash-es@4.18.0: {}
+  lodash-es@4.18.1: {}
 
   lodash.clone@4.5.0: {}
 
@@ -10182,7 +10180,7 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
-  lodash@4.18.0: {}
+  lodash@4.18.1: {}
 
   loupe@3.2.1: {}
 
@@ -11320,7 +11318,7 @@ snapshots:
       schema-utils: 4.3.3
       serialize-javascript: 7.0.3
       terser: 5.46.0
-      webpack: 5.105.1
+      webpack: 5.105.1(webpack-cli@5.1.4)
 
   terser@5.46.0:
     dependencies:
@@ -11662,7 +11660,7 @@ snapshots:
       axe-core: 4.11.1
       chalk: 5.6.2
       dom-accessibility-api: 0.5.16
-      lodash-es: 4.18.0
+      lodash-es: 4.18.1
       redent: 3.0.0
       vitest: 4.0.18(@types/node@25.2.3)(@vitest/browser-playwright@4.0.18)(@vitest/ui@4.0.18)(jsdom@28.0.0)(sass@1.97.3)(terser@5.46.0)
 
