@@ -1,0 +1,89 @@
+/* ==========================================================================
+   COMPONENTS / #SEARCH INPUT
+   ========================================================================== */
+
+.ofh-search-input {
+  align-items: stretch;
+  display: flex;
+  width: 100%;
+}
+
+.ofh-search-input__field {
+  align-items: center;
+  background-color: $ofh-color-background-primary;
+  border-color: $ofh-color-border-input-default;
+  border-radius: $ofh-radius-4 0 0 $ofh-radius-4;
+  border-style: solid;
+  border-width: $ofh-stroke-weight-2 0 $ofh-stroke-weight-2 $ofh-stroke-weight-2;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: $ofh-size-12 $ofh-size-16;
+  position: relative;
+
+  &:focus-within {
+    border-radius: $ofh-radius-8 0 0 $ofh-radius-8;
+    box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus;
+    z-index: 1;
+  }
+}
+
+.ofh-search-input__input {
+  @include ofh-typography-responsive('paragraph-md');
+
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  color: $ofh-color-foreground-secondary;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+
+  &::placeholder {
+    color: $ofh-color-foreground-secondary;
+    opacity: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.ofh-search-input__button {
+  align-items: center;
+  background-color: $ofh-color-background-button-default;
+  border: 0;
+  border-radius: 0 $ofh-radius-4 $ofh-radius-4 0;
+  color: $ofh-color-foreground-primary-inverted;
+  display: inline-flex;
+  flex: 0 0 auto;
+  justify-content: center;
+  padding: $ofh-size-12;
+  position: relative;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover {
+    background-color: $ofh-color-background-button-hover;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $ofh-color-background-button-active;
+  }
+
+  &:focus {
+    @include ofh-focused-button;
+
+    border-radius: $ofh-radius-8;
+    outline-offset: $ofh-stroke-weight-4;
+    z-index: 1;
+  }
+}
+
+.ofh-search-input__button-icon {
+  color: currentColor;
+  display: block;
+}

@@ -1,0 +1,28 @@
+{% from 'search-input/macro.njk' import searchInput %}
+
+{{ searchInput({
+  "action": "/search/participants",
+  "method": "post",
+  "label": {
+    "text": "Search participants"
+  },
+  "input": {
+    "id": "participant-search",
+    "name": "query",
+    "value": "cohort",
+    "placeholder": "Search participants",
+    "attributes": {
+      "autocomplete": "off"
+    }
+  },
+  "button": {
+    "ariaLabel": "Search participants",
+    "attributes": {
+      "data-qa": "search-submit"
+    }
+  },
+  "classes": "custom-search-input",
+  "attributes": {
+    "data-track": "site-search"
+  }
+}) }}

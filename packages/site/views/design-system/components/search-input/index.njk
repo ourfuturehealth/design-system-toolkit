@@ -1,0 +1,36 @@
+{% set pageTitle = "Search input" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Search input when people need a compact, direct search control for finding specific content or records." %}
+{% set theme = "Input" %}
+{% set dateUpdated = "April 2026" %}
+{% set backlog_issue_id = "247" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  {{ designExample({
+    group: "components",
+    item: "search-input",
+    type: "default"
+  }) }}
+
+  <h2>When to use Search input</h2>
+  <p>Use Search input when people need to find specific content within a larger set of content, records, or searchable resources.</p>
+  <p>It works well when navigation alone is not enough to help people find what they need quickly, or when they may not know the exact location of the information they are looking for.</p>
+
+  <h2>When not to use Search input</h2>
+  <p>Do not use Search input when the available content is small and easy to browse, when filters or categories are the better navigation model, or when there are no backend search results to support the interaction.</p>
+
+  <h2>How to use Search input</h2>
+  <p>Give the field a clear accessible label that describes what people are searching. In v1 the label is visually hidden, so placeholder text is only supporting text and must not do the job of the label.</p>
+  <p>Keep the placeholder concise and focused on what can be searched, for example “Search” or “Search participants”.</p>
+  <p>Let people submit the search with the keyboard by pressing Enter, and make sure the icon-only button still has an accessible name such as “Search”.</p>
+  <p>Messages such as “No results found” belong to the search page or search results experience, not to the Search input component itself.</p>
+
+{% endblock %}

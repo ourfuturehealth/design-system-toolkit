@@ -1,0 +1,106 @@
+{
+  "params": [
+    {
+      "name": "action",
+      "type": "string",
+      "required": false,
+      "description": "Form action URL for the submitted search request."
+    },
+    {
+      "name": "method",
+      "type": "string",
+      "required": false,
+      "description": "Form method. Defaults to `get`."
+    },
+    {
+      "name": "label",
+      "type": "object",
+      "required": true,
+      "description": "Accessible label settings for the search field.",
+      "params": [
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name for the search field."
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "object",
+      "required": false,
+      "description": "Search field settings.",
+      "params": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Search field ID. Defaults to `search-input`."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Search field name. Defaults to `q`."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Initial search term value."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text shown in the field. Defaults to `Search`."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the search field."
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "object",
+      "required": false,
+      "description": "Submit button settings.",
+      "params": [
+        {
+          "name": "text",
+          "type": "string",
+          "required": false,
+          "description": "Accessible button label fallback when `button.ariaLabel` is not provided."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "description": "Accessible name for the icon-only submit button. Defaults to `Search`."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the submit button."
+        }
+      ]
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the root form element."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes for the root form element."
+    }
+  ]
+}
