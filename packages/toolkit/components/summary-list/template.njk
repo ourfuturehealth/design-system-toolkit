@@ -1,29 +1,43 @@
 {%- macro _link(action) %}
-  <a href="{{ action.href }}">
+  <a href="{{ action.href }}"{% if action.attributes %}{% for attribute, value in action.attributes %} {{attribute}}="{{value}}"{% endfor %}{% endif %}>
     {{ action.html | safe if action.html else action.text }}
     {%- if action.visuallyHiddenText -%}
-      <span class="ofh-u-visually-hidden"> {{ action.visuallyHiddenText }}</span>
+      <span class="ofh-u-visually-hidden">{{ action.visuallyHiddenText }}</span>
     {% endif -%}
   </a>
 {% endmacro -%}
-<dl class="ofh-summary-list {%- if params.classes %} {{ params.classes }}{% endif %}"{% for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+
+{% set summaryListClasses = 'ofh-summary-list' %}
+{% if params.padded != false %}
+  {% set summaryListClasses = summaryListClasses + ' ofh-summary-list--padded' %}
+{% else %}
+  {% set summaryListClasses = summaryListClasses + ' ofh-summary-list--compact' %}
+{% endif %}
+{% if params.noBorder and 'ofh-summary-list--no-border' not in (params.classes or '') %}
+  {% set summaryListClasses = summaryListClasses + ' ofh-summary-list--no-border' %}
+{% endif %}
+{% if params.classes %}
+  {% set summaryListClasses = summaryListClasses + ' ' + params.classes %}
+{% endif %}
+
+<dl class="{{ summaryListClasses }}"{% for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}>
   {% for row in params.rows %}
-    <div class="ofh-summary-list__row">
+    <div class="ofh-summary-list__row {%- if row.classes %} {{ row.classes }}{% endif %}">
       <dt class="ofh-summary-list__key {%- if row.key.classes %} {{ row.key.classes }}{% endif %}">
         {{ row.key.html | safe if row.key.html else row.key.text }}
       </dt>
       <dd class="ofh-summary-list__value {%- if row.value.classes %} {{ row.value.classes }}{% endif %}">
-        {{ row.value.html | indent(8) | trim | safe if row.value.html else row.value.text }}
+        {{ row.value.html | safe if row.value.html else row.value.text }}
       </dd>
       {% if row.actions.items %}
         <dd class="ofh-summary-list__actions {%- if row.actions.classes %} {{ row.actions.classes }}{% endif %}">
           {% if row.actions.items.length == 1 %}
-            {{ _link(row.actions.items[0]) | indent(12) | trim }}
+            {{ _link(row.actions.items[0]) | trim }}
           {% else %}
             <ul class="ofh-summary-list__actions-list">
               {% for action in row.actions.items %}
                 <li class="ofh-summary-list__actions-list-item">
-                  {{ _link(action) | indent(18) | trim }}
+                  {{ _link(action) | trim }}
                 </li>
               {% endfor %}
             </ul>

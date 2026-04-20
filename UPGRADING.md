@@ -8,8 +8,10 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
 | [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
-| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop and adopt canonical names for new usage |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes | 🟢 Low - Adopt the public link family and canonical names for new usage |
+| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
@@ -18,6 +20,63 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.12.0 / React v0.11.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.12.0+
+- `@ourfuturehealth/react-components` v0.11.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `summary-list` component to the current design-system treatment and introduces the first public React `SummaryList` component.
+
+- Toolkit consumers can now use the explicit `padded: false` and `noBorder: true` macro options instead of relying only on manual class combinations.
+- Existing toolkit templates that already apply `ofh-summary-list--no-border` continue to work in this release.
+- React consumers can now adopt the public `SummaryList` component instead of carrying local review-answer list markup.
+
+### Migration Steps
+
+1. Adopt the public React `SummaryList` where you need toolkit-parity summary rows in React.
+2. Prefer the explicit toolkit macro options for compact and no-border variants when touching existing Nunjucks templates.
+3. Re-run visual QA for stacked mobile/tablet rows and action-link labelling if you have local summary-list overrides.
+
+#### React example
+
+**New in `react-v0.11.0`:**
+
+```tsx
+import { SummaryList } from '@ourfuturehealth/react-components';
+```
+
+#### Toolkit example
+
+**Before (`toolkit-v4.11.0`):**
+
+```njk
+{{ summaryList({
+  classes: 'ofh-summary-list--no-border',
+  rows: rows
+}) }}
+```
+
+**After (`toolkit-v4.12.0`):**
+
+```njk
+{{ summaryList({
+  padded: false,
+  noBorder: true,
+  rows: rows
+}) }}
+```
 
 ---
 
@@ -68,7 +127,7 @@ import {
 
 ### Breaking Changes
 
-`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+None.
 
 Toolkit macro paths and site routes now teach the canonical names below, while compatibility aliases remain available in this release:
 
@@ -88,10 +147,9 @@ This release introduces the public React link family and aligns the toolkit link
 
 ### Migration Steps
 
-1. Remove any `spritePath` prop from `Icon` usage and any `spritePath` field from `Card` icon configuration objects.
-2. Adopt the new public React `LinkAction`, `LinkIcon`, and `LinkSkip` components where you want React parity for the link family.
-3. Prefer the canonical toolkit macro paths and macro names when touching existing templates.
-4. Re-run manual QA for keyboard and focus behavior, especially for `LinkSkip`, `LinkIcon`, and any icon-bearing surfaces such as `Icon`, `Select`, and `Card`.
+1. Adopt the new public React `LinkAction`, `LinkIcon`, and `LinkSkip` components where you want React parity for the link family.
+2. Prefer the canonical toolkit macro paths and macro names when touching existing templates.
+3. Re-run manual QA for keyboard and focus behavior, especially for `LinkSkip`, `LinkIcon`, and any icon-bearing surfaces such as `Icon`, `Select`, and `Card`.
 
 #### React example
 
@@ -105,27 +163,55 @@ import {
 } from '@ourfuturehealth/react-components';
 ```
 
+## Upgrading to React v0.8.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/react-components` v0.8.0+
+
+### Breaking Changes
+
+`@ourfuturehealth/react-components` removes the `spritePath` prop from the public `Icon` API and from `Card` icon configuration. React icons now always render from bundled toolkit SVG data.
+
+### Migration Steps
+
+1. Remove any `spritePath` prop from `Icon` usage.
+2. Remove any `spritePath` field from `Card` icon configuration objects.
+3. Re-run visual checks for icon-bearing surfaces such as `Icon`, `Select`, `Card`, and `Checkboxes`.
+
+#### React example
+
+**Before:**
+
+```tsx
+<Icon name="Search" spritePath="/assets/icons/icon-sprite.svg" />
+
+<Card
+  icon={{
+    name: 'Search',
+    spritePath: '/assets/icons/icon-sprite.svg',
+  }}
+/>
+```
+
+**After:**
+
+```tsx
+<Icon name="Search" />
+
+<Card
+  icon={{
+    name: 'Search',
+  }}
+/>
+```
+
+If an application previously passed `spritePath` in React, that prop should now be removed.
+
 ### Toolkit reminder
 
 Toolkit/Nunjucks icon consumers are unchanged. They must still serve `icon-sprite.svg` at a public URL, default `/assets/icons/icon-sprite.svg`, or override that URL with `spritePath`.
-
-#### Toolkit example
-
-**Before (`toolkit-v4.9.0`):**
-
-```njk
-{% from "components/action-link/macro.njk" import actionLink %}
-{% from "components/back-link/macro.njk" import backLink %}
-{% from "components/skip-link/macro.njk" import skipLink %}
-```
-
-**After (`toolkit-v4.10.0`):**
-
-```njk
-{% from "components/link-action/macro.njk" import linkAction %}
-{% from "components/link-icon/macro.njk" import linkIcon %}
-{% from "components/link-skip/macro.njk" import linkSkip %}
-```
 
 ## Upgrading to v4.9.0 / React v0.7.0
 

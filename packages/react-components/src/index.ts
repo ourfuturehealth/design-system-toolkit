@@ -85,3 +85,11 @@ export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
+
+export { SummaryList } from './components/SummaryList';
+export type {
+  SummaryListActionItem,
+  SummaryListContent,
+  SummaryListProps,
+  SummaryListRow,
+} from './components/SummaryList';

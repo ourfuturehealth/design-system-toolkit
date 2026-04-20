@@ -7,19 +7,13 @@
  * https://github.com/alphagov/govuk-frontend
  *
  * 1. Required to allow us to wrap words that overflow.
- * 2. Reset default user agent styles
- * 3. Automatic wrapping for unbreakable text (e.g. URLs)
- * 4. Fallback for older browsers only
+ * 2. Reset default user agent styles.
+ * 3. Automatic wrapping for unbreakable text (e.g. URLs).
+ * 4. Fallback for older browsers only.
  */
 
 .ofh-summary-list {
   @include ofh-font($size: 'paragraph-md');
-
-  @include mq($from: tablet) {
-    display: table;
-    table-layout: fixed; /* [1] */
-    width: 100%;
-  }
 
   margin: 0; /* [2] */
 
@@ -27,13 +21,21 @@
 }
 
 .ofh-summary-list__row {
-  @include mq($until: tablet) {
-    border-bottom: 1px solid $ofh-color-border-primary;
-    margin-bottom: $ofh-size-16;
-  }
+  border-bottom: 1px solid $ofh-color-border-primary;
+  margin: 0; /* [2] */
+  padding-block: $ofh-size-16;
 
   @include mq($from: tablet) {
-    display: table-row;
+    display: grid;
+    gap: $ofh-size-24;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 0.75fr);
+    padding-block: $ofh-size-16;
+  }
+}
+
+.ofh-summary-list--compact .ofh-summary-list__row {
+  @include mq($from: tablet) {
+    padding-block: $ofh-size-8;
   }
 }
 
@@ -41,32 +43,13 @@
 .ofh-summary-list__value,
 .ofh-summary-list__actions {
   margin: 0; /* [2] */
-  vertical-align: top;
-
-  @include mq($from: tablet) {
-    border-bottom: 1px solid $ofh-color-border-primary;
-    display: table-cell;
-    padding-bottom: $ofh-size-8;
-    padding-right: $ofh-size-24;
-    padding-top: $ofh-size-8;
-  }
-}
-
-.ofh-summary-list__actions {
-  margin-bottom: $ofh-size-16;
-
-  @include mq($from: tablet) {
-    padding-right: 0;
-    text-align: right;
-    width: 20%;
-  }
-}
-
-.ofh-summary-list__key,
-.ofh-summary-list__value {
-  /* [3] */
   overflow-wrap: break-word;
+  vertical-align: top;
   word-wrap: break-word; /* [4] */
+
+  @include mq($from: tablet) {
+    min-width: 0;
+  }
 }
 
 .ofh-summary-list__key {
@@ -75,17 +58,13 @@
   margin-bottom: $ofh-size-4;
 
   @include mq($from: tablet) {
-    width: 30%;
+    margin-bottom: 0;
   }
 }
 
 .ofh-summary-list__value {
-  @include mq($until: tablet) {
-    margin-bottom: $ofh-size-16;
-  }
-
   @include mq($from: tablet) {
-    width: 50%;
+    margin-bottom: 0;
   }
 }
 
@@ -97,33 +76,39 @@
   margin-bottom: 0;
 }
 
+.ofh-summary-list__actions {
+  @include ofh-responsive-margin(16, 'top');
+
+  @include mq($from: tablet) {
+    margin-top: 0;
+    text-align: right;
+  }
+}
+
+.ofh-summary-list__actions a {
+  display: inline-block;
+}
+
 .ofh-summary-list__actions-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 $ofh-size-8;
+  list-style: none;
   margin: 0; /* [2] */
   padding: 0; /* [2] */
-  width: 100%;
 }
 
 .ofh-summary-list__actions-list-item {
-  display: inline;
-  margin-right: $ofh-size-8;
-  padding-right: $ofh-size-8;
+  display: inline-flex;
 }
 
 .ofh-summary-list__actions-list-item:not(:last-child) {
   border-right: 1px solid $ofh-color-border-primary;
-}
-
-.ofh-summary-list__actions-list-item:last-child {
-  border: 0;
-  margin-right: 0;
-  padding-right: 0;
+  padding-right: $ofh-size-8;
 }
 
 .ofh-summary-list--no-border {
-  .ofh-summary-list__key,
-  .ofh-summary-list__value,
-  .ofh-summary-list__actions,
   .ofh-summary-list__row {
-    border: 0;
+    border-bottom: 0;
   }
 }
