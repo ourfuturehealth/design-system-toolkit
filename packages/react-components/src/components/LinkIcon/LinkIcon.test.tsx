@@ -7,9 +7,11 @@ import { LinkIcon } from './LinkIcon';
 
 describe('LinkIcon', () => {
   it('renders the default left icon pattern', () => {
-    const { container } = render(<LinkIcon href="#back">Go back</LinkIcon>);
+    const { container } = render(
+      <LinkIcon href="#overview">Back to overview</LinkIcon>,
+    );
 
-    const link = screen.getByRole('link', { name: /go back/i });
+    const link = screen.getByRole('link', { name: /back to overview/i });
     const icon = container.querySelector('svg');
     const wrapper = container.firstElementChild;
 
@@ -24,12 +26,12 @@ describe('LinkIcon', () => {
 
   it('renders the right icon pattern with the launch icon by default', () => {
     const { container } = render(
-      <LinkIcon href="https://example.com" iconPosition="right">
-        Open external service
+      <LinkIcon href="https://example.com/guidance" iconPosition="right">
+        External guidance
       </LinkIcon>,
     );
 
-    const link = screen.getByRole('link', { name: /open external service/i });
+    const link = screen.getByRole('link', { name: /external guidance/i });
     const children = Array.from(link.children);
     const wrapper = container.firstElementChild;
 
@@ -41,8 +43,8 @@ describe('LinkIcon', () => {
 
   it('supports medium size and explicit icon names', () => {
     const { container } = render(
-      <LinkIcon href="#back" iconName="ChevronLeft" size="medium">
-        Go back
+      <LinkIcon href="#search" iconName="Search" size="medium">
+        Search site
       </LinkIcon>,
     );
 
@@ -56,7 +58,7 @@ describe('LinkIcon', () => {
   it('supports icon-only colour overrides', () => {
     const { container } = render(
       <LinkIcon href="#search" iconName="Search" iconColor="#005eb8">
-        Search results
+        Search site
       </LinkIcon>,
     );
 
@@ -65,17 +67,22 @@ describe('LinkIcon', () => {
     expect(icon).toHaveStyle({ color: 'rgb(0, 94, 184)' });
   });
 
-  it('opens in a new window when requested', () => {
+  it('preserves caller rel tokens when opening in a new window', () => {
     render(
-      <LinkIcon href="https://example.com" openInNewWindow>
-        Open external service
+      <LinkIcon
+        href="https://example.com/guidance"
+        iconPosition="right"
+        openInNewWindow
+        rel="nofollow"
+      >
+        External guidance
       </LinkIcon>,
     );
 
-    const link = screen.getByRole('link', { name: /open external service/i });
+    const link = screen.getByRole('link', { name: /external guidance/i });
 
     expect(link).toHaveAttribute('target', '_blank');
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(link).toHaveAttribute('rel', 'nofollow noopener noreferrer');
   });
 
   it('handles clicks', async () => {
@@ -83,8 +90,8 @@ describe('LinkIcon', () => {
     const user = userEvent.setup();
 
     render(
-      <LinkIcon href="#back" onClick={onClick}>
-        Go back
+      <LinkIcon href="#overview" onClick={onClick}>
+        Back to overview
       </LinkIcon>,
     );
 
@@ -97,8 +104,8 @@ describe('LinkIcon', () => {
     const ref = createRef<HTMLAnchorElement>();
 
     render(
-      <LinkIcon ref={ref} href="#back">
-        Go back
+      <LinkIcon ref={ref} href="#overview">
+        Back to overview
       </LinkIcon>,
     );
 
@@ -106,7 +113,9 @@ describe('LinkIcon', () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<LinkIcon href="#back">Go back</LinkIcon>);
+    const { container } = render(
+      <LinkIcon href="#overview">Back to overview</LinkIcon>,
+    );
 
     const results = await axe(container);
 

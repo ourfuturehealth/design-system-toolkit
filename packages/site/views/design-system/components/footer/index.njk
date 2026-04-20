@@ -1,10 +1,10 @@
 {% set pageTitle = "Footer" %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Components" %}
-{% set pageDescription = "Use the footer to show users they are on an NHS service and to help them find links they expect at the bottom of our pages." %}
+{% set pageDescription = "Use the footer to show service support links, legal information, and optional social links at the bottom of a page." %}
 {% set theme = "Navigation" %}
-{% set dateUpdated = "May 2020" %}
-{% set backlog_issue_id = "15" %}
+{% set dateUpdated = "April 2026" %}
+{% set backlog_issue_id = "337" %}
 
 {% extends "app-layout.njk" %}
 
@@ -24,16 +24,35 @@
   <p>Use the footer at the bottom of every page of your service.</p>
 
   <h2 id="how-to-use-the-footer">How to use the footer</h2>
+  <p>Add only the links users expect to find in the footer, such as support, contact, privacy, and accessibility information.</p>
+  <p>Use the small-print and legal text areas for concise organisation details. The default footer keeps support links text-only, but you can opt into shared link icons when a directional or external cue helps users understand where a link leads.</p>
+  <p>Only include the social section when those channels are part of the service experience and are actively maintained.</p>
 
-  <p>Add links to meta information about your service, such as:
-  <ul>
-    <li>accessibility</li>
-    <li>contact details</li>
-    <li>cookies</li>
-    <li>privacy policy</li>
-    <li>terms and conditions</li>
-  </ul>
+  <h3 id="footer-links-with-icons">Footer links with icons</h3>
+  <p>Use link icons sparingly in the footer. They can help when you need to distinguish between text-only support links, back-navigation, and links that open external guidance.</p>
 
-  <p>Avoid adding lots of links. Keep them to a minimum.</p>
+  {{ designExample({
+    group: "components",
+    item: "footer",
+    type: "link-icons"
+  }) }}
+
+  <h3 id="minimal-footer">Minimal footer</h3>
+  <p>If your service only needs a small set of support links, you can use the simpler footer without legal copy or social links.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "footer",
+    type: "minimal"
+  }) }}
+
+  <h3 id="legal-and-social-footer">Footer with legal and social sections only</h3>
+  <p>Use this variant when the service needs organisation details and social channels, but does not need a support-link list or a separate small-print line.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "footer",
+    type: "legal-and-social"
+  }) }}
 
 {% endblock %}

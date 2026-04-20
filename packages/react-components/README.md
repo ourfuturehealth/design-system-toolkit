@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.11.0/ourfuturehealth-react-components-0.11.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.12.0/ourfuturehealth-react-components-0.12.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -53,6 +53,7 @@ import {
   ErrorSummary,
   Expander,
   Fieldset,
+  Footer,
   Icon,
   LinkAction,
   LinkIcon,
@@ -128,6 +129,13 @@ function App() {
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
         <TextInput id="phone" label="Phone number" type="tel" width="two-thirds" />
       </Fieldset>
+      <Footer
+        links={[
+          { href: '#privacy', label: 'Privacy' },
+          { href: '#careers', label: 'Careers' },
+        ]}
+        smallPrint="© Our Future Health 2026"
+      />
       <TextInput id="name" label="Your name" hint="Enter your full name" inputWidth={20} />
       <Textarea id="notes" label="Additional notes" />
       <Select
@@ -215,6 +223,7 @@ A form input component with toolkit-parity label, hint, error, and width support
 The package also provides:
 
 - `Fieldset`
+- `Footer`
 - `Textarea`
 - `Select`
 - `DateInput`

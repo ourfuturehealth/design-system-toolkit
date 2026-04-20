@@ -1,11 +1,13 @@
 import React from 'react';
+import type { IconProps } from '../Icon';
 import { Icon } from '../Icon';
+import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import { joinClassNames } from '../_internal/joinClassNames';
 
 export type LinkIconSize = 'small' | 'medium';
 export type LinkIconIconPosition = 'left' | 'right';
 
-const defaultIconNames: Record<LinkIconIconPosition, string> = {
+const defaultIconNames: Record<LinkIconIconPosition, IconProps['name']> = {
   left: 'ChevronLeft',
   right: 'Launch',
 };
@@ -16,18 +18,19 @@ const iconSizes: Record<LinkIconSize, 16 | 24> = {
 };
 
 export interface LinkIconProps
-  extends Omit<
-    React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    'children' | 'ref'
-  > {
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'ref'> {
   children: React.ReactNode;
   href: string;
   iconColor?: string;
-  iconName?: string;
+  iconName?: IconProps['name'];
   iconPosition?: LinkIconIconPosition;
+  leftIconName?: IconProps['name'];
   openInNewWindow?: boolean;
-  size?: LinkIconSize;
   ref?: React.Ref<HTMLAnchorElement>;
+  rightIconName?: IconProps['name'];
+  showIconLeft?: boolean;
+  showIconRight?: boolean;
+  size?: LinkIconSize;
 }
 
 export const LinkIcon = ({
@@ -36,15 +39,26 @@ export const LinkIcon = ({
   iconColor,
   iconName,
   iconPosition = 'left',
+  leftIconName,
   openInNewWindow = false,
   size = 'small',
   className = '',
   ref,
   rel,
+  rightIconName,
+  showIconLeft,
+  showIconRight,
   target,
   ...props
 }: LinkIconProps) => {
-  const resolvedIconName = iconName ?? defaultIconNames[iconPosition];
+  const resolvedShowIconLeft = showIconLeft ?? iconPosition === 'left';
+  const resolvedShowIconRight = showIconRight ?? iconPosition === 'right';
+  const resolvedLeftIconName =
+    leftIconName ??
+    (iconPosition === 'left' && iconName ? iconName : defaultIconNames.left);
+  const resolvedRightIconName =
+    rightIconName ??
+    (iconPosition === 'right' && iconName ? iconName : defaultIconNames.right);
   const resolvedIconSize = iconSizes[size];
   const rootClassName = joinClassNames(
     'ofh-link-icon',
@@ -52,7 +66,7 @@ export const LinkIcon = ({
     `ofh-link-icon--icon-${iconPosition}`,
     className,
   );
-  const resolvedRel = openInNewWindow ? 'noopener noreferrer' : rel;
+  const resolvedRel = mergeRelTokens(rel, openInNewWindow);
   const resolvedTarget = openInNewWindow ? '_blank' : target;
 
   return (
@@ -65,18 +79,18 @@ export const LinkIcon = ({
         rel={resolvedRel}
         target={resolvedTarget}
       >
-        {iconPosition === 'left' ? (
+        {resolvedShowIconLeft ? (
           <Icon
-            name={resolvedIconName}
+            name={resolvedLeftIconName}
             size={resolvedIconSize}
             className="ofh-link-icon__icon"
             color={iconColor}
           />
         ) : null}
         <span className="ofh-link-icon__text">{children}</span>
-        {iconPosition === 'right' ? (
+        {resolvedShowIconRight ? (
           <Icon
-            name={resolvedIconName}
+            name={resolvedRightIconName}
             size={resolvedIconSize}
             className="ofh-link-icon__icon"
             color={iconColor}

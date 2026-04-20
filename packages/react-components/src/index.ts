@@ -43,6 +43,14 @@ export type { DetailsProps } from './components/Details';
 export { Expander } from './components/Expander';
 export type { ExpanderProps } from './components/Expander';
 
+export { Footer } from './components/Footer';
+export type {
+  FooterLinkItem,
+  FooterProps,
+  FooterSocialLinkItem,
+  FooterSocialPlatform,
+} from './components/Footer';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 

@@ -8,6 +8,25 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-20
 
+#### @ourfuturehealth/toolkit 4.13.0 (`toolkit-v4.13.0`)
+
+##### Changed
+
+- Refreshed the toolkit `footer` component to the current design-system treatment, including responsive main/social spacing, optional legal and social sections, and text-only support links by default
+- Composed footer support links from the shared `link-icon` pattern so directional and external cues can be enabled with footer data instead of bespoke markup, and aligned the footer accent rule to the active theme tokens
+- Expanded the footer macro, docs page, macro options, and README guidance to cover minimal, icon-led support-link, and legal-plus-social variants while preserving legacy `URL` and `copyright` compatibility
+
+#### @ourfuturehealth/react-components 0.12.0 (`react-v0.12.0`)
+
+##### Added
+
+- First public React `Footer` component with toolkit-parity support links, small print, legal copy, optional social links, and icon-aware footer link items
+- Storybook coverage and unit/accessibility tests for default, minimal, icon-led support-link, and legal-plus-social footer variants
+
+##### Changed
+
+- Simplified the React footer Storybook controls and added participant/research theme switching so reviewers and consumers can explore curated footer configurations without editing raw nested data structures
+
 #### @ourfuturehealth/toolkit 4.12.1 (`toolkit-v4.12.1`)
 
 ##### Changed

@@ -4,27 +4,137 @@
       "name": "links",
       "type": "array",
       "required": false,
-      "description": "Contains an array of footer link items.",
+      "description": "Array of footer link items.",
       "params": [
         {
           "name": "url",
           "type": "string",
           "required": false,
-          "description": "Href attribute for the footer link item."
+          "description": "Href for the footer link item. The legacy `URL` key is also supported."
         },
         {
           "name": "label",
           "type": "string",
           "required": true,
-          "description": "The label of for the footer link item."
+          "description": "Visible label for the footer link item."
+        },
+        {
+          "name": "external",
+          "type": "boolean",
+          "required": false,
+          "description": "Adds a right-side launch icon for external links."
+        },
+        {
+          "name": "iconName",
+          "type": "string",
+          "required": false,
+          "description": "Optional shared icon name for the footer link. Defaults to `ChevronLeft` for left icons and `Launch` for right icons."
+        },
+        {
+          "name": "iconPosition",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon placement for the footer link. Use `left` or `right`."
+        },
+        {
+          "name": "iconLeftName",
+          "type": "string",
+          "required": false,
+          "description": "Optional explicit icon name for the left side of the footer link."
+        },
+        {
+          "name": "iconRightName",
+          "type": "string",
+          "required": false,
+          "description": "Optional explicit icon name for the right side of the footer link."
+        },
+        {
+          "name": "showIconLeft",
+          "type": "boolean",
+          "required": false,
+          "description": "Forces the left icon on or off for the footer link."
+        },
+        {
+          "name": "showIconRight",
+          "type": "boolean",
+          "required": false,
+          "description": "Forces the right icon on or off for the footer link."
+        },
+        {
+          "name": "iconColor",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon-only colour override for the footer link."
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "description": "Optional icon/text size for the footer link. Use `small` or `medium`."
+        },
+        {
+          "name": "openInNewWindow",
+          "type": "boolean",
+          "required": false,
+          "description": "Opens the link in a new window and adds `rel=\"noopener noreferrer\"`."
         }
       ]
+    },
+    {
+      "name": "smallPrint",
+      "type": "string",
+      "required": false,
+      "description": "Small-print line shown below the support links. Set it to an empty string or `null` to hide it."
     },
     {
       "name": "copyright",
       "type": "string",
       "required": false,
-      "description": "Optional text for the copyright notice in the footer."
+      "description": "Backward-compatible alias for `smallPrint`."
+    },
+    {
+      "name": "legalText",
+      "type": "string",
+      "required": false,
+      "description": "Additional legal copy shown below the small-print line."
+    },
+    {
+      "name": "socialLabel",
+      "type": "string",
+      "required": false,
+      "description": "Optional label shown before the social links. Defaults to `Follow us`."
+    },
+    {
+      "name": "socialLinks",
+      "type": "array",
+      "required": false,
+      "description": "Array of social link items.",
+      "params": [
+        {
+          "name": "platform",
+          "type": "string",
+          "required": true,
+          "description": "One of `linkedin`, `x`, `facebook`, `youtube`, `instagram`, or `tiktok`."
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Href for the social link."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label override for the social link."
+        },
+        {
+          "name": "openInNewWindow",
+          "type": "boolean",
+          "required": false,
+          "description": "Opens the social link in a new window."
+        }
+      ]
     },
     {
       "name": "classes",

@@ -1,23 +1,27 @@
 {% from '../icon/macro.njk' import icon %}
 
-{% set iconPosition = params.iconPosition if params.iconPosition else 'left' %}
-{% set iconName = params.iconName if params.iconName else ('Launch' if iconPosition == 'right' else 'ChevronLeft') %}
-{% set iconColor = params.iconColor if params.iconColor else '' %}
 {% set size = params.size if params.size else 'small' %}
+{% set iconPosition = params.iconPosition if params.iconPosition else 'left' %}
+{% set showIconLeft = params.showIconLeft if params.showIconLeft is defined else (iconPosition == 'left') %}
+{% set showIconRight = params.showIconRight if params.showIconRight is defined else (iconPosition == 'right') %}
+{% set leftIconName = params.iconLeftName if params.iconLeftName else (params.iconName if params.iconName and iconPosition == 'left' else 'ChevronLeft') %}
+{% set rightIconName = params.iconRightName if params.iconRightName else (params.iconName if params.iconName and iconPosition == 'right' else 'Launch') %}
+{% set iconColor = params.iconColor if params.iconColor else '' %}
 {% set iconSize = 24 if size == 'medium' else 16 %}
 {% set textContent = params.html if params.html else (params.text if params.text else '') %}
+{% set reservedAttributes = ['href', 'target', 'rel', 'class'] %}
 
 <div class="ofh-link-icon ofh-link-icon--{{ size }} ofh-link-icon--icon-{{ iconPosition }}{%- if params.classes %} {{ params.classes }}{% endif %}">
   <a class="ofh-link-icon__link"
     href="{% if params.href %}{{ params.href }}{% else %}#{% endif %}"
     {%- if params.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
-    {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-    {%- if iconPosition == 'left' %}
-      {{ icon({ "name": iconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
+    {%- for attribute, value in params.attributes %}{% if attribute not in reservedAttributes %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}>
+    {%- if showIconLeft %}
+      {{ icon({ "name": leftIconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
     {%- endif %}
     <span class="ofh-link-icon__text">{{ params.html | safe if params.html else textContent }}</span>
-    {%- if iconPosition == 'right' %}
-      {{ icon({ "name": iconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
+    {%- if showIconRight %}
+      {{ icon({ "name": rightIconName, "size": iconSize, "color": iconColor, "classes": "ofh-link-icon__icon" }) }}
     {%- endif %}
   </a>
 </div>
