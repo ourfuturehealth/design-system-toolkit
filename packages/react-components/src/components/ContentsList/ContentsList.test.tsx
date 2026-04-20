@@ -52,6 +52,21 @@ describe('ContentsList', () => {
     expect(link).toHaveAttribute('data-track', 'contents-list-link');
   });
 
+  it('renders plain text when a non-current item is missing href at runtime', () => {
+    render(
+      <ContentsList
+        items={[
+          {
+            text: 'Symptoms',
+          } as ContentsListItem,
+        ]}
+      />,
+    );
+
+    expect(screen.queryByRole('link', { name: 'Symptoms' })).not.toBeInTheDocument();
+    expect(screen.getByText('Symptoms').tagName).toBe('SPAN');
+  });
+
   it('forwards refs and merges classes with className', () => {
     const ref = { current: null as HTMLElement | null };
 

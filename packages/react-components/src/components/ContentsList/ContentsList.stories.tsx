@@ -86,12 +86,19 @@ const items = [
 <ContentsList items={items} />;
 `;
 
-const itemsShapeExample = `type ContentsListItem = {
+const itemsShapeExample = `type ContentsListCurrentItem = {
   text: React.ReactNode;
-  href?: string;
-  current?: boolean;
+  current: true;
+};
+
+type ContentsListLinkedItem = {
+  text: React.ReactNode;
+  href: string;
+  current?: false;
   anchorProps?: Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'children' | 'href'>;
 };
+
+type ContentsListItem = ContentsListCurrentItem | ContentsListLinkedItem;
 `;
 
 const defaultSource = `import { ContentsList } from '@ourfuturehealth/react-components';
