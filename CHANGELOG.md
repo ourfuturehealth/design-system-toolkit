@@ -8,12 +8,6 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-20
 
-#### @ourfuturehealth/toolkit 4.12.1 (`toolkit-v4.12.1`)
-
-##### Changed
-
-- Updated the monorepo dependency overrides so toolkit release preparation resolves `lodash` and `lodash-es` to `4.18.1`, addressing the latest lodash code injection advisory in this repo
-
 #### @ourfuturehealth/toolkit 4.13.0 (`toolkit-v4.13.0`)
 
 ##### Changed
@@ -32,6 +26,12 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 ##### Changed
 
 - Simplified the React footer Storybook controls and added participant/research theme switching so reviewers and consumers can explore curated footer configurations without editing raw nested data structures
+
+#### @ourfuturehealth/toolkit 4.12.1 (`toolkit-v4.12.1`)
+
+##### Changed
+
+- Updated the monorepo dependency overrides so toolkit release preparation resolves `lodash` and `lodash-es` to `4.18.1`, addressing the latest lodash code injection advisory in this repo
 
 #### @ourfuturehealth/toolkit 4.12.0 (`toolkit-v4.12.0`)
 
