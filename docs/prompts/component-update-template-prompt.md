@@ -557,6 +557,10 @@ it('should be keyboard accessible', async () => {
 - ✅ Auto-generated prop table (via TypeScript)
 - ✅ Story controls that are ergonomic and honest about what the component actually supports
 - ✅ Example coverage that is intentionally compared against the docs site so one surface does not become much richer than the other
+- ✅ A Docs page that teaches the actual React API in plain language
+- ✅ A realistic `Default` story
+- ✅ A `Builder` story when interactive stakeholder-friendly controls add value
+- ✅ Showcase stories that are intentionally non-interactive when they exist to demonstrate fixed examples or states
 
 **Story Pattern:**
 
@@ -592,17 +596,34 @@ const meta: Meta<typeof {ComponentName}> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Individual variant stories
+// Realistic default story
 export const Default: Story = {
-  args: { variant: 'default' },
+  args: {
+    // realistic props
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
 };
 
-export const Variant1: Story = {
-  args: { variant: 'variant1' },
+// Builder story for stakeholder-friendly interaction
+export const Builder: Story = {
+  args: {
+    // friendly story-only args and realistic defaults
+  },
+  parameters: {
+    controls: {
+      include: [
+        // only the friendly Builder args and any genuinely simple real props
+      ],
+    },
+  },
 };
 
-// Demo stories
-export const AllVariants: Story = {
+// Showcase stories
+export const VariantShowcase: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <{ComponentName} variant="variant1">Variant 1</{ComponentName}>
@@ -610,27 +631,9 @@ export const AllVariants: Story = {
       <{ComponentName} variant="variant3">Variant 3</{ComponentName}>
     </div>
   ),
-};
-
-export const InForm: Story = {
-  render: () => (
-    <form onSubmit={(e) => e.preventDefault()}>
-      {/* Real-world usage example */}
-    </form>
-  ),
-};
-
-export const KeyboardNavigation: Story = {
-  render: () => (
-    <div>
-      {/* Demo keyboard interaction patterns */}
-    </div>
-  ),
   parameters: {
-    docs: {
-      description: {
-        story: 'Press Tab to focus, Enter/Space to activate.',
-      },
+    controls: {
+      disable: true,
     },
   },
 };
@@ -648,14 +651,22 @@ Review the component's user-facing documentation surfaces and make sure they exp
   - `interactive single-component example`
   - `showcase/comparison story`
   - `behavior/demo story`
+- Prefer this teaching shape unless there is a strong reason not to:
+  - `Docs` page teaches the real React API and how to consume the component
+  - `Default` story shows a realistic example
+  - `Builder` story is the main interactive controls surface when interactive controls add value
+  - other stories are fixed showcase examples with controls disabled
 - Controls rule:
-  - keep controls enabled for `interactive single-component example` stories where the controls map cleanly to the rendered output
+  - keep controls enabled for the `Builder` story or another true `interactive single-component example` story where the controls map cleanly to the rendered output
   - disable controls for `showcase/comparison` or `behavior/demo` stories when controls would be misleading or do not control the rendered output meaningfully
 - For structured or nested props, do not default to raw JSON editing when a clearer control model is available
   - examples: `tag`, `icon`, `dismissButton`, `actionLink`, `metadataItems`
   - when the story only needs a stable subset of that object shape, add story-only args such as `tagText`, `tagVariant`, `iconName`, `iconSize`, `actionHref`, or similar and map them to the real prop in `render`
   - hide the raw object control for that story when the story-only controls are the intended interaction path
   - only keep raw object editing visible when the JSON shape itself is what consumers need to learn
+- Do not let story-only helper args masquerade as real component props on the Docs page
+  - if you add `taskSet`, `showHints`, `linkSet`, `socialPlatforms`, or similar story-only helper args, make it explicit that they are Storybook-only and not part of the React API
+  - the Docs page should make it easy for a consumer to distinguish real component props from story-only helpers at a glance
 - Use the most specific control type available for constrained values
   - `select`, `radio`, `boolean`, `text`, or `number` instead of generic object editors whenever the value set is finite or easy to model
 - Do not expose controls for prop fields that the component visually ignores or overrides
@@ -683,6 +694,11 @@ Review the component's user-facing documentation surfaces and make sure they exp
   - `headingClasses` or similar styling hooks
   - `classes`, `className`, `attributes`, and `ref`
 - Mark advanced or integration-focused props clearly in Storybook where appropriate
+- The Docs page must be developer-friendly, not just type-friendly
+  - a React consumer should be able to tell what each prop does, when to use it, and what shape to pass without needing to infer it from TypeScript alone
+  - if the auto-generated prop table is too raw or misleading, add a custom docs page, usage example, or item-shape example to teach the API clearly
+- If an example story passes a variable such as `items={defaultItems}`, make sure the copyable source still teaches the variable shape
+  - either inline the structure in the source snippet or include the variable declaration in the shown snippet so the consumer can see what to pass
 
 **Cross-surface consistency review (MANDATORY):**
 
@@ -716,9 +732,12 @@ Review the component's user-facing documentation surfaces and make sure they exp
 **Output required before moving to QA:**
 
 - Confirm that each story has an intentional controls policy
+- Confirm that the Storybook surface follows the intended `Docs` / `Default` / `Builder` / showcase split, or explain clearly why a component needs a different shape
 - Confirm that structured props are not exposed as raw JSON when a clearer story-specific control model would be more usable
 - Confirm that no story exposes controls for values the component visibly ignores or overrides
 - Confirm that prop descriptions are written in plain language, not just implementation language
+- Confirm that the Docs page teaches the actual React API rather than a mixture of real props and story-only helper args
+- Confirm that copyable example source shows meaningful prop shapes instead of hiding them behind undeclared variables
 - Confirm that Storybook docs, site docs, macro options, and README describe the same API consistently
 - Confirm that Storybook and docs-site examples are on the same teaching level and that any important example gap has been closed in one direction or the other
 
@@ -746,10 +765,13 @@ Before moving to the validation prompt, answer these checks explicitly:
 
 - [ ] Are any Storybook controls misleading for any story?
 - [ ] Does every story have an intentional controls policy?
+- [ ] Does the Storybook surface follow the intended `Docs` / `Default` / `Builder` / showcase pattern, or is there a good reason it does not?
 - [ ] Are any nested or structured props still exposed as raw JSON even though the story could offer clearer text/select/boolean controls instead?
 - [ ] Do any story controls expose values that the component visually ignores or overrides?
+- [ ] Can a consumer clearly distinguish real React props from story-only helper args on the Docs page?
 - [ ] Are `heading`, `headingLevel`, and any HTML-overrides explained clearly where relevant?
 - [ ] Are advanced props such as `classes`, `className`, `attributes`, and `ref` clearly described as advanced/integration props where appropriate?
+- [ ] Do copyable example snippets show the meaningful shape of any structured props instead of hiding them behind undeclared variables?
 - [ ] Do Storybook docs, site docs, macro options, and README describe the same API consistently?
 - [ ] Are showcase/demo stories clearly non-interactive where appropriate?
 - [ ] Do Storybook and docs-site examples cover the same important usage patterns, states, and props?

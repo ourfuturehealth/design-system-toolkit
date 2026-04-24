@@ -1,8 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import { TextInput } from '../TextInput';
-import { Checkboxes } from './Checkboxes';
+import { Checkboxes, type CheckboxesProps } from './Checkboxes';
 
-const conditionalItems = [
+type CheckboxesStoryArgs = CheckboxesProps & {
+  itemSet?: 'contact' | 'conditional' | 'exclusive';
+};
+
+const contactItems: CheckboxesProps['items'] = [
+  { value: 'email', label: 'Email', exclusiveGroup: 'contact' },
+  { value: 'phone', label: 'Phone', exclusiveGroup: 'contact' },
+  { divider: 'or' as const },
+  {
+    value: 'none',
+    label: 'No, I do not want to be contacted',
+    exclusive: true,
+    exclusiveGroup: 'contact',
+  },
+];
+
+const conditionalItems: CheckboxesProps['items'] = [
   {
     value: 'email',
     label: 'Email',
@@ -38,7 +55,7 @@ const conditionalItems = [
   },
 ];
 
-const exclusiveItems = [
+const exclusiveItems: CheckboxesProps['items'] = [
   {
     value: 'sore-throat',
     label: 'Sore throat',
@@ -63,7 +80,75 @@ const exclusiveItems = [
   },
 ];
 
-const meta: Meta<typeof Checkboxes> = {
+const checkboxItemSets: Record<
+  NonNullable<CheckboxesStoryArgs['itemSet']>,
+  CheckboxesProps['items']
+> = {
+  contact: contactItems,
+  conditional: conditionalItems,
+  exclusive: exclusiveItems,
+};
+
+const checkboxesUsageExample = `import { Checkboxes } from '@ourfuturehealth/react-components';
+
+const items = [
+  { value: 'email', label: 'Email', exclusiveGroup: 'contact' },
+  { value: 'phone', label: 'Phone', exclusiveGroup: 'contact' },
+  { divider: 'or' },
+  {
+    value: 'none',
+    label: 'No, I do not want to be contacted',
+    exclusive: true,
+    exclusiveGroup: 'contact',
+  },
+];
+
+<Checkboxes
+  hint="Select all contact methods that apply."
+  items={items}
+  legend="How should we contact you?"
+  name="contact-method"
+/>;
+`;
+
+const checkboxItemsShapeExample = `type CheckboxItem =
+  | {
+      value: string | number;
+      label: React.ReactNode;
+      hint?: React.ReactNode;
+      checked?: boolean;
+      disabled?: boolean;
+      exclusive?: boolean;
+      exclusiveGroup?: string;
+      conditional?: React.ReactNode;
+      inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+    }
+  | {
+      divider: React.ReactNode;
+    };
+`;
+
+const renderCheckboxesBuilderStory = ({
+  itemSet,
+  ...args
+}: CheckboxesStoryArgs) => {
+  const items = itemSet ? checkboxItemSets[itemSet] : args.items ?? contactItems;
+  const resolvedArgs = {
+    ...args,
+    describedBy: args.describedBy || undefined,
+    errorMessage: args.errorMessage || undefined,
+    hint: args.hint || undefined,
+  };
+
+  return (
+    <Checkboxes
+      {...resolvedArgs}
+      items={items}
+    />
+  );
+};
+
+const meta: Meta<CheckboxesStoryArgs> = {
   title: 'Components/Input/Checkboxes',
   component: Checkboxes,
   parameters: {
@@ -74,44 +159,111 @@ const meta: Meta<typeof Checkboxes> = {
         component:
           'A checkbox group that reuses the toolkit fieldset, input-family supporting text, updated 48px controllers, and conditional reveal patterns. Items can include hints, exclusive options, and conditional content that is revealed when selected.',
       },
+      page: () => (
+        <>
+          <Title />
+          <Description />
+
+          <h2>How to use the React component</h2>
+          <p>
+            Pass a required <code>legend</code>, <code>name</code>, and an{' '}
+            <code>items</code> array. Each item becomes one checkbox row, and
+            you can add a divider row where the list needs a visual break.
+          </p>
+          <p>
+            Use <code>hint</code> for group-level guidance,{' '}
+            <code>errorMessage</code> for validation feedback, and use{' '}
+            <code>idPrefix</code> when you want predictable generated IDs for
+            the inputs and any conditional content.
+          </p>
+          <Source code={checkboxesUsageExample} language="tsx" />
+
+          <h2>Component props</h2>
+          <ArgTypes
+            of={Default}
+            include={[
+              'legend',
+              'hint',
+              'errorMessage',
+              'name',
+              'idPrefix',
+              'items',
+              'describedBy',
+              'isPageHeading',
+            ]}
+          />
+
+          <h2>
+            <code>items</code> shape
+          </h2>
+          <p>
+            Each entry in the <code>items</code> array is either a checkbox item
+            object or a divider row:
+          </p>
+          <Source code={checkboxItemsShapeExample} language="tsx" />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>itemSet</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so you can switch between realistic
+            checkbox examples without editing the real <code>items</code> prop.
+            It is not a React prop accepted by <code>Checkboxes</code>.
+          </p>
+
+          <Stories title="Examples" />
+        </>
+      ),
     },
   },
   tags: ['autodocs'],
   args: {
-    items: [
-      { value: 'email', label: 'Email', exclusiveGroup: 'contact' },
-      { value: 'phone', label: 'Phone', exclusiveGroup: 'contact' },
-      { divider: 'or' as const },
-      {
-        value: 'none',
-        label: 'No, I do not want to be contacted',
-        exclusive: true,
-        exclusiveGroup: 'contact',
-      },
-    ],
     legend: 'How should we contact you?',
     name: 'contact-method',
   },
   argTypes: {
+    itemSet: {
+      control: 'select',
+      options: ['contact', 'conditional', 'exclusive'],
+      description:
+        'Builder-only Storybook helper. Switches between the contact, conditional, and exclusive checkbox presets.',
+      table: {
+        category: 'Builder story only',
+      },
+    },
     legend: {
       control: 'text',
       description: 'Question shown as the fieldset legend for the checkbox group.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     hint: {
       control: 'text',
       description: 'Optional supporting text shown below the legend and above any error message.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     errorMessage: {
       control: 'text',
       description: 'Validation message shown above the checkbox items. When present, the fieldset is linked with `aria-describedby`.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     name: {
       control: 'text',
       description: 'HTML name used for each checkbox input in the group.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     idPrefix: {
       control: 'text',
       description: 'Optional prefix used when generating checkbox IDs.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     items: {
       control: false,
@@ -122,16 +274,23 @@ const meta: Meta<typeof Checkboxes> = {
           detail:
             "{ value: string | number; label: ReactNode; hint?: ReactNode; checked?: boolean; disabled?: boolean; exclusive?: boolean; exclusiveGroup?: string; conditional?: ReactNode; inputProps?: InputHTMLAttributes<HTMLInputElement> }[] | { divider: ReactNode }[]",
         },
+        category: 'CheckboxesProps',
       },
     },
     describedBy: {
       control: 'text',
       description: 'Additional element IDs to append to the component-generated `aria-describedby` value.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     isPageHeading: {
       control: 'boolean',
       description:
         'Wrap the legend content in an `h1` when this question is also the page heading.',
+      table: {
+        category: 'CheckboxesProps',
+      },
     },
     onChange: {
       control: false,
@@ -176,6 +335,7 @@ const meta: Meta<typeof Checkboxes> = {
       },
     },
   },
+  render: renderCheckboxesBuilderStory,
 };
 
 export default meta;
@@ -185,7 +345,42 @@ export const Default: Story = {
   args: {
     hint: 'Select all contact methods that apply.',
     idPrefix: 'contact-method-default',
+    items: contactItems,
     name: 'contact-method-default',
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story: 'Default contact-method checkbox group with an exclusive none option.',
+      },
+    },
+  },
+};
+
+export const Builder: Story = {
+  args: {
+    describedBy: '',
+    errorMessage: '',
+    hint: 'Select all contact methods that apply.',
+    idPrefix: 'contact-method-builder',
+    isPageHeading: false,
+    itemSet: 'contact',
+    legend: 'How should we contact you?',
+    name: 'contact-method-builder',
+  },
+  parameters: {
+    controls: {
+      include: ['itemSet', 'legend', 'hint', 'errorMessage', 'name', 'idPrefix', 'isPageHeading'],
+    },
+    docs: {
+      description: {
+        story:
+          'Interactive checkbox example. Switch between the preset item sets and adjust the real group props without editing raw JSON.',
+      },
+    },
   },
 };
 
@@ -201,6 +396,9 @@ export const WithHint: Story = {
     name: 'contact-method-with-hint',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -234,6 +432,9 @@ export const WithItemHints: Story = {
     name: 'contact-method-item-hints',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Each checkbox item can carry its own hint text under the main label.',
@@ -251,6 +452,9 @@ export const ConditionalContent: Story = {
     name: 'contact-method-conditional',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -269,6 +473,9 @@ export const WithExclusiveNoneOption: Story = {
     name: 'symptoms-exclusive-none',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story:
@@ -286,6 +493,9 @@ export const WithError: Story = {
     name: 'contact-method-error',
   },
   parameters: {
+    controls: {
+      disable: true,
+    },
     docs: {
       description: {
         story: 'Example of a group-level validation error for checkbox questions.',
