@@ -1,6 +1,6 @@
-# Search input
+# Search
 
-Use the Search input component to let people submit a direct search request from a compact search field with an icon-only submit button.
+Use the Search component to let people submit a direct search request from a compact search field with an icon-only submit button.
 
 The component owns the search control only. Empty states, "no results found" feedback, and results layout belong to the page or service using the component.
 

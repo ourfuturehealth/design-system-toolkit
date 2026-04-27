@@ -48,26 +48,33 @@ const stateShowcaseStyles = `
 }
 
 .search-input-story__state--input-focus .ofh-search-input__field {
-  border-radius: 8px 0 0 8px;
-  box-shadow: 0 0 0 4px #0053b3;
   z-index: 1;
 }
 
+.search-input-story__state--input-focus .ofh-search-input__field::after {
+  opacity: 1;
+}
+
 .search-input-story__state--button-focus .ofh-search-input__button {
-  border-radius: 8px;
-  outline: 4px solid #0053b3;
-  outline-offset: 4px;
   position: relative;
   z-index: 1;
+}
+
+.search-input-story__state--button-focus .ofh-search-input__button::after {
+  opacity: 1;
 }
 `;
 
 const meta: Meta<SearchInputStoryArgs> = {
-  title: 'Components/Input/Search input',
+  title: 'Components/Input/Search',
   component: SearchInput,
   parameters: {
     layout: 'padded',
     docs: {
+      description: {
+        component:
+          'A compact search control that renders a `<form role="search">` containing a visually hidden field label, a single `<input type="search">`, and an icon-only submit button. Pass standard form props such as `onSubmit` to the component itself, and use `inputProps` only for additional native input attributes that the component does not already own.',
+      },
       page: () => (
         <>
           <Title />
@@ -94,7 +101,26 @@ const meta: Meta<SearchInputStoryArgs> = {
           </p>
           <Source code={defaultSearchInputSource} language="tsx" />
           <h2>Component props</h2>
-          <ArgTypes of={SearchInput} />
+          <ArgTypes
+            of={Default}
+            include={[
+              'label',
+              'action',
+              'method',
+              'name',
+              'placeholder',
+              'defaultValue',
+              'submitLabel',
+              'inputProps',
+            ]}
+          />
+
+          <h2>Storybook builder helpers</h2>
+          <p>
+            <code>inputId</code> is only used by the Storybook{' '}
+            <code>Builder</code> story so the examples keep deterministic field
+            IDs. It is not a React prop accepted by <code>SearchInput</code>.
+          </p>
           <Stories includePrimary={false} title="Stories" />
         </>
       ),
@@ -107,43 +133,72 @@ const meta: Meta<SearchInputStoryArgs> = {
     placeholder: 'Search',
     submitLabel: 'Search',
   },
+  tags: ['autodocs'],
   argTypes: {
     label: {
       control: 'text',
       description:
-        'Accessible name for the search field. It is rendered with the shared visually-hidden utility in v1.',
+        'Required accessible name for the search field. In v1 it is rendered with the shared visually-hidden utility, so write it as the complete standalone label a screen reader should announce.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     name: {
       control: 'text',
-      description: 'Form field name submitted with the search request.',
+      description:
+        'HTML field name submitted with the search term. It defaults to `q`, which matches common search endpoints.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     action: {
       control: 'text',
-      description: 'Form action URL for the search request.',
+      description:
+        'Form action URL for the submitted search request. Leave it blank to submit to the current page, or set it explicitly when the search form should target another route.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     method: {
       control: 'radio',
       options: ['get', 'post'],
-      description: 'HTTP method used by the wrapping form.',
+      description:
+        'HTTP method used by the wrapping `<form>`. Use `get` for typical site or content search, and switch to `post` only when the receiving endpoint requires it.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     placeholder: {
       control: 'text',
       description:
-        'Optional helper text shown in the field when it is empty. This does not replace the accessible label.',
+        'Optional helper text shown inside the field when it is empty. This supports the control visually but does not replace the accessible label.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     defaultValue: {
       control: 'text',
-      description: 'Initial search term rendered into the field.',
+      description:
+        'Initial search term rendered into the field before the user types. This is useful on search-results pages that echo the submitted query back into the control.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     submitLabel: {
       control: 'text',
       description:
-        'Accessible name applied to the icon-only submit button.',
+        'Accessible name applied to the icon-only submit button. Screen readers use this because the visible button only shows the search icon.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     inputProps: {
       control: false,
       description:
-        'Extra native input attributes passed to the underlying `<input type="search">`, such as `autoComplete`, `required`, or data attributes.',
+        'Optional passthrough for extra native `<input type="search">` attributes such as `autoComplete`, `required`, `aria-*`, or `data-*`. The component still owns the structure, `type`, and the main search props listed above.',
+      table: {
+        category: 'SearchInputProps',
+      },
     },
     inputId: {
       control: false,
@@ -155,21 +210,24 @@ const meta: Meta<SearchInputStoryArgs> = {
     },
     className: {
       control: false,
-      description: 'Additional classes applied to the root `<form>` element.',
+      description:
+        'Additional classes applied to the root `<form>` element. Most consumers should not need this unless the surrounding layout requires an integration hook.',
       table: {
         category: 'Advanced',
       },
     },
     ref: {
       control: false,
-      description: 'React ref for the root `<form>` element.',
+      description:
+        'React ref for the root `<form>` element when the consuming page needs direct form access.',
       table: {
         category: 'Advanced',
       },
     },
     inputRef: {
       control: false,
-      description: 'React ref for the underlying `<input>` element.',
+      description:
+        'React ref for the underlying `<input>` element when the consuming page needs to focus or read the field directly.',
       table: {
         category: 'Advanced',
       },

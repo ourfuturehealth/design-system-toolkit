@@ -2,10 +2,23 @@
    COMPONENTS / #SEARCH INPUT
    ========================================================================== */
 
+$ofh-search-input-input-focus-ring-offset: ($ofh-size-8 + $ofh-stroke-weight-2);
+$ofh-search-input-input-focus-ring-offset-negative: $ofh-search-input-input-focus-ring-offset * -1;
+$ofh-search-input-button-focus-ring-offset: $ofh-size-8;
+$ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-focus-ring-offset * -1;
+
 .ofh-search-input {
   align-items: stretch;
   display: flex;
   width: 100%;
+
+  &:hover .ofh-search-input__button {
+    background-color: $ofh-color-background-button-hover;
+  }
+
+  &:has(.ofh-search-input__field:active, .ofh-search-input__button:active) .ofh-search-input__button {
+    background-color: $ofh-color-background-button-active;
+  }
 }
 
 .ofh-search-input__field {
@@ -18,18 +31,36 @@
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
-  padding: $ofh-size-12 $ofh-size-16;
   position: relative;
 
-  &:focus-within {
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
+
+  &::after {
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
     border-radius: $ofh-radius-8 0 0 $ofh-radius-8;
-    box-shadow: 0 0 0 $ofh-stroke-weight-4 $ofh-color-border-feedback-focus;
+    content: '';
+    inset:
+      $ofh-search-input-input-focus-ring-offset-negative
+      $ofh-search-input-button-focus-ring-offset-negative
+      $ofh-search-input-input-focus-ring-offset-negative
+      $ofh-search-input-input-focus-ring-offset-negative;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  &:focus-within {
     z-index: 1;
+  }
+
+  &:focus-within::after {
+    opacity: 1;
   }
 }
 
 .ofh-search-input__input {
-  @include ofh-typography-responsive('paragraph-md');
+  @include ofh-font('paragraph-md');
 
   -webkit-appearance: none;
   background: transparent;
@@ -58,15 +89,26 @@
   display: inline-flex;
   flex: 0 0 auto;
   justify-content: center;
-  padding: $ofh-size-12;
   position: relative;
+
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(12, 'horizontal');
+
+  &::after {
+    border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
+    border-radius: 0 $ofh-radius-8 $ofh-radius-8 0;
+    content: '';
+    inset: $ofh-search-input-button-focus-ring-offset-negative;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+  }
 
   &::-moz-focus-inner {
     border: 0;
   }
 
   &:hover {
-    background-color: $ofh-color-background-button-hover;
     cursor: pointer;
   }
 
@@ -75,11 +117,12 @@
   }
 
   &:focus {
-    @include ofh-focused-button;
-
-    border-radius: $ofh-radius-8;
-    outline-offset: $ofh-stroke-weight-4;
+    outline: none;
     z-index: 1;
+  }
+
+  &:focus::after {
+    opacity: 1;
   }
 }
 
