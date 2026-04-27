@@ -6,6 +6,30 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-27
+
+#### @ourfuturehealth/toolkit 4.21.0 (`toolkit-v4.21.0`)
+
+##### Added
+
+- First public toolkit `Search` component with a joined search field, icon-only submit button, and dedicated docs/example coverage
+
+##### Changed
+
+- Aligned the toolkit search control spacing, typography, hover, active, and focus states to the current Figma component states
+- Renamed the public teaching surface to `Search` across toolkit docs and examples
+
+#### @ourfuturehealth/react-components 0.20.0 (`react-v0.20.0`)
+
+##### Added
+
+- First public React `SearchInput` component with toolkit-parity structure, icon-only submit semantics, and unit/accessibility coverage
+- Storybook docs, builder coverage, and state-showcase stories for the public React search control
+
+##### Changed
+
+- Updated the React search teaching surface to follow the current Storybook `Docs` / `Default` / `Builder` / showcase pattern with clearer prop guidance and story-only helper separation
+
 ### 2026-04-20
 
 #### @ourfuturehealth/toolkit 4.13.0 (`toolkit-v4.13.0`)
