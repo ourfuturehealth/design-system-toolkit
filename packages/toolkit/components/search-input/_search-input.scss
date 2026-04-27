@@ -16,7 +16,7 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
     background-color: $ofh-color-background-button-hover;
   }
 
-  &:has(.ofh-search-input__field:active, .ofh-search-input__button:active) .ofh-search-input__button {
+  &:active .ofh-search-input__button {
     background-color: $ofh-color-background-button-active;
   }
 }

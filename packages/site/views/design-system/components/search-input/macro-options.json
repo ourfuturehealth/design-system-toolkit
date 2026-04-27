@@ -15,14 +15,14 @@
     {
       "name": "label",
       "type": "object",
-      "required": true,
-      "description": "Accessible label settings for the search field.",
+      "required": false,
+      "description": "Accessible label settings for the search field. Defaults to `Search the site` when omitted.",
       "params": [
         {
           "name": "text",
           "type": "string",
-          "required": true,
-          "description": "Accessible name for the search field."
+          "required": false,
+          "description": "Accessible name for the search field. Defaults to `Search the site`."
         }
       ]
     },

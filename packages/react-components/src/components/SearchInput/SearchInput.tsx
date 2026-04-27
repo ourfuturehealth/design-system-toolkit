@@ -41,12 +41,20 @@ export const SearchInput = ({
   ...props
 }: SearchInputProps) => {
   const generatedId = React.useId().replace(/:/g, '');
+  const inputValueProps = inputProps as
+    | Pick<React.InputHTMLAttributes<HTMLInputElement>, 'defaultValue' | 'value'>
+    | undefined;
   const {
     className: inputClassName,
     id,
     ...resolvedInputProps
   } = inputProps ?? {};
   const inputId = id ?? `${generatedId}-search-input`;
+  const inputDefaultValue =
+    inputValueProps?.value === undefined &&
+    inputValueProps?.defaultValue === undefined
+      ? defaultValue
+      : undefined;
 
   return (
     <form
@@ -65,7 +73,7 @@ export const SearchInput = ({
           {...resolvedInputProps}
           ref={inputRef}
           className={joinClassNames('ofh-search-input__input', inputClassName)}
-          defaultValue={defaultValue}
+          defaultValue={inputDefaultValue}
           id={inputId}
           name={name}
           placeholder={placeholder}

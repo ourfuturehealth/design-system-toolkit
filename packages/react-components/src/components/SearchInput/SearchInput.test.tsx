@@ -3,10 +3,14 @@ import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { SearchInput } from './SearchInput';
 
 describe('SearchInput', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('renders a labelled search field and submit button', () => {
     render(
       <SearchInput
@@ -66,6 +70,29 @@ describe('SearchInput', () => {
     );
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not mix a top-level defaultValue with controlled input props', () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => undefined);
+    const onChange = vi.fn();
+
+    render(
+      <SearchInput
+        defaultValue="genomics"
+        label="Search the site"
+        inputProps={{
+          onChange,
+          value: 'controlled value',
+        }}
+      />,
+    );
+
+    expect(
+      screen.getByRole('searchbox', { name: 'Search the site' }),
+    ).toHaveValue('controlled value');
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
   });
 
   it('forwards refs to the form and input elements', () => {

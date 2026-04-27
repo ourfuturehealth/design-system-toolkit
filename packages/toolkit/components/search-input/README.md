@@ -55,7 +55,7 @@ The component owns the search control only. Empty states, "no results found" fee
 | --- | --- | --- | --- |
 | `action` | string | No | Form action URL for the submitted search request. |
 | `method` | string | No | Form method. Defaults to `get`. |
-| `label.text` | string | Yes | Accessible name for the search field. Rendered with the visually hidden utility. |
+| `label.text` | string | No | Accessible name for the search field. Rendered with the visually hidden utility. Defaults to `Search the site`. |
 | `input.id` | string | No | Search field ID. Defaults to `search-input`. |
 | `input.name` | string | No | Search field name. Defaults to `q`. |
 | `input.value` | string | No | Initial search term value. |
