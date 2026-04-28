@@ -26,6 +26,16 @@ on:
         required: false
         default: false
         type: boolean
+      send_slack_notification:
+        description: Send a Slack notification for this dry-run release.
+        required: false
+        default: false
+        type: boolean
+      force_failure_notification:
+        description: Fail the dry-run before publishing so the Slack failure notification path can be tested.
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -132,6 +142,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Force dry-run failure notification
+        if: github.event_name == 'workflow_dispatch' && inputs.force_failure_notification
+        run: |
+          echo 'Forcing dry-run failure before release checks or publishing.'
+          exit 1
+
       - name: Run linting
         run: pnpm run lint
 
@@ -226,11 +242,14 @@ jobs:
     permissions:
       contents: read
       issues: write
+    outputs:
+      issue_url: ${{ steps.repair_issue.outputs.issue_url }}
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Create or update repair issue
+        id: repair_issue
         env:
           GH_TOKEN: ${{ github.token }}
           RESPONSIBLE_USER: ${{ needs.plan_auto_release.outputs.responsible_user }}
@@ -244,3 +263,34 @@ jobs:
           PUBLISH_RESULT: ${{ needs.publish_releases.result }}
           WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/release/notify-auto-release-failure.mjs
+
+  notify_slack:
+    name: Notify Slack
+    needs:
+      - plan_auto_release
+      - run_release_checks
+      - publish_releases
+      - notify_failure
+    if: always() && github.event_name != 'pull_request' && (needs.plan_auto_release.outputs.has_releases == 'true' || needs.plan_auto_release.result == 'failure') && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.send_slack_notification))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Send Slack release notification
+        continue-on-error: true
+        env:
+          SLACK_RELEASE_WORKFLOW_WEBHOOK_URL: ${{ secrets.SLACK_RELEASE_WORKFLOW_WEBHOOK_URL }}
+          RELEASE_STATUS: ${{ needs.publish_releases.result == 'success' && 'success' || 'failure' }}
+          FAILED_GATE: ${{ needs.plan_auto_release.result == 'failure' && 'planning' || needs.run_release_checks.result == 'failure' && 'checks' || needs.publish_releases.result == 'failure' && 'publishing' || 'none' }}
+          RESPONSIBLE_USER: ${{ needs.plan_auto_release.outputs.responsible_user }}
+          PR_NUMBER: ${{ needs.plan_auto_release.outputs.pr_number }}
+          PR_URL: ${{ needs.plan_auto_release.outputs.pr_url }}
+          PR_TITLE: ${{ needs.plan_auto_release.outputs.pr_title }}
+          RELEASE_SUMMARY: ${{ needs.plan_auto_release.outputs.summary }}
+          PACKAGES_JSON: ${{ needs.plan_auto_release.outputs.packages }}
+          REPAIR_ISSUE_URL: ${{ needs.notify_failure.outputs.issue_url }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: bash scripts/release/notify-auto-release-slack.sh

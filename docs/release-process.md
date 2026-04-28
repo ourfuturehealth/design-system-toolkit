@@ -148,6 +148,41 @@ Use this before changing release automation or when validating a repair:
 2. run **Automated release** manually
 3. choose `toolkit`, `react-components`, or `all`
 4. leave `keep_test_releases` unchecked unless you need to inspect the test release
+5. select `send_slack_notification` only when testing the Slack notification path
+6. select `force_failure_notification` only when testing the Slack failure notification path
+
+### Slack release notifications
+
+The automated release workflow can send success and failure notifications to Slack through a Slack Workflow Builder webhook. GitHub issues remain the authoritative repair trail for failures; Slack is a non-blocking notification layer.
+
+To configure Slack notifications:
+
+1. create a Slack workflow that starts **From a webhook**
+2. add the flat text variables listed below to the webhook trigger
+3. add a Slack step that posts those variables to the release channel
+4. save the generated webhook URL as the repository secret `SLACK_RELEASE_WORKFLOW_WEBHOOK_URL`
+
+Slack workflow variables:
+
+| Variable | Description |
+| -------- | ----------- |
+| `status` | `success` or `failure` |
+| `environment` | `production` or `dry-run` |
+| `repository` | GitHub repository name |
+| `summary` | Planned release summary from the workflow |
+| `package_summary` | Package, version, and tag lines |
+| `candidate_tags` | Comma-separated candidate tags |
+| `release_urls` | GitHub release URLs for the tags |
+| `workflow_url` | GitHub Actions run URL |
+| `pull_request` | Pull request number, title, and URL when available |
+| `actor` | Merge owner or workflow actor |
+| `commit` | Short commit SHA |
+| `failed_gate` | `planning`, `checks`, `publishing`, or `none` |
+| `repair_issue_url` | GitHub repair issue URL for failed production auto-releases |
+
+The notification step uses `curl` and does not use a third-party GitHub Action. If `SLACK_RELEASE_WORKFLOW_WEBHOOK_URL` is not configured, the workflow skips Slack notification without failing the release.
+
+To test failure notifications safely, run the dry-run workflow with `send_slack_notification` and `force_failure_notification` selected. The workflow fails before release checks and before any tag or release is created, then posts a Slack failure message with `failed_gate` set to `checks`.
 
 ### How release-contract validation stays current
 

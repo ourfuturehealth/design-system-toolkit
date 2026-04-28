@@ -68,6 +68,15 @@ function writeTempBody(body) {
   return bodyPath;
 }
 
+function writeOutput(key, value) {
+  if (!process.env.GITHUB_OUTPUT) {
+    return;
+  }
+
+  const delimiter = `OFH_AUTO_RELEASE_${key}`;
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `${key}<<${delimiter}\n${value}\n${delimiter}\n`);
+}
+
 function createIssue(title, bodyPath, assignee) {
   const args = ['issue', 'create', '--title', title, '--body-file', bodyPath, '--label', 'auto-release'];
 
@@ -137,8 +146,11 @@ const existingIssue = findExistingIssue(title);
 
 if (existingIssue) {
   run('gh', ['issue', 'comment', String(existingIssue), '--body-file', bodyPath]);
+  const issueUrl = `https://github.com/${process.env.GITHUB_REPOSITORY}/issues/${existingIssue}`;
+  writeOutput('issue_url', issueUrl);
   process.stdout.write(`Updated existing auto-release repair issue #${existingIssue}.\n`);
 } else {
   const issueUrl = createIssue(title, bodyPath, responsibleUser);
+  writeOutput('issue_url', issueUrl);
   process.stdout.write(`Created auto-release repair issue: ${issueUrl}\n`);
 }
