@@ -56,8 +56,8 @@ else
 fi
 
 # This validator protects the published consumer install contract.
-# It intentionally scans tracked Markdown, workflow, and shell files so new docs
-# are picked up automatically without maintaining a brittle file allowlist.
+# It intentionally scans tracked Markdown, release JavaScript, workflow, and shell files
+# so new docs and release automation are picked up automatically without maintaining a brittle file allowlist.
 # If consumer-facing release docs move to a new file type, update this script and
 # docs/release-process.md together.
 tracked_text_files=()
@@ -65,9 +65,9 @@ while IFS= read -r path; do
   if [[ -n "${path}" && "${path}" != 'CHANGELOG.md' ]]; then
     tracked_text_files+=("${path}")
   fi
-done < <(git ls-files -- '*.md' '*.sh' '*.yml' '*.yaml')
+done < <(git ls-files -- '*.md' '*.mjs' '*.sh' '*.yml' '*.yaml')
 
-print_success "Collected ${#tracked_text_files[@]} tracked Markdown, shell, and workflow files"
+print_success "Collected ${#tracked_text_files[@]} tracked Markdown, release script, shell, and workflow files"
 
 broken_git_subdir_pattern=':pack''ages/'
 stale_pre_monorepo_version='v3.4.''3'

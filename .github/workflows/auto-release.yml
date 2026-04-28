@@ -1,0 +1,246 @@
+name: Automated release
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      release_scope:
+        description: Package release path to exercise with test tags and draft prereleases.
+        required: true
+        type: choice
+        options:
+          - toolkit
+          - react-components
+          - all
+      keep_test_releases:
+        description: Keep dry-run tags and draft prereleases for debugging.
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: automated-release-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate_pr_release_intent:
+    name: Validate PR release intent
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate release checkboxes and package versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/release/auto-release-plan.mjs validate-pr \
+            --base-sha "${{ github.event.pull_request.base.sha }}" \
+            --head-sha "${{ github.event.pull_request.head.sha }}" \
+            --event-path "${GITHUB_EVENT_PATH}"
+
+  plan_auto_release:
+    name: Plan automated release
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.plan_push.outputs.packages || steps.plan_test.outputs.packages }}
+      has_releases: ${{ steps.plan_push.outputs.has_releases || steps.plan_test.outputs.has_releases }}
+      responsible_user: ${{ steps.plan_push.outputs.responsible_user || steps.plan_test.outputs.responsible_user }}
+      pr_number: ${{ steps.plan_push.outputs.pr_number || steps.plan_test.outputs.pr_number }}
+      pr_url: ${{ steps.plan_push.outputs.pr_url || steps.plan_test.outputs.pr_url }}
+      pr_title: ${{ steps.plan_push.outputs.pr_title || steps.plan_test.outputs.pr_title }}
+      summary: ${{ steps.plan_push.outputs.summary || steps.plan_test.outputs.summary }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve merged pull request
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "${RUNNER_TEMP}/auto-release"
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls" > "${RUNNER_TEMP}/auto-release/pulls.json"
+
+          pr_number=$(jq -r '.[0].number // empty' "${RUNNER_TEMP}/auto-release/pulls.json")
+          if [[ -n "${pr_number}" ]]; then
+            gh api "repos/${GITHUB_REPOSITORY}/pulls/${pr_number}" > "${RUNNER_TEMP}/auto-release/pull.json"
+          else
+            printf '{}\n' > "${RUNNER_TEMP}/auto-release/pull.json"
+          fi
+
+      - name: Plan main merge release
+        id: plan_push
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/release/auto-release-plan.mjs plan-push \
+            --base-sha "${{ github.event.before }}" \
+            --head-sha "${{ github.sha }}" \
+            --pr-json "${RUNNER_TEMP}/auto-release/pull.json" \
+            --github-output "${GITHUB_OUTPUT}"
+
+      - name: Plan dry-run release
+        id: plan_test
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          node scripts/release/auto-release-plan.mjs plan-test \
+            --scope "${{ inputs.release_scope }}" \
+            --run-id "${{ github.run_id }}-${{ github.run_attempt }}" \
+            --github-output "${GITHUB_OUTPUT}"
+
+  run_release_checks:
+    name: Run release checks
+    needs: plan_auto_release
+    if: needs.plan_auto_release.outputs.has_releases == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linting
+        run: pnpm run lint
+
+      - name: Install Playwright browser for tests
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Build all packages
+        run: pnpm build
+
+      - name: Validate release contract docs
+        run: pnpm docs:release-contract
+
+  publish_releases:
+    name: Publish releases
+    needs:
+      - plan_auto_release
+      - run_release_checks
+    if: needs.plan_auto_release.outputs.has_releases == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure release tag author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Publish planned releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          KEEP_TEST_RELEASES: ${{ github.event_name == 'workflow_dispatch' && inputs.keep_test_releases || 'false' }}
+          TARGET_SHA: ${{ github.sha }}
+        run: |
+          packages_file="${RUNNER_TEMP}/auto-release-packages.json"
+          cat > "${packages_file}" <<'JSON'
+          ${{ needs.plan_auto_release.outputs.packages }}
+          JSON
+
+          jq -c '.[]' "${packages_file}" | while read -r release_package; do
+            package_name=$(jq -r '.package' <<< "${release_package}")
+            tag=$(jq -r '.tag' <<< "${release_package}")
+            version=$(jq -r '.version' <<< "${release_package}")
+            is_test=$(jq -r '.test' <<< "${release_package}")
+
+            args=(
+              --package "${package_name}"
+              --tag "${tag}"
+              --target "${TARGET_SHA}"
+              --expected-version "${version}"
+              --stage-dir "${RUNNER_TEMP}/release-assets-${package_name}-${tag}"
+            )
+
+            if [[ "${is_test}" == "true" ]]; then
+              args+=(--test-release)
+
+              if [[ "${KEEP_TEST_RELEASES}" == "true" ]]; then
+                args+=(--keep-test-release)
+              fi
+            fi
+
+            bash scripts/release/publish-auto-release.sh "${args[@]}"
+          done
+
+  notify_failure:
+    name: Notify auto-release failure
+    needs:
+      - plan_auto_release
+      - run_release_checks
+      - publish_releases
+    if: always() && github.event_name == 'push' && (needs.plan_auto_release.result == 'failure' || needs.run_release_checks.result == 'failure' || needs.publish_releases.result == 'failure')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create or update repair issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RESPONSIBLE_USER: ${{ needs.plan_auto_release.outputs.responsible_user }}
+          PR_NUMBER: ${{ needs.plan_auto_release.outputs.pr_number }}
+          PR_URL: ${{ needs.plan_auto_release.outputs.pr_url }}
+          PR_TITLE: ${{ needs.plan_auto_release.outputs.pr_title }}
+          RELEASE_SUMMARY: ${{ needs.plan_auto_release.outputs.summary }}
+          PACKAGES_JSON: ${{ needs.plan_auto_release.outputs.packages }}
+          PLAN_RESULT: ${{ needs.plan_auto_release.result }}
+          CHECKS_RESULT: ${{ needs.run_release_checks.result }}
+          PUBLISH_RESULT: ${{ needs.publish_releases.result }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/release/notify-auto-release-failure.mjs

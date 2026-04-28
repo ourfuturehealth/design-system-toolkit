@@ -26,6 +26,7 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 - Toolkit and React components are versioned independently
 - Consumers install packaged release artifacts, not git subdirectories
 - Canonical tag patterns are package-specific
+- Package tags are normally created by the automated release workflow after a release-intent pull request is merged to `main`
 
 ## Canonical Tag Patterns
 
@@ -34,7 +35,7 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 | `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.13.0` |
 | `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.12.0`   |
 
-The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
+The manual release fallback workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 
 ## Release Artifact Contract
 
@@ -143,4 +144,5 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 - [Release Process](./release-process.md)
 - [Upgrading Guide](../UPGRADING.md)
 - [Changelog](../CHANGELOG.md)
-- [Release workflow](../.github/workflows/release.yml)
+- [Automated release workflow](../.github/workflows/auto-release.yml)
+- [Manual release fallback workflow](../.github/workflows/release.yml)

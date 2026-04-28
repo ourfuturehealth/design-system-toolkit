@@ -105,21 +105,17 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
 
 2. **Update [CHANGELOG.md](CHANGELOG.md)**: Document what's being released
 
-3. **Commit and push**:
+3. **Select release intent in the PR template**:
+   - choose `No package release` for changes that do not publish package artifacts
+   - choose `Release toolkit`, `Release React components`, or both when package versions are bumped
 
-   ```bash
-   git add packages/[package-name]/package.json CHANGELOG.md
-   git commit -m "chore([package]): bump version to X.X.X"
-   git push origin main
-   ```
-
-4. **Create and push tag**:
-   - Toolkit: `git tag -a toolkit-vX.X.X -m "Release toolkit vX.X.X" && git push origin toolkit-vX.X.X`
-   - React: `git tag -a react-vX.X.X -m "Release react vX.X.X" && git push origin react-vX.X.X`
+4. **Merge to `main`**: the automated release workflow creates the package tag, GitHub release, and release assets after checks pass
 
 5. **Verify**: Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and test installation
 
 6. **Announce**: Post in #design-system Slack channel
+
+Human-pushed release tags are still supported through the **Manual release fallback** workflow for recovery and exceptional cases.
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 

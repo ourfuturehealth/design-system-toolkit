@@ -17,6 +17,7 @@ The design system distributes packages through **GitHub Releases**.
 - all tests pass locally: `pnpm test`
 - all linting passes locally: `pnpm lint`
 - changelog and migration docs are updated when required
+- the release section in the pull request template is filled in
 
 ## Release Steps
 
@@ -45,7 +46,28 @@ For the package you are releasing:
 - update [CHANGELOG.md](../CHANGELOG.md)
 - update [UPGRADING.md](../UPGRADING.md) if the release changes the public API or install contract
 
-### 3. Commit and tag
+### 3. Select release intent in the pull request
+
+Every pull request includes a release section:
+
+```md
+## Release
+
+- [ ] No package release
+- [ ] Release toolkit
+- [ ] Release React components
+```
+
+Select:
+
+- `No package release` when no package artifacts should be published
+- `Release toolkit` when `packages/toolkit/package.json` is bumped
+- `Release React components` when `packages/react-components/package.json` is bumped
+- both package release checkboxes when both package manifests are bumped
+
+The automated PR check fails if a package version changes without the matching release checkbox, if a release checkbox is selected without a package version change, if the candidate tag already exists, or if [CHANGELOG.md](../CHANGELOG.md) does not mention the candidate tag.
+
+### 4. Merge to main
 
 Toolkit example:
 
@@ -53,8 +75,6 @@ Toolkit example:
 git add packages/toolkit/package.json CHANGELOG.md UPGRADING.md
 git commit -m "chore(toolkit): bump version to 4.0.1"
 git push origin main
-git tag -a toolkit-v4.0.1 -m "Release toolkit v4.0.1"
-git push origin toolkit-v4.0.1
 ```
 
 React example:
@@ -63,22 +83,26 @@ React example:
 git add packages/react-components/package.json CHANGELOG.md UPGRADING.md
 git commit -m "chore(react-components): bump version to 0.5.1"
 git push origin main
-git tag -a react-v0.5.1 -m "Release react-components v0.5.1"
-git push origin react-v0.5.1
 ```
 
-### 4. GitHub Actions builds the release
+After the pull request is merged, the **Automated release** workflow runs on `main`. Maintainers do not create the release tag manually for the normal release path.
 
-When a release tag is pushed, [.github/workflows/release.yml](../.github/workflows/release.yml) automatically:
+### 5. GitHub Actions builds the release
+
+When a release-intent pull request is merged, [.github/workflows/auto-release.yml](../.github/workflows/auto-release.yml) automatically:
 
 1. installs dependencies with pnpm
 2. runs linting and tests
-3. validates the release-contract docs
-4. prepares the package release assets in a dedicated staging directory outside the package tree
-5. smoke-tests the tarball with Yarn 1, npm, and pnpm
-6. renders release notes with the tarball install URL
-7. creates or updates the GitHub release
-8. uploads release assets
+3. builds all packages
+4. validates the release-contract docs
+5. prepares the package release assets in a dedicated staging directory outside the package tree
+6. smoke-tests the tarball with Yarn 1, npm, and pnpm
+7. creates the annotated package tag
+8. renders release notes with the tarball install URL
+9. creates the GitHub release
+10. uploads and verifies release assets
+
+The automated workflow never overwrites existing tags, releases, or release assets.
 
 Toolkit releases upload:
 
@@ -89,7 +113,7 @@ React releases upload:
 
 - `ourfuturehealth-react-components-{version}.tgz`
 
-### 5. Verify the release
+### 6. Verify the release
 
 After the workflow completes:
 
@@ -120,9 +144,20 @@ React release note example:
 
 ## Testing Before Or After Release
 
+### Dry-run the automated release flow
+
+The **Automated release** workflow has a `workflow_dispatch` dry-run mode for safe end-to-end testing. It creates fake tags such as `auto-release-test-toolkit-v4.13.0-<run-id>`, creates draft prereleases, uploads real staged assets, verifies the assets, and cleans up the test tags and releases unless `keep_test_releases` is selected.
+
+Use this before changing release automation or when validating a repair:
+
+1. open the Actions tab
+2. run **Automated release** manually
+3. choose `toolkit`, `react-components`, or `all`
+4. leave `keep_test_releases` unchecked unless you need to inspect the test release
+
 ### How release-contract validation stays current
 
-`pnpm docs:release-contract` scans all tracked Markdown, shell, and workflow files in the repository rather than relying on a narrow hand-maintained file list.
+`pnpm docs:release-contract` scans all tracked Markdown, release JavaScript, shell, and workflow files in the repository rather than relying on a narrow hand-maintained file list.
 
 It validates that:
 
@@ -194,6 +229,38 @@ Common causes:
 - package build failures
 - smoke test failures for the tarball install contract
 - stale docs or release templates that still mention the old git-subdirectory syntax
+- release intent checkboxes that do not match package version changes
+- candidate tags or GitHub releases that already exist
+
+On `main` merge failures, the workflow creates or updates a GitHub issue labelled `auto-release` and assigns it to the merge owner when possible.
+
+### Manual release fallback
+
+The normal release path is automated from `main`. Human-pushed release tags are reserved for recovery and exceptional cases through the **Manual release fallback** workflow.
+
+Use the fallback only after confirming the automated path cannot be repaired through a normal follow-up pull request.
+
+Toolkit fallback:
+
+```bash
+git fetch origin main --tags
+git switch main
+git pull --ff-only origin main
+git tag -a toolkit-v4.0.1 -m "Release toolkit v4.0.1"
+git push origin toolkit-v4.0.1
+```
+
+React fallback:
+
+```bash
+git fetch origin main --tags
+git switch main
+git pull --ff-only origin main
+git tag -a react-v0.5.1 -m "Release react-components v0.5.1"
+git push origin react-v0.5.1
+```
+
+The fallback workflow also refuses version/tag mismatches, but it may update an existing GitHub release for a human-pushed tag. Do not use it to overwrite a stale tag. Delete the incorrect remote tag or release intentionally first when that is the repair path.
 
 ### Why release assets are staged outside the package tree
 
@@ -224,3 +291,4 @@ If you are testing unreleased code, build and pack the package locally instead o
 3. Keep `.zip` guidance limited to compiled-file toolkit consumers
 4. Test every release with Yarn 1, npm, and pnpm before or during the workflow
 5. Update migration docs whenever the public API or install path changes
+6. Use the automated release path by default; reserve manual tags for recovery

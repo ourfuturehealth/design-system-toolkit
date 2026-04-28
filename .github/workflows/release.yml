@@ -1,4 +1,4 @@
-name: Create release
+name: Manual release fallback
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Create release
+    name: Manual release fallback
     runs-on: ubuntu-latest
 
     steps:
