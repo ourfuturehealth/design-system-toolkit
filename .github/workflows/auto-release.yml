@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - main
+      - feature/auto-release-from-main-ci
   workflow_dispatch:
     inputs:
       release_scope:
@@ -74,7 +75,7 @@ jobs:
           fetch-depth: 0
 
       - name: Resolve merged pull request
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -92,7 +93,7 @@ jobs:
 
       - name: Plan main merge release
         id: plan_push
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -104,10 +105,12 @@ jobs:
 
       - name: Plan dry-run release
         id: plan_test
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/feature/auto-release-from-main-ci')
+        env:
+          RELEASE_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.release_scope || 'all' }}
         run: |
           node scripts/release/auto-release-plan.mjs plan-test \
-            --scope "${{ inputs.release_scope }}" \
+            --scope "${RELEASE_SCOPE}" \
             --run-id "${{ github.run_id }}-${{ github.run_attempt }}" \
             --github-output "${GITHUB_OUTPUT}"
 
@@ -182,7 +185,7 @@ jobs:
       - name: Publish planned releases
         env:
           GH_TOKEN: ${{ github.token }}
-          KEEP_TEST_RELEASES: ${{ github.event_name == 'workflow_dispatch' && inputs.keep_test_releases || 'false' }}
+          KEEP_TEST_RELEASES: ${{ github.ref == 'refs/heads/feature/auto-release-from-main-ci' || (github.event_name == 'workflow_dispatch' && inputs.keep_test_releases) || 'false' }}
           TARGET_SHA: ${{ github.sha }}
         run: |
           packages_file="${RUNNER_TEMP}/auto-release-packages.json"
@@ -221,7 +224,7 @@ jobs:
       - plan_auto_release
       - run_release_checks
       - publish_releases
-    if: always() && github.event_name == 'push' && (needs.plan_auto_release.result == 'failure' || needs.run_release_checks.result == 'failure' || needs.publish_releases.result == 'failure')
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main' && (needs.plan_auto_release.result == 'failure' || needs.run_release_checks.result == 'failure' || needs.publish_releases.result == 'failure')
     runs-on: ubuntu-latest
     permissions:
       contents: read
