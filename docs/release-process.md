@@ -67,23 +67,17 @@ Select:
 
 The automated PR check fails if a package version changes without the matching release checkbox, if a release checkbox is selected without a package version change, if the candidate tag already exists, or if [CHANGELOG.md](../CHANGELOG.md) does not mention the candidate tag.
 
-### 4. Merge to main
+### 4. Open and merge the pull request
 
-Toolkit example:
+Open a pull request into `main` with the package version, changelog, and migration documentation changes. Use the release checkboxes in the pull request body to declare whether the PR should release toolkit, React components, both packages, or no package artifacts.
 
-```bash
-git add packages/toolkit/package.json CHANGELOG.md UPGRADING.md
-git commit -m "chore(toolkit): bump version to 4.0.1"
-git push origin main
-```
+Before merging:
 
-React example:
+- confirm the release-intent PR check passes
+- confirm the normal pull request checks pass
+- confirm the candidate tag does not already exist
 
-```bash
-git add packages/react-components/package.json CHANGELOG.md UPGRADING.md
-git commit -m "chore(react-components): bump version to 0.5.1"
-git push origin main
-```
+Merge the pull request through the normal repository process. Do not push release commits directly to `main`, and do not create release tags locally for the normal release path.
 
 After the pull request is merged, the **Automated release** workflow runs on `main`. Maintainers do not create the release tag manually for the normal release path.
 
