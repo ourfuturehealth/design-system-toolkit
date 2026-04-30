@@ -102,8 +102,6 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - Refined the Task List Storybook docs page so it teaches the React API, `items` shape, and Builder-only helper controls more clearly
 
-### 2026-04-28
-
 #### @ourfuturehealth/toolkit 4.14.0 (`toolkit-v4.14.0`)
 
 ##### Changed
@@ -229,6 +227,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - React icons now render correctly in published-consumer installs by inlining the requested bundled SVG symbol instead of referencing a bundled `data:` sprite URL.
 
+### 2026-04-09
 
 #### @ourfuturehealth/toolkit 4.9.0 (`toolkit-v4.9.0`)
 
@@ -264,7 +263,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - Updated the public React `Icon` stories/tests and current component consumers to use the renamed icon surface
 
-### 2026-03-30
+### 2026-04-08
 
 #### @ourfuturehealth/toolkit 4.8.0 (`toolkit-v4.8.0`)
 
@@ -352,8 +351,6 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Refined Card-family Storybook docs, controls behaviour, and examples for easier manual QA
 - Updated Card icon stories to expose glyph and colour controls that match the current component behavior
 
-### 2026-03-24
-
 #### @ourfuturehealth/toolkit 4.6.0 (`toolkit-v4.6.0`)
 
 ##### ⚠️ BREAKING CHANGES
@@ -383,7 +380,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Storybook coverage for default, variant showcase, and usage-example Tag stories
 - Unit and accessibility coverage for variant mapping, children rendering, passthrough props, and ref support
 
-### 2026-03-19
+### 2026-03-24
 
 #### @ourfuturehealth/toolkit 4.5.0 (`toolkit-v4.5.0`)
 
@@ -409,7 +406,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Direct typography alias support for legacy keys such as `h1`, `lead`, `paragraph`, and `list-small`
 - Legacy direct typography utility aliases such as `.ofh-u-font-size-h1`; use numeric override classes such as `.ofh-u-font-size-64` instead
 
-### 2026-03-11
+### 2026-03-16
 
 #### @ourfuturehealth/toolkit 4.4.0 (`toolkit-v4.4.0`)
 
@@ -446,7 +443,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - React Storybook examples now isolate link targets per story so docs previews do not jump into unrelated story content
 - In-form and multiple-errors stories were expanded to make focus and scroll behaviour easier to validate manually
 
-### 2026-03-10
+### 2026-03-11
 
 #### @ourfuturehealth/toolkit 4.3.0 (`toolkit-v4.3.0`)
 
@@ -480,6 +477,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Updated Button component variant types, stories, tests, example app, and docs to use the renamed button variants
 - `Button` now renders an anchor automatically when `href` is provided, with ref support for both button and anchor paths
 - Expanded story and test coverage for link rendering, keyboard navigation, and form usage
+
+### 2026-03-10
 
 #### @ourfuturehealth/toolkit 4.2.0 (`toolkit-v4.2.0`)
 
@@ -558,7 +557,7 @@ The 14 legacy `icon-*.svg` files have been replaced with a comprehensive Materia
 - For decorative icons, omit the `title` parameter (automatically sets `aria-hidden="true"`)
 - For semantic icons, include a `title` parameter for accessibility
 
-### 2026-02-26
+### 2026-03-02
 
 #### @ourfuturehealth/toolkit 4.1.0 (`toolkit-v4.1.0`)
 
