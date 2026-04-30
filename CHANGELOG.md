@@ -6,6 +6,31 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-04-30
+
+#### @ourfuturehealth/toolkit 4.15.0 (`toolkit-v4.15.0`)
+
+##### Added
+
+- Task list docs-site examples for `with-hints` and `status-variants`
+
+##### Changed
+
+- Refreshed the toolkit `task-list` component to the current Figma-aligned row structure and spacing
+- Removed the legacy first-row top divider so the rendered task list matches the design reference more closely
+- Updated task-list docs-site guidance and examples to match the refreshed component usage
+
+#### @ourfuturehealth/react-components 0.14.0 (`react-v0.14.0`)
+
+##### Added
+
+- New public `TaskList` component using the shared React `Tag` component for row status
+- Storybook coverage for `TaskList` including `Default`, `Builder`, `WithHints`, and `StatusVariants`
+
+##### Changed
+
+- Refined the Task List Storybook docs page so it teaches the React API, `items` shape, and Builder-only helper controls more clearly
+
 ### 2026-04-28
 
 #### @ourfuturehealth/toolkit 4.14.0 (`toolkit-v4.14.0`)

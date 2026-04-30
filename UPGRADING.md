@@ -6,13 +6,14 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ## Breaking Changes by Version
 
-| Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
-| ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes | 🟢 Low - adopt the public React pagination if needed |
-| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes | 🟢 Low - adopt the public React footer if needed |
-| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
-| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
-| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes | 🟢 Low - Adopt the public link family and canonical names for new usage |
+| Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
+| ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
+| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React pagination if needed |
+| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React footer if needed |
+| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React summary list if needed |
+| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React details family if needed |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes        | 🟢 Low - Adopt the public link family and canonical names for new usage |
 | [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
 | [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
@@ -22,6 +23,63 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.15.0 / React v0.14.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.15.0+
+- `@ourfuturehealth/react-components` v0.14.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `task-list` component to the current design-system treatment and introduces the first public React `TaskList` component.
+
+- Toolkit consumers should review the refreshed task-list row spacing, the removal of the old first-row divider, and the expanded docs examples for hints and status variants.
+- React consumers can now adopt the public `TaskList` component when they need long-form task navigation with right-aligned Tag-based statuses.
+
+### Migration Steps
+
+1. Adopt the public React `TaskList` component where you need toolkit-parity task navigation in React.
+2. Prefer the refreshed toolkit task-list API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local task-list overrides, especially around first-row dividers, responsive spacing, hint text, and status tag alignment.
+
+#### React example
+
+**New in `react-v0.14.0`:**
+
+```tsx
+import { TaskList } from '@ourfuturehealth/react-components';
+
+const items = [
+  {
+    title: 'Company directors',
+    href: '/company/directors',
+    status: {
+      children: 'Complete',
+      variant: 'green',
+    },
+  },
+  {
+    title: 'Financial history',
+    href: '/company/financial-history',
+    hint: 'Include 5 years of the company’s relevant financial information.',
+    status: {
+      children: 'Incomplete',
+      variant: 'blue',
+    },
+  },
+];
+
+<TaskList items={items} idPrefix="company-task-list" />;
+```
 
 ---
 

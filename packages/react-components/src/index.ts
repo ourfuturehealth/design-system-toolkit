@@ -104,3 +104,6 @@ export type {
   SummaryListProps,
   SummaryListRow,
 } from './components/SummaryList';
+
+export { TaskList } from './components/TaskList';
+export type { TaskListItemProps, TaskListProps } from './components/TaskList';

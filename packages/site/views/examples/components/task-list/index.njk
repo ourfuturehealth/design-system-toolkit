@@ -1,6 +1,6 @@
 {% set html_style = 'background-color: #f0f4f5;' %}
-{% set pageTitle = 'Back link' %}
-{% from 'back-link/macro.njk' import backLink %}
+{% set pageTitle = 'Task list' %}
+{% from 'task-list/macro.njk' import taskList %}
 {% extends 'standalone-example-layout.njk' %}
 
 {% block body %}
@@ -10,9 +10,68 @@
 
       <div class="ofh-grid-row">
         <div class="ofh-grid-column-two-thirds">
-          {{ backLink({
-            "href": "#",
-            "text": "Go back"
+          {{ taskList({
+            idPrefix: "company-details",
+            items: [
+              {
+                title: {
+                  text: "Company directors"
+                },
+                href: "#",
+                status: {
+                  tag: {
+                    text: "Complete"
+                  }
+                }
+              },
+              {
+                title: {
+                  text: "Registered company details"
+                },
+                href: "#",
+                status: {
+                  tag: {
+                    text: "Incomplete"
+                  }
+                }
+              },
+              {
+                title: {
+                  text: "Financial history"
+                },
+                hint: {
+                  text: "Include 5 years of the company’s relevant financial information."
+                },
+                href: "#",
+                status: {
+                  tag: {
+                    text: "Complete"
+                  }
+                }
+              },
+              {
+                title: {
+                  text: "Business plan"
+                },
+                href: "#",
+                status: {
+                  tag: {
+                    text: "Pending"
+                  }
+                }
+              },
+              {
+                title: {
+                  text: "References"
+                },
+                href: "#",
+                status: {
+                  tag: {
+                    text: "Incomplete"
+                  }
+                }
+              }
+            ]
           }) }}
         </div>
       </div>
