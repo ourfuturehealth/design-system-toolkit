@@ -3,73 +3,63 @@
    ========================================================================== */
 
 /**
- * 1. Bespoke spacing numbers used as there is no 12px
- *    spacing mapped in settings/spacing.
- * 2. Hide the breadcrumb on print stylesheets.
- * 3. Don't show the full breadcrumb below tablet size.
- * 4. Typography sizing mixin, see core/tools/_typography
- * 5. and core/settings/_typography for size maps.
- * 5. .. but show a back to index page link.
- * 6. Remove spacing between back icon and label.
- * 7. Custom padding for the chevron separator icon.
+ * 1. Hide the breadcrumb on print stylesheets.
+ * 2. Don't show the full breadcrumb below tablet size.
+ * 3. Typography sizing mixin, see core/tools/_typography
+ * 4. and core/settings/_typography for size maps.
+ * 5. .. but show a single back link.
  */
 
 .ofh-breadcrumb {
   @include print-hide();
 
-  padding-bottom: 12px; /* [1] */
-  padding-top: 12px; /* [1] */
+  padding-bottom: $ofh-size-12;
+  padding-top: $ofh-size-12;
 
   .ofh-breadcrumb__separator {
-    fill: $ofh-color-greyscale-2;
-    height: 24px;
-    position: relative;
-    top: 1px;
-    width: 24px;
-
-    @include mq($from: large-desktop) {
-      margin: 0 3px 0 5px;
-    }
+    color: $ofh-color-foreground-breadcrumb-default;
+    fill: $ofh-color-foreground-breadcrumb-default;
+    flex: 0 0 auto;
+    height: $ofh-size-16;
+    width: $ofh-size-16;
   }
 
   .ofh-breadcrumb__back-icon {
-    height: 24px;
-    left: -2px;
-    margin-right: 2px;
-    position: relative;
-    top: -1px;
-    vertical-align: middle;
-    width: 24px;
+    color: $ofh-color-foreground-breadcrumb-default;
+    fill: $ofh-color-foreground-breadcrumb-default;
+    flex: 0 0 auto;
+    height: $ofh-size-16;
+    width: $ofh-size-16;
   }
 }
 
 .ofh-breadcrumb__list {
-  @include mq($until: tablet) {
-    display: none; /* [3] */
-  }
-
+  align-items: center;
+  column-gap: $ofh-size-8;
+  display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  @include mq($until: tablet) {
+    display: none; /* [2] */
+  }
 }
 
 .ofh-breadcrumb__item {
-  @include ofh-font('paragraph-sm'); /* [4] */
+  @include ofh-font('paragraph-sm'); /* [3] */
 
-  display: inline-block;
+  align-items: center;
+  column-gap: $ofh-size-8;
+  display: flex;
   margin-bottom: 0;
-
-  .ofh-breadcrumb__separator {
-    color: $ofh-color-greyscale-2;
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 2px;
-    vertical-align: middle;
-  }
+  white-space: nowrap;
 }
 
 .ofh-breadcrumb__link {
   color: $ofh-color-foreground-breadcrumb-default;
+  white-space: nowrap;
 
   &:visited {
     color: $ofh-color-foreground-breadcrumb-visited;
@@ -91,11 +81,9 @@
 }
 
 .ofh-breadcrumb__back {
-  @include ofh-font('paragraph-sm'); /* [4] */
+  @include ofh-font('paragraph-sm'); /* [3] */
 
   margin: 0;
-  padding-left: 0;
-  position: relative;
 
   @include mq($from: tablet) {
     display: none; /* [5] */
@@ -103,7 +91,11 @@
 }
 
 .ofh-breadcrumb__backlink {
+  align-items: center;
   color: $ofh-color-foreground-breadcrumb-default;
+  column-gap: $ofh-size-8;
+  display: inline-flex;
+  white-space: nowrap;
 
   &:visited {
     color: $ofh-color-foreground-breadcrumb-visited;

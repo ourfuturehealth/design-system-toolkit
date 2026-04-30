@@ -42,6 +42,7 @@ Install the resulting local `.tgz` in the consumer application.
 ```tsx
 import {
   Autocomplete,
+  Breadcrumb,
   Button,
   Card,
   CardCallout,
@@ -74,6 +75,10 @@ import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   const countryOptions = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
+  const breadcrumbItems = [
+    { text: 'Health A to Z', href: '/health-a-to-z' },
+    { text: 'Conditions', href: '/health-a-to-z/conditions' },
+  ];
   const contactCheckboxItems = [
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
@@ -110,6 +115,13 @@ function App() {
 
   return (
     <div>
+      <Breadcrumb
+        items={breadcrumbItems}
+        current={{
+          text: 'Eczema',
+          href: '/health-a-to-z/conditions/eczema',
+        }}
+      />
       <ErrorSummary
         titleText="There is a problem"
         errorList={[
@@ -271,6 +283,7 @@ A form input component with toolkit-parity label, hint, error, and width support
 The package also provides:
 
 - `Fieldset`
+- `Breadcrumb`
 - `Footer`
 - `Textarea`
 - `Select`
