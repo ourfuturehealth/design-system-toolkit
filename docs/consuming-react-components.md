@@ -146,7 +146,6 @@ The React components package currently provides the following components:
 - `Tag` - Status tags aligned with toolkit Tag variants
 - `TaskList` - Ordered service tasks with optional hint text and shared Tag-based statuses
 - `InsetText` - Supporting content blocks with semantic feedback borders, optional headings, and one action link
-- `TaskList` - Ordered service tasks with optional hint text and shared Tag-based statuses
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
