@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.14.0/ourfuturehealth-react-components-0.14.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.15.0/ourfuturehealth-react-components-0.15.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -54,6 +54,7 @@ import {
   Expander,
   Fieldset,
   Footer,
+  InsetText,
   Icon,
   LinkAction,
   LinkIcon,
@@ -145,6 +146,11 @@ function App() {
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
       <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />
+      <InsetText
+        heading="Information"
+        text="You can report any suspected side effect to the Yellow Card safety scheme."
+        actionLink={{ text: 'Report a side effect', href: '#report-a-side-effect' }}
+      />
       <Fieldset legend="Contact details" legendSize="medium">
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
         <TextInput id="phone" label="Phone number" type="tel" width="two-thirds" />
@@ -250,6 +256,7 @@ The package also provides:
 - `Autocomplete`
 - `CharacterCount`
 - `Checkboxes`
+- `InsetText`
 - `Radios`
 - `TaskList`
 - `Icon`
@@ -325,6 +332,18 @@ Commonly used props are listed below. `TaskListProps` also includes optional `cl
 - `className?`: string
 - `classes?`: styling override classes for the root task list element
 - `ref?`: React ref forwarded to the root task list element
+
+### InsetText
+
+A lightweight content callout with feedback border variants, background options, and an optional action link.
+
+**Props:**
+
+- `variant`: 'info' | 'success' | 'warning' | 'error'
+- `background`: 'grey' | 'yellow' | 'blue'
+- `heading`, `headingHtml`, `headingLevel`
+- `text` or `html`
+- `actionLink`
 
 ### Icons
 

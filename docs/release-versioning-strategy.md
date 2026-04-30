@@ -31,8 +31,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 | Package                             | Canonical tag pattern | Example tag      |
 | ----------------------------------- | --------------------- | ---------------- |
-| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.15.0` |
-| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.14.0`   |
+| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.16.0` |
+| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.15.0`   |
 
 The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 
@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.15.0/ourfuturehealth-toolkit-4.15.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.14.0/ourfuturehealth-react-components-0.14.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz"
   }
 }
 ```
