@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
 | [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React InsetText if needed and use the refreshed toolkit inset-text APIs when relevant |
 | [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
 | [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React pagination if needed |
@@ -24,6 +25,48 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.17.0 / React v0.16.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.17.0+
+- `@ourfuturehealth/react-components` v0.16.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `image` component to the current design-system treatment and introduces the first public React `Image` component.
+
+- Toolkit consumers should review the refreshed image caption strip and bottom-edge treatment, especially where local overrides depend on the older styling.
+- Toolkit docs now show explicit default and `without-caption` examples.
+- React consumers can now adopt the public `Image` component when they need toolkit-parity content images with optional captions and responsive image sources.
+
+### Migration Steps
+
+1. Adopt the public React `Image` component where you need toolkit-parity image rendering in React.
+2. Prefer the refreshed toolkit image API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local image overrides, especially around caption treatment, bottom-edge styling, and responsive image sizing.
+
+#### React example
+
+**New in `react-v0.16.0`:**
+
+```tsx
+import { Image } from '@ourfuturehealth/react-components';
+
+<Image
+  src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
+  alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
+  caption="It can affect large areas of the body or limbs."
+/>;
+```
 
 ---
 

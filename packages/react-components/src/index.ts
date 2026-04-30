@@ -115,3 +115,6 @@ export type {
   InsetTextProps,
   InsetTextVariant,
 } from './components/InsetText';
+
+export { Image } from './components/Image';
+export type { ImageProps } from './components/Image';

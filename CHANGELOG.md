@@ -8,6 +8,28 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-04-30
 
+#### @ourfuturehealth/toolkit 4.17.0 (`toolkit-v4.17.0`)
+
+##### Added
+
+- Image docs-site guidance and a `without-caption` example
+
+##### Changed
+
+- Refreshed the toolkit `image` component to match the current Figma bottom-edge and caption treatment more closely
+- Updated image docs-site guidance so it better explains default, no-caption, and responsive-source usage
+
+#### @ourfuturehealth/react-components 0.16.0 (`react-v0.16.0`)
+
+##### Added
+
+- New public `Image` component with support for required `src` and `alt`, optional `caption`, and advanced responsive image-source props
+- Storybook coverage for `Image` including `Default`, `Builder`, `WithoutCaption`, and `ResponsiveSources`
+
+##### Changed
+
+- Refined the Image Storybook docs page so it teaches the React API and responsive `sizes` / `srcSet` usage more clearly
+
 #### @ourfuturehealth/toolkit 4.16.0 (`toolkit-v4.16.0`)
 
 ##### Added

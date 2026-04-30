@@ -30,7 +30,7 @@
   <p>Images should flow with the text content, not appear too prominent or isolated.</p>
   <p>We recommend stacking images. We've found that gallery views (images side by side) confuse users.</p>
   <h3>Captions</h3>
-  <p>The image component is made up of 2 elements - the image and a caption underneath it in a white box.</p>
+  <p>The image component is made up of 2 elements - the image and an optional caption underneath it in a white box.</p>
   <p>Not all images need captions. If you use them:</p>
   <ul>
     <li>write a full sentence ending with a full stop</li>
@@ -47,6 +47,15 @@
         1. Chickenpox starts with red spots. They can appear anywhere on the body.
       </figcaption>
     </figure>
+
+  <h3>Without a caption</h3>
+  <p>Omit the caption when the image already supports the surrounding content and users do not need an extra conclusion or explanation beneath it.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "image",
+    type: "without-caption"
+  }) }}
 
   <h3>Accessibility</h3>
   <p>Do not use images that have words in them, because screen readers will not be able to read the words.</p>
