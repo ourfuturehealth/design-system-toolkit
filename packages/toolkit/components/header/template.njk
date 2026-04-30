@@ -1,185 +1,402 @@
+{% from '../button/macro.njk' import button %}
 {% from '../icon/macro.njk' import icon %}
-{# Define some defaults #}
-{% set showNav = params.showNav if params.showNav else "false" %}
-{% set showSearch = params.showSearch if params.showSearch else "false" %}
+{% from '../search-input/macro.njk' import searchInput %}
 
-{% set nhsLogo %}
-  <svg class="ofh-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 16" height="40" width="100">
-    <path class="ofh-logo__background" fill="#005eb8" d="M0 0h40v16H0z"></path>
-    <path class="ofh-logo__text" fill="#fff" d="M3.9 1.5h4.4l2.6 9h.1l1.8-9h3.3l-2.8 13H9l-2.7-9h-.1l-1.8 9H1.1M17.3 1.5h3.6l-1 4.9h4L25 1.5h3.5l-2.7 13h-3.5l1.1-5.6h-4.1l-1.2 5.6h-3.4M37.7 4.4c-.7-.3-1.6-.6-2.9-.6-1.4 0-2.5.2-2.5 1.3 0 1.8 5.1 1.2 5.1 5.1 0 3.6-3.3 4.5-6.4 4.5-1.3 0-2.9-.3-4-.7l.8-2.7c.7.4 2.1.7 3.2.7s2.8-.2 2.8-1.5c0-2.1-5.1-1.3-5.1-5 0-3.4 2.9-4.4 5.8-4.4 1.6 0 3.1.2 4 .6"></path>
-  </svg>
-{% endset %}
+{% set resolvedTheme = params.theme if params.theme else 'dark' %}
+{% set resolvedLayout = params.layout if params.layout else 'capped' %}
+{% set resolvedContainerClass = 'ofh-width-container-fluid' if resolvedLayout == 'fluid' else 'ofh-width-container' %}
+{% set resolvedBrand = params.brand if params.brand else {
+  "href": "/",
+  "ariaLabel": "Our Future Health home"
+} %}
+{% set resolvedUtilityLinks = params.utilityLinks if params.utilityLinks else [] %}
+{% set resolvedNavigation = params.navigation if params.navigation else [] %}
+{% set resolvedIdPrefix = params.idPrefix if params.idPrefix else 'ofh-header' %}
+{% set hasDesktopToolsContent = params.search or params.action or params.account %}
+{% set hasMobilePanelContent = params.search or params.action or params.account or resolvedNavigation | length %}
+{% set resolvedMenuButtonClasses = 'ofh-button--ghost-inverted ofh-header__menu-button' if resolvedTheme == 'dark' else 'ofh-button--outlined ofh-header__menu-button' %}
+{% set rootClasses = 'ofh-header ofh-header--' + resolvedTheme + ' ofh-header--' + resolvedLayout %}
+{% set resolvedNhsLogo = resolvedBrand.nhsLogo if resolvedBrand and resolvedBrand.nhsLogo else '' %}
+{% set resolvedPartnerIsInverted = resolvedTheme == 'dark' %}
+{% set logoAssetPath = '/ofh-design-system-toolkit/assets/logos/' %}
+{% set nhsLogoAssets = {
+  "england": {
+    "largeDesktop": "nhs-partnership-england-large-desktop.svg",
+    "largeDesktopInverted": "nhs-partnership-england-large-desktop-inverted.svg",
+    "desktop": "nhs-partnership-england-desktop.svg",
+    "desktopInverted": "nhs-partnership-england-desktop-inverted.svg",
+    "tablet": "nhs-partnership-england-tablet.svg",
+    "tabletInverted": "nhs-partnership-england-tablet-inverted.svg",
+    "mobile": "nhs-partnership-england-mobile.svg",
+    "mobileInverted": "nhs-partnership-england-mobile-inverted.svg"
+  },
+  "scotland": {
+    "largeDesktop": "nhs-partnership-scotland-large-desktop.svg",
+    "largeDesktopInverted": "nhs-partnership-scotland-large-desktop-inverted.svg",
+    "desktop": "nhs-partnership-scotland-desktop.svg",
+    "desktopInverted": "nhs-partnership-scotland-desktop-inverted.svg",
+    "tablet": "nhs-partnership-scotland-tablet.svg",
+    "tabletInverted": "nhs-partnership-scotland-tablet-inverted.svg",
+    "mobile": "nhs-partnership-scotland-mobile.svg",
+    "mobileInverted": "nhs-partnership-scotland-mobile-inverted.svg"
+  },
+  "wales": {
+    "largeDesktop": "nhs-partnership-wales-large-desktop.svg",
+    "largeDesktopInverted": "nhs-partnership-wales-large-desktop-inverted.svg",
+    "desktop": "nhs-partnership-wales-desktop.svg",
+    "desktopInverted": "nhs-partnership-wales-desktop-inverted.svg",
+    "tablet": "nhs-partnership-wales-tablet.svg",
+    "tabletInverted": "nhs-partnership-wales-tablet-inverted.svg",
+    "mobile": "nhs-partnership-wales-mobile.svg",
+    "mobileInverted": "nhs-partnership-wales-mobile-inverted.svg"
+  },
+  "northern-ireland": {
+    "largeDesktop": "nhs-partnership-northern-ireland-large-desktop.svg",
+    "largeDesktopInverted": "nhs-partnership-northern-ireland-large-desktop-inverted.svg",
+    "desktop": "nhs-partnership-northern-ireland-desktop.svg",
+    "desktopInverted": "nhs-partnership-northern-ireland-desktop-inverted.svg",
+    "tablet": "nhs-partnership-northern-ireland-tablet.svg",
+    "tabletInverted": "nhs-partnership-northern-ireland-tablet-inverted.svg",
+    "mobile": "nhs-partnership-northern-ireland-mobile.svg",
+    "mobileInverted": "nhs-partnership-northern-ireland-mobile-inverted.svg"
+  }
+} %}
+{% set resolvedNhsLogoAssets = nhsLogoAssets[resolvedNhsLogo] if resolvedNhsLogo and nhsLogoAssets[resolvedNhsLogo] else null %}
 
-<header class="ofh-header
-{%- if params.transactional or params.transactionalService %} ofh-header--transactional{% endif %}
-{%- if params.organisation and params.organisation.name %} ofh-header--organisation{% endif %}
-{%- if params.classes %} {{ params.classes }}{% endif %}" role="banner"
-{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-  <div class="ofh-width-container ofh-header__container">
-    <div class="ofh-header__logo {%- if showNav == "false" and showSearch == "false"%} ofh-header__logo--only{%- endif %}">
-      {%- if params.organisation %}
-      <a class="ofh-header__link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}" aria-label="{{ params.organisation.name }} {{ params.organisation.split }} {{ params.organisation.descriptor }} homepage">
-        {%- if params.organisation.logoURL %}
-        <img class="ofh-org-logo" src="{{ baseUrl }}{{ params.organisation.logoURL }}" alt=""/>
-        {%- else -%}
-        {{ nhsLogo | safe }}
-        <span class="ofh-organisation-name">{{ params.organisation.name }}{% if params.organisation.split %} <span class="ofh-organisation-name-split">{{ params.organisation.split }}</span>{% endif %}</span>
-        {% if params.organisation.descriptor %}<span class="ofh-organisation-descriptor">{{ params.organisation.descriptor }}</span>{% endif %}
-        {%- endif %}
+{%- macro _href(item, fallback='#') -%}
+  {{ item.href if item and item.href else fallback }}
+{%- endmacro -%}
+
+{%- macro _rel(item) -%}
+  {% if item and item.openInNewWindow and item.rel %}
+    {{ item.rel }} noopener noreferrer
+  {% elif item and item.openInNewWindow %}
+    noopener noreferrer
+  {% elif item and item.rel %}
+    {{ item.rel }}
+  {% endif %}
+{%- endmacro -%}
+
+{%- macro _target(item) -%}
+  {{ '_blank' if item and item.openInNewWindow else (item.target if item and item.target else '') }}
+{%- endmacro -%}
+
+{%- macro _headerBrand(brand) -%}
+  <a
+    class="ofh-header__brand-link"
+    href="{{ brand.href if brand and brand.href else '/' }}"
+    aria-label="{{ brand.ariaLabel if brand and brand.ariaLabel else 'Our Future Health home' }}"
+    {%- for attribute, value in brand.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <span aria-hidden="true" class="ofh-header__brand-logo">
+      <img
+        alt=""
+        class="ofh-header__brand-logo-image"
+        src="{{ logoAssetPath }}ofh-logo-default.svg">
+    </span>
+  </a>
+{%- endmacro -%}
+
+{%- macro _headerPartner(assets) -%}
+  <span aria-hidden="true" class="ofh-header__partner">
+    <picture class="ofh-header__partner-picture">
+      <source
+        media="(min-width: 1300px)"
+        srcset="{{ logoAssetPath }}{{ assets.largeDesktopInverted if resolvedPartnerIsInverted else assets.largeDesktop }}">
+      <source
+        media="(min-width: 980px)"
+        srcset="{{ logoAssetPath }}{{ assets.desktopInverted if resolvedPartnerIsInverted else assets.desktop }}">
+      <source
+        media="(min-width: 740px)"
+        srcset="{{ logoAssetPath }}{{ assets.tabletInverted if resolvedPartnerIsInverted else assets.tablet }}">
+      <img
+        alt=""
+        class="ofh-header__partner-image"
+        src="{{ logoAssetPath }}{{ assets.mobileInverted if resolvedPartnerIsInverted else assets.mobile }}">
+    </picture>
+  </span>
+{%- endmacro -%}
+
+{%- macro _utilityLink(item) -%}
+  <a
+    class="ofh-header__utility-link"
+    href="{{ _href(item) | trim }}"
+    {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
+    {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
+    {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <span class="ofh-header__utility-text">{{ item.label }}</span>
+    {%- if item.external or item.openInNewWindow %}
+      {{ icon({ "name": "Launch", "size": 16, "classes": "ofh-header__utility-icon" }) }}
+    {%- endif %}
+  </a>
+{%- endmacro -%}
+
+{%- macro _actionLink(item, mobile=false) -%}
+  <a
+    class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__action-link' }}"
+    href="{{ _href(item) | trim }}"
+    {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
+    {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
+    {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <span class="{{ 'ofh-header__mobile-link-text' if mobile else 'ofh-header__action-text' }}">{{ item.label }}</span>
+  </a>
+{%- endmacro -%}
+
+{%- macro _account(account, mobile=false) -%}
+  {% if not account %}
+  {% elif account.type == 'account' %}
+    <div class="{{ 'ofh-header__account-cluster ofh-header__mobile-footer-account' if mobile else 'ofh-header__account-cluster' }}">
+      <a
+        class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
+        href="{{ account.accountHref if account.accountHref else '#' }}"
+        {%- if account.accountTarget %} target="{{ account.accountTarget }}"{% endif %}
+        {%- if account.accountRel %} rel="{{ account.accountRel }}"{% endif %}
+        {%- for attribute, value in account.accountAttributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+        <span class="ofh-header__account-text">{{ account.accountLabel if account.accountLabel else 'Account' }}</span>
       </a>
-      {%- else -%}
-      <a class="ofh-header__link{% if params.service %} ofh-header__link--service {% endif %}" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}" aria-label="{% if params.ariaLabel %}{{ params.ariaLabel }}{% else %}NHS homepage{% endif %}">
-        {{ nhsLogo | safe }}
-        {%- if params.service %}
-        <span class="ofh-header__service-name">
-          {{ params.service.name }}
-        </span>
-        {%- endif %}
+      <a
+        class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
+        href="{{ account.signOutHref if account.signOutHref else '#' }}"
+        {%- if account.signOutTarget %} target="{{ account.signOutTarget }}"{% endif %}
+        {%- if account.signOutRel %} rel="{{ account.signOutRel }}"{% endif %}
+        {%- for attribute, value in account.signOutAttributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+        {{ icon({ "name": "AccountCircle", "size": 24, "classes": "ofh-header__account-icon" }) }}
+        <span class="ofh-header__account-text">{{ account.signOutLabel if account.signOutLabel else 'Sign Out' }}</span>
       </a>
-      {%- endif %}
     </div>
+  {% else %}
+    <a
+      class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
+      href="{{ account.href if account.href else '#' }}"
+      {%- if account.target %} target="{{ account.target }}"{% endif %}
+      {%- if account.rel %} rel="{{ account.rel }}"{% endif %}
+      {%- for attribute, value in account.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      {{ icon({ "name": "AccountCircle", "size": 24, "classes": "ofh-header__account-icon" }) }}
+      <span class="ofh-header__account-text">{{ account.label if account.label else 'Sign In' }}</span>
+    </a>
+  {% endif %}
+{%- endmacro -%}
 
-    {%- if showNav == "false" and showSearch == "false"%}
+{%- macro _desktopNavigation(item, itemIndex) -%}
+  {% set groupId = resolvedIdPrefix + '-desktop-group-' + itemIndex %}
 
-      {%- if params.transactionalService%}
-        <div class="ofh-header__transactional-service-name">
-          <a class="ofh-header__transactional-service-name--link" href="{% if params.transactionalService.href %}{{ params.transactionalService.href }}{% else %}/{% endif %}">{{ params.transactionalService.name }}</a>
-        </div>
-      {%- endif %}
-
-    </div>{# close ofh-header__container #}
-
-    {% endif -%}
-
-    {% if showNav == "true" and params.primaryLinks and showSearch == "true" %}
-
-      <div class="ofh-header__content" id="content-header">
-
-        <div class="ofh-header__menu">
-          <button class="ofh-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false">Menu</button>
-        </div>
-
-        <div class="ofh-header__search">
-          <button class="ofh-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search">
-            {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
-            <span class="ofh-u-visually-hidden">Search</span>
-          </button>
-          <div class="ofh-header__search-wrap" id="wrap-search">
-            <form class="ofh-header__search-form" id="search" action="{{ params.searchAction if params.searchAction else 'https://www.nhs.uk/search/' }}" method="get" role="search">
-              <label class="ofh-u-visually-hidden" for="search-field">Search the NHS website</label>
-              <input class="ofh-search__input" id="search-field" name="{{ params.searchInputName if params.searchInputName else 'q' }}" type="search" placeholder="Search" autocomplete="off">
-              <button class="ofh-search__submit" type="submit">
-                {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
-                <span class="ofh-u-visually-hidden">Search</span>
-              </button>
-              <button class="ofh-search__close" id="close-search">
-                {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
-                <span class="ofh-u-visually-hidden">Close search</span>
-              </button>
-            </form>
-          </div>
-        </div>
-
+  {% if item.items %}
+    {% set hasCurrentChild = (item.items | selectattr('current') | list | length) > 0 %}
+    <li class="ofh-header__nav-item ofh-header__nav-item--group" data-ofh-header-group>
+      <button
+        class="ofh-header__nav-trigger{% if item.current or hasCurrentChild %} ofh-header__nav-trigger--current{% endif %}"
+        type="button"
+        aria-controls="{{ groupId }}-panel"
+        aria-expanded="false"
+        data-ofh-header-group-toggle>
+        <span class="ofh-header__nav-label">{{ item.label }}</span>
+        {{ icon({ "name": "ChevronDown", "size": 24, "classes": "ofh-header__nav-icon ofh-header__nav-icon--down" }) }}
+        {{ icon({ "name": "ChevronUp", "size": 24, "classes": "ofh-header__nav-icon ofh-header__nav-icon--up" }) }}
+      </button>
+      <div
+        class="ofh-header__nav-panel"
+        id="{{ groupId }}-panel"
+        hidden
+        data-ofh-header-group-panel>
+        <ul class="ofh-header__nav-panel-list">
+          {% for child in item.items %}
+            <li class="ofh-header__nav-panel-item">
+              <a
+                class="ofh-header__nav-panel-link{% if child.current %} ofh-header__nav-panel-link--current{% endif %}"
+                href="{{ _href(child) | trim }}"
+                {%- if child.current %} aria-current="page"{% endif %}
+                {%- if _target(child) | trim %} target="{{ _target(child) | trim }}"{% endif %}
+                {%- if _rel(child) | trim %} rel="{{ _rel(child) | trim }}"{% endif %}
+                {%- for attribute, value in child.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+                <span class="ofh-header__nav-panel-label">{{ child.label }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
+    </li>
+  {% else %}
+    <li class="ofh-header__nav-item">
+      <a
+        class="ofh-header__nav-link{% if item.current %} ofh-header__nav-link--current{% endif %}"
+        href="{{ _href(item) | trim }}"
+        {%- if item.current %} aria-current="page"{% endif %}
+        {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
+        {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
+        {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+        <span class="ofh-header__nav-label">{{ item.label }}</span>
+      </a>
+    </li>
+  {% endif %}
+{%- endmacro -%}
 
-    </div>{# close ofh-header__container #}
+{%- macro _mobileNavigation(item, itemIndex) -%}
+  {% set groupId = resolvedIdPrefix + '-mobile-group-' + itemIndex %}
 
-    <nav class="ofh-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation" aria-labelledby="label-navigation">
-      <div class="ofh-width-container">
-        <p class="ofh-header__navigation-title"><span id="label-navigation">Menu</span>
-          <button class="ofh-header__navigation-close" id="close-menu">
-            {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
-            <span class="ofh-u-visually-hidden">Close menu</span>
-          </button>
-        </p>
-        <ul class="ofh-header__navigation-list">
-          <li class="ofh-header__navigation-item ofh-header__navigation-item--for-mobile">
-            <a class="ofh-header__navigation-link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}">
-              {% if params.homeText %}{{ params.homeText }}{% else %}Home{% endif %}
-              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
+  {% if item.items %}
+    <li class="ofh-header__mobile-nav-item ofh-header__mobile-nav-item--group" data-ofh-header-mobile-group>
+      <button
+        class="ofh-header__mobile-trigger"
+        type="button"
+        aria-controls="{{ groupId }}-panel"
+        aria-expanded="false"
+        data-ofh-header-mobile-group-toggle>
+        <span class="ofh-header__mobile-link-text">{{ item.label }}</span>
+        {{ icon({ "name": "ChevronDown", "size": 24, "classes": "ofh-header__mobile-trigger-icon ofh-header__mobile-trigger-icon--down" }) }}
+        {{ icon({ "name": "ChevronUp", "size": 24, "classes": "ofh-header__mobile-trigger-icon ofh-header__mobile-trigger-icon--up" }) }}
+      </button>
+      <ul
+        class="ofh-header__mobile-subnav"
+        id="{{ groupId }}-panel"
+        hidden
+        data-ofh-header-mobile-group-panel>
+        {% for child in item.items %}
+          <li class="ofh-header__mobile-subnav-item">
+            <a
+              class="ofh-header__mobile-subnav-link{% if child.current %} ofh-header__mobile-subnav-link--current{% endif %}"
+              href="{{ _href(child) | trim }}"
+              {%- if child.current %} aria-current="page"{% endif %}
+              {%- if _target(child) | trim %} target="{{ _target(child) | trim }}"{% endif %}
+              {%- if _rel(child) | trim %} rel="{{ _rel(child) | trim }}"{% endif %}
+              {%- for attribute, value in child.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+              <span class="ofh-header__mobile-link-text">{{ child.label }}</span>
             </a>
           </li>
-          {%- for item in params.primaryLinks %}
-          <li class="ofh-header__navigation-item">
-            <a class="ofh-header__navigation-link" href="{{item.url}}">
-              {{item.label}}
-              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
-            </a>
-          </li>
-          {%- endfor %}
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+    <li class="ofh-header__mobile-nav-item">
+      <a
+        class="ofh-header__mobile-link{% if item.current %} ofh-header__mobile-link--current{% endif %}"
+        href="{{ _href(item) | trim }}"
+        {%- if item.current %} aria-current="page"{% endif %}
+        {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
+        {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
+        {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+        <span class="ofh-header__mobile-link-text">{{ item.label }}</span>
+      </a>
+    </li>
+  {% endif %}
+{%- endmacro -%}
+
+<header
+  class="{{ rootClasses }}{% if params.classes %} {{ params.classes }}{% endif %}"
+  data-ofh-header
+  {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+
+  {% if resolvedUtilityLinks | length %}
+    <div class="ofh-header__top">
+      <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
+        <ul class="ofh-header__utility-list">
+          {% for item in resolvedUtilityLinks %}
+            <li class="ofh-header__utility-item">{{ _utilityLink(item) | trim }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="ofh-header__middle">
+    <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
+      <div class="ofh-header__middle-layout">
+        {{ _headerBrand(resolvedBrand) | trim }}
+
+        <div class="ofh-header__middle-tools">
+          {% if resolvedNhsLogoAssets %}
+            {{ _headerPartner(resolvedNhsLogoAssets) | trim }}
+          {% endif %}
+
+          {% if resolvedNhsLogoAssets and (hasDesktopToolsContent or hasMobilePanelContent) %}
+            <span aria-hidden="true" class="ofh-header__partner-divider"></span>
+          {% endif %}
+
+          <div class="ofh-header__desktop-tools">
+            {% if params.search %}
+              {{ searchInput({
+                "action": params.search.action,
+                "method": params.search.method,
+                "label": params.search.label,
+                "input": params.search.input,
+                "button": params.search.button,
+                "classes": "ofh-header__search" + (' ' + params.search.classes if params.search.classes else ''),
+                "attributes": params.search.attributes
+              }) }}
+            {% endif %}
+
+            {% if params.action %}
+              {{ _actionLink(params.action) | trim }}
+            {% endif %}
+
+            {{ _account(params.account) | trim }}
+          </div>
+
+          {% if hasMobilePanelContent %}
+            {{ button({
+              "text": params.menuLabel if params.menuLabel else 'Menu',
+              "type": "button",
+              "classes": resolvedMenuButtonClasses,
+              "attributes": {
+                "aria-controls": resolvedIdPrefix + "-mobile-panel",
+                "aria-expanded": "false",
+                "data-ofh-header-menu-toggle": "true"
+              }
+            }) }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if resolvedNavigation | length %}
+    <nav class="ofh-header__bottom" aria-label="Primary navigation">
+      <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
+        <ul class="ofh-header__nav-list">
+          {% for item in resolvedNavigation %}
+            {{ _desktopNavigation(item, loop.index0) | trim }}
+          {% endfor %}
         </ul>
       </div>
     </nav>
+  {% endif %}
 
-    {% endif -%}
-
-    {% if showSearch == "true" and showNav == "false" %}
-
-      <div class="ofh-header__content" id="content-header">
-
-        <div class="ofh-header__search">
-          <button class="ofh-header__search-toggle" id="toggle-search" aria-controls="search" aria-label="Open search">
-            {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
-            <span class="ofh-u-visually-hidden">Search</span>
-          </button>
-          <div class="ofh-header__search-wrap" id="wrap-search">
-            <form class="ofh-header__search-form" id="search" action="{{ params.searchAction if params.searchAction else 'https://www.nhs.uk/search/' }}" method="get" role="search">
-              <label class="ofh-u-visually-hidden" for="search-field">Search the NHS website</label>
-              <input class="ofh-search__input" id="search-field" name="{{ params.searchInputName if params.searchInputName else 'q' }}" type="search" placeholder="Search" autocomplete="off">
-              <button class="ofh-search__submit" type="submit">
-                {{ icon({ "name": "Search", "size": 24, "classes": "ofh-header__icon ofh-header__icon--search" }) }}
-                <span class="ofh-u-visually-hidden">Search</span>
-              </button>
-              <button class="ofh-search__close" id="close-search">
-                {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
-                <span class="ofh-u-visually-hidden">Close search</span>
-              </button>
-            </form>
+  {% if hasMobilePanelContent %}
+    <div
+      class="ofh-header__mobile-panel"
+      id="{{ resolvedIdPrefix }}-mobile-panel"
+      hidden
+      data-ofh-header-mobile-panel>
+      <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
+        {% if params.search %}
+          <div class="ofh-header__mobile-search">
+            {{ searchInput({
+              "action": params.search.action,
+              "method": params.search.method,
+              "label": params.search.label,
+              "input": params.search.input,
+              "button": params.search.button,
+              "classes": "ofh-header__mobile-search-control" + (' ' + params.search.classes if params.search.classes else ''),
+              "attributes": params.search.attributes
+            }) }}
           </div>
-        </div>
+        {% endif %}
 
+        {% if resolvedNavigation | length %}
+          <ul class="ofh-header__mobile-nav-list">
+            {% for item in resolvedNavigation %}
+              {{ _mobileNavigation(item, loop.index0) | trim }}
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if params.action or params.account %}
+          <div class="ofh-header__mobile-footer">
+            {% if params.action %}
+              {{ _actionLink(params.action, true) | trim }}
+            {% endif %}
+            {{ _account(params.account, true) | trim }}
+          </div>
+        {% endif %}
       </div>
-
-    </div>{# close ofh-header__container #}
-
-    {% endif -%}
-
-    {% if showNav == "true" and params.primaryLinks and showSearch == "false" %}
-
-      <div class="ofh-header__content" id="content-header">
-        <div class="ofh-header__menu ofh-header__menu--only">
-          <button class="ofh-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false">Menu</button>
-        </div>
-      </div>
-    </div>{# close ofh-header__container #}
-
-    <nav class="ofh-header__navigation" id="header-navigation" role="navigation" aria-label="Primary navigation" aria-labelledby="label-navigation">
-      <div class="ofh-width-container">
-        <p class="ofh-header__navigation-title"><span id="label-navigation">Menu</span>
-          <button class="ofh-header__navigation-close" id="close-menu">
-            {{ icon({ "name": "Close", "size": 24, "classes": "ofh-header__icon ofh-header__icon--close" }) }}
-            <span class="ofh-u-visually-hidden">Close menu</span>
-          </button>
-        </p>
-        <ul class="ofh-header__navigation-list">
-          <li class="ofh-header__navigation-item ofh-header__navigation-item--for-mobile">
-            <a class="ofh-header__navigation-link" href="{% if params.homeHref %}{{ params.homeHref }}{% else %}/{% endif %}">
-              Home
-              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
-            </a>
-          </li>
-          {%- for item in params.primaryLinks %}
-          <li class="ofh-header__navigation-item">
-            <a class="ofh-header__navigation-link" href="{{item.url}}">
-              {{item.label}}
-              {{ icon({ "name": "ChevronRight", "size": 32, "classes": "ofh-header__icon ofh-header__icon--chevron" }) }}
-            </a>
-          </li>
-          {%- endfor %}
-        </ul>
-      </div>
-    </nav>
-
-    {% endif -%}
-
+    </div>
+  {% endif %}
 </header>

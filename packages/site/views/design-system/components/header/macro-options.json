@@ -1,130 +1,122 @@
 {
   "params": [
     {
-      "name": "showNav",
-      "type": "boolean",
-      "required": true,
-      "description": "Set to `true` to show the navigation links in the header."
-    },
-    {
-      "name": "showSearch",
-      "type": "boolean",
-      "required": true,
-      "description": "Set to `true` to show the site search input form."
-    },
-    {
-      "name": "homeHref",
+      "name": "theme",
       "type": "string",
-      "required": "No",
-      "description": "The `href` of the link for the logo and mobile home link in the navigation links. Defaults to \"/\""
-    },
-    {
-      "name": "ariaLabel",
-      "type": "string",
-      "required": "No",
-      "description": "Aria label for the logo href. Defaults to \"NHS homepage\"."
-    },
-    {
-      "name": "organisation",
-      "type": "object",
       "required": false,
-      "description": "Settings for header with organisational logo.",
+      "description": "Header theme. Use `dark`, `light`, or `brand`. Defaults to `dark`."
+    },
+    {
+      "name": "layout",
+      "type": "string",
+      "required": false,
+      "description": "Header width behavior. Use `capped` or `fluid`. Defaults to `capped`."
+    },
+    {
+      "name": "brand",
+      "type": "object",
+      "required": true,
+      "description": "Brand block configuration.",
       "params": [
         {
-          "name": "name",
-          "type": "string",
-          "required": false,
-          "description": "Organisation name value."
-        },
-        {
-          "name": "descriptor",
-          "type": "string",
-          "required": false,
-          "description": "Organisation descriptor."
-        },
-        {
-          "name": "logoURL",
+          "name": "href",
           "type": "string",
           "required": true,
-          "description": "Organisation logo if using a static asset, such as PNG, is preferred."
+          "description": "Brand destination URL."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": true,
+          "description": "Accessible name for the brand link."
+        },
+        {
+          "name": "nhsLogo",
+          "type": "string",
+          "required": false,
+          "description": "Optional NHS partner logo region. Use `england`, `scotland`, `wales`, or `northern-ireland`."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the brand link."
         }
       ]
     },
     {
-      "name": "primaryLinks",
+      "name": "utilityLinks",
       "type": "array",
       "required": false,
-      "description": "Array of navigation links for use in the header.",
+      "description": "Top-bar utility links rendered above the main Header row."
+    },
+    {
+      "name": "search",
+      "type": "object",
+      "required": false,
+      "description": "Search configuration using the same shape as the Search input macro."
+    },
+    {
+      "name": "action",
+      "type": "object",
+      "required": false,
+      "description": "Standalone middle-row action link.",
       "params": [
         {
-          "name": "url",
+          "name": "href",
           "type": "string",
           "required": true,
-          "description": "The href of a navigation item in the header."
+          "description": "Action destination URL."
         },
         {
           "name": "label",
           "type": "string",
-          "required": false,
-          "description": "The label of a navigation item in the header."
-        }
-      ]
-    },
-    {
-      "name": "transactional",
-      "type": "string",
-      "required": "No",
-      "description": "Set to `true` if this is a transactional header (with smaller logo)."
-    },
-    {
-      "name": "transactionalService",
-      "type": "object",
-      "required": false,
-      "description": "Settings for transactional service header.",
-      "params": [
-        {
-          "name": "name",
-          "type": "string",
-          "required": false,
-          "description": "Transactional service name value."
+          "required": true,
+          "description": "Action link text."
         },
         {
-          "name": "href",
-          "type": "string",
-          "required": false,
-          "description": "The href of the transactional header name."
-        },
-        {
-          "name": "longName",
+          "name": "openInNewWindow",
           "type": "boolean",
           "required": false,
-          "description": "Set this to `true` if the transactional service name is longer than 22 characters."
+          "description": "Open the action in a new window and append `rel` values."
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": false,
+          "description": "Additional HTML attributes for the action link."
         }
       ]
     },
     {
-      "name": "searchAction",
-      "type": "string",
-      "required": "No",
-      "description": "Custom search action endpoint."
+      "name": "account",
+      "type": "object",
+      "required": false,
+      "description": "Account state configuration for either sign-in or signed-out account links."
     },
     {
-      "name": "searchInputName",
+      "name": "navigation",
+      "type": "array",
+      "required": false,
+      "description": "Primary navigation items. Each item is either a leaf link (`{ href, label }`) or a grouped item (`{ label, items: [...] }`)."
+    },
+    {
+      "name": "idPrefix",
       "type": "string",
-      "required": "No",
-      "description": "The name for the search field. Defaults to \"q\""
+      "required": false,
+      "description": "ID prefix used for the generated mobile and desktop disclosure controls."
     },
     {
       "name": "classes",
       "type": "string",
       "required": false,
-      "description": "Classes to add to the header container."
+      "description": "Classes to add to the root Header element."
     },
     {
       "name": "attributes",
       "type": "object",
       "required": false,
-      "description": "HTML attributes (for example data attributes) to add to the header container."
+      "description": "Additional HTML attributes for the root Header element."
     }
   ]
 }
