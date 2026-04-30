@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
 | ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
+| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes | 🟢 Low - adopt the public React pagination if needed |
 | [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes | 🟢 Low - adopt the public React footer if needed |
 | [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
 | [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
@@ -21,6 +22,64 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.14.0 / React v0.13.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.14.0+
+- `@ourfuturehealth/react-components` v0.13.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `pagination` component to the current design-system treatment and introduces the first public React `Pagination` component.
+
+- Toolkit consumers now get boxed pagination focus states, corrected state coloring, and content-hugging previous/next hit areas instead of 50/50 click zones.
+- Toolkit docs now show the start and end of a sequence explicitly through `previous-only` and `next-only` examples.
+- React consumers can now adopt the public `Pagination` component instead of carrying local previous/next page navigation markup.
+
+### Migration Steps
+
+1. Adopt the public React `Pagination` component where you need toolkit-parity previous/next page navigation in React.
+2. Re-run visual QA if you have local pagination overrides, because the link hit area now hugs the content instead of filling half of the row.
+3. For sequence endpoints, omit the unavailable side rather than rendering placeholder markup.
+
+#### React example
+
+**New in `react-v0.13.0`:**
+
+```tsx
+import { Pagination } from '@ourfuturehealth/react-components';
+```
+
+#### Toolkit example
+
+**Before:**
+
+```njk
+<nav class="app-pagination" aria-label="Pagination">
+  <a href="/previous">Previous page</a>
+  <a href="/next">Next page</a>
+</nav>
+```
+
+**After (`toolkit-v4.14.0`):**
+
+```njk
+{{ pagination({
+  "previousUrl": "/section/treatments",
+  "previousPage": "Treatments",
+  "nextUrl": "/section/symptoms",
+  "nextPage": "Symptoms"
+}) }}
+```
 
 ---
 

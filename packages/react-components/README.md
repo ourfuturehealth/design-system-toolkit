@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.12.0/ourfuturehealth-react-components-0.12.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.13.0/ourfuturehealth-react-components-0.13.0.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -55,6 +55,7 @@ import {
   Fieldset,
   Footer,
   Icon,
+  Pagination,
   LinkAction,
   LinkIcon,
   LinkSkip,
@@ -118,6 +119,12 @@ function App() {
       <SummaryList rows={summaryRows} />
       <Tag variant="brand">Beta</Tag>
       <Button variant="contained">Click me</Button>
+      <Pagination
+        previousUrl="/section/treatments"
+        previousPage="Treatments"
+        nextUrl="/section/symptoms"
+        nextPage="Symptoms"
+      />
       <Icon name="Search" size={24} />
       <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
       <LinkIcon href="/previous-step">Go back</LinkIcon>
@@ -232,6 +239,7 @@ The package also provides:
 - `Checkboxes`
 - `Radios`
 - `Icon`
+- `Pagination`
 - `SummaryList`
 
 ### ErrorSummary

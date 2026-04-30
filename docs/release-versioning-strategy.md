@@ -31,8 +31,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 | Package                             | Canonical tag pattern | Example tag      |
 | ----------------------------------- | --------------------- | ---------------- |
-| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.13.0` |
-| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.12.0`   |
+| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.14.0` |
+| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.13.0`   |
 
 The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 
@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.13.0/ourfuturehealth-toolkit-4.13.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.14.0/ourfuturehealth-toolkit-4.14.0.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.12.0/ourfuturehealth-react-components-0.12.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.13.0/ourfuturehealth-react-components-0.13.0.tgz"
   }
 }
 ```
@@ -137,6 +137,8 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 28    | `react-v0.11.0`   | N/A            | `0.11.0`      | Monorepo       | Released               |
 | 29    | `toolkit-v4.13.0` | `4.13.0`       | N/A           | Monorepo       | Released               |
 | 30    | `react-v0.12.0`   | N/A            | `0.12.0`      | Monorepo       | Released               |
+| 31    | `toolkit-v4.14.0` | `4.14.0`       | N/A           | Monorepo       | Released               |
+| 32    | `react-v0.13.0`   | N/A            | `0.13.0`      | Monorepo       | Released               |
 
 ## References
 
