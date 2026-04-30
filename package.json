@@ -23,7 +23,7 @@
       "serialize-javascript": "7.0.3",
       "rollup": "4.59.0",
       "immutable": "5.1.5",
-      "liquidjs": "10.25.5",
+      "liquidjs": "10.25.7",
       "flatted": "3.4.2",
       "undici": "7.24.0",
       "picomatch@2.3.1": "2.3.2",
