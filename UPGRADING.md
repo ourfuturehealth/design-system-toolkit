@@ -555,47 +555,6 @@ Current toolkit component templates, docs examples, React stories, and tests hav
 <Icon name="Linkedin" size={24} />
 ```
 
----
-
-## Upgrading to v4.16.0 / React v0.15.0
-
-**Planned:** April 2026
-**Affected packages:**
-
-- `@ourfuturehealth/toolkit` v4.16.0+
-- `@ourfuturehealth/react-components` v0.15.0+
-
-### Release Overview
-
-This release does not introduce a supported breaking API change.
-
-Toolkit consumers should review the refreshed `inset-text` structure and docs examples if they already use inset text.
-
-React consumers can now adopt the public `InsetText` component when they need short supporting information with a semantic feedback border, optional heading, and one action link.
-
-### Inset Text
-
-- Toolkit `inset-text` now matches the current Figma treatment more closely, including the refreshed border/background combinations and content structure
-- React now exposes `InsetText` as a public component with support for `heading`, `text` or `html`, variant/background selection, and an optional `actionLink`
-- Storybook and docs-site examples now cover default, without-heading, and rich-text inset text usage
-
-#### React example
-
-```tsx
-import { InsetText } from '@ourfuturehealth/react-components';
-
-<InsetText
-  heading="Information"
-  variant="info"
-  background="grey"
-  text="You can report any suspected side effect to the Yellow Card safety scheme."
-  actionLink={{
-    text: 'Report a side effect',
-    href: '/report-side-effect',
-  }}
-/>;
-```
-
 ## Upgrading to v4.8.0 / React v0.6.0
 
 **Released:** March 2026
