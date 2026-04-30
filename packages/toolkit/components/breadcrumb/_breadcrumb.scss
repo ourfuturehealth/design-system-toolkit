@@ -17,16 +17,16 @@
   padding-top: $ofh-size-12;
 
   .ofh-breadcrumb__separator {
-    color: $ofh-color-greyscale-2;
-    fill: $ofh-color-greyscale-2;
+    color: $ofh-color-foreground-breadcrumb-default;
+    fill: $ofh-color-foreground-breadcrumb-default;
     flex: 0 0 auto;
     height: $ofh-size-16;
     width: $ofh-size-16;
   }
 
   .ofh-breadcrumb__back-icon {
-    color: $ofh-color-greyscale-2;
-    fill: $ofh-color-greyscale-2;
+    color: $ofh-color-foreground-breadcrumb-default;
+    fill: $ofh-color-foreground-breadcrumb-default;
     flex: 0 0 auto;
     height: $ofh-size-16;
     width: $ofh-size-16;
