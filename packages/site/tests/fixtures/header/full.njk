@@ -1,0 +1,68 @@
+{% from 'header/macro.njk' import header %}
+
+{{ header({
+  "theme": "dark",
+  "brand": {
+    "href": "/",
+    "ariaLabel": "Our Future Health home",
+    "nhsLogo": "england"
+  },
+  "utilityLinks": [
+    {
+      "href": "/docs",
+      "label": "View docs",
+      "openInNewWindow": true
+    }
+  ],
+  "search": {
+    "action": "/search",
+    "label": {
+      "text": "Search the site"
+    },
+    "input": {
+      "id": "header-search"
+    }
+  },
+  "action": {
+    "href": "/join",
+    "label": "Join now"
+  },
+  "account": {
+    "type": "account",
+    "accountHref": "/account",
+    "signOutHref": "/sign-out"
+  },
+  "navigation": [
+    {
+      "href": "/about",
+      "label": "About"
+    },
+    {
+      "label": "Research",
+      "items": [
+        {
+          "href": "/research/participant-portal",
+          "label": "Participant portal"
+        },
+        {
+          "href": "/research/data-access",
+          "label": "Data access",
+          "current": true
+        }
+      ]
+    },
+    {
+      "label": "Support",
+      "items": [
+        {
+          "href": "/support/contact",
+          "label": "Contact"
+        },
+        {
+          "href": "/support/faq",
+          "label": "FAQ"
+        }
+      ]
+    }
+  ]
+}) }}

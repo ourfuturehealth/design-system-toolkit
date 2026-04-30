@@ -208,7 +208,7 @@ gulp.task('clean', cleanDist);
 
 gulp.task('style', compileCSS);
 
-gulp.task('build', gulp.series([buildIconSprite, compileCSS, webpackJS]));
+gulp.task('build', gulp.series([buildIconSprite, compileCSS, webpackJS, assets]));
 
 gulp.task(
   'bundle',

@@ -1,35 +1,14 @@
-{% from 'components/header/macro.njk' import header %}
+{% from '_header-examples.njk' import siteHeader %}
 
-{{ header({
-  "homeHref": "/",
-  "ariaLabel": "Our Future Health design system homepage",
-  "service": {
-    "name": "Digital service manual",
-    "longName": "true"
-  },
-  "organisation": {
-    "name": "Our Future Health",
-    "logoURL": "/ofh-design-system-toolkit/assets/logos/ofh-logo-marque.svg"
-  },
-  "showNav": "false",
-  "showSearch": "false",
-  "primaryLinks": [
-    {
-      'url': '/get-started',
-      'label': 'Get started'
-    },
-    {
-      'url' : '/design-system/styles',
-      'label' : 'Foundation styles'
-    },
-    {
-      'url' : '/design-system/components',
-      'label' : 'Components'
-    },
-    {
-      'url' : '/design-system/patterns',
-      'label' : 'Patterns'
-    }
-  ]
-  })
-}}
+{% set currentSection = '' %}
+{% if pageSection == 'Get started' or subSection == 'Get started' %}
+  {% set currentSection = 'Get started' %}
+{% elif subSection == 'Foundation styles' %}
+  {% set currentSection = 'Foundation styles' %}
+{% elif subSection == 'Components' %}
+  {% set currentSection = 'Components' %}
+{% elif subSection == 'Patterns' %}
+  {% set currentSection = 'Patterns' %}
+{% endif %}
+
+{{ siteHeader(currentSection) }}

@@ -1,0 +1,195 @@
+{% from 'header/macro.njk' import header %}
+
+{% macro siteHeader(currentSection='') %}
+  {{ header({
+    "theme": "light",
+    "brand": {
+      "href": "/",
+      "ariaLabel": "Our Future Health design system home"
+    },
+    "navigation": [
+      {
+        "href": "/get-started",
+        "label": "Get started",
+        "current": currentSection == "Get started"
+      },
+      {
+        "href": "/design-system/styles",
+        "label": "Foundation styles",
+        "current": currentSection == "Foundation styles"
+      },
+      {
+        "href": "/design-system/components",
+        "label": "Components",
+        "current": currentSection == "Components"
+      },
+      {
+        "href": "/design-system/patterns",
+        "label": "Patterns",
+        "current": currentSection == "Patterns"
+      }
+    ]
+  }) }}
+{% endmacro %}
+
+{% macro contentHeader() %}
+  {{ header({
+    "theme": "light",
+    "brand": {
+      "href": "/",
+      "ariaLabel": "Our Future Health home",
+      "nhsLogo": "england"
+    },
+    "navigation": [
+      {
+        "href": "#",
+        "label": "About"
+      },
+      {
+        "label": "Research",
+        "items": [
+          {
+            "href": "#",
+            "label": "Participant portal"
+          },
+          {
+            "href": "#",
+            "label": "Data access"
+          },
+          {
+            "href": "#",
+            "label": "Publications"
+          }
+        ]
+      },
+      {
+        "href": "#",
+        "label": "Support"
+      },
+      {
+        "href": "#",
+        "label": "Contact"
+      }
+    ]
+  }) }}
+{% endmacro %}
+
+{% macro showcaseHeader(theme='dark') %}
+  {{ header({
+    "idPrefix": "header-showcase-" + theme,
+    "theme": theme,
+    "brand": {
+      "href": "#",
+      "ariaLabel": "Our Future Health home",
+      "nhsLogo": "england"
+    },
+    "utilityLinks": [
+      {
+        "href": "#",
+        "label": "View docs",
+        "openInNewWindow": true
+      },
+      {
+        "href": "#",
+        "label": "View GitHub",
+        "openInNewWindow": true
+      },
+      {
+        "href": "#",
+        "label": "View Confluence",
+        "openInNewWindow": true
+      },
+      {
+        "href": "#",
+        "label": "View Storybook",
+        "openInNewWindow": true
+      }
+    ],
+    "search": {
+      "action": "#",
+      "label": {
+        "text": "Search the site"
+      },
+      "input": {
+        "id": "header-showcase-search-" + theme,
+        "placeholder": "Search"
+      }
+    },
+    "action": {
+      "href": "#",
+      "label": "Join now"
+    },
+    "account": {
+      "type": "sign-in",
+      "href": "#"
+    },
+    "navigation": [
+      {
+        "href": "#",
+        "label": "About"
+      },
+      {
+        "label": "Research",
+        "items": [
+          {
+            "href": "#",
+            "label": "Participant portal"
+          },
+          {
+            "href": "#",
+            "label": "Data access",
+            "current": true
+          },
+          {
+            "href": "#",
+            "label": "Publications"
+          }
+        ]
+      },
+      {
+        "href": "#",
+        "label": "Events"
+      },
+      {
+        "href": "#",
+        "label": "Support"
+      },
+      {
+        "href": "#",
+        "label": "Contact"
+      }
+    ]
+  }) }}
+{% endmacro %}
+
+{% macro landingHeader() %}
+  {{ header({
+    "theme": "light",
+    "brand": {
+      "href": "#",
+      "ariaLabel": "Our Future Health home"
+    },
+    "navigation": [
+      {
+        "href": "#",
+        "label": "Research programme"
+      },
+      {
+        "href": "#",
+        "label": "About us"
+      },
+      {
+        "href": "#",
+        "label": "Participants"
+      },
+      {
+        "href": "#",
+        "label": "Partners"
+      },
+      {
+        "href": "#",
+        "label": "News & events"
+      }
+    ]
+  }) }}
+{% endmacro %}
