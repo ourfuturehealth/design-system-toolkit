@@ -103,7 +103,7 @@ npm pack ./packages/react-components --ignore-scripts
 
 ## Version Correlation Table
 
-This table is illustrative, not exhaustive. It shows the transition from the pre-monorepo single-package release model to the monorepo model where toolkit and React release independently.
+This table is illustrative, not exhaustive. It shows the transition from the pre-monorepo single-package release model to the monorepo model where toolkit and React release independently, plus the tag format future monorepo releases continue to use.
 
 | Order | Release tag      | Toolkit version | React version | Repo model     | Status                 |
 | ----- | ---------------- | --------------- | ------------- | -------------- | ---------------------- |
@@ -114,8 +114,8 @@ This table is illustrative, not exhaustive. It shows the transition from the pre
 | 5     | `react-v0.0.1`   | N/A             | `0.0.1`       | Monorepo       | Released               |
 | 6     | `toolkit-v4.1.0` | `4.1.0`         | N/A           | Monorepo       | Released               |
 | 7     | `react-v0.1.0`   | N/A             | `0.1.0`       | Monorepo       | Released               |
-| 8     | `toolkit-v4.15.0` | `4.15.0`       | N/A           | Monorepo       | Planned in this branch |
-| 9     | `react-v0.14.0`   | N/A            | `0.14.0`      | Monorepo       | Planned in this branch |
+| 8     | `toolkit-vX.Y.Z` | `X.Y.Z`         | N/A           | Monorepo       | Future releases follow this format |
+| 9     | `react-vA.B.C`   | N/A             | `A.B.C`       | Monorepo       | Future releases follow this format |
 
 ## References
 
