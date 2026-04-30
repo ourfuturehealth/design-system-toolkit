@@ -8,7 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
-| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the new Task List APIs only if relevant |
+| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
 | [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React pagination if needed |
 | [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React footer if needed |
 | [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React summary list if needed |
@@ -48,8 +48,8 @@ This release refreshes the toolkit `task-list` component to the current design-s
 ### Migration Steps
 
 1. Adopt the public React `TaskList` component where you need toolkit-parity task navigation in React.
-2. Re-run visual QA if you have local task-list overrides, especially around first-row dividers, responsive spacing, hint text, and status tag alignment.
-3. Move the docs-site IA reference for Task List to `Content presentation` rather than `Navigation` when cross-checking internal references.
+2. Prefer the refreshed toolkit task-list API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local task-list overrides, especially around first-row dividers, responsive spacing, hint text, and status tag alignment.
 
 #### React example
 
