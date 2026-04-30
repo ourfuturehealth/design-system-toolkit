@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.16.0/ourfuturehealth-react-components-0.16.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -64,6 +64,7 @@ import {
   Radios,
   Select,
   SummaryList,
+  Table,
   TaskList,
   Tag,
   Textarea,
@@ -82,6 +83,20 @@ function App() {
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
     { value: 'post', label: 'Post' },
+  ];
+  const symptomsHead = [
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ];
+  const symptomsRows = [
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
   ];
   const summaryRows = [
     {
@@ -210,6 +225,7 @@ function App() {
         legend="Preferred contact method"
         name="preferred-contact-method"
       />
+      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
     </div>
   );
 }
@@ -269,6 +285,7 @@ The package also provides:
 - `Icon`
 - `Pagination`
 - `SummaryList`
+- `Table`
 
 ### ErrorSummary
 

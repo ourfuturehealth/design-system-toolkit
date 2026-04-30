@@ -17,7 +17,7 @@
     <thead role="rowgroup" class="ofh-table__head">
     <tr role="row">
       {%- for item in params.head %}
-        <th role="columnheader" class="
+        <th role="columnheader" class="ofh-table__header
       {%- if item.format %} ofh-table__header--{{ item.format }}{% endif %}" scope="col">
           {{ item.html |safe if item.html else item.text }}
         </th>
@@ -30,8 +30,12 @@
       <tr role="row" class="ofh-table__row" >
         {%- if params.responsive %}
           {%- for cell in row %}
-            <td role="cell" class="ofh-table__cell{% if cell.format %} ofh-table__cell--{{ cell.format }}{% endif %}">
-              <span class="ofh-table-responsive__heading">{{cell.header}} </span>{{ cell.html | safe if cell.html else cell.text }}
+            {%- set responsiveHeader = cell.header if cell.header else (params.head[loop.index0].text if params.head and params.head[loop.index0] and params.head[loop.index0].text else (params.head[loop.index0].html | striptags if params.head and params.head[loop.index0] and params.head[loop.index0].html else '')) %}
+            <td role="cell" class="ofh-table__cell{% if cell.format %} ofh-table__cell--{{ cell.format }}{% endif %}"
+                {%- if cell.colspan %} colspan="{{ cell.colspan }}"{% endif %}
+                {%- if cell.rowspan %} rowspan="{{ cell.rowspan }}"{% endif %}>
+              <span class="ofh-table-responsive__heading">{{ responsiveHeader }}</span>
+              <span class="ofh-table-responsive__content">{{ cell.html | safe if cell.html else cell.text }}</span>
             </td>
           {%- endfor %}
         {%- else %}

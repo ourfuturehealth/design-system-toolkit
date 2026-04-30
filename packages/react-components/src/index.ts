@@ -118,3 +118,11 @@ export type {
 
 export { Image } from './components/Image';
 export type { ImageProps } from './components/Image';
+
+export { Table } from './components/Table';
+export type {
+  TableCell,
+  TableCellFormat,
+  TableHeadCell,
+  TableProps,
+} from './components/Table';

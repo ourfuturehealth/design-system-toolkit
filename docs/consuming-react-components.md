@@ -57,10 +57,25 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, Image, TextInput } from '@ourfuturehealth/react-components';
+import { Button, Table, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
+  const symptomsHead = [
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ];
+  const symptomsRows = [
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
+  ];
+
   return (
     <div>
       <TextInput
@@ -70,11 +85,7 @@ function App() {
         inputWidth={20}
         onChange={(e) => console.log(e.target.value)}
       />
-      <Image
-        src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
-        alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
-        caption="It can affect large areas of the body or limbs."
-      />
+      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
       <Button onClick={() => console.log('Clicked')}>Submit</Button>
     </div>
   );
@@ -139,6 +150,7 @@ The React components package currently provides the following components:
 - `Radios` - Grouped radio inputs with hints and conditional reveals
 - `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
 - `SummaryList` - Review-answer and key-value summary rows with optional actions
+- `Table` - Structured content tables with caption, responsive stacking, row headers, numeric cells, and merged-cell support
 - `ErrorSummary` - Page-level validation summaries with linked errors
 - `Tag` - Status tags aligned with toolkit Tag variants
 - `TaskList` - Ordered service tasks with optional hint text and shared Tag-based statuses
