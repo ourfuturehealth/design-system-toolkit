@@ -6,10 +6,12 @@ const renderFixture = (fixturePath) => {
   return {
     root: document.querySelector('.ofh-header'),
     brand: document.querySelector('.ofh-header__brand-link'),
-    utilityLink: document.querySelector('.ofh-header__utility-link'),
+    utilityLink: document.querySelector('.ofh-header__utility-link .ofh-link-icon__link'),
     search: document.querySelector('.ofh-header__search'),
-    desktopAction: document.querySelector('.ofh-header__action-link'),
-    accountLinks: document.querySelectorAll('.ofh-header__account-link'),
+    desktopAction: document.querySelector('.ofh-header__action-link .ofh-link-icon__link'),
+    accountLinks: document.querySelectorAll(
+      '.ofh-header__header-desktop-tools .ofh-header__account-link .ofh-link-icon__link',
+    ),
     navCurrent: document.querySelector('.ofh-header__nav-link--current'),
     navGroupToggle: document.querySelector('[data-ofh-header-group-toggle]'),
     navPanel: document.querySelector('[data-ofh-header-group-panel]'),
@@ -34,11 +36,12 @@ describe('Our Future Health header macro', () => {
 
     expect(root).not.toBeNull();
     expect(root.classList.contains('ofh-header--light')).toBe(true);
-    expect(root.classList.contains('ofh-header--capped')).toBe(true);
+    expect(root.classList.contains('ofh-header--fixed')).toBe(true);
     expect(brand.getAttribute('aria-label')).toBe('Our Future Health home');
     expect(navCurrent.getAttribute('aria-current')).toBe('page');
     expect(navGroupToggle.getAttribute('aria-expanded')).toBe('false');
     expect(menuButton.classList.contains('ofh-button--outlined')).toBe(true);
+    expect(root.classList.contains('ofh-header--with-bottom-border')).toBe(true);
   });
 
   it('renders the complete dark header with search, account, and hidden panels', () => {
@@ -69,5 +72,11 @@ describe('Our Future Health header macro', () => {
     expect(menuButton.classList.contains('ofh-button--ghost-inverted')).toBe(true);
     expect(navPanel.hidden).toBe(true);
     expect(mobilePanel.hidden).toBe(true);
+  });
+
+  it('does not render the bottom border when disabled', () => {
+    const { root } = renderFixture('tests/fixtures/header/no-bottom-border.njk');
+
+    expect(root.classList.contains('ofh-header--with-bottom-border')).toBe(false);
   });
 });

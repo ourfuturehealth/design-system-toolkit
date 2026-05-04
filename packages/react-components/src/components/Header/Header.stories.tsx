@@ -13,9 +13,9 @@ type HeaderStoryArgs = HeaderProps & {
   accountState?: 'none' | 'sign-in' | 'account';
   builderNhsLogo?: HeaderBrandNhsLogo | 'none';
   showAction?: boolean;
-  showNavigation?: boolean;
+  showDomainNavigationLinks?: boolean;
+  showNavigationLinks?: boolean;
   showSearch?: boolean;
-  showUtilityLinks?: boolean;
 };
 
 const defaultHeaderSource = `import { Header } from '@ourfuturehealth/react-components';
@@ -37,7 +37,7 @@ const defaultHeaderSource = `import { Header } from '@ourfuturehealth/react-comp
     placeholder: 'Search',
   }}
   action={{ href: '/join', label: 'Join now' }}
-  account={{ type: 'sign-in', href: '/sign-in' }}
+  account={{ type: 'sign-in', href: '/log-in' }}
   navigation={[
     { href: '/about', label: 'About' },
     {
@@ -109,7 +109,7 @@ const navigation = [
 
 const baseArgs: HeaderProps = {
   theme: 'dark',
-  layout: 'capped',
+  layout: 'fixed',
   brand: {
     href: '/',
     ariaLabel: 'Our Future Health home',
@@ -127,7 +127,7 @@ const baseArgs: HeaderProps = {
   },
   account: {
     type: 'sign-in',
-    href: '/sign-in',
+    href: '/log-in',
   },
   navigation,
 };
@@ -136,9 +136,9 @@ const BuilderPreview = ({
   accountState = 'sign-in',
   builderNhsLogo = 'england',
   showAction = true,
-  showNavigation = true,
+  showDomainNavigationLinks = true,
+  showNavigationLinks = true,
   showSearch = true,
-  showUtilityLinks = true,
   ...args
 }: HeaderStoryArgs) => {
   const account =
@@ -148,11 +148,11 @@ const BuilderPreview = ({
         ? {
             type: 'account' as const,
             accountHref: '/account',
-            signOutHref: '/sign-out',
+            signOutHref: '/log-out',
           }
         : {
             type: 'sign-in' as const,
-            href: '/sign-in',
+            href: '/log-in',
           };
   const resolvedBrand = {
     ...args.brand,
@@ -165,9 +165,9 @@ const BuilderPreview = ({
       account={account}
       action={showAction ? args.action : undefined}
       brand={resolvedBrand}
-      navigation={showNavigation ? args.navigation : undefined}
+      navigation={showNavigationLinks ? args.navigation : undefined}
       search={showSearch ? args.search : undefined}
-      utilityLinks={showUtilityLinks ? args.utilityLinks : undefined}
+      utilityLinks={showDomainNavigationLinks ? args.utilityLinks : undefined}
     />
   );
 };
@@ -209,13 +209,13 @@ const OpenMobileMenuPreview = () => {
 
   return (
     <div ref={containerRef} style={{ maxWidth: '28rem' }}>
-      <Header {...baseArgs} theme="brand" />
+      <Header {...baseArgs} theme="dark" />
     </div>
   );
 };
 
 const meta: Meta<HeaderStoryArgs> = {
-  title: 'Components/Navigation/Header',
+  title: 'Components/Header',
   component: Header,
   parameters: {
     layout: 'fullscreen',
@@ -234,9 +234,9 @@ const meta: Meta<HeaderStoryArgs> = {
           <p>
             The real React API is structured around the real page sections.
             Pass <code>brand</code> for the OFH brand block, add{' '}
-            <code>utilityLinks</code> for the top bar, pass{' '}
+            <code>utilityLinks</code> for the domain-navigation row, pass{' '}
             <code>search</code>, <code>action</code>, and <code>account</code>{' '}
-            for the middle section, and use <code>navigation</code> for leaf
+            for the main header row, and use <code>navigation</code> for leaf
             links or grouped dropdown navigation.
           </p>
           <p>
@@ -244,6 +244,9 @@ const meta: Meta<HeaderStoryArgs> = {
             <code>{'{ label, items: [...] }'}</code>, while leaf links use{' '}
             <code>{'{ href, label }'}</code>. Storybook helper toggles in the
             Builder story are story-only shortcuts, not part of the public API.
+            Header supports only the <code>dark</code> and <code>light</code>{' '}
+            themes, and the NHS logo region is selected through{' '}
+            <code>brand.nhsLogo</code>.
           </p>
           <Source code={defaultHeaderSource} language="tsx" />
           <h2>Component props</h2>
@@ -257,49 +260,54 @@ const meta: Meta<HeaderStoryArgs> = {
   argTypes: {
     theme: {
       control: 'radio',
-      options: ['dark', 'light', 'brand'],
+      options: ['dark', 'light'],
       description: 'Visual theme for the Header surface.',
     },
     layout: {
       control: 'radio',
-      options: ['capped', 'fluid'],
+      options: ['fixed', 'fluid'],
       description:
-        'Width behavior for the shared Header container. Use `capped` by default and `fluid` only when the surrounding page layout needs it.',
+        'Width behavior for the shared Header container. Use `fixed` by default and `fluid` only when the surrounding page layout needs it.',
     },
     brand: {
-      control: 'object',
+      control: false,
       description:
         'Header brand block configuration. Provide the destination, accessible name, and optionally choose the NHS partner logo region with `nhsLogo`.',
     },
     utilityLinks: {
-      control: 'object',
+      control: false,
       description:
         'Top-bar links rendered as compact underlined actions. These are best for cross-system utilities and documentation links.',
     },
     search: {
-      control: 'object',
+      control: false,
       description:
         'Header search control configuration. This reuses the public `SearchInput` API shape instead of inventing header-specific search props.',
     },
     action: {
-      control: 'object',
+      control: false,
       description:
-        'Single standalone action rendered in the middle section, for example “Join now”.',
+        'Single standalone action rendered in the main Header row, for example “Join now”.',
     },
     account: {
-      control: 'object',
+      control: false,
       description:
-        'Account area configuration. Use either `{ type: "sign-in", href }` or `{ type: "account", accountHref, signOutHref }`.',
+        'Account area configuration. Use either `{ type: "sign-in", href }` or `{ type: "account", accountHref, signOutHref }`. Default labels are “Log in” and “Log out”.',
     },
     navigation: {
-      control: 'object',
+      control: false,
       description:
         'Primary navigation items. Each item is either a leaf link (`{ href, label }`) or a grouped dropdown (`{ label, items: [...] }`).',
     },
-    showUtilityLinks: {
+    showBottomBorder: {
       control: 'boolean',
       description:
-        'Story-only helper that toggles the top utility bar on and off.',
+        'Whether the Header renders its bottom border across the full width of the Header. Defaults to `true`.',
+    },
+    showDomainNavigationLinks: {
+      control: 'boolean',
+      description:
+        'Story-only helper that toggles the domain-navigation links on and off.',
       table: {
         category: 'Builder story only',
       },
@@ -320,10 +328,10 @@ const meta: Meta<HeaderStoryArgs> = {
         category: 'Builder story only',
       },
     },
-    showNavigation: {
+    showNavigationLinks: {
       control: 'boolean',
       description:
-        'Story-only helper that toggles the primary navigation rows and mobile menu items.',
+        'Story-only helper that toggles the primary navigation links on and off.',
       table: {
         category: 'Builder story only',
       },
@@ -371,9 +379,11 @@ export const Builder: Story = {
     accountState: 'sign-in',
     builderNhsLogo: 'england',
     showAction: true,
-    showNavigation: true,
+    showDomainNavigationLinks: true,
+    showNavigationLinks: true,
     showSearch: true,
-    showUtilityLinks: true,
+    layout: 'fixed',
+    showBottomBorder: true,
   },
   render: (args) => <BuilderPreview {...args} />,
   parameters: {
@@ -381,12 +391,13 @@ export const Builder: Story = {
       include: [
         'theme',
         'layout',
+        'showBottomBorder',
         'builderNhsLogo',
         'accountState',
-        'showUtilityLinks',
+        'showDomainNavigationLinks',
         'showSearch',
         'showAction',
-        'showNavigation',
+        'showNavigationLinks',
       ],
     },
     docs: {
@@ -419,7 +430,6 @@ export const ThemeShowcase: Story = {
     >
       <Header {...baseArgs} theme="dark" />
       <Header {...baseArgs} theme="light" />
-      <Header {...baseArgs} theme="brand" />
     </div>
   ),
 };

@@ -31,7 +31,7 @@ describe('Header', () => {
       <Header
         account={{
           type: 'sign-in',
-          href: '/sign-in',
+          href: '/log-in',
         }}
         action={{
           href: '/join',
@@ -75,9 +75,9 @@ describe('Header', () => {
       'href',
       '/join',
     );
-    expect(screen.getByRole('link', { name: 'Sign In' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Log in' })).toHaveAttribute(
       'href',
-      '/sign-in',
+      '/log-in',
     );
     expect(
       screen.getByRole('link', { name: 'View docs' }),
@@ -94,7 +94,7 @@ describe('Header', () => {
         account={{
           type: 'account',
           accountHref: '/account',
-          signOutHref: '/sign-out',
+          signOutHref: '/log-out',
         }}
         brand={{
           ariaLabel: 'Our Future Health home',
@@ -107,9 +107,41 @@ describe('Header', () => {
       'href',
       '/account',
     );
-    expect(screen.getByRole('link', { name: 'Sign Out' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Log out' })).toHaveAttribute(
       'href',
-      '/sign-out',
+      '/log-out',
+    );
+  });
+
+  it('renders the fixed layout and bottom border by default', () => {
+    const { container } = render(
+      <Header
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+      />,
+    );
+
+    expect(container.querySelector('.ofh-header')).toHaveClass('ofh-header--fixed');
+    expect(container.querySelector('.ofh-header')).toHaveClass(
+      'ofh-header--with-bottom-border',
+    );
+  });
+
+  it('does not render the bottom border when disabled', () => {
+    const { container } = render(
+      <Header
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+        showBottomBorder={false}
+      />,
+    );
+
+    expect(container.querySelector('.ofh-header')).not.toHaveClass(
+      'ofh-header--with-bottom-border',
     );
   });
 
@@ -153,7 +185,7 @@ describe('Header', () => {
       <Header
         account={{
           type: 'sign-in',
-          href: '/sign-in',
+          href: '/log-in',
         }}
         action={{
           href: '/join',
@@ -200,7 +232,7 @@ describe('Header', () => {
       <Header
         account={{
           type: 'sign-in',
-          href: '/sign-in',
+          href: '/log-in',
         }}
         brand={{
           ariaLabel: 'Our Future Health home',

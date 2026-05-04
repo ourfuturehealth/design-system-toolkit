@@ -1,10 +1,12 @@
 {% from '../button/macro.njk' import button %}
 {% from '../icon/macro.njk' import icon %}
+{% from '../link-icon/macro.njk' import linkIcon %}
 {% from '../search-input/macro.njk' import searchInput %}
 
 {% set resolvedTheme = params.theme if params.theme else 'dark' %}
-{% set resolvedLayout = params.layout if params.layout else 'capped' %}
+{% set resolvedLayout = params.layout if params.layout else 'fixed' %}
 {% set resolvedContainerClass = 'ofh-width-container-fluid' if resolvedLayout == 'fluid' else 'ofh-width-container' %}
+{% set resolvedShowBottomBorder = params.showBottomBorder if params.showBottomBorder is defined else true %}
 {% set resolvedBrand = params.brand if params.brand else {
   "href": "/",
   "ariaLabel": "Our Future Health home"
@@ -15,7 +17,7 @@
 {% set hasDesktopToolsContent = params.search or params.action or params.account %}
 {% set hasMobilePanelContent = params.search or params.action or params.account or resolvedNavigation | length %}
 {% set resolvedMenuButtonClasses = 'ofh-button--ghost-inverted ofh-header__menu-button' if resolvedTheme == 'dark' else 'ofh-button--outlined ofh-header__menu-button' %}
-{% set rootClasses = 'ofh-header ofh-header--' + resolvedTheme + ' ofh-header--' + resolvedLayout %}
+{% set rootClasses = 'ofh-header ofh-header--' + resolvedTheme + ' ofh-header--' + resolvedLayout + (resolvedShowBottomBorder and ' ofh-header--with-bottom-border' or '') %}
 {% set resolvedNhsLogo = resolvedBrand.nhsLogo if resolvedBrand and resolvedBrand.nhsLogo else '' %}
 {% set resolvedPartnerIsInverted = resolvedTheme == 'dark' %}
 {% set logoAssetPath = '/ofh-design-system-toolkit/assets/logos/' %}
@@ -117,62 +119,63 @@
 {%- endmacro -%}
 
 {%- macro _utilityLink(item) -%}
-  <a
-    class="ofh-header__utility-link"
-    href="{{ _href(item) | trim }}"
-    {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
-    {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
-    {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-    <span class="ofh-header__utility-text">{{ item.label }}</span>
-    {%- if item.external or item.openInNewWindow %}
-      {{ icon({ "name": "Launch", "size": 16, "classes": "ofh-header__utility-icon" }) }}
-    {%- endif %}
-  </a>
+  {{ linkIcon({
+    "text": item.label,
+    "href": _href(item) | trim,
+    "openInNewWindow": item.openInNewWindow,
+    "iconPosition": "right",
+    "showIconLeft": false,
+    "showIconRight": item.external or item.openInNewWindow,
+    "classes": "ofh-header__utility-link",
+    "attributes": item.attributes
+  }) }}
 {%- endmacro -%}
 
 {%- macro _actionLink(item, mobile=false) -%}
-  <a
-    class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__action-link' }}"
-    href="{{ _href(item) | trim }}"
-    {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
-    {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
-    {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-    <span class="{{ 'ofh-header__mobile-link-text' if mobile else 'ofh-header__action-text' }}">{{ item.label }}</span>
-  </a>
+  {{ linkIcon({
+    "text": item.label,
+    "href": _href(item) | trim,
+    "size": "medium",
+    "showIconLeft": false,
+    "showIconRight": false,
+    "classes": mobile and "ofh-header__action-link ofh-header__mobile-footer-link" or "ofh-header__action-link",
+    "attributes": item.attributes
+  }) }}
 {%- endmacro -%}
 
 {%- macro _account(account, mobile=false) -%}
   {% if not account %}
   {% elif account.type == 'account' %}
     <div class="{{ 'ofh-header__account-cluster ofh-header__mobile-footer-account' if mobile else 'ofh-header__account-cluster' }}">
-      <a
-        class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
-        href="{{ account.accountHref if account.accountHref else '#' }}"
-        {%- if account.accountTarget %} target="{{ account.accountTarget }}"{% endif %}
-        {%- if account.accountRel %} rel="{{ account.accountRel }}"{% endif %}
-        {%- for attribute, value in account.accountAttributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-        <span class="ofh-header__account-text">{{ account.accountLabel if account.accountLabel else 'Account' }}</span>
-      </a>
-      <a
-        class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
-        href="{{ account.signOutHref if account.signOutHref else '#' }}"
-        {%- if account.signOutTarget %} target="{{ account.signOutTarget }}"{% endif %}
-        {%- if account.signOutRel %} rel="{{ account.signOutRel }}"{% endif %}
-        {%- for attribute, value in account.signOutAttributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-        {{ icon({ "name": "AccountCircle", "size": 24, "classes": "ofh-header__account-icon" }) }}
-        <span class="ofh-header__account-text">{{ account.signOutLabel if account.signOutLabel else 'Sign Out' }}</span>
-      </a>
+      {{ linkIcon({
+        "text": account.accountLabel if account.accountLabel else "Account",
+        "href": account.accountHref if account.accountHref else "#",
+        "size": "medium",
+        "showIconLeft": false,
+        "showIconRight": false,
+        "classes": mobile and "ofh-header__account-link ofh-header__mobile-footer-link" or "ofh-header__account-link",
+        "attributes": account.accountAttributes
+      }) }}
+      {{ linkIcon({
+        "text": account.signOutLabel if account.signOutLabel else "Log out",
+        "href": account.signOutHref if account.signOutHref else "#",
+        "iconName": "AccountCircle",
+        "iconPosition": "left",
+        "size": "medium",
+        "classes": mobile and "ofh-header__account-link ofh-header__account-link--icon ofh-header__mobile-footer-sign-link" or "ofh-header__account-link ofh-header__account-link--icon",
+        "attributes": account.signOutAttributes
+      }) }}
     </div>
   {% else %}
-    <a
-      class="{{ 'ofh-header__mobile-footer-link' if mobile else 'ofh-header__account-link' }}"
-      href="{{ account.href if account.href else '#' }}"
-      {%- if account.target %} target="{{ account.target }}"{% endif %}
-      {%- if account.rel %} rel="{{ account.rel }}"{% endif %}
-      {%- for attribute, value in account.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-      {{ icon({ "name": "AccountCircle", "size": 24, "classes": "ofh-header__account-icon" }) }}
-      <span class="ofh-header__account-text">{{ account.label if account.label else 'Sign In' }}</span>
-    </a>
+    {{ linkIcon({
+      "text": account.label if account.label else "Log in",
+      "href": account.href if account.href else "#",
+      "iconName": "AccountCircle",
+      "iconPosition": "left",
+      "size": "medium",
+      "classes": mobile and "ofh-header__account-link ofh-header__account-link--icon ofh-header__mobile-footer-sign-link" or "ofh-header__account-link ofh-header__account-link--icon",
+      "attributes": account.attributes
+    }) }}
   {% endif %}
 {%- endmacro -%}
 
@@ -285,7 +288,7 @@
   {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
 
   {% if resolvedUtilityLinks | length %}
-    <div class="ofh-header__top">
+    <div class="ofh-header__domain-navigation">
       <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
         <ul class="ofh-header__utility-list">
           {% for item in resolvedUtilityLinks %}
@@ -296,12 +299,12 @@
     </div>
   {% endif %}
 
-  <div class="ofh-header__middle">
+  <div class="ofh-header__header">
     <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
-      <div class="ofh-header__middle-layout">
+      <div class="ofh-header__header-layout">
         {{ _headerBrand(resolvedBrand) | trim }}
 
-        <div class="ofh-header__middle-tools">
+        <div class="ofh-header__header-tools">
           {% if resolvedNhsLogoAssets %}
             {{ _headerPartner(resolvedNhsLogoAssets) | trim }}
           {% endif %}
@@ -310,7 +313,7 @@
             <span aria-hidden="true" class="ofh-header__partner-divider"></span>
           {% endif %}
 
-          <div class="ofh-header__desktop-tools">
+          <div class="ofh-header__header-desktop-tools">
             {% if params.search %}
               {{ searchInput({
                 "action": params.search.action,
@@ -348,7 +351,7 @@
   </div>
 
   {% if resolvedNavigation | length %}
-    <nav class="ofh-header__bottom" aria-label="Primary navigation">
+    <nav class="ofh-header__navigation" aria-label="Primary navigation">
       <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
         <ul class="ofh-header__nav-list">
           {% for item in resolvedNavigation %}
@@ -399,4 +402,5 @@
       </div>
     </div>
   {% endif %}
+
 </header>
