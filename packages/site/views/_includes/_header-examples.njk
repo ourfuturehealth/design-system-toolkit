@@ -1,5 +1,64 @@
 {% from 'header/macro.njk' import header %}
 
+{% set showcaseUtilityLinks = [
+  {
+    "href": "#",
+    "label": "View docs",
+    "openInNewWindow": true
+  },
+  {
+    "href": "#",
+    "label": "View GitHub",
+    "openInNewWindow": true
+  },
+  {
+    "href": "#",
+    "label": "View Confluence",
+    "openInNewWindow": true
+  },
+  {
+    "href": "#",
+    "label": "View Storybook",
+    "openInNewWindow": true
+  }
+] %}
+
+{% set showcaseNavigation = [
+  {
+    "href": "#",
+    "label": "About"
+  },
+  {
+    "label": "Research",
+    "items": [
+      {
+        "href": "#",
+        "label": "Participant portal"
+      },
+      {
+        "href": "#",
+        "label": "Data access"
+      },
+      {
+        "href": "#",
+        "label": "Publications"
+      }
+    ]
+  },
+  {
+    "href": "#",
+    "label": "Events"
+  },
+  {
+    "href": "#",
+    "label": "Support"
+  },
+  {
+    "href": "#",
+    "label": "Contact"
+  }
+] %}
+
 {% macro siteHeader(currentSection='') %}
   {{ header({
     "theme": "light",
@@ -32,86 +91,36 @@
   }) }}
 {% endmacro %}
 
-{% macro contentHeader() %}
-  {{ header({
-    "theme": "light",
-    "brand": {
-      "href": "/",
-      "ariaLabel": "Our Future Health home",
-      "nhsLogo": "england"
-    },
-    "navigation": [
-      {
-        "href": "#",
-        "label": "About"
-      },
-      {
-        "label": "Research",
-        "items": [
-          {
-            "href": "#",
-            "label": "Participant portal"
-          },
-          {
-            "href": "#",
-            "label": "Data access"
-          },
-          {
-            "href": "#",
-            "label": "Publications"
-          }
-        ]
-      },
-      {
-        "href": "#",
-        "label": "Support"
-      },
-      {
-        "href": "#",
-        "label": "Contact"
-      }
-    ]
-  }) }}
-{% endmacro %}
+{% macro showcaseHeader(theme='dark', idPrefix='header-showcase', accountState='sign-in') %}
+  {% set resolvedAccount = {
+    "type": "sign-in",
+    "href": "#"
+  } %}
 
-{% macro showcaseHeader(theme='dark') %}
+  {% if accountState == 'account' %}
+    {% set resolvedAccount = {
+      "type": "account",
+      "accountHref": "#",
+      "signOutHref": "#"
+    } %}
+  {% endif %}
+
   {{ header({
-    "idPrefix": "header-showcase-" + theme,
+    "idPrefix": idPrefix,
     "theme": theme,
     "brand": {
       "href": "#",
       "ariaLabel": "Our Future Health home",
       "nhsLogo": "england"
     },
-    "utilityLinks": [
-      {
-        "href": "#",
-        "label": "View docs",
-        "openInNewWindow": true
-      },
-      {
-        "href": "#",
-        "label": "View GitHub",
-        "openInNewWindow": true
-      },
-      {
-        "href": "#",
-        "label": "View Confluence",
-        "openInNewWindow": true
-      },
-      {
-        "href": "#",
-        "label": "View Storybook",
-        "openInNewWindow": true
-      }
-    ],
+    "utilityLinks": showcaseUtilityLinks,
     "search": {
       "action": "#",
       "label": {
         "text": "Search the site"
       },
       "input": {
-        "id": "header-showcase-search-" + theme,
+        "id": idPrefix + "-search",
         "placeholder": "Search"
       }
     },
@@ -119,77 +128,40 @@
       "href": "#",
       "label": "Join now"
     },
-    "account": {
-      "type": "sign-in",
-      "href": "#"
-    },
-    "navigation": [
-      {
-        "href": "#",
-        "label": "About"
-      },
-      {
-        "label": "Research",
-        "items": [
-          {
-            "href": "#",
-            "label": "Participant portal"
-          },
-          {
-            "href": "#",
-            "label": "Data access",
-            "current": true
-          },
-          {
-            "href": "#",
-            "label": "Publications"
-          }
-        ]
-      },
-      {
-        "href": "#",
-        "label": "Events"
-      },
-      {
-        "href": "#",
-        "label": "Support"
-      },
-      {
-        "href": "#",
-        "label": "Contact"
-      }
-    ]
+    "account": resolvedAccount,
+    "navigation": showcaseNavigation
   }) }}
 {% endmacro %}
 
-{% macro landingHeader() %}
-  {{ header({
-    "theme": "light",
-    "brand": {
-      "href": "#",
-      "ariaLabel": "Our Future Health home"
-    },
-    "navigation": [
-      {
-        "href": "#",
-        "label": "Research programme"
-      },
-      {
-        "href": "#",
-        "label": "About us"
-      },
-      {
-        "href": "#",
-        "label": "Participants"
-      },
-      {
-        "href": "#",
-        "label": "Partners"
-      },
-      {
-        "href": "#",
-        "label": "News & events"
+{% macro desktopDropdownOpenHeader(theme='dark', idPrefix='header-desktop-open') %}
+  {{ showcaseHeader(theme, idPrefix) }}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var desktopTrigger = document.querySelector('[aria-controls="{{ idPrefix }}-desktop-group-1-panel"]');
+
+      if (desktopTrigger) {
+        desktopTrigger.click();
       }
-    ]
-  }) }}
+    });
+  </script>
+{% endmacro %}
+
+{% macro mobileMenuOpenHeader(theme='dark', idPrefix='header-mobile-open') %}
+  <div style="max-width: 28rem;">
+    {{ showcaseHeader(theme, idPrefix) }}
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var menuButton = document.querySelector('[aria-controls="{{ idPrefix }}-mobile-panel"]');
+      var mobileTrigger = document.querySelector('[aria-controls="{{ idPrefix }}-mobile-group-1-panel"]');
+
+      if (menuButton) {
+        menuButton.click();
+      }
+
+      if (mobileTrigger) {
+        mobileTrigger.click();
+      }
+    });
+  </script>
 {% endmacro %}

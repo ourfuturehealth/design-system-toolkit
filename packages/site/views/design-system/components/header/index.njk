@@ -14,10 +14,42 @@
 
 {% block bodyContent %}
 
+  <h2>Examples</h2>
+  <p>Use the examples below to review the same core Header states that Storybook covers: default dark and light themes, desktop dropdown behavior, mobile condensed navigation, and the signed-out account state.</p>
+
+  <h3>Default dark Header</h3>
   {{ designExample({
     group: "components",
     item: "header",
     type: "default"
+  }) }}
+
+  <h3>Light Header</h3>
+  {{ designExample({
+    group: "components",
+    item: "header",
+    type: "light"
+  }) }}
+
+  <h3>Desktop dropdown open</h3>
+  {{ designExample({
+    group: "components",
+    item: "header",
+    type: "desktop-dropdown-open"
+  }) }}
+
+  <h3>Mobile menu open</h3>
+  {{ designExample({
+    group: "components",
+    item: "header",
+    type: "mobile-menu-open"
+  }) }}
+
+  <h3>Signed-out account state</h3>
+  {{ designExample({
+    group: "components",
+    item: "header",
+    type: "signed-out"
   }) }}
 
   <h2>When to use Header</h2>
@@ -29,6 +61,7 @@
 
   <h2>How to use Header</h2>
   <p>Build the Header from its real sections rather than a collection of show-or-hide booleans. Start with the brand block, then add utility links, search, the standalone action, account state, and primary navigation only where they help the page.</p>
+  <p>Use the <code>dark</code> or <code>light</code> themes only. Choose <code>fixed</code> width by default and switch to <code>fluid</code> only when the surrounding page layout truly needs it.</p>
   <p>Keep navigation labels concise, aim to match the Header width to the rest of the page layout, and avoid enabling every optional section just because the API allows it.</p>
   <p>On smaller breakpoints the Header switches to a condensed menu pattern. Make sure the primary navigation still makes sense in that condensed view, especially when grouped dropdown items are involved.</p>
 
