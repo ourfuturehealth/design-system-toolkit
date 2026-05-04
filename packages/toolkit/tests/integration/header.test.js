@@ -12,7 +12,9 @@ const initTest = () => {
     desktopGroupPanels: document.querySelectorAll('[data-ofh-header-group-panel]'),
     mobileGroupToggle: document.querySelector('[data-ofh-header-mobile-group-toggle]'),
     mobileGroupPanel: document.querySelector('[data-ofh-header-mobile-group-panel]'),
-    mobileFooterLink: document.querySelector('.ofh-header__mobile-footer-link'),
+    mobileFooterLink: document.querySelector(
+      '.ofh-header__mobile-footer-link .ofh-link-icon__link',
+    ),
   };
 };
 

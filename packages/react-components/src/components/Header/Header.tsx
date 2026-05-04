@@ -2,6 +2,7 @@ import React from 'react';
 import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
+import { LinkIcon } from '../LinkIcon';
 import { SearchInput, type SearchInputProps } from '../SearchInput';
 import { joinClassNames } from '../_internal/joinClassNames';
 import {
@@ -71,8 +72,8 @@ export interface HeaderAccountSignedOut {
 
 export type HeaderAccountConfig = HeaderAccountSignIn | HeaderAccountSignedOut;
 
-export type HeaderTheme = 'dark' | 'light' | 'brand';
-export type HeaderLayout = 'capped' | 'fluid';
+export type HeaderTheme = 'dark' | 'light';
+export type HeaderLayout = 'fixed' | 'fluid';
 
 export interface HeaderProps
   extends Omit<React.ComponentPropsWithoutRef<'header'>, 'children' | 'ref'> {
@@ -84,6 +85,7 @@ export interface HeaderProps
   action?: HeaderLinkItem;
   account?: HeaderAccountConfig;
   navigation?: HeaderNavItem[];
+  showBottomBorder?: boolean;
   ref?: React.Ref<HTMLElement>;
 }
 
@@ -138,23 +140,6 @@ const resolveHeaderLinkProps = (item: HeaderLinkItem) => {
   };
 };
 
-const renderHeaderLinkLabel = (
-  item: HeaderLinkItem,
-  className: string,
-  showExternalIcon = false,
-) => (
-  <>
-    <span className={className}>{item.label}</span>
-    {showExternalIcon ? (
-      <Icon
-        className="ofh-header__utility-icon"
-        name="Launch"
-        size={16}
-      />
-    ) : null}
-  </>
-);
-
 const renderPartnerMark = (
   nhsLogo: HeaderBrandNhsLogo,
   isInverted: boolean,
@@ -190,13 +175,14 @@ const renderPartnerMark = (
 
 export const Header = ({
   theme = 'dark',
-  layout = 'capped',
+  layout = 'fixed',
   brand,
   utilityLinks = [],
   search,
   action,
   account,
   navigation = [],
+  showBottomBorder = true,
   className = '',
   ref,
   ...props
@@ -211,8 +197,10 @@ export const Header = ({
   const [openMobileGroup, setOpenMobileGroup] = React.useState<string | null>(
     null,
   );
+  const widthContainerClassName =
+    layout === 'fluid' ? 'ofh-width-container-fluid' : 'ofh-width-container';
   const sectionInnerClassName = joinClassNames(
-    layout === 'fluid' ? 'ofh-width-container-fluid' : 'ofh-width-container',
+    widthContainerClassName,
     'ofh-header__section-inner',
   );
   const hasDesktopToolsContent = Boolean(search || action || account);
@@ -234,30 +222,30 @@ export const Header = ({
 
     if (account.type === 'sign-in') {
       const {
-        label = 'Sign In',
+        label = 'Log in',
         href,
         ...linkProps
       } = account;
       const resolvedProps = resolveAnchorProps(linkProps, href);
+      const signLinkClassName = joinClassNames(
+        'ofh-header__account-link',
+        'ofh-header__account-link--icon',
+        context === 'mobile-footer'
+          ? 'ofh-header__mobile-footer-sign-link'
+          : undefined,
+      );
 
       return (
-        <a
+        <LinkIcon
           {...resolvedProps}
-          className={joinClassNames(
-            'ofh-header__account-link',
-            context === 'mobile-footer'
-              ? 'ofh-header__mobile-footer-link'
-              : undefined,
-          )}
+          className={signLinkClassName}
           href={href}
+          iconName="AccountCircle"
+          iconPosition="left"
+          size="medium"
         >
-          <Icon
-            className="ofh-header__account-icon"
-            name="AccountCircle"
-            size={24}
-          />
-          <span className="ofh-header__account-text">{label}</span>
-        </a>
+          {label}
+        </LinkIcon>
       );
     }
 
@@ -266,7 +254,7 @@ export const Header = ({
       accountLabel = 'Account',
       accountLinkProps,
       signOutHref,
-      signOutLabel = 'Sign Out',
+      signOutLabel = 'Log out',
       signOutLinkProps,
     } = account;
 
@@ -288,7 +276,7 @@ export const Header = ({
             : undefined,
         )}
       >
-        <a
+        <LinkIcon
           {...resolvedAccountProps}
           className={joinClassNames(
             'ofh-header__account-link',
@@ -297,26 +285,28 @@ export const Header = ({
               : undefined,
           )}
           href={accountHref}
+          showIconLeft={false}
+          showIconRight={false}
+          size="medium"
         >
-          <span className="ofh-header__account-text">{accountLabel}</span>
-        </a>
-        <a
+          {accountLabel}
+        </LinkIcon>
+        <LinkIcon
           {...resolvedSignOutProps}
           className={joinClassNames(
             'ofh-header__account-link',
+            'ofh-header__account-link--icon',
             context === 'mobile-footer'
-              ? 'ofh-header__mobile-footer-link'
+              ? 'ofh-header__mobile-footer-sign-link'
               : undefined,
           )}
           href={signOutHref}
+          iconName="AccountCircle"
+          iconPosition="left"
+          size="medium"
         >
-          <Icon
-            className="ofh-header__account-icon"
-            name="AccountCircle"
-            size={24}
-          />
-          <span className="ofh-header__account-text">{signOutLabel}</span>
-        </a>
+          {signOutLabel}
+        </LinkIcon>
       </div>
     );
   };
@@ -329,11 +319,12 @@ export const Header = ({
         'ofh-header',
         `ofh-header--${theme}`,
         `ofh-header--${layout}`,
+        showBottomBorder ? 'ofh-header--with-bottom-border' : undefined,
         className,
       )}
     >
       {utilityLinks.length ? (
-        <div className="ofh-header__top">
+        <div className="ofh-header__domain-navigation">
           <div className={sectionInnerClassName}>
             <ul className="ofh-header__utility-list">
               {utilityLinks.map((item, index) => {
@@ -347,17 +338,18 @@ export const Header = ({
                     className="ofh-header__utility-item"
                     key={`header-utility-${index}`}
                   >
-                    <a
+                    <LinkIcon
                       {...resolvedProps}
                       className="ofh-header__utility-link"
                       href={item.href}
+                      iconPosition="right"
+                      openInNewWindow={Boolean(item.openInNewWindow)}
+                      showIconLeft={false}
+                      showIconRight={showExternalIcon}
+                      size="small"
                     >
-                      {renderHeaderLinkLabel(
-                        item,
-                        'ofh-header__utility-text',
-                        showExternalIcon,
-                      )}
-                    </a>
+                      {item.label}
+                    </LinkIcon>
                   </li>
                 );
               })}
@@ -366,9 +358,9 @@ export const Header = ({
         </div>
       ) : null}
 
-      <div className="ofh-header__middle">
+      <div className="ofh-header__header">
         <div className={sectionInnerClassName}>
-          <div className="ofh-header__middle-layout">
+          <div className="ofh-header__header-layout">
             <a
               {...brandLinkProps}
               aria-label={ariaLabel}
@@ -384,7 +376,7 @@ export const Header = ({
               </span>
             </a>
 
-            <div className="ofh-header__middle-tools">
+            <div className="ofh-header__header-tools">
               {showPartnerMark ? (
                 <span aria-hidden="true" className="ofh-header__partner">
                   {renderPartnerMark(nhsLogo as HeaderBrandNhsLogo, theme === 'dark')}
@@ -395,7 +387,7 @@ export const Header = ({
                 <span aria-hidden="true" className="ofh-header__partner-divider" />
               ) : null}
 
-              <div className="ofh-header__desktop-tools">
+              <div className="ofh-header__header-desktop-tools">
                 {search ? (
                   <SearchInput
                     {...search}
@@ -403,13 +395,16 @@ export const Header = ({
                   />
                 ) : null}
                 {action ? (
-                  <a
+                  <LinkIcon
                     {...resolveHeaderLinkProps(action)}
                     className="ofh-header__action-link"
                     href={action.href}
+                    showIconLeft={false}
+                    showIconRight={false}
+                    size="medium"
                   >
-                    <span className="ofh-header__action-text">{action.label}</span>
-                  </a>
+                    {action.label}
+                  </LinkIcon>
                 ) : null}
                 {renderAccount('desktop')}
               </div>
@@ -444,7 +439,7 @@ export const Header = ({
       {navigation.length ? (
         <nav
           aria-label="Primary navigation"
-          className="ofh-header__bottom"
+          className="ofh-header__navigation"
         >
           <div className={sectionInnerClassName}>
             <ul className="ofh-header__nav-list">
@@ -666,19 +661,20 @@ export const Header = ({
             {action || account ? (
               <div className="ofh-header__mobile-footer">
                 {action ? (
-                  <a
+                  <LinkIcon
                     {...resolveHeaderLinkProps(action)}
-                    className="ofh-header__mobile-footer-link"
+                    className="ofh-header__action-link ofh-header__mobile-footer-link"
                     href={action.href}
                     onClick={() => {
                       setIsMobileMenuOpen(false);
                       setOpenMobileGroup(null);
                     }}
+                    showIconLeft={false}
+                    showIconRight={false}
+                    size="medium"
                   >
-                    <span className="ofh-header__mobile-link-text">
-                      {action.label}
-                    </span>
-                  </a>
+                    {action.label}
+                  </LinkIcon>
                 ) : null}
                 {renderAccount('mobile-footer')}
               </div>

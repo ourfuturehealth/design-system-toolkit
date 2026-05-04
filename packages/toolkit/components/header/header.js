@@ -154,7 +154,7 @@ const initHeader = (headerElement) => {
 
   headerElement
     .querySelectorAll(
-      '.ofh-header__mobile-link, .ofh-header__mobile-subnav-link, .ofh-header__mobile-footer-link',
+      '.ofh-header__mobile-link, .ofh-header__mobile-subnav-link, .ofh-header__mobile-footer-link .ofh-link-icon__link',
     )
     .forEach((link) => {
       link.addEventListener('click', () => {
