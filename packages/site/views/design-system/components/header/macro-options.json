@@ -4,13 +4,19 @@
       "name": "theme",
       "type": "string",
       "required": false,
-      "description": "Header theme. Use `dark`, `light`, or `brand`. Defaults to `dark`."
+      "description": "Header theme. Use `dark` or `light`. Defaults to `dark`."
     },
     {
       "name": "layout",
       "type": "string",
       "required": false,
-      "description": "Header width behavior. Use `capped` or `fluid`. Defaults to `capped`."
+      "description": "Header width behavior. Use `fixed` or `fluid`. Defaults to `fixed`."
+    },
+    {
+      "name": "showBottomBorder",
+      "type": "boolean",
+      "required": false,
+      "description": "Whether to render the Header bottom border across the full width of the Header. Defaults to `true`."
     },
     {
       "name": "brand",
