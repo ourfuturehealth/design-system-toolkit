@@ -161,6 +161,40 @@
   width: 100%;
 }
 
+@mixin ofh-header-link-no-visited-state(
+  $default-color,
+  $hover-color: null,
+  $active-color: null,
+  $focus-color: null
+) {
+  color: $default-color;
+
+  &:visited {
+    color: $default-color;
+  }
+
+  @if $hover-color {
+    &:hover {
+      color: $hover-color;
+    }
+  }
+
+  @if $active-color {
+    &:active {
+      color: $active-color;
+    }
+  }
+
+  @if $focus-color {
+    &:focus,
+    &:focus-visible,
+    &:focus:visited,
+    &:focus-visible:visited {
+      color: $focus-color;
+    }
+  }
+}
+
 .ofh-header__utility-link,
 .ofh-header__utility-link .ofh-link-icon__link,
 .ofh-header__mobile-link,
@@ -173,40 +207,32 @@
 }
 
 .ofh-header__utility-link .ofh-link-icon__link {
-  color: var(--ofh-header-utility-color);
-
-  &:visited {
-    color: var(--ofh-header-utility-color);
-  }
-
-  &:hover {
-    color: var(--ofh-header-utility-hover);
-  }
+  @include ofh-header-link-no-visited-state(
+    var(--ofh-header-utility-color),
+    var(--ofh-header-utility-hover),
+    null,
+    var(--ofh-header-utility-color)
+  );
 }
 
 .ofh-header__action-link .ofh-link-icon__link {
-  color: var(--ofh-header-action-color);
-
-  &:visited {
-    color: var(--ofh-header-action-color);
-  }
-
-  &:hover {
-    color: var(--ofh-header-action-hover);
-  }
+  @include ofh-header-link-no-visited-state(
+    var(--ofh-header-action-color),
+    var(--ofh-header-action-hover),
+    null,
+    var(--ofh-header-action-color)
+  );
 }
 
 .ofh-header__account-link .ofh-link-icon__link {
-  color: var(--ofh-header-account-color);
   font-weight: $ofh-typography-weight-semibold;
 
-  &:visited {
-    color: var(--ofh-header-account-color);
-  }
-
-  &:hover {
-    color: var(--ofh-header-account-hover);
-  }
+  @include ofh-header-link-no-visited-state(
+    var(--ofh-header-account-color),
+    var(--ofh-header-account-hover),
+    null,
+    var(--ofh-header-account-color)
+  );
 }
 
 .ofh-header__action-link .ofh-link-icon__link,
@@ -340,9 +366,12 @@
 }
 
 .ofh-header__nav-link {
-  &:visited {
-    color: var(--ofh-header-bottom-navigation-color);
-  }
+  @include ofh-header-link-no-visited-state(
+    var(--ofh-header-bottom-navigation-color),
+    null,
+    null,
+    var(--ofh-header-bottom-navigation-color)
+  );
 }
 
 .ofh-header__nav-link--current,
@@ -394,8 +423,8 @@
 
 .ofh-header__nav-panel-link {
   @include ofh-typography-responsive('paragraph-sm');
+  @include ofh-header-link-no-visited-state($ofh-color-foreground-primary);
 
-  color: $ofh-color-foreground-primary;
   display: block;
   min-height: 56px;
   text-decoration: none;
@@ -405,10 +434,6 @@
 
   &:hover {
     text-decoration: underline;
-  }
-
-  &:visited {
-    color: $ofh-color-foreground-primary;
   }
 }
 
@@ -441,7 +466,6 @@
 .ofh-header__mobile-footer-link .ofh-link-icon__link {
   @include ofh-typography-responsive('paragraph-sm');
 
-  color: $ofh-color-foreground-primary;
   min-height: 56px;
   width: 100%;
 
@@ -456,9 +480,12 @@
 }
 
 .ofh-header__mobile-link {
-  &:visited {
-    color: $ofh-color-foreground-primary;
-  }
+  @include ofh-header-link-no-visited-state(
+    $ofh-color-foreground-primary,
+    null,
+    null,
+    $ofh-color-foreground-primary
+  );
 }
 
 .ofh-header__mobile-link--current,
@@ -496,17 +523,19 @@
 }
 
 .ofh-header__mobile-subnav-link {
-  color: $ofh-color-foreground-primary;
+  @include ofh-header-link-no-visited-state(
+    $ofh-color-foreground-primary,
+    null,
+    null,
+    $ofh-color-foreground-primary
+  );
+
   display: block;
   padding: 0;
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
-  }
-
-  &:visited {
-    color: $ofh-color-foreground-primary;
   }
 }
 
@@ -524,10 +553,7 @@
 
 .ofh-header__mobile-footer-link .ofh-link-icon__link {
   display: flex;
-
-  &:visited {
-    color: $ofh-color-foreground-primary;
-  }
+  @include ofh-header-link-no-visited-state($ofh-color-foreground-primary);
 }
 
 @include mq($from: desktop) {
