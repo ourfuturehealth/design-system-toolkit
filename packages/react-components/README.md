@@ -161,11 +161,11 @@ function App() {
         ]}
       />
       <Button variant="contained">Click me</Button>
-      <Pagination
-        previousUrl="/section/treatments"
-        previousPage="Treatments"
-        nextUrl="/section/symptoms"
-        nextPage="Symptoms"
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
       />
       <Icon name="Search" size={24} />
       <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
@@ -296,6 +296,7 @@ The package also provides:
 - `Radios`
 - `TaskList`
 - `Icon`
+- `ContentsList`
 - `Pagination`
 - `SummaryList`
 - `Table`

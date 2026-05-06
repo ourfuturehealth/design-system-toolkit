@@ -31,8 +31,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 
 | Package                             | Canonical tag pattern | Example tag      |
 | ----------------------------------- | --------------------- | ---------------- |
-| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.19.0` |
-| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.18.0`   |
+| `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.20.0` |
+| `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.19.0`   |
 
 The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
 

@@ -8,23 +8,29 @@
  */
 
 .ofh-contents-list {
+  @include ofh-font('paragraph-md');
   @include ofh-responsive-margin(40, 'bottom');
 }
 
 .ofh-contents-list__list {
+  display: flex;
+  flex-direction: column;
+  gap: $ofh-size-8;
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
 .ofh-contents-list__item {
-  background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__emdash' xmlns='http://www.w3.org/2000/svg' fill='%23aeb7bd' width='19' height='1' aria-hidden='true'%3E%3Cpath d='M0 0h19v1H0z'%3E%3C/path%3E%3C/svg%3E")
-    left ofh-px-to-rem(12px) no-repeat;
-  padding: 0 0 0 $ofh-size-32;
-  position: relative;
+  align-items: center;
+  display: flex;
+  gap: $ofh-size-12;
 
-  @include mq($from: tablet) {
-    background: url("data:image/svg+xml,%3Csvg class='ofh-icon ofh-icon__emdash' xmlns='http://www.w3.org/2000/svg' fill='%23aeb7bd' width='16' height='1' aria-hidden='true'%3E%3Cpath d='M0 0h19v1H0z'%3E%3C/path%3E%3C/svg%3E")
-      left ofh-px-to-rem(14px) no-repeat;
+  &::before {
+    background-color: $ofh-color-border-input-default;
+    content: '';
+    flex: 0 0 ofh-px-to-rem(20px);
+    height: $ofh-stroke-weight-1;
   }
 }
 
@@ -33,5 +39,6 @@
 }
 
 .ofh-contents-list__current {
+  color: $ofh-color-foreground-primary;
   font-weight: $ofh-typography-weight-semibold;
 }
