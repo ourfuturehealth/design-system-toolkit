@@ -1,0 +1,59 @@
+{% from 'tables/macro.njk' import table %}
+
+{{ table({
+  caption: "Clinic availability by day",
+  head: [
+    {
+      text: "Day"
+    },
+    {
+      text: "Morning clinic"
+    },
+    {
+      text: "Afternoon clinic"
+    },
+    {
+      text: "Notes"
+    }
+  ],
+  rows: [
+    [
+      {
+        text: "Monday",
+        rowspan: 2
+      },
+      {
+        text: "Children"
+      },
+      {
+        text: "Adults"
+      },
+      {
+        text: "Walk-ins available"
+      }
+    ],
+    [
+      {
+        text: "Urgent care",
+        colspan: 2
+      },
+      {
+        text: "Limited appointments"
+      }
+    ],
+    [
+      {
+        text: "Tuesday"
+      },
+      {
+        text: "Respiratory"
+      },
+      {
+        text: "Diabetes"
+      },
+      {
+        text: "Pre-booked only"
+      }
+    ]
+  ]
+}) }}

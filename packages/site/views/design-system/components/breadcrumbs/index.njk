@@ -1,9 +1,9 @@
-{% set pageTitle = "Breadcrumbs" %}
+{% set pageTitle = "Breadcrumb" %}
 {% set pageSection = "Design system" %}
 {% set subSection = "Components" %}
-{% set pageDescription = "Use breadcrumbs to help users understand where they are in the website." %}
+{% set pageDescription = "Use breadcrumb navigation to help users understand where they are in the website." %}
 {% set theme = "Navigation" %}
-{% set dateUpdated = "January 2019" %}
+{% set dateUpdated = "April 2026" %}
 {% set backlog_issue_id = "6" %}
 
 {% extends "app-layout.njk" %}
@@ -14,26 +14,48 @@
 
 {% block bodyContent %}
 
+  <p>Use breadcrumb navigation to show where a page sits in a wider content structure and help users move back up through related pages.</p>
+  <p>If you are working in React instead of Nunjucks, use the React <code>Breadcrumb</code> component in Storybook. This page is the toolkit/Nunjucks usage guide.</p>
+
+  <h2 id="default-breadcrumb">Default breadcrumb</h2>
+  <p>Use a short breadcrumb trail when users need to understand where they are in a content hierarchy and move back through parent pages.</p>
+
   {{ designExample({
     group: "components",
     item: "breadcrumbs",
     type: "default"
   }) }}
 
-  <h2>When to use breadcrumbs</h2>
-  <p>Use breadcrumbs to give users context and let them move back or up a level if they can't find what they want on the page.</p>
+  <h2 id="deep-breadcrumb-trail">Deep breadcrumb trail</h2>
+  <p>Longer breadcrumb trails can wrap across 2 lines on larger breakpoints. On tablet and mobile, the full trail collapses to a single back link so the component stays compact.</p>
 
-  <h2>When not to use breadcrumbs</h2>
+  {{ designExample({
+    group: "components",
+    item: "breadcrumbs",
+    type: "deep-trail"
+  }) }}
+
+  <h2 id="when-to-use-breadcrumbs">When to use breadcrumbs</h2>
+  <p>Use breadcrumb navigation to give users context and let them move back or up a level if they can't find what they want on the page.</p>
+
+  <h2 id="when-not-to-use-breadcrumbs">When not to use breadcrumbs</h2>
   <p>Don’t use breadcrumbs in transactional journeys as they can get in the way of the user completing the task.</p>
 
-  <h2>How to use breadcrumbs</h2>
-  <p>If the full breadcrumb trail doesn't fit the screen size, it can wrap onto 2 lines, but don't break a breadcrumb if it doesn't fit the line.</p>
-  <p>You don't need to show the current page in the breadcrumb because this information is in the H1.</p>
-  <p>On mobile, we replace the full breadcrumb trail with a "Back to [parent]" link.</p>
-  <p>Use these breadcrumbs on either white or OFH Brand Yellow (see Accessibility section below).</p>
+  <h2 id="how-breadcrumbs-work">How breadcrumbs work</h2>
+  <p>Use these options when configuring the breadcrumb macro:</p>
+  <ul>
+    <li><code>items</code>: the linked ancestor pages shown in the full desktop breadcrumb trail</li>
+    <li><code>text</code>: the final breadcrumb label, which is also used as the tablet/mobile back-link label when provided</li>
+    <li><code>href</code>: the final breadcrumb link destination, used with <code>text</code></li>
+    <li><code>classes</code>: extra classes added to the root breadcrumb element when you need layout-specific hooks</li>
+    <li><code>attributes</code>: extra HTML attributes added to the root breadcrumb element</li>
+  </ul>
+  <p>If the full breadcrumb trail does not fit the available width, it can wrap onto 2 lines on larger breakpoints. Keep each breadcrumb item on one line so the label and separator stay together.</p>
+  <p>On tablet and mobile, the full trail is replaced with a single back link showing just the label text, rather than the full trail.</p>
+  <p>Use this component on either white or OFH Brand Yellow backgrounds (see Accessibility section below).</p>
 
   <h3>Accessibility</h3>
-  <p class="rich-text">We use <code>aria-label="breadcrumb"</code> as a label in the nav element to let people who use screen readers know what it is.</p>
+  <p class="rich-text">We use <code>aria-label="Breadcrumb"</code> as a label in the nav element to let people who use screen readers know what it is.</p>
   <p class="rich-text">We add <code>aria-hidden="true"</code> to the svg <a href="/design-system/styles/icons">icons</a> to hide them from people who use screen readers.</p>
   <p>These breadcrumbs have been tested and pass accessibility on the following backgrounds:</p>
   <ul>
@@ -43,6 +65,6 @@
   <p>They have not been tested or implemented on other colour backgrounds.</p>
 
   <h2>Research</h2>
-  <p>To see more about how breadcrumbs were researched and used by the NHS, <a href="https://designsystem.ourfuturehealth.org.uk/design-system/components/breadcrumbs">refer to their documentation on breadcrumbs.</a></p>
+  <p>To see more about how breadcrumb navigation was researched and used by the NHS, <a href="https://designsystem.ourfuturehealth.org.uk/design-system/components/breadcrumbs">refer to their documentation on breadcrumbs.</a></p>
 
 {% endblock %}

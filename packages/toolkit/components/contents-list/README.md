@@ -57,9 +57,8 @@ Find out more about the contents list component and when to use it in the [desig
 {{ contentsList({
   items: [
     {
-      href: "https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/",
       text: "What is AMD?",
-      current: "true"
+      current: true
     },
     {
       href: "https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/symptoms/",
@@ -68,13 +67,11 @@ Find out more about the contents list component and when to use it in the [desig
     {
       href: "https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/getting-diagnosed/",
       text: "Getting diagnosed"
-    }
-    ,
+    },
     {
       href: "https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/treatment/",
       text: "Treatments"
-    }
-    ,
+    },
     {
       href: "https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/living-with-amd/",
       text: "Living with AMD"
@@ -87,13 +84,13 @@ Find out more about the contents list component and when to use it in the [desig
 
 The contents list Nunjucks macro takes the following arguments:
 
-| Name              | Type    | Required | Description                                                                           |
-| ----------------- | ------- | -------- | ------------------------------------------------------------------------------------- |
-| **items**         | array   | Yes      | Array of items in the contents list.                                                  |
-| **items.[].href** | string  | Yes      | Href value of an item in the contents list.                                           |
-| **items.[].text** | string  | Yes      | Text value of an item in the contents llst.                                           |
-| **current**       | boolean | No       | Current active page in the contents list.                                             |
-| **classes**       | string  | No       | Optional additional classes content list container. Separate each class with a space. |
-| **attributes**    | object  | No       | Any extra HTML attributes (for example data attributes) to items in the list.         |
+| Name                  | Type    | Required | Description                                                                                   |
+| --------------------- | ------- | -------- | --------------------------------------------------------------------------------------------- |
+| **items**             | array   | Yes      | Array of items in the contents list.                                                          |
+| **items.[].text**     | string  | Yes      | Visible label for the contents list item.                                                     |
+| **items.[].href**     | string  | No       | Link destination for the item. Omit it when the item is the current page.                     |
+| **items.[].current**  | boolean | No       | When true, renders the item as the current page instead of a link.                            |
+| **classes**           | string  | No       | Optional additional classes for the contents list container. Separate each class with a space. |
+| **attributes**        | object  | No       | Extra HTML attributes (for example data attributes) for the root contents list element.       |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).

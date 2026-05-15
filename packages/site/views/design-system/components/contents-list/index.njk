@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Use contents lists to allow users to navigate between related pages, for example about a single condition." %}
 {% set theme = "Navigation" %}
-{% set dateUpdated = "February 2019" %}
+{% set dateUpdated = "April 2026" %}
 {% set backlog_issue_id = "25" %}
 
 {% extends "app-layout.njk" %}
@@ -14,17 +14,41 @@
 
 {% block bodyContent %}
 
+  <p>Use a contents list to help users move around a small group of related information pages, such as a condition guide or advice hub.</p>
+  <p>If you are working in React instead of Nunjucks, use the React <code>ContentsList</code> component in Storybook. This page is the toolkit/Nunjucks usage guide.</p>
+
+  <h2 id="default-contents-list">Default contents list</h2>
+  <p>Use a current page item when the contents list appears on one page in the guide and needs to show where the user is now.</p>
+
   {{ designExample({
     group: "components",
     item: "contents-list",
     type: "default"
   }) }}
 
-  <h2>When to use a contents list</h2>
+  <h2 id="current-page-in-the-middle">Current page in the middle</h2>
+  <p>The current page does not need to be the first item. Use the current-state styling on whichever item matches the page the user is viewing.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "contents-list",
+    type: "current-in-middle"
+  }) }}
+
+  <h2 id="contents-list-with-all-links">Contents list with all links</h2>
+  <p>When you are linking to a group of related pages from a landing page or hub, you can show the list without a current page item.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "contents-list",
+    type: "all-links"
+  }) }}
+
+  <h2 id="when-to-use-a-contents-list">When to use a contents list</h2>
   <p>Use a contents list at the top of the page to allow users to navigate around a small group of related pages (up to 8 pages), for example a group of pages about a specific condition. The example on this page is from the nhs.uk page about <a href="https://www.nhs.uk/conditions/age-related-macular-degeneration-amd/">age-related macular degeneration</a>.</p>
   <p>If you're using a contents list, you should also use <a href="/design-system/components/pagination">pagination</a> at the bottom of the page. The 2 components make up the multi-page navigation pattern.</p>
 
-  <h2>When not to use a contents list</h2>
+  <h2 id="when-not-to-use-a-contents-list">When not to use a contents list</h2>
   <p>Do not use a contents list on pages which aren't grouped together or "related" as this is likely confuse users.</p>
   <p>Do not use a contents list in a transactional service or a form. We use other components instead, including:</p>
   <ul>
@@ -32,7 +56,16 @@
     <li><a href="/design-system/components/link-icon">link icon</a> to navigate back</li>
   </ul>
 
-  <h2>How to use a contents list</h2>
+  <h2 id="how-contents-lists-work">How contents lists work</h2>
+  <p>Use these options when configuring the contents list macro:</p>
+  <ul>
+    <li><code>items</code>: the list of pages shown in the contents list</li>
+    <li><code>text</code>: the visible label for each item</li>
+    <li><code>href</code>: the link destination for each non-current item</li>
+    <li><code>current</code>: marks the current page item so it is rendered as text instead of a link</li>
+    <li><code>classes</code>: extra classes added to the root contents list element</li>
+    <li><code>attributes</code>: extra HTML attributes added to the root contents list element</li>
+  </ul>
   <p>Use the contents list at the top of the page together with pagination at the bottom of each page.</p>
   <p>Keep links short and descriptive. Links that are too long (more than 2 lines) make it difficult for users to scan the list.</p>
   <p>Page titles must reflect the subject of the page (for example, "Treatment"), with the overall subject of the section as the sub-header (for example, "Age-related macular degeneration (AMD)"). This is so users are clear where they have navigated to.</p>

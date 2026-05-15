@@ -1,0 +1,28 @@
+{% from 'breadcrumb/macro.njk' import breadcrumb %}
+
+{{ breadcrumb({
+  items: [
+    {
+      href: "/health-a-to-z",
+      text: "Health A to Z"
+    },
+    {
+      href: "/health-a-to-z/conditions",
+      text: "Conditions"
+    },
+    {
+      href: "/health-a-to-z/conditions/skin-problems",
+      text: "Skin problems"
+    },
+    {
+      href: "/health-a-to-z/conditions/skin-problems/dry-skin",
+      text: "Dry skin"
+    },
+    {
+      href: "/health-a-to-z/conditions/skin-problems/dry-skin/treatments",
+      text: "Treatments"
+    }
+  ],
+  href: "/health-a-to-z/conditions/skin-problems/dry-skin/treatments/ointments",
+  text: "Ointments"
+}) }}

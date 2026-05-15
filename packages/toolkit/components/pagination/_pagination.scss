@@ -15,16 +15,20 @@
 }
 
 .ofh-pagination__list {
-  @include clearfix();
+  display: flex;
+  width: 100%;
+
+  > li {
+    margin-bottom: 0;
+  }
 }
 
 .ofh-pagination-item--previous {
-  float: left;
+  flex: 0 0 auto;
   text-align: left;
-  width: 50%;
 
   .ofh-icon {
-    left: -6px;
+    left: -4px;
   }
 
   .ofh-pagination__title {
@@ -33,12 +37,12 @@
 }
 
 .ofh-pagination-item--next {
-  float: right;
+  flex: 0 0 auto;
+  margin-left: auto;
   text-align: right;
-  width: 50%;
 
   .ofh-icon {
-    right: -6px;
+    right: -4px;
   }
 
   .ofh-pagination__title {
@@ -47,18 +51,19 @@
 }
 
 .ofh-pagination__link {
-  display: block;
+  color: $ofh-color-foreground-link-default;
+  display: inline-block;
   position: relative;
   text-decoration: none;
-  width: 100%;
 
   @include mq($media-type: print) {
     color: $ofh-color-foreground-primary;
   }
 
   .ofh-icon {
+    color: $ofh-color-brand-blue-navy-3-main;
     position: absolute;
-    top: -2px;
+    top: 0;
 
     @include mq($media-type: print) {
       color: $ofh-color-foreground-primary;
@@ -69,52 +74,43 @@
   &:hover {
     color: $ofh-color-foreground-link-hover;
 
-    .ofh-icon {
-      color: $ofh-color-foreground-link-hover;
-      fill: $ofh-color-foreground-link-hover;
-    }
-
     .ofh-pagination__page {
       text-decoration: none;
     }
   }
 
   &:focus {
-    @include ofh-focused-text;
+    @include ofh-focused-button;
+
+    color: $ofh-color-foreground-link-active;
 
     .ofh-pagination__page {
       text-decoration: none;
     }
-
-    &:visited,
-    &:hover,
-    &:active {
-      .ofh-icon {
-        color: $ofh-color-foreground-brand-blue-navy;
-        fill: $ofh-color-foreground-brand-blue-navy;
-      }
-    }
   }
 
   &:visited {
-    .ofh-icon {
-      color: $ofh-color-foreground-link-visited;
-      fill: $ofh-color-foreground-link-visited;
-    }
+    color: $ofh-color-foreground-link-visited;
 
     &:hover {
-      .ofh-icon {
-        color: $ofh-color-foreground-link-hover;
-        fill: $ofh-color-foreground-link-hover;
+      color: $ofh-color-foreground-link-hover;
+
+      .ofh-pagination__page {
+        text-decoration: none;
       }
     }
 
     &:focus {
-      .ofh-icon {
-        color: $ofh-color-foreground-brand-blue-navy;
-        fill: $ofh-color-foreground-brand-blue-navy;
+      color: $ofh-color-foreground-link-active;
+
+      .ofh-pagination__page {
+        text-decoration: none;
       }
     }
+  }
+
+  &:active {
+    color: $ofh-color-foreground-link-active;
   }
 }
 
@@ -134,6 +130,7 @@
 .ofh-pagination__page {
   @include ofh-typography-responsive('paragraph-sm');
 
+  color: inherit;
   display: block;
   text-decoration: underline;
 }

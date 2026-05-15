@@ -1,0 +1,43 @@
+{% from 'task-list/macro.njk' import taskList %}
+
+{{ taskList({
+  idPrefix: "company-details-status-variants",
+  items: [
+    {
+      title: {
+        text: "Company directors"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Complete",
+          classes: "ofh-tag--green"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Registered company details"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Incomplete",
+          classes: "ofh-tag--blue"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Financial history"
+      },
+      href: "#",
+      status: {
+        tag: {
+          text: "Pending",
+          classes: "ofh-tag--yellow"
+        }
+      }
+    }
+  ]
+}) }}

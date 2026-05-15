@@ -57,12 +57,18 @@ Import components and styles in your React application:
 
 ```tsx
 import React from 'react';
-import { Button, TextInput } from '@ourfuturehealth/react-components';
+import { Button, ContentsList, TextInput } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   return (
     <div>
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
+      />
       <TextInput
         id="name"
         label="Your name"
@@ -122,6 +128,7 @@ The React components package currently provides the following components:
 
 - `Button` - Call-to-action buttons and links
 - `TextInput` - Text input fields with toolkit-parity hint, error, and width support
+- `Breadcrumb` - Breadcrumb trails that collapse to a single back link on tablet and mobile
 - `Fieldset` - Semantic fieldset wrapper for grouped form questions and legends
 - `Footer` - Page footer with support links, optional small print and legal copy, and optional social links
 - `Textarea` - Multi-line text input fields
@@ -130,15 +137,20 @@ The React components package currently provides the following components:
 - `Autocomplete` - Accessible text input with filtered suggestion list
 - `CharacterCount` - Text input and textarea variants with count feedback
 - `Checkboxes` - Grouped checkbox inputs with hints, exclusive options, and conditional reveals
+- `Image` - Content images with optional captions and advanced responsive-source support
 - `Radios` - Grouped radio inputs with hints and conditional reveals
 - `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
 - `SummaryList` - Review-answer and key-value summary rows with optional actions
-- `Icon` - Toolkit icon component with fixed and responsive sizing using bundled SVG data
+- `Table` - Structured content tables with caption, responsive stacking, row headers, numeric cells, and merged-cell support
 - `ErrorSummary` - Page-level validation summaries with linked errors
 - `Tag` - Status tags aligned with toolkit Tag variants
+- `TaskList` - Ordered service tasks with optional hint text and shared Tag-based statuses
+- `InsetText` - Supporting content blocks with semantic feedback borders, optional headings, and one action link
 - `Card` - Content presentation cards for summaries, status, and next steps
 - `CardCallout` - Feedback-style callout cards for informational, warning, success, and error messages
 - `CardDoDont` - Positive and negative recommendation lists
+- `ContentsList` - Navigation lists for small groups of related content pages
+- `Pagination` - Previous/next page navigation for a small related sequence
 
 For complete component documentation and live examples, run Storybook locally from this repository:
 

@@ -6,15 +6,22 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ## Breaking Changes by Version
 
-| Version                                                 | Date          | Breaking Changes      | Migration Complexity                  |
-| ------------------------------------------------------- | ------------- | --------------------- | ------------------------------------- |
-| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes | 🟢 Low - adopt the new public Search surfaces where needed |
-| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes | 🟢 Low - adopt the public React footer if needed |
-| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes | 🟢 Low - adopt the public React summary list if needed |
-| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes | 🟢 Low - adopt the public React details family if needed |
-| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes | 🟢 Low - Adopt the public link family and canonical names for new usage |
+| Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
+| ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
+| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
+| [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
+| [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
+| [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
+| [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React InsetText if needed and use the refreshed toolkit inset-text APIs when relevant |
+| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
+| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React pagination if needed |
+| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React footer if needed |
+| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React summary list if needed |
+| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React details family if needed |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes        | 🟢 Low - Adopt the public link family and canonical names for new usage |
 | [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
-| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync    | 🟡 Medium - Search/replace icon names  |
+| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
 | [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
 | [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
 | [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
@@ -77,6 +84,352 @@ import { SearchInput } from '@ourfuturehealth/react-components';
   "button": {
     "ariaLabel": "Search"
   }
+}) }}
+```
+
+---
+
+## Upgrading to v4.20.0 / React v0.19.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.20.0+
+- `@ourfuturehealth/react-components` v0.19.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `contents-list` component to the current design-system treatment and introduces the first public React `ContentsList` component.
+
+- Toolkit consumers should review the refreshed contents-list spacing, marker treatment, and typography, especially where local overrides depend on the older styling.
+- Toolkit docs now show explicit default, current-in-middle, and all-links examples.
+- React consumers can now adopt the public `ContentsList` component when they need toolkit-parity navigation lists for small groups of related content pages.
+
+### Migration Steps
+
+1. Adopt the public React `ContentsList` component where you need toolkit-parity content navigation in React.
+2. Prefer the refreshed toolkit contents-list API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local contents-list overrides, especially around marker contrast, spacing, and current-item placement.
+
+#### React example
+
+**New in `react-v0.19.0`:**
+
+```tsx
+import { ContentsList } from '@ourfuturehealth/react-components';
+
+const items = [
+  { text: 'What is AMD?', current: true },
+  { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+];
+
+<ContentsList items={items} />;
+```
+
+---
+## Upgrading to v4.19.0 / React v0.18.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.19.0+
+- `@ourfuturehealth/react-components` v0.18.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `breadcrumb` component to the current design-system treatment and introduces the first public React `Breadcrumb` component.
+
+- Toolkit consumers should review the refreshed breadcrumb chevron sizing, spacing, color tokens, and responsive collapse behaviour, especially if local overrides depend on the older treatment.
+- Toolkit docs now show explicit default and deep-trail examples.
+- React consumers can now adopt the public `Breadcrumb` component when they need toolkit-parity breadcrumb navigation that collapses to a single back link on tablet and mobile.
+
+### Migration Steps
+
+1. Adopt the public React `Breadcrumb` component where you need toolkit-parity breadcrumb navigation in React.
+2. Prefer the refreshed toolkit breadcrumb API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local breadcrumb overrides, especially around chevron sizing, color state treatment, and responsive collapse behaviour.
+
+#### React example
+
+**New in `react-v0.18.0`:**
+
+```tsx
+import { Breadcrumb } from '@ourfuturehealth/react-components';
+
+const items = [
+  { text: 'Health A to Z', href: '/health-a-to-z' },
+  { text: 'Conditions', href: '/health-a-to-z/conditions' },
+];
+
+<Breadcrumb
+  items={items}
+  current={{
+    text: 'Eczema',
+    href: '/health-a-to-z/conditions/eczema',
+  }}
+/>;
+```
+
+---
+
+## Upgrading to v4.18.0 / React v0.17.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.18.0+
+- `@ourfuturehealth/react-components` v0.17.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `table` component to the current design-system treatment and introduces the first public React `Table` component.
+
+- Toolkit consumers should review the refreshed responsive/mobile stacked-row treatment, the `2px` closing border, and the expanded docs examples for row headers, numeric values, and merged cells.
+- React consumers can now adopt the public `Table` component when they need toolkit-parity content tables with optional captions, responsive stacking, row headers, numeric cells, and merged cells.
+
+### Migration Steps
+
+1. Adopt the public React `Table` component where you need toolkit-parity content tables in React.
+2. Prefer the refreshed toolkit table API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local table overrides, especially around responsive stacked rows, row-header emphasis, numeric alignment, and merged-cell layouts.
+
+#### React example
+
+**New in `react-v0.17.0`:**
+
+```tsx
+import { Table } from '@ourfuturehealth/react-components';
+
+<Table
+  caption="Symptoms and self-care"
+  head={[
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ]}
+  rows={[
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
+  ]}
+/>;
+```
+
+---
+
+## Upgrading to v4.17.0 / React v0.16.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.17.0+
+- `@ourfuturehealth/react-components` v0.16.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `image` component to the current design-system treatment and introduces the first public React `Image` component.
+
+- Toolkit consumers should review the refreshed image caption strip and bottom-edge treatment, especially where local overrides depend on the older styling.
+- Toolkit docs now show explicit default and `without-caption` examples.
+- React consumers can now adopt the public `Image` component when they need toolkit-parity content images with optional captions and responsive image sources.
+
+### Migration Steps
+
+1. Adopt the public React `Image` component where you need toolkit-parity image rendering in React.
+2. Prefer the refreshed toolkit image API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local image overrides, especially around caption treatment, bottom-edge styling, and responsive image sizing.
+
+#### React example
+
+**New in `react-v0.16.0`:**
+
+```tsx
+import { Image } from '@ourfuturehealth/react-components';
+
+<Image
+  src="https://assets.nhs.uk/prod/images/S_0318_Bullous_pemphigoid_lesions_.2e16d0ba.fill-320x213.jpg"
+  alt="Lots of sore red patches with small blisters spread across white skin on a woman's chest."
+  caption="It can affect large areas of the body or limbs."
+/>;
+```
+
+---
+
+## Upgrading to v4.16.0 / React v0.15.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.16.0+
+- `@ourfuturehealth/react-components` v0.15.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `inset-text` component to the current design-system treatment and introduces the first public React `InsetText` component.
+
+- Toolkit consumers should review the refreshed inset-text border, background, and content structure, especially where local overrides depend on the older treatment.
+- Toolkit docs now show explicit `without-heading` and `html-content` examples.
+- React consumers can now adopt the public `InsetText` component when they need supporting content blocks with optional headings, rich text, and one action link.
+
+### Migration Steps
+
+1. Adopt the public React `InsetText` component where you need toolkit-parity inset text in React.
+2. Prefer the refreshed toolkit inset-text API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local inset-text overrides, especially around borders, background color, heading visibility, and action-link spacing.
+
+#### React example
+
+**New in `react-v0.15.0`:**
+
+```tsx
+import { InsetText } from '@ourfuturehealth/react-components';
+
+<InsetText
+  heading="Information"
+  text="You can report any suspected side effect to the Yellow Card safety scheme."
+  actionLink={{
+    text: 'Report a side effect',
+    href: '/report-side-effect',
+  }}
+/>;
+```
+
+---
+
+## Upgrading to v4.15.0 / React v0.14.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.15.0+
+- `@ourfuturehealth/react-components` v0.14.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `task-list` component to the current design-system treatment and introduces the first public React `TaskList` component.
+
+- Toolkit consumers should review the refreshed task-list row spacing, the removal of the old first-row divider, and the expanded docs examples for hints and status variants.
+- React consumers can now adopt the public `TaskList` component when they need long-form task navigation with right-aligned Tag-based statuses.
+
+### Migration Steps
+
+1. Adopt the public React `TaskList` component where you need toolkit-parity task navigation in React.
+2. Prefer the refreshed toolkit task-list API, docs examples, and canonical usage when touching existing Nunjucks templates.
+3. Re-run visual QA if you have local task-list overrides, especially around first-row dividers, responsive spacing, hint text, and status tag alignment.
+
+#### React example
+
+**New in `react-v0.14.0`:**
+
+```tsx
+import { TaskList } from '@ourfuturehealth/react-components';
+
+const items = [
+  {
+    title: 'Company directors',
+    href: '/company/directors',
+    status: {
+      children: 'Complete',
+      variant: 'green',
+    },
+  },
+  {
+    title: 'Financial history',
+    href: '/company/financial-history',
+    hint: 'Include 5 years of the company’s relevant financial information.',
+    status: {
+      children: 'Incomplete',
+      variant: 'blue',
+    },
+  },
+];
+
+<TaskList items={items} idPrefix="company-task-list" />;
+```
+
+---
+
+## Upgrading to v4.14.0 / React v0.13.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.14.0+
+- `@ourfuturehealth/react-components` v0.13.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release refreshes the toolkit `pagination` component to the current design-system treatment and introduces the first public React `Pagination` component.
+
+- Toolkit consumers now get boxed pagination focus states, corrected state coloring, and content-hugging previous/next hit areas instead of 50/50 click zones.
+- Toolkit docs now show the start and end of a sequence explicitly through `previous-only` and `next-only` examples.
+- React consumers can now adopt the public `Pagination` component instead of carrying local previous/next page navigation markup.
+
+### Migration Steps
+
+1. Adopt the public React `Pagination` component where you need toolkit-parity previous/next page navigation in React.
+2. Re-run visual QA if you have local pagination overrides, because the link hit area now hugs the content instead of filling half of the row.
+3. For sequence endpoints, omit the unavailable side rather than rendering placeholder markup.
+
+#### React example
+
+**New in `react-v0.13.0`:**
+
+```tsx
+import { Pagination } from '@ourfuturehealth/react-components';
+```
+
+#### Toolkit example
+
+**Before:**
+
+```njk
+<nav class="app-pagination" aria-label="Pagination">
+  <a href="/previous">Previous page</a>
+  <a href="/next">Next page</a>
+</nav>
+```
+
+**After (`toolkit-v4.14.0`):**
+
+```njk
+{{ pagination({
+  "previousUrl": "/section/treatments",
+  "previousPage": "Treatments",
+  "nextUrl": "/section/symptoms",
+  "nextPage": "Symptoms"
 }) }}
 ```
 
@@ -303,7 +656,6 @@ import {
   LinkSkip,
 } from '@ourfuturehealth/react-components';
 ```
-
 ## Upgrading to React v0.8.0
 
 **Released:** April 2026
@@ -449,8 +801,6 @@ Current toolkit component templates, docs examples, React stories, and tests hav
 <Icon name="ClockOutline" size={24} />
 <Icon name="Linkedin" size={24} />
 ```
-
----
 
 ## Upgrading to v4.8.0 / React v0.6.0
 

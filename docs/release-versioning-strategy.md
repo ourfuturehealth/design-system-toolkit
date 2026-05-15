@@ -60,7 +60,7 @@ Consumers must install the package release tarball:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.21.0/ourfuturehealth-toolkit-4.21.0.tgz"
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v{version}/ourfuturehealth-toolkit-{version}.tgz"
   }
 }
 ```
@@ -70,7 +70,7 @@ React consumers follow the same contract:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.20.0/ourfuturehealth-react-components-0.20.0.tgz"
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz"
   }
 }
 ```
@@ -103,7 +103,7 @@ npm pack ./packages/react-components --ignore-scripts
 
 ## Version Correlation Table
 
-This table is a visual aid for pre-monorepo versus post-monorepo releases.
+This table is illustrative, not exhaustive. It shows the transition from the pre-monorepo single-package release model to the monorepo model where toolkit and React release independently, plus the tag format future monorepo releases continue to use.
 
 | Order | Release tag      | Toolkit version | React version | Repo model     | Status                 |
 | ----- | ---------------- | --------------- | ------------- | -------------- | ---------------------- |
@@ -114,29 +114,8 @@ This table is a visual aid for pre-monorepo versus post-monorepo releases.
 | 5     | `react-v0.0.1`   | N/A             | `0.0.1`       | Monorepo       | Released               |
 | 6     | `toolkit-v4.1.0` | `4.1.0`         | N/A           | Monorepo       | Released               |
 | 7     | `react-v0.1.0`   | N/A             | `0.1.0`       | Monorepo       | Released               |
-| 8     | `toolkit-v4.2.0` | `4.2.0`         | N/A           | Monorepo       | Released               |
-| 9     | `toolkit-v4.3.0` | `4.3.0`         | N/A           | Monorepo       | Released               |
-| 10    | `react-v0.2.0`   | N/A             | `0.2.0`       | Monorepo       | Released               |
-| 11    | `toolkit-v4.4.0` | `4.4.0`         | N/A           | Monorepo       | Released               |
-| 12    | `react-v0.3.0`   | N/A             | `0.3.0`       | Monorepo       | Released               |
-| 13    | `toolkit-v4.5.0` | `4.5.0`         | N/A           | Monorepo       | Released               |
-| 14    | `toolkit-v4.6.0` | `4.6.0`         | N/A           | Monorepo       | Released               |
-| 15    | `react-v0.4.0`   | N/A             | `0.4.0`       | Monorepo       | Released               |
-| 16    | `toolkit-v4.7.0` | `4.7.0`         | N/A           | Monorepo       | Released               |
-| 17    | `react-v0.5.0`   | N/A             | `0.5.0`       | Monorepo       | Released               |
-| 18    | `toolkit-v4.8.0` | `4.8.0`         | N/A           | Monorepo       | Released               |
-| 19    | `react-v0.6.0`   | N/A             | `0.6.0`       | Monorepo       | Released               |
-| 20    | `toolkit-v4.9.0` | `4.9.0`         | N/A           | Monorepo       | Released               |
-| 21    | `react-v0.7.0`   | N/A             | `0.7.0`       | Monorepo       | Released               |
-| 22    | `react-v0.8.0`    | N/A            | `0.8.0`       | Monorepo       | Released               |
-| 23    | `toolkit-v4.10.0` | `4.10.0`       | N/A           | Monorepo       | Released               |
-| 24    | `react-v0.9.0`    | N/A            | `0.9.0`       | Monorepo       | Released               |
-| 25    | `toolkit-v4.11.0` | `4.11.0`       | N/A           | Monorepo       | Released               |
-| 26    | `react-v0.10.0`   | N/A            | `0.10.0`      | Monorepo       | Released               |
-| 27    | `toolkit-v4.12.0` | `4.12.0`       | N/A           | Monorepo       | Released               |
-| 28    | `react-v0.11.0`   | N/A            | `0.11.0`      | Monorepo       | Released               |
-| 29    | `toolkit-v4.13.0` | `4.13.0`       | N/A           | Monorepo       | Released               |
-| 30    | `react-v0.12.0`   | N/A            | `0.12.0`      | Monorepo       | Released               |
+| 8     | `toolkit-vX.Y.Z` | `X.Y.Z`         | N/A           | Monorepo       | Future releases follow this format |
+| 9     | `react-vA.B.C`   | N/A             | `A.B.C`       | Monorepo       | Future releases follow this format |
 
 ## References
 

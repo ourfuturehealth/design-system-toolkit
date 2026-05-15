@@ -1,0 +1,59 @@
+{% from 'tables/macro.njk' import table %}
+
+{{ table({
+  caption: "Monthly appointment summary",
+  head: [
+    {
+      text: "Month"
+    },
+    {
+      text: "Appointments",
+      format: "numeric"
+    },
+    {
+      text: "Participants",
+      format: "numeric"
+    }
+  ],
+  rows: [
+    [
+      {
+        text: "January"
+      },
+      {
+        text: "128",
+        format: "numeric"
+      },
+      {
+        text: "942",
+        format: "numeric"
+      }
+    ],
+    [
+      {
+        text: "February"
+      },
+      {
+        text: "156",
+        format: "numeric"
+      },
+      {
+        text: "1,084",
+        format: "numeric"
+      }
+    ],
+    [
+      {
+        text: "March"
+      },
+      {
+        text: "149",
+        format: "numeric"
+      },
+      {
+        text: "1,031",
+        format: "numeric"
+      }
+    ]
+  ]
+}) }}

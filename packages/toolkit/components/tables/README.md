@@ -185,13 +185,13 @@ Find out more about the table component and when to use it in the [design system
   <caption class="ofh-table__caption">Ibuprofen syrup dosages for children</caption>
   <thead role="rowgroup" class="ofh-table__head">
     <tr role="row">
-      <th role="columnheader" class="" scope="col">
-        Age
-      </th>
-      <th role="columnheader" class="" scope="col">
+        <th role="columnheader" class="ofh-table__header" scope="col">
+          Age
+        </th>
+      <th role="columnheader" class="ofh-table__header" scope="col">
         How much?
       </th>
-      <th role="columnheader" class="" scope="col">
+      <th role="columnheader" class="ofh-table__header" scope="col">
         How often?
       </th>
     </tr>
@@ -199,35 +199,44 @@ Find out more about the table component and when to use it in the [design system
   <tbody class="ofh-table__body">
     <tr role="row" class="ofh-table__row" >
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">Age </span>3 to 5 months (weighing more than 5kg)
+        <span class="ofh-table-responsive__heading">Age</span>
+        <span class="ofh-table-responsive__content">3 to 5 months (weighing more than 5kg)</span>
       </td>
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How much? </span>2.5ml
+        <span class="ofh-table-responsive__heading">How much?</span>
+        <span class="ofh-table-responsive__content">2.5ml</span>
       </td>
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How often? </span>Max 3 times in 24 hours
-      </td>
-    </tr>
-    <tr role="row" class="ofh-table__row" >
-      <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">Age </span>6 to 11 months
-      </td>
-      <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How much? </span>2.5l
-      </td>
-      <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How often? </span>Max 3 to 4 times in 24 hours
+        <span class="ofh-table-responsive__heading">How often?</span>
+        <span class="ofh-table-responsive__content">Max 3 times in 24 hours</span>
       </td>
     </tr>
     <tr role="row" class="ofh-table__row" >
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">Age </span>1 to 3 years
+        <span class="ofh-table-responsive__heading">Age</span>
+        <span class="ofh-table-responsive__content">6 to 11 months</span>
       </td>
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How much? </span>5ml
+        <span class="ofh-table-responsive__heading">How much?</span>
+        <span class="ofh-table-responsive__content">2.5ml</span>
       </td>
       <td role="cell" class="ofh-table__cell">
-        <span class="ofh-table-responsive__heading">How often? </span>Max 3 times in 24 hours
+        <span class="ofh-table-responsive__heading">How often?</span>
+        <span class="ofh-table-responsive__content">Max 3 to 4 times in 24 hours</span>
+      </td>
+    </tr>
+    <tr role="row" class="ofh-table__row" >
+      <td role="cell" class="ofh-table__cell">
+        <span class="ofh-table-responsive__heading">Age</span>
+        <span class="ofh-table-responsive__content">1 to 3 years</span>
+      </td>
+      <td role="cell" class="ofh-table__cell">
+        <span class="ofh-table-responsive__heading">How much?</span>
+        <span class="ofh-table-responsive__content">5ml</span>
+      </td>
+      <td role="cell" class="ofh-table__cell">
+        <span class="ofh-table-responsive__heading">How often?</span>
+        <span class="ofh-table-responsive__content">Max 3 times in 24 hours</span>
       </td>
     </tr>
   </tbody>

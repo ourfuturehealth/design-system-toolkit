@@ -9,7 +9,7 @@ Install the packaged GitHub release artifact:
 ```json
 {
   "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.20.0/ourfuturehealth-react-components-0.20.0.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v{version}/ourfuturehealth-react-components-{version}.tgz",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
@@ -42,11 +42,13 @@ Install the resulting local `.tgz` in the consumer application.
 ```tsx
 import {
   Autocomplete,
+  Breadcrumb,
   Button,
   Card,
   CardCallout,
   CardDoDont,
   CharacterCount,
+  ContentsList,
   Checkboxes,
   DateInput,
   Details,
@@ -54,14 +56,19 @@ import {
   Expander,
   Fieldset,
   Footer,
+  InsetText,
+  Image,
   Icon,
   LinkAction,
   LinkIcon,
   LinkSkip,
+  Pagination,
   Radios,
   SearchInput,
   Select,
   SummaryList,
+  Table,
+  TaskList,
   Tag,
   Textarea,
   TextInput,
@@ -70,6 +77,10 @@ import '@ourfuturehealth/react-components/styles/participant';
 
 function App() {
   const countryOptions = ['England', 'Scotland', 'Wales', 'Northern Ireland'];
+  const breadcrumbItems = [
+    { text: 'Health A to Z', href: '/health-a-to-z' },
+    { text: 'Conditions', href: '/health-a-to-z/conditions' },
+  ];
   const contactCheckboxItems = [
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
@@ -79,6 +90,20 @@ function App() {
     { value: 'email', label: 'Email' },
     { value: 'phone', label: 'Phone' },
     { value: 'post', label: 'Post' },
+  ];
+  const symptomsHead = [
+    { content: 'Symptom' },
+    { content: 'Self-care' },
+  ];
+  const symptomsRows = [
+    [
+      { content: 'Dry eyes' },
+      { content: 'Use artificial tears' },
+    ],
+    [
+      { content: 'Headache' },
+      { content: 'Rest and keep hydrated' },
+    ],
   ];
   const summaryRows = [
     {
@@ -92,6 +117,13 @@ function App() {
 
   return (
     <div>
+      <Breadcrumb
+        items={breadcrumbItems}
+        current={{
+          text: 'Eczema',
+          href: '/health-a-to-z/conditions/eczema',
+        }}
+      />
       <ErrorSummary
         titleText="There is a problem"
         errorList={[
@@ -109,17 +141,35 @@ function App() {
         information.
       </Expander>
       <SummaryList rows={summaryRows} />
-      <Details summary="Why we ask for this">
-        We use your answers to tailor the information you see next.
-      </Details>
-      <Expander summary="What happens next">
-        We will review your answers and let you know if we need any more
-        information.
-      </Expander>
-      <SummaryList rows={summaryRows} />
-      <SearchInput label="Search the site" action="/search" />
       <Tag variant="brand">Beta</Tag>
+      <TaskList
+        items={[
+          {
+            title: 'Company directors',
+            href: '#directors',
+            status: {
+              children: 'Complete',
+              variant: 'green',
+            },
+          },
+          {
+            title: 'Registered company details',
+            href: '#company-details',
+            status: {
+              children: 'Incomplete',
+              variant: 'blue',
+            },
+          },
+        ]}
+      />
       <Button variant="contained">Click me</Button>
+      <ContentsList
+        items={[
+          { text: 'What is AMD?', current: true },
+          { text: 'Symptoms', href: '/conditions/amd/symptoms' },
+        ]}
+      />
+      <SearchInput action="/search" label="Search the site" />
       <Icon name="Search" size={24} />
       <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
       <LinkIcon href="/previous-step">Go back</LinkIcon>
@@ -127,6 +177,16 @@ function App() {
       <Card heading="Profile complete" description="You’ve completed all the required profile details." />
       <CardCallout heading="Warning" variant="warning" text="Check this information before you continue." />
       <CardDoDont type="do" items={[{ item: 'keep points short and scannable' }]} />
+      <InsetText
+        heading="Information"
+        text="You can report any suspected side effect to the Yellow Card safety scheme."
+        actionLink={{ text: 'Report a side effect', href: '#report-a-side-effect' }}
+      />
+      <Image
+        src="https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg"
+        alt="Picture of allergic conjunctivitis"
+        caption="Itchy, red, watering eyes."
+      />
       <Fieldset legend="Contact details" legendSize="medium">
         <TextInput id="email" label="Email address" type="email" width="three-quarters" />
         <TextInput id="phone" label="Phone number" type="tel" width="two-thirds" />
@@ -180,6 +240,7 @@ function App() {
         legend="Preferred contact method"
         name="preferred-contact-method"
       />
+      <Table caption="Symptoms and self-care" head={symptomsHead} rows={symptomsRows} />
     </div>
   );
 }
@@ -225,6 +286,7 @@ A form input component with toolkit-parity label, hint, error, and width support
 The package also provides:
 
 - `Fieldset`
+- `Breadcrumb`
 - `Footer`
 - `Textarea`
 - `Select`
@@ -232,9 +294,15 @@ The package also provides:
 - `Autocomplete`
 - `CharacterCount`
 - `Checkboxes`
+- `InsetText`
+- `Image`
 - `Radios`
+- `TaskList`
 - `Icon`
+- `ContentsList`
+- `Pagination`
 - `SummaryList`
+- `Table`
 
 ### ErrorSummary
 
@@ -285,8 +353,48 @@ A card for short do and don’t recommendation lists.
 **Props:**
 
 - `type`: 'do' | 'dont'
-- `heading`, `headingLevel`
-- `items`
+- `heading?`: React.ReactNode
+- `headingLevel?`: 1 | 2 | 3 | 4 | 5 | 6
+- `items`: `{ item: ReactNode }[]`
+- `classes?`: string
+- `className?`: string
+- `ref?`: React ref forwarded to the root card element
+
+### TaskList
+
+A task list that reuses the shared `Tag` component for the status column.
+
+Commonly used props are listed below. `TaskListProps` also includes optional `classes` and `ref` props.
+
+**Props:**
+
+- `items`: `{ title: ReactNode; href?: string; hint?: ReactNode; status: TagProps; className?: string; titleClassName?: string; hintClassName?: string }[]`
+- `idPrefix?`: string
+- `className?`: string
+- `classes?`: styling override classes for the root task list element
+- `ref?`: React ref forwarded to the root task list element
+
+### InsetText
+
+A lightweight content callout with feedback border variants, background options, and an optional action link.
+
+**Props:**
+
+- `variant`: 'info' | 'success' | 'warning' | 'error'
+- `background`: 'grey' | 'yellow' | 'blue'
+- `heading`, `headingHtml`, `headingLevel`
+- `text` or `html`
+- `actionLink`
+
+### Image
+
+A content image with optional caption and responsive image-source support.
+
+**Props:**
+
+- `src`, `alt`
+- `caption`
+- `sizes`, `srcSet`
 
 ### Icons
 

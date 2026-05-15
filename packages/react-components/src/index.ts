@@ -94,6 +94,15 @@ export type { CardCalloutProps } from './components/CardCallout';
 export { CardDoDont } from './components/CardDoDont';
 export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
+export { ContentsList } from './components/ContentsList';
+export type {
+  ContentsListItem,
+  ContentsListProps,
+} from './components/ContentsList';
+
+export { Pagination } from './components/Pagination';
+export type { PaginationProps } from './components/Pagination';
+
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
 
@@ -104,3 +113,28 @@ export type {
   SummaryListProps,
   SummaryListRow,
 } from './components/SummaryList';
+
+export { TaskList } from './components/TaskList';
+export type { TaskListItemProps, TaskListProps } from './components/TaskList';
+
+export { InsetText } from './components/InsetText';
+export type {
+  InsetTextActionLink,
+  InsetTextBackground,
+  InsetTextProps,
+  InsetTextVariant,
+} from './components/InsetText';
+
+export { Image } from './components/Image';
+export type { ImageProps } from './components/Image';
+
+export { Table } from './components/Table';
+export type {
+  TableCell,
+  TableCellFormat,
+  TableHeadCell,
+  TableProps,
+} from './components/Table';
+
+export { Breadcrumb } from './components/Breadcrumb';
+export type { BreadcrumbItem, BreadcrumbProps } from './components/Breadcrumb';

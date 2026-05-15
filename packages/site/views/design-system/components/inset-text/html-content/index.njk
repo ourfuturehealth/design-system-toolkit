@@ -1,0 +1,12 @@
+{% from 'inset-text/macro.njk' import insetText %}
+
+{{ insetText({
+  "heading": "Information",
+  "variant": "info",
+  "background": "blue",
+  "html": "<p>You can report any suspected side effect to the <a href=\"https://yellowcard.mhra.gov.uk/\">Yellow Card safety scheme</a>.</p>",
+  "actionLink": {
+    "text": "Read more",
+    "href": "#read-more"
+  }
+}) }}

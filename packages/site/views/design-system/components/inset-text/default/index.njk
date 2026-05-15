@@ -1,5 +1,130 @@
 {% from 'inset-text/macro.njk' import insetText %}
 
-{{ insetText({
-  "HTML": "<p>You can report any suspected side effect to the <a href=\"https://yellowcard.mhra.gov.uk/\" title=\"External website\">UK safety scheme</a>.</p>"
-}) }}
+{% set examples = [
+  {
+    "heading": "Information",
+    "variant": "info",
+    "background": "grey",
+    "text": "You can report any suspected side effect to the Yellow Card safety scheme.",
+    "actionLink": {
+      "text": "Report a side effect",
+      "href": "#report-a-side-effect"
+    }
+  },
+  {
+    "heading": "Success",
+    "variant": "success",
+    "background": "grey",
+    "text": "Your contact details have been saved successfully.",
+    "actionLink": {
+      "text": "Review your details",
+      "href": "#review-your-details"
+    }
+  },
+  {
+    "heading": "Warning",
+    "variant": "warning",
+    "background": "grey",
+    "text": "Check this information before you continue.",
+    "actionLink": {
+      "text": "Read the guidance",
+      "href": "#read-the-guidance"
+    }
+  },
+  {
+    "heading": "Error",
+    "variant": "error",
+    "background": "grey",
+    "text": "There is a problem with the information in this section.",
+    "actionLink": {
+      "text": "Fix this section",
+      "href": "#fix-this-section"
+    }
+  },
+  {
+    "heading": "Information",
+    "variant": "info",
+    "background": "yellow",
+    "text": "Keep this note visible while you complete the next step.",
+    "actionLink": {
+      "text": "Read more",
+      "href": "#read-more"
+    }
+  },
+  {
+    "heading": "Success",
+    "variant": "success",
+    "background": "yellow",
+    "text": "Your appointment has been booked for next week.",
+    "actionLink": {
+      "text": "Add it to your calendar",
+      "href": "#add-it-to-your-calendar"
+    }
+  },
+  {
+    "heading": "Warning",
+    "variant": "warning",
+    "background": "yellow",
+    "text": "Bring your invitation letter with you on the day.",
+    "actionLink": {
+      "text": "View preparation guidance",
+      "href": "#view-preparation-guidance"
+    }
+  },
+  {
+    "heading": "Error",
+    "variant": "error",
+    "background": "yellow",
+    "text": "We could not verify the details you entered.",
+    "actionLink": {
+      "text": "Check your answers",
+      "href": "#check-your-answers"
+    }
+  },
+  {
+    "heading": "Information",
+    "variant": "info",
+    "background": "blue",
+    "text": "You can come back to this page later using the same link.",
+    "actionLink": {
+      "text": "Copy the link",
+      "href": "#copy-the-link"
+    }
+  },
+  {
+    "heading": "Success",
+    "variant": "success",
+    "background": "blue",
+    "text": "Your preferences have been updated.",
+    "actionLink": {
+      "text": "Manage preferences",
+      "href": "#manage-preferences"
+    }
+  },
+  {
+    "heading": "Warning",
+    "variant": "warning",
+    "background": "blue",
+    "text": "You may need to wait a few minutes before changes appear.",
+    "actionLink": {
+      "text": "Learn why",
+      "href": "#learn-why"
+    }
+  },
+  {
+    "heading": "Error",
+    "variant": "error",
+    "background": "blue",
+    "text": "We could not submit your answers right now.",
+    "actionLink": {
+      "text": "Try again",
+      "href": "#try-again"
+    }
+  }
+] %}
+
+{% for example in examples %}
+  <div class="ofh-u-margin-bottom-16">
+    {{ insetText(example) }}
+  </div>
+{% endfor %}

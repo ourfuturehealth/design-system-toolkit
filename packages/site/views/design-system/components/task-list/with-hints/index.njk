@@ -1,0 +1,52 @@
+{% from 'task-list/macro.njk' import taskList %}
+
+{{ taskList({
+  idPrefix: "company-details-with-hints",
+  items: [
+    {
+      title: {
+        text: "Company directors"
+      },
+      href: "#",
+      hint: {
+        text: "Add each director’s full name and date of birth."
+      },
+      status: {
+        tag: {
+          text: "Complete",
+          classes: "ofh-tag--green"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Registered company details"
+      },
+      href: "#",
+      hint: {
+        text: "Use the company registration number from your records."
+      },
+      status: {
+        tag: {
+          text: "Incomplete",
+          classes: "ofh-tag--blue"
+        }
+      }
+    },
+    {
+      title: {
+        text: "Financial history"
+      },
+      href: "#",
+      hint: {
+        text: "Include 5 years of the company’s relevant financial information."
+      },
+      status: {
+        tag: {
+          text: "Pending",
+          classes: "ofh-tag--yellow"
+        }
+      }
+    }
+  ]
+}) }}

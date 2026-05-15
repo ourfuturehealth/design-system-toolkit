@@ -19,31 +19,31 @@
 }
 
 .ofh-task-list__item {
+  align-items: flex-start;
   border-bottom: 1px solid $ofh-color-border-primary;
-  display: table;
+  display: flex;
   margin-bottom: 0;
   padding-bottom: $ofh-size-8;
   padding-top: $ofh-size-8;
   position: relative;
   width: 100%;
-}
 
-.ofh-task-list__item:first-child {
-  border-top: 1px solid $ofh-color-border-primary;
+  @include ofh-responsive-gap-x(24);
 }
 
 .ofh-task-list__name-and-hint {
   color: $ofh-color-foreground-primary;
-  display: table-cell;
-  vertical-align: top;
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  gap: $ofh-size-4;
+  min-width: 0;
 }
 
 .ofh-task-list__status {
   color: $ofh-color-foreground-primary;
-  display: table-cell;
-  padding-left: 10px;
+  flex-shrink: 0;
   text-align: right;
-  vertical-align: top;
 }
 
 // This adds an empty transparent box covering the whole row, including the task status and
@@ -58,5 +58,4 @@
 
 .ofh-task-list__hint {
   color: $ofh-color-foreground-secondary;
-  margin-top: 5px;
 }
