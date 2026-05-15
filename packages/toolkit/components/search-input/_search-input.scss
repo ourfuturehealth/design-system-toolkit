@@ -11,14 +11,6 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
   align-items: stretch;
   display: flex;
   width: 100%;
-
-  &:hover .ofh-search-input__button {
-    background-color: $ofh-color-background-button-hover;
-  }
-
-  &:active .ofh-search-input__button {
-    background-color: $ofh-color-background-button-active;
-  }
 }
 
 .ofh-search-input__field {
@@ -36,6 +28,14 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
   @include ofh-responsive-padding(12, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
+  &:hover {
+    @include ofh-emphasised-input-border($ofh-color-border-input-default);
+  }
+
+  &:active {
+    @include ofh-emphasised-input-border($ofh-color-border-input-active);
+  }
+
   &::after {
     border: $ofh-stroke-weight-4 solid $ofh-color-border-feedback-focus;
     border-radius: $ofh-radius-8 0 0 $ofh-radius-8;
@@ -51,6 +51,8 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
   }
 
   &:focus-within {
+    @include ofh-emphasised-input-border($ofh-color-border-input-active);
+
     z-index: 1;
   }
 
@@ -109,6 +111,7 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
   }
 
   &:hover {
+    background-color: $ofh-color-background-button-hover;
     cursor: pointer;
   }
 

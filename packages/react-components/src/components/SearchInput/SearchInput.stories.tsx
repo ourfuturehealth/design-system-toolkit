@@ -12,6 +12,38 @@ type SearchInputStoryArgs = SearchInputProps & {
   inputId?: string;
 };
 
+const preventSearchInputStorySubmit: NonNullable<SearchInputProps['onSubmit']> = (
+  event,
+) => {
+  event.preventDefault();
+};
+
+const renderSearchInputStory = ({
+  inputId,
+  inputProps,
+  onSubmit,
+  ...args
+}: SearchInputStoryArgs) => {
+  const resolvedInputProps =
+    inputId ?? inputProps?.id
+      ? {
+          ...inputProps,
+          id: inputId ?? inputProps?.id,
+        }
+      : inputProps;
+
+  return (
+    <SearchInput
+      {...args}
+      inputProps={resolvedInputProps}
+      onSubmit={(event) => {
+        preventSearchInputStorySubmit(event);
+        onSubmit?.(event);
+      }}
+    />
+  );
+};
+
 const defaultSearchInputSource = `import { SearchInput } from '@ourfuturehealth/react-components';
 
 <SearchInput
@@ -39,15 +71,27 @@ const stateShowcaseStyles = `
   margin: 0;
 }
 
-.search-input-story__state--hover .ofh-search-input__button {
+.search-input-story__state--input-hover .ofh-search-input__field {
+  border-color: #494949;
+  box-shadow: inset 0 0 0 2px #494949;
+}
+
+.search-input-story__state--input-active .ofh-search-input__field {
+  border-color: #1b1b1b;
+  box-shadow: inset 0 0 0 2px #1b1b1b;
+}
+
+.search-input-story__state--button-hover .ofh-search-input__button {
   background-color: #002d61;
 }
 
-.search-input-story__state--active .ofh-search-input__button {
+.search-input-story__state--button-active .ofh-search-input__button {
   background-color: #002d61;
 }
 
 .search-input-story__state--input-focus .ofh-search-input__field {
+  border-color: #1b1b1b;
+  box-shadow: inset 0 0 0 2px #1b1b1b;
   z-index: 1;
 }
 
@@ -133,6 +177,7 @@ const meta: Meta<SearchInputStoryArgs> = {
     placeholder: 'Search',
     submitLabel: 'Search',
   },
+  render: renderSearchInputStory,
   tags: ['autodocs'],
   argTypes: {
     label: {
@@ -253,15 +298,6 @@ export const Builder: Story = {
       id: 'search-input-builder',
     },
   },
-  render: ({ inputId, inputProps, ...args }) => (
-    <SearchInput
-      {...args}
-      inputProps={{
-        ...inputProps,
-        id: inputId ?? inputProps?.id,
-      }}
-    />
-  ),
   parameters: {
     docs: {
       description: {
@@ -290,8 +326,10 @@ export const StateShowcase: Story = {
       <div className="search-input-story__grid">
         {[
           ['Default', 'search-input-story__state--default'],
-          ['Hover', 'search-input-story__state--hover'],
-          ['Active', 'search-input-story__state--active'],
+          ['Input hover', 'search-input-story__state--input-hover'],
+          ['Input active', 'search-input-story__state--input-active'],
+          ['Button hover', 'search-input-story__state--button-hover'],
+          ['Button active', 'search-input-story__state--button-active'],
           ['Input focus', 'search-input-story__state--input-focus'],
           ['Button focus', 'search-input-story__state--button-focus'],
         ].map(([label, className]) => (
@@ -299,11 +337,11 @@ export const StateShowcase: Story = {
             <p className="search-input-story__label">{label}</p>
             <div className={className}>
               <SearchInput
-                action="/search"
                 inputProps={{
                   id: `search-input-${label.toLowerCase().replace(/\s+/g, '-')}`,
                 }}
                 label="Search the site"
+                onSubmit={preventSearchInputStorySubmit}
                 placeholder="Search"
               />
             </div>
