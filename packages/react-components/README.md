@@ -48,6 +48,7 @@ import {
   CardCallout,
   CardDoDont,
   CharacterCount,
+  ContentsList,
   Checkboxes,
   DateInput,
   Details,
@@ -63,6 +64,7 @@ import {
   LinkSkip,
   Pagination,
   Radios,
+  SearchInput,
   Select,
   SummaryList,
   Table,
@@ -167,6 +169,7 @@ function App() {
           { text: 'Symptoms', href: '/conditions/amd/symptoms' },
         ]}
       />
+      <SearchInput action="/search" label="Search the site" />
       <Icon name="Search" size={24} />
       <LinkAction href="/services/minor-injuries">Find a minor injuries unit</LinkAction>
       <LinkIcon href="/previous-step">Go back</LinkIcon>

@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
 | [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
 | [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
 | [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
@@ -28,6 +29,63 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.21.0 / React v0.20.0
+
+**Released:** April 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.21.0+
+- `@ourfuturehealth/react-components` v0.20.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release introduces the public Search component surfaces in toolkit and React.
+
+- Toolkit consumers can now use the dedicated `searchInput` macro instead of carrying local joined-search markup and styling.
+- React consumers can now adopt the public `SearchInput` component for compact site or page search controls.
+- The public docs and Storybook teaching surfaces now align on the `Search` naming and state behaviour shown in Figma.
+
+### Migration Steps
+
+1. Adopt the public React `SearchInput` where you need a compact joined search control in React.
+2. Prefer the toolkit `searchInput` macro over bespoke form markup when building Nunjucks pages with OFH search controls.
+3. Re-run visual QA for hover, active, input-focus, and button-focus states if you are replacing an existing local search implementation, because the public component now owns the focus geometry and button-state treatment.
+
+#### React example
+
+**New in `react-v0.20.0`:**
+
+```tsx
+import { SearchInput } from '@ourfuturehealth/react-components';
+```
+
+#### Toolkit example
+
+**New in `toolkit-v4.21.0`:**
+
+```njk
+{{ searchInput({
+  "action": "/search",
+  "label": {
+    "text": "Search the site"
+  },
+  "input": {
+    "id": "site-search",
+    "name": "q",
+    "placeholder": "Search"
+  },
+  "button": {
+    "ariaLabel": "Search"
+  }
+}) }}
+```
 
 ---
 

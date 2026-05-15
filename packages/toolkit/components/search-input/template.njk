@@ -1,0 +1,33 @@
+{% from '../icon/macro.njk' import icon %}
+{% set resolvedLabel = params.label.text if params.label and params.label.text else 'Search the site' %}
+{% set resolvedInputId = params.input.id if params.input and params.input.id else 'search-input' %}
+{% set resolvedName = params.input.name if params.input and params.input.name else 'q' %}
+{% set resolvedPlaceholder = params.input.placeholder if params.input and params.input.placeholder else 'Search' %}
+{% set resolvedMethod = params.method if params.method else 'get' %}
+{% set resolvedButtonLabel = params.button.ariaLabel if params.button and params.button.ariaLabel else (params.button.text if params.button and params.button.text else 'Search') %}
+
+<form
+  class="ofh-search-input{%- if params.classes %} {{ params.classes }}{% endif %}"
+  role="search"
+  {%- if params.action %} action="{{ params.action }}"{% endif %}
+  method="{{ resolvedMethod }}"
+  {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  <div class="ofh-search-input__field">
+    <label class="ofh-u-visually-hidden" for="{{ resolvedInputId }}">{{ resolvedLabel }}</label>
+    <input
+      class="ofh-search-input__input"
+      id="{{ resolvedInputId }}"
+      name="{{ resolvedName }}"
+      placeholder="{{ resolvedPlaceholder }}"
+      type="search"
+      {%- if params.input and params.input.value is defined and params.input.value != null %} value="{{ params.input.value }}"{% endif %}
+      {%- for attribute, value in params.input.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  </div>
+  <button
+    class="ofh-search-input__button"
+    type="submit"
+    aria-label="{{ resolvedButtonLabel }}"
+    {%- for attribute, value in params.button.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    {{ icon({ "name": "Search", "size": 32, "classes": "ofh-search-input__button-icon" }) }}
+  </button>
+</form>
