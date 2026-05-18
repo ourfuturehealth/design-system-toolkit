@@ -107,6 +107,72 @@ const navigation = [
   },
 ] satisfies NonNullable<HeaderProps['navigation']>;
 
+const navigationWithSelectedDropdownItem = [
+  {
+    href: '/about',
+    label: 'About',
+  },
+  {
+    label: 'Research',
+    items: [
+      {
+        href: '/research/participant-portal',
+        label: 'Participant portal',
+      },
+      {
+        href: '/research/data-access',
+        label: 'Data access',
+        current: true,
+      },
+      {
+        href: '/research/publications',
+        label: 'Publications',
+      },
+    ],
+  },
+  {
+    href: '/events',
+    label: 'Events',
+  },
+  {
+    href: '/contact',
+    label: 'Contact',
+  },
+] satisfies NonNullable<HeaderProps['navigation']>;
+
+const navigationWithCurrentGroup = [
+  {
+    href: '/about',
+    label: 'About',
+  },
+  {
+    label: 'Research',
+    current: true,
+    items: [
+      {
+        href: '/research/participant-portal',
+        label: 'Participant portal',
+      },
+      {
+        href: '/research/data-access',
+        label: 'Data access',
+      },
+      {
+        href: '/research/publications',
+        label: 'Publications',
+      },
+    ],
+  },
+  {
+    href: '/events',
+    label: 'Events',
+  },
+  {
+    href: '/contact',
+    label: 'Contact',
+  },
+] satisfies NonNullable<HeaderProps['navigation']>;
+
 const baseArgs: HeaderProps = {
   theme: 'dark',
   layout: 'fixed',
@@ -130,6 +196,27 @@ const baseArgs: HeaderProps = {
     href: '/log-in',
   },
   navigation,
+};
+
+const StoryInteractionBoundary = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const preventNavigation = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement | null;
+    const anchor = target?.closest('a');
+
+    if (anchor) {
+      event.preventDefault();
+    }
+  };
+
+  return (
+    <div onClickCapture={preventNavigation} onSubmitCapture={(event) => event.preventDefault()}>
+      {children}
+    </div>
+  );
 };
 
 const BuilderPreview = ({
@@ -172,7 +259,13 @@ const BuilderPreview = ({
   );
 };
 
-const OpenDesktopDropdownPreview = () => {
+const OpenDesktopDropdownPreview = ({
+  theme,
+  navigation: previewNavigation = navigation,
+}: {
+  theme: HeaderProps['theme'];
+  navigation?: NonNullable<HeaderProps['navigation']>;
+}) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -185,12 +278,16 @@ const OpenDesktopDropdownPreview = () => {
 
   return (
     <div ref={containerRef}>
-      <Header {...baseArgs} />
+      <Header {...baseArgs} theme={theme} navigation={previewNavigation} />
     </div>
   );
 };
 
-const OpenMobileMenuPreview = () => {
+const OpenMobileMenuPreview = ({
+  navigation: previewNavigation = navigation,
+}: {
+  navigation?: NonNullable<HeaderProps['navigation']>;
+}) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
@@ -209,7 +306,7 @@ const OpenMobileMenuPreview = () => {
 
   return (
     <div ref={containerRef} style={{ maxWidth: '28rem' }}>
-      <Header {...baseArgs} theme="dark" />
+      <Header {...baseArgs} theme="dark" navigation={previewNavigation} />
     </div>
   );
 };
@@ -217,6 +314,13 @@ const OpenMobileMenuPreview = () => {
 const meta: Meta<HeaderStoryArgs> = {
   title: 'Components/Header',
   component: Header,
+  decorators: [
+    (Story) => (
+      <StoryInteractionBoundary>
+        <Story />
+      </StoryInteractionBoundary>
+    ),
+  ],
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -434,7 +538,7 @@ export const ThemeShowcase: Story = {
   ),
 };
 
-export const DesktopDropdownOpen: Story = {
+export const DesktopDropdownOpenDark: Story = {
   parameters: {
     controls: {
       disable: true,
@@ -446,10 +550,83 @@ export const DesktopDropdownOpen: Story = {
       },
     },
   },
-  render: () => <OpenDesktopDropdownPreview />,
+  render: () => <OpenDesktopDropdownPreview theme="dark" />,
+};
+
+export const DesktopDropdownOpenLight: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing an open dropdown group in the light theme. This is a docs-only interaction preview, not an extra public prop.',
+      },
+    },
+  },
+  render: () => <OpenDesktopDropdownPreview theme="light" />,
+};
+
+export const DesktopDropdownOpenSelectedDark: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing an open dropdown with one dropdown item in the selected state.',
+      },
+    },
+  },
+  render: () => (
+    <OpenDesktopDropdownPreview
+      theme="dark"
+      navigation={navigationWithSelectedDropdownItem}
+    />
+  ),
+};
+
+export const DesktopDropdownOpenSelectedLight: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing an open dropdown with one dropdown item selected in the light theme.',
+      },
+    },
+  },
+  render: () => (
+    <OpenDesktopDropdownPreview
+      theme="light"
+      navigation={navigationWithSelectedDropdownItem}
+    />
+  ),
+};
+
+export const DesktopNavCurrentGroup: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing a grouped navigation item in the current/active state without being opened. This is the thin 4px underline state from the nav-item spec.',
+      },
+    },
+  },
+  render: () => <Header {...baseArgs} navigation={navigationWithCurrentGroup} />,
 };
 
 export const MobileMenuOpen: Story = {
+  globals: {
+    viewport: { value: 'smallMobile' },
+  },
   parameters: {
     controls: {
       disable: true,
