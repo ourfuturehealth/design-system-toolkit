@@ -15,7 +15,7 @@
 {% set resolvedNavigation = params.navigation if params.navigation else [] %}
 {% set resolvedIdPrefix = params.idPrefix if params.idPrefix else 'ofh-header' %}
 {% set hasDesktopToolsContent = params.search or params.action or params.account %}
-{% set hasMobilePanelContent = params.search or params.action or params.account or resolvedNavigation | length %}
+{% set hasMobilePanelContent = resolvedNavigation | length %}
 {% set resolvedMenuButtonClasses = 'ofh-button--ghost-inverted ofh-header__menu-button' if resolvedTheme == 'dark' else 'ofh-button--outlined ofh-header__menu-button' %}
 {% set rootClasses = 'ofh-header ofh-header--' + resolvedTheme + ' ofh-header--' + resolvedLayout + (resolvedShowBottomBorder and ' ofh-header--with-bottom-border' or '') %}
 {% set resolvedNhsLogo = resolvedBrand.nhsLogo if resolvedBrand and resolvedBrand.nhsLogo else '' %}
@@ -131,29 +131,29 @@
   }) }}
 {%- endmacro -%}
 
-{%- macro _actionLink(item, mobile=false) -%}
+{%- macro _actionLink(item) -%}
   {{ linkIcon({
     "text": item.label,
     "href": _href(item) | trim,
     "size": "medium",
     "showIconLeft": false,
     "showIconRight": false,
-    "classes": mobile and "ofh-header__action-link ofh-header__mobile-footer-link" or "ofh-header__action-link",
+    "classes": "ofh-header__action-link",
     "attributes": item.attributes
   }) }}
 {%- endmacro -%}
 
-{%- macro _account(account, mobile=false) -%}
+{%- macro _account(account) -%}
   {% if not account %}
   {% elif account.type == 'account' %}
-    <div class="{{ 'ofh-header__account-cluster ofh-header__mobile-footer-account' if mobile else 'ofh-header__account-cluster' }}">
+    <div class="ofh-header__account-cluster">
       {{ linkIcon({
         "text": account.accountLabel if account.accountLabel else "Account",
         "href": account.accountHref if account.accountHref else "#",
         "size": "medium",
         "showIconLeft": false,
         "showIconRight": false,
-        "classes": mobile and "ofh-header__account-link ofh-header__mobile-footer-link" or "ofh-header__account-link",
+        "classes": "ofh-header__account-link",
         "attributes": account.accountAttributes
       }) }}
       {{ linkIcon({
@@ -162,7 +162,7 @@
         "iconName": "AccountCircle",
         "iconPosition": "left",
         "size": "medium",
-        "classes": mobile and "ofh-header__account-link ofh-header__account-link--icon ofh-header__mobile-footer-sign-link" or "ofh-header__account-link ofh-header__account-link--icon",
+        "classes": "ofh-header__account-link ofh-header__account-link--icon",
         "attributes": account.signOutAttributes
       }) }}
     </div>
@@ -173,7 +173,7 @@
       "iconName": "AccountCircle",
       "iconPosition": "left",
       "size": "medium",
-      "classes": mobile and "ofh-header__account-link ofh-header__account-link--icon ofh-header__mobile-footer-sign-link" or "ofh-header__account-link ofh-header__account-link--icon",
+      "classes": "ofh-header__account-link ofh-header__account-link--icon",
       "attributes": account.attributes
     }) }}
   {% endif %}
@@ -369,35 +369,12 @@
       hidden
       data-ofh-header-mobile-panel>
       <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
-        {% if params.search %}
-          <div class="ofh-header__mobile-search">
-            {{ searchInput({
-              "action": params.search.action,
-              "method": params.search.method,
-              "label": params.search.label,
-              "input": params.search.input,
-              "button": params.search.button,
-              "classes": "ofh-header__mobile-search-control" + (' ' + params.search.classes if params.search.classes else ''),
-              "attributes": params.search.attributes
-            }) }}
-          </div>
-        {% endif %}
-
         {% if resolvedNavigation | length %}
           <ul class="ofh-header__mobile-nav-list">
             {% for item in resolvedNavigation %}
               {{ _mobileNavigation(item, loop.index0) | trim }}
             {% endfor %}
           </ul>
-        {% endif %}
-
-        {% if params.action or params.account %}
-          <div class="ofh-header__mobile-footer">
-            {% if params.action %}
-              {{ _actionLink(params.action, true) | trim }}
-            {% endif %}
-            {{ _account(params.account, true) | trim }}
-          </div>
         {% endif %}
       </div>
     </div>

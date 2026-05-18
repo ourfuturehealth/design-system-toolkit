@@ -221,10 +221,13 @@ describe('Header', () => {
     expect(
       mobilePanelQueries.getByRole('link', { name: 'Participant portal' }),
     ).toHaveAttribute('href', '/research/participant-portal');
-    expect(mobilePanelQueries.getByRole('search')).toBeInTheDocument();
+    expect(mobilePanelQueries.queryByRole('search')).toBeNull();
     expect(
-      mobilePanelQueries.getByRole('link', { name: 'Join now' }),
-    ).toHaveAttribute('href', '/join');
+      mobilePanelQueries.queryByRole('link', { name: 'Join now' }),
+    ).toBeNull();
+    expect(
+      mobilePanelQueries.queryByRole('link', { name: 'Log in' }),
+    ).toBeNull();
   });
 
   it('has no accessibility violations', async () => {

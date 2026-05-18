@@ -204,18 +204,13 @@ export const Header = ({
     'ofh-header__section-inner',
   );
   const hasDesktopToolsContent = Boolean(search || action || account);
-  const hasMobilePanelContent = Boolean(
-    search ||
-      action ||
-      account ||
-      navigation.length,
-  );
+  const hasMobilePanelContent = Boolean(navigation.length);
   const showPartnerMark = Boolean(nhsLogo);
   const showPartnerDivider = showPartnerMark && (
     hasDesktopToolsContent || hasMobilePanelContent
   );
 
-  const renderAccount = (context: 'desktop' | 'mobile-footer') => {
+  const renderAccount = () => {
     if (!account) {
       return null;
     }
@@ -227,18 +222,10 @@ export const Header = ({
         ...linkProps
       } = account;
       const resolvedProps = resolveAnchorProps(linkProps, href);
-      const signLinkClassName = joinClassNames(
-        'ofh-header__account-link',
-        'ofh-header__account-link--icon',
-        context === 'mobile-footer'
-          ? 'ofh-header__mobile-footer-sign-link'
-          : undefined,
-      );
-
       return (
         <LinkIcon
           {...resolvedProps}
-          className={signLinkClassName}
+          className="ofh-header__account-link ofh-header__account-link--icon"
           href={href}
           iconName="AccountCircle"
           iconPosition="left"
@@ -268,22 +255,10 @@ export const Header = ({
     );
 
     return (
-      <div
-        className={joinClassNames(
-          'ofh-header__account-cluster',
-          context === 'mobile-footer'
-            ? 'ofh-header__mobile-footer-account'
-            : undefined,
-        )}
-      >
+      <div className="ofh-header__account-cluster">
         <LinkIcon
           {...resolvedAccountProps}
-          className={joinClassNames(
-            'ofh-header__account-link',
-            context === 'mobile-footer'
-              ? 'ofh-header__mobile-footer-link'
-              : undefined,
-          )}
+          className="ofh-header__account-link"
           href={accountHref}
           showIconLeft={false}
           showIconRight={false}
@@ -293,13 +268,7 @@ export const Header = ({
         </LinkIcon>
         <LinkIcon
           {...resolvedSignOutProps}
-          className={joinClassNames(
-            'ofh-header__account-link',
-            'ofh-header__account-link--icon',
-            context === 'mobile-footer'
-              ? 'ofh-header__mobile-footer-sign-link'
-              : undefined,
-          )}
+          className="ofh-header__account-link ofh-header__account-link--icon"
           href={signOutHref}
           iconName="AccountCircle"
           iconPosition="left"
@@ -406,7 +375,7 @@ export const Header = ({
                     {action.label}
                   </LinkIcon>
                 ) : null}
-                {renderAccount('desktop')}
+                {renderAccount()}
               </div>
 
               {hasMobilePanelContent ? (
@@ -548,15 +517,6 @@ export const Header = ({
           id={mobileMenuId}
         >
           <div className={sectionInnerClassName}>
-            {search ? (
-              <div className="ofh-header__mobile-search">
-                <SearchInput
-                  {...search}
-                  className="ofh-header__mobile-search-control"
-                />
-              </div>
-            ) : null}
-
             {navigation.length ? (
               <ul className="ofh-header__mobile-nav-list">
                 {navigation.map((item, index) => {
@@ -658,27 +618,6 @@ export const Header = ({
               </ul>
             ) : null}
 
-            {action || account ? (
-              <div className="ofh-header__mobile-footer">
-                {action ? (
-                  <LinkIcon
-                    {...resolveHeaderLinkProps(action)}
-                    className="ofh-header__action-link ofh-header__mobile-footer-link"
-                    href={action.href}
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      setOpenMobileGroup(null);
-                    }}
-                    showIconLeft={false}
-                    showIconRight={false}
-                    size="medium"
-                  >
-                    {action.label}
-                  </LinkIcon>
-                ) : null}
-                {renderAccount('mobile-footer')}
-              </div>
-            ) : null}
           </div>
         </div>
       ) : null}
