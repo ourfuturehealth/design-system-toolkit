@@ -65,6 +65,7 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
   @include ofh-font('paragraph-md');
 
   -webkit-appearance: none;
+  appearance: none;
   background: transparent;
   border: 0;
   color: $ofh-color-foreground-secondary;
@@ -79,6 +80,15 @@ $ofh-search-input-button-focus-ring-offset-negative: $ofh-search-input-button-fo
 
   &:focus {
     outline: none;
+  }
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
   }
 }
 
