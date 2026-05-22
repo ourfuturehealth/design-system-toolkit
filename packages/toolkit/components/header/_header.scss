@@ -22,15 +22,15 @@
 }
 
 .ofh-header--light {
-  --ofh-header-domain-navigation-background: #{$ofh-color-background-primary};
+  --ofh-header-domain-navigation-background: #{$ofh-color-background-secondary-yellow};
   --ofh-header-header-background: #{$ofh-color-background-secondary-yellow};
   --ofh-header-navigation-background: #{$ofh-color-background-secondary-yellow};
   --ofh-header-utility-color: #{$ofh-color-foreground-link-default};
   --ofh-header-utility-hover: #{$ofh-color-foreground-link-hover};
-  --ofh-header-action-color: #{$ofh-color-foreground-link-default};
-  --ofh-header-action-hover: #{$ofh-color-foreground-link-hover};
+  --ofh-header-action-color: #{$ofh-color-foreground-primary};
+  --ofh-header-action-hover: #{$ofh-color-foreground-primary};
   --ofh-header-account-color: #{$ofh-color-foreground-primary};
-  --ofh-header-account-hover: #{$ofh-color-foreground-link-hover};
+  --ofh-header-account-hover: #{$ofh-color-foreground-primary};
   --ofh-header-bottom-navigation-color: #{$ofh-color-foreground-primary};
   --ofh-header-navigation-hover-border: #{$ofh-color-border-primary};
   --ofh-header-list-item-background: #{$ofh-color-background-secondary-yellow};
@@ -227,8 +227,6 @@
 }
 
 .ofh-header__account-link .ofh-link-icon__link {
-  font-weight: $ofh-typography-weight-semibold;
-
   @include ofh-header-link-no-visited-state(
     var(--ofh-header-account-color),
     var(--ofh-header-account-hover),
@@ -313,7 +311,6 @@
   }
 }
 
-.ofh-header__account-link .ofh-link-icon__link,
 .ofh-header__menu-button {
   font-weight: $ofh-typography-weight-semibold;
 }
@@ -335,6 +332,7 @@
 
 .ofh-header__menu-button {
   margin-bottom: 0;
+  min-inline-size: 74px;
   white-space: nowrap;
 }
 
@@ -411,6 +409,8 @@
 
 .ofh-header__nav-item.is-open {
   .ofh-header__nav-trigger {
+    z-index: 6;
+
     &::after {
       background-color: var(--ofh-header-bottom-navigation-color);
       height: $ofh-stroke-weight-8;
@@ -427,6 +427,8 @@
 }
 
 .ofh-header__nav-trigger--open {
+  z-index: 6;
+
   &::after {
     background-color: var(--ofh-header-bottom-navigation-color);
     height: $ofh-stroke-weight-8;
@@ -443,7 +445,7 @@
   inline-size: fit-content;
   left: 0;
   max-inline-size: calc(100vw - #{$ofh-size-32});
-  overflow: clip;
+  min-inline-size: 300px;
   position: absolute;
   top: calc(100% + #{$ofh-stroke-weight-4});
   z-index: 5;
@@ -460,6 +462,8 @@
   @include ofh-typography-responsive('paragraph-sm');
   @include ofh-header-link-no-visited-state(
     var(--ofh-header-list-item-color),
+    var(--ofh-header-list-item-color),
+    null,
     var(--ofh-header-list-item-color)
   );
 
@@ -478,6 +482,12 @@
     background-color: var(--ofh-header-list-item-background);
     text-decoration: underline;
   }
+
+  &:focus,
+  &:focus-visible {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .ofh-header__nav-panel-label {
@@ -491,6 +501,8 @@
 .ofh-header__nav-panel-link--current {
   @include ofh-header-link-no-visited-state(
     $ofh-color-foreground-primary,
+    $ofh-color-foreground-primary,
+    null,
     $ofh-color-foreground-primary
   );
 

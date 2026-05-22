@@ -15,8 +15,9 @@
 {% set resolvedNavigation = params.navigation if params.navigation else [] %}
 {% set resolvedIdPrefix = params.idPrefix if params.idPrefix else 'ofh-header' %}
 {% set hasDesktopToolsContent = params.search or params.action or params.account %}
-{% set hasMobilePanelContent = resolvedNavigation | length %}
+{% set hasMobilePanelContent = (resolvedNavigation | length) or params.action or params.account %}
 {% set resolvedMenuButtonClasses = 'ofh-button--ghost-inverted ofh-header__menu-button' if resolvedTheme == 'dark' else 'ofh-button--outlined ofh-header__menu-button' %}
+{% set resolvedMenuLabel = params.menuLabel if params.menuLabel else 'Menu' %}
 {% set rootClasses = 'ofh-header ofh-header--' + resolvedTheme + ' ofh-header--' + resolvedLayout + (resolvedShowBottomBorder and ' ofh-header--with-bottom-border' or '') %}
 {% set resolvedNhsLogo = resolvedBrand.nhsLogo if resolvedBrand and resolvedBrand.nhsLogo else '' %}
 {% set resolvedPartnerIsInverted = resolvedTheme == 'dark' %}
@@ -282,6 +283,20 @@
   {% endif %}
 {%- endmacro -%}
 
+{%- macro _mobileSimpleLink(item) -%}
+  <li class="ofh-header__mobile-nav-item">
+    <a
+      class="ofh-header__mobile-link{% if item.current %} ofh-header__mobile-link--current{% endif %}"
+      href="{{ _href(item) | trim }}"
+      {%- if item.current %} aria-current="page"{% endif %}
+      {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
+      {%- if _rel(item) | trim %} rel="{{ _rel(item) | trim }}"{% endif %}
+      {%- for attribute, value in item.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      <span class="ofh-header__mobile-link-text">{{ item.label }}</span>
+    </a>
+  </li>
+{%- endmacro -%}
+
 <header
   class="{{ rootClasses }}{% if params.classes %} {{ params.classes }}{% endif %}"
   data-ofh-header
@@ -335,13 +350,15 @@
 
           {% if hasMobilePanelContent %}
             {{ button({
-              "text": params.menuLabel if params.menuLabel else 'Menu',
+              "text": resolvedMenuLabel,
               "type": "button",
               "classes": resolvedMenuButtonClasses,
               "attributes": {
                 "aria-controls": resolvedIdPrefix + "-mobile-panel",
                 "aria-expanded": "false",
-                "data-ofh-header-menu-toggle": "true"
+                "data-ofh-header-menu-toggle": "true",
+                "data-ofh-header-menu-label": resolvedMenuLabel,
+                "data-ofh-header-close-label": "Close"
               }
             }) }}
           {% endif %}
@@ -369,8 +386,33 @@
       hidden
       data-ofh-header-mobile-panel>
       <div class="{{ resolvedContainerClass }} ofh-header__section-inner">
-        {% if resolvedNavigation | length %}
+        {% if hasMobilePanelContent %}
           <ul class="ofh-header__mobile-nav-list">
+            {% if params.action %}
+              {{ _mobileSimpleLink(params.action) | trim }}
+            {% endif %}
+
+            {% if params.account %}
+              {% if params.account.type == 'account' %}
+                {{ _mobileSimpleLink({
+                  "href": params.account.accountHref if params.account.accountHref else "#",
+                  "label": params.account.accountLabel if params.account.accountLabel else "Account",
+                  "attributes": params.account.accountAttributes
+                }) | trim }}
+                {{ _mobileSimpleLink({
+                  "href": params.account.signOutHref if params.account.signOutHref else "#",
+                  "label": params.account.signOutLabel if params.account.signOutLabel else "Log out",
+                  "attributes": params.account.signOutAttributes
+                }) | trim }}
+              {% else %}
+                {{ _mobileSimpleLink({
+                  "href": params.account.href if params.account.href else "#",
+                  "label": params.account.label if params.account.label else "Log in",
+                  "attributes": params.account.attributes
+                }) | trim }}
+              {% endif %}
+            {% endif %}
+
             {% for item in resolvedNavigation %}
               {{ _mobileNavigation(item, loop.index0) | trim }}
             {% endfor %}

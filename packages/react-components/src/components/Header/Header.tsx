@@ -204,11 +204,62 @@ export const Header = ({
     'ofh-header__section-inner',
   );
   const hasDesktopToolsContent = Boolean(search || action || account);
-  const hasMobilePanelContent = Boolean(navigation.length);
+  const hasMobilePanelContent = Boolean(navigation.length || action || account);
   const showPartnerMark = Boolean(nhsLogo);
   const showPartnerDivider = showPartnerMark && (
     hasDesktopToolsContent || hasMobilePanelContent
   );
+
+  const mobileMenuLinks: Array<{
+    href: string;
+    key: string;
+    label: React.ReactNode;
+    linkProps: HeaderAnchorProps;
+  }> = [];
+
+  if (action) {
+    const { href, ...linkProps } = resolveHeaderLinkProps(action);
+    mobileMenuLinks.push({
+      href,
+      key: 'action',
+      label: action.label,
+      linkProps,
+    });
+  }
+
+  if (account) {
+    if (account.type === 'sign-in') {
+      const { href, label = 'Log in', ...linkProps } = account;
+      mobileMenuLinks.push({
+        href,
+        key: 'account-sign-in',
+        label,
+        linkProps,
+      });
+    } else {
+      const {
+        accountHref,
+        accountLabel = 'Account',
+        accountLinkProps,
+        signOutHref,
+        signOutLabel = 'Log out',
+        signOutLinkProps,
+      } = account;
+
+      mobileMenuLinks.push({
+        href: accountHref,
+        key: 'account',
+        label: accountLabel,
+        linkProps: accountLinkProps ?? {},
+      });
+      mobileMenuLinks.push({
+        href: signOutHref,
+        key: 'account-sign-out',
+        label: signOutLabel,
+        linkProps: signOutLinkProps ?? {},
+      });
+    }
+  }
 
   const renderAccount = () => {
     if (!account) {
@@ -397,7 +448,7 @@ export const Header = ({
                   type="button"
                   variant={theme === 'dark' ? 'ghost-inverted' : 'outlined'}
                 >
-                  Menu
+                  {isMobileMenuOpen ? 'Close' : 'Menu'}
                 </Button>
               ) : null}
             </div>
@@ -517,8 +568,28 @@ export const Header = ({
           id={mobileMenuId}
         >
           <div className={sectionInnerClassName}>
-            {navigation.length ? (
+            {mobileMenuLinks.length || navigation.length ? (
               <ul className="ofh-header__mobile-nav-list">
+                {mobileMenuLinks.map((item) => (
+                  <li
+                    className="ofh-header__mobile-nav-item"
+                    key={`header-mobile-top-link-${item.key}`}
+                  >
+                    <a
+                      {...item.linkProps}
+                      className="ofh-header__mobile-link"
+                      href={item.href}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setOpenMobileGroup(null);
+                      }}
+                    >
+                      <span className="ofh-header__mobile-link-text">
+                        {item.label}
+                      </span>
+                    </a>
+                  </li>
+                ))}
                 {navigation.map((item, index) => {
                   if (!isNavGroup(item)) {
                     return (

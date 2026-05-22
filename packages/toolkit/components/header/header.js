@@ -1,5 +1,16 @@
 const isOpen = (toggle) => toggle?.getAttribute('aria-expanded') === 'true';
 
+const setMenuToggleLabel = (toggle, isExpanded) => {
+  if (!toggle) {
+    return;
+  }
+
+  const closedLabel = toggle.getAttribute('data-ofh-header-menu-label') || 'Menu';
+  const openLabel = toggle.getAttribute('data-ofh-header-close-label') || 'Close';
+
+  toggle.textContent = isExpanded ? openLabel : closedLabel;
+};
+
 const closeDisclosure = (group, toggleSelector, panelSelector) => {
   const toggle = group?.querySelector(toggleSelector);
   const panel = group?.querySelector(panelSelector);
@@ -66,11 +77,14 @@ const initHeader = (headerElement) => {
     }
 
     menuToggle.setAttribute('aria-expanded', 'false');
+    setMenuToggleLabel(menuToggle, false);
     mobilePanel.hidden = true;
     closeAllMobileGroups();
   };
 
   if (menuToggle && mobilePanel) {
+    setMenuToggleLabel(menuToggle, false);
+
     menuToggle.addEventListener('click', (event) => {
       event.preventDefault();
 
@@ -80,6 +94,7 @@ const initHeader = (headerElement) => {
       }
 
       menuToggle.setAttribute('aria-expanded', 'true');
+      setMenuToggleLabel(menuToggle, true);
       mobilePanel.hidden = false;
     });
   }

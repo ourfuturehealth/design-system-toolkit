@@ -89,7 +89,7 @@ describe('Header', () => {
   });
 
   it('renders the signed-out account cluster', () => {
-    render(
+    const { container } = render(
       <Header
         account={{
           type: 'account',
@@ -208,6 +208,7 @@ describe('Header', () => {
     await user.click(menuButton);
 
     expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button', { name: 'Close' })).toBe(menuButton);
 
     const mobilePanel = container.querySelector('.ofh-header__mobile-panel');
     const mobilePanelQueries = within(mobilePanel as HTMLElement);
@@ -223,11 +224,58 @@ describe('Header', () => {
     ).toHaveAttribute('href', '/research/participant-portal');
     expect(mobilePanelQueries.queryByRole('search')).toBeNull();
     expect(
-      mobilePanelQueries.queryByRole('link', { name: 'Join now' }),
-    ).toBeNull();
+      mobilePanelQueries.getByRole('link', { name: 'Join now' }),
+    ).toHaveAttribute('href', '/join');
     expect(
-      mobilePanelQueries.queryByRole('link', { name: 'Log in' }),
-    ).toBeNull();
+      mobilePanelQueries.getByRole('link', { name: 'Log in' }),
+    ).toHaveAttribute('href', '/log-in');
+
+    await user.click(screen.getByRole('button', { name: 'Close' }));
+
+    expect(screen.getByRole('button', { name: 'Menu' })).toBe(menuButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('renders action and account rows at the top of the mobile menu for signed-in accounts', async () => {
+    const user = userEvent.setup();
+
+    const { container } = render(
+      <Header
+        account={{
+          type: 'account',
+          accountHref: '/account',
+          signOutHref: '/log-out',
+        }}
+        action={{
+          href: '/join',
+          label: 'Join now',
+        }}
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+        navigation={baseNavigation}
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }));
+
+    const mobilePanel = container.querySelector('.ofh-header__mobile-panel');
+    const mobilePanelQueries = within(mobilePanel as HTMLElement);
+    const mobileItems = mobilePanelQueries.getAllByRole('listitem');
+
+    expect(within(mobileItems[0]).getByRole('link', { name: 'Join now' })).toHaveAttribute(
+      'href',
+      '/join',
+    );
+    expect(within(mobileItems[1]).getByRole('link', { name: 'Account' })).toHaveAttribute(
+      'href',
+      '/account',
+    );
+    expect(within(mobileItems[2]).getByRole('link', { name: 'Log out' })).toHaveAttribute(
+      'href',
+      '/log-out',
+    );
   });
 
   it('has no accessibility violations', async () => {
