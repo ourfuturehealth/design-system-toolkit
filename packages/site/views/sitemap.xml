@@ -184,8 +184,11 @@
   <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/radios</loc>
   </url>
-   <url>
+  <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/review-date</loc>
+  </url>
+  <url>
+    <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/search-input</loc>
   </url>
   <url>
     <loc>https://designsystem.ourfuturehealth.org.uk/design-system/components/select</loc>

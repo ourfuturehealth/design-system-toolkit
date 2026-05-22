@@ -27,6 +27,9 @@ export type {
 export { LinkSkip } from './components/LinkSkip';
 export type { LinkSkipProps } from './components/LinkSkip';
 
+export { SearchInput } from './components/SearchInput';
+export type { SearchInputProps } from './components/SearchInput';
+
 export { TextInput } from './components/TextInput';
 export type {
   TextInputFixedWidth,

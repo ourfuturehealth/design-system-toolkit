@@ -1,0 +1,16 @@
+{% from 'search-input/macro.njk' import searchInput %}
+
+{{ searchInput({
+  "action": "/search",
+  "label": {
+    "text": "Search the site"
+  },
+  "input": {
+    "id": "site-search",
+    "name": "q",
+    "placeholder": "Search"
+  },
+  "button": {
+    "ariaLabel": "Search"
+  }
+}) }}
