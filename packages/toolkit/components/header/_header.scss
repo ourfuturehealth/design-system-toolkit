@@ -280,6 +280,39 @@
   text-decoration: none;
 }
 
+.ofh-header--dark {
+  .ofh-header__brand-link:focus,
+  .ofh-header__brand-link:focus-visible,
+  .ofh-header__nav-link:focus,
+  .ofh-header__nav-link:focus-visible,
+  .ofh-header__nav-trigger:focus,
+  .ofh-header__nav-trigger:focus-visible,
+  .ofh-header__nav-panel-link:focus,
+  .ofh-header__nav-panel-link:focus-visible,
+  .ofh-header__mobile-link:focus,
+  .ofh-header__mobile-link:focus-visible,
+  .ofh-header__mobile-trigger:focus,
+  .ofh-header__mobile-trigger:focus-visible,
+  .ofh-header__mobile-subnav-link:focus,
+  .ofh-header__mobile-subnav-link:focus-visible {
+    @include ofh-focused-button-inverted;
+  }
+
+  .ofh-header__utility-link .ofh-link-icon__link:focus,
+  .ofh-header__utility-link .ofh-link-icon__link:focus-visible,
+  .ofh-header__action-link .ofh-link-icon__link:focus,
+  .ofh-header__action-link .ofh-link-icon__link:focus-visible,
+  .ofh-header__account-link .ofh-link-icon__link:focus,
+  .ofh-header__account-link .ofh-link-icon__link:focus-visible {
+    outline-color: $ofh-color-border-feedback-focus-inverted;
+  }
+
+  .ofh-search-input__field::after,
+  .ofh-search-input__button::after {
+    border-color: $ofh-color-border-feedback-focus-inverted;
+  }
+}
+
 .ofh-header__account-link .ofh-link-icon__link,
 .ofh-header__menu-button {
   font-weight: $ofh-typography-weight-semibold;
