@@ -173,6 +173,70 @@ const navigationWithCurrentGroup = [
   },
 ] satisfies NonNullable<HeaderProps['navigation']>;
 
+const navigationWithShortDropdownItems = [
+  {
+    href: '/about',
+    label: 'About',
+  },
+  {
+    label: 'Research',
+    items: [
+      {
+        href: '/research/news',
+        label: 'News',
+      },
+      {
+        href: '/research/blog',
+        label: 'Blog',
+      },
+      {
+        href: '/research/faq',
+        label: 'FAQs',
+      },
+    ],
+  },
+  {
+    href: '/events',
+    label: 'Events',
+  },
+  {
+    href: '/contact',
+    label: 'Contact',
+  },
+] satisfies NonNullable<HeaderProps['navigation']>;
+
+const navigationWithLongDropdownItem = [
+  {
+    href: '/about',
+    label: 'About',
+  },
+  {
+    label: 'Research',
+    items: [
+      {
+        href: '/research/participant-portal',
+        label: 'Participant portal',
+      },
+      {
+        href: '/research/data-access',
+        label: 'Data access and participant datasets programme overview',
+      },
+      {
+        href: '/research/publications',
+        label: 'Publications',
+      },
+    ],
+  },
+  {
+    href: '/events',
+    label: 'Events',
+  },
+  {
+    href: '/contact',
+    label: 'Contact',
+  },
+] satisfies NonNullable<HeaderProps['navigation']>;
+
 const baseArgs: HeaderProps = {
   theme: 'dark',
   layout: 'fixed',
@@ -608,6 +672,46 @@ export const DesktopDropdownOpenSelectedLight: Story = {
   ),
 };
 
+export const DesktopDropdownOpenMinWidthDark: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing the dropdown panel holding at its 300px minimum width when child labels are shorter than that floor.',
+      },
+    },
+  },
+  render: () => (
+    <OpenDesktopDropdownPreview
+      theme="dark"
+      navigation={navigationWithShortDropdownItems}
+    />
+  ),
+};
+
+export const DesktopDropdownOpenWideContentDark: Story = {
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed desktop review state showing the dropdown panel stretching wider than 300px to fit the longest child label.',
+      },
+    },
+  },
+  render: () => (
+    <OpenDesktopDropdownPreview
+      theme="dark"
+      navigation={navigationWithLongDropdownItem}
+    />
+  ),
+};
+
 export const DesktopNavCurrentGroup: Story = {
   parameters: {
     controls: {
@@ -639,4 +743,24 @@ export const MobileMenuOpen: Story = {
     },
   },
   render: () => <OpenMobileMenuPreview />,
+};
+
+export const MobileMenuOpenDataAccessCurrent: Story = {
+  globals: {
+    viewport: { value: 'smallMobile' },
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed mobile review state showing the condensed menu open with the "Data access" child marked current in the navigation data. The current spec may not give this a distinct visual treatment, so this story exists for explicit design review.',
+      },
+    },
+  },
+  render: () => (
+    <OpenMobileMenuPreview navigation={navigationWithSelectedDropdownItem} />
+  ),
 };
