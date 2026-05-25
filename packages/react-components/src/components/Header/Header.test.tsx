@@ -89,7 +89,7 @@ describe('Header', () => {
   });
 
   it('renders the signed-out account cluster', () => {
-    const { container } = render(
+    render(
       <Header
         account={{
           type: 'account',
