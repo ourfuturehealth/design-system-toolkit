@@ -313,6 +313,9 @@
 
 .ofh-header__menu-button {
   font-weight: $ofh-typography-weight-semibold;
+  margin-bottom: 0;
+  min-inline-size: 74px;
+  white-space: nowrap;
 }
 
 .ofh-header__account-cluster {
@@ -328,12 +331,6 @@
 .ofh-header__mobile-trigger-icon {
   color: currentColor;
   flex: none;
-}
-
-.ofh-header__menu-button {
-  margin-bottom: 0;
-  min-inline-size: 74px;
-  white-space: nowrap;
 }
 
 .ofh-header__action-link .ofh-link-icon__link,
@@ -604,6 +601,7 @@
 
   .ofh-header__mobile-subnav {
     @include ofh-responsive-gap-y(32);
+
     padding: 0;
   }
 }
