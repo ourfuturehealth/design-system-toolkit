@@ -3,31 +3,33 @@ name: Release contract
 on:
   pull_request:
     paths:
-      - '.github/workflows/release.yml'
-      - '.github/workflows/release-contract.yml'
-      - 'README.md'
-      - 'UPGRADING.md'
-      - 'docs/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'packages/toolkit/gulpfile.js'
-      - 'packages/toolkit/package.json'
-      - 'packages/react-components/package.json'
-      - 'packages/react-components/README.md'
-      - 'packages/react-components/scripts/**'
-      - 'scripts/release/**'
+      - ".github/workflows/release.yml"
+      - ".github/workflows/release-contract.yml"
+      - "README.md"
+      - "UPGRADING.md"
+      - "docs/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "packages/toolkit/gulpfile.js"
+      - "packages/toolkit/package.json"
+      - "packages/react-components/package.json"
+      - "packages/react-components/README.md"
+      - "packages/react-components/scripts/**"
+      - "scripts/release/**"
 
 jobs:
   validate:
     name: Validate release contract
     runs-on: ubuntu-latest
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: "22.x"
 
       - name: Enable Corepack and pnpm
         run: |

@@ -3,14 +3,16 @@ name: Create release
 on:
   push:
     tags:
-      - 'v*' # Toolkit releases (backward compatible)
-      - 'toolkit-v*' # Toolkit releases (new pattern)
-      - 'react-v*' # React components releases
+      - "v*" # Toolkit releases (backward compatible)
+      - "toolkit-v*" # Toolkit releases (new pattern)
+      - "react-v*" # React components releases
 
 jobs:
   build:
     name: Create release
     runs-on: ubuntu-latest
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +21,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.x'
+          node-version: "22.x"
 
       - name: Enable Corepack and pnpm
         run: |

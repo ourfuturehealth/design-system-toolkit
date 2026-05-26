@@ -4,8 +4,16 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+registries:
+  cloudsmith-npm:
+    type: npm-registry
+    url: https://npm.pkg.ofh.org.uk/npm/
+    token: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+    replaces-base: true
 updates:
-  - package-ecosystem: "" # See documentation for possible values
+  - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    registries:
+      - cloudsmith-npm
