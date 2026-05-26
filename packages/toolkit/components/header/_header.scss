@@ -585,7 +585,7 @@
   display: flex;
   flex-direction: column;
 
-  @include ofh-responsive-gap-y(24);
+  @include ofh-responsive-gap-y(32);
   @include ofh-responsive-padding(12, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
 
@@ -603,12 +603,8 @@
   }
 
   .ofh-header__mobile-subnav {
-    gap: 0;
+    @include ofh-responsive-gap-y(32);
     padding: 0;
-  }
-
-  .ofh-header__mobile-subnav-item + .ofh-header__mobile-subnav-item {
-    @include ofh-responsive-margin(24, 'top');
   }
 }
 
