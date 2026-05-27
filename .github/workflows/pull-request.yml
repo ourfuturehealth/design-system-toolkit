@@ -17,7 +17,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
         with:
           node-version: "22.x"
-          registry-url: //${{ vars.CLOUDSMITH_NPM_URL }}/npm/
+          registry-url: http://npm.pkg.ofh.org.uk/npm/
 
       - name: Enable Corepack and pnpm
         run: |
