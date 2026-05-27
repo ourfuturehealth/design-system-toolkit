@@ -6,15 +6,18 @@ jobs:
   build:
     name: Pull request
     runs-on: ubuntu-latest
-    env:
-      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+    # env:
+    #   CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
         with:
           node-version: "22.x"
+          registry-url: //${{ vars.CLOUDSMITH_NPM_URL }}/npm/
 
       - name: Enable Corepack and pnpm
         run: |
