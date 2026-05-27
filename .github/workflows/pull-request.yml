@@ -24,11 +24,8 @@ jobs:
           corepack enable
           corepack prepare pnpm@10.29.2 --activate
 
-      - name: Debug
-        run: pnpm config list
-
       - name: Install dependencies
-        run: pnpm install --reporter=ndjson
+        run: pnpm install
 
       - name: Run linting
         run: pnpm run lint
