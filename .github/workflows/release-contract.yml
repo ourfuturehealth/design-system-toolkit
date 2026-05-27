@@ -39,9 +39,6 @@ jobs:
           corepack enable
           corepack prepare pnpm@10.29.2 --activate
 
-      - name: Debug
-        run: pnpm config list
-
       - name: Install dependencies for release-contract checks
         run: pnpm install --frozen-lockfile --ignore-scripts
 
@@ -49,4 +46,6 @@ jobs:
         run: pnpm docs:release-contract
 
       - name: Prepare and smoke test current release artifacts
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org # use default npm registry instead of cloudsmith to simulate package consumer
         run: pnpm smoke:release-artifacts
