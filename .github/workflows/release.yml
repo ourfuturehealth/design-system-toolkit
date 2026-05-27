@@ -89,6 +89,8 @@ jobs:
           fi
 
       - name: Smoke test release tarball
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org # use default npm registry instead of cloudsmith to simulate package consumer
         run: |
           ./scripts/release/smoke-package-tarball.sh \
             --package-dir "${{ github.workspace }}/${{ steps.package_info.outputs.PACKAGE_DIR }}" \
