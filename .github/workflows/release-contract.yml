@@ -21,8 +21,8 @@ jobs:
   validate:
     name: Validate release contract
     runs-on: ubuntu-latest
-    # env:
-    #   CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
