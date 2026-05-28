@@ -533,9 +533,9 @@
 
   align-items: center;
   display: flex;
+  font-weight: $ofh-typography-weight-semibold;
   min-height: 56px;
   width: 100%;
-  font-weight: $ofh-typography-weight-semibold;
 
   @include ofh-responsive-padding(12, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
