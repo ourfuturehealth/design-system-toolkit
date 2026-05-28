@@ -42,6 +42,10 @@ nvm use
 nvm install
 ```
 
+## NPM Registry Configuration
+
+- **Public packages**: All packages from the public npm registry are fetched from the Cloudsmith registry. Authentication is provided via the `CLOUDSMITH_NPM_REGISTRY_TOKEN` environment variable. See [doc for instructions](https://ourfuturehealth.atlassian.net/wiki/x/FQDAtg). The relevant settings are in the `.npmrc` file.
+
 ## Quick Start
 
 ```bash
