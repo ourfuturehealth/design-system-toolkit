@@ -70,6 +70,16 @@ pnpm build                      # Build all packages
 
 For step-by-step local setup (including fork/clone options and workflow selection), see [Running the application locally](/docs/contributing/running-locally.md).
 
+## Repository skills
+
+This repo includes a Codex skill for fixing dependency vulnerability alerts: [`fix-dependency-vulnerability`](.codex/skills/fix-dependency-vulnerability/SKILL.md). It finds affected lockfiles, works out the package manager, updates the relevant package override or resolution, and guides the lockfile regeneration steps.
+
+Example:
+
+```text
+Use $fix-dependency-vulnerability to fix the picomatch vulnerability by bumping it to 4.0.4.
+```
+
 ## Guidance
 
 Visit the [design system docs website](https://designsystem.ourfuturehealth.org.uk/) for examples of components and guidance for when to use them.
