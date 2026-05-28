@@ -348,8 +348,10 @@ const OpenDesktopDropdownPreview = ({
 };
 
 const OpenMobileMenuPreview = ({
+  theme = 'dark',
   navigation: previewNavigation = navigation,
 }: {
+  theme?: HeaderProps['theme'];
   navigation?: NonNullable<HeaderProps['navigation']>;
 }) => {
   const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -370,7 +372,7 @@ const OpenMobileMenuPreview = ({
 
   return (
     <div ref={containerRef} style={{ maxWidth: '28rem' }}>
-      <Header {...baseArgs} theme="dark" navigation={previewNavigation} />
+      <Header {...baseArgs} theme={theme} navigation={previewNavigation} />
     </div>
   );
 };
@@ -745,6 +747,24 @@ export const MobileMenuOpen: Story = {
   render: () => <OpenMobileMenuPreview />,
 };
 
+export const MobileMenuOpenLight: Story = {
+  globals: {
+    viewport: { value: 'smallMobile' },
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed mobile review state showing the condensed menu open with a nested group expanded in the light theme.',
+      },
+    },
+  },
+  render: () => <OpenMobileMenuPreview theme="light" />,
+};
+
 export const MobileMenuOpenDataAccessCurrent: Story = {
   globals: {
     viewport: { value: 'smallMobile' },
@@ -756,11 +776,34 @@ export const MobileMenuOpenDataAccessCurrent: Story = {
     docs: {
       description: {
         story:
-          'Fixed mobile review state showing the condensed menu open with the "Data access" child marked current in the navigation data. The current spec may not give this a distinct visual treatment, so this story exists for explicit design review.',
+          'Fixed mobile review state showing the condensed menu open with the "Data access" child marked current in the navigation data.',
       },
     },
   },
   render: () => (
     <OpenMobileMenuPreview navigation={navigationWithSelectedDropdownItem} />
+  ),
+};
+
+export const MobileMenuOpenDataAccessCurrentLight: Story = {
+  globals: {
+    viewport: { value: 'smallMobile' },
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed mobile review state showing the condensed menu open with the "Data access" child marked current in the navigation data for the light theme.',
+      },
+    },
+  },
+  render: () => (
+    <OpenMobileMenuPreview
+      navigation={navigationWithSelectedDropdownItem}
+      theme="light"
+    />
   ),
 };

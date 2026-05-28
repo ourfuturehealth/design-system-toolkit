@@ -525,7 +525,6 @@
 
 .ofh-header__mobile-nav-item {
   background-color: var(--ofh-header-list-item-background);
-  border-top: 1px solid $ofh-color-border-primary;
 }
 
 .ofh-header__mobile-link,
@@ -536,6 +535,7 @@
   display: flex;
   min-height: 56px;
   width: 100%;
+  font-weight: $ofh-typography-weight-semibold;
 
   @include ofh-responsive-padding(12, 'vertical');
   @include ofh-responsive-padding(16, 'horizontal');
@@ -562,6 +562,10 @@
   background-color: $ofh-color-background-primary;
   border-left: $ofh-stroke-weight-4 solid var(--ofh-header-list-item-selected-border);
   color: $ofh-color-foreground-primary;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .ofh-header__mobile-trigger {
@@ -579,12 +583,7 @@
 .ofh-header__mobile-nav-item.is-open,
 .ofh-header__mobile-nav-item--open {
   background-color: var(--ofh-header-list-item-background);
-  display: flex;
-  flex-direction: column;
-
-  @include ofh-responsive-gap-y(32);
-  @include ofh-responsive-padding(12, 'vertical');
-  @include ofh-responsive-padding(16, 'horizontal');
+  display: block;
 
   .ofh-header__mobile-trigger-icon--down {
     display: none;
@@ -593,21 +592,10 @@
   .ofh-header__mobile-trigger-icon--up {
     display: inline-flex;
   }
-
-  .ofh-header__mobile-trigger {
-    min-height: 0;
-    padding: 0;
-  }
-
-  .ofh-header__mobile-subnav {
-    @include ofh-responsive-gap-y(32);
-
-    padding: 0;
-  }
 }
 
 .ofh-header__mobile-subnav {
-  display: grid;
+  display: block;
 }
 
 .ofh-header__mobile-panel[hidden],
@@ -624,13 +612,37 @@
     var(--ofh-header-list-item-color)
   );
 
-  display: block;
-  padding: 0;
+  align-items: center;
+  background-color: var(--ofh-header-list-item-background);
+  color: var(--ofh-header-list-item-color);
+  display: flex;
+  min-height: 56px;
   text-decoration: none;
+  width: 100%;
+
+  @include ofh-responsive-padding(12, 'vertical');
+  @include ofh-responsive-padding(16, 'horizontal');
+
+  &:hover {
+    background-color: var(--ofh-header-list-item-background);
+    text-decoration: underline;
+  }
 }
 
 .ofh-header__mobile-subnav-link--current {
+  background-color: $ofh-color-background-primary;
+  border-left: $ofh-stroke-weight-4 solid var(--ofh-header-list-item-selected-border);
+  color: $ofh-color-foreground-primary;
   text-decoration: none;
+
+  &:hover {
+    background-color: $ofh-color-background-primary;
+    text-decoration: none;
+  }
+}
+
+.ofh-header__mobile-subnav-item + .ofh-header__mobile-subnav-item {
+  border-top: 1px solid $ofh-color-border-primary;
 }
 
 @include mq($from: desktop) {
