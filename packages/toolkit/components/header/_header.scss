@@ -616,7 +616,7 @@
   background-color: var(--ofh-header-list-item-background);
   color: var(--ofh-header-list-item-color);
   display: flex;
-  min-height: 56px;
+  min-height: 48px;
   text-decoration: none;
   width: 100%;
 
@@ -639,10 +639,6 @@
     background-color: $ofh-color-background-primary;
     text-decoration: none;
   }
-}
-
-.ofh-header__mobile-subnav-item + .ofh-header__mobile-subnav-item {
-  border-top: 1px solid $ofh-color-border-primary;
 }
 
 @include mq($from: desktop) {
