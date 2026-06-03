@@ -179,6 +179,32 @@ describe('Header', () => {
     ).not.toBeInTheDocument();
   });
 
+  it('closes desktop dropdown groups when clicking outside the header', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <Header
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+        navigation={baseNavigation}
+      />,
+    );
+
+    const groupButton = screen.getByRole('button', { name: 'Research' });
+
+    await user.click(groupButton);
+    expect(groupButton).toHaveAttribute('aria-expanded', 'true');
+
+    await user.click(document.body);
+
+    expect(groupButton).toHaveAttribute('aria-expanded', 'false');
+    expect(
+      screen.queryByRole('link', { name: 'Participant portal' }),
+    ).not.toBeInTheDocument();
+  });
+
   it('opens the mobile panel and nested mobile groups', async () => {
     const user = userEvent.setup();
     const { container } = render(
@@ -234,6 +260,59 @@ describe('Header', () => {
 
     expect(screen.getByRole('button', { name: 'Menu' })).toBe(menuButton);
     expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('closes open desktop and mobile disclosures on Escape', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Header
+        account={{
+          type: 'sign-in',
+          href: '/log-in',
+        }}
+        action={{
+          href: '/join',
+          label: 'Join now',
+        }}
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+        navigation={baseNavigation}
+      />,
+    );
+
+    const desktopGroupButton = screen.getByRole('button', { name: 'Research' });
+
+    await user.click(desktopGroupButton);
+    expect(desktopGroupButton).toHaveAttribute('aria-expanded', 'true');
+
+    await user.keyboard('{Escape}');
+
+    expect(desktopGroupButton).toHaveAttribute('aria-expanded', 'false');
+    expect(
+      screen.queryByRole('link', { name: 'Participant portal' }),
+    ).not.toBeInTheDocument();
+
+    const menuButton = screen.getByRole('button', { name: 'Menu' });
+
+    await user.click(menuButton);
+
+    const mobilePanel = container.querySelector('.ofh-header__mobile-panel');
+    const mobilePanelQueries = within(mobilePanel as HTMLElement);
+    const mobileGroupButton = mobilePanelQueries.getByRole('button', {
+      name: 'Research',
+    });
+
+    await user.click(mobileGroupButton);
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+    expect(mobileGroupButton).toHaveAttribute('aria-expanded', 'true');
+
+    await user.keyboard('{Escape}');
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.getByRole('button', { name: 'Menu' })).toBe(menuButton);
+    expect(mobileGroupButton).toHaveAttribute('aria-expanded', 'false');
   });
 
   it('renders action and account rows at the top of the mobile menu for signed-in accounts', async () => {

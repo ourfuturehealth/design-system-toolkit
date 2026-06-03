@@ -68,6 +68,8 @@ describe('Our Future Health header macro', () => {
     expect(utilityLink.getAttribute('target')).toBe('_blank');
     expect(search).not.toBeNull();
     expect(desktopAction.getAttribute('href')).toBe('/join');
+    expect(desktopAction.getAttribute('target')).toBe('_blank');
+    expect(desktopAction.getAttribute('rel')).toBe('noopener noreferrer');
     expect(accountLinks).toHaveLength(2);
     expect(menuButton.classList.contains('ofh-button--ghost-inverted')).toBe(true);
     expect(navPanel.hidden).toBe(true);

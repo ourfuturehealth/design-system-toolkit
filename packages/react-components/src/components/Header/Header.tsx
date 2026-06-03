@@ -185,8 +185,10 @@ export const Header = ({
   showBottomBorder = true,
   className = '',
   ref,
+  onKeyDown,
   ...props
 }: HeaderProps) => {
+  const headerRef = React.useRef<HTMLElement | null>(null);
   const { ariaLabel, href: brandHref, nhsLogo, ...brandLinkProps } = brand;
   const generatedId = React.useId().replace(/:/g, '');
   const mobileMenuId = `${generatedId}-mobile-menu`;
@@ -208,6 +210,19 @@ export const Header = ({
   const showPartnerMark = Boolean(nhsLogo);
   const showPartnerDivider = showPartnerMark && (
     hasDesktopToolsContent || hasMobilePanelContent
+  );
+
+  const setHeaderRef = React.useCallback(
+    (node: HTMLElement | null) => {
+      headerRef.current = node;
+
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref],
   );
 
   const mobileMenuLinks: Array<{
@@ -331,10 +346,39 @@ export const Header = ({
     );
   };
 
+  React.useEffect(() => {
+    if (!openDesktopGroup) {
+      return undefined;
+    }
+
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setOpenDesktopGroup(null);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, [openDesktopGroup]);
+
   return (
     <header
       {...props}
-      ref={ref}
+      onKeyDown={(event) => {
+        onKeyDown?.(event);
+
+        if (event.key !== 'Escape') {
+          return;
+        }
+
+        setOpenDesktopGroup(null);
+        setIsMobileMenuOpen(false);
+        setOpenMobileGroup(null);
+      }}
+      ref={setHeaderRef}
       className={joinClassNames(
         'ofh-header',
         `ofh-header--${theme}`,
