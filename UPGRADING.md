@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026     | No breaking changes        | 🟢 Low - adopt the new public Header surfaces where needed |
 | [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
 | [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
 | [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
@@ -29,6 +30,60 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.22.0 / React v0.21.0
+
+**Released:** June 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.22.0+
+- `@ourfuturehealth/react-components` v0.21.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release introduces the public Header component surfaces in toolkit and React.
+
+- Toolkit consumers can now use the public `header` macro for dark and light Headers with brand, utility links, search, action, account, and responsive navigation support.
+- React consumers can now adopt the public `Header` component for toolkit-parity site headers in React applications.
+- The docs site and Storybook now align on the supported dark and light Header teaching surfaces, desktop dropdown review states, and mobile menu states shown in Figma.
+
+### Migration Steps
+
+1. Adopt the public React `Header` component where you need a toolkit-parity site header in React.
+2. Prefer the toolkit `header` macro over bespoke Header markup when building Nunjucks pages with OFH site headers.
+3. Re-run visual QA for desktop nav states, dropdown states, focus states, and mobile menu states if you are replacing an existing local Header implementation, because the public component now owns those behaviors.
+
+#### React example
+
+**New in `react-v0.21.0`:**
+
+```tsx
+import { Header } from '@ourfuturehealth/react-components';
+```
+
+#### Toolkit example
+
+**New in `toolkit-v4.22.0`:**
+
+```njk
+{{ header({
+  "theme": "dark",
+  "brand": {
+    "href": "/",
+    "ariaLabel": "Our Future Health home"
+  },
+  "navigation": [
+    { "label": "About", "href": "/about" },
+    { "label": "Events", "href": "/events" }
+  ]
+}) }}
+```
 
 ---
 
