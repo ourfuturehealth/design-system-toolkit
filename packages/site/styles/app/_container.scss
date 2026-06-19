@@ -6,7 +6,8 @@
 $app-container-size: 1280px;
 
 .app-width-container,
-.app-breadcrumb .ofh-width-container {
+.app-breadcrumb .ofh-width-container,
+.app-site-header .ofh-header__section-inner {
   @include ofh-responsive-margin(32, 'horizontal');
 
   max-width: $app-container-size;
@@ -16,7 +17,6 @@ $app-container-size: 1280px;
   }
 }
 
-.ofh-header__container,
-.ofh-header__navigation {
-  max-width: $app-container-size;
+.app-site-header .ofh-header__section-inner {
+  width: auto;
 }

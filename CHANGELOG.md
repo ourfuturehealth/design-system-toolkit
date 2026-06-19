@@ -6,6 +6,31 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-06-03
+
+#### @ourfuturehealth/toolkit 4.22.0 (`toolkit-v4.22.0`)
+
+##### Added
+
+- First public toolkit `Header` component surface with dark and light themes, fixed and fluid layouts, responsive brand handling, primary navigation, action/account support, and docs/example coverage
+
+##### Changed
+
+- Aligned the toolkit Header desktop and mobile navigation states, dropdown behavior, focus treatment, and docs-site integration to the current Figma work
+- Updated the toolkit build output so Header logo assets are copied into `dist/assets` during the normal build flow
+- Aligned the shared `link-icon` underline states to the current Figma primitive, which the Header surface now relies on
+
+#### @ourfuturehealth/react-components 0.21.0 (`react-v0.21.0`)
+
+##### Added
+
+- First public React `Header` component with toolkit-parity structure, responsive menu behavior, dark and light themes, and Storybook review coverage
+
+##### Changed
+
+- Expanded the React Header teaching surface to include docs, builder, desktop dropdown review stories, and mobile menu state review stories
+- Added explicit Storybook review coverage for current desktop group states and mobile current-child data states
+
 ### 2026-04-27
 
 #### @ourfuturehealth/toolkit 4.21.0 (`toolkit-v4.21.0`)

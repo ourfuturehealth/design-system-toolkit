@@ -54,6 +54,23 @@ export type {
   FooterSocialPlatform,
 } from './components/Footer';
 
+export { Header } from './components/Header';
+export type {
+  HeaderAccountConfig,
+  HeaderAccountSignIn,
+  HeaderAccountSignedOut,
+  HeaderBrandConfig,
+  HeaderBrandNhsLogo,
+  HeaderLayout,
+  HeaderLinkItem,
+  HeaderNavGroup,
+  HeaderNavItem,
+  HeaderNavLink,
+  HeaderProps,
+  HeaderSearchConfig,
+  HeaderTheme,
+} from './components/Header';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 

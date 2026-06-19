@@ -56,6 +56,7 @@ import {
   Expander,
   Fieldset,
   Footer,
+  Header,
   InsetText,
   Image,
   Icon,
@@ -123,6 +124,14 @@ function App() {
           text: 'Eczema',
           href: '/health-a-to-z/conditions/eczema',
         }}
+      />
+      <Header
+        theme="dark"
+        brand={{ href: '/', ariaLabel: 'Our Future Health home' }}
+        navigation={[
+          { label: 'About', href: '/about' },
+          { label: 'Events', href: '/events' },
+        ]}
       />
       <ErrorSummary
         titleText="There is a problem"

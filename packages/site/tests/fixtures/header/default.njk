@@ -1,0 +1,29 @@
+{% from 'header/macro.njk' import header %}
+
+{{ header({
+  "theme": "light",
+  "brand": {
+    "href": "/",
+    "ariaLabel": "Our Future Health home"
+  },
+  "navigation": [
+    {
+      "href": "/about",
+      "label": "About",
+      "current": true
+    },
+    {
+      "label": "Research",
+      "items": [
+        {
+          "href": "/research/participant-portal",
+          "label": "Participant portal"
+        },
+        {
+          "href": "/research/data-access",
+          "label": "Data access"
+        }
+      ]
+    }
+  ]
+}) }}

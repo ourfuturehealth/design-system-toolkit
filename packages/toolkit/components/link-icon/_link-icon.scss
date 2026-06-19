@@ -13,7 +13,7 @@
   color: $ofh-color-foreground-link-default;
   display: inline-flex;
   gap: $ofh-size-4;
-  text-decoration: none;
+  text-decoration: underline;
 
   &:visited {
     color: $ofh-color-foreground-link-default;
@@ -21,7 +21,7 @@
 
   &:hover {
     color: $ofh-color-foreground-link-hover;
-    text-decoration: underline;
+    text-decoration: none;
   }
 
   &:focus {

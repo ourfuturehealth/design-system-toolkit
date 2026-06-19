@@ -1,7 +1,234 @@
-import MenuToggle from './menuToggle';
-import SearchToggle from './searchToggle';
+const isOpen = (toggle) => toggle?.getAttribute('aria-expanded') === 'true';
+
+const activeHeaders = new Set();
+const closeDesktopGroupsByHeader = new WeakMap();
+const initializedHeaders = new WeakSet();
+
+let hasDocumentClickListener = false;
+
+const setMenuToggleLabel = (toggle, isExpanded) => {
+  if (!toggle) {
+    return;
+  }
+
+  const closedLabel = toggle.getAttribute('data-ofh-header-menu-label') || 'Menu';
+  const openLabel = toggle.getAttribute('data-ofh-header-close-label') || 'Close';
+
+  toggle.textContent = isExpanded ? openLabel : closedLabel;
+};
+
+const closeDisclosure = (group, toggleSelector, panelSelector) => {
+  const toggle = group?.querySelector(toggleSelector);
+  const panel = group?.querySelector(panelSelector);
+
+  if (!toggle || !panel) {
+    return;
+  }
+
+  toggle.setAttribute('aria-expanded', 'false');
+  group.classList.remove('is-open');
+  panel.hidden = true;
+};
+
+const openDisclosure = (group, toggleSelector, panelSelector) => {
+  const toggle = group?.querySelector(toggleSelector);
+  const panel = group?.querySelector(panelSelector);
+
+  if (!toggle || !panel) {
+    return;
+  }
+
+  toggle.setAttribute('aria-expanded', 'true');
+  group.classList.add('is-open');
+  panel.hidden = false;
+};
+
+const ensureDocumentClickListener = () => {
+  if (hasDocumentClickListener || typeof document === 'undefined') {
+    return;
+  }
+
+  document.addEventListener('click', (event) => {
+    activeHeaders.forEach((headerElement) => {
+      if (!document.documentElement.contains(headerElement)) {
+        activeHeaders.delete(headerElement);
+        closeDesktopGroupsByHeader.delete(headerElement);
+        return;
+      }
+
+      if (!headerElement.contains(event.target)) {
+        closeDesktopGroupsByHeader.get(headerElement)?.();
+      }
+    });
+  });
+
+  hasDocumentClickListener = true;
+};
+
+const initHeader = (headerElement) => {
+  if (initializedHeaders.has(headerElement)) {
+    return;
+  }
+
+  initializedHeaders.add(headerElement);
+  activeHeaders.add(headerElement);
+  ensureDocumentClickListener();
+
+  const menuToggle = headerElement.querySelector('[data-ofh-header-menu-toggle]');
+  const mobilePanel = headerElement.querySelector('[data-ofh-header-mobile-panel]');
+  const desktopGroups = Array.from(
+    headerElement.querySelectorAll('[data-ofh-header-group]'),
+  );
+  const mobileGroups = Array.from(
+    headerElement.querySelectorAll('[data-ofh-header-mobile-group]'),
+  );
+
+  const closeAllDesktopGroups = (exceptGroup) => {
+    desktopGroups.forEach((group) => {
+      if (group !== exceptGroup) {
+        closeDisclosure(
+          group,
+          '[data-ofh-header-group-toggle]',
+          '[data-ofh-header-group-panel]',
+        );
+      }
+    });
+  };
+
+  closeDesktopGroupsByHeader.set(headerElement, closeAllDesktopGroups);
+
+  const closeAllMobileGroups = (exceptGroup) => {
+    mobileGroups.forEach((group) => {
+      if (group !== exceptGroup) {
+        closeDisclosure(
+          group,
+          '[data-ofh-header-mobile-group-toggle]',
+          '[data-ofh-header-mobile-group-panel]',
+        );
+      }
+    });
+  };
+
+  const closeMobilePanel = () => {
+    if (!menuToggle || !mobilePanel) {
+      return;
+    }
+
+    menuToggle.setAttribute('aria-expanded', 'false');
+    setMenuToggleLabel(menuToggle, false);
+    mobilePanel.hidden = true;
+    closeAllMobileGroups();
+  };
+
+  if (menuToggle && mobilePanel) {
+    setMenuToggleLabel(menuToggle, false);
+
+    menuToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      if (isOpen(menuToggle)) {
+        closeMobilePanel();
+        return;
+      }
+
+      menuToggle.setAttribute('aria-expanded', 'true');
+      setMenuToggleLabel(menuToggle, true);
+      mobilePanel.hidden = false;
+    });
+  }
+
+  desktopGroups.forEach((group) => {
+    const toggle = group.querySelector('[data-ofh-header-group-toggle]');
+
+    if (!toggle) {
+      return;
+    }
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      const groupIsOpen = isOpen(toggle);
+
+      closeAllDesktopGroups(group);
+
+      if (groupIsOpen) {
+        closeDisclosure(
+          group,
+          '[data-ofh-header-group-toggle]',
+          '[data-ofh-header-group-panel]',
+        );
+      } else {
+        openDisclosure(
+          group,
+          '[data-ofh-header-group-toggle]',
+          '[data-ofh-header-group-panel]',
+        );
+      }
+    });
+
+    group.addEventListener('focusout', (event) => {
+      if (!group.contains(event.relatedTarget)) {
+        closeDisclosure(
+          group,
+          '[data-ofh-header-group-toggle]',
+          '[data-ofh-header-group-panel]',
+        );
+      }
+    });
+  });
+
+  mobileGroups.forEach((group) => {
+    const toggle = group.querySelector('[data-ofh-header-mobile-group-toggle]');
+
+    if (!toggle) {
+      return;
+    }
+
+    toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      const groupIsOpen = isOpen(toggle);
+
+      closeAllMobileGroups(group);
+
+      if (groupIsOpen) {
+        closeDisclosure(
+          group,
+          '[data-ofh-header-mobile-group-toggle]',
+          '[data-ofh-header-mobile-group-panel]',
+        );
+      } else {
+        openDisclosure(
+          group,
+          '[data-ofh-header-mobile-group-toggle]',
+          '[data-ofh-header-mobile-group-panel]',
+        );
+      }
+    });
+  });
+
+  headerElement
+    .querySelectorAll(
+      '.ofh-header__mobile-link, .ofh-header__mobile-subnav-link',
+    )
+    .forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMobilePanel();
+      });
+    });
+
+  headerElement.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+      return;
+    }
+
+    closeAllDesktopGroups();
+    closeMobilePanel();
+  });
+};
 
 export default () => {
-  MenuToggle();
-  SearchToggle();
+  if (typeof document === 'undefined') {
+    return;
+  }
+
+  document.querySelectorAll('[data-ofh-header]').forEach(initHeader);
 };
