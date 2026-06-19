@@ -1,5 +1,11 @@
 const isOpen = (toggle) => toggle?.getAttribute('aria-expanded') === 'true';
 
+const activeHeaders = new Set();
+const closeDesktopGroupsByHeader = new WeakMap();
+const initializedHeaders = new WeakSet();
+
+let hasDocumentClickListener = false;
+
 const setMenuToggleLabel = (toggle, isExpanded) => {
   if (!toggle) {
     return;
@@ -37,7 +43,37 @@ const openDisclosure = (group, toggleSelector, panelSelector) => {
   panel.hidden = false;
 };
 
+const ensureDocumentClickListener = () => {
+  if (hasDocumentClickListener || typeof document === 'undefined') {
+    return;
+  }
+
+  document.addEventListener('click', (event) => {
+    activeHeaders.forEach((headerElement) => {
+      if (!document.documentElement.contains(headerElement)) {
+        activeHeaders.delete(headerElement);
+        closeDesktopGroupsByHeader.delete(headerElement);
+        return;
+      }
+
+      if (!headerElement.contains(event.target)) {
+        closeDesktopGroupsByHeader.get(headerElement)?.();
+      }
+    });
+  });
+
+  hasDocumentClickListener = true;
+};
+
 const initHeader = (headerElement) => {
+  if (initializedHeaders.has(headerElement)) {
+    return;
+  }
+
+  initializedHeaders.add(headerElement);
+  activeHeaders.add(headerElement);
+  ensureDocumentClickListener();
+
   const menuToggle = headerElement.querySelector('[data-ofh-header-menu-toggle]');
   const mobilePanel = headerElement.querySelector('[data-ofh-header-mobile-panel]');
   const desktopGroups = Array.from(
@@ -58,6 +94,8 @@ const initHeader = (headerElement) => {
       }
     });
   };
+
+  closeDesktopGroupsByHeader.set(headerElement, closeAllDesktopGroups);
 
   const closeAllMobileGroups = (exceptGroup) => {
     mobileGroups.forEach((group) => {
@@ -184,12 +222,6 @@ const initHeader = (headerElement) => {
 
     closeAllDesktopGroups();
     closeMobilePanel();
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!headerElement.contains(event.target)) {
-      closeAllDesktopGroups();
-    }
   });
 };
 

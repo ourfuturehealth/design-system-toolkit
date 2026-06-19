@@ -1,9 +1,10 @@
-import Header from '../../components/header/header';
 const { getHTMLCode } = require('../../../site/views/_data/helpers');
+
+const getHeader = () => require('../../components/header/header').default;
 
 const initTest = () => {
   document.body.innerHTML = getHTMLCode('tests/fixtures/header/full.njk');
-  Header();
+  getHeader()();
 
   return {
     menuButton: document.querySelector('[data-ofh-header-menu-toggle]'),
@@ -18,12 +19,35 @@ const initTest = () => {
 };
 
 describe('Our Future Health header()', () => {
+  let addEventListenerSpy;
+  let documentClickListeners;
+
+  beforeEach(() => {
+    jest.resetModules();
+    documentClickListeners = [];
+
+    const originalAddEventListener = document.addEventListener.bind(document);
+    addEventListenerSpy = jest
+      .spyOn(document, 'addEventListener')
+      .mockImplementation((eventName, listener, options) => {
+        if (eventName === 'click') {
+          documentClickListeners.push(listener);
+        }
+
+        return originalAddEventListener(eventName, listener, options);
+      });
+  });
+
   afterEach(() => {
+    documentClickListeners.forEach((listener) => {
+      document.removeEventListener('click', listener);
+    });
+    addEventListenerSpy.mockRestore();
     document.body.innerHTML = '';
   });
 
   it('does not throw when no header markup exists', () => {
-    Header();
+    getHeader()();
   });
 
   it('toggles the mobile panel and nested mobile groups', () => {
@@ -70,5 +94,17 @@ describe('Our Future Health header()', () => {
     expect(desktopGroupPanels[0].hidden).toBe(true);
     expect(desktopGroupToggles[1].getAttribute('aria-expanded')).toBe('true');
     expect(desktopGroupPanels[1].hidden).toBe(false);
+  });
+
+  it('registers a single document click listener across repeated init calls and multiple headers', () => {
+    const fixture = getHTMLCode('tests/fixtures/header/full.njk');
+    const Header = getHeader();
+
+    document.body.innerHTML = fixture + fixture;
+
+    Header();
+    Header();
+
+    expect(documentClickListeners).toHaveLength(1);
   });
 });
