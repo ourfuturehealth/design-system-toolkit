@@ -17,16 +17,16 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Install Snyk CLI  
+    - name: Install Snyk CLI
       run: |
         curl -L -o $GITHUB_WORKSPACE/snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
         chmod +x $GITHUB_WORKSPACE/snyk
-    
+
     - name: Install KDT CLI
       run: |
         curl -sSL https://cli.kondukto.io | sh
 
-    - name: Run Snyk Scans  
+    - name: Run Snyk Scans
       env:
         HOST: ${{ secrets.KONDUKTO_HOST }}
         TOKEN: ${{ secrets.KONDUKTO_TOKEN }}
@@ -48,9 +48,6 @@ jobs:
 
     - name: Scan with OSV
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t osvscannersca -b $TARGET_BRANCH --async
-
-    - name: Scan with Gitleaks
-      run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t gitleaks -b $TARGET_BRANCH --async
 
     - name: Scan with Trufflehog
       run: kdt scan --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }} -p ${{ secrets.PROJECT_NAME }} -t trufflehogsecurity -b $TARGET_BRANCH --async
