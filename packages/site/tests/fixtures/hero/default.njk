@@ -1,0 +1,24 @@
+{% from 'hero/macro.njk' import hero %}
+
+{{ hero({
+  "heading": "Design and build digital products at Our Future Health",
+  "description": "Information and guidelines to help everyone design and build consistent products.",
+  "secondaryAction": {
+    "text": "Get started",
+    "href": "/get-started"
+  },
+  "primaryAction": {
+    "text": "View components",
+    "href": "https://example.com/components",
+    "attributes": {
+      "target": "_blank",
+      "rel": "external"
+    }
+  },
+  "image": {
+    "src": "https://example.com/hero-image.jpg",
+    "alt": "Example hero image",
+    "srcset": "https://example.com/hero-image-640.jpg 640w, https://example.com/hero-image-960.jpg 960w",
+    "sizes": "(min-width: 1020px) 50vw, 100vw"
+  }
+}) }}

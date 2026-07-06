@@ -2,161 +2,256 @@
    COMPONENTS / #HERO
    ========================================================================== */
 
-/**
- *  Hero component shared styles.
- *
- * 1. Position relative to support the description
- *    appearing over the image.
- */
-
 .ofh-hero {
+  --ofh-hero-background: #{$ofh-color-background-accent-2};
+  --ofh-hero-text: #{$ofh-color-foreground-primary};
+  --ofh-hero-link: #{$ofh-color-foreground-link-default};
+  --ofh-hero-link-hover: #{$ofh-color-foreground-link-hover};
+  --ofh-hero-panel-background: #{$ofh-color-background-primary};
+  --ofh-hero-panel-text: #{$ofh-color-foreground-primary};
+
   @include print-color($ofh-color-foreground-primary);
+  @include ofh-responsive-padding(64, 'vertical');
 
-  background-color: $ofh-color-brand-yellow-3-main;
-  color: $ofh-color-foreground-primary-inverted;
-  position: relative; /* [1] */
+  background-color: var(--ofh-hero-background);
+  color: var(--ofh-hero-text);
+  overflow: hidden;
+  position: relative;
 }
 
-.ofh-hero__wrapper {
-  @include ofh-responsive-padding(48, top);
-  @include ofh-responsive-padding(48, bottom);
+.ofh-hero--brand {
+  --ofh-hero-background: #{$ofh-color-background-accent-2};
+  --ofh-hero-text: #{$ofh-color-foreground-primary};
+  --ofh-hero-link: #{$ofh-color-foreground-link-default};
+  --ofh-hero-link-hover: #{$ofh-color-foreground-link-hover};
 }
 
-/**
- *  Hero component image styles
- *
- * 3. Center the background image.
- * 4. Stop the height affecting print stylesheets.
- * 5. Show more of the image for larger screen sizes
- * 6. Overlay must be min same height as .ofh-hero--image to cover the image.
- * 7. Darken the background image with an overlay.
- * 12. Remove any heights/min heights in Windows high contrast mode.
- */
+.ofh-hero--dark {
+  --ofh-hero-background: #{$ofh-color-background-brand-blue-navy-2};
+  --ofh-hero-text: #{$ofh-color-foreground-primary-inverted};
+  --ofh-hero-link: #{$ofh-color-foreground-accent-2};
+  --ofh-hero-link-hover: #{$ofh-color-greyscale-white};
+}
 
-.ofh-hero--image {
-  background-position: center right; /* [3] */
-  background-repeat: no-repeat;
-  background-size: cover;
+.ofh-hero > .ofh-hero__container {
+  position: relative;
+  z-index: 1;
+}
 
-  @media only screen {
-    /* [4] */
-    min-height: 200px;
+.ofh-hero__decoration {
+  align-items: center;
+  display: flex;
+  height: 720px;
+  justify-content: center;
+  pointer-events: none;
+  position: absolute;
+  width: 360px;
+  z-index: 0;
+}
+
+.ofh-hero__decoration > .ofh-tile-pattern {
+  flex: none;
+  transform: rotate(90deg);
+}
+
+.ofh-hero__decoration--top-right {
+  right: 0;
+  top: 0;
+}
+
+.ofh-hero__decoration--left-edge {
+  left: -360px;
+  top: 0;
+}
+
+.ofh-hero__decoration--top-left {
+  left: 0;
+  top: 0;
+}
+
+.ofh-hero--free .ofh-hero__decoration--top-left {
+  display: none;
+}
+
+@include mq($until: desktop) {
+  .ofh-hero--free .ofh-hero__decoration {
+    display: none;
+  }
+}
+
+.ofh-hero__row {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  margin-right: 0;
+  position: relative;
+
+  &::after {
+    content: none;
   }
 
   @include mq($from: tablet) {
-    @media only screen {
-      /* [4] */
-      min-height: 320px; /* [5] */
-
-      .ofh-hero__overlay {
-        height: 320px; /* [6] */
-      }
-    }
-  }
-
-  @media screen and (-ms-high-contrast: active) {
-    min-height: 0; /* [12] */
-  }
-
-  .ofh-hero__overlay {
-    background-color: rgba($ofh-color-brand-blue-navy-3-main, 0.5); /* [7] */
-
-    @media only screen {
-      /* [4] */
-      min-height: 200px; /* [6] */
-    }
-
-    @media screen and (-ms-high-contrast: active) {
-      height: auto; /* [12] */
-      min-height: 0; /* [12] */
-    }
+    flex-direction: row;
   }
 }
 
-/**
- *  Hero component description styles.
- *
- * 8. 'Random number' for the triangle.
- * 9. 'Random number' for the triangle positioning.
- * 10. Needed to enable the triangle to show correctly in high contrast mode.
- * 11. Give the description box a max width.
- * 13. Remove the arrow in Windows high contrast mode.
- * 14. Reduce spacing and change positioning for Windows high contrast mode.
- * 15. Prevent text breaking out of box on smaller sizes
- */
+.ofh-hero--with-image .ofh-hero__row {
+  row-gap: $ofh-size-64;
+}
 
-.ofh-hero--image-description {
-  .ofh-hero-content {
-    background-color: $ofh-color-brand-yellow-3-main;
-    color: $ofh-color-foreground-primary-inverted;
-    margin-bottom: 24px;
-    padding: $ofh-size-24;
+.ofh-hero--boxed.ofh-hero--with-image .ofh-hero__row {
+  row-gap: 0;
+}
+
+.ofh-hero__content-column,
+.ofh-hero__media-column {
+  display: flex;
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+  width: 100%;
+}
+
+.ofh-hero__content-column {
+  order: 2;
+  z-index: 1;
+}
+
+.ofh-hero__media-column {
+  order: 1;
+}
+
+@include mq($from: tablet) {
+  .ofh-hero__content-column {
+    order: 1;
+  }
+
+  .ofh-hero__media-column {
+    order: 2;
+  }
+
+  .ofh-hero--free.ofh-hero--with-image .ofh-hero__row {
+    column-gap: $ofh-size-64;
+  }
+}
+
+.ofh-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: $ofh-size-32;
+  max-width: 800px;
+  width: 100%;
+}
+
+.ofh-hero__text-group {
+  display: flex;
+  flex-direction: column;
+  gap: $ofh-size-16;
+  max-width: 800px;
+  width: 100%;
+}
+
+.ofh-hero__content--boxed {
+  background-color: var(--ofh-hero-panel-background);
+  color: var(--ofh-hero-panel-text);
+  padding: $ofh-size-48;
+}
+
+.ofh-hero__heading {
+  color: inherit;
+
+  @include ofh-typography-responsive('heading-xl');
+
+  margin-bottom: 0;
+}
+
+.ofh-hero__description {
+  @extend %ofh-body-l;
+
+  color: inherit;
+  margin-bottom: 0;
+}
+
+.ofh-hero__secondary-action {
+  margin-bottom: 0;
+}
+
+.ofh-hero__secondary-link {
+  @extend %ofh-body-l;
+
+  color: var(--ofh-hero-link);
+  display: inline-block;
+  font-weight: $ofh-typography-weight-regular;
+  margin-bottom: 0;
+  text-decoration: underline;
+  text-decoration-thickness: $ofh-stroke-weight-1;
+  text-underline-offset: 1px;
+
+  &:visited {
+    color: var(--ofh-hero-link);
+  }
+
+  &:hover {
+    color: var(--ofh-hero-link-hover);
+    text-decoration: none;
+  }
+
+  &:focus {
+    @include ofh-focused-text();
+  }
+}
+
+.ofh-hero__content--boxed .ofh-hero__secondary-link {
+  color: $ofh-color-foreground-link-default;
+
+  &:visited {
+    color: $ofh-color-foreground-link-default;
+  }
+
+  &:hover {
+    color: $ofh-color-foreground-link-hover;
+  }
+}
+
+.ofh-hero__primary-action .ofh-button {
+  margin-bottom: 0;
+}
+
+.ofh-hero__media {
+  overflow: hidden;
+  width: 100%;
+}
+
+.ofh-hero__image {
+  aspect-ratio: 1 / 1;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+@include mq($from: tablet) {
+  .ofh-hero--boxed.ofh-hero--with-image .ofh-hero__content--boxed {
+    margin-right: -$ofh-size-32;
     position: relative;
-    top: 70px;
+    width: calc(100% + #{$ofh-size-32});
+    z-index: 2;
+  }
 
-    .ofh-hero__arrow {
-      bottom: -10px; /* [8] */
-      display: block;
-      height: 20px; /* [8] */
-      left: 32px; /* [9] */
-      overflow: hidden;
-      position: absolute;
-      transform: rotate(45deg);
-      width: 20px; /* [8] */
+  .ofh-hero--boxed.ofh-hero--with-image .ofh-hero__media-column {
+    z-index: 0;
+  }
 
-      @include print-hide();
+}
 
-      @include mq($from: tablet) {
-        left: 46px; /* [9] */
-      }
+@include mq($media-type: print) {
+  .ofh-hero {
+    background: none;
+    color: $ofh-color-foreground-primary;
+  }
 
-      &::before,
-      &::after {
-        border: solid 32px $ofh-color-brand-yellow-3-main; /* [8] */
-        content: '';
-        display: block;
-        height: 0;
-        position: absolute;
-        top: 0;
-        transform: rotate(45deg); /* [10] */
-        width: 0;
-      }
-
-      @media screen and (-ms-high-contrast: active) {
-        display: none; /* [13] */
-      }
-    }
-
-    @include mq(375px) {
-      /* [15] */
-      width: 85%;
-    }
-
-    @include mq($from: tablet) {
-      @include top-and-bottom();
-
-      bottom: -48px; /* [8] */
-      margin-bottom: 0;
-      max-width: 35em; /* [11] */
-      padding: $ofh-size-32 $ofh-size-40;
-      position: absolute;
-      top: auto;
-    }
-
-    @include mq($media-type: print) {
-      color: $ofh-color-foreground-primary;
-      max-width: 100%;
-      padding: 0;
-    }
-
-    @media screen and (-ms-high-contrast: active) {
-      /* [14] */
-      bottom: 0;
-      margin-bottom: 0;
-      min-height: 0;
-      padding: $ofh-size-32 0 0;
-      position: relative;
-      top: 0;
-    }
+  .ofh-hero__content--boxed {
+    border: $ofh-stroke-weight-1 solid $ofh-color-border-primary;
   }
 }

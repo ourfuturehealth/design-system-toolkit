@@ -1,0 +1,16 @@
+{% from 'tile-pattern/macro.njk' import tilePattern %}
+
+{{ tilePattern({
+  "color": "accent",
+  "tileSize": "40px",
+  "spritePath": "/custom/tile-pattern.svg",
+  "classes": "custom-pattern",
+  "attributes": {
+    "data-track": "tile-pattern",
+    "style": "display: grid;"
+  },
+  "tiles": [
+    [1, 2, null],
+    [7, { "type": 8, "color": "white" }, 9]
+  ]
+}) }}
