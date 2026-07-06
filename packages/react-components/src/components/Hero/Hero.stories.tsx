@@ -27,6 +27,27 @@ const heroUsageExample = `import { Hero } from '@ourfuturehealth/react-component
 />;
 `;
 
+const customDecorationExample = `import { Hero, TilePattern } from '@ourfuturehealth/react-components';
+
+<div className="custom-hero-shell">
+  <Hero
+    heading="Take part in health research"
+    description="Help build a clearer picture of health across the UK."
+    showDecoration={false}
+  />
+
+  <TilePattern
+    className="custom-hero-shell__pattern"
+    color="brand"
+    tileSize="96px"
+    tiles={[
+      [1, { type: 2, color: 'transparent' }, 5],
+      [null, { type: 8, color: 'accent' }, 12],
+    ]}
+  />
+</div>;
+`;
+
 const defaultImage = {
   src: 'https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg',
   alt: 'Picture of allergic conjunctivitis',
@@ -137,12 +158,18 @@ const meta: Meta<HeroStoryArgs> = {
             </a>{' '}
             primitive. Hero owns the pattern rows, columns, placement and theme
             mapping so each Hero instance keeps the canonical treatment. Use{' '}
-            <code>showDecoration</code> to turn decoration off. If a new Hero
-            treatment needs different tile types, colours or pattern
-            dimensions, update the Hero component implementation with{' '}
-            <code>TilePattern</code> rather than configuring every Hero
-            instance separately.
+            <code>showDecoration</code> to turn decoration off.
           </p>
+          <p>
+            Keep the default decoration unless the page or product needs a
+            deliberately custom treatment. If you need a custom pattern, turn
+            Hero decoration off, render a separate <code>TilePattern</code>{' '}
+            next to the Hero in the consuming layout, and own the positioning
+            CSS in that layout. Pass the exact tile matrix, global colour,
+            per-tile colour overrides and tile size needed by the custom
+            treatment.
+          </p>
+          <Source code={customDecorationExample} language="tsx" />
           <Source code={heroUsageExample} language="tsx" />
 
           <h2>Component props</h2>

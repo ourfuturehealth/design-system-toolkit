@@ -80,7 +80,42 @@
 
   <h3>Decoration and Tile pattern</h3>
   <p>Hero decoration is built with the <a href="/design-system/components/tile-pattern">Tile pattern</a> primitive. Hero owns the pattern rows, columns, placement and theme mapping so each Hero instance keeps the canonical treatment.</p>
-  <p>The public Hero API lets you turn decoration off with <code>showDecoration: false</code>. If a new Hero treatment needs different tile types, colours or pattern dimensions, update the Hero component implementation using Tile pattern rather than configuring every Hero instance separately.</p>
+  <p>The public Hero API lets you turn decoration off with <code>showDecoration: false</code>. Keep the default decoration unless the page or product needs a deliberately custom treatment.</p>
+  <p>If you need a custom pattern, turn the Hero decoration off, render a separate Tile pattern next to the Hero in the consuming layout, and own the positioning CSS in that layout. Pass the exact tile matrix, global colour, per-tile colour overrides and tile size that the custom treatment needs.</p>
+  {% set customHeroPatternCode %}{% raw %}{% from 'components/hero/macro.njk' import hero %}
+{% from 'components/tile-pattern/macro.njk' import tilePattern %}
+
+<div class="custom-hero-shell">
+  {{ hero({
+    "heading": "Take part in health research",
+    "description": "Help build a clearer picture of health across the UK.",
+    "showDecoration": false
+  }) }}
+
+  {{ tilePattern({
+    "classes": "custom-hero-shell__pattern",
+    "color": "brand",
+    "tileSize": "96px",
+    "tiles": [
+      [1, { "type": 2, "color": "transparent" }, 5],
+      [null, { "type": 8, "color": "accent" }, 12]
+    ]
+  }) }}
+</div>{% endraw %}{% endset %}
+
+  <div class="design-example">
+    <div class="code-snippet">
+      <div class="app-tabs__container js-tabs__container" id="custom-hero-pattern-example" role="tabpanel">
+        <div class="code-snippet__preformatted" data-index="ex-1">
+          <div class="app-code-snippet__macro"></div>
+          <div class="app-code-snippet__container">
+            <a class="app-link--copy" href="javascript:void(0);" aria-live="assertive">Copy<span class="ofh-u-visually-hidden"> custom Hero pattern</span> code</a>
+            <pre><code class="language-js">{{- customHeroPatternCode | highlight('js') | safe -}}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <h3>Accessibility</h3>
   <p>Keep the Hero heading semantic level correct for the page, which is typically <code>h1</code> for the primary page introduction.</p>

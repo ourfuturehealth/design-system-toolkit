@@ -48,12 +48,36 @@ Use Hero for the single primary introduction at the top of a page when users nee
 - `theme` defaults to `brand`
 - `variant` defaults to `free`
 - decoration is built with the Tile Pattern primitive and is on by default for the supported theme and variant combinations; set `showDecoration: false` to opt out
-- Hero owns the Tile Pattern rows, columns, placement and theme mapping; update the Hero implementation if a new treatment needs different tile types, colours or pattern dimensions
+- Hero owns the default Tile Pattern rows, columns, placement and theme mapping. Keep that default unless a page or product needs a deliberately custom treatment.
+- If you need a custom pattern, set `showDecoration: false`, render a separate Tile Pattern in the consuming layout, and own the positioning CSS in that layout. Pass the exact tile matrix, global colour, per-tile colour overrides and tile size needed by the custom treatment.
 - `image` is optional; when it is missing, Hero renders as a text-only layout
 - `headingLevel` defaults to `1`
 - use `description` and `image` for supporting copy and media
 - `secondaryAction` is a Hero-specific text link, not the Link action component
 - if the image is decorative, set `decorative: true` and omit meaningful alt text
+
+```njk
+{% from 'components/hero/macro.njk' import hero %}
+{% from 'components/tile-pattern/macro.njk' import tilePattern %}
+
+<div class="custom-hero-shell">
+  {{ hero({
+    "heading": "Take part in health research",
+    "description": "Help build a clearer picture of health across the UK.",
+    "showDecoration": false
+  }) }}
+
+  {{ tilePattern({
+    "classes": "custom-hero-shell__pattern",
+    "color": "brand",
+    "tileSize": "96px",
+    "tiles": [
+      [1, { "type": 2, "color": "transparent" }, 5],
+      [null, { "type": 8, "color": "accent" }, 12]
+    ]
+  }) }}
+</div>
+```
 
 ### Nunjucks arguments
 
