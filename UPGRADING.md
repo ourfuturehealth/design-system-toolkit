@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.23.0 / React v0.22.0](#upgrading-to-v4230--react-v0220) | July 2026     | Hero macro API update      | 🟡 Medium - update old Hero `text` / `imageURL` usages before adopting the new Hero |
 | [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026     | No breaking changes        | 🟢 Low - adopt the new public Header surfaces where needed |
 | [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
 | [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
@@ -30,6 +31,73 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.23.0 / React v0.22.0
+
+**Released:** July 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.23.0+
+- `@ourfuturehealth/react-components` v0.22.0+
+
+### Breaking Changes
+
+The toolkit `hero` macro now uses the canonical full-width Hero API.
+
+Old Hero examples used `text` for supporting copy and `imageURL` for a background-image treatment. The new component uses `description` and an `image` object instead.
+
+This is a deliberate safe breaking cleanup in a minor release: organisation-wide code search found no external OFH consumers using the old Hero macro inputs outside this repository's own old docs/examples, so this release does not keep compatibility aliases. The migration notes are kept here for anyone adopting an earlier toolkit version and later upgrading to `v4.23.0` or newer.
+
+### Release Overview
+
+This release introduces the canonical full-width Hero and Tile Pattern surfaces in toolkit and React.
+
+- Toolkit consumers can now use the `hero` macro for brand and dark full-width page introductions with free and boxed layouts.
+- React consumers can now adopt the public `Hero` component with the same content, media, action, and decorative treatment.
+- `Tile pattern` is available as a primitive for components that need explicit tile matrix decoration.
+- The docs site and Storybook now include matching Hero examples for brand free, dark free, brand boxed, dark boxed, secondary-action-only, no-actions, and text-only configurations.
+
+### Migration Steps
+
+1. Search for old Hero macro calls using `text` or `imageURL`.
+2. Replace `text` with `description`.
+3. Replace `imageURL` with an `image` object.
+4. Re-test the page at desktop, tablet, and mobile breakpoints because the new Hero uses a different full-width layout and decorative treatment.
+
+#### Toolkit example
+
+**Before:**
+
+```njk
+{{ hero({
+  "heading": "We’re here for you",
+  "text": "Helping you take control of your health and wellbeing.",
+  "imageURL": "https://example.com/hero.jpg"
+}) }}
+```
+
+**New in `toolkit-v4.23.0`:**
+
+```njk
+{{ hero({
+  "heading": "We’re here for you",
+  "description": "Helping you take control of your health and wellbeing.",
+  "image": {
+    "src": "https://example.com/hero.jpg",
+    "alt": "Person attending a health appointment"
+  }
+}) }}
+```
+
+#### React example
+
+**New in `react-v0.22.0`:**
+
+```tsx
+import { Hero, TilePattern } from '@ourfuturehealth/react-components';
+```
 
 ---
 

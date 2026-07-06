@@ -6,6 +6,33 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-07-06
+
+#### @ourfuturehealth/toolkit 4.23.0 (`toolkit-v4.23.0`)
+
+##### Added
+
+- Added the canonical full-width `Hero` component surface with brand/dark themes, free/boxed variants, optional media, primary and secondary actions, and decorative Tile Pattern support
+- Added the toolkit `Tile pattern` primitive, including the SVG tile sprite, explicit tile matrix rendering, docs examples, and macro test coverage
+
+##### Changed
+
+- Replaced the site-local Hero implementation with the toolkit Hero macro across docs examples and the homepage
+- Updated Hero documentation to use the canonical `description` and `image` options instead of the old site-local `text` and `imageURL` examples
+- Added safe `noopener noreferrer` handling for Button links that open in a new tab
+
+#### @ourfuturehealth/react-components 0.22.0 (`react-v0.22.0`)
+
+##### Added
+
+- Added the public React `Hero` component with toolkit-parity themes, variants, actions, media, decorative treatment, tests, and Storybook docs/examples
+- Added the public React `TilePattern` primitive with explicit tile matrix rendering, tests, and a Storybook builder for trying different rows and columns
+
+##### Changed
+
+- Moved Icon Storybook docs under `Primitives/Icon` to match the docs-site component primitive grouping
+- Added safe `noopener noreferrer` handling for Button links that open in a new tab
+
 ### 2026-06-03
 
 #### @ourfuturehealth/toolkit 4.22.0 (`toolkit-v4.22.0`)
