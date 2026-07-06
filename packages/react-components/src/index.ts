@@ -71,6 +71,25 @@ export type {
   HeaderTheme,
 } from './components/Header';
 
+export { Hero } from './components/Hero';
+export type {
+  HeroAs,
+  HeroImage,
+  HeroPrimaryAction,
+  HeroProps,
+  HeroSecondaryAction,
+  HeroTheme,
+  HeroVariant,
+} from './components/Hero';
+
+export { TilePattern } from './components/TilePattern';
+export type {
+  TilePatternColor,
+  TilePatternProps,
+  TilePatternTile,
+  TilePatternType,
+} from './components/TilePattern';
+
 export { Textarea } from './components/Textarea';
 export type { TextareaProps } from './components/Textarea';
 
