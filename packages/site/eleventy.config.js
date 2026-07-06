@@ -19,6 +19,10 @@ module.exports = function configuration(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "../toolkit/assets/icons/icon-sprite.svg": "assets/icons/icon-sprite.svg",
   });
+  eleventyConfig.addPassthroughCopy({
+    "../toolkit/assets/tile-pattern/tile-pattern-sprite.svg":
+      "assets/tile-pattern/tile-pattern-sprite.svg",
+  });
 
   // Toolkit CSS & JavaScript assets.
   // These compiled toolkit assets are used by `views/_includes/standalone-example-layout.njk`.

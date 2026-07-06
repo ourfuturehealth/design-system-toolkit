@@ -3,24 +3,24 @@
 
 {% extends "app-layout.njk" %}
 
+{% from 'hero/macro.njk' import hero %}
+
 {% block breadcrumb %}{% endblock %}
 
 {% block outerBody %}
 
 <main id="maincontent" role="main">
 
-<section class="ofh-hero-ds ofh-hero-ds--image ofh-hero-ds--image-description" style="background-image: url('/assets/ds-home-hero-lines-white.svg');" aria-label="Hero section">
-    <div class="ofh-width-container app-width-container">
-      <div class="ofh-grid-row">
-        <div class="ofh-grid-column-two-thirds">
-          <div class="ofh-hero__wrapper app-hero__wrapper">
-            <h1 class="ofh-u-margin-bottom-16">Design and build digital products at Our Future Health</h1>
-            <p class="ofh-body-l ofh-u-margin-bottom-4">Information and guidelines to help everyone design and build consistent, highly-considered products and services that put people first.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
+{{ hero({
+  "heading": "Design and build digital products at Our Future Health",
+  "description": "Information and guidelines to help everyone design and build consistent, highly-considered products and services that put people first.",
+  "showDecoration": false,
+  "classes": "app-homepage-hero",
+  "attributes": {
+    "aria-label": "Hero section",
+    "style": "background-image: url('/assets/ds-home-hero-lines-white.svg');"
+  }
+}) }}
 
 
     <div class="ofh-width-container app-width-container">

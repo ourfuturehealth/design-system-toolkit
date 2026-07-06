@@ -6,6 +6,36 @@
  * Custom style for the homepage
  */
 
+.app-homepage-hero {
+  @include ofh-responsive-padding(32, 'vertical');
+
+  --ofh-hero-background: #{$ofh-color-backgrounds-yellow};
+
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media only screen {
+    min-height: 200px;
+  }
+
+  @include mq($from: tablet) {
+    @media only screen {
+      min-height: 320px;
+    }
+  }
+}
+
+.app-homepage-hero .ofh-hero__container {
+  @include ofh-responsive-margin(32, 'horizontal');
+
+  max-width: $app-container-size;
+
+  @include govuk-media-query($and: '(min-width: #{($app-container-size + $ofh-size-32 * 2)})') {
+    margin: 0 auto;
+  }
+}
+
 .ofh-section {
   @include ofh-responsive-padding(32, 'bottom');
   @include ofh-responsive-padding(32, 'top');

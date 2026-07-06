@@ -1,19 +1,16 @@
-{% set html_style = 'background-color: #f0f4f5;' %}
-{% set pageTitle = 'Hero with media' %}
 {% from 'hero/macro.njk' import hero %}
-{% extends 'standalone-example-layout.njk' %}
-
-{% block body %}
 
 {{ hero({
-  "heading": "Design and build digital products at Our Future Health",
-  "description": "Information and guidelines to help everyone design and build consistent, highly-considered products and services that put people first.",
+  "theme": "dark",
+  "variant": "boxed",
+  "heading": "Design principles",
+  "description": "These principles guide all of our design. Use them to get started on a project and to help with making decisions.",
   "secondaryAction": {
-    "text": "Get started",
-    "href": "/get-started"
+    "text": "Read the principles",
+    "href": "/design-principles"
   },
   "primaryAction": {
-    "text": "View components",
+    "text": "Browse components",
     "href": "/design-system/components"
   },
   "image": {
@@ -23,5 +20,3 @@
     "sizes": "(min-width: 1020px) 50vw, 100vw"
   }
 }) }}
-
-{% endblock %}

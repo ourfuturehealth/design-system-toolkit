@@ -1,0 +1,40 @@
+{
+  "params": [
+    {
+      "name": "tiles",
+      "type": "array",
+      "required": true,
+      "description": "Two-dimensional tile matrix. Use Figma tile types 1 to 22; use null for an empty/off tile."
+    },
+    {
+      "name": "color",
+      "type": "string",
+      "required": false,
+      "description": "Default tile colour. Use brand, accent, accent-light, white, or transparent. Defaults to brand. Accent colours follow the active participant or research theme."
+    },
+    {
+      "name": "tileSize",
+      "type": "string",
+      "required": false,
+      "description": "CSS length for each square tile. Defaults to 120px."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the Tile Pattern root."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes to add to the Tile Pattern root."
+    },
+    {
+      "name": "spritePath",
+      "type": "string",
+      "required": false,
+      "description": "Path to the tile-pattern sprite. Defaults to /assets/tile-pattern/tile-pattern-sprite.svg."
+    }
+  ]
+}

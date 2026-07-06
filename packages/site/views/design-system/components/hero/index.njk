@@ -1,0 +1,89 @@
+{% set pageTitle = "Hero" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Hero at the top of a page when users need a clear introduction, optional supporting media, and one primary next step." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "July 2026" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <h2>When to use Hero</h2>
+  <p>Use Hero once at the top of a page when users need a short, high-level introduction and a clear next step.</p>
+  <p>Hero can include optional supporting media. Keep the copy brief and the call to action focused.</p>
+
+  <h2>When not to use Hero</h2>
+  <p>Do not use Hero on low-level content pages where users are trying to find specific information quickly.</p>
+  <p>Do not use Hero more than once on the same page.</p>
+
+  <h2>How to use Hero</h2>
+  <p>Use the <code>brand</code> theme by default and switch to <code>dark</code> when the page needs the darker colour mode. Use the <code>free</code> variant for an open split layout or <code>boxed</code> when the content needs white containment.</p>
+  <p>Hero supports at most 1 primary button and 1 secondary text link. The button is the primary call to action. The text link is the lower-emphasis secondary action.</p>
+  <p>If you use media, provide meaningful alt text when the image carries information. If the image is decorative, set it as decorative so assistive technology ignores it.</p>
+  <p>Hero defaults to a <code>section</code> root. Use the root override only when the page structure already provides the surrounding landmark or section semantics.</p>
+
+  <h2>Examples</h2>
+
+  <h3>Brand free variant</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "default"
+  }) }}
+
+  <h3>Dark free variant</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "dark-free"
+  }) }}
+
+  <h3>Brand boxed variant</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "brand-boxed"
+  }) }}
+
+  <h3>Dark boxed variant</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "dark-boxed"
+  }) }}
+
+  <h3>Secondary action only</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "secondary-action-only"
+  }) }}
+
+  <h3>No actions</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "no-actions"
+  }) }}
+
+  <h3>Text-only variant</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "text-only"
+  }) }}
+
+  <h3>Decoration and Tile pattern</h3>
+  <p>Hero decoration is built with the <a href="/design-system/components/tile-pattern">Tile pattern</a> primitive. Hero owns the pattern rows, columns, placement and theme mapping so each Hero instance keeps the canonical treatment.</p>
+  <p>The public Hero API lets you turn decoration off with <code>showDecoration: false</code>. If a new Hero treatment needs different tile types, colours or pattern dimensions, update the Hero component implementation using Tile pattern rather than configuring every Hero instance separately.</p>
+
+  <h3>Accessibility</h3>
+  <p>Keep the Hero heading semantic level correct for the page, which is typically <code>h1</code> for the primary page introduction.</p>
+  <p>Check the focus order when both actions are present, and make sure the media alt text or decorative treatment matches the purpose of the image.</p>
+
+{% endblock %}

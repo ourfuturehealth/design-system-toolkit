@@ -1,0 +1,88 @@
+{
+  "params": [
+    {
+      "name": "theme",
+      "type": "string",
+      "required": false,
+      "description": "Hero colour theme. Use brand or dark. Defaults to brand."
+    },
+    {
+      "name": "variant",
+      "type": "string",
+      "required": false,
+      "description": "Hero containment variant. Use free or boxed. Defaults to free."
+    },
+    {
+      "name": "heading",
+      "type": "string",
+      "required": true,
+      "description": "Plain text heading for the Hero. Required unless headingHtml is provided."
+    },
+    {
+      "name": "headingHtml",
+      "type": "string",
+      "required": false,
+      "description": "Trusted HTML heading for the Hero. Use instead of heading when the heading needs markup."
+    },
+    {
+      "name": "headingLevel",
+      "type": "number",
+      "required": false,
+      "description": "Semantic heading level from 1 to 6. Defaults to 1."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "required": false,
+      "description": "Supporting copy below the heading."
+    },
+    {
+      "name": "descriptionHtml",
+      "type": "string",
+      "required": false,
+      "description": "Trusted HTML supporting copy. Replaces description when provided."
+    },
+    {
+      "name": "primaryAction",
+      "type": "object",
+      "required": false,
+      "description": "Primary button configuration."
+    },
+    {
+      "name": "secondaryAction",
+      "type": "object",
+      "required": false,
+      "description": "Secondary text-link configuration."
+    },
+    {
+      "name": "image",
+      "type": "object",
+      "required": false,
+      "description": "Hero media configuration with src, optional srcset, optional sizes, optional alt, and optional decorative."
+    },
+    {
+      "name": "showDecoration",
+      "type": "boolean",
+      "required": false,
+      "description": "Set to false to disable the default decorative treatment."
+    },
+    {
+      "name": "element",
+      "type": "string",
+      "required": false,
+      "description": "Root element override. Use section or div. Defaults to section."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Classes to add to the Hero root."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "HTML attributes to add to the Hero root."
+    }
+  ]
+}

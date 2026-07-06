@@ -43,7 +43,7 @@ const renderIconBuilderStory = ({
 };
 
 const meta = {
-  title: 'Components/Icon',
+  title: 'Primitives/Icon',
   component: Icon,
   parameters: {
     layout: 'centered',

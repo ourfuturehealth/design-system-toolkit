@@ -80,13 +80,18 @@
   { title: "Card / Do & Don’t", url: "/design-system/components/card-do-dont" },
   { title: "Details", url: "/design-system/components/details" },
   { title: "Expander", url: "/design-system/components/expander" },
-  { title: "Icon", url: "/design-system/components/icon" },
+  { title: "Hero", url: "/design-system/components/hero" },
   { title: "Image", url: "/design-system/components/image" },
   { title: "Inset text", url: "/design-system/components/inset-text" },
   { title: "Summary list", url: "/design-system/components/summary-list" },
   { title: "Table", url: "/design-system/components/table" },
   { title: "Tag", url: "/design-system/components/tag" },
   { title: "Task list", url: "/design-system/components/task-list" }
+] %}
+
+{% set componentPrimitives = [
+  { title: "Icon", url: "/design-system/components/icon" },
+  { title: "Tile pattern", url: "/design-system/components/tile-pattern" }
 ] %}
 
 {% set inputComponents = [
@@ -185,6 +190,13 @@
     <h2 class="app-side-nav__heading">Content presentation</h2>
     <ul class="ofh-list app-side-nav__list">
     {% for item in contentPresentation %}
+      <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <h2 class="app-side-nav__heading">Component primitives</h2>
+    <ul class="ofh-list app-side-nav__list">
+    {% for item in componentPrimitives %}
       <li class="app-side-nav__item{% if item.title == pageTitle %} app-side-nav__item--current{% endif %}"><a class="app-side-nav__link" href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
     </ul>

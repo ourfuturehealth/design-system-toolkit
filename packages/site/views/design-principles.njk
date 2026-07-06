@@ -7,21 +7,24 @@
 
 {% extends "app-layout-two-thirds.njk" %}
 
+{% from 'hero/macro.njk' import hero %}
+
 {% block breadcrumb %}{% endblock %}
 
 {% block outerBody %}
-<section class="ofh-hero-ds ofh-hero-ds--image ofh-hero-ds--image-description" style="background-image: url('/assets/ds-hero-dots-green.svg');" aria-label="Hero section">
-    <div class="ofh-width-container app-width-container">
-      <div class="ofh-grid-row">
-        <div class="ofh-grid-column-two-thirds">
-          <div class="ofh-hero-ds__wrapper app-hero__wrapper">
-            <h1 class="ofh-u-margin-bottom-16">Design principles</h1>
-            <p class="ofh-body-l ofh-u-margin-bottom-4">These principles guide all of our design. Use them to get started on a project and to help with making decisions.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-</section>
+{{ hero({
+  "theme": "dark",
+  "variant": "boxed",
+  "heading": "Design principles",
+  "description": "These principles guide all of our design. Use them to get started on a project and to help with making decisions.",
+  "image": {
+    "src": "/assets/ds-hero-dots-green.svg",
+    "decorative": true
+  },
+  "attributes": {
+    "aria-label": "Hero section"
+  }
+}) }}
 {% endblock %}
   
  {% block bodyContent %}

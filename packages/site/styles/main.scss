@@ -6,7 +6,6 @@
 @import "../components/footer/footer";
 @import "../components/header/header";
 @import "../components/inset-text/inset-text";
-@import "../components/hero/hero";
 @import "../components/card/card";
 
 // Design examples
@@ -32,15 +31,6 @@
 // Remove bottom margin from a <p>
 .ofh-table__cell {
   @include top-and-bottom;
-}
-
-// Custom style for the home page hero
-// Reducing the padding on smaller screens
-.app-hero__wrapper {
-  @include mq($until: desktop) {
-    padding-bottom: $ofh-size-32;
-    padding-top: $ofh-size-32;
-  }
 }
 
 // Page template annotation
@@ -88,9 +78,4 @@
   li {
     list-style: none;
   }
-}
-
-// FIXME: this should probably be done / addressed directly in the Hero component.
-.ofh-hero h1 {
-  color: $ofh-color-foreground-primary;
 }
