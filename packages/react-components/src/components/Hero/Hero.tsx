@@ -240,12 +240,7 @@ export const Hero = ({
 
           {hasImage && image ? (
             <div className="ofh-grid-column-one-half ofh-hero__media-column">
-              <div
-                className={joinClasses(
-                  'ofh-hero__media',
-                  variant === 'boxed' && 'ofh-hero__media--boxed',
-                )}
-              >
+              <div className="ofh-hero__media">
                 <img
                   className="ofh-hero__image"
                   src={image.src}
