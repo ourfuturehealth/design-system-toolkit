@@ -1,4 +1,5 @@
 import React from 'react';
+import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import styles from './Button.module.scss';
 
 // Base props shared between button and anchor variants
@@ -65,11 +66,17 @@ export const Button = ({
 
   // Render as anchor if href is provided
   if ('href' in props && props.href) {
+    const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    const safeAnchorProps = {
+      ...anchorProps,
+      rel: mergeRelTokens(anchorProps.rel, anchorProps.target === '_blank'),
+    };
+
     return (
       <a
         ref={ref as React.Ref<HTMLAnchorElement>}
         className={buttonClasses}
-        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+        {...safeAnchorProps}
       >
         {children}
       </a>

@@ -140,6 +140,17 @@ describe('Button', () => {
     const link = screen.getByRole('link');
 
     expect(link).toHaveAttribute('target', '_blank');
-    expect(link).toHaveAttribute('rel', 'noopener');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('adds safe rel values to new-window links', () => {
+    render(
+      <Button href="https://example.com" target="_blank" rel="external">
+        External Link
+      </Button>,
+    );
+    const link = screen.getByRole('link');
+
+    expect(link).toHaveAttribute('rel', 'external noopener noreferrer');
   });
 });

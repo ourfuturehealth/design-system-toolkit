@@ -10,6 +10,15 @@
   {% endif %}
 {% endif %}
 
+{% set isAnchor = element == 'a' %}
+{% set anchorTarget = params.attributes.target if params.attributes and params.attributes.target else '' %}
+{% set anchorRel = params.attributes.rel if params.attributes and params.attributes.rel else '' %}
+{% set anchorOpensInNewWindow = isAnchor and anchorTarget == '_blank' %}
+{% set anchorRelTokens = ' ' ~ anchorRel ~ ' ' %}
+{% set anchorRelHasNoopener = ' noopener ' in anchorRelTokens %}
+{% set anchorRelHasNoreferrer = ' noreferrer ' in anchorRelTokens %}
+{% set safeAnchorRel %}{{ anchorRel }}{% if not anchorRelHasNoopener %}{% if anchorRel %} {% endif %}noopener{% endif %}{% if not anchorRelHasNoreferrer %}{% if anchorRel or not anchorRelHasNoopener %} {% endif %}noreferrer{% endif %}{% endset %}
+
 {# Define common attributes that we can use across all element types #}
 {% set commonAttributes %} class="ofh-button
   {%- if params.classes %}
@@ -18,7 +27,8 @@
     ofh-button--contained
   {% endif %}
   {%- if params.disabled %} ofh-button--disabled{% endif %}"
-  {%- for attribute, value in params.attributes %} {{attribute}}="{{value}}"{% endfor %}
+  {%- for attribute, value in params.attributes %}{% if not (anchorOpensInNewWindow and attribute == 'rel') %} {{attribute}}="{{value}}"{% endif %}{% endfor %}
+  {%- if anchorOpensInNewWindow %} rel="{{ safeAnchorRel | trim }}"{% endif %}
 {%- endset -%}
 
 {# Define common attributes we can use for both button and input types #}
