@@ -1,0 +1,21 @@
+{% from 'hero/macro.njk' import hero %}
+
+{{ hero({
+  "variant": "boxed",
+  "heading": "Take part in health research that helps everyone",
+  "description": "Join Our Future Health to help researchers discover better ways to prevent, detect and treat disease.",
+  "secondaryAction": {
+    "text": "Find out what taking part involves",
+    "href": "/get-started"
+  },
+  "primaryAction": {
+    "text": "Start now",
+    "href": "/get-started"
+  },
+  "image": {
+    "src": "https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg",
+    "alt": "Picture of allergic conjunctivitis",
+    "srcset": "https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-640x427.jpg 640w, https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-767x511.jpg 767w",
+    "sizes": "(min-width: 1020px) 50vw, 100vw"
+  }
+}) }}

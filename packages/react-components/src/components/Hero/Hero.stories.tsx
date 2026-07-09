@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import type React from 'react';
-import decorativeHeroImage from '../../../../site/assets/ds-home-hero-multi-color.svg?url';
 import { Hero, type HeroProps } from './Hero';
 
 type HeroStoryArgs = HeroProps & {
   showImage?: boolean;
-  useDecorativeImage?: boolean;
+  showTilePattern?: boolean;
   showPrimaryAction?: boolean;
   showSecondaryAction?: boolean;
 };
@@ -56,6 +55,61 @@ const defaultImage = {
   sizes: '(min-width: 1020px) 50vw, 100vw',
 };
 
+const allActionsContent = {
+  heading: 'Take part in health research that helps everyone',
+  description:
+    'Join Our Future Health to help researchers discover better ways to prevent, detect and treat disease.',
+  secondaryAction: {
+    children: 'Find out what taking part involves',
+    href: '/get-started',
+  },
+  primaryAction: {
+    children: 'Start now',
+    href: '/get-started',
+  },
+};
+
+const singleTextLinkContent = {
+  heading: 'Understand how your information supports research',
+  description:
+    'Read how Our Future Health protects participant information and makes approved research possible.',
+  secondaryAction: {
+    children: 'Read about data protection',
+    href: '/get-started',
+  },
+};
+
+const singleButtonContent = {
+  heading: 'Continue your health questionnaire',
+  description:
+    'Answer questions about your health and lifestyle so researchers can build a clearer picture of health across the UK.',
+  primaryAction: {
+    children: 'Continue questionnaire',
+    href: '/get-started',
+  },
+};
+
+const noActionsContent = {
+  heading: 'Your appointment is confirmed',
+  description:
+    'We have sent the appointment details to your email address. You can return to your account to review the information at any time.',
+};
+
+const noImageryContent = {
+  heading:
+    'Use the Hero when the page needs a clear introduction without supporting media',
+  description:
+    'This configuration keeps the full-width Hero treatment while removing the media region.',
+  secondaryAction: {
+    children: 'Read Hero guidance',
+    href: '/design-system/components/hero',
+  },
+  primaryAction: {
+    children: 'View components',
+    href: '/design-system/components',
+  },
+};
+
 const disabledControls = {
   controls: {
     disable: true,
@@ -81,26 +135,19 @@ const StoryInteractionBoundary = ({
 
 const renderHeroStory = ({
   showImage = true,
-  useDecorativeImage = false,
+  showTilePattern,
   showPrimaryAction = true,
   showSecondaryAction = true,
   image,
   primaryAction,
   secondaryAction,
+  showDecoration,
   ...args
 }: HeroStoryArgs) => (
   <Hero
     {...args}
-    image={
-      showImage
-        ? useDecorativeImage
-          ? {
-              src: decorativeHeroImage,
-              decorative: true,
-            }
-          : (image ?? defaultImage)
-        : undefined
-    }
+    showDecoration={showTilePattern ?? showDecoration}
+    image={showImage ? (image ?? defaultImage) : undefined}
     primaryAction={
       showPrimaryAction
         ? (primaryAction ?? { children: 'View components', href: '/design-system/components' })
@@ -146,8 +193,9 @@ const meta: Meta<HeroStoryArgs> = {
           </p>
           <p>
             When the image is decorative, set <code>decorative</code> to{' '}
-            <code>true</code> and leave meaningful alt text out. Hero defaults
-            to a <code>section</code> root. Only use the <code>as</code>
+            <code>true</code>. This is accessibility-only: it renders an empty
+            alt value and hides the image from assistive technology. Hero
+            defaults to a <code>section</code> root. Only use the <code>as</code>
             {' '}override when surrounding page structure already supplies the
             right sectioning or landmark semantics.
           </p>
@@ -174,7 +222,7 @@ const meta: Meta<HeroStoryArgs> = {
 
           <h2>Component props</h2>
           <ArgTypes
-            of={Default}
+            of={AllActionsFreeBrand}
             include={[
               'theme',
               'variant',
@@ -215,7 +263,6 @@ const meta: Meta<HeroStoryArgs> = {
     showDecoration: true,
     as: 'section',
     showImage: true,
-    useDecorativeImage: false,
     showPrimaryAction: true,
     showSecondaryAction: true,
   },
@@ -246,7 +293,7 @@ const meta: Meta<HeroStoryArgs> = {
     showDecoration: {
       control: 'boolean',
       description:
-        'Disables the default decorative treatment when set to false.',
+        'Set to false to turn off the default TilePattern decoration.',
     },
     as: {
       control: 'radio',
@@ -291,10 +338,10 @@ const meta: Meta<HeroStoryArgs> = {
         category: 'Builder story only',
       },
     },
-    useDecorativeImage: {
+    showTilePattern: {
       control: 'boolean',
       description:
-        'Storybook-only helper for switching the Builder story to a decorative media example.',
+        'Storybook-only helper for toggling the default TilePattern decoration. Maps to the Hero `showDecoration` prop.',
       table: {
         category: 'Builder story only',
       },
@@ -322,14 +369,278 @@ const meta: Meta<HeroStoryArgs> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  name: 'Brand free',
+export const AllActionsFreeBrand: Story = {
+  name: 'All actions - Free - Brand',
+  args: {
+    ...allActionsContent,
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsFreeDark: Story = {
+  name: 'All actions - Free - Dark',
+  args: {
+    ...allActionsContent,
+    theme: 'dark',
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsBoxedBrand: Story = {
+  name: 'All actions - Boxed - Brand',
+  args: {
+    ...allActionsContent,
+    variant: 'boxed',
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsBoxedDark: Story = {
+  name: 'All actions - Boxed - Dark',
+  args: {
+    ...allActionsContent,
+    theme: 'dark',
+    variant: 'boxed',
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleTextLinkFreeBrand: Story = {
+  name: 'Single action Text Link - Free - Brand',
+  args: {
+    ...singleTextLinkContent,
+    showPrimaryAction: false,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleTextLinkFreeDark: Story = {
+  name: 'Single action Text Link - Free - Dark',
+  args: {
+    ...singleTextLinkContent,
+    theme: 'dark',
+    showPrimaryAction: false,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleTextLinkBoxedBrand: Story = {
+  name: 'Single action Text Link - Boxed - Brand',
+  args: {
+    ...singleTextLinkContent,
+    variant: 'boxed',
+    showPrimaryAction: false,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleTextLinkBoxedDark: Story = {
+  name: 'Single action Text Link - Boxed - Dark',
+  args: {
+    ...singleTextLinkContent,
+    theme: 'dark',
+    variant: 'boxed',
+    showPrimaryAction: false,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleButtonFreeBrand: Story = {
+  name: 'Single action Button - Free - Brand',
+  args: {
+    ...singleButtonContent,
+    showPrimaryAction: undefined,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleButtonFreeDark: Story = {
+  name: 'Single action Button - Free - Dark',
+  args: {
+    ...singleButtonContent,
+    theme: 'dark',
+    showPrimaryAction: undefined,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleButtonBoxedBrand: Story = {
+  name: 'Single action Button - Boxed - Brand',
+  args: {
+    ...singleButtonContent,
+    variant: 'boxed',
+    showPrimaryAction: undefined,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const SingleButtonBoxedDark: Story = {
+  name: 'Single action Button - Boxed - Dark',
+  args: {
+    ...singleButtonContent,
+    theme: 'dark',
+    variant: 'boxed',
+    showPrimaryAction: undefined,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const NoActionsFreeBrand: Story = {
+  name: 'No actions - Free - Brand',
+  args: {
+    ...noActionsContent,
+    showPrimaryAction: false,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const NoActionsFreeDark: Story = {
+  name: 'No actions - Free - Dark',
+  args: {
+    ...noActionsContent,
+    theme: 'dark',
+    showPrimaryAction: false,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const NoActionsBoxedBrand: Story = {
+  name: 'No actions - Boxed - Brand',
+  args: {
+    ...noActionsContent,
+    variant: 'boxed',
+    showPrimaryAction: false,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const NoActionsBoxedDark: Story = {
+  name: 'No actions - Boxed - Dark',
+  args: {
+    ...noActionsContent,
+    theme: 'dark',
+    variant: 'boxed',
+    showPrimaryAction: false,
+    showSecondaryAction: false,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsNoImageryFreeBrand: Story = {
+  name: 'All actions (No imagery) - Free - Brand',
+  args: {
+    ...noImageryContent,
+    image: undefined,
+    showImage: false,
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsNoImageryFreeDark: Story = {
+  name: 'All actions (No imagery) - Free - Dark',
+  args: {
+    ...noImageryContent,
+    theme: 'dark',
+    image: undefined,
+    showImage: false,
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsNoImageryBoxedBrand: Story = {
+  name: 'All actions (No imagery) - Boxed - Brand',
+  args: {
+    ...noImageryContent,
+    variant: 'boxed',
+    image: undefined,
+    showImage: false,
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsNoImageryBoxedDark: Story = {
+  name: 'All actions (No imagery) - Boxed - Dark',
+  args: {
+    ...noImageryContent,
+    theme: 'dark',
+    variant: 'boxed',
+    image: undefined,
+    showImage: false,
+    showPrimaryAction: undefined,
+    showSecondaryAction: undefined,
+  },
   parameters: {
     ...disabledControls,
   },
 };
 
 export const Builder: Story = {
+  args: {
+    showTilePattern: true,
+  },
   parameters: {
     controls: {
       include: [
@@ -339,146 +650,11 @@ export const Builder: Story = {
         'headingLevel',
         'description',
         'showImage',
-        'useDecorativeImage',
+        'showTilePattern',
         'showPrimaryAction',
         'showSecondaryAction',
-        'showDecoration',
         'as',
       ],
     },
-  },
-};
-
-export const DarkFree: Story = {
-  args: {
-    theme: 'dark',
-    heading: 'Take part in health research that helps everyone',
-    description:
-      'Join Our Future Health to help researchers discover better ways to prevent, detect and treat disease.',
-    secondaryAction: {
-      children: 'Find out what taking part involves',
-      href: '/get-started',
-    },
-    primaryAction: {
-      children: 'Start now',
-      href: '/get-started',
-    },
-    image: defaultImage,
-    useDecorativeImage: undefined,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
-  },
-  parameters: {
-    ...disabledControls,
-  },
-};
-
-export const BrandBoxed: Story = {
-  args: {
-    variant: 'boxed',
-    heading: 'Continue your health questionnaire',
-    description:
-      'Answer questions about your health and lifestyle so researchers can build a clearer picture of health across the UK.',
-    secondaryAction: {
-      children: 'What you need before you start',
-      href: '/get-started',
-    },
-    primaryAction: {
-      children: 'Continue questionnaire',
-      href: '/get-started',
-    },
-    image: defaultImage,
-    useDecorativeImage: undefined,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
-  },
-  parameters: {
-    ...disabledControls,
-  },
-};
-
-export const DarkBoxed: Story = {
-  args: {
-    theme: 'dark',
-    variant: 'boxed',
-    heading: 'Design principles',
-    description:
-      'These principles guide all of our design. Use them to get started on a project and to help with making decisions.',
-    image: defaultImage,
-    secondaryAction: {
-      children: 'Read the principles',
-      href: '/design-principles',
-    },
-    primaryAction: {
-      children: 'Browse components',
-      href: '/design-system/components',
-    },
-    useDecorativeImage: undefined,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
-  },
-  parameters: {
-    ...disabledControls,
-  },
-};
-
-export const SecondaryActionOnly: Story = {
-  args: {
-    heading: 'Understand how your information supports research',
-    description:
-      'Read how Our Future Health protects participant information and makes approved research possible.',
-    image: defaultImage,
-    secondaryAction: {
-      children: 'Read about data protection',
-      href: '/get-started',
-    },
-    useDecorativeImage: undefined,
-    showPrimaryAction: false,
-    showSecondaryAction: undefined,
-  },
-  parameters: {
-    ...disabledControls,
-  },
-};
-
-export const NoActions: Story = {
-  args: {
-    theme: 'dark',
-    variant: 'boxed',
-    heading: 'Your appointment is confirmed',
-    description:
-      'We have sent the appointment details to your email address. You can return to your account to review the information at any time.',
-    image: defaultImage,
-    useDecorativeImage: undefined,
-    showPrimaryAction: false,
-    showSecondaryAction: false,
-  },
-  parameters: {
-    ...disabledControls,
-  },
-};
-
-export const TextOnly: Story = {
-  args: {
-    heading:
-      'Use the text-only Hero when the page needs a clear introduction without supporting media.',
-    description:
-      'This configuration keeps the full-width Hero treatment while removing the media region.',
-    image: undefined,
-    showImage: false,
-    secondaryAction: {
-      children: 'Read Hero guidance',
-      href: '/design-system/components/hero',
-    },
-    primaryAction: {
-      children: 'View components',
-      href: '/design-system/components',
-    },
-    useDecorativeImage: undefined,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
-  },
-  parameters: {
-    ...disabledControls,
   },
 };

@@ -8,13 +8,14 @@ Use Hero for the single primary introduction at the top of a page when users nee
 
 ### Preview examples
 
-- [Hero brand free example](/design-example/components/hero/default/layout-default/)
-- [Hero dark free example](/design-example/components/hero/dark-free/layout-default/)
-- [Hero brand boxed example](/design-example/components/hero/brand-boxed/layout-default/)
-- [Hero dark boxed example](/design-example/components/hero/dark-boxed/layout-default/)
-- [Hero secondary-action-only example](/design-example/components/hero/secondary-action-only/layout-default/)
-- [Hero no-actions example](/design-example/components/hero/no-actions/layout-default/)
-- [Hero text-only example](/design-example/components/hero/text-only/layout-default/)
+- [Hero all-actions free brand example](/design-example/components/hero/all-actions-free-brand/layout-default/)
+- [Hero all-actions free dark example](/design-example/components/hero/all-actions-free-dark/layout-default/)
+- [Hero all-actions boxed brand example](/design-example/components/hero/all-actions-boxed-brand/layout-default/)
+- [Hero all-actions boxed dark example](/design-example/components/hero/all-actions-boxed-dark/layout-default/)
+- [Hero single text-link free brand example](/design-example/components/hero/single-text-link-free-brand/layout-default/)
+- [Hero single button free brand example](/design-example/components/hero/single-button-free-brand/layout-default/)
+- [Hero no-actions free brand example](/design-example/components/hero/no-actions-free-brand/layout-default/)
+- [Hero no-imagery free brand example](/design-example/components/hero/all-actions-no-imagery-free-brand/layout-default/)
 
 ### Nunjucks macro
 
@@ -90,7 +91,7 @@ Use Hero for the single primary introduction at the top of a page when users nee
 | `description` / `descriptionHtml` | string | No | Supporting copy below the heading. |
 | `primaryAction` | object | No | Primary button configuration using toolkit Button fields such as `text`, `html`, `href`, `type`, `disabled`, and `attributes`. |
 | `secondaryAction` | object | No | Secondary text-link configuration with `text` or `html`, required `href`, optional `openInNewWindow`, and optional `attributes`. |
-| `image` | object | No | Media object with `src`, optional `srcset`, optional `sizes`, optional `alt`, and optional `decorative`. |
+| `image` | object | No | Media object with `src`, optional `srcset`, optional `sizes`, optional `alt`, and optional `decorative`. Set `decorative` to `true` only when the image adds no information; this renders an empty `alt` value and hides the image from assistive technology. |
 | `showDecoration` | boolean | No | Set to `false` to disable decorative pattern treatment. |
 | `element` | string | No | Root element override. Use `section` or `div`. Defaults to `section`. |
 | `classes` | string | No | Classes to add to the Hero root. |

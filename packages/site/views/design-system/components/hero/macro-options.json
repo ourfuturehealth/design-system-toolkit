@@ -58,7 +58,7 @@
       "name": "image",
       "type": "object",
       "required": false,
-      "description": "Hero media configuration with src, optional srcset, optional sizes, optional alt, and optional decorative."
+      "description": "Hero media configuration with src, optional srcset, optional sizes, optional alt, and optional decorative. Set decorative to true only when the image adds no information; this renders an empty alt value and hides the image from assistive technology."
     },
     {
       "name": "showDecoration",
