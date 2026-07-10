@@ -1,6 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArgTypes, Description, Source, Stories, Title } from '@storybook/addon-docs/blocks';
 import type React from 'react';
+import heroVolunteerGuideImageUrl from '../../../../site/assets/examples/hero/edinburgh-stock-image-01.jpg?url';
+import heroClinicImageUrl from '../../../../site/assets/examples/hero/mancity-curry-mile-clinic.jpg?url';
+import heroShirleyImageUrl from '../../../../site/assets/examples/hero/ofh-shirley-8613.jpg?url';
+import heroPortrait01ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-01.jpg?url';
+import heroPortrait02ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-02.jpg?url';
+import heroPortrait03ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-03.jpg?url';
+import heroPortrait04ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-04.jpg?url';
+import heroPortrait05ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-05.jpg?url';
+import heroPortrait06ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-06.jpg?url';
+import heroPortrait07ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-07.jpg?url';
+import heroPortrait08ImageUrl from '../../../../site/assets/examples/hero/ofh-portrait-08.jpg?url';
 import { Hero, type HeroProps } from './Hero';
 
 type HeroStoryArgs = HeroProps & {
@@ -47,13 +58,36 @@ const customDecorationExample = `import { Hero, TilePattern } from '@ourfuturehe
 </div>;
 `;
 
-const defaultImage = {
-  src: 'https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg',
-  alt: 'Picture of allergic conjunctivitis',
-  srcSet:
-    'https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-640x427.jpg 640w, https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-767x511.jpg 767w',
-  sizes: '(min-width: 1020px) 50vw, 100vw',
+const shirleyImage = {
+  src: heroShirleyImageUrl,
+  alt: 'A clinician standing beside Our Future Health mobile clinic signage',
 };
+
+const clinicImage = {
+  src: heroClinicImageUrl,
+  alt: 'An Our Future Health mobile clinic parked on Manchester Curry Mile',
+};
+
+const volunteerGuideImage = {
+  src: heroVolunteerGuideImageUrl,
+  alt: 'A printed Our Future Health volunteer guide reading Join Our Future Health',
+};
+
+const portraitImages = [
+  heroPortrait01ImageUrl,
+  heroPortrait02ImageUrl,
+  heroPortrait03ImageUrl,
+  heroPortrait04ImageUrl,
+  heroPortrait05ImageUrl,
+  heroPortrait06ImageUrl,
+  heroPortrait07ImageUrl,
+  heroPortrait08ImageUrl,
+].map((src) => ({
+  src,
+  alt: 'Portrait of a person',
+}));
+
+const defaultImage = shirleyImage;
 
 const allActionsContent = {
   heading: 'Take part in health research that helps everyone',
@@ -373,6 +407,7 @@ export const AllActionsFreeBrand: Story = {
   name: 'All actions - Free - Brand',
   args: {
     ...allActionsContent,
+    image: shirleyImage,
     showPrimaryAction: undefined,
     showSecondaryAction: undefined,
   },
@@ -386,6 +421,7 @@ export const AllActionsFreeDark: Story = {
   args: {
     ...allActionsContent,
     theme: 'dark',
+    image: clinicImage,
     showPrimaryAction: undefined,
     showSecondaryAction: undefined,
   },
@@ -399,6 +435,7 @@ export const AllActionsBoxedBrand: Story = {
   args: {
     ...allActionsContent,
     variant: 'boxed',
+    image: volunteerGuideImage,
     showPrimaryAction: undefined,
     showSecondaryAction: undefined,
   },
@@ -413,6 +450,7 @@ export const AllActionsBoxedDark: Story = {
     ...allActionsContent,
     theme: 'dark',
     variant: 'boxed',
+    image: portraitImages[0],
     showPrimaryAction: undefined,
     showSecondaryAction: undefined,
   },
@@ -425,6 +463,7 @@ export const SingleTextLinkFreeBrand: Story = {
   name: 'Single action Text Link - Free - Brand',
   args: {
     ...singleTextLinkContent,
+    image: portraitImages[1],
     showPrimaryAction: false,
     showSecondaryAction: undefined,
   },
@@ -438,6 +477,7 @@ export const SingleTextLinkFreeDark: Story = {
   args: {
     ...singleTextLinkContent,
     theme: 'dark',
+    image: volunteerGuideImage,
     showPrimaryAction: false,
     showSecondaryAction: undefined,
   },
@@ -451,6 +491,7 @@ export const SingleTextLinkBoxedBrand: Story = {
   args: {
     ...singleTextLinkContent,
     variant: 'boxed',
+    image: clinicImage,
     showPrimaryAction: false,
     showSecondaryAction: undefined,
   },
@@ -465,6 +506,7 @@ export const SingleTextLinkBoxedDark: Story = {
     ...singleTextLinkContent,
     theme: 'dark',
     variant: 'boxed',
+    image: portraitImages[2],
     showPrimaryAction: false,
     showSecondaryAction: undefined,
   },
@@ -477,6 +519,7 @@ export const SingleButtonFreeBrand: Story = {
   name: 'Single action Button - Free - Brand',
   args: {
     ...singleButtonContent,
+    image: shirleyImage,
     showPrimaryAction: undefined,
     showSecondaryAction: false,
   },
@@ -490,6 +533,7 @@ export const SingleButtonFreeDark: Story = {
   args: {
     ...singleButtonContent,
     theme: 'dark',
+    image: portraitImages[3],
     showPrimaryAction: undefined,
     showSecondaryAction: false,
   },
@@ -503,6 +547,7 @@ export const SingleButtonBoxedBrand: Story = {
   args: {
     ...singleButtonContent,
     variant: 'boxed',
+    image: volunteerGuideImage,
     showPrimaryAction: undefined,
     showSecondaryAction: false,
   },
@@ -517,6 +562,7 @@ export const SingleButtonBoxedDark: Story = {
     ...singleButtonContent,
     theme: 'dark',
     variant: 'boxed',
+    image: clinicImage,
     showPrimaryAction: undefined,
     showSecondaryAction: false,
   },
@@ -529,6 +575,7 @@ export const NoActionsFreeBrand: Story = {
   name: 'No actions - Free - Brand',
   args: {
     ...noActionsContent,
+    image: portraitImages[4],
     showPrimaryAction: false,
     showSecondaryAction: false,
   },
@@ -542,6 +589,7 @@ export const NoActionsFreeDark: Story = {
   args: {
     ...noActionsContent,
     theme: 'dark',
+    image: portraitImages[5],
     showPrimaryAction: false,
     showSecondaryAction: false,
   },
@@ -555,6 +603,7 @@ export const NoActionsBoxedBrand: Story = {
   args: {
     ...noActionsContent,
     variant: 'boxed',
+    image: portraitImages[6],
     showPrimaryAction: false,
     showSecondaryAction: false,
   },
@@ -569,6 +618,7 @@ export const NoActionsBoxedDark: Story = {
     ...noActionsContent,
     theme: 'dark',
     variant: 'boxed',
+    image: portraitImages[7],
     showPrimaryAction: false,
     showSecondaryAction: false,
   },

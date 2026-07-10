@@ -13,6 +13,16 @@ declare module '*.svg?url' {
   export default url;
 }
 
+declare module '*.jpg?url' {
+  const url: string;
+  export default url;
+}
+
+declare module '*.png?url' {
+  const url: string;
+  export default url;
+}
+
 declare module '*.svg?raw' {
   const content: string;
   export default content;
