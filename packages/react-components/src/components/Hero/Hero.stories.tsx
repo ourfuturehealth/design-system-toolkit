@@ -17,8 +17,8 @@ import { Hero, type HeroProps } from './Hero';
 type HeroStoryArgs = HeroProps & {
   showImage?: boolean;
   showTilePattern?: boolean;
-  showPrimaryAction?: boolean;
-  showSecondaryAction?: boolean;
+  showButton?: boolean;
+  showTextLink?: boolean;
 };
 
 const heroUsageExample = `import { Hero } from '@ourfuturehealth/react-components';
@@ -170,8 +170,8 @@ const StoryInteractionBoundary = ({
 const renderHeroStory = ({
   showImage = true,
   showTilePattern,
-  showPrimaryAction = true,
-  showSecondaryAction = true,
+  showButton = true,
+  showTextLink = true,
   image,
   primaryAction,
   secondaryAction,
@@ -183,12 +183,12 @@ const renderHeroStory = ({
     showDecoration={showTilePattern ?? showDecoration}
     image={showImage ? (image ?? defaultImage) : undefined}
     primaryAction={
-      showPrimaryAction
+      showButton
         ? (primaryAction ?? { children: 'View components', href: '/design-system/components' })
         : undefined
     }
     secondaryAction={
-      showSecondaryAction
+      showTextLink
         ? (secondaryAction ?? { children: 'Get started', href: '/get-started' })
         : undefined
     }
@@ -297,8 +297,8 @@ const meta: Meta<HeroStoryArgs> = {
     showDecoration: true,
     as: 'section',
     showImage: true,
-    showPrimaryAction: true,
-    showSecondaryAction: true,
+    showButton: true,
+    showTextLink: true,
   },
   argTypes: {
     theme: {
@@ -380,7 +380,7 @@ const meta: Meta<HeroStoryArgs> = {
         category: 'Builder story only',
       },
     },
-    showPrimaryAction: {
+    showButton: {
       control: 'boolean',
       description:
         'Storybook-only helper for toggling the primary action in the Builder story.',
@@ -388,7 +388,7 @@ const meta: Meta<HeroStoryArgs> = {
         category: 'Builder story only',
       },
     },
-    showSecondaryAction: {
+    showTextLink: {
       control: 'boolean',
       description:
         'Storybook-only helper for toggling the secondary action in the Builder story.',
@@ -408,8 +408,8 @@ export const AllActionsFreeBrand: Story = {
   args: {
     ...allActionsContent,
     image: shirleyImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -422,8 +422,8 @@ export const AllActionsFreeDark: Story = {
     ...allActionsContent,
     theme: 'dark',
     image: clinicImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -436,8 +436,8 @@ export const AllActionsBoxedBrand: Story = {
     ...allActionsContent,
     variant: 'boxed',
     image: volunteerGuideImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -451,8 +451,8 @@ export const AllActionsBoxedDark: Story = {
     theme: 'dark',
     variant: 'boxed',
     image: portraitImages[0],
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -464,8 +464,8 @@ export const SingleTextLinkFreeBrand: Story = {
   args: {
     ...singleTextLinkContent,
     image: portraitImages[1],
-    showPrimaryAction: false,
-    showSecondaryAction: undefined,
+    showButton: false,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -478,8 +478,8 @@ export const SingleTextLinkFreeDark: Story = {
     ...singleTextLinkContent,
     theme: 'dark',
     image: volunteerGuideImage,
-    showPrimaryAction: false,
-    showSecondaryAction: undefined,
+    showButton: false,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -492,8 +492,8 @@ export const SingleTextLinkBoxedBrand: Story = {
     ...singleTextLinkContent,
     variant: 'boxed',
     image: clinicImage,
-    showPrimaryAction: false,
-    showSecondaryAction: undefined,
+    showButton: false,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -507,8 +507,8 @@ export const SingleTextLinkBoxedDark: Story = {
     theme: 'dark',
     variant: 'boxed',
     image: portraitImages[2],
-    showPrimaryAction: false,
-    showSecondaryAction: undefined,
+    showButton: false,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -520,8 +520,8 @@ export const SingleButtonFreeBrand: Story = {
   args: {
     ...singleButtonContent,
     image: shirleyImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: false,
+    showButton: undefined,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -534,8 +534,8 @@ export const SingleButtonFreeDark: Story = {
     ...singleButtonContent,
     theme: 'dark',
     image: portraitImages[3],
-    showPrimaryAction: undefined,
-    showSecondaryAction: false,
+    showButton: undefined,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -548,8 +548,8 @@ export const SingleButtonBoxedBrand: Story = {
     ...singleButtonContent,
     variant: 'boxed',
     image: volunteerGuideImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: false,
+    showButton: undefined,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -563,8 +563,8 @@ export const SingleButtonBoxedDark: Story = {
     theme: 'dark',
     variant: 'boxed',
     image: clinicImage,
-    showPrimaryAction: undefined,
-    showSecondaryAction: false,
+    showButton: undefined,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -576,8 +576,8 @@ export const NoActionsFreeBrand: Story = {
   args: {
     ...noActionsContent,
     image: portraitImages[4],
-    showPrimaryAction: false,
-    showSecondaryAction: false,
+    showButton: false,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -590,8 +590,8 @@ export const NoActionsFreeDark: Story = {
     ...noActionsContent,
     theme: 'dark',
     image: portraitImages[5],
-    showPrimaryAction: false,
-    showSecondaryAction: false,
+    showButton: false,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -604,8 +604,8 @@ export const NoActionsBoxedBrand: Story = {
     ...noActionsContent,
     variant: 'boxed',
     image: portraitImages[6],
-    showPrimaryAction: false,
-    showSecondaryAction: false,
+    showButton: false,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -619,8 +619,8 @@ export const NoActionsBoxedDark: Story = {
     theme: 'dark',
     variant: 'boxed',
     image: portraitImages[7],
-    showPrimaryAction: false,
-    showSecondaryAction: false,
+    showButton: false,
+    showTextLink: false,
   },
   parameters: {
     ...disabledControls,
@@ -634,8 +634,8 @@ export const AllActionsNoImageryFreeBrand: Story = {
     image: undefined,
     showImage: false,
     showTilePattern: false,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -650,8 +650,8 @@ export const AllActionsNoImageryFreeDark: Story = {
     image: undefined,
     showImage: false,
     showTilePattern: false,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -666,8 +666,8 @@ export const AllActionsNoImageryBoxedBrand: Story = {
     image: undefined,
     showImage: false,
     showTilePattern: false,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -683,8 +683,8 @@ export const AllActionsNoImageryBoxedDark: Story = {
     image: undefined,
     showImage: false,
     showTilePattern: false,
-    showPrimaryAction: undefined,
-    showSecondaryAction: undefined,
+    showButton: undefined,
+    showTextLink: undefined,
   },
   parameters: {
     ...disabledControls,
@@ -705,8 +705,8 @@ export const Builder: Story = {
         'description',
         'showImage',
         'showTilePattern',
-        'showPrimaryAction',
-        'showSecondaryAction',
+        'showButton',
+        'showTextLink',
         'as',
       ],
     },
