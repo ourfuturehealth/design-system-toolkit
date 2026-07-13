@@ -1,0 +1,27 @@
+{% from 'hero/macro.njk' import hero %}
+
+{{ hero({
+  "element": "div",
+  "theme": "dark",
+  "variant": "boxed",
+  "heading": "Design principles",
+  "headingLevel": 2,
+  "showDecoration": false,
+  "classes": "custom-hero",
+  "attributes": {
+    "data-track": "hero"
+  },
+  "secondaryAction": {
+    "text": "Read guidance",
+    "href": "https://example.com/guidance",
+    "attributes": {
+      "target": "_blank",
+      "rel": "external",
+      "data-track": "hero-secondary"
+    }
+  },
+  "image": {
+    "src": "https://example.com/decorative.svg",
+    "decorative": true
+  }
+}) }}

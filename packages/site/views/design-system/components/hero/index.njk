@@ -1,0 +1,215 @@
+{% set pageTitle = "Hero" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Hero at the top of a page when users need a clear introduction, optional supporting media, and one primary next step." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "July 2026" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <h2>When to use Hero</h2>
+  <p>Use Hero once at the top of a page when users need a short, high-level introduction and a clear next step.</p>
+  <p>Hero can include optional supporting media. Keep the copy brief and the call to action focused.</p>
+
+  <h2>When not to use Hero</h2>
+  <p>Do not use Hero on low-level content pages where users are trying to find specific information quickly.</p>
+  <p>Do not use Hero more than once on the same page.</p>
+
+  <h2>How to use Hero</h2>
+  <p>Use the <code>brand</code> theme by default and switch to <code>dark</code> when the page needs the darker colour mode. Use the <code>free</code> variant for an open split layout or <code>boxed</code> when the content needs white containment.</p>
+  <p>Hero supports at most 1 primary button and 1 secondary text link. The button is the primary call to action. The text link is the lower-emphasis secondary action.</p>
+  <p>If you use media, provide meaningful alt text when the image carries information. If the image is decorative, set it as decorative so assistive technology ignores it.</p>
+  <p>Hero defaults to a <code>section</code> root. Use the root override only when the page structure already provides the surrounding landmark or section semantics.</p>
+
+  <h2>Examples</h2>
+
+  <h3>All actions - Free - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-free-brand"
+  }) }}
+
+  <h3>All actions - Free - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-free-dark"
+  }) }}
+
+  <h3>All actions - Boxed - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-boxed-brand"
+  }) }}
+
+  <h3>All actions - Boxed - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-boxed-dark"
+  }) }}
+
+  <h3>Single action Text Link - Free - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-text-link-free-brand"
+  }) }}
+
+  <h3>Single action Text Link - Free - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-text-link-free-dark"
+  }) }}
+
+  <h3>Single action Text Link - Boxed - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-text-link-boxed-brand"
+  }) }}
+
+  <h3>Single action Text Link - Boxed - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-text-link-boxed-dark"
+  }) }}
+
+  <h3>Single action Button - Free - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-button-free-brand"
+  }) }}
+
+  <h3>Single action Button - Free - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-button-free-dark"
+  }) }}
+
+  <h3>Single action Button - Boxed - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-button-boxed-brand"
+  }) }}
+
+  <h3>Single action Button - Boxed - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "single-button-boxed-dark"
+  }) }}
+
+  <h3>No actions - Free - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "no-actions-free-brand"
+  }) }}
+
+  <h3>No actions - Free - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "no-actions-free-dark"
+  }) }}
+
+  <h3>No actions - Boxed - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "no-actions-boxed-brand"
+  }) }}
+
+  <h3>No actions - Boxed - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "no-actions-boxed-dark"
+  }) }}
+
+  <h3>All actions (No imagery) - Free - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-no-imagery-free-brand"
+  }) }}
+
+  <h3>All actions (No imagery) - Free - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-no-imagery-free-dark"
+  }) }}
+
+  <h3>All actions (No imagery) - Boxed - Brand</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-no-imagery-boxed-brand"
+  }) }}
+
+  <h3>All actions (No imagery) - Boxed - Dark</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-no-imagery-boxed-dark"
+  }) }}
+
+  <h3>Decoration and Tile pattern</h3>
+  <p>Hero decoration is built with the <a href="/design-system/components/tile-pattern">Tile pattern</a> primitive. Hero owns the pattern rows, columns, placement and theme mapping so each Hero instance keeps the canonical treatment.</p>
+  <p>The public Hero API lets you turn decoration off with <code>showDecoration: false</code>. Keep the default decoration unless the page or product needs a deliberately custom treatment.</p>
+  <p>If you need a custom pattern, turn the Hero decoration off, render a separate Tile pattern next to the Hero in the consuming layout, and own the positioning CSS in that layout. Pass the exact tile matrix, global colour, per-tile colour overrides and tile size that the custom treatment needs.</p>
+  {% set customHeroPatternCode %}{% raw %}{% from 'components/hero/macro.njk' import hero %}
+{% from 'components/tile-pattern/macro.njk' import tilePattern %}
+
+<div class="custom-hero-shell">
+  {{ hero({
+    "heading": "Take part in health research",
+    "description": "Help build a clearer picture of health across the UK.",
+    "showDecoration": false
+  }) }}
+
+  {{ tilePattern({
+    "classes": "custom-hero-shell__pattern",
+    "color": "brand",
+    "tileSize": "96px",
+    "tiles": [
+      [1, { "type": 2, "color": "transparent" }, 5],
+      [null, { "type": 8, "color": "accent" }, 12]
+    ]
+  }) }}
+</div>{% endraw %}{% endset %}
+
+  <div class="design-example">
+    <div class="code-snippet">
+      <div class="app-tabs__container js-tabs__container" id="custom-hero-pattern-example" role="tabpanel">
+        <div class="code-snippet__preformatted" data-index="ex-1">
+          <div class="app-code-snippet__macro"></div>
+          <div class="app-code-snippet__container">
+            <a class="app-link--copy" href="javascript:void(0);" aria-live="assertive">Copy<span class="ofh-u-visually-hidden"> custom Hero pattern</span> code</a>
+            <pre><code class="language-js">{{- customHeroPatternCode | highlight('js') | safe -}}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Accessibility</h3>
+  <p>Keep the Hero heading semantic level correct for the page, which is typically <code>h1</code> for the primary page introduction.</p>
+  <p>Check the focus order when both actions are present, and make sure the media alt text or decorative treatment matches the purpose of the image.</p>
+
+{% endblock %}

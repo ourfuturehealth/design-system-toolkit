@@ -1,22 +1,130 @@
-<section class="ofh-hero
-{%- if params.imageURL and params.heading %} ofh-hero--image ofh-hero--image-description
-{%- elif params.imageURL %} ofh-hero--image{% endif %}
-{%- if params.classes %} {{ params.classes }}{% endif %}"
-{%- if params.imageURL %} style="background-image: url('{{ params.imageURL }}');"{% endif %}
-{%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-{% if params.imageURL %}<div class="ofh-hero__overlay">{% endif %}
-{%- if params.heading %}
-  <div class="ofh-width-container{% if not params.imageURL %} ofh-hero--border{% endif %}">
-    <div class="ofh-grid-row">
-      <div class="ofh-grid-column-two-thirds">
-        <div class="{% if params.imageURL %}ofh-hero-content{% else %}ofh-hero__wrapper{% endif %}">
-          <h1 {% if params.text %}class="ofh-u-margin-bottom-12"{% endif %}>{{ params.heading }}</h1>
-          {% if params.text %}<p class="ofh-body-l ofh-u-margin-bottom-0">{{ params.text }}</p>{% endif %}
-          {% if params.imageURL %}<span class="ofh-hero__arrow" aria-hidden="true"></span>{% endif %}
+{% from '../button/macro.njk' import button %}
+{% from '../tile-pattern/macro.njk' import tilePattern %}
+
+{% set requestedElement = params.element | lower if params.element else '' %}
+{% set element = 'div' if requestedElement == 'div' else 'section' %}
+{% set theme = params.theme | lower if params.theme else 'brand' %}
+{% set variant = params.variant | lower if params.variant else 'free' %}
+{% set headingLevel = params.headingLevel if params.headingLevel in [1, 2, 3, 4, 5, 6] else 1 %}
+{% set headingTag = 'h' ~ headingLevel %}
+{% set hasImage = params.image and params.image.src %}
+{% set hasPrimaryAction = params.primaryAction and (params.primaryAction.text or params.primaryAction.html) %}
+{% set hasSecondaryAction = params.secondaryAction and (params.secondaryAction.text or params.secondaryAction.html) and params.secondaryAction.href %}
+{% set isDecorativeImage = hasImage and params.image.decorative %}
+{% set imageAlt = '' if isDecorativeImage else (params.image.alt if hasImage and params.image.alt else '') %}
+{% set secondaryActionAttributes = params.secondaryAction.attributes if params.secondaryAction and params.secondaryAction.attributes else {} %}
+{% set secondaryActionTarget = secondaryActionAttributes.target if secondaryActionAttributes and secondaryActionAttributes.target else '' %}
+{% set secondaryActionRel = secondaryActionAttributes.rel if secondaryActionAttributes and secondaryActionAttributes.rel else '' %}
+{% set secondaryActionOpensInNewWindow = hasSecondaryAction and (params.secondaryAction.openInNewWindow or secondaryActionTarget == '_blank') %}
+{% set reservedSecondaryActionAttributes = ['href', 'target', 'rel', 'class'] %}
+{% set decorationColor = 'white' if theme == 'dark' else 'brand' %}
+{% set heroDecorationPatternRight = [
+  [1, { "type": 2, "color": "transparent" }, { "type": 3, "color": "transparent" }, { "type": 4, "color": "transparent" }, 5, 6],
+  [{ "type": 7, "color": "transparent" }, 8, { "type": 9, "color": "transparent" }, 10, 11, 12],
+  [{ "type": 13, "color": "transparent" }, 14, 15, { "type": 16, "color": "transparent" }, { "type": 18, "color": "transparent" }, 19]
+] %}
+{% set heroDecorationPatternLeft = [
+  [{ "type": 1, "color": "transparent" }, { "type": 2, "color": "transparent" }, { "type": 3, "color": "transparent" }, { "type": 4, "color": "transparent" }, { "type": 5, "color": "transparent" }, 6],
+  [7, 21, 9, { "type": 10, "color": "transparent" }, 11, 12],
+  [{ "type": 13, "color": "transparent" }, 1, 5, 3, { "type": 18, "color": "transparent" }, 19]
+] %}
+
+{% if theme != 'dark' %}
+  {% set theme = 'brand' %}
+{% endif %}
+
+{% if variant != 'boxed' %}
+  {% set variant = 'free' %}
+{% endif %}
+
+<{{ element }} class="ofh-hero ofh-hero--{{ theme }} ofh-hero--{{ variant }}{% if hasImage %} ofh-hero--with-image{% endif %}{% if params.showDecoration == false %} ofh-hero--no-decoration{% endif %}{% if params.classes %} {{ params.classes }}{% endif %}"
+  {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  {% if params.showDecoration != false %}
+    <div class="ofh-hero__decoration ofh-hero__decoration--top-right">
+      {{ tilePattern({
+        "color": decorationColor,
+        "tiles": heroDecorationPatternRight,
+        "classes": "ofh-hero__tile-pattern"
+      }) }}
+    </div>
+    <div class="ofh-hero__decoration ofh-hero__decoration--left-edge">
+      {{ tilePattern({
+        "color": decorationColor,
+        "tiles": heroDecorationPatternLeft,
+        "classes": "ofh-hero__tile-pattern"
+      }) }}
+    </div>
+    {% if variant == 'boxed' %}
+      <div class="ofh-hero__decoration ofh-hero__decoration--top-left">
+        {{ tilePattern({
+          "color": decorationColor,
+          "tiles": heroDecorationPatternLeft,
+          "classes": "ofh-hero__tile-pattern"
+        }) }}
+      </div>
+    {% endif %}
+  {% endif %}
+  <div class="ofh-width-container-fluid ofh-hero__container">
+    <div class="ofh-grid-row ofh-hero__row">
+      <div class="ofh-grid-column-{% if hasImage %}one-half{% else %}two-thirds{% endif %} ofh-hero__content-column">
+        <div class="ofh-hero__content{% if variant == 'boxed' %} ofh-hero__content--boxed{% endif %}">
+          <div class="ofh-hero__text-group">
+            {% if params.headingHtml %}
+              <{{ headingTag }} class="ofh-hero__heading">{{ params.headingHtml | safe }}</{{ headingTag }}>
+            {% elseif params.heading %}
+              <{{ headingTag }} class="ofh-hero__heading">{{ params.heading }}</{{ headingTag }}>
+            {% endif %}
+
+            {% if params.descriptionHtml %}
+              <div class="ofh-hero__description">{{ params.descriptionHtml | safe }}</div>
+            {% elseif params.description %}
+              <p class="ofh-hero__description">{{ params.description }}</p>
+            {% endif %}
+
+            {% if hasSecondaryAction %}
+              <p class="ofh-hero__secondary-action">
+                <a class="ofh-hero__secondary-link"
+                  href="{{ params.secondaryAction.href }}"
+                  {%- if secondaryActionOpensInNewWindow %} target="_blank"{% elseif secondaryActionTarget %} target="{{ secondaryActionTarget }}"{% endif %}
+                  {%- if secondaryActionOpensInNewWindow and secondaryActionRel %} rel="{{ secondaryActionRel }} noopener noreferrer"{% elseif secondaryActionOpensInNewWindow %} rel="noopener noreferrer"{% elseif secondaryActionRel %} rel="{{ secondaryActionRel }}"{% endif %}
+                  {%- for attribute, value in secondaryActionAttributes %}{% if attribute not in reservedSecondaryActionAttributes %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}>
+                  {{ params.secondaryAction.html | safe if params.secondaryAction.html else params.secondaryAction.text }}
+                </a>
+              </p>
+            {% endif %}
+          </div>
+
+          {% if hasPrimaryAction %}
+            <div class="ofh-hero__primary-action">
+              {{ button({
+                "element": params.primaryAction.element,
+                "text": params.primaryAction.text,
+                "html": params.primaryAction.html,
+                "name": params.primaryAction.name,
+                "type": params.primaryAction.type,
+                "value": params.primaryAction.value,
+                "disabled": params.primaryAction.disabled,
+                "href": params.primaryAction.href,
+                "classes": "ofh-button--contained" ~ (" " ~ params.primaryAction.classes if params.primaryAction.classes else ""),
+                "attributes": params.primaryAction.attributes
+              }) }}
+            </div>
+          {% endif %}
         </div>
       </div>
+
+      {% if hasImage %}
+        <div class="ofh-grid-column-one-half ofh-hero__media-column">
+          <div class="ofh-hero__media">
+            <img class="ofh-hero__image"
+              src="{{ params.image.src }}"
+              alt="{{ imageAlt }}"
+              {% if params.image.srcset %}srcset="{{ params.image.srcset }}"{% endif %}
+              {% if params.image.sizes %}sizes="{{ params.image.sizes }}"{% endif %}
+              {% if isDecorativeImage %}aria-hidden="true"{% endif %}>
+          </div>
+        </div>
+      {% endif %}
     </div>
   </div>
-{% endif -%}
-{%- if params.imageURL %}</div>{% endif %}
-</section>
+</{{ element }}>

@@ -1,0 +1,39 @@
+{% set pageTitle = "Tile pattern" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use Tile pattern as decorative component chrome when a design needs the OFH tile motif." %}
+{% set theme = "Component primitives" %}
+{% set dateUpdated = "July 2026" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <p>Use Tile pattern as a decorative primitive inside another component. It does not hold content, add interaction, or decide where it appears in the layout.</p>
+  <p>Components must pass the exact matrix they need. There is no default pattern. Use Figma tile numbers <code>1</code> to <code>22</code>, and use <code>null</code> for an empty tile.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "tile-pattern",
+    type: "default"
+  }) }}
+
+  <h2 id="colour">Colour</h2>
+  <p>Use <code>color</code> in code. The available values are <code>brand</code>, <code>accent</code>, <code>accent-light</code>, <code>white</code>, and <code>transparent</code>. Individual tiles can override the pattern colour.</p>
+  <p><code>accent</code> and <code>accent-light</code> use theme-aware accent tokens, so they change with the participant or research theme bundle. <code>brand</code>, <code>white</code>, and <code>transparent</code> are fixed colours.</p>
+  <p><code>transparent</code> renders a transparent tile; <code>null</code> is the empty/off tile.</p>
+
+  <h2 id="size">Size</h2>
+  <p>Tiles default to <code>120px</code>. Use <code>tileSize</code> when a component needs a smaller or larger pattern.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "tile-pattern",
+    type: "compact"
+  }) }}
+
+{% endblock %}

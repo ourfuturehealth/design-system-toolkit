@@ -26,6 +26,18 @@
 
     {% include templatePath %}
 
+    {% if item == 'hero' %}
+      <script>
+        document.addEventListener('click', function(event) {
+          var target = event.target;
+
+          if (target && target.closest && target.closest('a')) {
+            event.preventDefault();
+          }
+        });
+      </script>
+    {% endif %}
+
     <script src="/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
   </body>
 

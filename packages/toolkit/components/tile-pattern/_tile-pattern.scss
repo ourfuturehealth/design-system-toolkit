@@ -1,0 +1,55 @@
+/* ==========================================================================
+   COMPONENTS / #TILE-PATTERN
+   ========================================================================== */
+
+.ofh-tile-pattern {
+  @include print-hide();
+
+  --ofh-tile-pattern-columns: 1;
+  --ofh-tile-pattern-tile-size: 120px;
+
+  color: $ofh-color-foreground-brand-blue-navy;
+  display: inline-grid;
+  grid-auto-rows: var(--ofh-tile-pattern-tile-size);
+  grid-template-columns: repeat(var(--ofh-tile-pattern-columns), var(--ofh-tile-pattern-tile-size));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ofh-tile-pattern--color-brand,
+.ofh-tile-pattern__tile--color-brand {
+  color: $ofh-color-foreground-brand-blue-navy;
+}
+
+.ofh-tile-pattern--color-accent,
+.ofh-tile-pattern__tile--color-accent {
+  color: $ofh-color-foreground-accent-3;
+}
+
+.ofh-tile-pattern--color-accent-light,
+.ofh-tile-pattern__tile--color-accent-light {
+  color: $ofh-color-foreground-accent-2;
+}
+
+.ofh-tile-pattern--color-white,
+.ofh-tile-pattern__tile--color-white {
+  color: $ofh-color-foreground-primary-inverted;
+}
+
+.ofh-tile-pattern--color-transparent,
+.ofh-tile-pattern__tile--color-transparent {
+  color: transparent;
+}
+
+.ofh-tile-pattern__tile {
+  display: block;
+  height: var(--ofh-tile-pattern-tile-size);
+  width: var(--ofh-tile-pattern-tile-size);
+}
+
+.ofh-tile-pattern__svg {
+  display: block;
+  height: 100%;
+  overflow: visible;
+  width: 100%;
+}

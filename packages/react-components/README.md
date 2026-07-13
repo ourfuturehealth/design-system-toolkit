@@ -57,6 +57,7 @@ import {
   Fieldset,
   Footer,
   Header,
+  Hero,
   InsetText,
   Image,
   Icon,
@@ -73,6 +74,7 @@ import {
   Tag,
   Textarea,
   TextInput,
+  TilePattern,
 } from '@ourfuturehealth/react-components';
 import '@ourfuturehealth/react-components/styles/participant';
 

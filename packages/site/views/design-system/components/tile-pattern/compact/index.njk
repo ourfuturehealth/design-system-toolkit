@@ -1,0 +1,12 @@
+{% from 'tile-pattern/macro.njk' import tilePattern %}
+
+<div style="background: #011d4b; display: inline-block; padding: 24px;">
+  {{ tilePattern({
+    "color": "accent-light",
+    "tileSize": "40px",
+    "tiles": [
+      [1, 2, null, 4],
+      [7, { "type": 8, "color": "white" }, 9, 10]
+    ]
+  }) }}
+</div>

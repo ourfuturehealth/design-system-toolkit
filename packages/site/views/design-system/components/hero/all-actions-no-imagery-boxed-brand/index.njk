@@ -1,0 +1,16 @@
+{% from 'hero/macro.njk' import hero %}
+
+{{ hero({
+  "variant": "boxed",
+  "heading": "Use the Hero when the page needs a clear introduction without supporting media",
+  "description": "This configuration keeps the full-width Hero treatment while removing the media region.",
+  "showDecoration": false,
+  "secondaryAction": {
+    "text": "Read Hero guidance",
+    "href": "/design-system/components/hero"
+  },
+  "primaryAction": {
+    "text": "View components",
+    "href": "/design-system/components"
+  }
+}) }}

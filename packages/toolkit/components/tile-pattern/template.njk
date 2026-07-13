@@ -1,0 +1,38 @@
+{% set validColors = ['brand', 'accent', 'accent-light', 'white', 'transparent'] %}
+{% set validTileTypes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'] %}
+{% set color = params.color | lower if params.color else 'brand' %}
+{% set color = color if color in validColors else 'brand' %}
+{% set tileSize = params.tileSize if params.tileSize else '120px' %}
+{% set spritePath = params.spritePath if params.spritePath else '/assets/tile-pattern/tile-pattern-sprite.svg' %}
+{% set columnCount = params.tiles[0] | length if params.tiles and params.tiles[0] else 0 %}
+{% set attributeStyle = params.attributes.style if params.attributes and params.attributes.style else '' %}
+{% set rootStyle %}--ofh-tile-pattern-columns: {{ columnCount }}; --ofh-tile-pattern-tile-size: {{ tileSize }};{% if attributeStyle %} {{ attributeStyle }}{% endif %}{% endset %}
+
+{% if params.tiles and columnCount %}
+  <div class="ofh-tile-pattern ofh-tile-pattern--color-{{ color }}{% if params.classes %} {{ params.classes }}{% endif %}"
+    aria-hidden="true"
+    style="{{ rootStyle | trim }}"
+    {%- for attribute, value in params.attributes %}{% if attribute != 'style' and attribute != 'aria-hidden' %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}>
+    {%- for row in params.tiles %}
+      {%- for tile in row %}
+        {%- if tile %}
+          {% set tileType = tile.type if tile.type else tile %}
+          {% set tileColor = tile.color | lower if tile.color else color %}
+          {% set tileColor = tileColor | replace(' ', '-') %}
+          {% set tileColor = tileColor if tileColor in validColors else color %}
+          {%- if tileType in validTileTypes %}
+            <span class="ofh-tile-pattern__tile ofh-tile-pattern__tile--color-{{ tileColor }}" data-ofh-tile-pattern-type="{{ tileType }}">
+              <svg class="ofh-tile-pattern__svg" viewBox="0 0 120 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <use href="{{ spritePath }}#ofh-tile-pattern-{{ tileType }}"></use>
+              </svg>
+            </span>
+          {%- else %}
+            <span class="ofh-tile-pattern__tile ofh-tile-pattern__tile--empty"></span>
+          {%- endif %}
+        {%- else %}
+          <span class="ofh-tile-pattern__tile ofh-tile-pattern__tile--empty"></span>
+        {%- endif %}
+      {%- endfor %}
+    {%- endfor %}
+  </div>
+{% endif %}

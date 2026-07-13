@@ -21,7 +21,9 @@ class DesignExample {
 
         this.bindEvents();
 
-        iFrameResize([{ heightCalculationMethod: 'max' }], this.iframe)
+        if (this.iframe) {
+            iFrameResize([{ heightCalculationMethod: 'max' }], this.iframe)
+        }
     }
 
     bindEvents() {

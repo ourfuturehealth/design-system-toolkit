@@ -1,114 +1,100 @@
 # Hero
 
-## Quick start examples
+## Guidance
 
-### Hero with heading and content
+Hero is the canonical full-width page-introduction component. Toolkit owns the structure and styling, site consumes it, and React mirrors it.
 
-[Preview the hero with heading and content component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/index.html)
+Use Hero for the single primary introduction at the top of a page when users need a short message, optional supporting media, and at most one primary button plus one secondary text link.
 
-#### HTML markup
+### Preview examples
 
-```html
-<section class="ofh-hero">
-  <div class="ofh-width-container ofh-hero--border">
-    <div class="ofh-grid-row">
-      <div class="ofh-grid-column-two-thirds">
-        <div class="ofh-hero__wrapper">
-          <h1 class="ofh-u-margin-bottom-12">We’re here for you</h1>
-          <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-```
+- [Hero all-actions free brand example](/design-example/components/hero/all-actions-free-brand/layout-default/)
+- [Hero all-actions free dark example](/design-example/components/hero/all-actions-free-dark/layout-default/)
+- [Hero all-actions boxed brand example](/design-example/components/hero/all-actions-boxed-brand/layout-default/)
+- [Hero all-actions boxed dark example](/design-example/components/hero/all-actions-boxed-dark/layout-default/)
+- [Hero single text-link free brand example](/design-example/components/hero/single-text-link-free-brand/layout-default/)
+- [Hero single button free brand example](/design-example/components/hero/single-button-free-brand/layout-default/)
+- [Hero no-actions free brand example](/design-example/components/hero/no-actions-free-brand/layout-default/)
+- [Hero no-imagery free brand example](/design-example/components/hero/all-actions-no-imagery-free-brand/layout-default/)
 
-#### Nunjucks macro
+### Nunjucks macro
 
-```
+```njk
 {% from 'components/hero/macro.njk' import hero %}
 
 {{ hero({
-"heading": "We’re here for you",
-"text": "Helping you take control of your health and wellbeing."
+  "theme": "brand",
+  "variant": "free",
+  "heading": "Design and build digital products at Our Future Health",
+  "description": "Information and guidelines to help everyone design and build consistent, highly considered products and services that put people first.",
+  "secondaryAction": {
+    "text": "Get started",
+    "href": "/get-started"
+  },
+  "primaryAction": {
+    "text": "View components",
+    "href": "/design-system/components"
+  },
+  "image": {
+    "src": "https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-320x213.jpg",
+    "alt": "Picture of allergic conjunctivitis",
+    "srcset": "https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-640x427.jpg 640w, https://assets.nhs.uk/prod/images/S_1017_allergic-conjunctivitis_M15.2e16d0ba.fill-767x511.jpg 767w",
+    "sizes": "(min-width: 1020px) 50vw, 100vw"
+  }
 }) }}
 ```
 
----
+### Notes
 
-### Hero with image, heading and content
+- `theme` defaults to `brand`
+- `variant` defaults to `free`
+- decoration is built with the Tile Pattern primitive and is on by default for the supported theme and variant combinations; set `showDecoration: false` to opt out
+- Hero owns the default Tile Pattern rows, columns, placement and theme mapping. Keep that default unless a page or product needs a deliberately custom treatment.
+- If you need a custom pattern, set `showDecoration: false`, render a separate Tile Pattern in the consuming layout, and own the positioning CSS in that layout. Pass the exact tile matrix, global colour, per-tile colour overrides and tile size needed by the custom treatment.
+- `image` is optional; when it is missing, Hero renders as a text-only layout
+- `headingLevel` defaults to `1`
+- use `description` and `image` for supporting copy and media
+- `secondaryAction` is a Hero-specific text link, not the Link action component
+- if the image is decorative, set `decorative: true` and omit meaningful alt text
 
-[Preview the hero with image, heading and content component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/hero-image-content.html)
-
-#### HTML markup
-
-```html
-<section class="ofh-hero ofh-hero--image ofh-hero--image-description" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
-  <div class="ofh-hero__overlay">
-    <div class="ofh-width-container">
-      <div class="ofh-grid-row">
-        <div class="ofh-grid-column-two-thirds">
-          <div class="ofh-hero-content">
-            <h1 class="ofh-u-margin-bottom-12">We’re here for you</h1>
-            <p class="ofh-body-l ofh-u-margin-bottom-0">Helping you take control of your health and wellbeing.</p>
-            <span class="ofh-hero__arrow" aria-hidden="true"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-```
-
-#### Nunjucks macro
-
-```
+```njk
 {% from 'components/hero/macro.njk' import hero %}
+{% from 'components/tile-pattern/macro.njk' import tilePattern %}
 
-{{ hero({
-  "heading": "We’re here for you",
-  "text": "Helping you take control of your health and wellbeing.",
-  "imageURL": "https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg"
-}) }}
+<div class="custom-hero-shell">
+  {{ hero({
+    "heading": "Take part in health research",
+    "description": "Help build a clearer picture of health across the UK.",
+    "showDecoration": false
+  }) }}
+
+  {{ tilePattern({
+    "classes": "custom-hero-shell__pattern",
+    "color": "brand",
+    "tileSize": "96px",
+    "tiles": [
+      [1, { "type": 2, "color": "transparent" }, 5],
+      [null, { "type": 8, "color": "accent" }, 12]
+    ]
+  }) }}
+</div>
 ```
-
----
-
-### Hero with image only
-
-[Preview the hero with image only component](https://ourfuturehealth.github.io/design-system-toolkit/components/hero/hero-image.html)
-
-#### HTML markup
-
-```html
-<section class="ofh-hero ofh-hero--image" style="background-image: url('https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg');">
-  <div class="ofh-hero__overlay">
-  </div>
-</section>
-```
-
-#### Nunjucks macro
-
-```
-{% from 'components/hero/macro.njk' import hero %}
-
-{{ hero({
-  "imageURL": "https://assets.nhs.uk/prod/images/S_0818_homepage_hero_1_F0147446.width-1000.jpg"
-}) }}
-```
-
----
 
 ### Nunjucks arguments
 
-The hero macro takes the following arguments:
-
-| Name                       | Type     | Required  | Description  |
-| ---------------------------|----------|-----------|--------------|
-| **heading**                | string   | No        | Text heading of the hero component. |
-| **text**                   | string   | No        | Text content of the hero component. |
-| **imageURL**               | string   | No        | URL of the image of the hero component. |
-| **classes**                | string   | No        | Optional additional classes to add to the hero container. Separate each class with a space. |
-| **attributes**             | object   | No        | Any extra HTML attributes (for example data attributes) to add to the hero container. |
+| Name | Type | Required | Description |
+| ---- | ---- | ---- | ---- |
+| `theme` | string | No | Hero colour theme. Use `brand` or `dark`. Defaults to `brand`. |
+| `variant` | string | No | Hero containment variant. Use `free` or `boxed`. Defaults to `free`. |
+| `heading` / `headingHtml` | string | Yes | Plain text or trusted HTML heading content. |
+| `headingLevel` | number | No | Semantic heading level from `1` to `6`. Defaults to `1`. |
+| `description` / `descriptionHtml` | string | No | Supporting copy below the heading. |
+| `primaryAction` | object | No | Primary button configuration using toolkit Button fields such as `text`, `html`, `href`, `type`, `disabled`, and `attributes`. |
+| `secondaryAction` | object | No | Secondary text-link configuration with `text` or `html`, required `href`, optional `openInNewWindow`, and optional `attributes`. |
+| `image` | object | No | Media object with `src`, optional `srcset`, optional `sizes`, optional `alt`, and optional `decorative`. Set `decorative` to `true` only when the image adds no information; this renders an empty `alt` value and hides the image from assistive technology. |
+| `showDecoration` | boolean | No | Set to `false` to disable decorative pattern treatment. |
+| `element` | string | No | Root element override. Use `section` or `div`. Defaults to `section`. |
+| `classes` | string | No | Classes to add to the Hero root. |
+| `attributes` | object | No | HTML attributes to add to the Hero root. |
 
 If you are using Nunjucks macros in production be aware that using `html` arguments, or ones ending with `html` can be a [security risk](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting). Read more about this in the [Nunjucks documentation](https://mozilla.github.io/nunjucks/api.html#user-defined-templates-warning).

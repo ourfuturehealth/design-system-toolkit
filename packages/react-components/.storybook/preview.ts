@@ -10,6 +10,48 @@ const OFH_THEME_STYLES = {
   participant: participantThemeCss,
   research: researchThemeCss,
 } as const;
+const OFH_VIEWPORTS = {
+  smallMobile: {
+    name: 'Small mobile',
+    styles: {
+      height: '568px',
+      width: '320px',
+    },
+    type: 'mobile',
+  },
+  ofhMobile: {
+    name: 'OFH mobile',
+    styles: {
+      height: '812px',
+      width: '390px',
+    },
+    type: 'mobile',
+  },
+  ofhTablet: {
+    name: 'OFH tablet',
+    styles: {
+      height: '1024px',
+      width: '740px',
+    },
+    type: 'tablet',
+  },
+  ofhDesktop: {
+    name: 'OFH desktop',
+    styles: {
+      height: '1024px',
+      width: '980px',
+    },
+    type: 'desktop',
+  },
+  ofhLargeDesktop: {
+    name: 'OFH large desktop',
+    styles: {
+      height: '1024px',
+      width: '1280px',
+    },
+    type: 'desktop',
+  },
+} as const;
 
 type OFHTheme = keyof typeof OFH_THEME_STYLES;
 
@@ -98,9 +140,42 @@ const preview: Preview = {
   ],
   parameters: {
     options: {
-      storySort: {
-        method: 'alphabetical',
-        locales: 'en-US',
+      storySort: (firstEntry, secondEntry) => {
+        const first = Array.isArray(firstEntry) ? firstEntry[1] : firstEntry;
+        const second = Array.isArray(secondEntry)
+          ? secondEntry[1]
+          : secondEntry;
+        const getRank = (entry) => {
+          if (entry.type === 'docs' || entry.name === 'Docs') {
+            return 0;
+          }
+
+          if (entry.name === 'Builder') {
+            return 1;
+          }
+
+          return 2;
+        };
+        const titleSort = (first.title ?? '').localeCompare(
+          second.title ?? '',
+          'en-US',
+          { numeric: true, sensitivity: 'base' },
+        );
+
+        if (titleSort !== 0) {
+          return titleSort;
+        }
+
+        const rankSort = getRank(first) - getRank(second);
+
+        if (rankSort !== 0) {
+          return rankSort;
+        }
+
+        return (first.name ?? '').localeCompare(second.name ?? '', 'en-US', {
+          numeric: true,
+          sensitivity: 'base',
+        });
       },
     },
     controls: {
@@ -111,6 +186,9 @@ const preview: Preview = {
     },
     docs: {
       toc: true, // Table of contents
+    },
+    viewport: {
+      options: OFH_VIEWPORTS,
     },
   },
   tags: ['autodocs'], // Enable auto-generated docs
