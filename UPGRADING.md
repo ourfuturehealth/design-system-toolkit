@@ -57,7 +57,7 @@ This release introduces the canonical full-width Hero and Tile Pattern surfaces 
 - Toolkit consumers can now use the `hero` macro for brand and dark full-width page introductions with free and boxed layouts.
 - React consumers can now adopt the public `Hero` component with the same content, media, action, and decorative treatment.
 - `Tile pattern` is available as a primitive for components that need explicit tile matrix decoration.
-- The docs site and Storybook now include matching Hero examples for brand free, dark free, brand boxed, dark boxed, secondary-action-only, no-actions, and text-only configurations.
+- The docs site and Storybook now include matching Hero examples for all-actions, single text-link, single button, no-actions, and no-imagery configurations across brand/dark and free/boxed variants.
 
 ### Migration Steps
 
