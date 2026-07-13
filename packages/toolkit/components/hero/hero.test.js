@@ -91,6 +91,18 @@ describe('Our Future Health hero macro', () => {
     expect(secondaryLink.getAttribute('data-track')).toBe('hero-secondary');
   });
 
+  it('renders the light theme with brand tile decoration', () => {
+    const { decorations, root, tilePatterns } = renderFixture(
+      'tests/fixtures/hero/light.njk',
+    );
+
+    expect(root.classList.contains('ofh-hero--light')).toBe(true);
+    expect(root.classList.contains('ofh-hero--boxed')).toBe(true);
+    expect(decorations).toHaveLength(3);
+    expect(tilePatterns).toHaveLength(3);
+    expect(tilePatterns[0].classList.contains('ofh-tile-pattern--color-brand')).toBe(true);
+  });
+
   it('falls back to safe defaults and supports text-only trusted HTML content', () => {
     const {
       contentColumn,

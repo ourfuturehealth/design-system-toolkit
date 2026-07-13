@@ -22,7 +22,7 @@
   <p>Do not use Hero more than once on the same page.</p>
 
   <h2>How to use Hero</h2>
-  <p>Use the <code>brand</code> theme by default and switch to <code>dark</code> when the page needs the darker colour mode. Use the <code>free</code> variant for an open split layout or <code>boxed</code> when the content needs white containment.</p>
+  <p>Use the <code>brand</code> theme by default, <code>dark</code> when the page needs the darker colour mode, or <code>light</code> to pair with the Light Header. Use the <code>free</code> variant for an open split layout or <code>boxed</code> when the content needs white containment.</p>
   <p>Hero supports at most 1 primary button and 1 secondary text link. The button is the primary call to action. The text link is the lower-emphasis secondary action.</p>
   <p>If you use media, provide meaningful alt text when the image carries information. If the image is decorative, set it as decorative so assistive technology ignores it.</p>
   <p>Hero defaults to a <code>section</code> root. Use the root override only when the page structure already provides the surrounding landmark or section semantics.</p>
@@ -43,6 +43,13 @@
     type: "all-actions-free-dark"
   }) }}
 
+  <h3>All actions - Free - Light</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-free-light"
+  }) }}
+
   <h3>All actions - Boxed - Brand</h3>
   {{ designExample({
     group: "components",
@@ -55,6 +62,13 @@
     group: "components",
     item: "hero",
     type: "all-actions-boxed-dark"
+  }) }}
+
+  <h3>All actions - Boxed - Light</h3>
+  {{ designExample({
+    group: "components",
+    item: "hero",
+    type: "all-actions-boxed-light"
   }) }}
 
   <h3>Single action Text Link - Free - Brand</h3>

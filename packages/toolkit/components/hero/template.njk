@@ -29,7 +29,7 @@
   [{ "type": 13, "color": "transparent" }, 1, 5, 3, { "type": 18, "color": "transparent" }, 19]
 ] %}
 
-{% if theme != 'dark' %}
+{% if theme not in ['dark', 'light'] %}
   {% set theme = 'brand' %}
 {% endif %}
 

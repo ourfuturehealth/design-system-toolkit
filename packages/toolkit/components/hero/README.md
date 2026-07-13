@@ -10,8 +10,10 @@ Use Hero for the single primary introduction at the top of a page when users nee
 
 - [Hero all-actions free brand example](/design-example/components/hero/all-actions-free-brand/layout-default/)
 - [Hero all-actions free dark example](/design-example/components/hero/all-actions-free-dark/layout-default/)
+- [Hero all-actions free light example](/design-example/components/hero/all-actions-free-light/layout-default/)
 - [Hero all-actions boxed brand example](/design-example/components/hero/all-actions-boxed-brand/layout-default/)
 - [Hero all-actions boxed dark example](/design-example/components/hero/all-actions-boxed-dark/layout-default/)
+- [Hero all-actions boxed light example](/design-example/components/hero/all-actions-boxed-light/layout-default/)
 - [Hero single text-link free brand example](/design-example/components/hero/single-text-link-free-brand/layout-default/)
 - [Hero single button free brand example](/design-example/components/hero/single-button-free-brand/layout-default/)
 - [Hero no-actions free brand example](/design-example/components/hero/no-actions-free-brand/layout-default/)
@@ -84,7 +86,7 @@ Use Hero for the single primary introduction at the top of a page when users nee
 
 | Name | Type | Required | Description |
 | ---- | ---- | ---- | ---- |
-| `theme` | string | No | Hero colour theme. Use `brand` or `dark`. Defaults to `brand`. |
+| `theme` | string | No | Hero colour theme. Use `brand`, `dark`, or `light`. Defaults to `brand`. |
 | `variant` | string | No | Hero containment variant. Use `free` or `boxed`. Defaults to `free`. |
 | `heading` / `headingHtml` | string | Yes | Plain text or trusted HTML heading content. |
 | `headingLevel` | number | No | Semantic heading level from `1` to `6`. Defaults to `1`. |

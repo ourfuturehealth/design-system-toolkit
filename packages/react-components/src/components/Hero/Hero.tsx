@@ -4,7 +4,7 @@ import { getHeadingTag, joinClasses, type HeadingLevel } from '../../internal/of
 import { Button } from '../Button';
 import { TilePattern, type TilePatternColor, type TilePatternTile } from '../TilePattern';
 
-type HeroTheme = 'brand' | 'dark';
+type HeroTheme = 'brand' | 'dark' | 'light';
 type HeroVariant = 'free' | 'boxed';
 type HeroAs = 'section' | 'div';
 

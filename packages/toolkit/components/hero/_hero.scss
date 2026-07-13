@@ -29,6 +29,14 @@
   --ofh-hero-link-visited: #{$ofh-color-foreground-link-visited};
 }
 
+.ofh-hero--light {
+  --ofh-hero-background: #{$ofh-color-background-secondary-yellow};
+  --ofh-hero-text: #{$ofh-color-foreground-primary};
+  --ofh-hero-link: #{$ofh-color-foreground-link-default};
+  --ofh-hero-link-hover: #{$ofh-color-foreground-link-hover};
+  --ofh-hero-link-visited: #{$ofh-color-foreground-link-visited};
+}
+
 .ofh-hero--dark {
   --ofh-hero-background: #{$ofh-color-background-brand-blue-navy-2};
   --ofh-hero-text: #{$ofh-color-foreground-primary-inverted};

@@ -73,6 +73,25 @@ describe('Hero', () => {
     expect(document.querySelector('.ofh-hero__media-column')).toBeNull();
   });
 
+  it('supports light heroes with brand tile decoration', () => {
+    render(
+      <Hero
+        theme="light"
+        variant="boxed"
+        heading="Light hero"
+      />,
+    );
+
+    expect(document.querySelector('.ofh-hero')).toHaveClass(
+      'ofh-hero--light',
+      'ofh-hero--boxed',
+    );
+    expect(document.querySelectorAll('.ofh-hero__decoration')).toHaveLength(3);
+    expect(document.querySelector('.ofh-tile-pattern')).toHaveClass(
+      'ofh-tile-pattern--color-brand',
+    );
+  });
+
   it('treats decorative images as decorative and allows root override', () => {
     const ref = createRef<HTMLElement>();
 
