@@ -148,12 +148,6 @@
   }
 }
 
-@include mq($from: desktop) {
-  .ofh-hero {
-    --ofh-hero-boxed-overlap: #{$ofh-size-64};
-  }
-}
-
 .ofh-hero__content {
   @include ofh-responsive-gap-y(32);
 
