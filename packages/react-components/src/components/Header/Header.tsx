@@ -509,7 +509,7 @@ export const Header = ({
             <ul className="ofh-header__nav-list">
               {navigation.map((item, index) => {
                 if (!isNavGroup(item)) {
-                  const resolvedProps = resolveAnchorProps(item, item.href);
+                  const resolvedProps = resolveHeaderLinkProps(item);
 
                   return (
                     <li className="ofh-header__nav-item" key={`header-nav-${index}`}>
