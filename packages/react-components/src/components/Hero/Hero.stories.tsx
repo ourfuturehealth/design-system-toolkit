@@ -303,7 +303,7 @@ const meta: Meta<HeroStoryArgs> = {
   argTypes: {
     theme: {
       control: 'radio',
-      options: ['brand', 'dark'],
+      options: ['brand', 'dark', 'light'],
       description: 'Hero colour theme.',
     },
     variant: {
@@ -430,6 +430,20 @@ export const AllActionsFreeDark: Story = {
   },
 };
 
+export const AllActionsFreeLight: Story = {
+  name: 'All actions - Free - Light',
+  args: {
+    ...allActionsContent,
+    theme: 'light',
+    image: portraitImages[0],
+    showButton: undefined,
+    showTextLink: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
 export const AllActionsBoxedBrand: Story = {
   name: 'All actions - Boxed - Brand',
   args: {
@@ -451,6 +465,21 @@ export const AllActionsBoxedDark: Story = {
     theme: 'dark',
     variant: 'boxed',
     image: portraitImages[0],
+    showButton: undefined,
+    showTextLink: undefined,
+  },
+  parameters: {
+    ...disabledControls,
+  },
+};
+
+export const AllActionsBoxedLight: Story = {
+  name: 'All actions - Boxed - Light',
+  args: {
+    ...allActionsContent,
+    theme: 'light',
+    variant: 'boxed',
+    image: portraitImages[1],
     showButton: undefined,
     showTextLink: undefined,
   },

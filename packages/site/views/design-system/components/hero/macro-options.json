@@ -4,7 +4,7 @@
       "name": "theme",
       "type": "string",
       "required": false,
-      "description": "Hero colour theme. Use brand or dark. Defaults to brand."
+      "description": "Hero colour theme. Use brand, dark, or light. Defaults to brand."
     },
     {
       "name": "variant",

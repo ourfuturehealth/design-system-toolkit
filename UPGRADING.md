@@ -8,6 +8,7 @@ This guide provides detailed migration instructions for upgrading between versio
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
 | ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
+| [v4.24.0 / React v0.23.0](#upgrading-to-v4240--react-v0230) | July 2026     | No breaking changes        | 🟢 Low - use the Light Hero theme where it pairs with a Light Header |
 | [v4.23.0 / React v0.22.0](#upgrading-to-v4230--react-v0220) | July 2026     | Hero macro API update      | 🟡 Medium - update old Hero `text` / `imageURL` usages before adopting the new Hero |
 | [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026     | No breaking changes        | 🟢 Low - adopt the new public Header surfaces where needed |
 | [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
@@ -31,6 +32,47 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
 | [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+
+---
+
+## Upgrading to v4.24.0 / React v0.23.0
+
+**Released:** July 2026
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.24.0+
+- `@ourfuturehealth/react-components` v0.23.0+
+
+### Breaking Changes
+
+None.
+
+### Release Overview
+
+This release adds the `light` Hero theme in toolkit and React. It is intended for pages that use the Light Header and has a yellow surface, dark content, standard link states, and brand Tile Pattern decoration.
+
+Boxed Heroes with media now use a `32px` content overlap at tablet and desktop widths, matching the current Figma component.
+
+### Migration Steps
+
+1. Existing Hero usage does not need to change.
+2. Use `theme: "light"` when a Hero should pair with the Light Header.
+3. Recheck boxed Heroes with media at tablet and desktop widths if their layout relied on the previous `64px` desktop overlap.
+
+#### Toolkit example
+
+```njk
+{{ hero({
+  "theme": "light",
+  "heading": "Take part in health research"
+}) }}
+```
+
+#### React example
+
+```tsx
+<Hero theme="light" heading="Take part in health research" />
+```
 
 ---
 

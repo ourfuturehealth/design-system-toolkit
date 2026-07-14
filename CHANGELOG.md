@@ -6,6 +6,24 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-07-14
+
+#### @ourfuturehealth/toolkit 4.24.0 (`toolkit-v4.24.0`)
+
+##### Added
+
+- Added the `light` Hero theme, with the Light Header's yellow surface, dark text and links, brand Tile Pattern decoration, and free/boxed docs examples
+
+##### Changed
+
+- Aligned boxed Hero media overlap to `32px` at tablet and larger breakpoints, matching the current Figma component
+
+#### @ourfuturehealth/react-components 0.23.0 (`react-v0.23.0`)
+
+##### Added
+
+- Added the public React Hero `light` theme, including TypeScript support, Storybook examples, and unit coverage
+
 ### 2026-07-13
 
 #### @ourfuturehealth/toolkit 4.23.0 (`toolkit-v4.23.0`)
