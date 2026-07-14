@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { Header } from './Header';
 
 const baseNavigation = [
@@ -127,6 +127,44 @@ describe('Header', () => {
     expect(container.querySelector('.ofh-header')).toHaveClass(
       'ofh-header--with-bottom-border',
     );
+  });
+
+  it('does not forward Header-only props from direct desktop navigation links', () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+
+    try {
+      render(
+        <Header
+          brand={{
+            ariaLabel: 'Our Future Health home',
+            href: '/',
+          }}
+          navigation={[
+            {
+              current: true,
+              external: true,
+              href: '/about',
+              label: 'About',
+              openInNewWindow: true,
+              rel: 'nofollow',
+            },
+          ]}
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: 'About' });
+
+      expect(link).toHaveAttribute('aria-current', 'page');
+      expect(link).toHaveClass('ofh-header__nav-link--current');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'nofollow noopener noreferrer');
+      expect(link).not.toHaveAttribute('current');
+      expect(link).not.toHaveAttribute('external');
+      expect(link).not.toHaveAttribute('label');
+      expect(consoleError).not.toHaveBeenCalled();
+    } finally {
+      consoleError.mockRestore();
+    }
   });
 
   it('does not render the bottom border when disabled', () => {
