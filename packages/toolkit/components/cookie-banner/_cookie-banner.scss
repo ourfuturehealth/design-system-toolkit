@@ -1,0 +1,44 @@
+/* ==========================================================================
+   COMPONENTS / #COOKIE-BANNER
+   ========================================================================== */
+
+.ofh-cookie-banner {
+  @include ofh-responsive-gap-y(24);
+  @include ofh-responsive-padding(32, 'horizontal');
+  @include ofh-responsive-padding(32, 'top');
+  @include ofh-responsive-padding(48, 'bottom');
+
+  background-color: $ofh-color-background-primary;
+  color: $ofh-color-foreground-primary;
+  display: flex;
+  flex-direction: column;
+}
+
+.ofh-cookie-banner__heading {
+  @include ofh-font('heading-lg', $weight: bold);
+
+  margin: 0;
+}
+
+.ofh-cookie-banner__body {
+  @include ofh-responsive-gap-y(24);
+  @include ofh-font('paragraph-md');
+
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+}
+
+.ofh-cookie-banner__link {
+  color: $ofh-color-foreground-link-default;
+}
+
+.ofh-cookie-banner__actions {
+  @include ofh-responsive-gap(32);
+
+  display: flex;
+  flex-wrap: wrap;
+}
