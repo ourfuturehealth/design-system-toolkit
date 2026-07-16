@@ -8,6 +8,18 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-07-16
 
+#### @ourfuturehealth/react-components 0.23.2 (`react-v0.23.2`)
+
+##### Fixed
+
+- Kept selected mobile Header navigation links dark when they have been visited, including focused visited links and selected sub-navigation links
+
+#### @ourfuturehealth/toolkit 4.24.2 (`toolkit-v4.24.2`)
+
+##### Fixed
+
+- Kept selected mobile Header navigation links dark when they have been visited, including focused visited links and selected sub-navigation links
+
 #### @ourfuturehealth/toolkit 4.24.1 (`toolkit-v4.24.1`)
 
 ##### Fixed
