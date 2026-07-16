@@ -8,6 +8,18 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ### 2026-07-16
 
+#### @ourfuturehealth/toolkit 4.25.0 (`toolkit-v4.25.0`)
+
+##### Added
+
+- Added the public Cookie Banner macro, responsive styles, default policy content, action attributes, docs examples, and test coverage
+
+#### @ourfuturehealth/react-components 0.24.0 (`react-v0.24.0`)
+
+##### Added
+
+- Added the public React Cookie Banner component with structured content overrides, action callbacks, custom body content, Storybook coverage, and tests
+
 #### @ourfuturehealth/toolkit 4.24.1 (`toolkit-v4.24.1`)
 
 ##### Fixed
