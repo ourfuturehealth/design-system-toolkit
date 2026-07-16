@@ -6,13 +6,13 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-07-15
+### 2026-07-16
 
 #### @ourfuturehealth/toolkit 4.24.1 (`toolkit-v4.24.1`)
 
 ##### Fixed
 
-- Restored the generic form-group responsive bottom margin to `16px` on mobile and tablet, and `24px` on desktop, matching the Figma spacing token
+- Restored generic form-group responsive bottom margins to the Figma spacing tokens: `16px` on mobile and tablet, and `24px` on desktop; form-group wrappers remain one token higher at `24px` on mobile and tablet, and `32px` on desktop
 
 ### 2026-07-14
 
