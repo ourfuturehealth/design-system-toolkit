@@ -1,0 +1,70 @@
+{% from '../button/macro.njk' import button %}
+
+{% set headingLevel = params.headingLevel if params.headingLevel in [1, 2, 3, 4, 5, 6] else 2 %}
+{% set idPrefix = params.idPrefix if params.idPrefix else 'ofh-cookie-banner' %}
+{% set headingId = idPrefix ~ '-heading' %}
+{% set heading = params.heading if params.heading is defined else 'Cookies on Our Future Health' %}
+{% set essentialCookiesText = params.essentialCookiesText if params.essentialCookiesText is defined else 'We use small data files to make the website work, known as essential cookies.' %}
+{% set analyticsCookiesText = params.analyticsCookiesText if params.analyticsCookiesText is defined else "We'd like to use analytics cookies so we can improve our site's experience and measure the effectiveness of our marketing activities. We use the Mixpanel web analytics tool to carry out this activity." %}
+{% set privacyNotice = params.privacyNotice if params.privacyNotice else {} %}
+{% set cookiePolicy = params.cookiePolicy if params.cookiePolicy else {} %}
+{% set privacyNoticeHref = privacyNotice.href if privacyNotice.href else 'https://ourfuturehealth.org.uk/privacy' %}
+{% set privacyNoticeText = privacyNotice.text if privacyNotice.text else 'privacy notice' %}
+{% set cookiePolicyHref = cookiePolicy.href if cookiePolicy.href else 'https://ourfuturehealth.org.uk/cookies' %}
+{% set cookiePolicyText = cookiePolicy.text if cookiePolicy.text else 'cookie policy' %}
+{% set acceptAction = params.acceptAction if params.acceptAction else {} %}
+{% set rejectAction = params.rejectAction if params.rejectAction else {} %}
+{% set acceptActionText = acceptAction.text if acceptAction.text else "I'm OK with analytics cookies" %}
+{% set rejectActionText = rejectAction.text if rejectAction.text else 'Do not use analytics cookies' %}
+
+{%- macro externalLink(link, href, text) -%}
+  {% set attributes = link.attributes if link.attributes else {} %}
+  {% set target = attributes.target if attributes.target else '_blank' %}
+  {% set rel = attributes.rel if attributes.rel else '' %}
+  {% set relTokens = ' ' ~ rel ~ ' ' %}
+  {% set hasNoopener = ' noopener ' in relTokens %}
+  {% set hasNoreferrer = ' noreferrer ' in relTokens %}
+  {% set safeRel %}{{ rel }}{% if target == '_blank' and not hasNoopener %}{% if rel %} {% endif %}noopener{% endif %}{% if target == '_blank' and not hasNoreferrer %}{% if rel or (target == '_blank' and not hasNoopener) %} {% endif %}noreferrer{% endif %}{% endset %}
+  <a
+    class="ofh-cookie-banner__link"
+    href="{{ href }}"
+    {% for attribute, value in attributes %}{% if attribute != 'target' and attribute != 'rel' %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}
+    target="{{ target }}"
+    {% if target == '_blank' %}rel="{{ safeRel | trim }}"{% elif rel %}rel="{{ rel }}"{% endif %}>{{ text }}</a>
+{%- endmacro -%}
+
+<section
+  class="ofh-cookie-banner{% if params.classes %} {{ params.classes }}{% endif %}"
+  aria-labelledby="{{ headingId }}"
+  {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+  <h{{ headingLevel }} class="ofh-cookie-banner__heading" id="{{ headingId }}">{{ heading }}</h{{ headingLevel }}>
+
+  <div class="ofh-cookie-banner__body">
+    {% if params.bodyHtml %}
+      {{ params.bodyHtml | safe }}
+    {% else %}
+      <p>{{ essentialCookiesText }}</p>
+      <p>{{ analyticsCookiesText }}</p>
+      <p>
+        You can read more in our
+        {{ externalLink(privacyNotice, privacyNoticeHref, privacyNoticeText) }}
+        and
+        {{ externalLink(cookiePolicy, cookiePolicyHref, cookiePolicyText) }}
+        before you choose.
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="ofh-cookie-banner__actions">
+    {{ button({
+      "text": acceptActionText,
+      "type": "button",
+      "attributes": acceptAction.attributes
+    }) }}
+    {{ button({
+      "text": rejectActionText,
+      "type": "button",
+      "attributes": rejectAction.attributes
+    }) }}
+  </div>
+</section>

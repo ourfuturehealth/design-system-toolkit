@@ -1,0 +1,76 @@
+{
+  "params": [
+    {
+      "name": "heading",
+      "type": "string",
+      "required": false,
+      "description": "Banner heading. Defaults to Cookies on Our Future Health."
+    },
+    {
+      "name": "headingLevel",
+      "type": "integer",
+      "required": false,
+      "description": "Semantic heading level from 1 to 6. Defaults to 2."
+    },
+    {
+      "name": "essentialCookiesText",
+      "type": "string",
+      "required": false,
+      "description": "First default body paragraph."
+    },
+    {
+      "name": "analyticsCookiesText",
+      "type": "string",
+      "required": false,
+      "description": "Second default body paragraph."
+    },
+    {
+      "name": "privacyNotice",
+      "type": "object",
+      "required": false,
+      "description": "Privacy-notice link with text, href, and attributes."
+    },
+    {
+      "name": "cookiePolicy",
+      "type": "object",
+      "required": false,
+      "description": "Cookie-policy link with text, href, and attributes."
+    },
+    {
+      "name": "acceptAction",
+      "type": "object",
+      "required": false,
+      "description": "Accept action with text and attributes."
+    },
+    {
+      "name": "rejectAction",
+      "type": "object",
+      "required": false,
+      "description": "Reject action with text and attributes."
+    },
+    {
+      "name": "bodyHtml",
+      "type": "string",
+      "required": false,
+      "description": "Trusted HTML that replaces the default body. Not recommended."
+    },
+    {
+      "name": "idPrefix",
+      "type": "string",
+      "required": false,
+      "description": "Prefix for the heading id used by aria-labelledby."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Extra classes for the root element."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Extra attributes for the root element."
+    }
+  ]
+}
