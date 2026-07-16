@@ -1,0 +1,38 @@
+{% set pageTitle = "Cookie banner" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use a cookie banner to let people choose whether a product can use analytics cookies." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "July 2026" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <p>Use the cookie banner when a product needs to ask for analytics-cookie consent. The component provides the approved OFH content and two actions: accept analytics cookies or reject them.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "cookie-banner",
+    type: "default"
+  }) }}
+
+  <h2>How to use the cookie banner</h2>
+  <p>Render the banner where it makes sense for your product. It does not choose its own position, store a consent choice, or turn analytics on and off. Your product must handle that work after a person chooses an action.</p>
+  <p>Use the default wording, links, and action labels unless your product has approved content changes. The links open in a new tab by default.</p>
+
+  <h2>Actions</h2>
+  <p>Both actions are buttons, not links. In Nunjucks, use <code>data-*</code>, <code>name</code>, or <code>value</code> attributes to connect them to your product's consent handler. In React, use <code>onAccept</code> and <code>onReject</code>.</p>
+
+  <h2>Custom body content</h2>
+  <p>You can replace the default body with trusted HTML in Nunjucks or children in React. This is not recommended. Use it only when the structured content options cannot meet an approved need.</p>
+  <p>Never pass user-provided content to the Nunjucks <code>bodyHtml</code> option.</p>
+
+  <h2>Accessibility</h2>
+  <p>The banner is a labelled section. Its heading defaults to <code>h2</code>, but you can choose a different level to fit the page hierarchy. The action buttons use <code>type="button"</code>, so they do not submit a surrounding form.</p>
+
+{% endblock %}
