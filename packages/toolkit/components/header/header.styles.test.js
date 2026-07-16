@@ -6,11 +6,10 @@ const sass = require('sass');
 const compileToolkitCss = () => {
   const entrypoint = path.resolve(__dirname, '../../ofh.scss');
 
-  return sass.renderSync({
-    file: entrypoint,
+  return sass.compile(entrypoint, {
     quietDeps: true,
-    silenceDeprecations: ['if-function', 'import', 'legacy-js-api'],
-  }).css.toString();
+    silenceDeprecations: ['if-function', 'import'],
+  }).css;
 };
 
 describe('Header compiled CSS', () => {
