@@ -559,6 +559,13 @@
 }
 
 .ofh-header__mobile-link--current {
+  @include ofh-header-link-no-visited-state(
+    $ofh-color-foreground-primary,
+    $ofh-color-foreground-primary,
+    null,
+    $ofh-color-foreground-primary
+  );
+
   background-color: $ofh-color-background-primary;
   border-left: $ofh-stroke-weight-4 solid var(--ofh-header-list-item-selected-border);
   color: $ofh-color-foreground-primary;
@@ -630,6 +637,13 @@
 }
 
 .ofh-header__mobile-subnav-link--current {
+  @include ofh-header-link-no-visited-state(
+    $ofh-color-foreground-primary,
+    $ofh-color-foreground-primary,
+    null,
+    $ofh-color-foreground-primary
+  );
+
   background-color: $ofh-color-background-primary;
   border-left: $ofh-stroke-weight-4 solid var(--ofh-header-list-item-selected-border);
   color: $ofh-color-foreground-primary;
