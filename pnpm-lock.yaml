@@ -19,7 +19,7 @@ overrides:
   serialize-javascript: 7.0.3
   rollup: 4.59.0
   immutable: 5.1.9
-  liquidjs: 10.27.0
+  liquidjs: 10.27.2
   flatted: 3.4.2
   undici: 7.28.0
   picomatch@2.3.1: 2.3.2
@@ -4104,8 +4104,8 @@ packages:
   linkify-it@5.0.2:
     resolution: {integrity: sha512-ONTm2jCMAVZjgQa/Fy1kScXsuOoF5NPTsoFBdE1KVIZ2vAh/r9+Bqo+0jINCBYnavTPQZz38QzFTme79ENoN3Q==}
 
-  liquidjs@10.27.0:
-    resolution: {integrity: sha512-tw/OA59K7aIBlMKIrKlumr37fiZUheShVHXY8cVctWisgY1p9mc5hreOvlreoS0wTiwlWk14Ya7305c2a/Cg5w==}
+  liquidjs@10.27.2:
+    resolution: {integrity: sha512-kvknfAEtOHjHkAAv7GxLEJh8ghpMQm3Fc4uWVyF7hERSTsSRsdC7saWs0p5aDG7GDcWsu5o+T4232O+8KZO55w==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -5871,7 +5871,7 @@ snapshots:
       is-glob: 4.0.3
       iso-639-1: 2.1.15
       kleur: 4.1.5
-      liquidjs: 10.27.0
+      liquidjs: 10.27.2
       luxon: 3.7.2
       markdown-it: 14.2.0
       micromatch: 4.0.8
@@ -10203,7 +10203,7 @@ snapshots:
     dependencies:
       uc.micro: 2.1.0
 
-  liquidjs@10.27.0:
+  liquidjs@10.27.2:
     dependencies:
       commander: 10.0.1
 
