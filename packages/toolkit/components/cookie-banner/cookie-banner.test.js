@@ -44,4 +44,13 @@ describe('Our Future Health cookieBanner macro', () => {
     expect(buttons[0].getAttribute('name')).toBe('cookie-choice');
     expect(buttons[0].getAttribute('value')).toBe('accept');
   });
+
+  it('keeps link URLs and classes out of generic link attributes', () => {
+    const banner = renderFixture('tests/fixtures/cookie-banner/link-attributes.njk');
+    const privacyNotice = banner.querySelector('.ofh-cookie-banner__link');
+
+    expect(privacyNotice.getAttribute('href')).toBe('/privacy-information');
+    expect(privacyNotice.getAttribute('class')).toBe('ofh-cookie-banner__link');
+    expect(privacyNotice.getAttribute('data-testid')).toBe('privacy-notice');
+  });
 });

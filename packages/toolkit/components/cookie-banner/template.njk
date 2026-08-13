@@ -19,6 +19,7 @@
 
 {%- macro externalLink(link, href, text) -%}
   {% set attributes = link.attributes if link.attributes else {} %}
+  {% set reservedAttributes = ['class', 'href', 'target', 'rel'] %}
   {% set target = attributes.target if attributes.target else '_blank' %}
   {% set rel = attributes.rel if attributes.rel else '' %}
   {% set relTokens = ' ' ~ rel ~ ' ' %}
@@ -28,7 +29,7 @@
   <a
     class="ofh-cookie-banner__link"
     href="{{ href }}"
-    {% for attribute, value in attributes %}{% if attribute != 'target' and attribute != 'rel' %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}
+    {% for attribute, value in attributes %}{% if attribute not in reservedAttributes %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}
     target="{{ target }}"
     {% if target == '_blank' %}rel="{{ safeRel | trim }}"{% elif rel %}rel="{{ rel }}"{% endif %}>{{ text }}</a>
 {%- endmacro -%}

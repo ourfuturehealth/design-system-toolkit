@@ -1,0 +1,12 @@
+{% from 'cookie-banner/macro.njk' import cookieBanner %}
+
+{{ cookieBanner({
+  "privacyNotice": {
+    "href": "/privacy-information",
+    "attributes": {
+      "class": "custom-link",
+      "href": "/incorrect-privacy-link",
+      "data-testid": "privacy-notice"
+    }
+  }
+}) }}
