@@ -1,0 +1,25 @@
+{% from 'cookie-banner/macro.njk' import cookieBanner %}
+
+{{ cookieBanner({
+  "heading": "Cookies on Example Service",
+  "headingLevel": 3,
+  "bodyHtml": "<p><strong>Custom content</strong> for this service.</p>",
+  "privacyNotice": {
+    "href": "/privacy",
+    "text": "privacy information",
+    "attributes": {
+      "target": "_self"
+    }
+  },
+  "acceptAction": {
+    "text": "Accept analytics",
+    "attributes": {
+      "name": "cookie-choice",
+      "value": "accept"
+    }
+  },
+  "rejectAction": {
+    "text": "Reject analytics"
+  },
+  "idPrefix": "example-cookies"
+}) }}

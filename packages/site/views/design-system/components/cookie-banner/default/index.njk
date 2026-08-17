@@ -1,0 +1,14 @@
+{% from 'cookie-banner/macro.njk' import cookieBanner %}
+
+{{ cookieBanner({
+  "acceptAction": {
+    "attributes": {
+      "data-cookie-choice": "accept"
+    }
+  },
+  "rejectAction": {
+    "attributes": {
+      "data-cookie-choice": "reject"
+    }
+  }
+}) }}

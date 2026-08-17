@@ -127,6 +127,12 @@ export type {
 export { CardCallout } from './components/CardCallout';
 export type { CardCalloutProps } from './components/CardCallout';
 
+export { CookieBanner } from './components/CookieBanner';
+export type {
+  CookieBannerLink,
+  CookieBannerProps,
+} from './components/CookieBanner';
+
 export { CardDoDont } from './components/CardDoDont';
 export type { CardDoDontItem, CardDoDontProps } from './components/CardDoDont';
 
