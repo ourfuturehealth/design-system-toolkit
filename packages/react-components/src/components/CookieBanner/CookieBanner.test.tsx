@@ -48,9 +48,9 @@ describe('CookieBanner', () => {
     );
 
     await user.click(screen.getByRole('button', { name: "I'm OK with analytics cookies" }));
-    await user.click(screen.getByRole('button', { name: 'Do not use analytics cookies' }));
-
     expect(onAccept).toHaveBeenCalledTimes(1);
+
+    await user.click(screen.getByRole('button', { name: 'Do not use analytics cookies' }));
     expect(onReject).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('button', { name: "I'm OK with analytics cookies" })).toHaveAttribute(
       'data-cookie-choice',
