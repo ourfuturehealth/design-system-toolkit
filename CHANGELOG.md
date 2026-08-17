@@ -6,19 +6,19 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-07-16
+### 2026-08-17
 
 #### @ourfuturehealth/toolkit 4.25.0 (`toolkit-v4.25.0`)
 
 ##### Added
 
-- Added the public Cookie Banner macro, responsive styles, default policy content, action attributes, docs examples, and test coverage
+- Added the public Cookie Banner macro, responsive styles, default policy content, new-tab link disclosure, action attributes, docs examples, and test coverage
 
 #### @ourfuturehealth/react-components 0.24.0 (`react-v0.24.0`)
 
 ##### Added
 
-- Added the public React Cookie Banner component with structured content overrides, action callbacks, custom body content, Storybook coverage, and tests
+- Added the public React Cookie Banner component with structured content overrides, new-tab link disclosure, action callbacks, custom body content, Storybook coverage, and tests
 
 #### @ourfuturehealth/react-components 0.23.2 (`react-v0.23.2`)
 

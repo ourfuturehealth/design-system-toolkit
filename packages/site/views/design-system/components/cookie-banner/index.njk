@@ -3,7 +3,7 @@
 {% set subSection = "Components" %}
 {% set pageDescription = "Use a cookie banner to let people choose whether a product can use analytics cookies." %}
 {% set theme = "Content presentation" %}
-{% set dateUpdated = "July 2026" %}
+{% set dateUpdated = "August 2026" %}
 
 {% extends "app-layout.njk" %}
 
@@ -23,7 +23,7 @@
 
   <h2>How to use the cookie banner</h2>
   <p>Render the banner where it makes sense for your product. It does not choose its own position, store a consent choice, or turn analytics on and off. Your product must handle that work after a person chooses an action.</p>
-  <p>Use the default wording, links, and action labels unless your product has approved content changes. The links open in a new tab by default.</p>
+  <p>Use the default wording, links, and action labels unless your product has approved content changes. The links open in a new tab by default, display a launch icon, and announce “opens in a new tab” to screen reader users.</p>
 
   <h2>Actions</h2>
   <p>Both actions are buttons, not links. In Nunjucks, use <code>data-*</code>, <code>name</code>, or <code>value</code> attributes to connect them to your product's consent handler. In React, use <code>onAccept</code> and <code>onReject</code>.</p>
