@@ -12,7 +12,9 @@ describe('CookieBanner', () => {
       level: 2,
       name: 'Cookies on Our Future Health',
     });
-    const privacyNotice = screen.getByRole('link', { name: 'privacy notice' });
+    const privacyNotice = screen.getByRole('link', {
+      name: 'privacy notice (opens in a new tab)',
+    });
 
     expect(heading).toHaveClass('ofh-cookie-banner__heading');
     expect(privacyNotice).toHaveAttribute(
@@ -21,6 +23,10 @@ describe('CookieBanner', () => {
     );
     expect(privacyNotice).toHaveAttribute('target', '_blank');
     expect(privacyNotice).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(privacyNotice.querySelector('.ofh-cookie-banner__link-icon')).toHaveAttribute(
+      'aria-hidden',
+      'true',
+    );
     expect(screen.getByRole('button', { name: "I'm OK with analytics cookies" })).toHaveAttribute(
       'type',
       'button',
@@ -70,6 +76,31 @@ describe('CookieBanner', () => {
     expect(screen.getByText('Custom body content for this service.')).toBeInTheDocument();
     expect(screen.queryByText('We use small data files')).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Accept analytics' })).toBeInTheDocument();
+  });
+
+  it('does not announce a new tab when a link stays in the current tab', () => {
+    render(
+      <CookieBanner
+        privacyNotice={{
+          href: '/privacy',
+          label: 'privacy information',
+          attributes: { target: '_self' },
+        }}
+      />,
+    );
+
+    const privacyNotice = screen.getByRole('link', { name: 'privacy information' });
+
+    expect(privacyNotice.querySelector('.ofh-cookie-banner__link-icon')).toBeNull();
+    expect(privacyNotice.querySelector('.ofh-u-visually-hidden')).toBeNull();
+  });
+
+  it('supports custom new-tab announcement text', () => {
+    render(<CookieBanner privacyNotice={{ newTabText: 'opens a separate tab' }} />);
+
+    expect(
+      screen.getByRole('link', { name: 'privacy notice (opens a separate tab)' }),
+    ).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {

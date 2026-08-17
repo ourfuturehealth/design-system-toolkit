@@ -36,6 +36,11 @@
   color: $ofh-color-foreground-link-default;
 }
 
+.ofh-cookie-banner__link-icon {
+  color: currentColor;
+  vertical-align: text-bottom;
+}
+
 .ofh-cookie-banner__actions {
   @include ofh-responsive-gap(32);
 

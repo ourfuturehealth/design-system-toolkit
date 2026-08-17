@@ -1,4 +1,5 @@
 {% from '../button/macro.njk' import button %}
+{% from '../icon/macro.njk' import icon %}
 
 {% set headingLevel = params.headingLevel if params.headingLevel in [1, 2, 3, 4, 5, 6] else 2 %}
 {% set idPrefix = params.idPrefix if params.idPrefix else 'ofh-cookie-banner' %}
@@ -22,6 +23,8 @@
   {% set reservedAttributes = ['class', 'href', 'target', 'rel'] %}
   {% set target = attributes.target if attributes.target else '_blank' %}
   {% set rel = attributes.rel if attributes.rel else '' %}
+  {% set newTabText = link.newTabText if link.newTabText else 'opens in a new tab' %}
+  {% set launchIcon %}{{ icon({ "name": "Launch", "size": 16, "classes": "ofh-cookie-banner__link-icon" }) }}{% endset %}
   {% set relTokens = ' ' ~ rel ~ ' ' %}
   {% set hasNoopener = ' noopener ' in relTokens %}
   {% set hasNoreferrer = ' noreferrer ' in relTokens %}
@@ -31,7 +34,7 @@
     href="{{ href }}"
     {% for attribute, value in attributes %}{% if attribute not in reservedAttributes %} {{ attribute }}="{{ value }}"{% endif %}{% endfor %}
     target="{{ target }}"
-    {% if target == '_blank' %}rel="{{ safeRel | trim }}"{% elif rel %}rel="{{ rel }}"{% endif %}>{{ text }}</a>
+    {% if target == '_blank' %}rel="{{ safeRel | trim }}"{% elif rel %}rel="{{ rel }}"{% endif %}>{{ text }}{% if target == '_blank' %} {{ launchIcon | trim | safe }}<span class="ofh-u-visually-hidden">({{ newTabText }})</span>{% endif %}</a>
 {%- endmacro -%}
 
 <section

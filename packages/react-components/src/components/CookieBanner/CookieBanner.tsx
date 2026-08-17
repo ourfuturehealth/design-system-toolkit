@@ -2,10 +2,12 @@ import React from 'react';
 import { mergeRelTokens } from '../../internal/mergeRelTokens';
 import { getHeadingTag, joinClasses, type HeadingLevel } from '../../internal/ofhUtils';
 import { Button } from '../Button';
+import { Icon } from '../Icon';
 
 export interface CookieBannerLink {
   href?: string;
   label?: React.ReactNode;
+  newTabText?: React.ReactNode;
   attributes?: Omit<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     'children' | 'href'
@@ -39,36 +41,43 @@ export interface CookieBannerProps
 }
 
 const defaultPrivacyNotice: Required<
-  Pick<CookieBannerLink, 'href' | 'label' | 'attributes'>
+  Pick<CookieBannerLink, 'href' | 'label' | 'newTabText' | 'attributes'>
 > = {
   href: 'https://ourfuturehealth.org.uk/privacy',
   label: 'privacy notice',
+  newTabText: 'opens in a new tab',
   attributes: { target: '_blank', rel: 'noopener noreferrer' },
 };
 
 const defaultCookiePolicy: Required<
-  Pick<CookieBannerLink, 'href' | 'label' | 'attributes'>
+  Pick<CookieBannerLink, 'href' | 'label' | 'newTabText' | 'attributes'>
 > = {
   href: 'https://ourfuturehealth.org.uk/cookies',
   label: 'cookie policy',
+  newTabText: 'opens in a new tab',
   attributes: { target: '_blank', rel: 'noopener noreferrer' },
 };
 
 const resolveLink = (
   link: CookieBannerLink | undefined,
-  fallback: Required<Pick<CookieBannerLink, 'href' | 'label' | 'attributes'>>,
+  fallback: Required<
+    Pick<CookieBannerLink, 'href' | 'label' | 'newTabText' | 'attributes'>
+  >,
 ) => ({
   href: link?.href ?? fallback.href,
   label: link?.label ?? fallback.label,
+  newTabText: link?.newTabText ?? fallback.newTabText,
   attributes: { ...fallback.attributes, ...link?.attributes },
 });
 
 const CookieBannerLink = ({
   href,
   label,
+  newTabText,
   attributes,
-}: Required<Pick<CookieBannerLink, 'href' | 'label' | 'attributes'>>) => {
+}: Required<Pick<CookieBannerLink, 'href' | 'label' | 'newTabText' | 'attributes'>>) => {
   const { rel, target = '_blank', ...props } = attributes;
+  const opensInNewTab = target === '_blank';
 
   return (
     <a
@@ -79,6 +88,13 @@ const CookieBannerLink = ({
       target={target}
     >
       {label}
+      {opensInNewTab ? (
+        <>
+          {' '}
+          <Icon name="Launch" size={16} className="ofh-cookie-banner__link-icon" />
+          <span className="ofh-u-visually-hidden">({newTabText})</span>
+        </>
+      ) : null}
     </a>
   );
 };

@@ -30,8 +30,10 @@ type CookieBannerStoryArgs = Omit<
   customBodyText?: string;
   privacyNoticeHref?: string;
   privacyNoticeLabel?: string;
+  privacyNoticeNewTabText?: string;
   cookiePolicyHref?: string;
   cookiePolicyLabel?: string;
+  cookiePolicyNewTabText?: string;
 };
 
 const renderBuilderStory = ({
@@ -39,8 +41,10 @@ const renderBuilderStory = ({
   customBodyText = 'Use essential cookies to make this service work.',
   privacyNoticeHref = 'https://ourfuturehealth.org.uk/privacy',
   privacyNoticeLabel = 'privacy notice',
+  privacyNoticeNewTabText = 'opens in a new tab',
   cookiePolicyHref = 'https://ourfuturehealth.org.uk/cookies',
   cookiePolicyLabel = 'cookie policy',
+  cookiePolicyNewTabText = 'opens in a new tab',
   ...args
 }: CookieBannerStoryArgs) => (
   <CookieBanner
@@ -48,11 +52,13 @@ const renderBuilderStory = ({
     privacyNotice={{
       href: privacyNoticeHref,
       label: privacyNoticeLabel,
+      newTabText: privacyNoticeNewTabText,
       attributes: { onClick: preventNavigation },
     }}
     cookiePolicy={{
       href: cookiePolicyHref,
       label: cookiePolicyLabel,
+      newTabText: cookiePolicyNewTabText,
       attributes: { onClick: preventNavigation },
     }}
   >
@@ -121,6 +127,11 @@ const meta: Meta<CookieBannerStoryArgs> = {
       description: 'Builder-only privacy-notice label.',
       table: { category: 'Builder story only' },
     },
+    privacyNoticeNewTabText: {
+      control: 'text',
+      description: 'Builder-only privacy-notice new-tab announcement.',
+      table: { category: 'Builder story only' },
+    },
     cookiePolicyHref: {
       control: 'text',
       description: 'Builder-only cookie-policy destination.',
@@ -129,6 +140,11 @@ const meta: Meta<CookieBannerStoryArgs> = {
     cookiePolicyLabel: {
       control: 'text',
       description: 'Builder-only cookie-policy label.',
+      table: { category: 'Builder story only' },
+    },
+    cookiePolicyNewTabText: {
+      control: 'text',
+      description: 'Builder-only cookie-policy new-tab announcement.',
       table: { category: 'Builder story only' },
     },
     heading: {
@@ -172,8 +188,10 @@ export const Default: Story = {
     bodyMode: 'default',
     privacyNoticeHref: 'https://ourfuturehealth.org.uk/privacy',
     privacyNoticeLabel: 'privacy notice',
+    privacyNoticeNewTabText: 'opens in a new tab',
     cookiePolicyHref: 'https://ourfuturehealth.org.uk/cookies',
     cookiePolicyLabel: 'cookie policy',
+    cookiePolicyNewTabText: 'opens in a new tab',
   },
   render: renderBuilderStory,
 };
@@ -195,8 +213,10 @@ export const Builder: Story = {
     customBodyText: 'Use essential cookies to make this service work.',
     privacyNoticeHref: 'https://ourfuturehealth.org.uk/privacy',
     privacyNoticeLabel: 'privacy notice',
+    privacyNoticeNewTabText: 'opens in a new tab',
     cookiePolicyHref: 'https://ourfuturehealth.org.uk/cookies',
     cookiePolicyLabel: 'cookie policy',
+    cookiePolicyNewTabText: 'opens in a new tab',
     heading: 'Cookies on Our Future Health',
     essentialCookiesText:
       'We use small data files to make the website work, known as essential cookies.',
@@ -217,8 +237,10 @@ export const Builder: Story = {
         'analyticsCookiesText',
         'privacyNoticeHref',
         'privacyNoticeLabel',
+        'privacyNoticeNewTabText',
         'cookiePolicyHref',
         'cookiePolicyLabel',
+        'cookiePolicyNewTabText',
         'acceptLabel',
         'rejectLabel',
       ],

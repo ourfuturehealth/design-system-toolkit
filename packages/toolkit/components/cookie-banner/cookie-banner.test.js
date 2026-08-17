@@ -23,6 +23,13 @@ describe('Our Future Health cookieBanner macro', () => {
     expect(links[0].getAttribute('href')).toBe('https://ourfuturehealth.org.uk/privacy');
     expect(links[0].getAttribute('target')).toBe('_blank');
     expect(links[0].getAttribute('rel')).toBe('noopener noreferrer');
+    expect(links[0].querySelector('.ofh-cookie-banner__link-icon')).not.toBeNull();
+    expect(links[0].querySelector('.ofh-cookie-banner__link-icon').getAttribute('aria-hidden')).toBe(
+      'true',
+    );
+    expect(links[0].querySelector('.ofh-u-visually-hidden').textContent).toBe(
+      '(opens in a new tab)',
+    );
     expect(buttons).toHaveLength(2);
     expect(buttons[0].getAttribute('type')).toBe('button');
     expect(buttons[0].getAttribute('data-cookie-choice')).toBe('accept');
@@ -52,5 +59,17 @@ describe('Our Future Health cookieBanner macro', () => {
     expect(privacyNotice.getAttribute('href')).toBe('/privacy-information');
     expect(privacyNotice.getAttribute('class')).toBe('ofh-cookie-banner__link');
     expect(privacyNotice.getAttribute('data-testid')).toBe('privacy-notice');
+    expect(privacyNotice.querySelector('.ofh-u-visually-hidden').textContent).toBe(
+      '(opens a separate tab)',
+    );
+  });
+
+  it('does not show the new-tab indicator for links in the current tab', () => {
+    const banner = renderFixture('tests/fixtures/cookie-banner/current-tab-link.njk');
+    const privacyNotice = banner.querySelector('.ofh-cookie-banner__link');
+
+    expect(privacyNotice.getAttribute('target')).toBe('_self');
+    expect(privacyNotice.querySelector('.ofh-cookie-banner__link-icon')).toBeNull();
+    expect(privacyNotice.querySelector('.ofh-u-visually-hidden')).toBeNull();
   });
 });
