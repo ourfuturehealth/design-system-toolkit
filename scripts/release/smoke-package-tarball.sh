@@ -265,6 +265,8 @@ NODE
       ;;
   esac
 
+  react_artifact_check "${install_dir}"
+
   (
     cd "${install_dir}"
     node - <<'NODE'
@@ -296,6 +298,30 @@ NODE
   )
 }
 
+react_artifact_check() {
+  local install_dir=$1
+
+  (
+    cd "${install_dir}"
+    node - <<'NODE'
+const fs = require('fs');
+const path = require('path');
+
+const packageEntry = require.resolve('@ourfuturehealth/react-components');
+const esmEntry = path.join(path.dirname(packageEntry), 'index.esm.js');
+const source = fs.readFileSync(esmEntry, 'utf8');
+
+if (!/^['"]use client['"];/u.test(source)) {
+  throw new Error('Expected the ESM entrypoint to preserve the use client directive');
+}
+
+if (!/from ['"]react\/jsx-(?:dev-)?runtime['"]/.test(source)) {
+  throw new Error('Expected the ESM entrypoint to reference an external React JSX runtime');
+}
+NODE
+  )
+}
+
 IFS=',' read -r -a manager_list <<< "${managers}"
 
 for manager in "${manager_list[@]}"; do
@@ -310,7 +336,7 @@ for manager in "${manager_list[@]}"; do
     @ourfuturehealth/react-components)
       print_step "Installing react-components tarball and peer dependencies with ${manager}"
       smoke_react "${manager}"
-      print_success "React tarball passed export and component rendering checks with ${manager}"
+      print_success "React tarball passed artifact, export, and component rendering checks with ${manager}"
       ;;
   esac
 done

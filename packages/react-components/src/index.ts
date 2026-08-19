@@ -1,3 +1,5 @@
+"use client";
+
 // Main library entry point
 // Components will be exported from here
 
