@@ -26,11 +26,12 @@ export default defineConfig(() => {
         entry: resolve(__dirname, 'src/index.ts'),
         name: 'OFHDesignSystemReact',
         formats: ['es', 'cjs'],
-        fileName: (format) => `index.${format === 'es' ? 'esm' : 'cjs'}.js`,
+        fileName: (format) => `index.${format === 'es' ? 'esm.js' : 'cjs'}`,
       },
       rollupOptions: {
-        external: ['react', 'react-dom'],
+        external: [/^react(?:\/|$)/, /^react-dom(?:\/|$)/],
         output: {
+          banner: '"use client";\n',
           globals: {
             react: 'React',
             'react-dom': 'ReactDOM',
