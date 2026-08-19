@@ -6,6 +6,15 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-08-19
+
+#### @ourfuturehealth/react-components 0.24.1 (`react-v0.24.1`)
+
+##### Fixed
+
+- Made the React package safe to import directly in Next.js App Router by preserving its Client Component boundary and keeping React's JSX runtime external in the published ESM bundle
+- Corrected the CommonJS output extension so Node recognises the package's `require` entrypoint under its ESM package configuration
+
 ### 2026-08-17
 
 #### @ourfuturehealth/toolkit 4.25.0 (`toolkit-v4.25.0`)
