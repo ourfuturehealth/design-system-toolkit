@@ -238,8 +238,8 @@ Source Sans Pro from Google Fonts – <https://fonts.google.com/specimen/Source+
 ```
 mobile: 320px
 tablet: 641px
-desktop: 769px
-large-desktop: 990px
+desktop: 990px
+large-desktop: 1440px
 ```
 
 ### Media queries (using [sass-mq](https://github.com/sass-mq/sass-mq))
