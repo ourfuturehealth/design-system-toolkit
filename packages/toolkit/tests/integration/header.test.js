@@ -68,9 +68,12 @@ describe('Our Future Health header()', () => {
     mobileGroupToggle.click();
     expect(mobileGroupToggle.getAttribute('aria-expanded')).toBe('true');
     expect(mobileGroupPanel.hidden).toBe(false);
-    expect(mobileLinks[0].textContent.trim()).toBe('Join now');
-    expect(mobileLinks[1].textContent.trim()).toBe('Account');
-    expect(mobileLinks[2].textContent.trim()).toBe('Log out');
+    expect(Array.from(mobileLinks, (link) => link.textContent.trim())).toEqual([
+      'Join now',
+      'About',
+      'Account',
+      'Log out',
+    ]);
 
     mobileSubnavLink.click();
     expect(menuButton.getAttribute('aria-expanded')).toBe('false');
