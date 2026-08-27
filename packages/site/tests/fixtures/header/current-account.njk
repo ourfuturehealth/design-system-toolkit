@@ -1,0 +1,17 @@
+{% from 'header/macro.njk' import header %}
+
+{{ header({
+  "brand": {
+    "href": "/",
+    "ariaLabel": "Our Future Health home"
+  },
+  "account": {
+    "type": "account",
+    "accountHref": "/account",
+    "accountLabel": "Manage account",
+    "accountAttributes": {
+      "aria-current": "page"
+    },
+    "signOutHref": "/log-out"
+  }
+}) }}

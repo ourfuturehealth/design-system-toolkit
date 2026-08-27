@@ -348,9 +348,11 @@ const OpenDesktopDropdownPreview = ({
 };
 
 const OpenMobileMenuPreview = ({
+  account: previewAccount = baseArgs.account,
   theme = 'dark',
   navigation: previewNavigation = navigation,
 }: {
+  account?: HeaderProps['account'];
   theme?: HeaderProps['theme'];
   navigation?: NonNullable<HeaderProps['navigation']>;
 }) => {
@@ -372,7 +374,12 @@ const OpenMobileMenuPreview = ({
 
   return (
     <div ref={containerRef} style={{ maxWidth: '28rem' }}>
-      <Header {...baseArgs} theme={theme} navigation={previewNavigation} />
+      <Header
+        {...baseArgs}
+        account={previewAccount}
+        theme={theme}
+        navigation={previewNavigation}
+      />
     </div>
   );
 };
@@ -804,6 +811,42 @@ export const MobileMenuOpenDataAccessCurrentLight: Story = {
     <OpenMobileMenuPreview
       navigation={navigationWithSelectedDropdownItem}
       theme="light"
+    />
+  ),
+};
+
+export const MobileMenuOpenManageAccountCurrent: Story = {
+  globals: {
+    viewport: { value: 'smallMobile' },
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Fixed mobile review state showing “Manage account” as the current page in the open condensed menu.',
+      },
+    },
+  },
+  render: () => (
+    <OpenMobileMenuPreview
+      account={{
+        type: 'account',
+        accountHref: '/account',
+        accountLabel: 'Manage account',
+        accountLinkProps: {
+          'aria-current': 'page',
+        },
+        signOutHref: '/log-out',
+      }}
+      navigation={[
+        {
+          href: '/dashboard',
+          label: 'Home',
+        },
+      ]}
     />
   ),
 };

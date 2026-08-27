@@ -621,7 +621,12 @@ export const Header = ({
                   >
                     <a
                       {...item.linkProps}
-                      className="ofh-header__mobile-link"
+                      className={joinClassNames(
+                        'ofh-header__mobile-link',
+                        item.linkProps['aria-current'] === 'page'
+                          ? 'ofh-header__mobile-link--current'
+                          : undefined,
+                      )}
                       href={item.href}
                       onClick={() => {
                         setIsMobileMenuOpen(false);

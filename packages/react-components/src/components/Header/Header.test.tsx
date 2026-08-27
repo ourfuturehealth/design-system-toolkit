@@ -395,6 +395,37 @@ describe('Header', () => {
     );
   });
 
+  it('renders the account link as current in the mobile menu', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Header
+        account={{
+          type: 'account',
+          accountHref: '/account',
+          accountLabel: 'Manage account',
+          accountLinkProps: {
+            'aria-current': 'page',
+          },
+          signOutHref: '/log-out',
+        }}
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }));
+
+    const mobilePanel = container.querySelector('.ofh-header__mobile-panel');
+    const mobileAccountLink = within(mobilePanel as HTMLElement).getByRole('link', {
+      name: 'Manage account',
+    });
+
+    expect(mobileAccountLink).toHaveAttribute('aria-current', 'page');
+    expect(mobileAccountLink).toHaveClass('ofh-header__mobile-link--current');
+  });
+
   it('has no accessibility violations', async () => {
     const { container } = render(
       <Header

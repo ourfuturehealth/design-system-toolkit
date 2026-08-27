@@ -76,6 +76,20 @@ describe('Our Future Health header macro', () => {
     expect(mobilePanel.hidden).toBe(true);
   });
 
+  it('renders the account link as current in the mobile menu', () => {
+    const { root } = renderFixture('tests/fixtures/header/current-account.njk');
+    const desktopAccountLink = root.querySelector(
+      '.ofh-header__header-desktop-tools .ofh-header__account-link .ofh-link-icon__link',
+    );
+    const mobileAccountLink = root.querySelector('.ofh-header__mobile-link');
+
+    expect(desktopAccountLink.getAttribute('aria-current')).toBe('page');
+    expect(mobileAccountLink.getAttribute('aria-current')).toBe('page');
+    expect(mobileAccountLink.classList.contains('ofh-header__mobile-link--current')).toBe(
+      true,
+    );
+  });
+
   it('does not render the bottom border when disabled', () => {
     const { root } = renderFixture('tests/fixtures/header/no-bottom-border.njk');
 

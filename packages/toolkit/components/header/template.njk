@@ -285,9 +285,10 @@
 {%- endmacro -%}
 
 {%- macro _mobileSimpleLink(item) -%}
+  {% set isCurrent = item.current or (item.attributes and item.attributes['aria-current'] == 'page') %}
   <li class="ofh-header__mobile-nav-item">
     <a
-      class="ofh-header__mobile-link{% if item.current %} ofh-header__mobile-link--current{% endif %}"
+      class="ofh-header__mobile-link{% if isCurrent %} ofh-header__mobile-link--current{% endif %}"
       href="{{ _href(item) | trim }}"
       {%- if item.current %} aria-current="page"{% endif %}
       {%- if _target(item) | trim %} target="{{ _target(item) | trim }}"{% endif %}
