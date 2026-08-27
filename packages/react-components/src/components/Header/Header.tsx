@@ -225,16 +225,19 @@ export const Header = ({
     [ref],
   );
 
-  const mobileMenuLinks: Array<{
+  type MobileMenuLink = {
     href: string;
     key: string;
     label: React.ReactNode;
     linkProps: HeaderAnchorProps;
-  }> = [];
+  };
+
+  const mobileActionLinks: MobileMenuLink[] = [];
+  const mobileAccountLinks: MobileMenuLink[] = [];
 
   if (action) {
     const { href, ...linkProps } = resolveHeaderLinkProps(action);
-    mobileMenuLinks.push({
+    mobileActionLinks.push({
       href,
       key: 'action',
       label: action.label,
@@ -245,7 +248,7 @@ export const Header = ({
   if (account) {
     if (account.type === 'sign-in') {
       const { href, label = 'Log in', ...linkProps } = account;
-      mobileMenuLinks.push({
+      mobileAccountLinks.push({
         href,
         key: 'account-sign-in',
         label,
@@ -261,13 +264,13 @@ export const Header = ({
         signOutLinkProps,
       } = account;
 
-      mobileMenuLinks.push({
+      mobileAccountLinks.push({
         href: accountHref,
         key: 'account',
         label: accountLabel,
         linkProps: accountLinkProps ?? {},
       });
-      mobileMenuLinks.push({
+      mobileAccountLinks.push({
         href: signOutHref,
         key: 'account-sign-out',
         label: signOutLabel,
@@ -275,6 +278,30 @@ export const Header = ({
       });
     }
   }
+
+  const renderMobileMenuLink = (item: MobileMenuLink) => (
+    <li
+      className="ofh-header__mobile-nav-item"
+      key={`header-mobile-link-${item.key}`}
+    >
+      <a
+        {...item.linkProps}
+        className={joinClassNames(
+          'ofh-header__mobile-link',
+          item.linkProps['aria-current'] === 'page'
+            ? 'ofh-header__mobile-link--current'
+            : undefined,
+        )}
+        href={item.href}
+        onClick={() => {
+          setIsMobileMenuOpen(false);
+          setOpenMobileGroup(null);
+        }}
+      >
+        <span className="ofh-header__mobile-link-text">{item.label}</span>
+      </a>
+    </li>
+  );
 
   const renderAccount = () => {
     if (!account) {
@@ -612,33 +639,9 @@ export const Header = ({
           id={mobileMenuId}
         >
           <div className={sectionInnerClassName}>
-            {mobileMenuLinks.length || navigation.length ? (
+            {mobileActionLinks.length || navigation.length || mobileAccountLinks.length ? (
               <ul className="ofh-header__mobile-nav-list">
-                {mobileMenuLinks.map((item) => (
-                  <li
-                    className="ofh-header__mobile-nav-item"
-                    key={`header-mobile-top-link-${item.key}`}
-                  >
-                    <a
-                      {...item.linkProps}
-                      className={joinClassNames(
-                        'ofh-header__mobile-link',
-                        item.linkProps['aria-current'] === 'page'
-                          ? 'ofh-header__mobile-link--current'
-                          : undefined,
-                      )}
-                      href={item.href}
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        setOpenMobileGroup(null);
-                      }}
-                    >
-                      <span className="ofh-header__mobile-link-text">
-                        {item.label}
-                      </span>
-                    </a>
-                  </li>
-                ))}
+                {mobileActionLinks.map(renderMobileMenuLink)}
                 {navigation.map((item, index) => {
                   if (!isNavGroup(item)) {
                     return (
@@ -735,6 +738,7 @@ export const Header = ({
                     </li>
                   );
                 })}
+                {mobileAccountLinks.map(renderMobileMenuLink)}
               </ul>
             ) : null}
 

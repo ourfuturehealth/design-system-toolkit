@@ -90,6 +90,27 @@ describe('Our Future Health header macro', () => {
     );
   });
 
+  it('renders account links after the primary navigation in the mobile menu', () => {
+    const { root } = renderFixture('tests/fixtures/header/full.njk');
+    const mobileItems = root.querySelectorAll(
+      '.ofh-header__mobile-nav-list > .ofh-header__mobile-nav-item',
+    );
+    const mobileItemLabels = Array.from(mobileItems).map((item) =>
+      item.firstElementChild
+        .querySelector('.ofh-header__mobile-link-text')
+        .textContent.trim(),
+    );
+
+    expect(mobileItemLabels).toEqual([
+      'Join now',
+      'About',
+      'Research',
+      'Support',
+      'Account',
+      'Log out',
+    ]);
+  });
+
   it('does not render the bottom border when disabled', () => {
     const { root } = renderFixture('tests/fixtures/header/no-bottom-border.njk');
 

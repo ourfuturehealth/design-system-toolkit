@@ -394,6 +394,10 @@
               {{ _mobileSimpleLink(params.action) | trim }}
             {% endif %}
 
+            {% for item in resolvedNavigation %}
+              {{ _mobileNavigation(item, loop.index0) | trim }}
+            {% endfor %}
+
             {% if params.account %}
               {% if params.account.type == 'account' %}
                 {{ _mobileSimpleLink({
@@ -414,10 +418,6 @@
                 }) | trim }}
               {% endif %}
             {% endif %}
-
-            {% for item in resolvedNavigation %}
-              {{ _mobileNavigation(item, loop.index0) | trim }}
-            {% endfor %}
           </ul>
         {% endif %}
       </div>
