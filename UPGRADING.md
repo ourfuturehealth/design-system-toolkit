@@ -35,6 +35,29 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ---
 
+## Upgrading to v4.26.0 / React v0.25.0
+
+**Affected packages:**
+
+- `@ourfuturehealth/toolkit` v4.26.0+
+- `@ourfuturehealth/react-components` v0.25.0+
+
+### Breaking Changes
+
+None. Public Sass names, mixins, CSS classes, token values, and React APIs are unchanged.
+
+### Release Overview
+
+This high-impact responsive behaviour change realigns named breakpoints to the approved design system: `desktop` now starts at `990px`, and `large-desktop` starts at `1440px`. React participant and research theme CSS includes the same toolkit Sass change.
+
+### Migration Steps
+
+1. Audit local Sass that uses the named `desktop` or `large-desktop` queries; those rules now activate later.
+2. Check responsive layouts at `640/641px`, `768/769px`, `989/990px`, and `1439/1440px`, including any local breakpoint overrides.
+3. Re-test pages that rely on responsive spacing, typography, iconography, headers, images, tables, or footers.
+
+---
+
 ## Upgrading to v4.24.0 / React v0.23.0
 
 **Released:** July 2026

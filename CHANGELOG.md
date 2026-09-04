@@ -6,6 +6,20 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-08-26
+
+#### @ourfuturehealth/toolkit 4.26.0 (`toolkit-v4.26.0`)
+
+##### Changed
+
+- Aligned named Sass desktop breakpoints with the approved design tokens: `desktop` now starts at `990px` and `large-desktop` at `1440px`
+
+#### @ourfuturehealth/react-components 0.25.0 (`react-v0.25.0`)
+
+##### Changed
+
+- Recompiled the participant and research theme styles with the updated toolkit desktop breakpoints
+
 ### 2026-08-19
 
 #### @ourfuturehealth/react-components 0.24.1 (`react-v0.24.1`)
