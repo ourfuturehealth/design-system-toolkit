@@ -11,6 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         env:
@@ -26,6 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Validate package release metadata
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: ./scripts/release/validate-package-release-metadata.sh "$BASE_SHA" "$HEAD_SHA"
 
       - name: Run linting
         run: pnpm run lint
