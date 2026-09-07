@@ -18,6 +18,10 @@ The design system distributes packages through **GitHub Releases**.
 - all linting passes locally: `pnpm lint`
 - changelog and migration docs are updated when required
 
+Pull requests that change published toolkit or React package source/assets must
+also bump the affected package version and add its changelog entry. The pull
+request workflow validates this before merge.
+
 ## Release Steps
 
 ### 1. Decide what to release

@@ -6,6 +6,22 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-09-07
+
+#### @ourfuturehealth/toolkit 4.25.1 (`toolkit-v4.25.1`)
+
+##### Fixed
+
+- Marked the current account page in the mobile Header menu and placed account links after the primary navigation
+- Updated the Welsh NHS partner logo assets used at mobile sizes
+
+#### @ourfuturehealth/react-components 0.24.2 (`react-v0.24.2`)
+
+##### Fixed
+
+- Marked the current account page in the mobile Header menu and placed account links after the primary navigation
+- Updated the Welsh NHS partner logo assets used at mobile sizes
+
 ### 2026-08-19
 
 #### @ourfuturehealth/react-components 0.24.1 (`react-v0.24.1`)
