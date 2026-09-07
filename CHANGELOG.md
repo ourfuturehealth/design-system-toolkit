@@ -20,6 +20,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 ##### Fixed
 
 - Marked the current account page in the mobile Header menu and placed account links after the primary navigation
+- Updated the Welsh NHS partner logo assets used at mobile sizes
 
 ### 2026-08-19
 
