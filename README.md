@@ -146,6 +146,21 @@ Visit our [support for browsers and assistive technology](/docs/contributing/bro
 Read our [contributing guidelines](CONTRIBUTING.md) to contribute to Our Future Health design system toolkit.
 If you're working with icon assets, see the [Material icons workflow](docs/contributing/material-icons.md).
 
+## Jira workflow for design system tickets
+
+```mermaid
+flowchart LR
+  todo["To Do"] --> designRequired{"Design input or<br/>changes required?"}
+  designRequired -->|Yes, for example Figma changes| design["In Design/Draft"]
+  designRequired -->|No| ready["Ready for Dev"]
+  design --> ready
+  ready --> devTicket{"Development ticket?"}
+  devTicket -->|Yes| development["In Dev"]
+  devTicket -->|No| approval["Approval<br/>Test here and wait for<br/>other engineers to approve"]
+  development --> approval
+  approval -->|After release| done["Done"]
+```
+
 ## Design system docs website
 
 > **Note** <br>

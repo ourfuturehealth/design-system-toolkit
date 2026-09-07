@@ -353,7 +353,7 @@ describe('Header', () => {
     expect(mobileGroupButton).toHaveAttribute('aria-expanded', 'false');
   });
 
-  it('renders action and account rows at the top of the mobile menu for signed-in accounts', async () => {
+  it('renders the action first and account rows after primary navigation in the mobile menu', async () => {
     const user = userEvent.setup();
 
     const { container } = render(
@@ -361,6 +361,7 @@ describe('Header', () => {
         account={{
           type: 'account',
           accountHref: '/account',
+          accountLabel: 'Manage account',
           signOutHref: '/log-out',
         }}
         action={{
@@ -385,14 +386,51 @@ describe('Header', () => {
       'href',
       '/join',
     );
-    expect(within(mobileItems[1]).getByRole('link', { name: 'Account' })).toHaveAttribute(
+    expect(within(mobileItems[1]).getByRole('link', { name: 'About' })).toHaveAttribute(
       'href',
-      '/account',
+      '/about',
     );
-    expect(within(mobileItems[2]).getByRole('link', { name: 'Log out' })).toHaveAttribute(
-      'href',
-      '/log-out',
+    expect(within(mobileItems[2]).getByRole('button', { name: 'Research' })).toHaveAttribute(
+      'aria-expanded',
+      'false',
     );
+    expect(
+      within(mobileItems[3]).getByRole('link', { name: 'Manage account' }),
+    ).toHaveAttribute('href', '/account');
+    expect(
+      within(mobileItems[4]).getByRole('link', { name: 'Log out' }),
+    ).toHaveAttribute('href', '/log-out');
+  });
+
+  it('renders the account link as current in the mobile menu', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Header
+        account={{
+          type: 'account',
+          accountHref: '/account',
+          accountLabel: 'Manage account',
+          accountLinkProps: {
+            'aria-current': 'page',
+          },
+          signOutHref: '/log-out',
+        }}
+        brand={{
+          ariaLabel: 'Our Future Health home',
+          href: '/',
+        }}
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Menu' }));
+
+    const mobilePanel = container.querySelector('.ofh-header__mobile-panel');
+    const mobileAccountLink = within(mobilePanel as HTMLElement).getByRole('link', {
+      name: 'Manage account',
+    });
+
+    expect(mobileAccountLink).toHaveAttribute('aria-current', 'page');
+    expect(mobileAccountLink).toHaveClass('ofh-header__mobile-link--current');
   });
 
   it('has no accessibility violations', async () => {
