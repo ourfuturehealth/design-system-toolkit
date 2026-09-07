@@ -46,7 +46,7 @@ while IFS= read -r path; do
       react_changed=true
       ;;
   esac
-done < <(git diff --name-only --diff-filter=ACMR "$base_ref" "$head_ref")
+done < <(git diff --name-only --diff-filter=ACMRD "$base_ref" "$head_ref")
 
 version_for() {
   local ref=$1
