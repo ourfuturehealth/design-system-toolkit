@@ -5,7 +5,6 @@ TOKEN="$1"
 PROJECT_NAME="$2"
 BRANCH="$3"
 VERBOSITY="$4"
-SNYK_TOKEN="$5"
 
 HOST="https://ourfuturehealth.kondukto.io"
 
@@ -27,18 +26,6 @@ run_snyk_scans() {
   local tool="$1"
   local branch_name="$BRANCH"
   local output_file="${tool}_results.json"
-
-  if [[ -z "${SNYK_TOKEN:-}" ]]; then
-    log_error "⚠️ Scan $tool skipped: No SNYK_TOKEN provided! Please set 'SNYK_TOKEN' in the GitHub Action inputs."
-  fi
-
-  export SNYK_TOKEN="$SNYK_TOKEN"
-  export SNYK_API="https://app.eu.snyk.io/api"
-
-  # Authenticate with Snyk
-  if ! $GITHUB_WORKSPACE/snyk auth "$SNYK_TOKEN"; then
-    log_error "⚠️ Scan ($tool) skipped: Snyk authentication failed! Ensure the SNYK_TOKEN is valid."
-  fi
 
   debug "Running $tool scan on branch: $branch_name"
 

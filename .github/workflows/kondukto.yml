@@ -22,6 +22,16 @@ jobs:
         curl -L -o $GITHUB_WORKSPACE/snyk https://github.com/snyk/cli/releases/latest/download/snyk-linux
         chmod +x $GITHUB_WORKSPACE/snyk
 
+    - name: Configure and authenticate Snyk (OAuth)
+      env:
+        SNYK_CLIENT_ID: ${{ secrets.SNYK_CLIENT_ID }}
+        SNYK_CLIENT_SECRET: ${{ secrets.SNYK_CLIENT_SECRET }}
+      run: |
+        "$GITHUB_WORKSPACE/snyk" config environment SNYK-EU-01
+        "$GITHUB_WORKSPACE/snyk" auth --auth-type=oauth \
+          --client-id="$SNYK_CLIENT_ID" \
+          --client-secret="$SNYK_CLIENT_SECRET"
+
     - name: Install KDT CLI
       run: |
         curl -sSL https://cli.kondukto.io | sh
@@ -37,8 +47,7 @@ jobs:
           "$TOKEN" \
           "$PROJECT_NAME" \
           "main" \
-          "$VERBOSITY" \
-          "${{ secrets.SNYK_TOKEN }}"
+          "$VERBOSITY"
 
     - name: List available scanners
       run: kdt list scanners --host ${{ secrets.KONDUKTO_HOST }} --token ${{ secrets.KONDUKTO_TOKEN }}
