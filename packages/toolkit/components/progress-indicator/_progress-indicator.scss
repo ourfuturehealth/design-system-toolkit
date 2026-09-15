@@ -17,14 +17,14 @@
 .ofh-progress-indicator__steps {
   @include ofh-typography-weight-bold;
 
-  color: $ofh-color-foreground-secondary;
+  color: $ofh-color-greyscale-3;
   font-size: $ofh-size-14;
   line-height: $ofh-size-20;
 }
 
 .ofh-progress-indicator__track {
   display: flex;
-  gap: $ofh-size-4;
+  gap: $ofh-size-1;
   width: 100%;
 }
 
@@ -42,7 +42,7 @@
 .ofh-progress-indicator__helper {
   @include ofh-typography-weight-bold;
 
-  color: $ofh-color-foreground-brand-green-teal;
+  color: $ofh-color-greyscale-3;
   display: block;
   font-size: $ofh-size-14;
   line-height: $ofh-size-20;
