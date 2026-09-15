@@ -49,16 +49,16 @@ export const ProgressIndicator = ({
     <div
       {...props}
       ref={ref}
-      className={joinClassNames('ofh-progress-indicator-bar', className)}
+      className={joinClassNames('ofh-progress-indicator', className)}
     >
-      <div className="ofh-progress-indicator-bar__header">
+      <div className="ofh-progress-indicator__header">
         {label ? (
-          <span className="ofh-progress-indicator-bar__label">{label}</span>
+          <span className="ofh-progress-indicator__label">{label}</span>
         ) : null}
-        <span className="ofh-progress-indicator-bar__steps">{stepsText}</span>
+        <span className="ofh-progress-indicator__steps">{stepsText}</span>
       </div>
       <div
-        className="ofh-progress-indicator-bar__track"
+        className="ofh-progress-indicator__track"
         role="progressbar"
         aria-valuenow={clampedStep}
         aria-valuemin={0}
@@ -68,18 +68,17 @@ export const ProgressIndicator = ({
       >
         {Array.from({ length: totalSteps }, (_, index) => (
           <span
-            // eslint-disable-next-line react/no-array-index-key -- segments are static and have no other identity
             key={index}
             className={joinClassNames(
-              'ofh-progress-indicator-bar__segment',
+              'ofh-progress-indicator__segment',
               index < clampedStep &&
-                'ofh-progress-indicator-bar__segment--filled',
+                'ofh-progress-indicator__segment--filled',
             )}
           />
         ))}
       </div>
       {helperText ? (
-        <span className="ofh-progress-indicator-bar__helper">
+        <span className="ofh-progress-indicator__helper">
           {helperText}
         </span>
       ) : null}

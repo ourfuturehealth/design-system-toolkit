@@ -24,10 +24,10 @@ describe('ProgressIndicator', () => {
 
     const progressbar = screen.getByRole('progressbar');
     const segments = progressbar.querySelectorAll(
-      '.ofh-progress-indicator-bar__segment',
+      '.ofh-progress-indicator__segment',
     );
     const filledSegments = progressbar.querySelectorAll(
-      '.ofh-progress-indicator-bar__segment--filled',
+      '.ofh-progress-indicator__segment--filled',
     );
 
     expect(segments).toHaveLength(4);
@@ -44,7 +44,7 @@ describe('ProgressIndicator', () => {
     );
 
     expect(container.firstElementChild).toHaveClass(
-      'ofh-progress-indicator-bar',
+      'ofh-progress-indicator',
       'custom-progress',
     );
   });
@@ -92,7 +92,7 @@ describe('ProgressIndicator', () => {
     render(<ProgressIndicator ref={ref} currentStep={1} totalSteps={3} />);
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
-    expect(ref.current).toHaveClass('ofh-progress-indicator-bar');
+    expect(ref.current).toHaveClass('ofh-progress-indicator');
   });
 
   it('has no accessibility violations', async () => {

@@ -1,0 +1,50 @@
+/* ==========================================================================
+   #PROGRESS INDICATOR
+   ========================================================================== */
+
+.ofh-progress-indicator {
+  display: block;
+  width: 100%;
+}
+
+.ofh-progress-indicator__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $ofh-size-8;
+}
+
+.ofh-progress-indicator__label,
+.ofh-progress-indicator__steps {
+  @include ofh-typography-weight-bold;
+
+  color: $ofh-color-foreground-secondary;
+  font-size: $ofh-size-14;
+  line-height: $ofh-size-20;
+}
+
+.ofh-progress-indicator__track {
+  display: flex;
+  gap: $ofh-size-4;
+  width: 100%;
+}
+
+.ofh-progress-indicator__segment {
+  background-color: $ofh-color-background-secondary;
+  border-radius: 0;
+  flex: 1 1 0;
+  height: $ofh-size-8;
+}
+
+.ofh-progress-indicator__segment--filled {
+  background-color: $ofh-color-background-brand;
+}
+
+.ofh-progress-indicator__helper {
+  @include ofh-typography-weight-bold;
+
+  color: $ofh-color-foreground-brand-green-teal;
+  display: block;
+  font-size: $ofh-size-14;
+  line-height: $ofh-size-20;
+  margin-top: $ofh-size-8;
+}
