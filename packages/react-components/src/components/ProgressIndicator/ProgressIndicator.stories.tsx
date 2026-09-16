@@ -7,6 +7,7 @@ const progressIndicatorUsageExample = `import { ProgressIndicator } from '@ourfu
 <ProgressIndicator
   progressState={25}
   totalSegments={8}
+  subSegmentProgress={50}
   label="Personal details"
   progressText="Page 2 of 8"
   helperText="About 5 minutes left"
@@ -33,8 +34,8 @@ const meta: Meta<typeof ProgressIndicator> = {
           <p>
             Pass progress as a percentage through <code>progressState</code>{' '}
             and set the fixed number of segments with{' '}
-            <code>totalSegments</code>. The filled segment count is rounded to
-            the nearest segment.
+            <code>totalSegments</code>. Use <code>subSegmentProgress</code> to
+            fill part of the segment representing the current state.
           </p>
           <p>
             Use the optional <code>label</code> prop to show text on the left
@@ -51,6 +52,7 @@ const meta: Meta<typeof ProgressIndicator> = {
             include={[
               'progressState',
               'totalSegments',
+              'subSegmentProgress',
               'label',
               'progressText',
               'helperText',
@@ -76,6 +78,14 @@ const meta: Meta<typeof ProgressIndicator> = {
     totalSegments: {
       control: { type: 'number', min: 1, step: 1 },
       description: 'Fixed number of segments rendered in the progress track.',
+      table: {
+        category: 'ProgressIndicatorProps',
+      },
+    },
+    subSegmentProgress: {
+      control: { type: 'number', min: 0, max: 100 },
+      description:
+        'Percentage fill applied to the segment representing the current state.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -120,6 +130,7 @@ const meta: Meta<typeof ProgressIndicator> = {
   args: {
     progressState: 25,
     totalSegments: 8,
+    subSegmentProgress: 50,
     label: 'Personal details',
     progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
@@ -146,6 +157,7 @@ export const Default: Story = {
     <ProgressIndicator
       progressState={50}
       totalSegments={8}
+      subSegmentProgress={50}
       label="Personal details"
       progressText="Page 2 of 8"
     />
@@ -156,6 +168,7 @@ export const Builder: Story = {
   args: {
     progressState: 25,
     totalSegments: 8,
+    subSegmentProgress: 50,
     label: 'Personal details',
     progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
@@ -166,6 +179,7 @@ export const Builder: Story = {
       include: [
         'progressState',
         'totalSegments',
+        'subSegmentProgress',
         'label',
         'progressText',
         'helperText',
@@ -176,6 +190,29 @@ export const Builder: Story = {
       description: {
         story:
           'Use the Builder story to try the ProgressIndicator API interactively.',
+      },
+    },
+  },
+};
+
+export const HalfFilledCurrentSegment: Story = {
+  render: () => (
+    <ProgressIndicator
+      progressState={25}
+      totalSegments={8}
+      subSegmentProgress={50}
+      label="Personal details"
+      progressText="Page 2 of 8"
+    />
+  ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Set `subSegmentProgress` to `50` to fill half of the segment representing the current state.',
       },
     },
   },

@@ -13,7 +13,11 @@ export interface ProgressIndicatorProps
   /**
     * Fixed number of segments rendered in the progress track.
    */
-    totalSegments: number;
+  totalSegments: number;
+  /**
+   * Percentage fill applied to the segment representing the current state.
+   */
+  subSegmentProgress?: number;
   /**
    * Optional text shown on the left of the header, above the track.
    */
@@ -43,6 +47,7 @@ export interface ProgressIndicatorProps
 export const ProgressIndicator = ({
   progressState,
   totalSegments,
+  subSegmentProgress = 0,
   label,
   progressText,
   helperText,
@@ -52,8 +57,12 @@ export const ProgressIndicator = ({
   ...props
 }: ProgressIndicatorProps) => {
   const clampedProgressState = Math.min(Math.max(progressState, 0), 100);
+  const clampedSubSegmentProgress = Math.min(
+    Math.max(subSegmentProgress, 0),
+    100,
+  );
   const segmentCount = Math.max(Math.round(totalSegments), 1);
-  const filledSegmentCount = Math.round(
+  const filledSegmentCount = Math.floor(
     (clampedProgressState / 100) * segmentCount,
   );
   const percentageText = `${clampedProgressState}%`;
@@ -90,16 +99,28 @@ export const ProgressIndicator = ({
         aria-valuetext={percentageText}
         aria-label={accessibleLabel}
       >
-        {Array.from({ length: segmentCount }, (_, index) => (
-          <span
-            key={index}
-            className={joinClassNames(
-              'ofh-progress-indicator__segment',
-              index < filledSegmentCount &&
-                'ofh-progress-indicator__segment--filled',
-            )}
-          />
-        ))}
+        {Array.from({ length: segmentCount }, (_, index) => {
+          const isCurrentSegment =
+            index === filledSegmentCount && filledSegmentCount < segmentCount;
+
+          return (
+            <span
+              key={index}
+              className={joinClassNames(
+                'ofh-progress-indicator__segment',
+                index < filledSegmentCount &&
+                  'ofh-progress-indicator__segment--filled',
+              )}
+            >
+              {isCurrentSegment ? (
+                <span
+                  className="ofh-progress-indicator__segment-progress"
+                  style={{ width: `${clampedSubSegmentProgress}%` }}
+                />
+              ) : null}
+            </span>
+          );
+        })}
       </div>
       {helperText ? (
         <span className="ofh-progress-indicator__helper">

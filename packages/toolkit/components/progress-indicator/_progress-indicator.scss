@@ -36,10 +36,17 @@
   border-radius: 0;
   flex: 1 1 0;
   height: $ofh-size-8;
+  overflow: hidden;
 }
 
 .ofh-progress-indicator__segment--filled {
   background-color: $ofh-color-feedback-success-2-main;
+}
+
+.ofh-progress-indicator__segment-progress {
+  background-color: $ofh-color-feedback-success-2-main;
+  display: block;
+  height: 100%;
 }
 
 .ofh-progress-indicator__helper {

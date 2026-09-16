@@ -32,6 +32,52 @@ describe('ProgressIndicator', () => {
     expect(filledSegments).toHaveLength(2);
   });
 
+  it('partially fills the segment representing the current state', () => {
+    render(
+      <ProgressIndicator
+        progressState={25}
+        totalSegments={8}
+        subSegmentProgress={40}
+      />,
+    );
+
+    expect(
+      screen
+        .getByRole('progressbar')
+        .querySelector('.ofh-progress-indicator__segment-progress'),
+    ).toHaveStyle({ width: '40%' });
+  });
+
+  it('clamps sub-segment progress between 0 and 100', () => {
+    const { rerender } = render(
+      <ProgressIndicator
+        progressState={25}
+        totalSegments={8}
+        subSegmentProgress={125}
+      />,
+    );
+
+    expect(
+      screen
+        .getByRole('progressbar')
+        .querySelector('.ofh-progress-indicator__segment-progress'),
+    ).toHaveStyle({ width: '100%' });
+
+    rerender(
+      <ProgressIndicator
+        progressState={25}
+        totalSegments={8}
+        subSegmentProgress={-25}
+      />,
+    );
+
+    expect(
+      screen
+        .getByRole('progressbar')
+        .querySelector('.ofh-progress-indicator__segment-progress'),
+    ).toHaveStyle({ width: '0%' });
+  });
+
   it('removes gaps between segments when showBars is false', () => {
     render(
       <ProgressIndicator

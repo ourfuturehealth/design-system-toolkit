@@ -46,6 +46,7 @@ Use the progress indicator to show users how far through a multi-step process (f
 {{ progressIndicator({
   progressState: 25,
   totalSegments: 8,
+  subSegmentProgress: 50,
   label: "Personal details",
   progressText: "Page 2 of 8",
   helperText: "About 5 minutes left"
@@ -56,6 +57,7 @@ Use the progress indicator to show users how far through a multi-step process (f
 
 - `progressState` (required): progress percentage, clamped between 0 and 100.
 - `totalSegments` (required): fixed number of segments rendered in the track.
+- `subSegmentProgress`: percentage fill applied to the current segment, clamped between 0 and 100. Defaults to `0`.
 - `label`: optional text shown on the left of the header, above the track.
 - `progressText`: optional free-form text shown on the right of the header.
 - `helperText`: optional supporting text shown below the track.
