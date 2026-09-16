@@ -5,22 +5,20 @@ import { describe, expect, it } from 'vitest';
 import { ProgressIndicator } from './ProgressIndicator';
 
 describe('ProgressIndicator', () => {
-  it('renders the default steps text and progressbar attributes', () => {
-    render(<ProgressIndicator currentStep={2} totalSteps={5} />);
-
-    expect(screen.getByText('Page 2 of 5')).toBeInTheDocument();
+  it('renders percentage-based progressbar attributes', () => {
+    render(<ProgressIndicator progressState={40} totalSegments={5} />);
 
     const progressbar = screen.getByRole('progressbar');
 
-    expect(progressbar).toHaveAttribute('aria-valuenow', '2');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '40');
     expect(progressbar).toHaveAttribute('aria-valuemin', '0');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '5');
-    expect(progressbar).toHaveAttribute('aria-valuetext', 'Page 2 of 5');
-    expect(progressbar).toHaveAttribute('aria-label', 'Page 2 of 5');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
+    expect(progressbar).toHaveAttribute('aria-valuetext', '40%');
+    expect(progressbar).toHaveAttribute('aria-label', '40%');
   });
 
-  it('renders a segment for each step and fills completed ones', () => {
-    render(<ProgressIndicator currentStep={2} totalSteps={4} />);
+  it('maps the progress percentage onto the fixed segment count', () => {
+    render(<ProgressIndicator progressState={25} totalSegments={8} />);
 
     const progressbar = screen.getByRole('progressbar');
     const segments = progressbar.querySelectorAll(
@@ -30,13 +28,17 @@ describe('ProgressIndicator', () => {
       '.ofh-progress-indicator__segment--filled',
     );
 
-    expect(segments).toHaveLength(4);
+    expect(segments).toHaveLength(8);
     expect(filledSegments).toHaveLength(2);
   });
 
   it('removes gaps between segments when showBars is false', () => {
     render(
-      <ProgressIndicator currentStep={2} totalSteps={4} showBars={false} />,
+      <ProgressIndicator
+        progressState={50}
+        totalSegments={4}
+        showBars={false}
+      />,
     );
 
     expect(screen.getByRole('progressbar')).toHaveClass(
@@ -47,8 +49,8 @@ describe('ProgressIndicator', () => {
   it('applies the toolkit classes and react className together', () => {
     const { container } = render(
       <ProgressIndicator
-        currentStep={3}
-        totalSteps={5}
+        progressState={60}
+        totalSegments={5}
         className="custom-progress"
       />,
     );
@@ -62,8 +64,8 @@ describe('ProgressIndicator', () => {
   it('supports an optional label and includes it in the accessible name', () => {
     render(
       <ProgressIndicator
-        currentStep={2}
-        totalSteps={5}
+        progressState={40}
+        totalSegments={5}
         label="Personal details"
       />,
     );
@@ -71,15 +73,27 @@ describe('ProgressIndicator', () => {
     expect(screen.getByText('Personal details')).toBeInTheDocument();
     expect(screen.getByRole('progressbar')).toHaveAttribute(
       'aria-label',
-      'Personal details: Page 2 of 5',
+      'Personal details: 40%',
     );
+  });
+
+  it('supports optional free-form progress text', () => {
+    render(
+      <ProgressIndicator
+        progressState={25}
+        totalSegments={8}
+        progressText="Page 2 of 8"
+      />,
+    );
+
+    expect(screen.getByText('Page 2 of 8')).toBeInTheDocument();
   });
 
   it('supports optional helper text', () => {
     render(
       <ProgressIndicator
-        currentStep={2}
-        totalSteps={5}
+        progressState={40}
+        totalSegments={5}
         helperText="About 5 minutes left"
       />,
     );
@@ -87,19 +101,26 @@ describe('ProgressIndicator', () => {
     expect(screen.getByText('About 5 minutes left')).toBeInTheDocument();
   });
 
-  it('clamps the current step within the valid range', () => {
-    render(<ProgressIndicator currentStep={10} totalSteps={5} />);
+  it('clamps the progress percentage within the valid range', () => {
+    render(<ProgressIndicator progressState={125} totalSegments={5} />);
 
     const progressbar = screen.getByRole('progressbar');
 
-    expect(progressbar).toHaveAttribute('aria-valuenow', '5');
-    expect(screen.getByText('Page 5 of 5')).toBeInTheDocument();
+    expect(progressbar).toHaveAttribute('aria-valuenow', '100');
+    expect(progressbar).toHaveAttribute('aria-valuetext', '100%');
+    expect(
+      progressbar.querySelectorAll(
+        '.ofh-progress-indicator__segment--filled',
+      ),
+    ).toHaveLength(5);
   });
 
   it('forwards refs to the root element', () => {
     const ref = createRef<HTMLDivElement>();
 
-    render(<ProgressIndicator ref={ref} currentStep={1} totalSteps={3} />);
+    render(
+      <ProgressIndicator ref={ref} progressState={33} totalSegments={3} />,
+    );
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
     expect(ref.current).toHaveClass('ofh-progress-indicator');
@@ -107,7 +128,7 @@ describe('ProgressIndicator', () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <ProgressIndicator currentStep={2} totalSteps={5} />,
+      <ProgressIndicator progressState={40} totalSegments={5} />,
     );
 
     const results = await axe(container);

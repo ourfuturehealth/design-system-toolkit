@@ -7,17 +7,21 @@ export interface ProgressIndicatorProps
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
   /**
-   * The total number of steps in the process.
+    * Progress percentage, between 0 and 100.
    */
-  totalSteps: number;
+    progressState: number;
   /**
-   * The current step number, between 0 and `totalSteps`.
+    * Fixed number of segments rendered in the progress track.
    */
-  currentStep: number;
+    totalSegments: number;
   /**
    * Optional text shown on the left of the header, above the track.
    */
   label?: React.ReactNode;
+    /**
+    * Optional free-form text shown on the right of the header.
+    */
+    progressText?: React.ReactNode;
   /**
    * Optional supporting text shown below the track.
    */
@@ -37,18 +41,24 @@ export interface ProgressIndicatorProps
 }
 
 export const ProgressIndicator = ({
-  totalSteps,
-  currentStep,
+  progressState,
+  totalSegments,
   label,
+  progressText,
   helperText,
   showBars = true,
   className = '',
   ref,
   ...props
 }: ProgressIndicatorProps) => {
-  const clampedStep = Math.min(Math.max(currentStep, 0), totalSteps);
-  const stepsText = `Page ${clampedStep} of ${totalSteps}`;
-  const accessibleLabel = label ? `${label}: ${stepsText}` : stepsText;
+  const clampedProgressState = Math.min(Math.max(progressState, 0), 100);
+  const segmentCount = Math.max(Math.round(totalSegments), 1);
+  const filledSegmentCount = Math.round(
+    (clampedProgressState / 100) * segmentCount,
+  );
+  const percentageText = `${clampedProgressState}%`;
+  const accessibleLabel =
+    typeof label === 'string' ? `${label}: ${percentageText}` : percentageText;
 
   return (
     <div
@@ -56,30 +66,36 @@ export const ProgressIndicator = ({
       ref={ref}
       className={joinClassNames('ofh-progress-indicator', className)}
     >
-      <div className="ofh-progress-indicator__header">
-        {label ? (
-          <span className="ofh-progress-indicator__label">{label}</span>
-        ) : null}
-        <span className="ofh-progress-indicator__steps">{stepsText}</span>
-      </div>
+      {label || progressText ? (
+        <div className="ofh-progress-indicator__header">
+          {label ? (
+            <span className="ofh-progress-indicator__label">{label}</span>
+          ) : null}
+          {progressText ? (
+            <span className="ofh-progress-indicator__steps">
+              {progressText}
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       <div
         className={joinClassNames(
           'ofh-progress-indicator__track',
           !showBars && 'ofh-progress-indicator__track--without-bars',
         )}
         role="progressbar"
-        aria-valuenow={clampedStep}
+        aria-valuenow={clampedProgressState}
         aria-valuemin={0}
-        aria-valuemax={totalSteps}
-        aria-valuetext={stepsText}
+        aria-valuemax={100}
+        aria-valuetext={percentageText}
         aria-label={accessibleLabel}
       >
-        {Array.from({ length: totalSteps }, (_, index) => (
+        {Array.from({ length: segmentCount }, (_, index) => (
           <span
             key={index}
             className={joinClassNames(
               'ofh-progress-indicator__segment',
-              index < clampedStep &&
+              index < filledSegmentCount &&
                 'ofh-progress-indicator__segment--filled',
             )}
           />
