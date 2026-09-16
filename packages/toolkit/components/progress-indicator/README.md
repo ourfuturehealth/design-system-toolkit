@@ -56,5 +56,6 @@ Use the progress indicator to show users how far through a multi-step process (f
 - `totalSteps` (required): the total number of steps.
 - `label`: optional text shown on the left of the header, above the track.
 - `helperText`: optional supporting text shown below the track.
+- `showBars`: whether to show gaps between progress segments. Defaults to `true`.
 - `classes`: additional classes to add to the outer element.
 - `attributes`: additional HTML attributes to add to the outer element.

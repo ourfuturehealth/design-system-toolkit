@@ -6,7 +6,7 @@
     <span class="ofh-progress-indicator__steps">Page {{ params.currentStep }} of {{ params.totalSteps }}</span>
   </div>
   <div
-    class="ofh-progress-indicator__track"
+    class="ofh-progress-indicator__track{% if params.showBars == false %} ofh-progress-indicator__track--without-bars{% endif %}"
     role="progressbar"
     aria-valuenow="{{ params.currentStep }}"
     aria-valuemin="0"

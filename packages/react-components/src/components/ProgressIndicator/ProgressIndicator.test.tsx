@@ -34,6 +34,16 @@ describe('ProgressIndicator', () => {
     expect(filledSegments).toHaveLength(2);
   });
 
+  it('removes gaps between segments when showBars is false', () => {
+    render(
+      <ProgressIndicator currentStep={2} totalSteps={4} showBars={false} />,
+    );
+
+    expect(screen.getByRole('progressbar')).toHaveClass(
+      'ofh-progress-indicator__track--without-bars',
+    );
+  });
+
   it('applies the toolkit classes and react className together', () => {
     const { container } = render(
       <ProgressIndicator

@@ -23,6 +23,10 @@ export interface ProgressIndicatorProps
    */
   helperText?: React.ReactNode;
   /**
+   * Whether to show gaps between progress segments.
+   */
+  showBars?: boolean;
+  /**
    * Additional classes added alongside the toolkit classes.
    */
   className?: string;
@@ -37,6 +41,7 @@ export const ProgressIndicator = ({
   currentStep,
   label,
   helperText,
+  showBars = true,
   className = '',
   ref,
   ...props
@@ -58,7 +63,10 @@ export const ProgressIndicator = ({
         <span className="ofh-progress-indicator__steps">{stepsText}</span>
       </div>
       <div
-        className="ofh-progress-indicator__track"
+        className={joinClassNames(
+          'ofh-progress-indicator__track',
+          !showBars && 'ofh-progress-indicator__track--without-bars',
+        )}
         role="progressbar"
         aria-valuenow={clampedStep}
         aria-valuemin={0}

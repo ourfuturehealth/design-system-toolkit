@@ -9,6 +9,7 @@ const progressIndicatorUsageExample = `import { ProgressIndicator } from '@ourfu
   totalSteps={8}
   label="Personal details"
   helperText="About 5 minutes left"
+  showBars={true}
 />;
 `;
 
@@ -38,7 +39,8 @@ const meta: Meta<typeof ProgressIndicator> = {
           <p>
             Use the optional <code>label</code> prop to show text on the left
             of the header, and <code>helperText</code> to show supporting text
-            below the track.
+            below the track. Set <code>showBars</code> to <code>false</code> to
+            remove the gaps between segments.
           </p>
           <Source code={progressIndicatorUsageExample} language="tsx" />
 
@@ -50,6 +52,7 @@ const meta: Meta<typeof ProgressIndicator> = {
               'currentStep',
               'label',
               'helperText',
+              'showBars',
               'className',
             ]}
           />
@@ -90,6 +93,13 @@ const meta: Meta<typeof ProgressIndicator> = {
         category: 'ProgressIndicatorProps',
       },
     },
+    showBars: {
+      control: 'boolean',
+      description: 'Whether to show gaps between progress segments.',
+      table: {
+        category: 'ProgressIndicatorProps',
+      },
+    },
     className: {
       control: 'text',
       description: 'Additional classes added alongside the toolkit classes.',
@@ -103,6 +113,7 @@ const meta: Meta<typeof ProgressIndicator> = {
     totalSteps: 8,
     label: 'Personal details',
     helperText: 'About 5 minutes left',
+    showBars: true,
   },
 };
 
@@ -137,15 +148,39 @@ export const Builder: Story = {
     totalSteps: 8,
     label: 'Personal details',
     helperText: 'About 5 minutes left',
+    showBars: true,
   },
   parameters: {
     controls: {
-      include: ['totalSteps', 'currentStep', 'label', 'helperText'],
+      include: ['totalSteps', 'currentStep', 'label', 'helperText', 'showBars'],
     },
     docs: {
       description: {
         story:
           'Use the Builder story to try the ProgressIndicator API interactively.',
+      },
+    },
+  },
+};
+
+export const WithoutBars: Story = {
+  render: () => (
+    <ProgressIndicator
+      currentStep={2}
+      totalSteps={8}
+      label="Personal details"
+      helperText="About 5 minutes left"
+      showBars={false}
+    />
+  ),
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Set `showBars` to `false` to remove the gaps between progress segments.',
       },
     },
   },
