@@ -6,6 +6,20 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
+### 2026-09-15
+
+#### @ourfuturehealth/toolkit 4.26.0 (`toolkit-v4.26.0`)
+
+##### Added
+
+- Added the `progress-indicator` component, showing users how far through a multi-step process they are
+
+#### @ourfuturehealth/react-components 0.25.0 (`react-v0.25.0`)
+
+##### Added
+
+- Added the `ProgressIndicator` component, showing users how far through a multi-step process they are
+
 ### 2026-09-07
 
 #### @ourfuturehealth/toolkit 4.25.1 (`toolkit-v4.25.1`)
