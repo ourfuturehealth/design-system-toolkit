@@ -15,11 +15,9 @@
 
 .ofh-progress-indicator__label,
 .ofh-progress-indicator__steps {
-  @include ofh-typography-weight-bold;
-
-  color: $ofh-color-greyscale-3;
-  font-size: $ofh-size-14;
-  line-height: $ofh-size-20;
+  @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
+  color: $ofh-color-foreground-secondary;
+  font-family: $ofh-typography-font-source-sans-pro;
 }
 
 .ofh-progress-indicator__track {
@@ -29,20 +27,18 @@
 }
 
 .ofh-progress-indicator__segment {
-  background-color: $ofh-color-background-secondary;
+  background-color: $ofh-color-background-tertiary;
   border-radius: 0;
   flex: 1 1 0;
   height: $ofh-size-8;
 }
 
 .ofh-progress-indicator__segment--filled {
-  background-color: $ofh-color-background-brand;
+  background-color: $ofh-color-feedback-success-2-main;
 }
 
 .ofh-progress-indicator__helper {
-  @include ofh-typography-weight-bold;
-
-  color: $ofh-color-greyscale-3;
+  color: $ofh-color-foreground-secondary;
   display: block;
   font-size: $ofh-size-14;
   line-height: $ofh-size-20;
