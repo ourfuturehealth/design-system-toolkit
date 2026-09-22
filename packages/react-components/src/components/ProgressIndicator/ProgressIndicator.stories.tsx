@@ -167,7 +167,7 @@ export const Default: Story = {
 export const Builder: Story = {
   args: {
     progressState: 25,
-    totalSegments: 8,
+    totalSegments: 3,
     subSegmentProgress: 50,
     label: 'Personal details',
     progressText: 'Page 2 of 8',
@@ -190,29 +190,6 @@ export const Builder: Story = {
       description: {
         story:
           'Use the Builder story to try the ProgressIndicator API interactively.',
-      },
-    },
-  },
-};
-
-export const HalfFilledCurrentSegment: Story = {
-  render: () => (
-    <ProgressIndicator
-      progressState={25}
-      totalSegments={8}
-      subSegmentProgress={50}
-      label="Personal details"
-      progressText="Page 2 of 8"
-    />
-  ),
-  parameters: {
-    controls: {
-      disable: true,
-    },
-    docs: {
-      description: {
-        story:
-          'Set `subSegmentProgress` to `50` to fill half of the segment representing the current state.',
       },
     },
   },
