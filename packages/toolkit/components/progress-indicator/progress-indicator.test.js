@@ -14,6 +14,7 @@ describe('Our Future Health progress indicator macro', () => {
     [5, 5],
     [2, 2],
     [1, 1],
+    [0.5, 1],
     [0, 1],
     [-1, 1],
   ])('renders step %s as page %s of 5', (currentStep, expectedStep) => {
@@ -29,6 +30,33 @@ describe('Our Future Health progress indicator macro', () => {
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedStep);
+  });
+
+  it.each([
+    [1, 1, 1],
+    [3, 3, 2],
+    [8, 8, 2],
+    [0, 1, 1],
+    [-3, 1, 1],
+    [4.4, 4, 2],
+    [4.6, 5, 2],
+  ])('normalizes totalSteps=%s to %s segments with %s filled', (totalSteps, expectedTotal, expectedStep) => {
+    const indicator = document.querySelector(`[data-total-steps="${totalSteps}"]`);
+    const progressbar = indicator.querySelector('[role="progressbar"]');
+    const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
+    const pageText = `Page ${expectedStep} of ${expectedTotal}`;
+
+    expect(segments).toHaveLength(expectedTotal);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedStep);
+    segments.forEach((segment, index) => {
+      expect(segment.classList.contains('ofh-progress-indicator__segment--filled')).toBe(index < expectedStep);
+    });
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedStep));
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe(String(expectedTotal));
+    expect(progressbar.getAttribute('aria-valuetext')).toBe(pageText);
+    expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
   });
 
   it.each([1, 2, 3])('uses Progress Bar as the accessible name for label case %s', (labelCase) => {
@@ -54,7 +82,8 @@ describe('Our Future Health progress indicator macro', () => {
     expect(track.closest('[role="progressbar"]')).toBe(progressbar);
     expect(header.getAttribute('aria-hidden')).toBe('true');
     expect(track.getAttribute('aria-hidden')).toBe('true');
-    expect(progressbar.hasAttribute('aria-hidden')).toBe(false);
+    expect(progressbar.closest('[aria-hidden="true"], [hidden]')).toBeNull();
+    expect(track.classList.contains('ofh-progress-indicator__track--without-bars')).toBe(false);
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('Page 2 of 8');
     expect(helper.textContent).toBe('About 5 minutes left');
@@ -92,5 +121,80 @@ describe('Our Future Health progress indicator macro', () => {
 
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('40%');
+  });
+
+  it.each([
+    [-25, 0, 0],
+    [0, 0, 0],
+    [25, 25, 2],
+    [100, 100, 8],
+    [125, 100, 8],
+  ])('clamps progressState=%s to %s percent with %s filled segments', (progressState, expectedProgress, expectedFilled) => {
+    const indicator = document.querySelector(`[data-progress-state="${progressState}"]`);
+    const progressbar = indicator.querySelector('[role="progressbar"]');
+    const partialSegments = progressbar.querySelectorAll('.ofh-progress-indicator__segment-progress');
+
+    expect(indicator.querySelector('.ofh-progress-indicator__header')).toBeNull();
+    expect(indicator.querySelector('.ofh-progress-indicator__helper')).toBeNull();
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
+    expect(progressbar.getAttribute('aria-valuetext')).toBe(`${expectedProgress}%`);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(8);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
+    expect(partialSegments).toHaveLength(expectedProgress === 100 ? 0 : 1);
+    if (partialSegments.length) {
+      expect(partialSegments[0].style.width).toBe('0%');
+    }
+  });
+
+  it.each([
+    [-25, 0],
+    [0, 0],
+    [40, 40],
+    [100, 100],
+    [125, 100],
+  ])('clamps subSegmentProgress=%s to %s percent on the current segment', (subSegmentProgress, expectedProgress) => {
+    const progressbar = document.querySelector(`[data-sub-segment-progress="${subSegmentProgress}"] [role="progressbar"]`);
+    const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
+    const partialSegments = progressbar.querySelectorAll('.ofh-progress-indicator__segment-progress');
+
+    expect(segments).toHaveLength(8);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(2);
+    expect(partialSegments).toHaveLength(1);
+    expect(partialSegments[0].parentElement).toBe(segments[2]);
+    expect(partialSegments[0].style.width).toBe(`${expectedProgress}%`);
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('25');
+  });
+
+  it.each([true, false])('sets the gap modifier for showBars=%s', (showBars) => {
+    const track = document.querySelector(`[data-show-bars="${showBars}"] .ofh-progress-indicator__track`);
+
+    expect(track.classList.contains('ofh-progress-indicator__track--without-bars')).toBe(!showBars);
+    expect(track.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
+  });
+
+  it('adds custom classes and attributes to the root without replacing toolkit classes', () => {
+    const indicator = document.querySelector('[data-show-bars="false"] .ofh-progress-indicator');
+
+    expect(indicator.className).toBe('ofh-progress-indicator custom-progress extra-progress');
+    expect(indicator.getAttribute('data-tracking')).toBe('progress');
+    expect(indicator.hasAttribute('classes')).toBe(false);
+    expect(indicator.querySelector('[role="progressbar"]').getAttribute('aria-label')).toBe('Progress Bar');
+  });
+
+  it('prioritizes clamped step values over percentage props and free-form progress text', () => {
+    const indicator = document.querySelector('[data-step-precedence]');
+    const progressbar = indicator.querySelector('[role="progressbar"]');
+
+    expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe('Page 5 of 5');
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('5');
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe('5');
+    expect(progressbar.getAttribute('aria-valuetext')).toBe('Page 5 of 5');
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(5);
+    expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress')).toBeNull();
   });
 });
