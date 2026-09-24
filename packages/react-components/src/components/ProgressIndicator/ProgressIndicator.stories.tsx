@@ -7,7 +7,7 @@ const progressIndicatorUsageExample = `import { ProgressIndicator } from '@ourfu
 <ProgressIndicator
   progressState={25}
   totalSegments={8}
-  subSegmentProgress={50}
+  subSegmentProgress={0}
   label="Personal details"
   progressText="Page 2 of 8"
   helperText="About 5 minutes left"
@@ -32,17 +32,21 @@ const meta: Meta<typeof ProgressIndicator> = {
 
           <h2>How to use the React component</h2>
           <p>
-            Pass progress as a percentage from 1 to 100 through <code>progressState</code>{' '}
+            Pass the overall percentage from 1 to 100 through <code>progressState</code>{' '}
             and set the fixed number of segments with{' '}
-            <code>totalSegments</code>. Use <code>subSegmentProgress</code> to
-            fill part of the segment representing the current state.
+            <code>totalSegments</code>. Full and partial segment fills are derived
+            from that percentage; leave <code>subSegmentProgress</code> at 0
+            when the percentage already includes all progress.
           </p>
           <p>
             Both React and the toolkit Nunjucks macro clamp <code>progressState</code>{' '}
-            to 1 through 100. Values below 1, including 0, become 1%; values above
-            100 become 100%. The ARIA range is also 1 through 100.{' '}
-            <code>subSegmentProgress</code> remains independently clamped between
-            0 and 100, defaulting to 0.
+            to 1 through 100. The optional <code>subSegmentProgress</code> is
+            additional progress as a percentage of one segment, clamped between
+            0 and 100. The overall percentage is{' '}
+            <code>min(progressState + subSegmentProgress / segmentCount, 100)</code>{' '}
+            after clamping inputs and normalizing the segment count. Both the
+            visible fill and ARIA values use this total. For example, 25% over
+            eight segments plus a 50% segment adds up to 31.25%.
           </p>
           <p>
             Pass a plain-text string to the optional <code>label</code> prop to show text on the left
@@ -50,6 +54,10 @@ const meta: Meta<typeof ProgressIndicator> = {
             right, and <code>helperText</code> to show supporting text below
             the track. Set <code>showBars</code> to <code>false</code> to remove
             the gaps between segments.
+          </p>
+          <p>
+            Keep free-form <code>progressText</code> consistent with the overall
+            progress. It does not override the calculated ARIA percentage.
           </p>
           <p>
             Use <code>classes</code>, <code>className</code>, or both to add
@@ -83,7 +91,7 @@ const meta: Meta<typeof ProgressIndicator> = {
   argTypes: {
     progressState: {
       control: { type: 'number', min: 1, max: 100 },
-      description: 'Progress percentage, clamped between 1 and 100 in both React and the toolkit macro. Values below 1, including 0, become 1.',
+      description: 'Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for both visual fill and ARIA.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -98,7 +106,7 @@ const meta: Meta<typeof ProgressIndicator> = {
     subSegmentProgress: {
       control: { type: 'number', min: 0, max: 100 },
       description:
-        'Percentage fill applied to the segment representing the current state.',
+        'Additional progress as a percentage of one segment, clamped between 0 and 100. Adds subSegmentProgress / segmentCount to the base percentage, capped at 100 overall.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -152,7 +160,7 @@ const meta: Meta<typeof ProgressIndicator> = {
   args: {
     progressState: 25,
     totalSegments: 8,
-    subSegmentProgress: 50,
+    subSegmentProgress: 0,
     label: 'Personal details',
     progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
@@ -179,9 +187,9 @@ export const Default: Story = {
   },
   render: () => (
     <ProgressIndicator
-      progressState={50}
+      progressState={25}
       totalSegments={8}
-      subSegmentProgress={50}
+      subSegmentProgress={0}
       label="Personal details"
       progressText="Page 2 of 8"
     />
@@ -191,8 +199,8 @@ export const Default: Story = {
 export const Builder: Story = {
   args: {
     progressState: 25,
-    totalSegments: 3,
-    subSegmentProgress: 50,
+    totalSegments: 8,
+    subSegmentProgress: 0,
     label: 'Personal details',
     progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
@@ -226,12 +234,29 @@ export const MinimumProgress: Story = {
     progressState: 1,
     totalSegments: 8,
     subSegmentProgress: 0,
-    progressText: 'Page 1 of 8',
+    progressText: '1%',
   },
   parameters: {
     docs: {
       description: {
         story: 'The minimum progress state is 1%. Lower values are clamped to 1%.',
+      },
+    },
+  },
+};
+
+export const PartialProgress: Story = {
+  args: {
+    progressState: 25,
+    totalSegments: 8,
+    subSegmentProgress: 50,
+    progressText: '31.25%',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Two full segments and half of the third represent 31.25% overall. The visual fill and ARIA values agree. Passing progressState={31.25} with no subSegmentProgress produces the same result.',
       },
     },
   },

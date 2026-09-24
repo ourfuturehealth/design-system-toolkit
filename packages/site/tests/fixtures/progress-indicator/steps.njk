@@ -95,3 +95,23 @@
     progressText: 'Page 10 of 5'
   }) }}
 </div>
+
+{% for progressCase in [[25, 50], [30, 0], [30, 50], [50, 50], [95, 50], [100, 100]] %}
+<div data-overall-case="{{ loop.index }}">
+  {{ progressIndicator({
+    progressState: progressCase[0],
+    totalSegments: 8,
+    subSegmentProgress: progressCase[1]
+  }) }}
+</div>
+{% endfor %}
+
+{% for progressCase in [[2, 50], [2, 100], [8, 50]] %}
+<div data-step-partial-case="{{ loop.index }}">
+  {{ progressIndicator({
+    currentStep: progressCase[0],
+    totalSteps: 8,
+    subSegmentProgress: progressCase[1]
+  }) }}
+</div>
+{% endfor %}

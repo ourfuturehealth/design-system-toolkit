@@ -4,7 +4,7 @@
       "name": "currentStep",
       "type": "number",
       "required": false,
-      "description": "Required with totalSteps for step-based progress. Clamped between 1 and the normalized total steps. When both step options are supplied, they take precedence over percentage options and generate the page text."
+      "description": "Required with totalSteps for step-based progress. Base step value, clamped between 1 and the normalized total. The overall step value includes subSegmentProgress / 100 and is capped at the total. Step options take precedence over percentage options; generated page text rounds the overall step value up."
     },
     {
       "name": "totalSteps",
@@ -16,7 +16,7 @@
       "name": "progressState",
       "type": "number",
       "required": false,
-      "description": "Required for percentage mode when the step options are not both supplied. Progress percentage, clamped between 1 and 100, matching React. Values below 1, including 0, become 1."
+      "description": "Required for percentage mode when the step options are not both supplied. Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for both visual fill and ARIA, matching React."
     },
     {
       "name": "totalSegments",
@@ -28,7 +28,7 @@
       "name": "subSegmentProgress",
       "type": "number",
       "required": false,
-      "description": "Percentage fill applied to the next unfilled segment, independently clamped between 0 and 100. Defaults to 0. No partial segment is rendered when all segments are filled."
+      "description": "Additional progress as a percentage of one segment, clamped between 0 and 100. Adds subSegmentProgress / segmentCount to percentage progress, or subSegmentProgress / 100 to step progress. Defaults to 0; the overall value is capped at completion and determines both fill and ARIA."
     },
     {
       "name": "label",
@@ -40,7 +40,7 @@
       "name": "progressText",
       "type": "string",
       "required": false,
-      "description": "Optional free-form text shown on the right of the header in percentage mode. Also used as aria-valuetext; otherwise the percentage is used. Step mode generates Page X of Y instead."
+      "description": "Optional free-form text shown on the right of the header in percentage mode. Keep it consistent with overall progress; it does not override calculated ARIA values. Step mode generates Page X of Y instead."
     },
     {
       "name": "helperText",

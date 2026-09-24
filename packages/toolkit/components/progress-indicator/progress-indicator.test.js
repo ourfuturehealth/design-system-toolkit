@@ -90,28 +90,29 @@ describe('Our Future Health progress indicator macro', () => {
     expect(helper.closest('[role="progressbar"], [aria-hidden="true"]')).toBeNull();
   });
 
-  it('preserves percentage progress and free-form progress text', () => {
+  it('preserves visible free-form text while exposing the overall percentage', () => {
     const indicator = document.querySelector('[data-percentage]');
     const progressbar = indicator.querySelector('[role="progressbar"]');
 
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe('Custom progress text');
-    expect(progressbar.getAttribute('aria-valuenow')).toBe('40');
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('50');
     expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
-    expect(progressbar.getAttribute('aria-valuetext')).toBe('Custom progress text');
+    expect(progressbar.getAttribute('aria-valuetext')).toBe('50%');
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(2);
     expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress').style.width).toBe('50%');
   });
 
-  it('announces the page text as the value in percentage mode', () => {
+  it('keeps page text visible without overriding the accessible percentage', () => {
     const indicator = document.querySelector('[data-percentage-page]');
     const progressbar = indicator.querySelector('[role="progressbar"]');
     const pageLabel = indicator.querySelector('.ofh-progress-indicator__steps');
 
     expect(pageLabel.closest('[role="progressbar"]')).toBe(progressbar);
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
-    expect(progressbar.getAttribute('aria-valuetext')).toBe('Page 2 of 8');
+    expect(pageLabel.textContent).toBe('Page 2 of 8');
+    expect(progressbar.getAttribute('aria-valuetext')).toBe('25%');
     expect(progressbar.getAttribute('aria-valuenow')).toBe('25');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
   });
@@ -147,27 +148,71 @@ describe('Our Future Health progress indicator macro', () => {
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
     expect(partialSegments).toHaveLength(expectedProgress === 100 ? 0 : 1);
     if (partialSegments.length) {
-      expect(partialSegments[0].style.width).toBe('0%');
+      expect(partialSegments[0].style.width).toBe(`${expectedProgress * 8 - expectedFilled * 100}%`);
     }
   });
 
   it.each([
-    [-25, 0],
-    [0, 0],
-    [40, 40],
-    [100, 100],
-    [125, 100],
-  ])('clamps subSegmentProgress=%s to %s percent on the current segment', (subSegmentProgress, expectedProgress) => {
+    [-25, 25, 2, 0],
+    [0, 25, 2, 0],
+    [40, 30, 2, 40],
+    [100, 37.5, 3, 0],
+    [125, 37.5, 3, 0],
+  ])('clamps subSegmentProgress=%s to an overall %s percent', (subSegmentProgress, expectedProgress, expectedFilled, expectedPartial) => {
     const progressbar = document.querySelector(`[data-sub-segment-progress="${subSegmentProgress}"] [role="progressbar"]`);
     const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
     const partialSegments = progressbar.querySelectorAll('.ofh-progress-indicator__segment-progress');
 
     expect(segments).toHaveLength(8);
-    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(2);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
     expect(partialSegments).toHaveLength(1);
-    expect(partialSegments[0].parentElement).toBe(segments[2]);
-    expect(partialSegments[0].style.width).toBe(`${expectedProgress}%`);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe('25');
+    expect(partialSegments[0].parentElement).toBe(segments[expectedFilled]);
+    expect(partialSegments[0].style.width).toBe(`${expectedPartial}%`);
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
+    expect(progressbar.getAttribute('aria-valuetext')).toBe(`${expectedProgress}%`);
+  });
+
+  it.each([
+    [1, 31.25, 2, 50],
+    [2, 30, 2, 40],
+    [3, 36.25, 2, 90],
+    [4, 56.25, 4, 50],
+    [5, 100, 8, null],
+    [6, 100, 8, null],
+  ])('uses one overall value in percentage case %s', (caseNumber, expectedProgress, expectedFilled, expectedPartial) => {
+    const progressbar = document.querySelector(`[data-overall-case="${caseNumber}"] [role="progressbar"]`);
+    const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
+
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
+    expect(progressbar.getAttribute('aria-valuetext')).toBe(`${expectedProgress}%`);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
+    if (expectedPartial === null) {
+      expect(partialSegment).toBeNull();
+    } else {
+      expect(partialSegment.style.width).toBe(`${expectedPartial}%`);
+    }
+  });
+
+  it.each([
+    [1, 2.5, 2, 50, 'Page 3 of 8', '2.5 of 8 steps complete'],
+    [2, 3, 3, 0, 'Page 3 of 8', 'Page 3 of 8'],
+    [3, 8, 8, null, 'Page 8 of 8', 'Page 8 of 8'],
+  ])('includes partial progress in the step value for case %s', (caseNumber, expectedProgress, expectedFilled, expectedPartial, pageText, valueText) => {
+    const indicator = document.querySelector(`[data-step-partial-case="${caseNumber}"]`);
+    const progressbar = indicator.querySelector('[role="progressbar"]');
+    const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
+
+    expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe('8');
+    expect(progressbar.getAttribute('aria-valuetext')).toBe(valueText);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
+    if (expectedPartial === null) {
+      expect(partialSegment).toBeNull();
+    } else {
+      expect(partialSegment.style.width).toBe(`${expectedPartial}%`);
+    }
   });
 
   it.each([true, false])('sets the gap modifier for showBars=%s', (showBars) => {

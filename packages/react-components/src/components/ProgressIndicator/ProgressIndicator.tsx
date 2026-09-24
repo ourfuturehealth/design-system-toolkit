@@ -7,7 +7,7 @@ export interface ProgressIndicatorProps
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
   /**
-    * Progress percentage, clamped between 1 and 100.
+    * Base progress percentage, clamped between 1 and 100.
    */
     progressState: number;
   /**
@@ -15,7 +15,7 @@ export interface ProgressIndicatorProps
    */
   totalSegments: number;
   /**
-   * Percentage fill applied to the segment representing the current state.
+  * Additional progress as a percentage of one segment, clamped between 0 and 100.
    */
   subSegmentProgress?: number;
   /**
@@ -66,10 +66,14 @@ export const ProgressIndicator = ({
     100,
   );
   const segmentCount = Math.max(Math.round(totalSegments), 1);
-  const filledSegmentCount = Math.floor(
-    (clampedProgressState / 100) * segmentCount,
+  const overallProgress = Math.min(
+    clampedProgressState + clampedSubSegmentProgress / segmentCount,
+    100,
   );
-  const percentageText = `${clampedProgressState}%`;
+  const scaledProgress = overallProgress * segmentCount;
+  const filledSegmentCount = Math.floor(scaledProgress / 100);
+  const segmentProgress = scaledProgress - filledSegmentCount * 100;
+  const percentageText = `${overallProgress}%`;
 
   return (
     <div
@@ -97,7 +101,7 @@ export const ProgressIndicator = ({
           !showBars && 'ofh-progress-indicator__track--without-bars',
         )}
         role="progressbar"
-        aria-valuenow={clampedProgressState}
+        aria-valuenow={overallProgress}
         aria-valuemin={1}
         aria-valuemax={100}
         aria-valuetext={percentageText}
@@ -120,7 +124,7 @@ export const ProgressIndicator = ({
               {isCurrentSegment ? (
                 <span
                   className="ofh-progress-indicator__segment-progress"
-                  style={{ width: `${clampedSubSegmentProgress}%` }}
+                  style={{ width: `${segmentProgress}%` }}
                 />
               ) : null}
             </span>

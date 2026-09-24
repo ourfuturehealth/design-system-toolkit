@@ -28,11 +28,13 @@
   <h2>Step-based progress</h2>
   <p>Pass both <code>currentStep</code> and <code>totalSteps</code> to generate page text such as "Page 2 of 8". Each step has one segment, and segments up to and including the current step are filled.</p>
   <p>The current step is clamped between 1 and the total number of steps. The total is rounded to an integer with a minimum of 1. For example, <code>currentStep: 10</code> with <code>totalSteps: 5</code> renders "Page 5 of 5", five filled segments, and matching accessibility values.</p>
+  <p>When <code>subSegmentProgress</code> is supplied, the overall step value is <code>currentStep + subSegmentProgress / 100</code>, capped at the total. Step 2 of 8 plus 50% of one segment represents 2.5 steps and shows "Page 3 of 8". The page number rounds up to the page containing the partial segment.</p>
   <p>When both step options are supplied, they take precedence over <code>progressState</code>, <code>totalSegments</code>, and <code>progressText</code>.</p>
 
   <h2>Percentage progress without gaps</h2>
-  <p>Alternatively, pass <code>progressState</code> as a percentage from 1 to 100 and <code>totalSegments</code> as the number of segments. The macro rounds the segment count to an integer with a minimum of 1 and clamps the percentage to its valid range, matching the React component. Values below 1, including 0, become 1%; values above 100 become 100%.</p>
-  <p>Use <code>subSegmentProgress</code> to fill part of the next unfilled segment. It is independently clamped between 0 and 100 and defaults to 0. Set <code>showBars</code> to <code>false</code> to remove the gaps between segments.</p>
+  <p>Alternatively, pass the overall percentage through <code>progressState</code> and set <code>totalSegments</code>. Full and partial segment fills are derived from that percentage. The base percentage is clamped between 1 and 100 and the segment count is rounded to an integer with a minimum of 1, matching React.</p>
+  <p>Leave <code>subSegmentProgress</code> at 0 when the percentage already includes all progress. Otherwise it adds progress as a percentage of one segment, independently clamped between 0 and 100. After clamping and normalizing inputs, the overall percentage is <code>min(progressState + subSegmentProgress / segmentCount, 100)</code>. For example, 25% over eight segments plus 50% of one segment produces 31.25%, with two full segments and half of the third.</p>
+  <p>The visual fill and ARIA state use this same overall value. Set <code>showBars</code> to <code>false</code> to remove the gaps between segments.</p>
 
   {{ designExample({
     group: "components",
@@ -41,12 +43,12 @@
   }) }}
 
   <h2>Labels and supporting text</h2>
-  <p>Use <code>label</code> for the current section's name and <code>helperText</code> for optional supporting information, such as an accurate estimate of time remaining. In percentage mode, <code>progressText</code> is optional free-form text displayed on the right. Omit these options when they do not add useful context.</p>
+  <p>Use <code>label</code> for the current section's name and <code>helperText</code> for optional supporting information, such as an accurate estimate of time remaining. In percentage mode, <code>progressText</code> is optional free-form text displayed on the right. Keep it consistent with the overall progress; it does not override the calculated ARIA percentage. Omit these options when they do not add useful context.</p>
   <p>Use <code>classes</code> to add CSS classes to the outer element and <code>attributes</code> to add HTML attributes.</p>
 
   <h2>Accessibility</h2>
   <p>The header and track form one element with <code>role="progressbar"</code> and the accessible name "Progress Bar". The visual label does not replace this accessible name. The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable.</p>
-  <p>In step mode, the clamped step and total are exposed through <code>aria-valuenow</code> and <code>aria-valuemax</code>, with a minimum of 1 and page text in <code>aria-valuetext</code>. In percentage mode, the range is 1 to 100, and the value text uses <code>progressText</code> or falls back to the clamped percentage.</p>
+  <p>In step mode, <code>aria-valuenow</code> includes partial progress on the 1-to-total-steps scale. Whole steps use generated page text, while partial steps use value text such as "2.5 of 8 steps complete". In percentage mode, both <code>aria-valuenow</code> and <code>aria-valuetext</code> expose the overall percentage on the 1-to-100 scale.</p>
   <p>The component does not move focus or announce updates through a live region. Exact announcements depend on the browser, screen reader, and navigation mode, so test it in the context of your service.</p>
 
 {% endblock %}

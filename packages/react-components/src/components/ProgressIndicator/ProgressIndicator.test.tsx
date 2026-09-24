@@ -51,6 +51,44 @@ describe('ProgressIndicator', () => {
         .getByRole('progressbar')
         .querySelector('.ofh-progress-indicator__segment-progress'),
     ).toHaveStyle({ width: '40%' });
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '30');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuetext', '30%');
+  });
+
+  it.each([
+    [25, 8, 50, 31.25, 2, 50],
+    [30, 8, 0, 30, 2, 40],
+    [30, 8, 50, 36.25, 2, 90],
+    [50, 8, 50, 56.25, 4, 50],
+    [95, 8, 50, 100, 8, null],
+    [100, 8, 100, 100, 8, null],
+  ])('derives visual and accessible progress from %s percent over %s segments plus %s', (
+    progressState,
+    totalSegments,
+    subSegmentProgress,
+    expectedProgress,
+    expectedFilled,
+    expectedPartial,
+  ) => {
+    render(
+      <ProgressIndicator
+        progressState={progressState}
+        totalSegments={totalSegments}
+        subSegmentProgress={subSegmentProgress}
+      />,
+    );
+
+    const progressbar = screen.getByRole('progressbar');
+    const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
+
+    expect(progressbar).toHaveAttribute('aria-valuenow', String(expectedProgress));
+    expect(progressbar).toHaveAttribute('aria-valuetext', `${expectedProgress}%`);
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
+    if (expectedPartial === null) {
+      expect(partialSegment).toBeNull();
+    } else {
+      expect(partialSegment).toHaveStyle({ width: `${expectedPartial}%` });
+    }
   });
 
   it('clamps sub-segment progress between 0 and 100', () => {
@@ -62,11 +100,15 @@ describe('ProgressIndicator', () => {
       />,
     );
 
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '37.5');
+    expect(
+      screen.getByRole('progressbar').querySelectorAll('.ofh-progress-indicator__segment--filled'),
+    ).toHaveLength(3);
     expect(
       screen
         .getByRole('progressbar')
         .querySelector('.ofh-progress-indicator__segment-progress'),
-    ).toHaveStyle({ width: '100%' });
+    ).toHaveStyle({ width: '0%' });
 
     rerender(
       <ProgressIndicator
@@ -180,7 +222,7 @@ describe('ProgressIndicator', () => {
       ).toHaveLength(0);
       expect(
         progressbar.querySelector('.ofh-progress-indicator__segment-progress'),
-      ).toHaveStyle({ width: '0%' });
+      ).toHaveStyle({ width: '8%' });
     },
   );
 
