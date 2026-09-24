@@ -38,7 +38,7 @@ const meta: Meta<typeof ProgressIndicator> = {
             fill part of the segment representing the current state.
           </p>
           <p>
-            Use the optional <code>label</code> prop to show text on the left
+            Pass a plain-text string to the optional <code>label</code> prop to show text on the left
             of the header, <code>progressText</code> for free-form text on the
             right, and <code>helperText</code> to show supporting text below
             the track. Set <code>showBars</code> to <code>false</code> to remove
@@ -92,8 +92,9 @@ const meta: Meta<typeof ProgressIndicator> = {
     },
     label: {
       control: 'text',
+      type: 'string',
       description:
-        'Optional text shown on the left of the header, above the track.',
+        'Optional plain-text string shown on the left of the header, above the track. JSX is not supported.',
       table: {
         category: 'ProgressIndicatorProps',
       },

@@ -19,9 +19,9 @@ export interface ProgressIndicatorProps
    */
   subSegmentProgress?: number;
   /**
-   * Optional text shown on the left of the header, above the track.
+    * Optional plain-text string shown on the left of the header, above the track.
    */
-  label?: React.ReactNode;
+    label?: string;
     /**
     * Optional free-form text shown on the right of the header.
     */

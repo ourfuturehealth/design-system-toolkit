@@ -1,10 +1,15 @@
 import { createRef } from 'react';
 import { render, screen } from '@testing-library/react';
 import { axe } from 'vitest-axe';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { ProgressIndicator } from './ProgressIndicator';
+import type { ProgressIndicatorProps } from './ProgressIndicator';
 
 describe('ProgressIndicator', () => {
+  it('accepts only an optional string label', () => {
+    expectTypeOf<ProgressIndicatorProps['label']>().toEqualTypeOf<string | undefined>();
+  });
+
   it('renders percentage-based progressbar attributes', () => {
     render(<ProgressIndicator progressState={40} totalSegments={5} />);
 
@@ -119,10 +124,20 @@ describe('ProgressIndicator', () => {
     const label = screen.getByText('Personal details');
 
     expect(label).toHaveTextContent('Personal details');
-    expect(label.firstElementChild).toHaveClass('ofh-u-visually-hidden');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-labelledby', label.id);
     expect(screen.getByRole('progressbar')).toHaveAccessibleName(
-      'Progress bar: Personal details',
+      'Personal details',
     );
+  });
+
+  it('omits an empty string label and uses the default accessible name', () => {
+    const { container } = render(
+      <ProgressIndicator progressState={40} totalSegments={5} label="" />,
+    );
+
+    expect(container.querySelector('.ofh-progress-indicator__label')).toBeNull();
+    expect(screen.getByRole('progressbar')).not.toHaveAttribute('aria-labelledby');
+    expect(screen.getByRole('progressbar')).toHaveAccessibleName('Progress bar');
   });
 
   it('supports optional helper text', () => {
