@@ -237,6 +237,25 @@ export const MinimumProgress: Story = {
   },
 };
 
+export const LongLabel: Story = {
+  args: {
+    progressState: (11 * 100) / 12,
+    totalSegments: 12,
+    subSegmentProgress: 0,
+    label: 'Tell us about your current medical conditions so we can help diagnose it better',
+    progressText: 'Page 11 of 12',
+    helperText: '',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'A long label at page 11 of 12 for responsive QA. Use the mobile, tablet, and desktop viewport presets to check that the label wraps while the page count stays on one line.',
+      },
+    },
+  },
+};
+
 export const WithoutBars: Story = {
   render: () => (
     <ProgressIndicator
