@@ -13,7 +13,7 @@
 }
 
 .ofh-progress-indicator__label {
-  color: $ofh-color-feedback-success-2-main;
+  color: $ofh-color-foreground-secondary;
 }
 
 .ofh-progress-indicator__steps {
@@ -57,7 +57,7 @@
 }
 
 .ofh-progress-indicator__helper {
-  color: $ofh-color-foreground-secondary;
+  color: $ofh-color-feedback-success-2-main;
   display: block;
   margin-top: $ofh-size-16;
   font-family: $ofh-typography-font-source-sans-pro;
