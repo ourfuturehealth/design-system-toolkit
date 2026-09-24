@@ -12,27 +12,28 @@ Use the progress indicator to show users how far through a multi-step process (f
 
 ```html
 <div class="ofh-progress-indicator">
-  <div class="ofh-progress-indicator__header">
-    <span class="ofh-progress-indicator__label">Personal details</span>
-    <span class="ofh-progress-indicator__steps">Page 2 of 8</span>
-  </div>
   <div
-    class="ofh-progress-indicator__track"
     role="progressbar"
     aria-valuenow="25"
     aria-valuemin="0"
     aria-valuemax="100"
-    aria-valuetext="25%"
-    aria-label="Personal details: 25%"
+    aria-valuetext="Page 2 of 8"
+    aria-label="Personal details"
   >
-    <span class="ofh-progress-indicator__segment ofh-progress-indicator__segment--filled"></span>
-    <span class="ofh-progress-indicator__segment ofh-progress-indicator__segment--filled"></span>
-    <span class="ofh-progress-indicator__segment"></span>
-    <span class="ofh-progress-indicator__segment"></span>
-    <span class="ofh-progress-indicator__segment"></span>
-    <span class="ofh-progress-indicator__segment"></span>
-    <span class="ofh-progress-indicator__segment"></span>
-    <span class="ofh-progress-indicator__segment"></span>
+    <div class="ofh-progress-indicator__header" aria-hidden="true">
+      <span class="ofh-progress-indicator__label">Personal details</span>
+      <span class="ofh-progress-indicator__steps">Page 2 of 8</span>
+    </div>
+    <div class="ofh-progress-indicator__track" aria-hidden="true">
+      <span class="ofh-progress-indicator__segment ofh-progress-indicator__segment--filled"></span>
+      <span class="ofh-progress-indicator__segment ofh-progress-indicator__segment--filled"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+      <span class="ofh-progress-indicator__segment"></span>
+    </div>
   </div>
   <span class="ofh-progress-indicator__helper">About 5 minutes left</span>
 </div>
@@ -70,6 +71,15 @@ The current step is clamped between 1 and the total steps. Total steps are round
 to an integer with a minimum of 1. The clamped step also determines filled segments
 and accessible text. In this mode, the step props take precedence over percentage
 props and `progressText` is generated automatically.
+
+The progress bar uses `label` as its accessible name, falling back to `Progress`
+when no label is supplied. The value is provided separately through
+`aria-valuetext`: `Page 2 of 8` for step 2 of 8, or `progressText` in percentage
+mode with a percentage fallback when no text is supplied.
+
+The header and track form one accessible progress bar. Their visual contents are
+hidden from the accessibility tree to avoid duplicate, standalone announcements.
+Helper text remains outside the progress bar so it can be read separately.
 
 ### Options
 

@@ -10,11 +10,38 @@
 </div>
 {% endfor %}
 
+{% for label in ['Personal details', '', null] %}
+<div data-label-case="{{ loop.index }}">
+  {{ progressIndicator({
+    currentStep: 2,
+    totalSteps: 8,
+    label: label,
+    helperText: 'About 5 minutes left'
+  }) }}
+</div>
+{% endfor %}
+
 <div data-percentage>
   {{ progressIndicator({
     progressState: 40,
     totalSegments: 5,
     subSegmentProgress: 50,
     progressText: 'Custom progress text'
+  }) }}
+</div>
+
+<div data-percentage-page>
+  {{ progressIndicator({
+    progressState: 25,
+    totalSegments: 8,
+    label: 'Personal details',
+    progressText: 'Page 2 of 8'
+  }) }}
+</div>
+
+<div data-percentage-without-text>
+  {{ progressIndicator({
+    progressState: 40,
+    totalSegments: 5
   }) }}
 </div>

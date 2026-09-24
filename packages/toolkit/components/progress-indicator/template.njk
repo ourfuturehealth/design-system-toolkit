@@ -13,38 +13,39 @@
 {% set progressMin = 0 %}
 {% set progressMax = 100 %}
 {% set progressText = params.progressText %}
-{% set valueText = progressState + '%' %}
+{% set valueText = progressText if progressText else progressState + '%' %}
 {% set filledSegments = (progressState / 100 * totalSegments) | round(0, 'floor') %}
 {% endif %}
 {% set requestedSubSegmentProgress = params.subSegmentProgress | default(0) %}
 {% set subSegmentProgress = 0 if requestedSubSegmentProgress < 0 else (100 if requestedSubSegmentProgress > 100 else requestedSubSegmentProgress) %}
 <div class="ofh-progress-indicator{% if params.classes %} {{ params.classes }}{% endif %}"{% for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-  {% if params.label or progressText %}
-  <div class="ofh-progress-indicator__header">
-    {% if params.label %}
-    <span class="ofh-progress-indicator__label">{{ params.label }}</span>
-    {% endif %}
-    {% if progressText %}
-    <span class="ofh-progress-indicator__steps">{{ progressText }}</span>
-    {% endif %}
-  </div>
-  {% endif %}
   <div
-    class="ofh-progress-indicator__track{% if params.showBars == false %} ofh-progress-indicator__track--without-bars{% endif %}"
     role="progressbar"
     aria-valuenow="{{ progressState }}"
     aria-valuemin="{{ progressMin }}"
     aria-valuemax="{{ progressMax }}"
     aria-valuetext="{{ valueText }}"
-    aria-label="{{ params.label + ': ' if params.label else '' }}{{ valueText }}"
+    aria-label="{{ params.label if params.label else 'Progress' }}"
   >
-    {% for segment in range(0, totalSegments) %}
-    <span class="ofh-progress-indicator__segment{% if segment < filledSegments %} ofh-progress-indicator__segment--filled{% endif %}">
-      {% if segment == filledSegments and filledSegments < totalSegments %}
-      <span class="ofh-progress-indicator__segment-progress" style="width: {{ subSegmentProgress }}%;"></span>
+    {% if params.label or progressText %}
+    <div class="ofh-progress-indicator__header" aria-hidden="true">
+      {% if params.label %}
+      <span class="ofh-progress-indicator__label">{{ params.label }}</span>
       {% endif %}
-    </span>
-    {% endfor %}
+      {% if progressText %}
+      <span class="ofh-progress-indicator__steps">{{ progressText }}</span>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="ofh-progress-indicator__track{% if params.showBars == false %} ofh-progress-indicator__track--without-bars{% endif %}" aria-hidden="true">
+      {% for segment in range(0, totalSegments) %}
+      <span class="ofh-progress-indicator__segment{% if segment < filledSegments %} ofh-progress-indicator__segment--filled{% endif %}">
+        {% if segment == filledSegments and filledSegments < totalSegments %}
+        <span class="ofh-progress-indicator__segment-progress" style="width: {{ subSegmentProgress }}%;"></span>
+        {% endif %}
+      </span>
+      {% endfor %}
+    </div>
   </div>
   {% if params.helperText %}
   <span class="ofh-progress-indicator__helper">{{ params.helperText }}</span>
