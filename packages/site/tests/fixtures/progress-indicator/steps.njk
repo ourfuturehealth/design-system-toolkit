@@ -1,0 +1,20 @@
+{% from 'progress-indicator/macro.njk' import progressIndicator %}
+
+{% for currentStep in [10, 5, 2, 1, 0, -1] %}
+<div data-current-step="{{ currentStep }}">
+  {{ progressIndicator({
+    currentStep: currentStep,
+    totalSteps: 5,
+    label: 'Personal details'
+  }) }}
+</div>
+{% endfor %}
+
+<div data-percentage>
+  {{ progressIndicator({
+    progressState: 40,
+    totalSegments: 5,
+    subSegmentProgress: 50,
+    progressText: 'Custom progress text'
+  }) }}
+</div>

@@ -1,16 +1,31 @@
+{% set usesSteps = params.currentStep is defined and params.totalSteps is defined %}
+{% if usesSteps %}
+{% set totalSegments = 1 if params.totalSteps < 1 else params.totalSteps | round %}
+{% set progressState = 1 if params.currentStep < 1 else (totalSegments if params.currentStep > totalSegments else params.currentStep) %}
+{% set progressMin = 1 %}
+{% set progressMax = totalSegments %}
+{% set progressText = 'Page ' + progressState + ' of ' + totalSegments %}
+{% set valueText = progressText %}
+{% set filledSegments = progressState %}
+{% else %}
 {% set progressState = 0 if params.progressState < 0 else (100 if params.progressState > 100 else params.progressState) %}
 {% set totalSegments = 1 if params.totalSegments < 1 else params.totalSegments | round %}
+{% set progressMin = 0 %}
+{% set progressMax = 100 %}
+{% set progressText = params.progressText %}
+{% set valueText = progressState + '%' %}
+{% set filledSegments = (progressState / 100 * totalSegments) | round(0, 'floor') %}
+{% endif %}
 {% set requestedSubSegmentProgress = params.subSegmentProgress | default(0) %}
 {% set subSegmentProgress = 0 if requestedSubSegmentProgress < 0 else (100 if requestedSubSegmentProgress > 100 else requestedSubSegmentProgress) %}
-{% set filledSegments = (progressState / 100 * totalSegments) | round(0, 'floor') %}
 <div class="ofh-progress-indicator{% if params.classes %} {{ params.classes }}{% endif %}"{% for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
-  {% if params.label or params.progressText %}
+  {% if params.label or progressText %}
   <div class="ofh-progress-indicator__header">
     {% if params.label %}
     <span class="ofh-progress-indicator__label">{{ params.label }}</span>
     {% endif %}
-    {% if params.progressText %}
-    <span class="ofh-progress-indicator__steps">{{ params.progressText }}</span>
+    {% if progressText %}
+    <span class="ofh-progress-indicator__steps">{{ progressText }}</span>
     {% endif %}
   </div>
   {% endif %}
@@ -18,10 +33,10 @@
     class="ofh-progress-indicator__track{% if params.showBars == false %} ofh-progress-indicator__track--without-bars{% endif %}"
     role="progressbar"
     aria-valuenow="{{ progressState }}"
-    aria-valuemin="0"
-    aria-valuemax="100"
-    aria-valuetext="{{ progressState }}%"
-    aria-label="{{ params.label + ': ' if params.label else '' }}{{ progressState }}%"
+    aria-valuemin="{{ progressMin }}"
+    aria-valuemax="{{ progressMax }}"
+    aria-valuetext="{{ valueText }}"
+    aria-label="{{ params.label + ': ' if params.label else '' }}{{ valueText }}"
   >
     {% for segment in range(0, totalSegments) %}
     <span class="ofh-progress-indicator__segment{% if segment < filledSegments %} ofh-progress-indicator__segment--filled{% endif %}">

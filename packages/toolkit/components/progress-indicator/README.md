@@ -53,10 +53,30 @@ Use the progress indicator to show users how far through a multi-step process (f
 })}}
 ```
 
+### Step-based progress
+
+Pass both `currentStep` and `totalSteps` to use step-based progress instead of percentages:
+
+```njk
+{{ progressIndicator({
+  currentStep: 10,
+  totalSteps: 5,
+  label: "Personal details"
+}) }}
+```
+
+This renders `Page 5 of 5`, `aria-valuenow="5"`, and `aria-valuemax="5"`.
+The current step is clamped between 1 and the total steps. Total steps are rounded
+to an integer with a minimum of 1. The clamped step also determines filled segments
+and accessible text. In this mode, the step props take precedence over percentage
+props and `progressText` is generated automatically.
+
 ### Options
 
-- `progressState` (required): progress percentage, clamped between 0 and 100.
-- `totalSegments` (required): fixed number of segments rendered in the track.
+- `progressState` (required for percentage mode): progress percentage, clamped between 0 and 100.
+- `totalSegments` (required for percentage mode): fixed number of segments rendered in the track.
+- `currentStep` (required for step mode): current step, clamped between 1 and `totalSteps`.
+- `totalSteps` (required for step mode): number of steps, rounded to an integer with a minimum of 1.
 - `subSegmentProgress`: percentage fill applied to the current segment, clamped between 0 and 100. Defaults to `0`.
 - `label`: optional text shown on the left of the header, above the track.
 - `progressText`: optional free-form text shown on the right of the header.
