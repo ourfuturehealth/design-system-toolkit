@@ -23,9 +23,9 @@
 .ofh-progress-indicator__label,
 .ofh-progress-indicator__steps {
   @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
-  margin-bottom: $ofh-size-16;
 
   font-family: $ofh-typography-font-source-sans-pro;
+  margin-bottom: $ofh-size-16;
 }
 
 .ofh-progress-indicator__track {
@@ -57,9 +57,10 @@
 }
 
 .ofh-progress-indicator__helper {
+  @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
+
   color: $ofh-color-feedback-success-2-main;
   display: block;
-  margin-top: $ofh-size-16;
   font-family: $ofh-typography-font-source-sans-pro;
-  @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
+  margin-top: $ofh-size-16;
 }
