@@ -26,19 +26,15 @@ describe('Our Future Health progress indicator macro', () => {
     expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('5');
     expect(progressbar.getAttribute('aria-valuetext')).toBe(pageText);
-    expect(progressbar.getAttribute('aria-label')).toBe('Personal details');
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedStep);
   });
 
-  it.each([
-    [1, 'Personal details'],
-    [2, 'Progress'],
-    [3, 'Progress'],
-  ])('provides a separate accessible name and page value for label case %s', (labelCase, expectedName) => {
+  it.each([1, 2, 3])('uses Progress Bar as the accessible name for label case %s', (labelCase) => {
     const progressbar = document.querySelector(`[data-label-case="${labelCase}"] [role="progressbar"]`);
 
-    expect(progressbar.getAttribute('aria-label')).toBe(expectedName);
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuenow')).toBe('2');
     expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('8');
@@ -59,7 +55,7 @@ describe('Our Future Health progress indicator macro', () => {
     expect(header.getAttribute('aria-hidden')).toBe('true');
     expect(track.getAttribute('aria-hidden')).toBe('true');
     expect(progressbar.hasAttribute('aria-hidden')).toBe(false);
-    expect(progressbar.getAttribute('aria-label')).toBe('Personal details');
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('Page 2 of 8');
     expect(helper.textContent).toBe('About 5 minutes left');
     expect(helper.closest('[role="progressbar"], [aria-hidden="true"]')).toBeNull();
@@ -74,7 +70,7 @@ describe('Our Future Health progress indicator macro', () => {
     expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('Custom progress text');
-    expect(progressbar.getAttribute('aria-label')).toBe('Progress');
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(2);
     expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress').style.width).toBe('50%');
   });
@@ -85,7 +81,7 @@ describe('Our Future Health progress indicator macro', () => {
     const pageLabel = indicator.querySelector('.ofh-progress-indicator__steps');
 
     expect(pageLabel.closest('[role="progressbar"]')).toBe(progressbar);
-    expect(progressbar.getAttribute('aria-label')).toBe('Personal details');
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('Page 2 of 8');
     expect(progressbar.getAttribute('aria-valuenow')).toBe('25');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
@@ -94,7 +90,7 @@ describe('Our Future Health progress indicator macro', () => {
   it('falls back to the percentage value when no progress text is supplied', () => {
     const progressbar = document.querySelector('[data-percentage-without-text] [role="progressbar"]');
 
-    expect(progressbar.getAttribute('aria-label')).toBe('Progress');
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('40%');
   });
 });

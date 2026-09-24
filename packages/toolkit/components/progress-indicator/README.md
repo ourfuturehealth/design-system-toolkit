@@ -18,7 +18,7 @@ Use the progress indicator to show users how far through a multi-step process (f
     aria-valuemin="0"
     aria-valuemax="100"
     aria-valuetext="Page 2 of 8"
-    aria-label="Personal details"
+    aria-label="Progress Bar"
   >
     <div class="ofh-progress-indicator__header" aria-hidden="true">
       <span class="ofh-progress-indicator__label">Personal details</span>
@@ -72,8 +72,8 @@ to an integer with a minimum of 1. The clamped step also determines filled segme
 and accessible text. In this mode, the step props take precedence over percentage
 props and `progressText` is generated automatically.
 
-The progress bar uses `label` as its accessible name, falling back to `Progress`
-when no label is supplied. The value is provided separately through
+The progress bar uses `Progress Bar` as its accessible name, independent of the
+visible `label`. The value is provided separately through
 `aria-valuetext`: `Page 2 of 8` for step 2 of 8, or `progressText` in percentage
 mode with a percentage fallback when no text is supplied.
 
