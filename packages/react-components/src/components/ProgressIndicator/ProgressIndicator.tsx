@@ -56,6 +56,7 @@ export const ProgressIndicator = ({
   ref,
   ...props
 }: ProgressIndicatorProps) => {
+  const labelId = React.useId();
   const clampedProgressState = Math.min(Math.max(progressState, 1), 100);
   const clampedSubSegmentProgress = Math.min(
     Math.max(subSegmentProgress, 0),
@@ -66,8 +67,6 @@ export const ProgressIndicator = ({
     (clampedProgressState / 100) * segmentCount,
   );
   const percentageText = `${clampedProgressState}%`;
-  const accessibleLabel =
-    typeof label === 'string' ? `${label}: ${percentageText}` : percentageText;
 
   return (
     <div
@@ -78,7 +77,9 @@ export const ProgressIndicator = ({
       {label || progressText ? (
         <div className="ofh-progress-indicator__header">
           {label ? (
-            <span className="ofh-progress-indicator__label">{label}</span>
+            <span id={labelId} className="ofh-progress-indicator__label">
+              {label}
+            </span>
           ) : null}
           {progressText ? (
             <span className="ofh-progress-indicator__steps">
@@ -97,7 +98,8 @@ export const ProgressIndicator = ({
         aria-valuemin={1}
         aria-valuemax={100}
         aria-valuetext={percentageText}
-        aria-label={accessibleLabel}
+        aria-label='Progress bar'
+        aria-labelledby={label ? labelId : undefined}
       >
         {Array.from({ length: segmentCount }, (_, index) => {
           const isCurrentSegment =
@@ -124,6 +126,7 @@ export const ProgressIndicator = ({
       </div>
       {helperText ? (
         <span className="ofh-progress-indicator__helper">
+          <span className="ofh-u-visually-hidden">Progress bar:</span>{' '}
           {helperText}
         </span>
       ) : null}

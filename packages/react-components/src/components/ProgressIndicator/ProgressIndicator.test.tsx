@@ -14,7 +14,7 @@ describe('ProgressIndicator', () => {
     expect(progressbar).toHaveAttribute('aria-valuemin', '1');
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).toHaveAttribute('aria-valuetext', '40%');
-    expect(progressbar).toHaveAttribute('aria-label', '40%');
+    expect(progressbar).toHaveAccessibleName('Progress bar');
   });
 
   it('maps the progress percentage onto the fixed segment count', () => {
@@ -116,10 +116,40 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByText('Personal details')).toBeInTheDocument();
-    expect(screen.getByRole('progressbar')).toHaveAttribute(
-      'aria-label',
-      'Personal details: 40%',
+    const label = screen.getByText('Personal details');
+
+    expect(label).toHaveTextContent('Progress bar: Personal details');
+    expect(label.firstElementChild).toHaveClass('ofh-u-visually-hidden');
+    expect(screen.getByRole('progressbar')).toHaveAccessibleName(
+      'Progress bar: Personal details',
+    );
+  });
+
+  it('uses each indicator\'s own prefixed JSX label as its accessible name', () => {
+    render(
+      <>
+        <ProgressIndicator
+          progressState={25}
+          totalSegments={4}
+          label={<strong>Personal details</strong>}
+        />
+        <ProgressIndicator
+          progressState={50}
+          totalSegments={4}
+          label={<strong>Contact details</strong>}
+        />
+      </>,
+    );
+
+    const personalProgress = screen.getByRole('progressbar', {
+      name: 'Progress bar: Personal details',
+    });
+    const contactProgress = screen.getByRole('progressbar', {
+      name: 'Progress bar: Contact details',
+    });
+
+    expect(personalProgress.getAttribute('aria-labelledby')).not.toBe(
+      contactProgress.getAttribute('aria-labelledby'),
     );
   });
 
@@ -132,7 +162,10 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByText('Page 2 of 8')).toBeInTheDocument();
+    const progressText = screen.getByText('Page 2 of 8');
+
+    expect(progressText).toHaveTextContent('Progress bar: Page 2 of 8');
+    expect(progressText.firstElementChild).toHaveClass('ofh-u-visually-hidden');
   });
 
   it('supports optional helper text', () => {
@@ -144,7 +177,10 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByText('About 5 minutes left')).toBeInTheDocument();
+    const helperText = screen.getByText('About 5 minutes left');
+
+    expect(helperText).toHaveTextContent('Progress bar: About 5 minutes left');
+    expect(helperText.firstElementChild).toHaveClass('ofh-u-visually-hidden');
   });
 
   it.each([-25, 0, 0.5, 1])(
@@ -157,7 +193,7 @@ describe('ProgressIndicator', () => {
       expect(progressbar).toHaveAttribute('aria-valuenow', '1');
       expect(progressbar).toHaveAttribute('aria-valuemin', '1');
       expect(progressbar).toHaveAttribute('aria-valuetext', '1%');
-      expect(progressbar).toHaveAttribute('aria-label', '1%');
+      expect(progressbar).toHaveAccessibleName('Progress bar');
       expect(
         progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled'),
       ).toHaveLength(0);
@@ -194,7 +230,13 @@ describe('ProgressIndicator', () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <ProgressIndicator progressState={40} totalSegments={5} />,
+      <ProgressIndicator
+        progressState={40}
+        totalSegments={5}
+        label="Personal details"
+        progressText="Page 2 of 5"
+        helperText="About 5 minutes left"
+      />,
     );
 
     const results = await axe(container);
