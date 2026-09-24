@@ -1,0 +1,70 @@
+{
+  "params": [
+    {
+      "name": "currentStep",
+      "type": "number",
+      "required": false,
+      "description": "Required with totalSteps for step-based progress. Clamped between 1 and the normalized total steps. When both step options are supplied, they take precedence over percentage options and generate the page text."
+    },
+    {
+      "name": "totalSteps",
+      "type": "number",
+      "required": false,
+      "description": "Required with currentStep for step-based progress. The number of segments, rounded to an integer with a minimum of 1."
+    },
+    {
+      "name": "progressState",
+      "type": "number",
+      "required": false,
+      "description": "Required for percentage mode when the step options are not both supplied. Progress percentage, clamped between 0 and 100."
+    },
+    {
+      "name": "totalSegments",
+      "type": "number",
+      "required": false,
+      "description": "Required with progressState for percentage mode. The fixed number of segments, rounded to an integer with a minimum of 1."
+    },
+    {
+      "name": "subSegmentProgress",
+      "type": "number",
+      "required": false,
+      "description": "Percentage fill applied to the next unfilled segment, independently clamped between 0 and 100. Defaults to 0. No partial segment is rendered when all segments are filled."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "Optional text shown on the left of the header, above the track. The accessible name remains Progress Bar."
+    },
+    {
+      "name": "progressText",
+      "type": "string",
+      "required": false,
+      "description": "Optional free-form text shown on the right of the header in percentage mode. Also used as aria-valuetext; otherwise the percentage is used. Step mode generates Page X of Y instead."
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "required": false,
+      "description": "Optional supporting text below the track. Read separately from the progress bar by assistive technology."
+    },
+    {
+      "name": "showBars",
+      "type": "boolean",
+      "required": false,
+      "description": "Whether to show gaps between segments. Defaults to true. Set to false for a continuous track without gaps."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Additional CSS classes for the outer element, merged with ofh-progress-indicator."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes, such as id or data attributes, for the outer element."
+    }
+  ]
+}

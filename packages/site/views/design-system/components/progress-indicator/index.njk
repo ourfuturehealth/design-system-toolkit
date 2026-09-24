@@ -1,0 +1,52 @@
+{% set pageTitle = "Progress indicator" %}
+{% set pageSection = "Design system" %}
+{% set subSection = "Components" %}
+{% set pageDescription = "Use a progress indicator to show people how far they are through a multi-step process." %}
+{% set theme = "Content presentation" %}
+{% set dateUpdated = "September 2026" %}
+
+{% extends "app-layout.njk" %}
+
+{% block breadcrumb %}
+  {% include "../_breadcrumb.njk" %}
+{% endblock %}
+
+{% block bodyContent %}
+
+  <p>Use the progress indicator for a process with a known number of pages or stages, such as a multi-page form. Keep the progress text consistent with the user's current position.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "progress-indicator",
+    type: "default"
+  }) }}
+
+  <h2>When to use a progress indicator</h2>
+  <p>Use it when knowing how much of a process remains helps people plan their time. Keep the indicator in a consistent position as they move between pages.</p>
+  <p>Do not use it for loading states with an unknown duration. For tasks that people can complete in any order, consider a <a href="/design-system/components/task-list">task list</a> instead.</p>
+
+  <h2>Step-based progress</h2>
+  <p>Pass both <code>currentStep</code> and <code>totalSteps</code> to generate page text such as "Page 2 of 8". Each step has one segment, and segments up to and including the current step are filled.</p>
+  <p>The current step is clamped between 1 and the total number of steps. The total is rounded to an integer with a minimum of 1. For example, <code>currentStep: 10</code> with <code>totalSteps: 5</code> renders "Page 5 of 5", five filled segments, and matching accessibility values.</p>
+  <p>When both step options are supplied, they take precedence over <code>progressState</code>, <code>totalSegments</code>, and <code>progressText</code>.</p>
+
+  <h2>Percentage progress without gaps</h2>
+  <p>Alternatively, pass <code>progressState</code> as a percentage from 0 to 100 and <code>totalSegments</code> as the number of segments. The macro rounds the segment count to an integer with a minimum of 1 and clamps the percentage to its valid range.</p>
+  <p>Use <code>subSegmentProgress</code> to fill part of the next unfilled segment. It is independently clamped between 0 and 100 and defaults to 0. Set <code>showBars</code> to <code>false</code> to remove the gaps between segments.</p>
+
+  {{ designExample({
+    group: "components",
+    item: "progress-indicator",
+    type: "percentage"
+  }) }}
+
+  <h2>Labels and supporting text</h2>
+  <p>Use <code>label</code> for the current section's name and <code>helperText</code> for optional supporting information, such as an accurate estimate of time remaining. In percentage mode, <code>progressText</code> is optional free-form text displayed on the right. Omit these options when they do not add useful context.</p>
+  <p>Use <code>classes</code> to add CSS classes to the outer element and <code>attributes</code> to add HTML attributes.</p>
+
+  <h2>Accessibility</h2>
+  <p>The header and track form one element with <code>role="progressbar"</code> and the accessible name "Progress Bar". The visual label does not replace this accessible name. The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable.</p>
+  <p>In step mode, the clamped step and total are exposed through <code>aria-valuenow</code> and <code>aria-valuemax</code>, with a minimum of 1 and page text in <code>aria-valuetext</code>. In percentage mode, the range is 0 to 100, and the value text uses <code>progressText</code> or falls back to the percentage.</p>
+  <p>The component does not move focus or announce updates through a live region. Exact announcements depend on the browser, screen reader, and navigation mode, so test it in the context of your service.</p>
+
+{% endblock %}
