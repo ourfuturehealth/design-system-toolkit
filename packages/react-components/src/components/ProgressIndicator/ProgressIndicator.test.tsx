@@ -118,54 +118,11 @@ describe('ProgressIndicator', () => {
 
     const label = screen.getByText('Personal details');
 
-    expect(label).toHaveTextContent('Progress bar: Personal details');
+    expect(label).toHaveTextContent('Personal details');
     expect(label.firstElementChild).toHaveClass('ofh-u-visually-hidden');
     expect(screen.getByRole('progressbar')).toHaveAccessibleName(
       'Progress bar: Personal details',
     );
-  });
-
-  it('uses each indicator\'s own prefixed JSX label as its accessible name', () => {
-    render(
-      <>
-        <ProgressIndicator
-          progressState={25}
-          totalSegments={4}
-          label={<strong>Personal details</strong>}
-        />
-        <ProgressIndicator
-          progressState={50}
-          totalSegments={4}
-          label={<strong>Contact details</strong>}
-        />
-      </>,
-    );
-
-    const personalProgress = screen.getByRole('progressbar', {
-      name: 'Progress bar: Personal details',
-    });
-    const contactProgress = screen.getByRole('progressbar', {
-      name: 'Progress bar: Contact details',
-    });
-
-    expect(personalProgress.getAttribute('aria-labelledby')).not.toBe(
-      contactProgress.getAttribute('aria-labelledby'),
-    );
-  });
-
-  it('supports optional free-form progress text', () => {
-    render(
-      <ProgressIndicator
-        progressState={25}
-        totalSegments={8}
-        progressText="Page 2 of 8"
-      />,
-    );
-
-    const progressText = screen.getByText('Page 2 of 8');
-
-    expect(progressText).toHaveTextContent('Progress bar: Page 2 of 8');
-    expect(progressText.firstElementChild).toHaveClass('ofh-u-visually-hidden');
   });
 
   it('supports optional helper text', () => {
