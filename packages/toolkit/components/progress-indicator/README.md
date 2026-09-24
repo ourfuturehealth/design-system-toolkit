@@ -17,8 +17,8 @@ Use the progress indicator to show users how far through a multi-step process (f
     aria-valuenow="25"
     aria-valuemin="1"
     aria-valuemax="100"
-    aria-valuetext="25%"
-    aria-label="Progress Bar"
+    aria-valuetext="Page 2 of 8"
+    aria-label="Personal details"
   >
     <div class="ofh-progress-indicator__header" aria-hidden="true">
       <span class="ofh-progress-indicator__label">Personal details</span>
@@ -74,9 +74,11 @@ For example, `progressState: 25`, `totalSegments: 8`, and
 At the 1% minimum, the first segment is partially filled instead of showing no
 progress. A total of 100% fills every segment without an extra partial segment.
 
-`aria-valuenow` and `aria-valuetext` use the overall percentage. The ARIA range
-remains 1 to 100. Free-form `progressText` is displayed in the header but does not
-override the accessible percentage; keep it consistent with the overall value.
+`aria-valuenow` uses the overall percentage, with an ARIA range of 1 to 100.
+Non-empty plain-text `progressText` provides the readable `aria-valuetext`, such
+as `Page 2 of 8`. When that text is missing or blank, the value text falls back to
+the overall percentage. Keep custom text consistent with the numeric progress;
+it does not change the calculation or fill.
 
 ### Step-based progress
 
@@ -101,10 +103,20 @@ For example, step 2 of 8 plus 50% of a segment shows `Page 3 of 8` and exposes
 In this mode, the step props take precedence over percentage props and
 `progressText` is generated automatically.
 
-The progress bar uses `Progress Bar` as its accessible name, independent of the
-visible `label`. The value is provided separately through
-`aria-valuetext`: page text for whole steps, fractional steps complete for partial
-steps, or the overall percentage in percentage mode.
+### Accessibility contract
+
+Both packages expose one element with `role="progressbar"`. Its accessible name
+is the trimmed `label`, falling back to `Progress` when missing or blank. Its
+value text is separate from its name. For `label: "Personal details"` and
+`progressText: "Page 2 of 8"`, the accessible name, role, and value correspond to
+"Personal details, progress bar, Page 2 of 8". Exact spoken order depends on the
+screen reader and navigation mode.
+
+In percentage mode, non-empty plain-text `progressText` provides `aria-valuetext`;
+otherwise the overall percentage is used. In React, non-string `progressText`
+also falls back to the overall percentage. In toolkit step mode, the value text
+is generated: page text for whole steps or fractional steps complete for partial
+steps. Numeric ARIA values always reflect the calculated overall progress.
 
 The header and track form one accessible progress bar. Their visual contents are
 hidden from the accessibility tree to avoid duplicate, standalone announcements.
@@ -117,8 +129,8 @@ Helper text remains outside the progress bar so it can be read separately.
 - `currentStep` (required for step mode): current step, clamped between 1 and `totalSteps`.
 - `totalSteps` (required for step mode): number of steps, rounded to an integer with a minimum of 1.
 - `subSegmentProgress`: additional progress as a percentage of one segment, clamped between 0 and 100. Defaults to `0`. The overall value is capped at completion.
-- `label`: optional text shown on the left of the header, above the track.
-- `progressText`: optional free-form text shown on the right of the header in percentage mode. Does not override calculated ARIA values.
+- `label`: optional text shown on the left of the header and used as the accessible name. Missing or blank labels use `Progress` as the accessible name.
+- `progressText`: optional text shown on the right of the header in percentage mode. Non-empty text also supplies `aria-valuetext`; otherwise the overall percentage is used. Does not change numeric progress.
 - `helperText`: optional supporting text shown below the track.
 - `showBars`: whether to show gaps between progress segments. Defaults to `true`.
 - `classes`: additional classes to add to the outer element.

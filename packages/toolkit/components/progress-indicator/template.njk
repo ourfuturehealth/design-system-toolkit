@@ -1,3 +1,4 @@
+{% set accessibleLabel = params.label | default('', true) | trim %}
 {% set requestedSubSegmentProgress = params.subSegmentProgress | default(0) %}
 {% set subSegmentProgress = 0 if requestedSubSegmentProgress < 0 else (100 if requestedSubSegmentProgress > 100 else requestedSubSegmentProgress) %}
 {% set usesSteps = params.currentStep is defined and params.totalSteps is defined %}
@@ -20,7 +21,8 @@
 {% set progressMin = 1 %}
 {% set progressMax = 100 %}
 {% set progressText = params.progressText %}
-{% set valueText = overallProgress + '%' %}
+{% set requestedValueText = progressText | default('', true) | trim %}
+{% set valueText = requestedValueText if requestedValueText else overallProgress + '%' %}
 {% endif %}
 {% set filledSegments = (scaledProgress / 100) | round(0, 'floor') %}
 {% set segmentProgress = scaledProgress - filledSegments * 100 %}
@@ -31,7 +33,7 @@
     aria-valuemin="{{ progressMin }}"
     aria-valuemax="{{ progressMax }}"
     aria-valuetext="{{ valueText }}"
-    aria-label="Progress Bar"
+    aria-label="{{ accessibleLabel if accessibleLabel else 'Progress' }}"
   >
     {% if params.label or progressText %}
     <div class="ofh-progress-indicator__header" aria-hidden="true">

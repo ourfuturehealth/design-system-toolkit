@@ -19,11 +19,11 @@ export interface ProgressIndicatorProps
    */
   subSegmentProgress?: number;
   /**
-    * Optional plain-text string shown on the left of the header, above the track.
+    * Optional visible label and accessible name. Defaults to "Progress" for assistive technology.
    */
     label?: string;
     /**
-    * Optional free-form text shown on the right of the header.
+    * Optional visible value. Non-empty strings also provide the accessible value text.
     */
     progressText?: React.ReactNode;
   /**
@@ -59,7 +59,6 @@ export const ProgressIndicator = ({
   ref,
   ...props
 }: ProgressIndicatorProps) => {
-  const labelId = React.useId();
   const clampedProgressState = Math.min(Math.max(progressState, 1), 100);
   const clampedSubSegmentProgress = Math.min(
     Math.max(subSegmentProgress, 0),
@@ -74,6 +73,11 @@ export const ProgressIndicator = ({
   const filledSegmentCount = Math.floor(scaledProgress / 100);
   const segmentProgress = scaledProgress - filledSegmentCount * 100;
   const percentageText = `${overallProgress}%`;
+  const accessibleLabel = label?.trim() || 'Progress';
+  const accessibleValueText =
+    typeof progressText === 'string' && progressText.trim()
+      ? progressText.trim()
+      : percentageText;
 
   return (
     <div
@@ -81,59 +85,61 @@ export const ProgressIndicator = ({
       ref={ref}
       className={joinClassNames('ofh-progress-indicator', classes, className)}
     >
-      {label || progressText ? (
-        <div className="ofh-progress-indicator__header">
-          {label ? (
-            <span id={labelId} className="ofh-progress-indicator__label">
-              {label}
-            </span>
-          ) : null}
-          {progressText ? (
-            <span className="ofh-progress-indicator__steps">
-              {progressText}
-            </span>
-          ) : null}
-        </div>
-      ) : null}
       <div
-        className={joinClassNames(
-          'ofh-progress-indicator__track',
-          !showBars && 'ofh-progress-indicator__track--without-bars',
-        )}
         role="progressbar"
         aria-valuenow={overallProgress}
         aria-valuemin={1}
         aria-valuemax={100}
-        aria-valuetext={percentageText}
-        aria-label='Progress bar'
-        aria-labelledby={label ? labelId : undefined}
+        aria-valuetext={accessibleValueText}
+        aria-label={accessibleLabel}
       >
-        {Array.from({ length: segmentCount }, (_, index) => {
-          const isCurrentSegment =
-            index === filledSegmentCount && filledSegmentCount < segmentCount;
+        {label || progressText ? (
+          <div className="ofh-progress-indicator__header" aria-hidden="true">
+            {label ? (
+              <span className="ofh-progress-indicator__label">
+                {label}
+              </span>
+            ) : null}
+            {progressText ? (
+              <span className="ofh-progress-indicator__steps">
+                {progressText}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
+        <div
+          className={joinClassNames(
+            'ofh-progress-indicator__track',
+            !showBars && 'ofh-progress-indicator__track--without-bars',
+          )}
+          aria-hidden="true"
+        >
+          {Array.from({ length: segmentCount }, (_, index) => {
+            const isCurrentSegment =
+              index === filledSegmentCount && filledSegmentCount < segmentCount;
 
-          return (
-            <span
-              key={index}
-              className={joinClassNames(
-                'ofh-progress-indicator__segment',
-                index < filledSegmentCount &&
-                  'ofh-progress-indicator__segment--filled',
-              )}
-            >
-              {isCurrentSegment ? (
-                <span
-                  className="ofh-progress-indicator__segment-progress"
-                  style={{ width: `${segmentProgress}%` }}
-                />
-              ) : null}
-            </span>
-          );
-        })}
+            return (
+              <span
+                key={index}
+                className={joinClassNames(
+                  'ofh-progress-indicator__segment',
+                  index < filledSegmentCount &&
+                    'ofh-progress-indicator__segment--filled',
+                )}
+              >
+                {isCurrentSegment ? (
+                  <span
+                    className="ofh-progress-indicator__segment-progress"
+                    style={{ width: `${segmentProgress}%` }}
+                  />
+                ) : null}
+              </span>
+            );
+          })}
+        </div>
       </div>
       {helperText ? (
         <span className="ofh-progress-indicator__helper">
-          <span className="ofh-u-visually-hidden">Progress bar:</span>{' '}
           {helperText}
         </span>
       ) : null}

@@ -115,3 +115,20 @@
   }) }}
 </div>
 {% endfor %}
+
+{% for announcementCase in [
+  { label: 'Personal details', progressText: 'Page 2 of 8' },
+  {},
+  { label: '', progressText: '' },
+  { label: '   ', progressText: '   ' },
+  { label: ' Personal details ', progressText: ' Page 2 of 8 ' }
+] %}
+<div data-announcement-case="{{ loop.index }}">
+  {{ progressIndicator({
+    progressState: 25,
+    totalSegments: 8,
+    label: announcementCase.label,
+    progressText: announcementCase.progressText
+  }) }}
+</div>
+{% endfor %}

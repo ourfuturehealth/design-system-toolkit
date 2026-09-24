@@ -45,7 +45,7 @@ const meta: Meta<typeof ProgressIndicator> = {
             0 and 100. The overall percentage is{' '}
             <code>min(progressState + subSegmentProgress / segmentCount, 100)</code>{' '}
             after clamping inputs and normalizing the segment count. Both the
-            visible fill and ARIA values use this total. For example, 25% over
+            visible fill and numeric ARIA value use this total. For example, 25% over
             eight segments plus a 50% segment adds up to 31.25%.
           </p>
           <p>
@@ -57,7 +57,19 @@ const meta: Meta<typeof ProgressIndicator> = {
           </p>
           <p>
             Keep free-form <code>progressText</code> consistent with the overall
-            progress. It does not override the calculated ARIA percentage.
+            progress. Non-empty strings provide <code>aria-valuetext</code>,
+            such as "Page 2 of 8". Missing, empty, whitespace-only, or non-string
+            values fall back to the calculated percentage. Numeric{' '}
+            <code>aria-valuenow</code> always uses overall progress.
+          </p>
+          <p>
+            Both packages expose one progress bar named by <code>label</code>,
+            falling back to "Progress" when the label is missing or blank.
+            The visual header and segments are hidden from the accessibility tree
+            to avoid duplicate announcements. For example, the name, role, and
+            value are "Personal details", "progress bar", and "Page 2 of 8".
+            Helper text remains separately readable. Exact speech depends on the
+            screen reader and its navigation mode.
           </p>
           <p>
             Use <code>classes</code>, <code>className</code>, or both to add
@@ -91,7 +103,7 @@ const meta: Meta<typeof ProgressIndicator> = {
   argTypes: {
     progressState: {
       control: { type: 'number', min: 1, max: 100 },
-      description: 'Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for both visual fill and ARIA.',
+      description: 'Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for visual fill and the numeric ARIA value.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -115,21 +127,21 @@ const meta: Meta<typeof ProgressIndicator> = {
       control: 'text',
       type: 'string',
       description:
-        'Optional plain-text string shown on the left of the header, above the track. JSX is not supported.',
+        'Optional plain-text string shown on the left and used as the accessible name. Missing or blank labels use Progress as the accessible name. JSX is not supported.',
       table: {
         category: 'ProgressIndicatorProps',
       },
     },
     progressText: {
       control: 'text',
-      description: 'Optional free-form text shown on the right of the header.',
+      description: 'Optional text shown on the right. Non-empty strings also provide aria-valuetext; blank or non-string values fall back to the overall percentage. Numeric progress is unchanged.',
       table: {
         category: 'ProgressIndicatorProps',
       },
     },
     helperText: {
       control: 'text',
-      description: 'Optional supporting text shown below the track.',
+      description: 'Optional supporting text shown below the track and read separately from the progress bar.',
       table: {
         category: 'ProgressIndicatorProps',
       },

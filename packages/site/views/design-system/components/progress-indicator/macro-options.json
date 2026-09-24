@@ -16,7 +16,7 @@
       "name": "progressState",
       "type": "number",
       "required": false,
-      "description": "Required for percentage mode when the step options are not both supplied. Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for both visual fill and ARIA, matching React."
+      "description": "Required for percentage mode when the step options are not both supplied. Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for visual fill and the numeric ARIA value, matching React."
     },
     {
       "name": "totalSegments",
@@ -34,13 +34,13 @@
       "name": "label",
       "type": "string",
       "required": false,
-      "description": "Optional text shown on the left of the header, above the track. The accessible name remains Progress Bar."
+      "description": "Optional text shown on the left of the header and used as the accessible name after trimming whitespace. Missing or blank labels use Progress as the accessible name, matching React."
     },
     {
       "name": "progressText",
       "type": "string",
       "required": false,
-      "description": "Optional free-form text shown on the right of the header in percentage mode. Keep it consistent with overall progress; it does not override calculated ARIA values. Step mode generates Page X of Y instead."
+      "description": "Optional text shown on the right of the header in percentage mode. Non-empty text also supplies aria-valuetext; missing or blank text falls back to the overall percentage. Keep it consistent with numeric progress, which is unchanged. Step mode generates its own page and accessible value text."
     },
     {
       "name": "helperText",
