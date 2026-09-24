@@ -44,6 +44,11 @@ const meta: Meta<typeof ProgressIndicator> = {
             the track. Set <code>showBars</code> to <code>false</code> to remove
             the gaps between segments.
           </p>
+          <p>
+            Use <code>classes</code>, <code>className</code>, or both to add
+            classes to the root element. Both props are merged with the toolkit
+            classes.
+          </p>
           <Source code={progressIndicatorUsageExample} language="tsx" />
 
           <h2>Component props</h2>
@@ -57,6 +62,7 @@ const meta: Meta<typeof ProgressIndicator> = {
               'progressText',
               'helperText',
               'showBars',
+              'classes',
               'className',
             ]}
           />
@@ -120,9 +126,17 @@ const meta: Meta<typeof ProgressIndicator> = {
         category: 'ProgressIndicatorProps',
       },
     },
+    classes: {
+      control: 'text',
+      description:
+        'Toolkit-parity alias for adding extra classes to the root element. Merged with className.',
+      table: {
+        category: 'ProgressIndicatorProps',
+      },
+    },
     className: {
       control: 'text',
-      description: 'Additional classes added alongside the toolkit classes.',
+      description: 'Additional classes added to the root element. Merged with classes.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -136,6 +150,8 @@ const meta: Meta<typeof ProgressIndicator> = {
     progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
     showBars: true,
+    classes: '',
+    className: '',
   },
 };
 
@@ -185,6 +201,8 @@ export const Builder: Story = {
         'progressText',
         'helperText',
         'showBars',
+        'classes',
+        'className',
       ],
     },
     docs: {

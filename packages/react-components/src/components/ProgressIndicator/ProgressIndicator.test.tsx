@@ -97,19 +97,24 @@ describe('ProgressIndicator', () => {
     );
   });
 
-  it('applies the toolkit classes and react className together', () => {
+  it.each([
+    [undefined, undefined, 'ofh-progress-indicator'],
+    ['toolkit-progress', undefined, 'ofh-progress-indicator toolkit-progress'],
+    [undefined, 'custom-progress', 'ofh-progress-indicator custom-progress'],
+    ['toolkit-progress', 'custom-progress', 'ofh-progress-indicator toolkit-progress custom-progress'],
+    ['', '', 'ofh-progress-indicator'],
+  ])('merges classes=%s and className=%s on the root', (classes, className, expectedClasses) => {
     const { container } = render(
       <ProgressIndicator
         progressState={60}
         totalSegments={5}
-        className="custom-progress"
+        classes={classes}
+        className={className}
       />,
     );
 
-    expect(container.firstElementChild).toHaveClass(
-      'ofh-progress-indicator',
-      'custom-progress',
-    );
+    expect(container.firstElementChild).toHaveAttribute('class', expectedClasses);
+    expect(container.firstElementChild).not.toHaveAttribute('classes');
   });
 
   it('supports an optional label and includes it in the accessible name', () => {

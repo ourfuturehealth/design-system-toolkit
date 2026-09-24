@@ -34,6 +34,8 @@ export interface ProgressIndicatorProps
    * Whether to show gaps between progress segments.
    */
   showBars?: boolean;
+  /** Toolkit-parity alias for adding extra classes to the root element. */
+  classes?: string;
   /**
    * Additional classes added alongside the toolkit classes.
    */
@@ -52,6 +54,7 @@ export const ProgressIndicator = ({
   progressText,
   helperText,
   showBars = true,
+  classes = '',
   className = '',
   ref,
   ...props
@@ -72,7 +75,7 @@ export const ProgressIndicator = ({
     <div
       {...props}
       ref={ref}
-      className={joinClassNames('ofh-progress-indicator', className)}
+      className={joinClassNames('ofh-progress-indicator', classes, className)}
     >
       {label || progressText ? (
         <div className="ofh-progress-indicator__header">
