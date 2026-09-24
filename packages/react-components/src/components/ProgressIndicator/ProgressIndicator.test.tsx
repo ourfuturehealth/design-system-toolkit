@@ -11,7 +11,7 @@ describe('ProgressIndicator', () => {
     const progressbar = screen.getByRole('progressbar');
 
     expect(progressbar).toHaveAttribute('aria-valuenow', '40');
-    expect(progressbar).toHaveAttribute('aria-valuemin', '0');
+    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).toHaveAttribute('aria-valuetext', '40%');
     expect(progressbar).toHaveAttribute('aria-label', '40%');
@@ -146,6 +146,26 @@ describe('ProgressIndicator', () => {
 
     expect(screen.getByText('About 5 minutes left')).toBeInTheDocument();
   });
+
+  it.each([-25, 0, 0.5, 1])(
+    'enforces the 1%% minimum for progressState=%s',
+    (progressState) => {
+      render(<ProgressIndicator progressState={progressState} totalSegments={5} />);
+
+      const progressbar = screen.getByRole('progressbar');
+
+      expect(progressbar).toHaveAttribute('aria-valuenow', '1');
+      expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+      expect(progressbar).toHaveAttribute('aria-valuetext', '1%');
+      expect(progressbar).toHaveAttribute('aria-label', '1%');
+      expect(
+        progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled'),
+      ).toHaveLength(0);
+      expect(
+        progressbar.querySelector('.ofh-progress-indicator__segment-progress'),
+      ).toHaveStyle({ width: '0%' });
+    },
+  );
 
   it('clamps the progress percentage within the valid range', () => {
     render(<ProgressIndicator progressState={125} totalSegments={5} />);

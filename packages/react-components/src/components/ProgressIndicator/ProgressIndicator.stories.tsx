@@ -32,7 +32,7 @@ const meta: Meta<typeof ProgressIndicator> = {
 
           <h2>How to use the React component</h2>
           <p>
-            Pass progress as a percentage through <code>progressState</code>{' '}
+            Pass progress as a percentage from 1 to 100 through <code>progressState</code>{' '}
             and set the fixed number of segments with{' '}
             <code>totalSegments</code>. Use <code>subSegmentProgress</code> to
             fill part of the segment representing the current state.
@@ -69,8 +69,8 @@ const meta: Meta<typeof ProgressIndicator> = {
   tags: ['autodocs'],
   argTypes: {
     progressState: {
-      control: { type: 'number', min: 0, max: 100 },
-      description: 'Progress percentage, clamped between 0 and 100.',
+      control: { type: 'number', min: 1, max: 100 },
+      description: 'Progress percentage, clamped between 1 and 100.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -190,6 +190,22 @@ export const Builder: Story = {
       description: {
         story:
           'Use the Builder story to try the ProgressIndicator API interactively.',
+      },
+    },
+  },
+};
+
+export const MinimumProgress: Story = {
+  args: {
+    progressState: 1,
+    totalSegments: 8,
+    subSegmentProgress: 0,
+    progressText: 'Page 1 of 8',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The minimum progress state is 1%. Lower values are clamped to 1%.',
       },
     },
   },

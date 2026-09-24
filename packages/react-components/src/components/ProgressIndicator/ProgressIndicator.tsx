@@ -7,7 +7,7 @@ export interface ProgressIndicatorProps
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
   /**
-    * Progress percentage, between 0 and 100.
+    * Progress percentage, clamped between 1 and 100.
    */
     progressState: number;
   /**
@@ -56,7 +56,7 @@ export const ProgressIndicator = ({
   ref,
   ...props
 }: ProgressIndicatorProps) => {
-  const clampedProgressState = Math.min(Math.max(progressState, 0), 100);
+  const clampedProgressState = Math.min(Math.max(progressState, 1), 100);
   const clampedSubSegmentProgress = Math.min(
     Math.max(subSegmentProgress, 0),
     100,
@@ -94,7 +94,7 @@ export const ProgressIndicator = ({
         )}
         role="progressbar"
         aria-valuenow={clampedProgressState}
-        aria-valuemin={0}
+        aria-valuemin={1}
         aria-valuemax={100}
         aria-valuetext={percentageText}
         aria-label={accessibleLabel}
