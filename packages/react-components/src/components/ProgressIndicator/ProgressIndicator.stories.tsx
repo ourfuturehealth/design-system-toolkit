@@ -38,6 +38,13 @@ const meta: Meta<typeof ProgressIndicator> = {
             fill part of the segment representing the current state.
           </p>
           <p>
+            Both React and the toolkit Nunjucks macro clamp <code>progressState</code>{' '}
+            to 1 through 100. Values below 1, including 0, become 1%; values above
+            100 become 100%. The ARIA range is also 1 through 100.{' '}
+            <code>subSegmentProgress</code> remains independently clamped between
+            0 and 100, defaulting to 0.
+          </p>
+          <p>
             Pass a plain-text string to the optional <code>label</code> prop to show text on the left
             of the header, <code>progressText</code> for free-form text on the
             right, and <code>helperText</code> to show supporting text below
@@ -76,7 +83,7 @@ const meta: Meta<typeof ProgressIndicator> = {
   argTypes: {
     progressState: {
       control: { type: 'number', min: 1, max: 100 },
-      description: 'Progress percentage, clamped between 1 and 100.',
+      description: 'Progress percentage, clamped between 1 and 100 in both React and the toolkit macro. Values below 1, including 0, become 1.',
       table: {
         category: 'ProgressIndicatorProps',
       },

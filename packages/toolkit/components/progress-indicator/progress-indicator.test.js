@@ -96,7 +96,7 @@ describe('Our Future Health progress indicator macro', () => {
 
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe('Custom progress text');
     expect(progressbar.getAttribute('aria-valuenow')).toBe('40');
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.getAttribute('aria-valuetext')).toBe('Custom progress text');
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
@@ -124,8 +124,10 @@ describe('Our Future Health progress indicator macro', () => {
   });
 
   it.each([
-    [-25, 0, 0],
-    [0, 0, 0],
+    [-25, 1, 0],
+    [0, 1, 0],
+    [0.5, 1, 0],
+    [1, 1, 0],
     [25, 25, 2],
     [100, 100, 8],
     [125, 100, 8],
@@ -138,7 +140,7 @@ describe('Our Future Health progress indicator macro', () => {
     expect(indicator.querySelector('.ofh-progress-indicator__helper')).toBeNull();
     expect(progressbar.getAttribute('aria-label')).toBe('Progress Bar');
     expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
+    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.getAttribute('aria-valuetext')).toBe(`${expectedProgress}%`);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(8);

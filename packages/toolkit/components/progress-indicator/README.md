@@ -15,7 +15,7 @@ Use the progress indicator to show users how far through a multi-step process (f
   <div
     role="progressbar"
     aria-valuenow="25"
-    aria-valuemin="0"
+    aria-valuemin="1"
     aria-valuemax="100"
     aria-valuetext="Page 2 of 8"
     aria-label="Progress Bar"
@@ -54,6 +54,17 @@ Use the progress indicator to show users how far through a multi-step process (f
 })}}
 ```
 
+### Percentage range
+
+Both the toolkit macro and React component clamp `progressState` between 1 and
+100. Values below 1, including 0, render with `aria-valuenow="1"`; values above
+100 render with `aria-valuenow="100"`. The ARIA range is always 1 to 100 in
+percentage mode. Without custom progress text, the value text uses the clamped
+percentage, such as `1%`.
+
+`subSegmentProgress` remains independently clamped between 0 and 100 and defaults
+to 0.
+
 ### Step-based progress
 
 Pass both `currentStep` and `totalSteps` to use step-based progress instead of percentages:
@@ -83,7 +94,7 @@ Helper text remains outside the progress bar so it can be read separately.
 
 ### Options
 
-- `progressState` (required for percentage mode): progress percentage, clamped between 0 and 100.
+- `progressState` (required for percentage mode): progress percentage, clamped between 1 and 100, matching React.
 - `totalSegments` (required for percentage mode): fixed number of segments rendered in the track.
 - `currentStep` (required for step mode): current step, clamped between 1 and `totalSteps`.
 - `totalSteps` (required for step mode): number of steps, rounded to an integer with a minimum of 1.

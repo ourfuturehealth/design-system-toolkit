@@ -163,14 +163,18 @@ describe('ProgressIndicator', () => {
   it.each([-25, 0, 0.5, 1])(
     'enforces the 1%% minimum for progressState=%s',
     (progressState) => {
-      render(<ProgressIndicator progressState={progressState} totalSegments={5} />);
+      render(<ProgressIndicator progressState={progressState} totalSegments={8} />);
 
       const progressbar = screen.getByRole('progressbar');
 
       expect(progressbar).toHaveAttribute('aria-valuenow', '1');
       expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+      expect(progressbar).toHaveAttribute('aria-valuemax', '100');
       expect(progressbar).toHaveAttribute('aria-valuetext', '1%');
       expect(progressbar).toHaveAccessibleName('Progress bar');
+      expect(
+        progressbar.querySelectorAll('.ofh-progress-indicator__segment'),
+      ).toHaveLength(8);
       expect(
         progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled'),
       ).toHaveLength(0);
@@ -180,18 +184,26 @@ describe('ProgressIndicator', () => {
     },
   );
 
-  it('clamps the progress percentage within the valid range', () => {
-    render(<ProgressIndicator progressState={125} totalSegments={5} />);
+  it.each([100, 125])('enforces the 100%% maximum for progressState=%s', (progressState) => {
+    render(<ProgressIndicator progressState={progressState} totalSegments={8} />);
 
     const progressbar = screen.getByRole('progressbar');
 
     expect(progressbar).toHaveAttribute('aria-valuenow', '100');
+    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).toHaveAttribute('aria-valuetext', '100%');
+    expect(
+      progressbar.querySelectorAll('.ofh-progress-indicator__segment'),
+    ).toHaveLength(8);
     expect(
       progressbar.querySelectorAll(
         '.ofh-progress-indicator__segment--filled',
       ),
-    ).toHaveLength(5);
+    ).toHaveLength(8);
+    expect(
+      progressbar.querySelector('.ofh-progress-indicator__segment-progress'),
+    ).toBeNull();
   });
 
   it('forwards refs to the root element', () => {

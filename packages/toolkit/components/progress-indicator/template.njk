@@ -8,9 +8,9 @@
 {% set valueText = progressText %}
 {% set filledSegments = progressState %}
 {% else %}
-{% set progressState = 0 if params.progressState < 0 else (100 if params.progressState > 100 else params.progressState) %}
+{% set progressState = 1 if params.progressState < 1 else (100 if params.progressState > 100 else params.progressState) %}
 {% set totalSegments = 1 if params.totalSegments < 1 else params.totalSegments | round %}
-{% set progressMin = 0 %}
+{% set progressMin = 1 %}
 {% set progressMax = 100 %}
 {% set progressText = params.progressText %}
 {% set valueText = progressText if progressText else progressState + '%' %}

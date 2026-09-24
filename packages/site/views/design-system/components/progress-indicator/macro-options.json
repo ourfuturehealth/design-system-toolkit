@@ -16,7 +16,7 @@
       "name": "progressState",
       "type": "number",
       "required": false,
-      "description": "Required for percentage mode when the step options are not both supplied. Progress percentage, clamped between 0 and 100."
+      "description": "Required for percentage mode when the step options are not both supplied. Progress percentage, clamped between 1 and 100, matching React. Values below 1, including 0, become 1."
     },
     {
       "name": "totalSegments",

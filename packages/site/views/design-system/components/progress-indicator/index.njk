@@ -31,7 +31,7 @@
   <p>When both step options are supplied, they take precedence over <code>progressState</code>, <code>totalSegments</code>, and <code>progressText</code>.</p>
 
   <h2>Percentage progress without gaps</h2>
-  <p>Alternatively, pass <code>progressState</code> as a percentage from 0 to 100 and <code>totalSegments</code> as the number of segments. The macro rounds the segment count to an integer with a minimum of 1 and clamps the percentage to its valid range.</p>
+  <p>Alternatively, pass <code>progressState</code> as a percentage from 1 to 100 and <code>totalSegments</code> as the number of segments. The macro rounds the segment count to an integer with a minimum of 1 and clamps the percentage to its valid range, matching the React component. Values below 1, including 0, become 1%; values above 100 become 100%.</p>
   <p>Use <code>subSegmentProgress</code> to fill part of the next unfilled segment. It is independently clamped between 0 and 100 and defaults to 0. Set <code>showBars</code> to <code>false</code> to remove the gaps between segments.</p>
 
   {{ designExample({
@@ -46,7 +46,7 @@
 
   <h2>Accessibility</h2>
   <p>The header and track form one element with <code>role="progressbar"</code> and the accessible name "Progress Bar". The visual label does not replace this accessible name. The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable.</p>
-  <p>In step mode, the clamped step and total are exposed through <code>aria-valuenow</code> and <code>aria-valuemax</code>, with a minimum of 1 and page text in <code>aria-valuetext</code>. In percentage mode, the range is 0 to 100, and the value text uses <code>progressText</code> or falls back to the percentage.</p>
+  <p>In step mode, the clamped step and total are exposed through <code>aria-valuenow</code> and <code>aria-valuemax</code>, with a minimum of 1 and page text in <code>aria-valuetext</code>. In percentage mode, the range is 1 to 100, and the value text uses <code>progressText</code> or falls back to the clamped percentage.</p>
   <p>The component does not move focus or announce updates through a live region. Exact announcements depend on the browser, screen reader, and navigation mode, so test it in the context of your service.</p>
 
 {% endblock %}

@@ -55,7 +55,7 @@
 </div>
 {% endfor %}
 
-{% for progressState in [-25, 0, 25, 100, 125] %}
+{% for progressState in [-25, 0, 0.5, 1, 25, 100, 125] %}
 <div data-progress-state="{{ progressState }}">
   {{ progressIndicator({
     progressState: progressState,
