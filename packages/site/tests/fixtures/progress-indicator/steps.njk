@@ -21,31 +21,6 @@
 </div>
 {% endfor %}
 
-<div data-percentage>
-  {{ progressIndicator({
-    progressState: 40,
-    totalSegments: 5,
-    subSegmentProgress: 50,
-    progressText: 'Custom progress text'
-  }) }}
-</div>
-
-<div data-percentage-page>
-  {{ progressIndicator({
-    progressState: 25,
-    totalSegments: 8,
-    label: 'Personal details',
-    progressText: 'Page 2 of 8'
-  }) }}
-</div>
-
-<div data-percentage-without-text>
-  {{ progressIndicator({
-    progressState: 40,
-    totalSegments: 5
-  }) }}
-</div>
-
 {% for totalSteps in [1, 3, 8, 0, -3, 4.4, 4.6] %}
 <div data-total-steps="{{ totalSteps }}">
   {{ progressIndicator({
@@ -55,20 +30,11 @@
 </div>
 {% endfor %}
 
-{% for progressState in [-25, 0, 0.5, 1, 25, 100, 125] %}
-<div data-progress-state="{{ progressState }}">
-  {{ progressIndicator({
-    progressState: progressState,
-    totalSegments: 8
-  }) }}
-</div>
-{% endfor %}
-
 {% for subSegmentProgress in [-25, 0, 40, 100, 125] %}
 <div data-sub-segment-progress="{{ subSegmentProgress }}">
   {{ progressIndicator({
-    progressState: 25,
-    totalSegments: 8,
+    currentStep: 2,
+    totalSteps: 8,
     subSegmentProgress: subSegmentProgress
   }) }}
 </div>
@@ -86,25 +52,12 @@
 </div>
 {% endfor %}
 
-<div data-step-precedence>
+<div data-generated-progress>
   {{ progressIndicator({
-    currentStep: 10,
-    totalSteps: 5,
-    progressState: 25,
-    totalSegments: 8,
-    progressText: 'Page 10 of 5'
+    currentStep: 11,
+    totalSteps: 12
   }) }}
 </div>
-
-{% for progressCase in [[25, 50], [30, 0], [30, 50], [50, 50], [95, 50], [100, 100]] %}
-<div data-overall-case="{{ loop.index }}">
-  {{ progressIndicator({
-    progressState: progressCase[0],
-    totalSegments: 8,
-    subSegmentProgress: progressCase[1]
-  }) }}
-</div>
-{% endfor %}
 
 {% for progressCase in [[2, 50], [2, 100], [8, 50]] %}
 <div data-step-partial-case="{{ loop.index }}">
@@ -116,19 +69,12 @@
 </div>
 {% endfor %}
 
-{% for announcementCase in [
-  { label: 'Personal details', progressText: 'Page 2 of 8' },
-  {},
-  { label: '', progressText: '' },
-  { label: '   ', progressText: '   ' },
-  { label: ' Personal details ', progressText: ' Page 2 of 8 ' }
-] %}
+{% for label in ['Personal details', null, '', '   ', ' Personal details '] %}
 <div data-announcement-case="{{ loop.index }}">
   {{ progressIndicator({
-    progressState: 25,
-    totalSegments: 8,
-    label: announcementCase.label,
-    progressText: announcementCase.progressText
+    currentStep: 2,
+    totalSteps: 8,
+    label: label
   }) }}
 </div>
 {% endfor %}

@@ -13,7 +13,7 @@
 
 {% block bodyContent %}
 
-  <p>Use the progress indicator for a process with a known number of pages or stages, such as a multi-page form. Keep the progress text consistent with the user's current position.</p>
+  <p>Use the progress indicator for a process with a known number of pages or stages, such as a multi-page form. The page text is generated from the user's current step.</p>
 
   {{ designExample({
     group: "components",
@@ -26,30 +26,28 @@
   <p>Do not use it for loading states with an unknown duration. For tasks that people can complete in any order, consider a <a href="/design-system/components/task-list">task list</a> instead.</p>
 
   <h2>Step-based progress</h2>
-  <p>Pass both <code>currentStep</code> and <code>totalSteps</code> to generate page text such as "Page 2 of 8". Each step has one segment, and segments up to and including the current step are filled.</p>
+  <p>Both React and Nunjucks require <code>currentStep</code> and <code>totalSteps</code> to generate page text such as "Page 2 of 8". Each step has one segment, and segments up to and including the current step are filled. Text, visual progress, and ARIA values stay in sync without manually calculating a percentage or supplying page text.</p>
   <p>The current step is clamped between 1 and the total number of steps. The total is rounded to an integer with a minimum of 1. For example, <code>currentStep: 10</code> with <code>totalSteps: 5</code> renders "Page 5 of 5", five filled segments, and matching accessibility values.</p>
-  <p>When <code>subSegmentProgress</code> is supplied, the overall step value is <code>currentStep + subSegmentProgress / 100</code>, capped at the total. Step 2 of 8 plus 50% of one segment represents 2.5 steps and shows "Page 3 of 8". The page number rounds up to the page containing the partial segment.</p>
-  <p>When both step options are supplied, they take precedence over <code>progressState</code>, <code>totalSegments</code>, and <code>progressText</code>.</p>
-
-  <h2>Percentage progress without gaps</h2>
-  <p>Alternatively, pass the overall percentage through <code>progressState</code> and set <code>totalSegments</code>. Full and partial segment fills are derived from that percentage. The base percentage is clamped between 1 and 100 and the segment count is rounded to an integer with a minimum of 1, matching React.</p>
-  <p>Leave <code>subSegmentProgress</code> at 0 when the percentage already includes all progress. Otherwise it adds progress as a percentage of one segment, independently clamped between 0 and 100. After clamping and normalizing inputs, the overall percentage is <code>min(progressState + subSegmentProgress / segmentCount, 100)</code>. For example, 25% over eight segments plus 50% of one segment produces 31.25%, with two full segments and half of the third.</p>
+  <h2>Partial progress without gaps</h2>
+  <p>Use <code>subSegmentProgress</code> for partial progress through the next step. It is clamped between 0 and 100 and defaults to 0. After clamping the inputs, the overall step value is <code>currentStep + subSegmentProgress / 100</code>, capped at the total. Step 2 of 8 plus 50 represents 2.5 steps and shows "Page 3 of 8". The page number rounds up to the page containing the partial segment.</p>
   <p>The visual fill and numeric ARIA value use this same overall value. Set <code>showBars</code> to <code>false</code> to remove the gaps between segments.</p>
 
   {{ designExample({
     group: "components",
     item: "progress-indicator",
-    type: "percentage"
+    type: "partial-progress"
   }) }}
 
   <h2>Labels and supporting text</h2>
-  <p>Use <code>label</code> for the current section's name and <code>helperText</code> for optional supporting information, such as an accurate estimate of time remaining. In percentage mode, <code>progressText</code> is optional text displayed on the right and used as the readable accessible value. Keep it consistent with overall progress; it does not change the calculated numeric value. Omit these options when they do not add useful context.</p>
+  <p>Use <code>label</code> for the current section's name and <code>helperText</code> for optional supporting information, such as an accurate estimate of time remaining. Omit these options when they do not add useful context. The generated page count remains visible even without a label or helper.</p>
   <p>Use <code>classes</code> to add CSS classes to the outer element and <code>attributes</code> to add HTML attributes.</p>
 
   <h2>Accessibility</h2>
   <p>Both the React component and toolkit macro expose one element with <code>role="progressbar"</code>, named by the trimmed <code>label</code> or "Progress" when it is missing or blank. The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable.</p>
-  <p>With the label "Personal details" and progress text "Page 2 of 8", both expose the name, role, and value for "Personal details, progress bar, Page 2 of 8". In percentage mode, non-empty plain-text <code>progressText</code> provides <code>aria-valuetext</code>. Missing or blank text falls back to the overall percentage, as do non-string React values. Numeric <code>aria-valuenow</code> always reflects overall progress on the 1-to-100 scale.</p>
-  <p>In toolkit step mode, <code>aria-valuenow</code> includes partial progress on the 1-to-total-steps scale. Whole steps use generated page text, while partial steps use value text such as "2.5 of 8 steps complete".</p>
+  <p>With the label "Personal details", <code>currentStep: 2</code>, and <code>totalSteps: 8</code>, both expose the name, role, and value for "Personal details, progress bar, Page 2 of 8". Numeric <code>aria-valuenow</code> includes partial progress on the 1-to-total-steps scale. Whole steps use generated page text, while partial steps use value text such as "2.5 of 8 steps complete".</p>
   <p>The component does not move focus or announce updates through a live region. Exact announcements depend on the browser, screen reader, and navigation mode, so test it in the context of your service.</p>
+
+  <h2>Migrating existing usage</h2>
+  <p>Percentage inputs and manual page text are no longer supported in either package. Replace <code>progressState</code>, <code>totalSegments</code>, and <code>progressText</code> with the journey's <code>currentStep</code> and <code>totalSteps</code>. For example, step 2 of 8 replaces a percentage of 25 with separately supplied page text.</p>
 
 {% endblock %}

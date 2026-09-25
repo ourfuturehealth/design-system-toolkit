@@ -14,9 +14,9 @@ Use the progress indicator to show users how far through a multi-step process (f
 <div class="ofh-progress-indicator">
   <div
     role="progressbar"
-    aria-valuenow="25"
+    aria-valuenow="2"
     aria-valuemin="1"
-    aria-valuemax="100"
+    aria-valuemax="8"
     aria-valuetext="Page 2 of 8"
     aria-label="Personal details"
   >
@@ -45,44 +45,28 @@ Use the progress indicator to show users how far through a multi-step process (f
 {% from 'components/progress-indicator/macro.njk' import progressIndicator %}
 
 {{ progressIndicator({
-  progressState: 25,
-  totalSegments: 8,
+  currentStep: 2,
+  totalSteps: 8,
   subSegmentProgress: 0,
   label: "Personal details",
-  progressText: "Page 2 of 8",
   helperText: "About 5 minutes left"
 })}}
 ```
 
-### Overall percentage
-
-Prefer passing the overall percentage as `progressState`, with
-`subSegmentProgress` left at its default of 0. Both packages derive full and
-partial segments from that percentage, without discarding fractional progress.
-
-The base `progressState` is clamped between 1 and 100. `subSegmentProgress` adds
-progress as a percentage of one segment and is independently clamped between
-0 and 100. After normalizing the segment count, the overall percentage is:
-
-```text
-min(progressState + subSegmentProgress / segmentCount, 100)
-```
-
-For example, `progressState: 25`, `totalSegments: 8`, and
-`subSegmentProgress: 50` produce 2.5 filled segments and 31.25% overall. Passing
-`progressState: 31.25` without a sub-segment value produces the same result.
-At the 1% minimum, the first segment is partially filled instead of showing no
-progress. A total of 100% fills every segment without an extra partial segment.
-
-`aria-valuenow` uses the overall percentage, with an ARIA range of 1 to 100.
-Non-empty plain-text `progressText` provides the readable `aria-valuetext`, such
-as `Page 2 of 8`. When that text is missing or blank, the value text falls back to
-the overall percentage. Keep custom text consistent with the numeric progress;
-it does not change the calculation or fill.
-
 ### Step-based progress
 
-Pass both `currentStep` and `totalSteps` to use step-based progress instead of percentages:
+In both React and Nunjucks, pass `currentStep` and `totalSteps` for a page-based
+journey instead of calculating a percentage and supplying page text separately:
+
+```tsx
+<ProgressIndicator currentStep={11} totalSteps={12} label="Personal details" />
+```
+
+This generates `Page 11 of 12`, 11 filled segments, `aria-valuenow="11"`, and
+`aria-valuemax="12"`. Both packages require `currentStep` and `totalSteps`.
+Page text and accessible value text are generated; no separate text input is needed.
+
+For example, the Nunjucks macro also clamps out-of-range steps:
 
 ```njk
 {{ progressIndicator({
@@ -100,22 +84,18 @@ determines full segments, partial fill, and `aria-valuenow` on the 1-to-total-st
 scale. Generated page text rounds up to the page containing the partial segment.
 For example, step 2 of 8 plus 50% of a segment shows `Page 3 of 8` and exposes
 `aria-valuenow="2.5"` with `aria-valuetext="2.5 of 8 steps complete"`.
-In this mode, the step props take precedence over percentage props and
-`progressText` is generated automatically.
+At completion, all segments are filled and no extra partial segment is rendered.
 
 ### Accessibility contract
 
 Both packages expose one element with `role="progressbar"`. Its accessible name
 is the trimmed `label`, falling back to `Progress` when missing or blank. Its
-value text is separate from its name. For `label: "Personal details"` and
-`progressText: "Page 2 of 8"`, the accessible name, role, and value correspond to
+value text is separate from its name. For `label: "Personal details"`,
+`currentStep: 2`, and `totalSteps: 8`, the accessible name, role, and value correspond to
 "Personal details, progress bar, Page 2 of 8". Exact spoken order depends on the
 screen reader and navigation mode.
 
-In percentage mode, non-empty plain-text `progressText` provides `aria-valuetext`;
-otherwise the overall percentage is used. In React, non-string `progressText`
-also falls back to the overall percentage. In toolkit step mode, the value text
-is generated: page text for whole steps or fractional steps complete for partial
+In both packages, value text is generated: page text for whole steps or fractional steps complete for partial
 steps. Numeric ARIA values always reflect the calculated overall progress.
 
 The header and track form one accessible progress bar. Their visual contents are
@@ -124,14 +104,19 @@ Helper text remains outside the progress bar so it can be read separately.
 
 ### Options
 
-- `progressState` (required for percentage mode): base progress percentage, clamped between 1 and 100, matching React.
-- `totalSegments` (required for percentage mode): fixed number of segments rendered in the track.
-- `currentStep` (required for step mode): current step, clamped between 1 and `totalSteps`.
-- `totalSteps` (required for step mode): number of steps, rounded to an integer with a minimum of 1.
+- `currentStep` (required): current step, clamped between 1 and `totalSteps`.
+- `totalSteps` (required): number of steps, rounded to an integer with a minimum of 1.
 - `subSegmentProgress`: additional progress as a percentage of one segment, clamped between 0 and 100. Defaults to `0`. The overall value is capped at completion.
 - `label`: optional text shown on the left of the header and used as the accessible name. Missing or blank labels use `Progress` as the accessible name.
-- `progressText`: optional text shown on the right of the header in percentage mode. Non-empty text also supplies `aria-valuetext`; otherwise the overall percentage is used. Does not change numeric progress.
 - `helperText`: optional supporting text shown below the track.
 - `showBars`: whether to show gaps between progress segments. Defaults to `true`.
 - `classes`: additional classes to add to the outer element.
 - `attributes`: additional HTML attributes to add to the outer element.
+
+### Migrating from percentage inputs
+
+`progressState`, `totalSegments`, and manual `progressText` are no longer supported
+in either package. Pass the journey's `currentStep` and `totalSteps` instead.
+For example, use step 2 of 8 instead of a percentage of 25 with separately supplied
+page text. `subSegmentProgress` remains available for partial progress through the
+next step.

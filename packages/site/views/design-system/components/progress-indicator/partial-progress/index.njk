@@ -1,11 +1,10 @@
 {% from 'progress-indicator/macro.njk' import progressIndicator %}
 
 {{ progressIndicator({
-  progressState: 25,
-  totalSegments: 8,
+  currentStep: 2,
+  totalSteps: 8,
   subSegmentProgress: 50,
   label: "Contact details",
-  progressText: "31.25%",
   helperText: "About 5 minutes left",
   showBars: false
 }) }}

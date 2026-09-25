@@ -5,11 +5,9 @@ import { ProgressIndicator } from './ProgressIndicator';
 const progressIndicatorUsageExample = `import { ProgressIndicator } from '@ourfuturehealth/react-components';
 
 <ProgressIndicator
-  progressState={25}
-  totalSegments={8}
-  subSegmentProgress={0}
+  currentStep={2}
+  totalSteps={8}
   label="Personal details"
-  progressText="Page 2 of 8"
   helperText="About 5 minutes left"
   showBars={true}
 />;
@@ -32,35 +30,30 @@ const meta: Meta<typeof ProgressIndicator> = {
 
           <h2>How to use the React component</h2>
           <p>
-            Pass the overall percentage from 1 to 100 through <code>progressState</code>{' '}
-            and set the fixed number of segments with{' '}
-            <code>totalSegments</code>. Full and partial segment fills are derived
-            from that percentage; leave <code>subSegmentProgress</code> at 0
-            when the percentage already includes all progress.
+            For a page-based journey, pass <code>currentStep</code> and{' '}
+            <code>totalSteps</code>. For example, 11 and 12 generate "Page 11 of 12",
+            11 filled segments, and an ARIA value of 11 out of 12. No percentage
+            calculation or separate page text is needed.
           </p>
           <p>
-            Both React and the toolkit Nunjucks macro clamp <code>progressState</code>{' '}
-            to 1 through 100. The optional <code>subSegmentProgress</code> is
-            additional progress as a percentage of one segment, clamped between
-            0 and 100. The overall percentage is{' '}
-            <code>min(progressState + subSegmentProgress / segmentCount, 100)</code>{' '}
-            after clamping inputs and normalizing the segment count. Both the
-            visible fill and numeric ARIA value use this total. For example, 25% over
-            eight segments plus a 50% segment adds up to 31.25%.
+            Both React and Nunjucks require these two step inputs. The total
+            is rounded with a minimum of 1, and the current step is clamped
+            between 1 and that total. Page text and accessible value text are
+            always generated from the step values.
+          </p>
+          <p>
+            <code>subSegmentProgress</code> adds a fraction of one step. It is
+            clamped between 0 and 100 and defaults to 0. Overall progress is
+            capped at the total. Step 2 of 8 plus 50 represents 2.5 steps:
+            the header shows "Page 3 of 8" and the accessible value is
+            "2.5 of 8 steps complete". Whole steps use their generated page text
+            as the accessible value.
           </p>
           <p>
             Pass a plain-text string to the optional <code>label</code> prop to show text on the left
-            of the header, <code>progressText</code> for free-form text on the
-            right, and <code>helperText</code> to show supporting text below
+            of the header, and <code>helperText</code> to show supporting text below
             the track. Set <code>showBars</code> to <code>false</code> to remove
             the gaps between segments.
-          </p>
-          <p>
-            Keep free-form <code>progressText</code> consistent with the overall
-            progress. Non-empty strings provide <code>aria-valuetext</code>,
-            such as "Page 2 of 8". Missing, empty, whitespace-only, or non-string
-            values fall back to the calculated percentage. Numeric{' '}
-            <code>aria-valuenow</code> always uses overall progress.
           </p>
           <p>
             Both packages expose one progress bar named by <code>label</code>,
@@ -82,11 +75,10 @@ const meta: Meta<typeof ProgressIndicator> = {
           <ArgTypes
             of={Default}
             include={[
-              'progressState',
-              'totalSegments',
+              'currentStep',
+              'totalSteps',
               'subSegmentProgress',
               'label',
-              'progressText',
               'helperText',
               'showBars',
               'classes',
@@ -101,16 +93,16 @@ const meta: Meta<typeof ProgressIndicator> = {
   },
   tags: ['autodocs'],
   argTypes: {
-    progressState: {
-      control: { type: 'number', min: 1, max: 100 },
-      description: 'Base progress percentage, clamped between 1 and 100. With subSegmentProgress at 0, this is the overall percentage used for visual fill and the numeric ARIA value.',
+    currentStep: {
+      control: { type: 'number', min: 1, step: 1 },
+      description: 'Required current step, clamped between 1 and totalSteps. Generates page text, visual fill, and ARIA values together with totalSteps.',
       table: {
         category: 'ProgressIndicatorProps',
       },
     },
-    totalSegments: {
+    totalSteps: {
       control: { type: 'number', min: 1, step: 1 },
-      description: 'Fixed number of segments rendered in the progress track.',
+      description: 'Required number of steps, rounded to an integer with a minimum of 1.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -118,7 +110,7 @@ const meta: Meta<typeof ProgressIndicator> = {
     subSegmentProgress: {
       control: { type: 'number', min: 0, max: 100 },
       description:
-        'Additional progress as a percentage of one segment, clamped between 0 and 100. Adds subSegmentProgress / segmentCount to the base percentage, capped at 100 overall.',
+        'Additional progress as a percentage of one segment, clamped between 0 and 100. Adds subSegmentProgress / 100 to the current step, capped at totalSteps.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -128,13 +120,6 @@ const meta: Meta<typeof ProgressIndicator> = {
       type: 'string',
       description:
         'Optional plain-text string shown on the left and used as the accessible name. Missing or blank labels use Progress as the accessible name. JSX is not supported.',
-      table: {
-        category: 'ProgressIndicatorProps',
-      },
-    },
-    progressText: {
-      control: 'text',
-      description: 'Optional text shown on the right. Non-empty strings also provide aria-valuetext; blank or non-string values fall back to the overall percentage. Numeric progress is unchanged.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -170,11 +155,8 @@ const meta: Meta<typeof ProgressIndicator> = {
     },
   },
   args: {
-    progressState: 25,
-    totalSegments: 8,
     subSegmentProgress: 0,
     label: 'Personal details',
-    progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
     showBars: true,
     classes: '',
@@ -199,33 +181,29 @@ export const Default: Story = {
   },
   render: () => (
     <ProgressIndicator
-      progressState={25}
-      totalSegments={8}
-      subSegmentProgress={0}
+      currentStep={2}
+      totalSteps={8}
       label="Personal details"
-      progressText="Page 2 of 8"
     />
   ),
 };
 
 export const Builder: Story = {
   args: {
-    progressState: 25,
-    totalSegments: 8,
+    currentStep: 2,
+    totalSteps: 8,
     subSegmentProgress: 0,
     label: 'Personal details',
-    progressText: 'Page 2 of 8',
     helperText: 'About 5 minutes left',
     showBars: true,
   },
   parameters: {
     controls: {
       include: [
-        'progressState',
-        'totalSegments',
+        'currentStep',
+        'totalSteps',
         'subSegmentProgress',
         'label',
-        'progressText',
         'helperText',
         'showBars',
         'classes',
@@ -235,7 +213,7 @@ export const Builder: Story = {
     docs: {
       description: {
         story:
-          'Use the Builder story to try the ProgressIndicator API interactively.',
+          'Change currentStep and totalSteps to update the generated page text, visual progress, and ARIA values together.',
       },
     },
   },
@@ -243,15 +221,14 @@ export const Builder: Story = {
 
 export const MinimumProgress: Story = {
   args: {
-    progressState: 1,
-    totalSegments: 8,
+    currentStep: 1,
+    totalSteps: 8,
     subSegmentProgress: 0,
-    progressText: '1%',
   },
   parameters: {
     docs: {
       description: {
-        story: 'The minimum progress state is 1%. Lower values are clamped to 1%.',
+        story: 'The minimum current step is 1. Lower values are clamped to the first step.',
       },
     },
   },
@@ -259,16 +236,15 @@ export const MinimumProgress: Story = {
 
 export const PartialProgress: Story = {
   args: {
-    progressState: 25,
-    totalSegments: 8,
+    currentStep: 2,
+    totalSteps: 8,
     subSegmentProgress: 50,
-    progressText: '31.25%',
   },
   parameters: {
     docs: {
       description: {
         story:
-          'Two full segments and half of the third represent 31.25% overall. The visual fill and ARIA values agree. Passing progressState={31.25} with no subSegmentProgress produces the same result.',
+          'Two full segments and half of the third represent 2.5 of 8 steps complete. The generated page text is Page 3 of 8 and the ARIA value includes the partial step.',
       },
     },
   },
@@ -276,11 +252,10 @@ export const PartialProgress: Story = {
 
 export const LongLabel: Story = {
   args: {
-    progressState: (11 * 100) / 12,
-    totalSegments: 12,
+    currentStep: 11,
+    totalSteps: 12,
     subSegmentProgress: 0,
     label: 'Tell us about your current medical conditions so we can help diagnose it better',
-    progressText: 'Page 11 of 12',
     helperText: '',
   },
   parameters: {
@@ -296,10 +271,9 @@ export const LongLabel: Story = {
 export const WithoutBars: Story = {
   render: () => (
     <ProgressIndicator
-      progressState={25}
-      totalSegments={8}
+      currentStep={2}
+      totalSteps={8}
       label="Personal details"
-      progressText="Page 2 of 8"
       helperText="About 5 minutes left"
       showBars={false}
     />
@@ -318,7 +292,7 @@ export const WithoutBars: Story = {
 };
 
 export const WithoutLabelOrHelperText: Story = {
-  render: () => <ProgressIndicator progressState={75} totalSegments={4} />,
+  render: () => <ProgressIndicator currentStep={3} totalSteps={4} />,
   parameters: {
     controls: {
       disable: true,
@@ -326,7 +300,7 @@ export const WithoutLabelOrHelperText: Story = {
     docs: {
       description: {
         story:
-          'The header and helper text are optional. Omit them to show only the progress track.',
+          'The label and helper text are optional. The generated page count remains visible when both are omitted.',
       },
     },
   },
