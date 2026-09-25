@@ -15,7 +15,7 @@ export interface ProgressIndicatorProps
    */
   subSegmentProgress?: number;
   /**
-    * Optional visible label and accessible name. Defaults to "Progress" for assistive technology.
+    * Optional visible label, placed before the generated page text in the accessible name.
    */
     label?: string;
   /**
@@ -64,10 +64,7 @@ export const ProgressIndicator = ({
   const filledSegmentCount = Math.floor(scaledProgress / 100);
   const segmentProgress = scaledProgress - filledSegmentCount * 100;
   const resolvedProgressText = `Page ${Math.ceil(overallProgress)} of ${segmentCount}`;
-  const accessibleLabel = label?.trim() || 'Progress';
-  const accessibleValueText = Number.isInteger(overallProgress)
-    ? resolvedProgressText
-    : `${overallProgress} of ${segmentCount} steps complete`;
+  const accessibleLabel = `${label?.trim() || 'Progress'}, ${resolvedProgressText}`;
 
   return (
     <div
@@ -80,14 +77,13 @@ export const ProgressIndicator = ({
         aria-valuenow={overallProgress}
         aria-valuemin={1}
         aria-valuemax={segmentCount}
-        aria-valuetext={accessibleValueText}
         aria-label={accessibleLabel}
       >
         <div className="ofh-progress-indicator__header" aria-hidden="true">
           {label ? (
-            <label className="ofh-progress-indicator__label">
+            <span className="ofh-progress-indicator__label">
               {label}
-            </label>
+            </span>
           ) : null}
           <span className="ofh-progress-indicator__steps">
             {resolvedProgressText}

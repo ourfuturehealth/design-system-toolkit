@@ -38,16 +38,15 @@ const meta: Meta<typeof ProgressIndicator> = {
           <p>
             Both React and Nunjucks require these two step inputs. The total
             is rounded with a minimum of 1, and the current step is clamped
-            between 1 and that total. Page text and accessible value text are
-            always generated from the step values.
+            between 1 and that total. Page text and the numeric accessible value
+            are always generated from the step values.
           </p>
           <p>
             <code>subSegmentProgress</code> adds a fraction of one step. It is
             clamped between 0 and 100 and defaults to 0. Overall progress is
             capped at the total. Step 2 of 8 plus 50 represents 2.5 steps:
-            the header shows "Page 3 of 8" and the accessible value is
-            "2.5 of 8 steps complete". Whole steps use their generated page text
-            as the accessible value.
+            the header shows "Page 3 of 8" and the numeric accessible value is
+            2.5 on the 1-to-8 scale.
           </p>
           <p>
             Pass a plain-text string to the optional <code>label</code> prop to show text on the left
@@ -56,13 +55,15 @@ const meta: Meta<typeof ProgressIndicator> = {
             the gaps between segments.
           </p>
           <p>
-            Both packages expose one progress bar named by <code>label</code>,
-            falling back to "Progress" when the label is missing or blank.
+            Both packages expose one progress bar with the label followed by the
+            generated page text in its accessible name, for example
+            "Personal details, Page 2 of 8". A missing or blank label uses "Progress".
             The visual header and segments are hidden from the accessibility tree
-            to avoid duplicate announcements. For example, the name, role, and
-            value are "Personal details", "progress bar", and "Page 2 of 8".
-            Helper text remains separately readable. Exact speech depends on the
-            screen reader and its navigation mode.
+            to avoid duplicate announcements. There is no separate{' '}
+            <code>aria-valuetext</code> that VoiceOver could announce before the
+            label; the native numeric value remains available. Helper text comes
+            after the progress bar. Exact speech depends on the screen reader
+            and its navigation mode.
           </p>
           <p>
             Use <code>classes</code>, <code>className</code>, or both to add
@@ -119,7 +120,7 @@ const meta: Meta<typeof ProgressIndicator> = {
       control: 'text',
       type: 'string',
       description:
-        'Optional plain-text string shown on the left and used as the accessible name. Missing or blank labels use Progress as the accessible name. JSX is not supported.',
+        'Optional plain-text label shown on the left and placed before the generated page text in the accessible name. Missing or blank labels use Progress. JSX is not supported.',
       table: {
         category: 'ProgressIndicatorProps',
       },

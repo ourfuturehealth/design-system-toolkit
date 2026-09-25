@@ -7,7 +7,6 @@
 {% set overallProgress = segmentCount if requestedProgress > segmentCount else requestedProgress %}
 {% set scaledProgress = overallProgress * 100 %}
 {% set pageText = 'Page ' + (overallProgress | round(0, 'ceil')) + ' of ' + segmentCount %}
-{% set valueText = pageText if overallProgress == (overallProgress | round(0, 'floor')) else overallProgress + ' of ' + segmentCount + ' steps complete' %}
 {% set filledSegments = (scaledProgress / 100) | round(0, 'floor') %}
 {% set segmentProgress = scaledProgress - filledSegments * 100 %}
 <div class="ofh-progress-indicator{% if params.classes %} {{ params.classes }}{% endif %}"{% for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
@@ -16,8 +15,7 @@
     aria-valuenow="{{ overallProgress }}"
     aria-valuemin="1"
     aria-valuemax="{{ segmentCount }}"
-    aria-valuetext="{{ valueText }}"
-    aria-label="{{ accessibleLabel if accessibleLabel else 'Progress' }}"
+    aria-label="{{ accessibleLabel if accessibleLabel else 'Progress' }}, {{ pageText }}"
   >
     <div class="ofh-progress-indicator__header" aria-hidden="true">
       {% if params.label %}

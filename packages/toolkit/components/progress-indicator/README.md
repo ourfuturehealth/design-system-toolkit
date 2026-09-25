@@ -17,8 +17,7 @@ Use the progress indicator to show users how far through a multi-step process (f
     aria-valuenow="2"
     aria-valuemin="1"
     aria-valuemax="8"
-    aria-valuetext="Page 2 of 8"
-    aria-label="Personal details"
+    aria-label="Personal details, Page 2 of 8"
   >
     <div class="ofh-progress-indicator__header" aria-hidden="true">
       <span class="ofh-progress-indicator__label">Personal details</span>
@@ -64,7 +63,7 @@ journey instead of calculating a percentage and supplying page text separately:
 
 This generates `Page 11 of 12`, 11 filled segments, `aria-valuenow="11"`, and
 `aria-valuemax="12"`. Both packages require `currentStep` and `totalSteps`.
-Page text and accessible value text are generated; no separate text input is needed.
+Page text and the numeric accessible value are generated; no separate text input is needed.
 
 For example, the Nunjucks macro also clamps out-of-range steps:
 
@@ -83,20 +82,21 @@ step plus `subSegmentProgress / 100`, capped at the total steps. This single val
 determines full segments, partial fill, and `aria-valuenow` on the 1-to-total-steps
 scale. Generated page text rounds up to the page containing the partial segment.
 For example, step 2 of 8 plus 50% of a segment shows `Page 3 of 8` and exposes
-`aria-valuenow="2.5"` with `aria-valuetext="2.5 of 8 steps complete"`.
+`aria-valuenow="2.5"` on the 1-to-8 scale.
 At completion, all segments are filled and no extra partial segment is rendered.
 
 ### Accessibility contract
 
 Both packages expose one element with `role="progressbar"`. Its accessible name
-is the trimmed `label`, falling back to `Progress` when missing or blank. Its
-value text is separate from its name. For `label: "Personal details"`,
-`currentStep: 2`, and `totalSteps: 8`, the accessible name, role, and value correspond to
-"Personal details, progress bar, Page 2 of 8". Exact spoken order depends on the
-screen reader and navigation mode.
+contains the trimmed `label` followed by the generated page text, for example
+`Personal details, Page 2 of 8`. A missing or blank label uses `Progress`.
+Combining these phrases in one name keeps the label before the page count.
 
-In both packages, value text is generated: page text for whole steps or fractional steps complete for partial
-steps. Numeric ARIA values always reflect the calculated overall progress.
+There is no `aria-valuetext` override that VoiceOver could announce before the
+label. Numeric ARIA values still reflect calculated overall progress, including
+partial steps, and allow the screen reader to announce its native progress value.
+Exact speech and percentage formatting depend on the browser, screen reader,
+and navigation mode.
 
 The header and track form one accessible progress bar. Their visual contents are
 hidden from the accessibility tree to avoid duplicate, standalone announcements.
@@ -107,7 +107,7 @@ Helper text remains outside the progress bar so it can be read separately.
 - `currentStep` (required): current step, clamped between 1 and `totalSteps`.
 - `totalSteps` (required): number of steps, rounded to an integer with a minimum of 1.
 - `subSegmentProgress`: additional progress as a percentage of one segment, clamped between 0 and 100. Defaults to `0`. The overall value is capped at completion.
-- `label`: optional text shown on the left of the header and used as the accessible name. Missing or blank labels use `Progress` as the accessible name.
+- `label`: optional text shown on the left of the header and placed before the page count in the accessible name. Missing or blank labels use `Progress`.
 - `helperText`: optional supporting text shown below the track.
 - `showBars`: whether to show gaps between progress segments. Defaults to `true`.
 - `classes`: additional classes to add to the outer element.

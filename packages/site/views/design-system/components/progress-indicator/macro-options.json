@@ -22,7 +22,7 @@
       "name": "label",
       "type": "string",
       "required": false,
-      "description": "Optional text shown on the left of the header and used as the accessible name after trimming whitespace. Missing or blank labels use Progress as the accessible name, matching React."
+      "description": "Optional text shown on the left of the header and placed before the generated page text in the accessible name. Missing or blank labels use Progress, matching React."
     },
     {
       "name": "helperText",

@@ -43,8 +43,8 @@
   <p>Use <code>classes</code> to add CSS classes to the outer element and <code>attributes</code> to add HTML attributes.</p>
 
   <h2>Accessibility</h2>
-  <p>Both the React component and toolkit macro expose one element with <code>role="progressbar"</code>, named by the trimmed <code>label</code> or "Progress" when it is missing or blank. The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable.</p>
-  <p>With the label "Personal details", <code>currentStep: 2</code>, and <code>totalSteps: 8</code>, both expose the name, role, and value for "Personal details, progress bar, Page 2 of 8". Numeric <code>aria-valuenow</code> includes partial progress on the 1-to-total-steps scale. Whole steps use generated page text, while partial steps use value text such as "2.5 of 8 steps complete".</p>
+  <p>Both the React component and toolkit macro expose one element with <code>role="progressbar"</code>. Its accessible name combines the trimmed <code>label</code> followed by the generated page text, such as "Personal details, Page 2 of 8". A missing or blank label uses "Progress". The visual header and segments are hidden from the accessibility tree to avoid duplicate announcements; helper text remains separately readable after the progress bar.</p>
+  <p>The label and page count are combined in one name to preserve their order. No <code>aria-valuetext</code> override is supplied, so VoiceOver cannot read that page text separately before the label. Numeric <code>aria-valuenow</code> still includes partial progress on the 1-to-total-steps scale, allowing assistive technology to announce its native progress value.</p>
   <p>The component does not move focus or announce updates through a live region. Exact announcements depend on the browser, screen reader, and navigation mode, so test it in the context of your service.</p>
 
   <h2>Migrating existing usage</h2>

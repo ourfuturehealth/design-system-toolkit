@@ -60,4 +60,13 @@ describe('Progress indicator compiled CSS', () => {
     expect(typographyEnd).toBeGreaterThan(typographyStart);
     expect(css.slice(typographyStart, typographyEnd)).not.toContain('margin-bottom:');
   });
+
+  it('does not override the source reading order of the header text', () => {
+    const headerStart = css.indexOf('.ofh-progress-indicator__header {');
+    const trackStart = css.indexOf('.ofh-progress-indicator__track {', headerStart);
+
+    expect(headerStart).toBeGreaterThanOrEqual(0);
+    expect(trackStart).toBeGreaterThan(headerStart);
+    expect(css.slice(headerStart, trackStart)).not.toContain('reading-order:');
+  });
 });
