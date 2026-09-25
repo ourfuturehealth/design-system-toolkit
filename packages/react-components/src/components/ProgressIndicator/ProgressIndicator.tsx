@@ -85,9 +85,9 @@ export const ProgressIndicator = ({
       >
         <div className="ofh-progress-indicator__header" aria-hidden="true">
           {label ? (
-            <span className="ofh-progress-indicator__label">
+            <label className="ofh-progress-indicator__label">
               {label}
-            </span>
+            </label>
           ) : null}
           <span className="ofh-progress-indicator__steps">
             {resolvedProgressText}
