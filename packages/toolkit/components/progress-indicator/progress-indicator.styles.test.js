@@ -31,5 +31,33 @@ describe('Progress indicator compiled CSS', () => {
 
     expect(rule).toContain('display: flex;');
     expect(rule).toContain('column-gap: 16px;');
+    expect(rule).toContain('margin-bottom: 8px;');
+  });
+
+  it.each([
+    ['ofh-progress-indicator__header', 'margin-bottom'],
+    ['ofh-progress-indicator__helper', 'margin-top'],
+  ])('uses responsive vertical-16 spacing for .%s', (className, property) => {
+    const rules = [...css.matchAll(new RegExp(`\\.${className} \\{([^}]+)\\}`, 'g'))];
+    const margins = rules
+      .map((rule) => rule[1].match(new RegExp(`${property}: ([^;]+);`))?.[1])
+      .filter(Boolean);
+
+    expect(margins).toEqual(['8px', '8px', '16px']);
+    expect(css).toContain(
+      `@media (min-width: 40.0625em) {\n  .${className} {\n    ${property}: 8px;\n  }\n}`,
+    );
+    expect(css).toContain(
+      `@media (min-width: 48.0625em) {\n  .${className} {\n    ${property}: 16px;\n  }\n}`,
+    );
+  });
+
+  it('does not add a second vertical margin to the header text', () => {
+    const typographyStart = css.indexOf('.ofh-progress-indicator__label,');
+    const typographyEnd = css.indexOf('.ofh-progress-indicator__track {', typographyStart);
+
+    expect(typographyStart).toBeGreaterThanOrEqual(0);
+    expect(typographyEnd).toBeGreaterThan(typographyStart);
+    expect(css.slice(typographyStart, typographyEnd)).not.toContain('margin-bottom:');
   });
 });
