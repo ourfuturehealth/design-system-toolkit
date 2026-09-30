@@ -92,12 +92,6 @@ contains the trimmed `label` followed by the generated page text, for example
 `Personal details, Page 2 of 8`. A missing or blank label uses `Progress`.
 Combining these phrases in one name keeps the label before the page count.
 
-There is no `aria-valuetext` override that VoiceOver could announce before the
-label. Numeric ARIA values still reflect calculated overall progress, including
-partial steps, and allow the screen reader to announce its native progress value.
-Exact speech and percentage formatting depend on the browser, screen reader,
-and navigation mode.
-
 The header and track form one accessible progress bar. Their visual contents are
 hidden from the accessibility tree to avoid duplicate, standalone announcements.
 Helper text remains outside the progress bar so it can be read separately.
@@ -112,11 +106,3 @@ Helper text remains outside the progress bar so it can be read separately.
 - `showBars`: whether to show gaps between progress segments. Defaults to `true`.
 - `classes`: additional classes to add to the outer element.
 - `attributes`: additional HTML attributes to add to the outer element.
-
-### Migrating from percentage inputs
-
-`progressState`, `totalSegments`, and manual `progressText` are no longer supported
-in either package. Pass the journey's `currentStep` and `totalSteps` instead.
-For example, use step 2 of 8 instead of a percentage of 25 with separately supplied
-page text. `subSegmentProgress` remains available for partial progress through the
-next step.
