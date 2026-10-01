@@ -66,6 +66,10 @@ export const ProgressIndicator = ({
   const resolvedProgressText = `Page ${Math.ceil(overallProgress)} of ${segmentCount}`;
   const accessibleLabel = `${label?.trim() || 'Progress'}, ${resolvedProgressText}`;
 
+  const percentProgress = (clampedCurrentStep) / totalSteps
+  const subsegmentProgressContrib = (((subSegmentProgress / 100) * (1/  totalSteps)))
+  const totalPercentProgress =  Math.floor((percentProgress + subsegmentProgressContrib) * 100);
+
   return (
     <div
       {...props}
@@ -74,16 +78,17 @@ export const ProgressIndicator = ({
     >
       <div
         role="progressbar"
-        aria-valuenow={overallProgress}
+        aria-valuenow={totalPercentProgress}
         aria-valuemin={1}
-        aria-valuemax={segmentCount}
+        aria-valuemax={100}
         aria-label={accessibleLabel}
       >
+        {totalPercentProgress}
         <div className="ofh-progress-indicator__header" aria-hidden="true">
           {label ? (
-            <span className="ofh-progress-indicator__label">
+            <label className="ofh-progress-indicator__label">
               {label}
-            </span>
+            </label>
           ) : null}
           <span className="ofh-progress-indicator__steps">
             {resolvedProgressText}

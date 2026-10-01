@@ -280,7 +280,7 @@ describe('ProgressIndicator', () => {
 
     expect(screen.getAllByRole('progressbar')).toHaveLength(1);
     expect(label.nextElementSibling).toBe(pageText);
-    expect(label.tagName).toBe('SPAN');
+    expect(label.tagName).toBe('LABEL');
     expect(label.closest('[aria-hidden="true"]')).not.toBeNull();
     expect(pageText.closest('[aria-hidden="true"]')).not.toBeNull();
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
