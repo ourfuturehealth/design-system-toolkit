@@ -136,7 +136,7 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '40');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '40.625');
     expect(
       screen.getByRole('progressbar').querySelectorAll('.ofh-progress-indicator__segment--filled'),
     ).toHaveLength(3);
@@ -301,7 +301,7 @@ describe('ProgressIndicator', () => {
       render(<ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />);
       const progressbar = screen.getByRole('progressbar');
 
-      expect(progressbar).toHaveAttribute('aria-valuenow', '12');
+      expect(progressbar).toHaveAttribute('aria-valuenow', '12.5');
       expect(progressbar).toHaveAttribute('aria-valuemin', '1');
       expect(progressbar).toHaveAttribute('aria-valuemax', '100');
       expect(progressbar).not.toHaveAttribute('aria-valuetext');
