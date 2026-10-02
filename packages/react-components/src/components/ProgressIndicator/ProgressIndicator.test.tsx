@@ -53,14 +53,13 @@ describe('ProgressIndicator', () => {
   });
 
   it.each([
-    [2, 100, 3, 3, 0, 'Page 3 of 8'],
-    [2, 125, 3, 3, 0, 'Page 3 of 8'],
-    [2, -25, 2, 2, 0, 'Page 2 of 8'],
-    [8, 50, 8, 8, null, 'Page 8 of 8'],
+    [2, 100, 3, 0, 'Page 3 of 8'],
+    [2, 125, 3, 0, 'Page 3 of 8'],
+    [2, -25, 2, 0, 'Page 2 of 8'],
+    [8, 50, 8, null, 'Page 8 of 8'],
   ])('includes partial progress in step mode for currentStep=%s and subSegmentProgress=%s', (
     currentStep,
     subSegmentProgress,
-    expectedProgress,
     expectedFilled,
     expectedPartial,
     pageText,
