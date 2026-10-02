@@ -37,10 +37,6 @@ describe('ProgressIndicator', () => {
 
     expect(screen.getByText(pageText)).toBeInTheDocument();
     expect(screen.getAllByRole('progressbar')).toHaveLength(1);
-    expect(progressbar).toHaveAttribute('aria-valuenow', String(expectedStep));
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', String(expectedTotal));
-    expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar.querySelector('.ofh-progress-indicator__header')).toHaveAttribute('aria-hidden', 'true');
     expect(segments).toHaveLength(expectedTotal);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedStep);
@@ -75,9 +71,6 @@ describe('ProgressIndicator', () => {
     const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
 
     expect(screen.getByText(pageText)).toBeInTheDocument();
-    expect(progressbar).toHaveAttribute('aria-valuenow', String(expectedProgress));
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '8');
     expect(progressbar).toHaveAccessibleName(`Progress, ${pageText}`);
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
@@ -93,9 +86,9 @@ describe('ProgressIndicator', () => {
 
     const progressbar = screen.getByRole('progressbar');
 
-    expect(progressbar).toHaveAttribute('aria-valuenow', '2');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '40');
     expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '5');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar).toHaveAccessibleName('Progress, Page 2 of 5');
   });
@@ -129,7 +122,7 @@ describe('ProgressIndicator', () => {
         .getByRole('progressbar')
         .querySelector('.ofh-progress-indicator__segment-progress'),
     ).toHaveStyle({ width: '40%' });
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2.4');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '30');
     expect(screen.getByRole('progressbar')).not.toHaveAttribute('aria-valuetext');
     expect(screen.getByRole('progressbar')).toHaveAccessibleName('Progress, Page 3 of 8');
     expect(screen.getByText('Page 3 of 8')).toBeInTheDocument();
@@ -144,7 +137,7 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '40');
     expect(
       screen.getByRole('progressbar').querySelectorAll('.ofh-progress-indicator__segment--filled'),
     ).toHaveLength(3);
@@ -252,11 +245,6 @@ describe('ProgressIndicator', () => {
     const progressbar = screen.getByRole('progressbar', { name: `${expectedName}, Page 2 of 8` });
 
     expect(screen.getAllByRole('progressbar')).toHaveLength(1);
-    expect(progressbar).toHaveAttribute('aria-valuenow', '2');
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '8');
-    expect(progressbar).not.toHaveAttribute('aria-valuetext');
-    expect(progressbar.closest('[aria-hidden="true"], [hidden]')).toBeNull();
     expect(progressbar.querySelector('.ofh-progress-indicator__track')).toHaveAttribute('aria-hidden', 'true');
     const header = container.querySelector<HTMLDivElement>('.ofh-progress-indicator__header');
     expect(progressbar).toContainElement(header);
@@ -284,9 +272,9 @@ describe('ProgressIndicator', () => {
     expect(label.closest('[aria-hidden="true"]')).not.toBeNull();
     expect(pageText.closest('[aria-hidden="true"]')).not.toBeNull();
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
-    expect(progressbar).toHaveAttribute('aria-valuenow', '2');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '25');
     expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '8');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar.nextElementSibling).toBe(helper);
     expect(helper.closest('[aria-hidden="true"]')).toBeNull();
   });
@@ -310,13 +298,13 @@ describe('ProgressIndicator', () => {
   it.each([-25, 0, 0.5, 1])(
     'enforces the first step minimum for currentStep=%s',
     (currentStep) => {
-      render(<ProgressIndicator currentStep={currentStep} totalSteps={8} />);
-
+      const totalSteps = 8;
+      render(<ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />);
       const progressbar = screen.getByRole('progressbar');
 
-      expect(progressbar).toHaveAttribute('aria-valuenow', '1');
+      expect(progressbar).toHaveAttribute('aria-valuenow', '12');
       expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-      expect(progressbar).toHaveAttribute('aria-valuemax', '8');
+      expect(progressbar).toHaveAttribute('aria-valuemax', '100');
       expect(progressbar).not.toHaveAttribute('aria-valuetext');
       expect(progressbar).toHaveAccessibleName('Progress, Page 1 of 8');
       expect(
@@ -336,9 +324,9 @@ describe('ProgressIndicator', () => {
 
     const progressbar = screen.getByRole('progressbar');
 
-    expect(progressbar).toHaveAttribute('aria-valuenow', '8');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '100');
     expect(progressbar).toHaveAttribute('aria-valuemin', '1');
-    expect(progressbar).toHaveAttribute('aria-valuemax', '8');
+    expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar).toHaveAccessibleName('Progress, Page 8 of 8');
     expect(

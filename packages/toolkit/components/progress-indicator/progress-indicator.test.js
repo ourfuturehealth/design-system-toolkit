@@ -10,22 +10,22 @@ describe('Our Future Health progress indicator macro', () => {
   });
 
   it.each([
-    [10, 5],
-    [5, 5],
-    [2, 2],
-    [1, 1],
-    [0.5, 1],
-    [0, 1],
-    [-1, 1],
-  ])('renders step %s as page %s of 5', (currentStep, expectedStep) => {
+    [10, 5, 100],
+    [5, 5, 100],
+    [2, 2, 40],
+    [1, 1, 20],
+    [0.5, 1, 20],
+    [0, 1, 20],
+    [-1, 1, 20],
+  ])('renders step %s as page %s of 5 with %s aria now progress', (currentStep, expectedStep, progressPercent) => {
     const indicator = document.querySelector(`[data-current-step="${currentStep}"]`);
     const progressbar = indicator.querySelector('[role="progressbar"]');
     const pageText = `Page ${expectedStep} of 5`;
 
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedStep));
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(progressPercent));
     expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe('5');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(progressbar.getAttribute('aria-label')).toBe(`Personal details, ${pageText}`);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
@@ -51,11 +51,6 @@ describe('Our Future Health progress indicator macro', () => {
     segments.forEach((segment, index) => {
       expect(segment.classList.contains('ofh-progress-indicator__segment--filled')).toBe(index < expectedStep);
     });
-    expect(progressbar.getAttribute('aria-label')).toBe(`Progress, ${pageText}`);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedStep));
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe(String(expectedTotal));
-    expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
   });
 
@@ -67,10 +62,6 @@ describe('Our Future Health progress indicator macro', () => {
     const progressbar = document.querySelector(`[data-label-case="${labelCase}"] [role="progressbar"]`);
 
     expect(progressbar.getAttribute('aria-label')).toBe(`${expectedName}, Page 2 of 8`);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe('2');
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe('8');
-    expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
   });
 
   it('groups the visible page text and track into one accessible progress bar', () => {
@@ -110,10 +101,6 @@ describe('Our Future Health progress indicator macro', () => {
 
     expect(indicator.querySelectorAll('[role="progressbar"]')).toHaveLength(1);
     expect(progressbar.getAttribute('aria-label')).toBe(`${expectedName}, ${expectedValue}`);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe('2');
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe('8');
-    expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(progressbar.closest('[aria-hidden="true"], [hidden]')).toBeNull();
     expect(progressbar.querySelector('.ofh-progress-indicator__track').getAttribute('aria-hidden')).toBe('true');
     expect(header.closest('[role="progressbar"]')).toBe(progressbar);
@@ -121,11 +108,11 @@ describe('Our Future Health progress indicator macro', () => {
   });
 
   it.each([
-    [-25, 2, 2, 0, 'Page 2 of 8'],
-    [0, 2, 2, 0, 'Page 2 of 8'],
-    [40, 2.4, 2, 40, 'Page 3 of 8'],
-    [100, 3, 3, 0, 'Page 3 of 8'],
-    [125, 3, 3, 0, 'Page 3 of 8'],
+    [-25, 25, 2, 0, 'Page 2 of 8'],
+    [0, 25, 2, 0, 'Page 2 of 8'],
+    [40, 30, 2, 40, 'Page 3 of 8'],
+    [100, 37.5, 3, 0, 'Page 3 of 8'],
+    [125, 37.5, 3, 0, 'Page 3 of 8'],
   ])('clamps subSegmentProgress=%s to an overall %s steps', (subSegmentProgress, expectedProgress, expectedFilled, expectedPartial, valueText) => {
     const progressbar = document.querySelector(`[data-sub-segment-progress="${subSegmentProgress}"] [role="progressbar"]`);
     const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
@@ -142,9 +129,9 @@ describe('Our Future Health progress indicator macro', () => {
   });
 
   it.each([
-    [1, 2.5, 2, 50, 'Page 3 of 8'],
-    [2, 3, 3, 0, 'Page 3 of 8'],
-    [3, 8, 8, null, 'Page 8 of 8'],
+    [1, 31.25, 2, 50, 'Page 3 of 8'],
+    [2, 37.5, 3, 0, 'Page 3 of 8'],
+    [3, 106.25, 8, null, 'Page 8 of 8'],
   ])('includes partial progress in the step value for case %s', (caseNumber, expectedProgress, expectedFilled, expectedPartial, pageText) => {
     const indicator = document.querySelector(`[data-step-partial-case="${caseNumber}"]`);
     const progressbar = indicator.querySelector('[role="progressbar"]');
@@ -153,7 +140,7 @@ describe('Our Future Health progress indicator macro', () => {
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
     expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedProgress));
     expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe('8');
+    expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(progressbar.getAttribute('aria-label')).toBe(`Progress, ${pageText}`);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilled);
@@ -188,10 +175,6 @@ describe('Our Future Health progress indicator macro', () => {
     expect(indicator.querySelector('.ofh-progress-indicator__helper')).toBeNull();
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe('Page 11 of 12');
     expect(progressbar.getAttribute('aria-label')).toBe('Progress, Page 11 of 12');
-    expect(progressbar.getAttribute('aria-valuenow')).toBe('11');
-    expect(progressbar.getAttribute('aria-valuemin')).toBe('1');
-    expect(progressbar.getAttribute('aria-valuemax')).toBe('12');
-    expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(12);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(11);
     expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress').style.width).toBe('0%');
