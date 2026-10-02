@@ -1,0 +1,9 @@
+{% from 'progress-indicator/macro.njk' import progressIndicator %}
+
+{{ progressIndicator({
+  currentStep: 2,
+  totalSteps: 8,
+  subSegmentProgress: 0,
+  label: "Personal details",
+  helperText: "About 5 minutes left"
+}) }}

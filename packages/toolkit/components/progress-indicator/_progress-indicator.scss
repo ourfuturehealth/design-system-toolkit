@@ -1,0 +1,71 @@
+/* ==========================================================================
+   #PROGRESS INDICATOR
+   ========================================================================== */
+
+.ofh-progress-indicator {
+  display: block;
+  width: 100%;
+}
+
+.ofh-progress-indicator__header {
+  column-gap: $ofh-size-16;
+  display: flex;
+  justify-content: space-between;
+
+  @include ofh-responsive-margin(16, 'bottom');
+}
+
+.ofh-progress-indicator__label {
+  color: $ofh-color-foreground-secondary;
+}
+
+.ofh-progress-indicator__steps {
+  color: $ofh-color-foreground-secondary;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ofh-progress-indicator__label,
+.ofh-progress-indicator__steps {
+  @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
+
+  font-family: $ofh-typography-font-source-sans-pro;
+}
+
+.ofh-progress-indicator__track {
+  display: flex;
+  gap: $ofh-size-4;
+  width: 100%;
+}
+
+.ofh-progress-indicator__track--without-bars {
+  gap: 0;
+}
+
+.ofh-progress-indicator__segment {
+  background-color: $ofh-color-background-tertiary;
+  border-radius: 0;
+  flex: 1 1 0;
+  height: $ofh-size-8;
+  overflow: hidden;
+}
+
+.ofh-progress-indicator__segment--filled {
+  background-color: $ofh-color-feedback-success-2-main;
+}
+
+.ofh-progress-indicator__segment-progress {
+  background-color: $ofh-color-feedback-success-2-main;
+  display: block;
+  height: 100%;
+}
+
+.ofh-progress-indicator__helper {
+  @include ofh-font($size: 'paragraph-md', $weight: $ofh-typography-weight-regular);
+
+  color: $ofh-color-feedback-success-2-main;
+  display: block;
+  font-family: $ofh-typography-font-source-sans-pro;
+
+  @include ofh-responsive-margin(16, 'top');
+}
