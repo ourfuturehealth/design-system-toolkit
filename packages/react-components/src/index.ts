@@ -147,6 +147,9 @@ export type {
 export { Pagination } from './components/Pagination';
 export type { PaginationProps } from './components/Pagination';
 
+export { ProgressIndicator } from './components/ProgressIndicator';
+export type { ProgressIndicatorProps } from './components/ProgressIndicator';
+
 export { Tag } from './components/Tag';
 export type { TagProps, TagVariant } from './components/Tag';
 

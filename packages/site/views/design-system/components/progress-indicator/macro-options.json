@@ -1,0 +1,52 @@
+{
+  "params": [
+    {
+      "name": "currentStep",
+      "type": "number",
+      "required": true,
+      "description": "Current step, clamped between 1 and the normalized total. Overall progress includes subSegmentProgress / 100 and is capped at totalSteps. Page text is generated from these values."
+    },
+    {
+      "name": "totalSteps",
+      "type": "number",
+      "required": true,
+      "description": "The number of steps and segments, rounded to an integer with a minimum of 1."
+    },
+    {
+      "name": "subSegmentProgress",
+      "type": "number",
+      "required": false,
+      "description": "Additional progress as a percentage of one step, clamped between 0 and 100. Adds subSegmentProgress / 100 to the current step. Defaults to 0; the overall value is capped at completion and determines both fill and ARIA."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "required": false,
+      "description": "Optional text shown on the left of the header and placed before the generated page text in the accessible name. Missing or blank labels use Progress, matching React."
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "required": false,
+      "description": "Optional supporting text below the track. Read separately from the progress bar by assistive technology."
+    },
+    {
+      "name": "showBars",
+      "type": "boolean",
+      "required": false,
+      "description": "Whether to show gaps between segments. Defaults to true. Set to false for a continuous track without gaps."
+    },
+    {
+      "name": "classes",
+      "type": "string",
+      "required": false,
+      "description": "Additional CSS classes for the outer element, merged with ofh-progress-indicator."
+    },
+    {
+      "name": "attributes",
+      "type": "object",
+      "required": false,
+      "description": "Additional HTML attributes, such as id or data attributes, for the outer element."
+    }
+  ]
+}
