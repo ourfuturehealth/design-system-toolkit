@@ -10,6 +10,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 #### @ourfuturehealth/toolkit 4.26.0 (`toolkit-v4.26.0`)
 
+#### @ourfuturehealth/react-components 0.26.0 (`react-v0.26.0`)
+
 ##### Added
 
 - Added the `progress-indicator` component, showing users how far through a multi-step process they are
