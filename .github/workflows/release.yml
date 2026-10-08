@@ -1,22 +1,32 @@
 name: Create release
 
+# Interim recovery workflow. Changesets publication will make tags an output.
 on:
   push:
     tags:
-      - "v*" # Toolkit releases (backward compatible)
-      - "toolkit-v*" # Toolkit releases (new pattern)
-      - "react-v*" # React components releases
+      - "toolkit-v*"
+      - "react-v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: design-system-release
+  cancel-in-progress: false
 
 jobs:
   build:
     name: Create release
     runs-on: ubuntu-latest
+    environment: release
     env:
       CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
           persist-credentials: false
 
       - uses: actions/setup-node@v4
@@ -32,121 +42,88 @@ jobs:
           corepack prepare pnpm@10.29.2 --activate
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate merged tag, version, and release documentation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISHED_RELEASE_TAGS_FILE: ${{ runner.temp }}/published-release-tags.txt
+        run: |
+          gh auth setup-git
+          git fetch origin main
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "${PUBLISHED_RELEASE_TAGS_FILE}"
+          node scripts/release/validate-tag-release.mjs "${GITHUB_REF_NAME}" "${GITHUB_SHA}"
 
       - name: Run linting
-        run: pnpm run lint
+        run: pnpm lint && pnpm lint:release
 
       - name: Install Playwright browser for tests
         run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
 
-      - name: Run tests
-        run: pnpm test
-
-      - name: Validate release contract docs
-        run: pnpm docs:release-contract
+      - name: Run tests and release documentation checks
+        run: pnpm test && pnpm test:release && pnpm docs:release-contract
 
       - name: Determine package from tag
         id: package_info
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          if [[ $TAG == react-v* ]]; then
-            echo "PACKAGE=react-components" >> $GITHUB_OUTPUT
-            echo "PACKAGE_DIR=packages/react-components" >> $GITHUB_OUTPUT
-          elif [[ $TAG == toolkit-v* ]]; then
-            echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
-            echo "PACKAGE_DIR=packages/toolkit" >> $GITHUB_OUTPUT
+          if [[ "${GITHUB_REF_NAME}" == react-v* ]]; then
+            echo "PACKAGE=react-components" >> "$GITHUB_OUTPUT"
+            echo "PACKAGE_DIR=packages/react-components" >> "$GITHUB_OUTPUT"
           else
-            # Assume v* tags are toolkit (backward compatibility)
-            echo "PACKAGE=toolkit" >> $GITHUB_OUTPUT
-            echo "PACKAGE_DIR=packages/toolkit" >> $GITHUB_OUTPUT
+            echo "PACKAGE=toolkit" >> "$GITHUB_OUTPUT"
+            echo "PACKAGE_DIR=packages/toolkit" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Prepare release assets
         id: release_assets
-        run: |
-          ./scripts/release/prepare-release-artifacts.sh \
-            "${{ steps.package_info.outputs.PACKAGE }}" \
-            --stage-dir "${RUNNER_TEMP}/release-assets-${{ github.run_id }}-${{ github.run_attempt }}-${{ steps.package_info.outputs.PACKAGE }}" \
-            --github-output "${GITHUB_OUTPUT}"
-
-      - name: Validate tag version matches package version
-        run: |
-          TAG="${GITHUB_REF_NAME}"
-          if [[ "${TAG}" == react-v* ]]; then
-            EXPECTED_VERSION="${TAG#react-v}"
-          elif [[ "${TAG}" == toolkit-v* ]]; then
-            EXPECTED_VERSION="${TAG#toolkit-v}"
-          else
-            EXPECTED_VERSION="${TAG#v}"
-          fi
-
-          ACTUAL_VERSION="${{ steps.release_assets.outputs.VERSION }}"
-
-          if [[ "${EXPECTED_VERSION}" != "${ACTUAL_VERSION}" ]]; then
-            echo "Tag version '${EXPECTED_VERSION}' does not match package version '${ACTUAL_VERSION}' for tag '${TAG}'." >&2
-            exit 1
-          fi
-
-      - name: Smoke test release tarball
         env:
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org # use default npm registry instead of cloudsmith to simulate package consumer
+          PACKAGE: ${{ steps.package_info.outputs.PACKAGE }}
         run: |
-          ./scripts/release/smoke-package-tarball.sh \
-            --package-dir "${{ github.workspace }}/${{ steps.package_info.outputs.PACKAGE_DIR }}" \
-            --tarball "${{ steps.release_assets.outputs.TARBALL_PATH }}" \
-            --managers 'yarn,npm,pnpm'
+          ./scripts/release/prepare-release-artifacts.sh "$PACKAGE" \
+            --stage-dir "${RUNNER_TEMP}/release-assets-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-${PACKAGE}" \
+            --github-output "$GITHUB_OUTPUT"
 
-      - name: Render release notes
-        id: release_notes
-        run: |
-          NOTES_PATH="${GITHUB_WORKSPACE}/release-notes.md"
-          if [ "${{ steps.package_info.outputs.PACKAGE }}" == "toolkit" ]; then
-            ./scripts/release/render-release-notes.sh \
-              --package "${{ steps.package_info.outputs.PACKAGE }}" \
-              --tag "${GITHUB_REF_NAME}" \
-              --version "${{ steps.release_assets.outputs.VERSION }}" \
-              --tarball "${{ steps.release_assets.outputs.TARBALL_NAME }}" \
-              --zip "${{ steps.release_assets.outputs.ZIP_NAME }}" > "${NOTES_PATH}"
-          else
-            ./scripts/release/render-release-notes.sh \
-              --package "${{ steps.package_info.outputs.PACKAGE }}" \
-              --tag "${GITHUB_REF_NAME}" \
-              --version "${{ steps.release_assets.outputs.VERSION }}" \
-              --tarball "${{ steps.release_assets.outputs.TARBALL_NAME }}" > "${NOTES_PATH}"
-          fi
-          echo "NOTES_PATH=${NOTES_PATH}" >> $GITHUB_OUTPUT
-
-      - name: Create or update release
+      - name: Verify staged package identity and consumer installation
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+          PACKAGE_DIR: ${{ steps.package_info.outputs.PACKAGE_DIR }}
+          TARBALL: ${{ steps.release_assets.outputs.TARBALL_PATH }}
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          if gh release view "$TAG" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
-            gh release edit "$TAG" \
-              --repo "${GITHUB_REPOSITORY}" \
-              --title "$TAG" \
-              --notes-file "${{ steps.release_notes.outputs.NOTES_PATH }}"
-          else
-            gh release create "$TAG" \
-              --repo "${GITHUB_REPOSITORY}" \
-              --title "$TAG" \
-              --notes-file "${{ steps.release_notes.outputs.NOTES_PATH }}"
-          fi
+          node scripts/release/validate-artifact-identity.mjs "$PACKAGE_DIR/package.json" "$TARBALL"
+          ./scripts/release/smoke-package-tarball.sh --package-dir "$PACKAGE_DIR" --tarball "$TARBALL" --managers yarn,npm,pnpm
 
-      - name: Upload toolkit zip asset
+      - name: Test compiled toolkit ZIP
         if: steps.package_info.outputs.PACKAGE == 'toolkit'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release upload "${GITHUB_REF_NAME}" "${{ steps.release_assets.outputs.ZIP_PATH }}" \
-            --clobber \
-            --repo "${GITHUB_REPOSITORY}"
+          ZIP: ${{ steps.release_assets.outputs.ZIP_PATH }}
+        run: node scripts/release/smoke-toolkit-zip.mjs "$ZIP"
 
-      - name: Upload package tarball asset
+      - name: Build isolated React application against staged tarball
+        if: steps.package_info.outputs.PACKAGE == 'react-components'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARBALL: ${{ steps.release_assets.outputs.TARBALL_PATH }}
+        run: node scripts/release/smoke-react-consumer.mjs "$TARBALL"
+
+      - name: Render reviewed release notes
+        id: release_notes
+        env:
+          PACKAGE: ${{ steps.package_info.outputs.PACKAGE }}
+          VERSION: ${{ steps.release_assets.outputs.VERSION }}
+          TARBALL_NAME: ${{ steps.release_assets.outputs.TARBALL_NAME }}
+          ZIP_NAME: ${{ steps.release_assets.outputs.ZIP_NAME }}
         run: |
-          gh release upload "${GITHUB_REF_NAME}" "${{ steps.release_assets.outputs.TARBALL_PATH }}" \
-            --clobber \
-            --repo "${GITHUB_REPOSITORY}"
+          args=(--package "$PACKAGE" --tag "$GITHUB_REF_NAME" --version "$VERSION" --tarball "$TARBALL_NAME" --source-ref "$GITHUB_SHA")
+          if [[ "$PACKAGE" == toolkit ]]; then args+=(--zip "$ZIP_NAME"); fi
+          ./scripts/release/render-release-notes.sh "${args[@]}" > "${RUNNER_TEMP}/release-notes.md"
+          echo "NOTES_PATH=${RUNNER_TEMP}/release-notes.md" >> "$GITHUB_OUTPUT"
+
+      - name: Stage draft, verify uploaded assets, and publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES_PATH: ${{ steps.release_notes.outputs.NOTES_PATH }}
+          TARBALL: ${{ steps.release_assets.outputs.TARBALL_PATH }}
+          ZIP: ${{ steps.release_assets.outputs.ZIP_PATH }}
+        run: |
+          assets=("$TARBALL")
+          if [[ -n "$ZIP" ]]; then assets+=("$ZIP"); fi
+          node scripts/release/publish-staged-release.mjs "$GITHUB_REF_NAME" "$NOTES_PATH" "${assets[@]}"

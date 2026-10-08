@@ -1,230 +1,134 @@
-# Release Process
+# Release process
 
-This document explains how to publish toolkit and React component releases from this repository.
-For release tag conventions and versioning context, see [Release Versioning Strategy](./release-versioning-strategy.md).
+Packages are distributed through GitHub Releases. Toolkit supplies an installable
+`.tgz` and compiled `.zip`; React supplies an installable `.tgz`. Consumers install
+the tarball URL. Keep those filenames and the package-manager installation
+contract described in [release versioning](release-versioning-strategy.md).
 
-## Overview
+## Recovery first
 
-The design system distributes packages through **GitHub Releases**.
+DSE-447 prepares toolkit `4.26.1` and React `0.26.1` to recover from the defective
+`4.26.0` / `0.26.0` releases. These recovery versions are calculated from published
+history, rather than the lower package versions merged onto `main` in PR #279.
+The changelog records them as unreleased until maintainers finalise publication.
 
-- `@ourfuturehealth/toolkit` ships an installable `.tgz` package and a compiled `.zip`
-- `@ourfuturehealth/react-components` ships an installable `.tgz` package
-- consumers install the package tarball URL, not a git subdirectory
+Follow [the recovery runbook](release-recovery.md), including the existing-release
+warnings and human screen-reader checks. Preserve defective assets and tags.
 
-## Prerequisites
+## Interim publication safeguards
 
-- ensure your branch is up to date with `main`
-- all tests pass locally: `pnpm test`
-- all linting passes locally: `pnpm lint`
-- changelog and migration docs are updated when required
+The recovery workflow still starts from a manually created canonical tag. This is
+a transitional step before Changesets release PRs and app-owned tag creation.
+Legacy `v*` tags remain historical references; they no longer start new releases.
 
-Pull requests that change published toolkit or React package source/assets must
-also bump the affected package version and add its changelog entry. The pull
-request workflow validates this before merge.
+Before publication:
 
-## Release Steps
+1. Review and merge the recovery PR into `main`. Finalise its changelog date in
+   that PR to the actual planned release date. An `Unreleased` entry blocks publication.
+2. Configure the GitHub `release` environment with required reviewers and allowed
+   canonical release tags. The YAML environment name alone does not enforce
+   approval; a repository administrator must configure its protection settings.
+3. Create each new tag at the exact merged commit. Never tag an unmerged branch,
+   replace an existing tag, or delete a tag to rerun a release.
+4. Approve the protected release job after reviewing its SHA and planned package.
 
-### 1. Decide what to release
+The workflow checks that the tag points to the checkout SHA, the commit is on
+merged `main`, the manifest agrees, and the version exceeds existing tags and
+published releases. It also requires a dated changelog entry and one explicit
+upgrade decision for that package version.
 
-Toolkit only:
+It then runs lint, tests, docs checks, and staged artifact checks. It creates a
+draft GitHub release, uploads without overwriting assets, downloads the uploaded
+files and compares their SHA-256 digests with the staged files, and checks the
+remote tag again before publication. Release notes include the reviewed package
+summary and upgrade guidance, with source links pinned to the release SHA.
 
-- changes affect toolkit Sass, JavaScript, templates, or compiled assets
-- bump `packages/toolkit/package.json`
+The environment, tag rules, and workflow must all be configured together. A tag
+workflow alone cannot prevent an authorised user from moving a tag afterwards.
 
-React only:
+## Validation
 
-- changes affect React components only
-- bump `packages/react-components/package.json`
-
-Both:
-
-- changes affect both packages
-- bump both package manifests
-
-### 2. Update versioned files
-
-For the package you are releasing:
-
-- update the package `version` field
-- update [CHANGELOG.md](../CHANGELOG.md)
-- update [UPGRADING.md](../UPGRADING.md) if the release changes the public API or install contract
-
-### 3. Commit and tag
-
-Toolkit example:
+Install with the pinned package manager and run:
 
 ```bash
-git add packages/toolkit/package.json CHANGELOG.md UPGRADING.md
-git commit -m "chore(toolkit): bump version to 4.0.1"
-git push origin main
-git tag -a toolkit-v4.0.1 -m "Release toolkit v4.0.1"
-git push origin toolkit-v4.0.1
-```
-
-React example:
-
-```bash
-git add packages/react-components/package.json CHANGELOG.md UPGRADING.md
-git commit -m "chore(react-components): bump version to 0.5.1"
-git push origin main
-git tag -a react-v0.5.1 -m "Release react-components v0.5.1"
-git push origin react-v0.5.1
-```
-
-### 4. GitHub Actions builds the release
-
-When a release tag is pushed, [.github/workflows/release.yml](../.github/workflows/release.yml) automatically:
-
-1. installs dependencies with pnpm
-2. runs linting and tests
-3. validates the release-contract docs
-4. prepares the package release assets in a dedicated staging directory outside the package tree
-5. smoke-tests the tarball with Yarn 1, npm, and pnpm
-6. renders release notes with the tarball install URL
-7. creates or updates the GitHub release
-8. uploads release assets
-
-Toolkit releases upload:
-
-- `ourfuturehealth-toolkit-{version}.tgz`
-- `ofh-design-system-toolkit-{version}.zip`
-
-React releases upload:
-
-- `ourfuturehealth-react-components-{version}.tgz`
-
-### 5. Verify the release
-
-After the workflow completes:
-
-1. check the [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) page
-2. confirm the expected `.tgz` asset is attached
-3. for toolkit, confirm the `.zip` is also attached
-4. verify the release notes show the tarball URL install contract
-
-Toolkit release note example:
-
-```json
-{
-  "dependencies": {
-    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.0.1/ourfuturehealth-toolkit-4.0.1.tgz"
-  }
-}
-```
-
-React release note example:
-
-```json
-{
-  "dependencies": {
-    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.5.1/ourfuturehealth-react-components-0.5.1.tgz"
-  }
-}
-```
-
-## Testing Before Or After Release
-
-### How release-contract validation stays current
-
-`pnpm docs:release-contract` scans all tracked Markdown, shell, and workflow files in the repository rather than relying on a narrow hand-maintained file list.
-
-It validates that:
-
-1. the broken git-subdirectory install syntax does not reappear in tracked docs or release automation
-2. the incorrect pre-monorepo baseline does not reappear in tracked docs
-3. the generated toolkit and React release notes still emit tarball install URLs
-
-This is intentional: new docs under the normal repository conventions are picked up automatically.
-
-`CHANGELOG.md` is excluded because it is a historical record and can legitimately contain superseded install strings from past releases.
-
-If you add consumer-facing release/install docs in a different file type or move the release-note generator, update both [scripts/release/validate-release-docs.sh](../scripts/release/validate-release-docs.sh) and this section in the same change.
-
-### Smoke test the current branch artifacts
-
-```bash
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm lint:release
+pnpm test
+pnpm test:release
+pnpm build
 pnpm docs:release-contract
-pnpm smoke:release-artifacts
+pnpm --filter=@ourfuturehealth/react-components exec playwright install chromium
+NPM_CONFIG_REGISTRY=https://registry.npmjs.org pnpm smoke:release-artifacts
 ```
 
-This validates the public docs and then tests the current branch tarballs with Yarn 1, npm, and pnpm.
-It uses the same staged-asset preparation path as the tag-driven release workflow, so PR validation exercises the same artifact handoff that production releases rely on.
+`pnpm test:release` tests metadata failures and draft publication with offline
+command fixtures. It does not call GitHub, create tags, or publish releases.
 
-For local iteration you can scope this wrapper to one package and one or more package managers:
+The artifact smoke command:
+
+- Builds and packs each package into a temporary staging directory outside its tree.
+- Checks the name and version inside each tarball against its manifest.
+- Installs and exercises tarballs through Yarn 1, npm, and pnpm using the public registry.
+- Extracts the toolkit ZIP, checks CSS/JS/assets and local CSS references, and
+  tests compiled styles and clickable-card JavaScript in Chromium. The current
+  bundle uses a font stack and does not embed font files.
+- Copies the React consumer example into an isolated directory, substitutes the
+  staged tarball while preserving other locked dependencies, and runs lint and a
+  production application build.
+
+For faster local iteration:
 
 ```bash
-./scripts/release/smoke-current-release-artifacts.sh toolkit --managers yarn
-./scripts/release/smoke-current-release-artifacts.sh react-components --managers npm,pnpm
+./scripts/release/smoke-current-release-artifacts.sh toolkit --managers npm
+./scripts/release/smoke-current-release-artifacts.sh react-components --managers npm
+./scripts/release/validate-package-release-metadata.sh origin/main WORKTREE
 ```
 
-### Prepare release assets directly
+PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
+Until Changesets is introduced, the recovery PR supplies the version/changelog
+updates required by this interim gate. Normal feature PRs will use changesets
+once the second DSE-447 slice switches the gate to release intent validation.
 
-If you need to inspect the exact staged assets before tagging:
+## Documentation requirements
 
-```bash
-./scripts/release/prepare-release-artifacts.sh toolkit
-./scripts/release/prepare-release-artifacts.sh react-components
-```
+Keep one root changelog. Each release has a unique, nonempty package/version/tag
+section, ordered by decreasing semantic version. Dated sections must descend.
+Do not invent releases for intermediate manifest values that were never published.
 
-The script prints the package, version, and staged asset paths. Toolkit releases must stage both the versioned `.zip` and the package tarball before the workflow can create or update the GitHub release.
+Every version being released must have one row in the release-decision index in
+`UPGRADING.md`: `No consumer action required` or `Action required`. The latter
+must link to a migration section with an explicit anchor in that guide.
 
-### Test unreleased changes locally in another consumer
+`pnpm docs:release-contract` scans tracked and new non-ignored Markdown, shell, and workflow files for
+known invalid installation guidance, then renders the current release notes to
+check their tarball URLs. `CHANGELOG.md` is excluded from the install-string scan
+because it preserves historical entries; release metadata validates its structure
+separately. If consumer documentation moves to another file type, update the
+validator's file scan.
 
-Toolkit:
+## Failure handling
 
-```bash
-pnpm --filter=@ourfuturehealth/toolkit run zip
-npm pack ./packages/toolkit --ignore-scripts
-```
+Fix validation failures before attempting publication. Never retag or overwrite a
+published release. Prepare a new version for fixes discovered after publication.
 
-React:
+An interrupted draft can resume only when existing assets match the newly staged
+bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
+it does not replace the asset. Failures reading GitHub state stop the workflow
+rather than being interpreted as an absent release.
 
-```bash
-pnpm --filter=@ourfuturehealth/react-components run build
-npm pack ./packages/react-components --ignore-scripts
-```
+After publication, confirm the expected assets and release notes are visible and
+the tags still resolve to the recorded SHA. GitHub tag protection remains necessary.
 
-Install the resulting `.tgz` file in the consumer application rather than pointing the consumer at a git branch.
+## Next DSE-447 slices
 
-## Troubleshooting
+After recovery establishes a supported published baseline:
 
-### Release workflow failed
-
-Check the [GitHub Actions tab](https://github.com/ourfuturehealth/design-system-toolkit/actions) and fix the failing step before re-tagging.
-
-Common causes:
-
-- failing tests or linting
-- package build failures
-- smoke test failures for the tarball install contract
-- stale docs or release templates that still mention the old git-subdirectory syntax
-
-### Why release assets are staged outside the package tree
-
-The release workflow deliberately copies built assets into a dedicated staging directory before it runs `npm pack`.
-
-This is intentional. CI previously showed the toolkit `createZip` step completing successfully, then failed later when the workflow tried to rediscover the versioned zip from `packages/toolkit/dist/`. Local reproduction did not show the same disappearance, and the local/CI npm versions differed, so the release flow now treats the package working tree as unstable across later packaging steps.
-
-The staged asset copy is the source of truth for:
-
-- tarball smoke testing
-- toolkit compiled-file uploads
-- release note asset references
-
-### Consumer installation failed
-
-Check that:
-
-- the release has a `.tgz` asset attached
-- the dependency points to the release tarball URL
-- toolkit consumers use the `.zip` only for compiled-file installs, not package-manager installs
-
-If you are testing unreleased code, build and pack the package locally instead of pointing the consumer at `#main`.
-
-## Best Practices
-
-1. Prefer package-prefixed tags: `toolkit-v*` and `react-v*`
-2. Treat the release tarball as the public install contract
-3. Keep `.zip` guidance limited to compiled-file toolkit consumers
-4. Test every release with Yarn 1, npm, and pnpm before or during the workflow
-5. Update migration docs whenever the public API or install path changes
+1. Changesets records release intent and generates reviewed version PRs. A
+   protected workflow publishes from the exact merged SHA and creates canonical
+   tags through the release app. Tag rules restrict creation and prohibit routine
+   modification/deletion. Retain this repository's artifact and consumer checks.
+2. Generate a reviewed announcement in the release PR and send it to the Slack
+   webhook workflow after all planned releases publish successfully. Record
+   notification submission separately and investigate ambiguous timeouts before
+   resubmitting. These integrations are not enabled by the recovery slice.

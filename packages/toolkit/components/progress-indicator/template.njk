@@ -1,23 +1,26 @@
 {% set accessibleLabel = params.label | default('', true) | trim %}
 {% set requestedSubSegmentProgress = params.subSegmentProgress | default(0) %}
+{# A non-finite number minus itself is NaN, so it cannot equal zero. #}
+{% set requestedSubSegmentProgress = 0 if requestedSubSegmentProgress - requestedSubSegmentProgress != 0 else requestedSubSegmentProgress %}
 {% set subSegmentProgress = 0 if requestedSubSegmentProgress < 0 else (100 if requestedSubSegmentProgress > 100 else requestedSubSegmentProgress) %}
-{% set segmentCount = 1 if params.totalSteps < 1 else params.totalSteps | round %}
-{% set clampedCurrentStep = 1 if params.currentStep < 1 else (segmentCount if params.currentStep > segmentCount else params.currentStep) %}
+{% set requestedTotalSteps = 1 if params.totalSteps - params.totalSteps != 0 else params.totalSteps %}
+{% set segmentCount = 1 if requestedTotalSteps < 1 else requestedTotalSteps | round %}
+{% set requestedCurrentStep = 0 if params.currentStep - params.currentStep != 0 else params.currentStep %}
+{% set clampedCurrentStep = 0 if requestedCurrentStep < 0 else (segmentCount if requestedCurrentStep > segmentCount else requestedCurrentStep) %}
 {% set requestedProgress = clampedCurrentStep + subSegmentProgress / 100 %}
 {% set overallProgress = segmentCount if requestedProgress > segmentCount else requestedProgress %}
 {% set scaledProgress = overallProgress * 100 %}
-{% set pageText = 'Page ' + (overallProgress | round(0, 'ceil')) + ' of ' + segmentCount %}
+{% set pageNumber = 1 if overallProgress < 1 else overallProgress | round(0, 'ceil') %}
+{% set pageText = 'Page ' + pageNumber + ' of ' + segmentCount %}
 {% set filledSegments = (scaledProgress / 100) | round(0, 'floor') %}
 {% set segmentProgress = scaledProgress - filledSegments * 100 %}
-{% set percentProgress = clampedCurrentStep / params.totalSteps %}
-{% set subsegmentProgressContrib = (((subSegmentProgress / 100) * (1/  params.totalSteps))) %}
-{% set totalPercentProgress = (percentProgress + subsegmentProgressContrib) * 100 %}
+{% set totalPercentProgress = overallProgress / segmentCount * 100 %}
 
 <div class="ofh-progress-indicator{% if params.classes %} {{ params.classes }}{% endif %}"{% for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
   <div
     role="progressbar"
     aria-valuenow="{{ totalPercentProgress }}"
-    aria-valuemin="{{ 1 }}"
+    aria-valuemin="{{ 0 }}"
     aria-valuemax="{{ 100 }}"
     aria-label="{{ accessibleLabel if accessibleLabel else 'Progress' }}, {{ pageText }}"
   >

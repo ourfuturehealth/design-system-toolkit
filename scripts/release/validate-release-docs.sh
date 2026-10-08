@@ -34,21 +34,15 @@ if command -v rg >/dev/null 2>&1; then
     rg -n --fixed-strings "$1" "${@:2}"
   }
 
-  file_contains_regex() {
-    rg -q "$1" "$2"
-  }
 else
   search_fixed() {
     grep -nF -- "$1" "${@:2}"
   }
 
-  file_contains_regex() {
-    grep -qE -- "$1" "$2"
-  }
 fi
 
 current_step='detecting text search tool'
-print_step 'Using tracked docs and workflow validation to protect the public install contract'
+print_step 'Using docs and workflow validation to protect the public install contract'
 if command -v rg >/dev/null 2>&1; then
   print_success 'Using ripgrep for repository scans'
 else
@@ -56,7 +50,7 @@ else
 fi
 
 # This validator protects the published consumer install contract.
-# It intentionally scans tracked Markdown, workflow, and shell files so new docs
+# It intentionally scans tracked and new non-ignored Markdown, workflow, and shell files so new docs
 # are picked up automatically without maintaining a brittle file allowlist.
 # If consumer-facing release docs move to a new file type, update this script and
 # docs/release-process.md together.
@@ -65,19 +59,19 @@ while IFS= read -r path; do
   if [[ -n "${path}" && "${path}" != 'CHANGELOG.md' ]]; then
     tracked_text_files+=("${path}")
   fi
-done < <(git ls-files -- '*.md' '*.sh' '*.yml' '*.yaml')
+done < <(git ls-files --cached --others --exclude-standard -- '*.md' '*.sh' '*.yml' '*.yaml' | sort -u)
 
-print_success "Collected ${#tracked_text_files[@]} tracked Markdown, shell, and workflow files"
+print_success "Collected ${#tracked_text_files[@]} Markdown, shell, and workflow files"
 
 broken_git_subdir_pattern=':pack''ages/'
 stale_pre_monorepo_version='v3.4.''3'
 
 current_step='checking for broken git subdirectory install syntax'
-print_step 'Checking tracked docs and workflows for broken git-subdirectory install syntax'
+print_step 'Checking docs and workflows for broken git-subdirectory install syntax'
 broken_git_subdir_matches=$(search_fixed "${broken_git_subdir_pattern}" "${tracked_text_files[@]}" || true)
 if [[ -n "${broken_git_subdir_matches}" ]]; then
   print_failure_block \
-    'Found broken git-subdirectory install syntax in tracked docs or workflows:' \
+    'Found broken git-subdirectory install syntax in docs or workflows:' \
     "${broken_git_subdir_matches}"
   echo 'Public docs and release templates must not use git subdirectory install syntax.' >&2
   exit 1
@@ -85,7 +79,7 @@ fi
 print_success 'No broken git-subdirectory install syntax found'
 
 current_step='checking for stale pre-monorepo version references'
-print_step 'Checking tracked docs for stale pre-monorepo toolkit version references'
+print_step 'Checking docs for stale pre-monorepo toolkit version references'
 stale_pre_monorepo_matches=$(search_fixed "${stale_pre_monorepo_version}" "${tracked_text_files[@]}" || true)
 if [[ -n "${stale_pre_monorepo_matches}" ]]; then
   print_failure_block \
@@ -107,14 +101,16 @@ trap cleanup EXIT
 
 current_step='rendering sample toolkit release notes'
 print_step 'Rendering sample toolkit release notes'
+toolkit_version=$(node -p "require('./packages/toolkit/package.json').version")
+react_version=$(node -p "require('./packages/react-components/package.json').version")
 ./scripts/release/render-release-notes.sh \
   --package toolkit \
-  --tag toolkit-v4.0.0 \
-  --version 4.0.0 \
-  --tarball ourfuturehealth-toolkit-4.0.0.tgz \
-  --zip ofh-design-system-toolkit-4.0.0.zip >"${toolkit_notes_file}"
+  --tag "toolkit-v${toolkit_version}" \
+  --version "${toolkit_version}" \
+  --tarball "ourfuturehealth-toolkit-${toolkit_version}.tgz" \
+  --zip "ofh-design-system-toolkit-${toolkit_version}.zip" >"${toolkit_notes_file}"
 
-if ! file_contains_regex 'releases/download/toolkit-v4\.0\.0/ourfuturehealth-toolkit-4\.0\.0\.tgz' "${toolkit_notes_file}"; then
+if ! search_fixed "releases/download/toolkit-v${toolkit_version}/ourfuturehealth-toolkit-${toolkit_version}.tgz" "${toolkit_notes_file}" >/dev/null; then
   echo 'Toolkit docs must point consumers at release tarball URLs.' >&2
   exit 1
 fi
@@ -124,11 +120,11 @@ current_step='rendering sample react release notes'
 print_step 'Rendering sample react release notes'
 ./scripts/release/render-release-notes.sh \
   --package react-components \
-  --tag react-v0.5.0 \
-  --version 0.5.0 \
-  --tarball ourfuturehealth-react-components-0.5.0.tgz >"${react_notes_file}"
+  --tag "react-v${react_version}" \
+  --version "${react_version}" \
+  --tarball "ourfuturehealth-react-components-${react_version}.tgz" >"${react_notes_file}"
 
-if ! file_contains_regex 'releases/download/react-v0\.5\.0/ourfuturehealth-react-components-0\.5\.0\.tgz' "${react_notes_file}"; then
+if ! search_fixed "releases/download/react-v${react_version}/ourfuturehealth-react-components-${react_version}.tgz" "${react_notes_file}" >/dev/null; then
   echo 'React docs must point consumers at release tarball URLs.' >&2
   exit 1
 fi

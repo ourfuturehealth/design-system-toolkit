@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { packages, parseChangelog, upgradeDecision } from './release-metadata.mjs';
+
+const [tag, sourceRef = tag, packageLabel, declaredVersion, tarball] = process.argv.slice(2);
+const pkg = packages.find(item => tag.startsWith(item.prefix));
+assert(pkg, `Unsupported release tag: ${tag}`);
+const version = tag.slice(pkg.prefix.length);
+const manifest = JSON.parse(readFileSync(pkg.manifest, 'utf8'));
+assert.equal(manifest.version, version, 'Release notes must match the package manifest');
+if (packageLabel) assert.equal(packageLabel, pkg.manifest.split('/')[1], 'Release notes package does not match tag');
+if (declaredVersion) assert.equal(declaredVersion, version, 'Release notes version does not match tag');
+if (tarball) assert.equal(tarball, `${pkg.name.replace('@', '').replace('/', '-')}-${version}.tgz`, 'Release notes tarball does not match package');
+const entry = parseChangelog(readFileSync('CHANGELOG.md', 'utf8')).get(tag);
+assert(entry, `Missing release summary: ${tag}`);
+const decision = upgradeDecision(readFileSync('UPGRADING.md', 'utf8'), pkg.name, version);
+const repo = 'https://github.com/ourfuturehealth/design-system-toolkit';
+const guidance = decision.guidance.replace(/\]\(#([^)]*)\)/g, `](${repo}/blob/${sourceRef}/UPGRADING.md#$1)`);
+const summary = entry.summary.join('\n').replace(/\]\((UPGRADING|CHANGELOG)\.md(#[^)]*)?\)/g, `](${repo}/blob/${sourceRef}/$1.md$2)`);
+process.stdout.write(`\n## Changes\n\n${summary}\n\n## Upgrade decision\n\n${decision.status}. ${guidance}\n\n[Full changelog](${repo}/blob/${sourceRef}/CHANGELOG.md)\n`);

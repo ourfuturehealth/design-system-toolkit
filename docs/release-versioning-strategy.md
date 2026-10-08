@@ -34,7 +34,8 @@ For consumer migration instructions, use [Upgrading Guide](../UPGRADING.md).
 | `@ourfuturehealth/toolkit`          | `toolkit-v*`          | `toolkit-v4.22.0` |
 | `@ourfuturehealth/react-components` | `react-v*`            | `react-v0.21.0`   |
 
-The release workflow still accepts legacy toolkit tags in the `v*` format for backward compatibility, but new toolkit releases should use `toolkit-v*`.
+Legacy toolkit `v*` tags remain available as historical references. New release
+workflows accept only the canonical package-prefixed tags above.
 
 ## Release Artifact Contract
 

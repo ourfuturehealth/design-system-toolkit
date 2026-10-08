@@ -115,6 +115,8 @@ if [[ "${package_scope}" == 'toolkit' || "${package_scope}" == 'all' ]]; then
     --tarball "${TARBALL_PATH}" \
     --managers "${managers}"
   print_success 'Toolkit tarball smoke test passed'
+  node scripts/release/validate-artifact-identity.mjs packages/toolkit/package.json "${TARBALL_PATH}"
+  node scripts/release/smoke-toolkit-zip.mjs "${ZIP_PATH}"
 fi
 
 if [[ "${package_scope}" == 'react-components' || "${package_scope}" == 'all' ]]; then
@@ -128,6 +130,8 @@ if [[ "${package_scope}" == 'react-components' || "${package_scope}" == 'all' ]]
     --tarball "${TARBALL_PATH}" \
     --managers "${managers}"
   print_success 'React-components tarball smoke test passed'
+  node scripts/release/validate-artifact-identity.mjs packages/react-components/package.json "${TARBALL_PATH}"
+  node scripts/release/smoke-react-consumer.mjs "${TARBALL_PATH}"
 fi
 
 current_step='printing success summary'
