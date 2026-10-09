@@ -25,12 +25,12 @@ Before publication:
 
 1. Review and merge the recovery PR into `main`. Finalise its changelog date in
    that PR to the actual planned release date. An `Unreleased` entry blocks publication.
-2. Configure the GitHub `release` environment with required reviewers and allowed
-   canonical release tags. The YAML environment name alone does not enforce
-   approval; a repository administrator must configure its protection settings.
+2. Check the merged SHA and package version before creating each canonical tag.
+   Publishing the tag to GitHub starts the release workflow, which publishes
+   automatically if all release checks pass. There is no separate environment
+   approval.
 3. Create each new tag at the exact merged commit. Never tag an unmerged branch,
    replace an existing tag, or delete a tag to rerun a release.
-4. Approve the protected release job after reviewing its SHA and planned package.
 
 The workflow checks that the tag points to the checkout SHA, the commit is on
 merged `main`, the manifest agrees, and the version exceeds existing tags and
@@ -43,8 +43,10 @@ files and compares their SHA-256 digests with the staged files, and checks the
 remote tag again before publication. Release notes include the reviewed package
 summary and upgrade guidance, with source links pinned to the release SHA.
 
-The environment, tag rules, and workflow must all be configured together. A tag
-workflow alone cannot prevent an authorised user from moving a tag afterwards.
+No GitHub `release` environment or additional approver group is required. For
+this interim workflow, the reviewed recovery PR and deliberate creation of its
+release tags authorise publication. A tag workflow alone cannot prevent an
+authorised user from moving a tag afterwards; tag rules remain necessary.
 
 ## Validation
 
@@ -124,10 +126,13 @@ the tags still resolve to the recorded SHA. GitHub tag protection remains necess
 
 After recovery establishes a supported published baseline:
 
-1. Changesets records release intent and generates reviewed version PRs. A
-   protected workflow publishes from the exact merged SHA and creates canonical
-   tags through the release app. Tag rules restrict creation and prohibit routine
-   modification/deletion. Retain this repository's artifact and consumer checks.
+1. Changesets records release intent and generates a release PR containing the
+   proposed versions, changelog entries, and upgrade decisions. A developer
+   reviews the whole release and merges the bot-authored PR under the existing
+   branch-protection rules. That merge authorises automatic publication from the
+   exact merged SHA, without a second workflow approval. The release app creates
+   canonical tags; tag rules restrict creation and prohibit routine modification
+   or deletion. Retain this repository's artifact and consumer checks.
 2. Generate a reviewed announcement in the release PR and send it to the Slack
    webhook workflow after all planned releases publish successfully. Record
    notification submission separately and investigate ambiguous timeouts before

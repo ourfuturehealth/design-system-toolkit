@@ -18,7 +18,6 @@ jobs:
   build:
     name: Create release
     runs-on: ubuntu-latest
-    environment: release
     env:
       CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 

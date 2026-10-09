@@ -62,10 +62,12 @@ Automated checks validate markup, not the spoken result.
 
 ## Publish and verify
 
-An administrator must configure the protected `release` environment first.
-After the recovery PR merges, use its exact merged SHA for both new canonical
-tags. Do not move the old tags to that SHA. Follow the protected interim workflow
-in [the release process](release-process.md).
+After the reviewed recovery PR merges, check its exact merged SHA and use that
+SHA for both new canonical tags. Publishing a tag to GitHub starts the release
+workflow, which publishes automatically after the release checks pass.
+No GitHub `release` environment or additional workflow
+approval is required. Do not move the old tags to that SHA. Follow the interim
+workflow in [the release process](release-process.md).
 
 Verify each tag, package manifest, uploaded asset, and GitHub release. Update the
 old release warnings with the now-published replacements. Keep DSE-447 open:
