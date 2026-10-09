@@ -2,6 +2,9 @@ name: Pull request
 
 on: pull_request
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Pull request
@@ -27,19 +30,33 @@ jobs:
           corepack prepare pnpm@10.29.2 --activate
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Read published version history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "${RUNNER_TEMP}/published-release-tags.txt"
 
       - name: Validate package release metadata
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PUBLISHED_RELEASE_TAGS_FILE: ${{ runner.temp }}/published-release-tags.txt
         run: ./scripts/release/validate-package-release-metadata.sh "$BASE_SHA" "$HEAD_SHA"
 
       - name: Run linting
-        run: pnpm run lint
+        run: pnpm run lint && pnpm lint:release
+
+      - name: Test release metadata guards
+        run: pnpm test:release && pnpm docs:release-contract
 
       - name: Install Playwright browser for tests
         run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
 
       - name: Run tests
         run: pnpm test
+
+      - name: Validate staged external-consumer artifacts
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+        run: pnpm smoke:release-artifacts

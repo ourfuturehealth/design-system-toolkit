@@ -6,21 +6,48 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 ## Monorepo Package Releases (`toolkit-v*`, `react-v*`)
 
-### 2026-09-15
+React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
+published tag or release; ProgressIndicator shipped in the defective `0.26.0`
+release recorded below.
+
+### Unreleased
+
+#### @ourfuturehealth/toolkit 4.26.1 (`toolkit-v4.26.1`)
+
+##### Fixed
+
+- Prepared a recovery release for defective `4.26.0`; see [upgrade instructions](UPGRADING.md#release-recovery).
+- Derived ProgressIndicator's accessible percentage and visual fill from the same normalised inputs, capped completion at 100%, and supported an empty track at zero progress.
+- Added release checks for increasing versions, changelog structure, upgrade decisions, and the staged consumer artifacts.
+
+#### @ourfuturehealth/react-components 0.26.1 (`react-v0.26.1`)
+
+##### Fixed
+
+- Prepared a recovery release for defective `0.26.0`; see [upgrade instructions](UPGRADING.md#release-recovery).
+- Corrected ProgressIndicator's accessible percentage for fractional totals, out-of-range partial progress, and completion; zero progress now renders an empty track.
+
+### 2026-10-07
 
 #### @ourfuturehealth/toolkit 4.26.0 (`toolkit-v4.26.0`)
+
+##### Added
+
+- Added the `progress-indicator` component for multi-step processes.
+
+##### Known defects
+
+- **DO NOT USE.** Published assets, current tag source, and merged package versions disagree. ProgressIndicator can announce invalid or inconsistent progress. Upgrade to `4.26.1` when the recovery release is published.
 
 #### @ourfuturehealth/react-components 0.26.0 (`react-v0.26.0`)
 
 ##### Added
 
-- Added the `progress-indicator` component, showing users how far through a multi-step process they are
+- Added the `ProgressIndicator` component for multi-step processes.
 
-#### @ourfuturehealth/react-components 0.25.0 (`react-v0.25.0`)
+##### Known defects
 
-##### Added
-
-- Added the `ProgressIndicator` component, showing users how far through a multi-step process they are
+- **DO NOT USE.** Published assets, current tag source, and merged package versions disagree. ProgressIndicator can announce invalid or inconsistent progress. Upgrade to `0.26.1` when the recovery release is published.
 
 ### 2026-09-07
 
@@ -47,8 +74,6 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Made the React package safe to import directly in Next.js App Router by preserving its Client Component boundary and keeping React's JSX runtime external in the published ESM bundle
 - Corrected the CommonJS output extension so Node recognises the package's `require` entrypoint under its ESM package configuration
 
-### 2026-08-17
-
 #### @ourfuturehealth/toolkit 4.25.0 (`toolkit-v4.25.0`)
 
 ##### Added
@@ -60,6 +85,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 ##### Added
 
 - Added the public React Cookie Banner component with structured content overrides, new-tab link disclosure, action callbacks, custom body content, Storybook coverage, and tests
+
+### 2026-07-16
 
 #### @ourfuturehealth/react-components 0.23.2 (`react-v0.23.2`)
 
@@ -130,7 +157,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Moved Icon Storybook docs under `Primitives/Icon` to match the docs-site component primitive grouping
 - Added safe `noopener noreferrer` handling for Button links that open in a new tab
 
-### 2026-06-03
+### 2026-06-19
 
 #### @ourfuturehealth/toolkit 4.22.0 (`toolkit-v4.22.0`)
 
@@ -155,7 +182,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 - Expanded the React Header teaching surface to include docs, builder, desktop dropdown review stories, and mobile menu state review stories
 - Added explicit Storybook review coverage for current desktop group states and mobile current-child data states
 
-### 2026-04-27
+### 2026-05-22
 
 #### @ourfuturehealth/toolkit 4.21.0 (`toolkit-v4.21.0`)
 
@@ -179,7 +206,7 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - Updated the React search teaching surface to follow the current Storybook `Docs` / `Default` / `Builder` / showcase pattern with clearer prop guidance and story-only helper separation
 
-### 2026-04-30
+### 2026-05-06
 
 #### @ourfuturehealth/toolkit 4.20.0 (`toolkit-v4.20.0`)
 
@@ -200,6 +227,8 @@ We are following [Semantic Versioning](https://semver.org/spec/v2.0.0.html), as 
 
 - Added Storybook docs, builder, and showcase coverage for the new React `ContentsList` component
 - Added unit and accessibility coverage for the React `ContentsList` component
+
+### 2026-04-30
 
 #### @ourfuturehealth/toolkit 4.19.0 (`toolkit-v4.19.0`)
 
@@ -907,7 +936,10 @@ After (monorepo):
 
 ## Legacy Single-Package Releases (`v*`)
 
-## [v3.4.3] - 2026-02-23
+## Unreleased legacy v3.4.3
+
+This planned version was never tagged or published; the last pre-monorepo
+release remains `v3.4.2`.
 
 ### Removed
 

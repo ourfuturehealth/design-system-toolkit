@@ -1,5 +1,17 @@
 {% from 'progress-indicator/macro.njk' import progressIndicator %}
 
+{% for invalidNumber in [0 / 0, 1 / 0, -1 / 0] %}
+<div data-nonfinite-total="{{ loop.index }}">
+  {{ progressIndicator({ currentStep: 2, totalSteps: invalidNumber }) }}
+</div>
+<div data-nonfinite-step="{{ loop.index }}">
+  {{ progressIndicator({ currentStep: invalidNumber, totalSteps: 8 }) }}
+</div>
+<div data-nonfinite-partial="{{ loop.index }}">
+  {{ progressIndicator({ currentStep: 2, totalSteps: 8, subSegmentProgress: invalidNumber }) }}
+</div>
+{% endfor %}
+
 {% for currentStep in [10, 5, 2, 1, 0.5, 0, -1] %}
 <div data-current-step="{{ currentStep }}">
   {{ progressIndicator({

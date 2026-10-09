@@ -4,7 +4,7 @@
       "name": "currentStep",
       "type": "number",
       "required": true,
-      "description": "Current step, clamped between 1 and the normalized total. Overall progress includes subSegmentProgress / 100 and is capped at totalSteps. Page text is generated from these values."
+      "description": "Filled step count, clamped between 0 and the normalized total. Overall progress includes subSegmentProgress / 100 and is capped at totalSteps. Page text and the accessible percentage are generated from these values; zero progress shows Page 1 with an empty track."
     },
     {
       "name": "totalSteps",

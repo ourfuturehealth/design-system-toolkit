@@ -6,7 +6,7 @@ export interface ProgressIndicatorProps
     React.HTMLAttributes<HTMLDivElement>,
     'children' | 'dangerouslySetInnerHTML' | 'ref'
   > {
-  /** Current step, clamped between 1 and totalSteps. */
+  /** Filled step count, clamped between 0 and totalSteps. */
   currentStep: number;
   /** Number of steps, rounded to an integer with a minimum of 1. */
   totalSteps: number;
@@ -50,10 +50,14 @@ export const ProgressIndicator = ({
   ref,
   ...props
 }: ProgressIndicatorProps) => {
-  const segmentCount = Math.max(Math.round(totalSteps), 1);
-  const clampedCurrentStep = Math.min(Math.max(currentStep, 1), segmentCount);
+  const segmentCount = Number.isFinite(totalSteps)
+    ? Math.max(Math.round(totalSteps), 1)
+    : 1;
+  const clampedCurrentStep = Number.isFinite(currentStep)
+    ? Math.min(Math.max(currentStep, 0), segmentCount)
+    : 0;
   const clampedSubSegmentProgress = Math.min(
-    Math.max(subSegmentProgress, 0),
+    Math.max(Number.isFinite(subSegmentProgress) ? subSegmentProgress : 0, 0),
     100,
   );
   const overallProgress = Math.min(
@@ -63,12 +67,10 @@ export const ProgressIndicator = ({
   const scaledProgress = overallProgress * 100;
   const filledSegmentCount = Math.floor(scaledProgress / 100);
   const segmentProgress = scaledProgress - filledSegmentCount * 100;
-  const resolvedProgressText = `Page ${Math.ceil(overallProgress)} of ${segmentCount}`;
+  const resolvedProgressText = `Page ${Math.max(Math.ceil(overallProgress), 1)} of ${segmentCount}`;
   const accessibleLabel = `${label?.trim() || 'Progress'}, ${resolvedProgressText}`;
 
-  const percentProgress = clampedCurrentStep / totalSteps
-  const subsegmentProgressContrib = (subSegmentProgress / 100) * (1 / totalSteps)
-  const totalPercentProgress = (percentProgress + subsegmentProgressContrib) * 100;
+  const totalPercentProgress = overallProgress / segmentCount * 100;
 
   return (
     <div
@@ -79,7 +81,7 @@ export const ProgressIndicator = ({
       <div
         role="progressbar"
         aria-valuenow={totalPercentProgress}
-        aria-valuemin={1}
+        aria-valuemin={0}
         aria-valuemax={100}
         aria-label={accessibleLabel}
       >

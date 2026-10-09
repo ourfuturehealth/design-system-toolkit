@@ -4,6 +4,75 @@ This guide provides detailed migration instructions for upgrading between versio
 
 **Quick reference:** Jump to the version you're upgrading from/to below.
 
+## Release upgrade decisions
+
+Each new package release needs one explicit decision in this index. The recovery
+versions below are prepared but unpublished until their GitHub releases exist.
+Earlier migration guidance remains below this index.
+
+| Package | Version | Status | Guidance |
+| ------- | ------- | ------ | -------- |
+| `@ourfuturehealth/toolkit` | `4.26.1` | Action required | [Recovery and ProgressIndicator checks](#release-recovery) |
+| `@ourfuturehealth/react-components` | `0.26.1` | Action required | [Recovery and ProgressIndicator checks](#release-recovery) |
+| `@ourfuturehealth/toolkit` | `4.26.0` | Action required | [DO NOT USE: replace the defective release](#release-recovery) |
+| `@ourfuturehealth/react-components` | `0.26.0` | Action required | [DO NOT USE: replace the defective release](#release-recovery) |
+| `@ourfuturehealth/toolkit` | `4.25.1` | No consumer action required | Mobile Header fixes and Welsh partner logos; public APIs unchanged. |
+| `@ourfuturehealth/react-components` | `0.24.2` | No consumer action required | Mobile Header fixes and Welsh partner logos; public APIs unchanged. |
+| `@ourfuturehealth/react-components` | `0.24.1` | No consumer action required | Direct Next.js App Router imports and the public CommonJS entrypoint are fixed; continue using the public package exports. |
+| `@ourfuturehealth/toolkit` | `4.25.0` | No consumer action required | Cookie Banner is an opt-in addition. |
+| `@ourfuturehealth/react-components` | `0.24.0` | No consumer action required | Cookie Banner is an opt-in addition. |
+| `@ourfuturehealth/toolkit` | `4.24.2` | No consumer action required | Selected mobile Header links retain dark text after visiting; public APIs unchanged. |
+| `@ourfuturehealth/react-components` | `0.23.2` | No consumer action required | Selected mobile Header links retain dark text after visiting; public APIs unchanged. |
+| `@ourfuturehealth/toolkit` | `4.24.1` | Action required | [Check form-group spacing overrides](#form-group-spacing-4241) |
+| `@ourfuturehealth/react-components` | `0.23.1` | No consumer action required | Header-only props are no longer forwarded to desktop anchors; public APIs unchanged. |
+
+React `0.25.0` was never published. Do not use it as a release baseline.
+
+<a id="release-recovery"></a>
+## Recovery from toolkit 4.26.0 / React 0.26.0
+
+**DO NOT USE toolkit 4.26.0 or React 0.26.0.** Their release artifacts cannot be
+reproduced from the current tags. Their ProgressIndicator accessible values also
+disagree with the rendered track for some inputs. The historical assets and tags
+are retained; a direct download URL remains installable despite the warning.
+
+Until recovery is published, the previous supported baseline is toolkit `4.25.1`
+and React `0.24.2`. These versions do not contain ProgressIndicator.
+
+When recovery releases `4.26.1` and `0.26.1` are available:
+
+1. Replace the defective tarball URL in your dependency manifest with the matching
+   recovery release URL. Toolkit compiled-file consumers should replace the ZIP.
+2. Regenerate your consumer lockfile with your existing package manager and verify
+   it resolves the new URL and integrity. Do not overwrite the old release asset.
+3. Build and test the consuming application, including its theme styles.
+4. Check ProgressIndicator usages. `currentStep` counts filled segments and is
+   clamped from zero to the rounded total. Zero and negative progress now show an
+   empty track with `Page 1` as the page label. Partial progress adds a fraction
+   of a segment; for example, step 2 of 8 plus 50% fills 2.5 segments and announces
+   31.25%. Accessible values use a 0-to-100 percentage range and cap at completion.
+5. Recheck any custom code that reads numeric ARIA attributes or assumes the first
+   segment is filled for zero progress. Component prop names remain unchanged.
+
+Recovery tarball URLs, usable only after publication:
+
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.26.1/ourfuturehealth-toolkit-4.26.1.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.26.1/ourfuturehealth-react-components-0.26.1.tgz"
+  }
+}
+```
+
+<a id="form-group-spacing-4241"></a>
+## Form-group spacing in toolkit 4.24.1
+
+Generic form groups use bottom margins of `16px` on mobile/tablet and `24px` on
+desktop. Form-group wrappers use `24px` on mobile/tablet and `32px` on desktop.
+Check layouts and remove compensating margin overrides added for the earlier
+spacing. There is no template API change.
+
 ## Breaking Changes by Version
 
 | Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
@@ -11,8 +80,8 @@ This guide provides detailed migration instructions for upgrading between versio
 | [v4.24.0 / React v0.23.0](#upgrading-to-v4240--react-v0230) | July 2026     | No breaking changes        | 🟢 Low - use the Light Hero theme where it pairs with a Light Header |
 | [v4.23.0 / React v0.22.0](#upgrading-to-v4230--react-v0220) | July 2026     | Hero macro API update      | 🟡 Medium - update old Hero `text` / `imageURL` usages before adopting the new Hero |
 | [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026     | No breaking changes        | 🟢 Low - adopt the new public Header surfaces where needed |
-| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
-| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
+| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | May 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
+| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | May 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
 | [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
 | [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
 | [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
@@ -199,7 +268,7 @@ import { Header } from '@ourfuturehealth/react-components';
 
 ## Upgrading to v4.21.0 / React v0.20.0
 
-**Released:** April 2026
+**Released:** May 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.21.0+
@@ -256,7 +325,7 @@ import { SearchInput } from '@ourfuturehealth/react-components';
 
 ## Upgrading to v4.20.0 / React v0.19.0
 
-**Released:** April 2026
+**Released:** May 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.20.0+

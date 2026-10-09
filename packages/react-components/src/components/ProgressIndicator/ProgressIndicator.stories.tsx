@@ -32,13 +32,14 @@ const meta: Meta<typeof ProgressIndicator> = {
           <p>
             For a page-based journey, pass <code>currentStep</code> and{' '}
             <code>totalSteps</code>. For example, 11 and 12 generate "Page 11 of 12",
-            11 filled segments, and an ARIA value of 11 out of 12. No percentage
+            11 filled segments, and an accessible percentage of approximately 91.67%. No percentage
             calculation or separate page text is needed.
           </p>
           <p>
             Both React and Nunjucks require these two step inputs. The total
             is rounded with a minimum of 1, and the current step is clamped
-            between 1 and that total. Page text and the numeric accessible value
+            between 0 and that total. Zero progress leaves the track empty and shows Page 1.
+            Page text and the numeric accessible value
             are always generated from the step values.
           </p>
           <p>
@@ -46,7 +47,7 @@ const meta: Meta<typeof ProgressIndicator> = {
             clamped between 0 and 100 and defaults to 0. Overall progress is
             capped at the total. Step 2 of 8 plus 50 represents 2.5 steps:
             the header shows "Page 3 of 8" and the numeric accessible value is
-            2.5 on the 1-to-8 scale.
+            31.25 on a 0-to-100 percentage scale.
           </p>
           <p>
             Pass a plain-text string to the optional <code>label</code> prop to show text on the left
@@ -95,8 +96,8 @@ const meta: Meta<typeof ProgressIndicator> = {
   tags: ['autodocs'],
   argTypes: {
     currentStep: {
-      control: { type: 'number', min: 1, step: 1 },
-      description: 'Required current step, clamped between 1 and totalSteps. Generates page text, visual fill, and ARIA values together with totalSteps.',
+      control: { type: 'number', min: 0, step: 1 },
+      description: 'Required filled step count, clamped between 0 and totalSteps. Generates page text, visual fill, and ARIA percentage together with totalSteps.',
       table: {
         category: 'ProgressIndicatorProps',
       },
@@ -306,4 +307,3 @@ export const WithoutLabelOrHelperText: Story = {
     },
   },
 };
-
