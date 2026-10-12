@@ -56,7 +56,7 @@ fi
 # docs/release-process.md together.
 tracked_text_files=()
 while IFS= read -r path; do
-  if [[ -n "${path}" && "${path}" != 'CHANGELOG.md' ]]; then
+  if [[ -f "${path}" && "${path}" != 'CHANGELOG.md' ]]; then
     tracked_text_files+=("${path}")
   fi
 done < <(git ls-files --cached --others --exclude-standard -- '*.md' '*.sh' '*.yml' '*.yaml' | sort -u)

@@ -57,16 +57,39 @@ export function parseChangelog(text) {
 }
 
 export function upgradeDecision(text, name, version) {
-  const rows = text.split('\n').map(line => line.split('|').map(cell => cell.trim()));
-  const matches = rows.filter(row => row[1] === `\`${name}\`` && row[2] === `\`${version}\``);
-  assert.equal(matches.length, 1, `Expected one upgrade decision for ${name}@${version}`);
-  const [, , , status, guidance] = matches[0];
-  assert(['No consumer action required', 'Action required'].includes(status), `Invalid upgrade decision for ${name}@${version}`);
-  assert(guidance, `Missing upgrade guidance for ${name}@${version}`);
-  if (status === 'Action required') {
-    const link = /\]\(#([^)]*)\)/.exec(guidance);
-    assert(link, `Action required needs a migration link for ${name}@${version}`);
-    assert(text.includes(`<a id="${link[1]}"></a>`), `Missing migration section: ${link[1]}`);
+  const pkg = packages.find(item => item.name === name);
+  assert(pkg, `Unsupported upgrade package: ${name}`);
+  const lines = text.split('\n');
+  const cells = line => line.split('|').map(cell => cell.trim());
+  const headers = lines.filter(line => line.trim().startsWith('|') && cells(line).includes('Consumer action'));
+  assert.equal(headers.length, 1, 'Expected one upgrade guidance table with a Consumer action column');
+  const header = cells(headers[0]);
+  const versionColumn = header.indexOf('Version');
+  const statusColumn = header.indexOf('Consumer action');
+  const guidanceColumn = header.indexOf('Migration Complexity');
+  assert(versionColumn > 0 && guidanceColumn > 0, 'Upgrade table needs Version and Migration Complexity columns');
+  const versionLabel = `${pkg.prefix === 'react-v' ? 'React ' : ''}v${version}`;
+  const matches = [];
+  for (const line of lines.slice(lines.indexOf(headers[0]) + 1)) {
+    if (!line.trim().startsWith('|')) break;
+    const row = cells(line);
+    const labels = (row[versionColumn] || '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replaceAll('`', '').split(' / ');
+    if (labels.includes(versionLabel)) matches.push(row);
   }
+  assert.equal(matches.length, 1, `Expected one upgrade decision for ${name}@${version}`);
+  const row = matches[0];
+  const status = row[statusColumn];
+  const versionCell = row[versionColumn];
+  const instructions = row[guidanceColumn];
+  assert(['No consumer action required', 'Action required'].includes(status), `Invalid upgrade decision for ${name}@${version}`);
+  assert(instructions, `Missing upgrade guidance for ${name}@${version}`);
+  const versionLink = /\]\(#([^)]*)\)/.exec(versionCell);
+  if (status === 'Action required') {
+    const link = versionLink || /\]\(#([^)]*)\)/.exec(instructions);
+    assert(link, `Action required needs a migration link for ${name}@${version}`);
+    const headings = lines.filter(line => /^#{1,6} /.test(line)).map(line => line.replace(/^#{1,6} /, '').toLowerCase().replace(/[^\w -]/g, '').replaceAll(' ', '-'));
+    assert(text.includes(`<a id="${link[1]}"></a>`) || headings.includes(link[1]), `Missing migration section: ${link[1]}`);
+  }
+  const guidance = versionLink ? `${instructions} See ${versionCell}.` : instructions;
   return { status, guidance };
 }

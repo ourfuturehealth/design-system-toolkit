@@ -5,32 +5,35 @@ Packages are distributed through GitHub Releases. Toolkit supplies an installabl
 the tarball URL. Keep those filenames and the package-manager installation
 contract described in [release versioning](release-versioning-strategy.md).
 
-## Recovery first
+## Prepare and review
 
-DSE-447 prepares toolkit `4.26.1` and React `0.26.1` to recover from the defective
-`4.26.0` / `0.26.0` releases. These recovery versions are calculated from published
-history, rather than the lower package versions merged onto `main` in PR #279.
-The changelog records them as unreleased until maintainers finalise publication.
+1. Update each affected package's version, root changelog entry, and upgrade
+   guidance in the PR. The version must exceed that package's existing tags and
+   published releases, even if the version on `main` is lower.
+2. Run the validation commands below. Review the generated release notes and
+   test the affected components in their consuming applications. Complete human
+   accessibility checks when changing accessible behaviour; automated markup
+   checks do not establish the spoken screen-reader result.
+3. Set the changelog entry to the planned actual release date before merging.
+   An `Unreleased` entry or a future date blocks publication.
+4. Review and merge the PR into `main` under the repository's branch protections.
 
-Follow [the recovery runbook](release-recovery.md), including the existing-release
-warnings and human screen-reader checks. Preserve defective assets and tags.
+## Start publication
 
-## Interim publication safeguards
+The release workflow runs when a maintainer pushes a canonical tag:
+`toolkit-v<version>` or `react-v<version>`. Legacy `v*` tags are historical
+references and do not trigger publication.
 
-The recovery workflow still starts from a manually created canonical tag. This is
-a transitional step before Changesets release PRs and app-owned tag creation.
-Legacy `v*` tags remain historical references; they no longer start new releases.
+Check the merged commit SHA and each package manifest before creating its tag.
+Create each tag at that exact SHA, not an interior feature-branch commit. Never
+replace an existing tag or delete a tag to rerun a release. Packages released
+together use the same merged SHA, but each tag starts its own release job.
 
-Before publication:
+Pushing a canonical tag authorises automatic publication if all checks pass.
+The workflow has no separate environment approval. Changesets release PRs and
+automated tag creation are not configured.
 
-1. Review and merge the recovery PR into `main`. Finalise its changelog date in
-   that PR to the actual planned release date. An `Unreleased` entry blocks publication.
-2. Check the merged SHA and package version before creating each canonical tag.
-   Publishing the tag to GitHub starts the release workflow, which publishes
-   automatically if all release checks pass. There is no separate environment
-   approval.
-3. Create each new tag at the exact merged commit. Never tag an unmerged branch,
-   replace an existing tag, or delete a tag to rerun a release.
+## Automated checks and publication
 
 The workflow checks that the tag points to the checkout SHA, the commit is on
 merged `main`, the manifest agrees, and the version exceeds existing tags and
@@ -43,10 +46,9 @@ files and compares their SHA-256 digests with the staged files, and checks the
 remote tag again before publication. Release notes include the reviewed package
 summary and upgrade guidance, with source links pinned to the release SHA.
 
-No GitHub `release` environment or additional approver group is required. For
-this interim workflow, the reviewed recovery PR and deliberate creation of its
-release tags authorise publication. A tag workflow alone cannot prevent an
-authorised user from moving a tag afterwards; tag rules remain necessary.
+The workflow detects tag movement during publication. Preventing later changes
+requires GitHub tag rules that restrict creation, updates, and deletion; the
+workflow itself does not configure those rules.
 
 ## Validation
 
@@ -64,8 +66,15 @@ pnpm --filter=@ourfuturehealth/react-components exec playwright install chromium
 NPM_CONFIG_REGISTRY=https://registry.npmjs.org pnpm smoke:release-artifacts
 ```
 
-`pnpm test:release` tests metadata failures and draft publication with offline
-command fixtures. It does not call GitHub, create tags, or publish releases.
+`pnpm test:release` tests metadata failures and release-SHA eligibility using
+both command fixtures and real temporary Git repositories. It creates local
+test commits and tags only inside those temporary repositories. Publication
+tests simulate GitHub commands; they do not contact GitHub or publish releases.
+
+Passing these tests does not prove GitHub permissions or live draft creation,
+upload, download, and publication. Rehearse that path in an explicitly authorised
+disposable repository before first use or after changing the publisher or its
+permissions. Never use a production release as a test.
 
 The artifact smoke command:
 
@@ -88,9 +97,9 @@ For faster local iteration:
 ```
 
 PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
-Until Changesets is introduced, the recovery PR supplies the version/changelog
-updates required by this interim gate. Normal feature PRs will use changesets
-once the second DSE-447 slice switches the gate to release intent validation.
+Package source changes must include a version increase, changelog entry, and
+upgrade decision. The metadata guard excludes test, Storybook, and package README
+changes from this source-change requirement.
 
 ## Documentation requirements
 
@@ -98,9 +107,12 @@ Keep one root changelog. Each release has a unique, nonempty package/version/tag
 section, ordered by decreasing semantic version. Dated sections must descend.
 Do not invent releases for intermediate manifest values that were never published.
 
-Every version being released must have one row in the release-decision index in
-`UPGRADING.md`: `No consumer action required` or `Action required`. The latter
-must link to a migration section with an explicit anchor in that guide.
+Every version being released must appear once in the version index in
+`UPGRADING.md`, with a `Consumer action` decision of `No consumer action required`
+or `Action required`. Toolkit and React can share a row when their guidance is
+the same. Use separate rows for package-only releases or different upgrade
+decisions. An actionable row must link to a migration section through its version
+or guidance cell. The target can be an explicit HTML anchor or a Markdown heading.
 
 `pnpm docs:release-contract` scans tracked and new non-ignored Markdown, shell, and workflow files for
 known invalid installation guidance, then renders the current release notes to
@@ -119,21 +131,16 @@ bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
 it does not replace the asset. Failures reading GitHub state stop the workflow
 rather than being interpreted as an absent release.
 
-After publication, confirm the expected assets and release notes are visible and
-the tags still resolve to the recorded SHA. GitHub tag protection remains necessary.
+## Verify the published release
 
-## Next DSE-447 slices
+Confirm each tag still resolves to the recorded merged SHA, the GitHub release
+contains the expected assets, and its notes link to the correct installation URL
+and SHA-pinned changelog and upgrade guidance. Install from the published tarball
+URL in a consumer application and build it; toolkit ZIP consumers should also
+check the published ZIP.
 
-After recovery establishes a supported published baseline:
-
-1. Changesets records release intent and generates a release PR containing the
-   proposed versions, changelog entries, and upgrade decisions. A developer
-   reviews the whole release and merges the bot-authored PR under the existing
-   branch-protection rules. That merge authorises automatic publication from the
-   exact merged SHA, without a second workflow approval. The release app creates
-   canonical tags; tag rules restrict creation and prohibit routine modification
-   or deletion. Retain this repository's artifact and consumer checks.
-2. Generate a reviewed announcement in the release PR and send it to the Slack
-   webhook workflow after all planned releases publish successfully. Record
-   notification submission separately and investigate ambiguous timeouts before
-   resubmitting. These integrations are not enabled by the recovery slice.
+For a release that replaces a defective version, retain the old tags and assets.
+Prepend a prominent `SUPERSEDED / DO NOT USE` warning to the old release's title
+and notes, with links to its published replacement and migration guidance.
+Before a replacement is published, use `DO NOT USE` without claiming it is
+available. A warning cannot prevent installation from a retained download URL.
