@@ -21,3 +21,5 @@ We've compiled a list of contributing guidance to make it easier for you to cont
 - [Automated testing](docs/contributing/testing.md#automated-testing)
 - [Support for browsers and assistive technology](/docs/contributing/browser-support.md)
 - [Git style guide](docs/contributing/git-style-guide.md)
+- [Changesets and consumer upgrade guidance](.changeset/README.md)
+- [Release process](docs/release-process.md)
