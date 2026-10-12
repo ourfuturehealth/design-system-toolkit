@@ -9,40 +9,108 @@ describe('Our Future Health progress indicator macro', () => {
     document.body.innerHTML = '';
   });
 
-  it.each([1, 2, 3])('uses finite fallback values for invalid number case %s', (caseNumber) => {
-    const total = document.querySelector(`[data-nonfinite-total="${caseNumber}"] [role="progressbar"]`);
-    const step = document.querySelector(`[data-nonfinite-step="${caseNumber}"] [role="progressbar"]`);
-    const partial = document.querySelector(`[data-nonfinite-partial="${caseNumber}"] [role="progressbar"]`);
-    expect(total.getAttribute('aria-valuenow')).toBe('100');
-    expect(total.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(1);
-    expect(step.getAttribute('aria-valuenow')).toBe('0');
-    expect(step.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(0);
-    expect(step.getAttribute('aria-label')).toBe('Progress, Page 1 of 8');
-    expect(partial.getAttribute('aria-valuenow')).toBe('25');
-    expect(partial.querySelector('.ofh-progress-indicator__segment-progress').style.width).toBe('0%');
+  const invalidNumbers = ['NaN', 'Infinity', '-Infinity'];
+
+  it.each(invalidNumbers)('falls back to one segment when totalSteps is %s', (invalidNumber) => {
+    const progressbar = document.querySelector(`[data-nonfinite-total="${invalidNumber}"] [role="progressbar"]`);
+
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(1);
+    // The fixture's two filled steps are capped at the fallback total of one.
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('100');
+  });
+
+  it.each(invalidNumbers)('falls back to an empty track when currentStep is %s', (invalidNumber) => {
+    const progressbar = document.querySelector(`[data-nonfinite-step="${invalidNumber}"] [role="progressbar"]`);
+
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('0');
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(0);
+    expect(progressbar.getAttribute('aria-label')).toBe('Progress, Page 1 of 8');
+  });
+
+  it.each(invalidNumbers)('adds no partial fill when subSegmentProgress is %s', (invalidNumber) => {
+    const progressbar = document.querySelector(`[data-nonfinite-partial="${invalidNumber}"] [role="progressbar"]`);
+
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(2);
+    expect(progressbar.getAttribute('aria-valuenow')).toBe('25');
+    expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress').style.width).toBe('0%');
   });
 
   it.each([
-    [10, 5, 100],
-    [5, 5, 100],
-    [2, 2, 40],
-    [1, 1, 20],
-    [0.5, 1, 10],
-    [0, 1, 0],
-    [-1, 1, 0],
-  ])('renders step %s as page %s of 5 with %s aria now progress', (currentStep, expectedStep, progressPercent) => {
+    {
+      currentStep: 10,
+      expectedPage: 5,
+      expectedPercent: 100,
+      expectedFilledSegments: 5,
+      expectedPartialPercent: null,
+    },
+    {
+      currentStep: 5,
+      expectedPage: 5,
+      expectedPercent: 100,
+      expectedFilledSegments: 5,
+      expectedPartialPercent: null,
+    },
+    {
+      currentStep: 2,
+      expectedPage: 2,
+      expectedPercent: 40,
+      expectedFilledSegments: 2,
+      expectedPartialPercent: 0,
+    },
+    {
+      currentStep: 1,
+      expectedPage: 1,
+      expectedPercent: 20,
+      expectedFilledSegments: 1,
+      expectedPartialPercent: 0,
+    },
+    {
+      currentStep: 0.5,
+      expectedPage: 1,
+      expectedPercent: 10,
+      expectedFilledSegments: 0,
+      expectedPartialPercent: 50,
+    },
+    {
+      currentStep: 0,
+      expectedPage: 1,
+      expectedPercent: 0,
+      expectedFilledSegments: 0,
+      expectedPartialPercent: 0,
+    },
+    {
+      currentStep: -1,
+      expectedPage: 1,
+      expectedPercent: 0,
+      expectedFilledSegments: 0,
+      expectedPartialPercent: 0,
+    },
+  ])('shows $expectedPercent% progress and page $expectedPage of 5 for currentStep=$currentStep', ({
+    currentStep,
+    expectedPage,
+    expectedPercent,
+    expectedFilledSegments,
+    expectedPartialPercent,
+  }) => {
     const indicator = document.querySelector(`[data-current-step="${currentStep}"]`);
     const progressbar = indicator.querySelector('[role="progressbar"]');
-    const pageText = `Page ${expectedStep} of 5`;
+    const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
+    const pageText = `Page ${expectedPage} of 5`;
 
     expect(indicator.querySelector('.ofh-progress-indicator__steps').textContent).toBe(pageText);
-    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(progressPercent));
+    expect(progressbar.getAttribute('aria-valuenow')).toBe(String(expectedPercent));
     expect(progressbar.getAttribute('aria-valuemin')).toBe('0');
     expect(progressbar.getAttribute('aria-valuemax')).toBe('100');
     expect(progressbar.hasAttribute('aria-valuetext')).toBe(false);
     expect(progressbar.getAttribute('aria-label')).toBe(`Personal details, ${pageText}`);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment')).toHaveLength(5);
-    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(Math.floor(Math.max(0, Math.min(currentStep, 5))));
+    expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedFilledSegments);
+    if (expectedPartialPercent === null) {
+      expect(partialSegment).toBeNull();
+    } else {
+      expect(partialSegment.parentElement).toBe(progressbar.querySelectorAll('.ofh-progress-indicator__segment')[expectedFilledSegments]);
+      expect(partialSegment.style.width).toBe(`${expectedPartialPercent}%`);
+    }
   });
 
   it.each([
@@ -127,7 +195,7 @@ describe('Our Future Health progress indicator macro', () => {
     [40, 30, 2, 40, 'Page 3 of 8'],
     [100, 37.5, 3, 0, 'Page 3 of 8'],
     [125, 37.5, 3, 0, 'Page 3 of 8'],
-  ])('clamps subSegmentProgress=%s to an overall %s steps', (subSegmentProgress, expectedProgress, expectedFilled, expectedPartial, valueText) => {
+  ])('clamps subSegmentProgress=%s to %s%% overall progress', (subSegmentProgress, expectedProgress, expectedFilled, expectedPartial, valueText) => {
     const progressbar = document.querySelector(`[data-sub-segment-progress="${subSegmentProgress}"] [role="progressbar"]`);
     const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
     const partialSegments = progressbar.querySelectorAll('.ofh-progress-indicator__segment-progress');

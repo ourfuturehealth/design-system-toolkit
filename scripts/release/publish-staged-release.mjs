@@ -19,14 +19,17 @@ function verifyRemoteTag() {
 const digest = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 verifyRemoteTag();
 // Listing distinguishes an absent release from an authentication/network failure.
-const releases = JSON.parse(gh('api', '--paginate', '--slurp', `repos/${repository}/releases`)).flat();
-let release = releases.find(item => item.tag_name === tag);
-if (release) {
-  assert(release.draft, 'Published releases must not be overwritten');
-} else {
-  gh('release', 'create', tag, '--verify-tag', '--target', sha, '--draft', '--title', tag, '--notes-file', notesPath, '--repo', repository);
-  release = JSON.parse(gh('api', `repos/${repository}/releases/tags/${tag}`));
+function findRelease() {
+  const releases = JSON.parse(gh('api', '--paginate', '--slurp', `repos/${repository}/releases`)).flat();
+  return releases.find(item => item.tag_name === tag);
 }
+let release = findRelease();
+if (!release) {
+  gh('release', 'create', tag, '--verify-tag', '--target', sha, '--draft', '--title', tag, '--notes-file', notesPath, '--repo', repository);
+  release = findRelease();
+}
+assert(release, 'Release draft was not found after creation');
+assert(release.draft, 'Published releases must not be overwritten');
 const downloads = mkdtempSync(join(tmpdir(), 'ofh-release-download-'));
 try {
   const expectedNames = assets.map(asset => basename(asset));

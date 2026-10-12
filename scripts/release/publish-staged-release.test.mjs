@@ -49,6 +49,18 @@ test('publisher uploads to a draft, verifies both assets, then publishes', () =>
   assert.equal(state.tagChecks, 3);
 });
 
+test('new drafts are retrieved through the release list, not the published-tag endpoint', () => {
+  const { result, state } = runPublisher();
+  assert.equal(result.status, 0, result.stderr);
+  const apiCalls = state.commands.filter(command => command[0] === 'gh' && command[1] === 'api');
+  assert.equal(apiCalls.length, 2);
+  assert(apiCalls.every(command => command.at(-1) === 'repos/example/design-system/releases'));
+  const creation = state.commands.findIndex(command => command[2] === 'create');
+  const lookup = state.commands.findIndex((command, index) => index > creation && command[1] === 'api');
+  const upload = state.commands.findIndex(command => command[2] === 'upload');
+  assert(lookup > creation && lookup < upload, 'Reload the newly created draft before uploading');
+});
+
 test('published releases are never overwritten', () => {
   const { result, state } = runPublisher({ releases: [{ tag_name: 'toolkit-v4.26.1', draft: false, assets: [] }] });
   assert.notEqual(result.status, 0);

@@ -28,7 +28,20 @@ if (command === 'git' && args[0] === 'diff') {
   process.stdout.write(`${'c'.repeat(40)}\trefs/tags/${state.tag}\n${sha}\trefs/tags/${state.tag}^{}\n`);
 } else if (command === 'gh' && args[0] === 'api') {
   if (state.failApi) process.exit(1);
-  process.stdout.write(JSON.stringify(args.includes('--slurp') ? [state.releases] : state.releases[0]));
+  const endpoint = args.at(-1);
+  if (endpoint.endsWith('/releases')) {
+    process.stdout.write(JSON.stringify(args.includes('--slurp') ? [state.releases] : state.releases));
+  } else if (endpoint.includes('/releases/tags/')) {
+    const tag = endpoint.split('/').at(-1);
+    const release = state.releases.find(item => item.tag_name === tag && !item.draft);
+    if (!release) {
+      process.stderr.write('gh: Not Found (HTTP 404)\n');
+      process.exit(1);
+    }
+    process.stdout.write(JSON.stringify(release));
+  } else {
+    throw new Error(`Unexpected mocked API endpoint: ${endpoint}`);
+  }
 } else if (command === 'gh' && args[0] === 'release') {
   switch (args[1]) {
     case 'create':
