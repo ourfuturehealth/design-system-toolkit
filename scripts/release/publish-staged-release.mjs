@@ -36,15 +36,35 @@ try {
   assert(release.assets.every(asset => expectedNames.includes(asset.name)), 'Draft has unexpected assets; inspect it before resuming');
   for (const asset of assets) {
     const name = basename(asset);
+    const expectedDigest = digest(asset);
     if (!release.assets.some(item => item.name === name)) {
       gh('release', 'upload', tag, asset, '--repo', repository);
     }
     gh('release', 'download', tag, '--pattern', name, '--dir', downloads, '--repo', repository);
-    assert.equal(digest(join(downloads, name)), digest(asset), `Uploaded asset differs from staged bytes: ${name}`);
+    assert.equal(digest(join(downloads, name)), expectedDigest, `Uploaded asset differs from staged bytes: ${name}`);
+    process.stdout.write(`Verified uploaded asset ${name}: SHA-256 ${expectedDigest}\n`);
   }
   verifyRemoteTag();
-  gh('release', 'edit', tag, '--notes-file', notesPath, '--draft=false', '--repo', repository);
-  verifyRemoteTag();
+  try {
+    gh('release', 'edit', tag, '--notes-file', notesPath, '--draft=false', '--repo', repository);
+  } catch (error) {
+    throw new Error(
+      `Publication outcome is unknown for ${tag}; the release may already be public. `
+      + `Inspect the existing release at https://github.com/${repository}/releases/tag/${tag} against expected SHA ${sha}. `
+      + 'Do not rerun publication, overwrite, delete, or retag.',
+      { cause: error },
+    );
+  }
+  try {
+    verifyRemoteTag();
+  } catch (error) {
+    throw new Error(
+      `Publication completed for ${tag}, but final verification failed. `
+      + `Inspect the existing release at https://github.com/${repository}/releases/tag/${tag} against expected SHA ${sha}. `
+      + 'Do not rerun publication, overwrite, delete, or retag.',
+      { cause: error },
+    );
+  }
   process.stdout.write(`Published ${tag} after verifying remote tag and uploaded asset digests\n`);
 } finally {
   rmSync(downloads, { recursive: true, force: true });

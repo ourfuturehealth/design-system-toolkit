@@ -5,6 +5,21 @@ Packages are distributed through GitHub Releases. Toolkit supplies an installabl
 the tarball URL. Keep those filenames and the package-manager installation
 contract described in [release versioning](release-versioning-strategy.md).
 
+## Repository protections
+
+Before publishing, confirm an active GitHub tag ruleset protects `toolkit-v*` and
+`react-v*` against updates and deletion, without routine bypasses. Maintainers
+can create canonical tags for the tag-triggered workflow. The workflow's tag
+checks detect changes but cannot prevent a tag moving between a check and
+publication. These settings require administrator configuration and manual
+verification; the workflow does not configure or validate the ruleset.
+
+To protect published assets as well, an administrator can enable release
+immutability in repository Settings, under Releases. It applies to future
+releases, locks published assets and tags, and still allows edits to titles and
+notes. Attach every asset to the draft before publishing. See
+[GitHub's immutable releases guidance](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases).
+
 ## Prepare and review
 
 1. Update each affected package's version, root changelog entry, and upgrade
@@ -46,9 +61,9 @@ files and compares their SHA-256 digests with the staged files, and checks the
 remote tag again before publication. Release notes include the reviewed package
 summary and upgrade guidance, with source links pinned to the release SHA.
 
-The workflow detects tag movement during publication. Preventing later changes
-requires GitHub tag rules that restrict creation, updates, and deletion; the
-workflow itself does not configure those rules.
+The publisher records the SHA-256 digest of each verified uploaded asset in the
+job log. A final tag check after publication detects discrepancies; it is not a
+publication gate and cannot undo a published release.
 
 ## Validation
 
@@ -130,6 +145,28 @@ An interrupted draft can resume only when existing assets match the newly staged
 bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
 it does not replace the asset. Failures reading GitHub state stop the workflow
 rather than being interpreted as an absent release.
+
+`Publication outcome is unknown` means the publish request failed without a
+reliable result. The release may be public even though the command failed.
+`Publication completed ... final verification failed` means the publish command
+succeeded but the subsequent check failed. That failure may be a network problem
+or confirmed tag movement; it does not by itself prove that the assets are wrong.
+
+For either message:
+
+1. Stop automatic reruns and inspect the existing GitHub release's draft/public
+   state. Record the expected SHA from the error and the verified asset digests
+   from the job log.
+2. Check the remote tag against that SHA and download the existing assets to
+   compare their SHA-256 digests. If GitHub is unreachable, wait for access before
+   deciding whether publication completed.
+3. If the release is still draft and the tag and assets match, a maintainer can
+   resume the workflow after resolving the failure. If it is public and matches,
+   record the verification result in the PR; do not rerun publication. Published
+   releases fail both the version-reuse guard and the publisher's overwrite guard.
+4. If a public release is defective, retain its tag and assets, add a prominent
+   warning, and prepare a superseding version. Never automatically redraft,
+   delete, overwrite, or retag it.
 
 ## Verify the published release
 

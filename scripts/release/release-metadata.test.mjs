@@ -42,6 +42,22 @@ test('changelog checks content, tag identity, uniqueness, and package ordering',
   assert.throws(() => parseChangelog(entry('4.26.1').replace('2026-10-08', '2026-02-30')));
 });
 
+test('package entries cannot inherit a date across unrelated section headings', () => {
+  const undatedEntry = entry('4.26.1').replace('### 2026-10-08\n\n', '');
+  for (const heading of ['## Other releases', '### Release notes', '#### Documentation']) {
+    assert.throws(() => parseChangelog(`### 2026-10-08\n\n${heading}\n\n${undatedEntry}`), /Missing date for toolkit-v4.26.1/, heading);
+  }
+});
+
+test('toolkit and React entries can share a dated or Unreleased section', () => {
+  const reactEntry = '#### @ourfuturehealth/react-components 0.26.1 (`react-v0.26.1`)\n\n##### Fixed\n\n- Corrected accessible progress.\n';
+  for (const date of ['2026-10-08', 'Unreleased']) {
+    const releases = parseChangelog(entry('4.26.1').replace('2026-10-08', date) + '\n' + reactEntry);
+    assert.deepEqual(releases.get('toolkit-v4.26.1'), { date, summary: ['- Fixed a public component.'] });
+    assert.deepEqual(releases.get('react-v0.26.1'), { date, summary: ['- Corrected accessible progress.'] });
+  }
+});
+
 test('every release needs an explicit upgrade decision and actionable migrations need a target', () => {
   const row = '| [v4.26.1](#recovery) | October 2026 | Corrected progress | Action required | Replace the package. |';
   assert.throws(() => upgradeDecision('', '@ourfuturehealth/toolkit', '4.26.1'));

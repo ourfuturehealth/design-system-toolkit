@@ -30,6 +30,7 @@ export function parseChangelog(text) {
         previousDate = date;
       }
       current = undefined;
+      continue;
     }
     const heading = /^#### (@ourfuturehealth\/(?:toolkit|react-components)) (\S+) \(`([^`]+)`\)$/.exec(line);
     if (heading) {
@@ -45,6 +46,7 @@ export function parseChangelog(text) {
       current = { date, summary: [] };
       entries.set(tag, current);
     } else if (/^#{2,4} /.test(line)) {
+      date = undefined;
       current = undefined;
     } else if (current && /^- /.test(line)) {
       current.summary.push(line);

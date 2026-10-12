@@ -24,6 +24,10 @@ if (command === 'git' && args[0] === 'diff') {
 } else if (command === 'git' && args[0] === 'ls-remote') {
   state.tagChecks += 1;
   save();
+  if (state.failTagCheckAt === state.tagChecks) {
+    process.stderr.write('Synthetic remote tag read failed\n');
+    process.exit(1);
+  }
   const sha = state.moveAfter && state.tagChecks >= state.moveAfter ? 'b'.repeat(40) : state.sha;
   process.stdout.write(`${'c'.repeat(40)}\trefs/tags/${state.tag}\n${sha}\trefs/tags/${state.tag}^{}\n`);
 } else if (command === 'gh' && args[0] === 'api') {
@@ -58,7 +62,12 @@ if (command === 'git' && args[0] === 'diff') {
       break;
     }
     case 'edit':
+      if (state.failPublishBeforeCommit) process.exit(1);
       state.releases[0].draft = false;
+      if (state.failPublishAfterCommit) {
+        save();
+        process.exit(1);
+      }
       break;
     default:
       throw new Error(`Unexpected mocked release command: ${args.join(' ')}`);

@@ -223,14 +223,14 @@ export const Builder: Story = {
 
 export const MinimumProgress: Story = {
   args: {
-    currentStep: 1,
+    currentStep: 0,
     totalSteps: 8,
     subSegmentProgress: 0,
   },
   parameters: {
     docs: {
       description: {
-        story: 'The minimum current step is 1. Lower values are clamped to the first step.',
+        story: 'Zero progress shows an empty track, Page 1 of 8, and 0%. Negative values are clamped to zero. Use currentStep 1 to fill the first segment.',
       },
     },
   },

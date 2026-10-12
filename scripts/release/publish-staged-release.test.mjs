@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { chmodSync, cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -86,6 +87,57 @@ test('tag movement during upload prevents publication', () => {
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /tag moved or disappeared/);
   assert.equal(state.releases[0].draft, true);
+});
+
+test('tag movement after publication requires inspection without rolling back the release', () => {
+  const { result, state } = runPublisher({ moveAfter: 3 });
+  assert.notEqual(result.status, 0);
+  assert.equal(state.releases[0].draft, false);
+  assert.match(result.stderr, /Publication completed.*final verification failed/);
+  assert.match(result.stderr, /Inspect the existing release/);
+  assert.match(result.stderr, /Do not rerun publication, overwrite, delete, or retag/);
+  assert.equal(state.commands.filter(command => command[2] === 'edit').length, 1);
+  for (const asset of state.releases[0].assets) {
+    const digest = createHash('sha256').update(asset.content).digest('hex');
+    assert(result.stdout.includes(`Verified uploaded asset ${asset.name}: SHA-256 ${digest}`));
+  }
+});
+
+test('a final tag-read failure reports publication completed without claiming tag movement', () => {
+  const { result, state } = runPublisher({ failTagCheckAt: 3 });
+  assert.notEqual(result.status, 0);
+  assert.equal(state.releases[0].draft, false);
+  assert.match(result.stderr, /Publication completed.*final verification failed/);
+  assert.match(result.stderr, /Synthetic remote tag read failed/);
+  assert.doesNotMatch(result.stderr, /Remote tag moved or disappeared/);
+});
+
+test('a lost publish response reports uncertainty even when the release became public', () => {
+  const { result, state } = runPublisher({ failPublishAfterCommit: true });
+  assert.notEqual(result.status, 0);
+  assert.equal(state.releases[0].draft, false);
+  assert.match(result.stderr, /Publication outcome is unknown/);
+  assert.match(result.stderr, /release may already be public/);
+  assert.doesNotMatch(result.stderr, /Publication completed/);
+  assert.equal(state.commands.filter(command => command[2] === 'edit').length, 1);
+});
+
+test('a rejected publish request also reports uncertainty without claiming publication completed', () => {
+  const { result, state } = runPublisher({ failPublishBeforeCommit: true });
+  assert.notEqual(result.status, 0);
+  assert.equal(state.releases[0].draft, true);
+  assert.match(result.stderr, /Publication outcome is unknown/);
+  assert.doesNotMatch(result.stderr, /Publication completed/);
+  assert.equal(state.commands.filter(command => command[2] === 'edit').length, 1);
+});
+
+test('a retry after failed final verification leaves the published release untouched', () => {
+  const first = runPublisher({ moveAfter: 3 });
+  const { result, state } = runPublisher({ releases: first.state.releases });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Published releases must not be overwritten/);
+  assert.equal(state.releases[0].draft, false);
+  assert(!state.commands.some(command => command[0] === 'gh' && command[1] === 'release'));
 });
 
 test('an API failure does not get treated as a missing release', () => {
