@@ -12,12 +12,20 @@ to be up to date before merging (or an equivalent merge queue). Release PR check
 compare against their base SHA: an old green result must not authorise merging
 over newly added changesets. Do not give the release App a bypass of these rules.
 
-Before publishing, confirm an active GitHub tag ruleset protects `toolkit-v*` and
-`react-v*` against updates and deletion, without routine bypasses. Maintainers
-can create canonical tags for the tag-triggered workflow. The workflow's tag
-checks detect changes but cannot prevent a tag moving between a check and
-publication. These settings require administrator configuration and manual
-verification; the workflow does not configure or validate the ruleset.
+Before automatic publication, configure two active tag rulesets matching
+`toolkit-v*` and `react-v*`:
+
+- Restrict creation, with only the dedicated release App allowed to bypass it.
+- Restrict updates and deletion, without routine bypasses, including for the App.
+
+Keep those rules separate: an App bypass on one combined ruleset would also let
+it bypass mutation protection. During tag-triggered publication, maintainers
+still need creation permission; apply App-only creation at cutover, after the
+manual recovery releases. The workflow only creates missing references. It never
+updates or deletes tags, but its checks cannot prevent another actor moving a tag
+between checks. Administrator configuration and verification of these rulesets
+remain required; the workflow does not configure or audit them. See
+[GitHub tag rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets).
 
 To protect published assets as well, an administrator can enable release
 immutability in repository Settings, under Releases. It applies to future
@@ -47,7 +55,14 @@ notes. Attach every asset to the draft before publishing. See
    generated notes. If only the date changes, update all new changelog and upgrade
    index dates together; CI regenerates the expected documents using that date.
 5. Merge the release PR normally. There is no separate environment approval.
-   Before the publication workflow is automated, follow the tag steps below.
+   Once enabled, publication starts from the actual merged SHA, including merge
+   and squash merges. Before cutover, follow the tag steps below.
+
+The generator commits `.changeset/release.json` with the reviewed base SHA,
+consumed changeset IDs and intended packages/versions/tags. CI checks it against
+the calculated plan. Publication revalidates the source, manifests and docs from
+that recorded base to the exact merged commit; it does not publish from the PR
+head, current branch tip or a tag pushed by a developer.
 
 ## Configure the release PR App
 
@@ -76,12 +91,24 @@ as the App and creates or updates `changeset-release/main`. The standard
 Changesets PR action requires per-package changelogs, which this repository does
 not maintain. Our workflow keeps the root changelog and supplies a GitHub-asset
 focused PR body. It must not run Changesets' npm publication or default tag
-creation. App-owned canonical tag creation and publication from the merged
-release SHA are not enabled by this workflow.
+creation. The publication workflow is separate and uses a token restricted to
+Contents write and Pull requests read. Both tokens must match the configured App
+slug. Repository App secrets trust collaborators who can modify and run workflows;
+review changes to release scripts and workflows under `main` protections.
 
 ## Start publication
 
-The release workflow runs when a maintainer pushes a canonical tag:
+With `RELEASE_PUBLISH_AUTOMATION_ENABLED=true`, merging an App-owned
+`changeset-release/main` PR to `main` starts `Publish merged release`. It reads the
+PR from GitHub, verifies its author/repository/branch/merged SHA, and checks out
+that exact SHA. Only packages listed in the release record receive tags and
+releases. Unchanged package versions are not republished.
+
+The activation variable defaults to disabled. When enabled, it also disables the
+tag-triggered workflow, so the App's new tag events cannot start a second publisher.
+Both publication workflows share one non-cancelling concurrency group.
+
+Before cutover, the existing workflow runs when a maintainer pushes a canonical tag:
 `toolkit-v<version>` or `react-v<version>`. Legacy `v*` tags are historical
 references and do not trigger publication.
 
@@ -90,27 +117,55 @@ Create each tag at that exact SHA, not an interior feature-branch commit. Never
 replace an existing tag or delete a tag to rerun a release. Packages released
 together use the same merged SHA, but each tag starts its own release job.
 
-Pushing a canonical tag authorises automatic publication if all checks pass.
-The workflow has no separate environment approval. The release PR App prepares
-versions but does not create or push tags; publication still uses this explicit
-maintainer action.
+Before cutover, pushing a canonical tag authorises publication if all checks pass.
+After cutover, merging the reviewed release PR authorises publication. Neither
+workflow uses a separate environment approval.
+
+## Activate automatic publication
+
+1. Publish and verify the recovery baseline releases before enabling further
+   release preparation. Keep the defective releases, tags and assets with the
+   agreed warnings and replacement links.
+2. Merge the stacked implementation PRs in order. Configure the App and release
+   PR variables above; keep publication disabled while setting up protections.
+3. Verify required `main` checks/up-to-date protection, App-only tag creation and
+   no routine tag update/deletion bypass. Consider native release immutability.
+4. Rehearse the real App, generated PR and publication flow in an explicitly
+   authorised disposable repository, with the same permissions and tag rules.
+   Verify a paired release, a package-only release and an inspected partial-run
+   resume. Offline tests do not prove these GitHub operations or permissions.
+5. Set `RELEASE_PUBLISH_AUTOMATION_ENABLED=true`. Subsequent merged release PRs
+   start the automatic workflow; normal developers no longer push release tags.
+
+This setup does not send Slack announcements. That integration follows publication
+and must use a successfully verified complete batch, not an individual tag event.
 
 ## Automated checks and publication
 
-The workflow checks that the tag points to the checkout SHA, the commit is on
-merged `main`, the manifest agrees, and the version exceeds existing tags and
-published releases. It also requires a dated changelog entry and one explicit
-upgrade decision for that package version.
+The automatic workflow verifies the recorded Changesets plan and increasing
+versions against tags and published history, plus dated changelog entries and
+explicit upgrade decisions. It accepts its own batch's existing versions only
+for inspection; remote tags and assets still require an explicitly approved resume
+and must match the exact source and original bytes. A newer release blocks an
+older batch from resuming.
 
-It then runs lint, tests, docs checks, and staged artifact checks. It creates a
-draft GitHub release, uploads without overwriting assets, downloads the uploaded
-files and compares their SHA-256 digests with the staged files, and checks the
-remote tag again before publication. Release notes include the reviewed package
-summary and upgrade guidance, with source links pinned to the release SHA.
+It runs lint, tests and docs checks, then builds and smoke-tests every intended
+package. It saves a `release-bundle-<SHA>` Actions artifact containing canonical
+assets, SHA-pinned reviewed notes and their SHA-256 checksums. The saved bundle
+and publication-state artifacts expire after 30 days. Do not rebuild substitutes
+for an existing release if its original bundle has expired.
 
-The publisher records the SHA-256 digest of each verified uploaded asset in the
-job log. A final tag check after publication detects discrepancies; it is not a
-publication gate and cannot undo a published release.
+Only after these checks and bundle verification does it mint a short-lived App
+token. It inspects the entire remote batch, creates missing tags through the
+create-reference API, and checks each target SHA. It stages every GitHub release
+as draft, uploads without overwriting, and downloads and checks every asset before
+the first release becomes public. It verifies tags and public assets again afterward.
+
+GitHub publishes releases separately, so this is not an atomic transaction. A
+late failure can leave one package public and another in draft. Final verification
+detects discrepancies but cannot undo publication. The workflow records each
+package's status in `publication-state.json`; only a fully verified batch has
+`completed: true`.
 
 ## Validation
 
@@ -160,9 +215,8 @@ pnpm release:check-pr origin/main WORKTREE
 ```
 
 Use the actual parent branch instead of `origin/main` when testing a stacked
-feature PR. For example, this Changesets branch targets
-`origin/feature/dse-447-release-recovery` until PR #289 merges. Its review diff
-must contain only the follow-up changes. If the parent is squash-merged, rebase
+feature PR. Its review diff must contain only the follow-up changes.
+If the parent is squash-merged, rebase
 the child-only commits onto the new `origin/main` before retargeting the PR;
 retargeting alone can leave the parent's commits in the child diff.
 
@@ -205,10 +259,10 @@ validator's file scan.
 Fix validation failures before attempting publication. Never retag or overwrite a
 published release. Prepare a new version for fixes discovered after publication.
 
-An interrupted draft can resume only when existing assets match the newly staged
-bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
-it does not replace the asset. Failures reading GitHub state stop the workflow
-rather than being interpreted as an absent release.
+An interrupted automatic batch can resume only with its original saved bundle.
+A mismatch or unexpected asset stops the job for maintainer inspection; it does
+not replace the asset. Failures reading GitHub state stop the workflow rather
+than being interpreted as an absent tag or release.
 
 `Publication outcome is unknown` means the publish request failed without a
 reliable result. The release may be public even though the command failed.
@@ -216,21 +270,31 @@ reliable result. The release may be public even though the command failed.
 succeeded but the subsequent check failed. That failure may be a network problem
 or confirmed tag movement; it does not by itself prove that the assets are wrong.
 
-For either message:
+For either message, cancellation, or any partially published batch:
 
-1. Stop automatic reruns and inspect the existing GitHub release's draft/public
-   state. Record the expected SHA from the error and the verified asset digests
-   from the job log.
-2. Check the remote tag against that SHA and download the existing assets to
-   compare their SHA-256 digests. If GitHub is unreachable, wait for access before
-   deciding whether publication completed.
-3. If the release is still draft and the tag and assets match, a maintainer can
-   resume the workflow after resolving the failure. If it is public and matches,
-   record the verification result in the PR; do not rerun publication. Published
-   releases fail both the version-reuse guard and the publisher's overwrite guard.
-4. If a public release is defective, retain its tag and assets, add a prominent
+1. Inspect every intended release's draft/public state, its tag target, and the
+   expected SHA/checksums in the original `release-bundle-<SHA>` artifact.
+   `publication-state.json` and job logs help identify where the run stopped;
+   a false/missing completion marker does not prove nothing was published.
+2. Download existing assets and compare their SHA-256 digests against the bundle.
+   If GitHub is unreachable, wait before deciding whether publication completed.
+3. Resolve the failure, then dispatch `Publish merged release` from `main` with
+   the merged `release_pr` number, `allow_resume` checked, and `bundle_run_id`
+   set to the original run containing the saved verified bytes. The workflow
+   checks the producer, source identity and all checksums before minting the App
+   token. It does not rebuild the bundle. A normal rerun without explicit resume
+   stops; a missing/expired/mismatched bundle needs a reviewed recovery plan.
+4. Resume verifies already-public packages and skips them without editing notes,
+   assets or tags. It fills only missing matching draft assets and publishes only
+   the remaining drafts. If all intended releases are already public and match,
+   verification can complete without another publication request.
+5. If a public release is defective, retain its tag and assets, add a prominent
    warning, and prepare a superseding version. Never automatically redraft,
    delete, overwrite, or retag it.
+
+Before cutover, the single-package tag-triggered publisher still refuses to adopt
+an existing public release. Its draft-only resume compares the staged bytes;
+inspect published outcomes manually rather than rerunning that publisher.
 
 ## Verify the published release
 

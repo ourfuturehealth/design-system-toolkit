@@ -39,7 +39,18 @@ export function releasePRBody(plan) {
     const details = release.guidance.map(item => `${item.summary}\n\nConsumer action: ${item.action}.\n\n${item.migration}`).join('\n\n');
     return `### ${release.name} ${release.newVersion}\n\n${details}`;
   }).join('\n\n');
-  return `## Description\n\nPrepare the next package releases from reviewed changesets. Check the versions, summaries, upgrade guidance and publication date before merging. Merging this PR does not publish packages; follow the repository release process.\n\n## Release scope\n\n${scope}\n\n## Validation\n\n- Changesets release plan and generated metadata checked.\n- Release-tooling lint, tests and documentation checks passed.\n- Required PR checks must pass before merge, including the staged external-consumer artifacts.\n`;
+  return `## Description\n\nPrepare the next package releases from reviewed changesets. Check the versions, summaries, upgrade guidance and publication date before merging. Merging this PR starts automatic GitHub publication when enabled. Otherwise use the documented tag-triggered workflow.\n\n## Release scope\n\n${scope}\n\n## Validation\n\n- Changesets release plan and generated metadata checked.\n- Release-tooling lint, tests and documentation checks passed.\n- Required PR checks must pass before merge, including the staged external-consumer artifacts.\n`;
+}
+
+export function createReleaseRecord(plan, baseSha) {
+  assert(/^[a-f0-9]{40}$/.test(baseSha), 'Release plan needs an exact base SHA');
+  return {
+    schemaVersion: 1,
+    baseSha,
+    changesets: plan.changesets.map(item => item.id).sort(),
+    releases: plan.releases.map(release => ({ name: release.name, version: release.newVersion, tag: `${release.prefix}${release.newVersion}` }))
+      .sort((left, right) => left.name.localeCompare(right.name)),
+  };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

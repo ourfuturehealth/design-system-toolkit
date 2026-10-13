@@ -6,6 +6,7 @@ on:
       - ".github/workflows/release.yml"
       - ".github/workflows/release-contract.yml"
       - ".github/workflows/release-pr.yml"
+      - ".github/workflows/publish-release.yml"
       - ".github/workflows/pull-request.yml"
       - ".changeset/**"
       - "README.md"

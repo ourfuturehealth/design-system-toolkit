@@ -107,6 +107,7 @@ jobs:
           delete-branch: false
           add-paths: |
             .changeset/*.md
+            .changeset/release.json
             packages/toolkit/package.json
             packages/react-components/package.json
             pnpm-lock.yaml

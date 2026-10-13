@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { readChangesetPlan } from './changeset-plan.mjs';
+import { createReleaseRecord, readChangesetPlan } from './changeset-plan.mjs';
 import { parseChangelog, upgradeDecision } from './release-metadata.mjs';
 
 export function renderReleaseDocs(plan, changelog, guide, date) {
@@ -54,6 +54,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   } else {
     const date = args[1] || new Date().toISOString().slice(0, 10);
     const docs = renderReleaseDocs(plan, readFileSync('CHANGELOG.md', 'utf8'), readFileSync('UPGRADING.md', 'utf8'), date);
+    const record = createReleaseRecord(plan, execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim());
     // Changesets owns version arithmetic and changeset consumption. We own root docs.
     execFileSync(process.execPath, [fileURLToPath(import.meta.resolve('@changesets/cli/bin.js')), 'version'], { stdio: 'inherit' });
     for (const release of plan.releases) {
@@ -61,6 +62,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     }
     writeFileSync('CHANGELOG.md', docs.changelog);
     writeFileSync('UPGRADING.md', docs.guide);
+    writeFileSync('.changeset/release.json', `${JSON.stringify(record, null, 2)}\n`);
     process.stdout.write(`Prepared ${plan.releases.length} package releases; no tags or publication.\n`);
   }
 }

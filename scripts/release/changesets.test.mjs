@@ -40,7 +40,9 @@ function fixture(t) {
   write('.changeset/config.json', config);
   write('CHANGELOG.md', '# Changelog\n\n## Monorepo Package Releases (`toolkit-v*`, `react-v*`)\n\n### 2026-10-12\n\n#### @ourfuturehealth/toolkit 4.26.1 (`toolkit-v4.26.1`)\n\n- Historical summary.\n');
   write('UPGRADING.md', '# Upgrading guide\n\n| Version | Date | Breaking Changes | Consumer action | Migration Complexity |\n| ------- | ---- | ---------------- | --------------- | -------------------- |\n| `v4.26.1` | October 2026 | No breaking changes | No consumer action required | None |\n\n## Historical guidance\n\nKeep this guidance.\n');
-  return { directory, write, read: path => readFileSync(`${directory}/${path}`, 'utf8') };
+  const project = { directory, write, read: path => readFileSync(`${directory}/${path}`, 'utf8') };
+  initialiseGit(project);
+  return project;
 }
 
 function intent(packageName, bump, summary, action = 'No consumer action required', migration = 'Public APIs remain unchanged.') {
@@ -51,7 +53,12 @@ test('the real Changesets CLI generates independent versions and the existing ro
   const project = fixture(t);
   project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
   project.write('.changeset/react-addition.md', intent('@ourfuturehealth/react-components', 'minor', 'Add a new Header option.', 'Action required', 'Replace the old Header option with the new name.'));
+  const { base } = initialiseGit(project);
   execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  const record = JSON.parse(project.read('.changeset/release.json'));
+  assert.equal(record.baseSha, base);
+  assert.deepEqual(record.changesets, ['react-addition', 'toolkit-fix']);
+  assert.deepEqual(record.releases.map(release => release.tag), ['react-v0.27.0', 'toolkit-v4.26.2']);
   assert.equal(JSON.parse(project.read('packages/toolkit/package.json')).version, '4.26.2');
   assert.equal(JSON.parse(project.read('packages/react-components/package.json')).version, '0.27.0');
   assert.match(project.read('CHANGELOG.md'), /toolkit-v4\.26\.2[\s\S]+Fix Header colours/);
@@ -64,19 +71,23 @@ test('the real Changesets CLI generates independent versions and the existing ro
 
 const checkScript = fileURLToPath(new URL('./validate-changeset-pr.mjs', import.meta.url));
 function initialiseGit(project) {
-  const git = (...args) => execFileSync('git', args, { cwd: project.directory, encoding: 'utf8' }).trim();
-  git('init', '-b', 'main');
+  const git = (...args) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-c', 'commit.gpgsign=false', ...args], { cwd: project.directory, encoding: 'utf8' }).trim();
+  if (!existsSync(`${project.directory}/.git`)) git('init', '-b', 'main');
   git('config', 'user.email', 'release-tests@example.invalid');
   git('config', 'user.name', 'Release tests');
   git('add', '.');
-  git('commit', '-m', 'Fixture baseline');
+  git('commit', '--allow-empty', '-m', 'Fixture baseline');
   return { git, base: git('rev-parse', 'HEAD') };
 }
-function runCheck(project, base, releasePR = false) {
+function runCheck(project, base, releasePR = false, published = '') {
   // Synthetic version history must not inherit the real repository's inventory.
   const env = { ...process.env };
   delete env.PUBLISHED_RELEASE_TAGS_FILE;
-  return execFileSync(process.execPath, [checkScript, base, 'WORKTREE', ...(releasePR ? ['--release-pr'] : [])], {
+  if (releasePR === '--publication') {
+    env.PUBLISHED_RELEASE_TAGS_FILE = `${project.directory}/.git/published.txt`;
+    writeFileSync(env.PUBLISHED_RELEASE_TAGS_FILE, published);
+  }
+  return execFileSync(process.execPath, [checkScript, base, 'WORKTREE', ...(releasePR ? [typeof releasePR === 'string' ? releasePR : '--release-pr'] : [])], {
     cwd: project.directory, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], env,
   });
 }
@@ -91,6 +102,16 @@ test('a feature PR needs new release intent and cannot bump its own package vers
   assert.match(runCheck(project, base), /Changeset PR validation passed/);
   project.write('packages/toolkit/package.json', JSON.stringify({ name: '@ourfuturehealth/toolkit', version: '4.26.2' }));
   assert.throws(() => runCheck(project, base), /do not change package versions in feature PRs/);
+});
+
+test('publication can inspect its own existing batch versions but cannot resume below a newer release', t => {
+  const project = fixture(t);
+  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
+  const { base, git } = initialiseGit(project);
+  execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  git('tag', 'toolkit-v4.26.2');
+  assert.match(runCheck(project, base, '--publication', 'toolkit-v4.26.2\n'), /validation passed/);
+  assert.throws(() => runCheck(project, base, '--publication', 'toolkit-v4.26.3\n'), /must be greater than/);
 });
 
 test('a release PR must contain exactly the calculated versions and generated guidance', t => {
@@ -230,7 +251,7 @@ test('the bot PR body describes the actual version plan and GitHub publication c
   assert.match(body, /@ourfuturehealth\/toolkit 4\.26\.2/);
   assert.match(body, /Fix Header colours/);
   assert.match(body, /No consumer action required/);
-  assert.match(body, /Merging this PR does not publish packages/);
+  assert.match(body, /Merging this PR starts automatic GitHub publication when enabled/);
   assert(!body.includes('publish to npm'));
 });
 
@@ -244,4 +265,82 @@ test('feature checks use the exact PR head rather than unrelated checkout change
   const head = git('rev-parse', 'HEAD');
   project.write('packages/toolkit/package.json', JSON.stringify({ name: '@ourfuturehealth/toolkit', version: '5.0.0' }));
   assert.match(execFileSync(process.execPath, [checkScript, base, head], { cwd: project.directory, encoding: 'utf8' }), /validation passed/);
+});
+
+const mergedScript = fileURLToPath(new URL('./validate-merged-release.mjs', import.meta.url));
+function publicationFixture(t) {
+  const project = fixture(t);
+  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
+  const { git } = initialiseGit(project);
+  git('switch', '-c', 'release');
+  execFileSync(process.execPath, [script, '--date', '2026-10-12'], { cwd: project.directory });
+  git('add', '.');
+  git('commit', '-m', 'Generated release');
+  return { project, git };
+}
+function checkMerged(project, sha) {
+  const context = { schemaVersion: 1, repository: 'example/design-system', prNumber: 42, sha };
+  project.write('.git/context.json', JSON.stringify(context));
+  project.write('.git/published.txt', 'toolkit-v4.26.1\nreact-v0.26.1\n');
+  return execFileSync(process.execPath, [mergedScript, '.git/context.json', '.git/plan.json'], {
+    cwd: project.directory, encoding: 'utf8', stdio: 'pipe',
+    env: { ...process.env, PUBLISHED_RELEASE_TAGS_FILE: `${project.directory}/.git/published.txt` },
+  });
+}
+
+for (const mode of ['merge', 'squash', 'fast-forward']) {
+  test(`${mode} publication validates the exact merged release even after main advances`, t => {
+    const { project, git } = publicationFixture(t);
+    git('switch', 'main');
+    if (mode === 'merge') git('merge', '--no-ff', 'release', '-m', 'Merge reviewed release');
+    else if (mode === 'squash') {
+      git('merge', '--squash', 'release');
+      git('commit', '-m', 'Squash reviewed release');
+    } else git('merge', '--ff-only', 'release');
+    const sha = git('rev-parse', 'HEAD');
+    project.write('later-documentation.md', 'Later unrelated work.\n');
+    git('add', '.');
+    git('commit', '-m', 'Main advances after release');
+    git('update-ref', 'refs/remotes/origin/main', git('rev-parse', 'HEAD'));
+    git('checkout', '--detach', sha);
+    assert.match(checkMerged(project, sha), /Validated release PR #42/);
+    const plan = JSON.parse(project.read('.git/plan.json'));
+    assert.equal(plan.sha, sha);
+    assert.deepEqual(plan.releases.map(release => release.tag), ['toolkit-v4.26.2']);
+  });
+}
+
+test('an unmerged release branch cannot authorise publication', t => {
+  const { project, git } = publicationFixture(t);
+  git('update-ref', 'refs/remotes/origin/main', git('rev-parse', 'main'));
+  assert.throws(() => checkMerged(project, git('rev-parse', 'HEAD')), /must be on main first-parent history/);
+});
+
+test('publication rejects tampered generated release records', t => {
+  const { project, git } = publicationFixture(t);
+  const record = JSON.parse(project.read('.changeset/release.json'));
+  record.releases[0].tag = 'toolkit-v4.99.0';
+  project.write('.changeset/release.json', JSON.stringify(record));
+  git('add', '.');
+  git('commit', '-m', 'Tamper release record');
+  git('update-ref', 'refs/remotes/origin/main', git('rev-parse', 'HEAD'));
+  assert.throws(() => checkMerged(project, git('rev-parse', 'HEAD')), /Release record must match/);
+});
+
+test('feature PRs cannot edit the generated publication record', t => {
+  const project = fixture(t);
+  const { base } = initialiseGit(project);
+  project.write('.changeset/release.json', JSON.stringify({ schemaVersion: 1, baseSha: base, releases: [] }));
+  assert.throws(() => runCheck(project, base), /Only a generated release PR may change the release record/);
+});
+
+test('a future publication date blocks the merged release', t => {
+  const project = fixture(t);
+  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
+  const { git } = initialiseGit(project);
+  execFileSync(process.execPath, [script, '--date', '2099-01-01'], { cwd: project.directory });
+  git('add', '.');
+  git('commit', '-m', 'Future-dated release');
+  git('update-ref', 'refs/remotes/origin/main', git('rev-parse', 'HEAD'));
+  assert.throws(() => checkMerged(project, git('rev-parse', 'HEAD')), /Publication date cannot be in the future/);
 });

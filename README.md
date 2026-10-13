@@ -119,9 +119,11 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
    existing upgrade index. Each package keeps its own version sequence.
 3. Review that release PR, confirm the release date and run the required checks
    before merging it to `main`.
-4. Publication currently starts with canonical tags at that exact merged SHA;
-   follow [the publication steps](docs/release-process.md#start-publication).
-   Automatic App-owned publication and Slack announcements are separate work.
+4. Once automatic publication is enabled, merging the App-owned release PR
+   starts tests, artifact checks, App-owned tag creation and GitHub publication
+   from that exact merged SHA. Until cutover, use the documented tag-triggered
+   workflow. See [publication and activation](docs/release-process.md#start-publication).
+   Slack announcements are separate work.
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 
