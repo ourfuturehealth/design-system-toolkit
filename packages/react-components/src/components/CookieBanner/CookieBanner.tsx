@@ -35,6 +35,7 @@ export interface CookieBannerProps
   onReject?: React.MouseEventHandler<HTMLButtonElement>;
   acceptButtonAttributes?: CookieBannerButtonAttributes;
   rejectButtonAttributes?: CookieBannerButtonAttributes;
+  hideWithoutJavaScript?: boolean;
   children?: React.ReactNode;
   classes?: string;
   ref?: React.Ref<HTMLElement>;
@@ -112,23 +113,45 @@ export const CookieBanner = ({
   onReject,
   acceptButtonAttributes,
   rejectButtonAttributes,
+  hideWithoutJavaScript = true,
   children,
   classes = '',
   className = '',
+  hidden,
   ref,
   ...props
 }: CookieBannerProps) => {
+  const bannerRef = React.useRef<HTMLElement | null>(null);
   const generatedId = React.useId().replace(/:/g, '');
   const headingId = `ofh-cookie-banner-${generatedId}-heading`;
   const resolvedPrivacyNotice = resolveLink(privacyNotice, defaultPrivacyNotice);
   const resolvedCookiePolicy = resolveLink(cookiePolicy, defaultCookiePolicy);
+  const setBannerRef = React.useCallback(
+    (node: HTMLElement | null) => {
+      bannerRef.current = node;
+
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref],
+  );
+
+  React.useEffect(() => {
+    if (bannerRef.current && hideWithoutJavaScript) {
+      bannerRef.current.hidden = Boolean(hidden);
+    }
+  }, [hidden, hideWithoutJavaScript]);
 
   return (
     <section
       {...props}
-      ref={ref}
+      ref={setBannerRef}
       aria-labelledby={headingId}
       className={joinClasses('ofh-cookie-banner', classes, className)}
+      hidden={Boolean(hidden) || hideWithoutJavaScript}
     >
       {React.createElement(
         getHeadingTag(headingLevel, 2),

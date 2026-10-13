@@ -85,7 +85,10 @@ const meta: Meta<CookieBannerStoryArgs> = {
           <p>
             Use the default copy unless your product has approved changes. Pass
             <code>onAccept</code> and <code>onReject</code> to handle the
-            choice in your application.
+            choice in your application. The banner is hidden in server-rendered
+            HTML and revealed when React initializes it. Set
+            <code>hideWithoutJavaScript</code> to <code>false</code> only when
+            the actions work without JavaScript.
           </p>
           <Source code={defaultSource} language="tsx" />
 
@@ -155,6 +158,11 @@ const meta: Meta<CookieBannerStoryArgs> = {
       control: 'select',
       options: [1, 2, 3, 4, 5, 6],
       description: 'Semantic heading level. Defaults to 2.',
+    },
+    hideWithoutJavaScript: {
+      control: 'boolean',
+      description:
+        'Hides server-rendered HTML until React initializes the component. Defaults to true.',
     },
     essentialCookiesText: {
       control: 'text',

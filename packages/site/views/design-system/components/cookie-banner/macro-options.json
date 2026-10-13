@@ -55,6 +55,12 @@
       "description": "Trusted HTML that replaces the default body. Not recommended."
     },
     {
+      "name": "hideWithoutJavaScript",
+      "type": "boolean",
+      "required": false,
+      "description": "Hides the initial HTML until the component JavaScript initializes. Defaults to true."
+    },
+    {
       "name": "idPrefix",
       "type": "string",
       "required": false,

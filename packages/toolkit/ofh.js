@@ -8,6 +8,7 @@ import Radios from './components/radios/radios';
 import LinkSkip from './components/link-skip/link-skip';
 import AutoComplete from './components/auto-complete/auto-complete';
 import CharacterCount from './components/character-count/character-count';
+import CookieBanner from './components/cookie-banner/cookie-banner';
 
 import './polyfills';
 
@@ -22,4 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
   LinkSkip();
   AutoComplete();
   CharacterCount();
+  CookieBanner();
 });

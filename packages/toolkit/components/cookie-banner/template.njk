@@ -17,6 +17,7 @@
 {% set rejectAction = params.rejectAction if params.rejectAction else {} %}
 {% set acceptActionText = acceptAction.text if acceptAction.text else "I'm OK with analytics cookies" %}
 {% set rejectActionText = rejectAction.text if rejectAction.text else 'Do not use analytics cookies' %}
+{% set hideWithoutJavaScript = params.hideWithoutJavaScript if params.hideWithoutJavaScript is defined else true %}
 
 {%- macro externalLink(link, href, text) -%}
   {% set attributes = link.attributes if link.attributes else {} %}
@@ -40,6 +41,7 @@
 <section
   class="ofh-cookie-banner{% if params.classes %} {{ params.classes }}{% endif %}"
   aria-labelledby="{{ headingId }}"
+  {% if hideWithoutJavaScript %}data-module="ofh-cookie-banner" hidden{% endif %}
   {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
   <h{{ headingLevel }} class="ofh-cookie-banner__heading" id="{{ headingId }}">{{ heading }}</h{{ headingLevel }}>
 

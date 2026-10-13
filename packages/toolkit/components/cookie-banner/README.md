@@ -4,6 +4,10 @@
 
 Use Cookie Banner to ask a user whether the product can use analytics cookies. Render it where the product needs it. The component does not control placement, store consent, or load analytics.
 
+The banner is hidden in the initial HTML and revealed when its JavaScript initializes. This prevents users without JavaScript from seeing controls that only work with JavaScript. Include the compiled toolkit JavaScript, or import and run the initializer from the individual `cookie-banner.js` component script.
+
+Set `hideWithoutJavaScript` to `false` only when the actions have a server-side implementation that works without JavaScript.
+
 The default copy and links match the OFH design. You can override the structured content when a product has approved content changes.
 
 ## Nunjucks macro
@@ -55,6 +59,7 @@ Policy links open in a new tab by default. Each displays a launch icon and annou
 | `acceptAction` | object | Accept action with `text` and `attributes`. |
 | `rejectAction` | object | Reject action with `text` and `attributes`. |
 | `bodyHtml` | string | Trusted HTML that replaces the default body. Not recommended. |
+| `hideWithoutJavaScript` | boolean | Hides the initial HTML until the component JavaScript initializes. Defaults to `true`. |
 | `idPrefix` | string | Prefix for the heading id used by `aria-labelledby`. |
 | `classes` | string | Extra classes for the root element. |
 | `attributes` | object | Extra attributes for the root element. |
