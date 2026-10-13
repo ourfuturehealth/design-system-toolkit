@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { packages, parseChangelog, upgradeDecision, validateVersion } from './release-metadata.mjs';
+
+const [tag, sha] = process.argv.slice(2);
+assert(tag && /^[a-f0-9]{40}$/.test(sha), 'Usage: validate-tag-release.mjs <canonical-tag> <40-character-SHA>');
+const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
+const pkg = packages.find(item => tag.startsWith(item.prefix));
+assert(pkg, `Unsupported release tag: ${tag}`);
+assert.equal(git('rev-parse', 'HEAD'), sha, 'Checkout differs from the release SHA');
+assert.equal(git('rev-parse', `refs/tags/${tag}^{commit}`), sha, 'Release tag differs from the release SHA');
+git('merge-base', '--is-ancestor', sha, 'origin/main');
+assert(git('rev-list', '--first-parent', 'origin/main').split('\n').includes(sha), 'Release SHA must be on the main branch commit history, not an interior feature-branch commit');
+const manifest = JSON.parse(readFileSync(pkg.manifest, 'utf8'));
+assert.equal(manifest.name, pkg.name, 'Release package name differs from the expected package');
+assert.equal(tag, `${pkg.prefix}${manifest.version}`, 'Release tag differs from the package version');
+const tags = git('tag', '--list', `${pkg.prefix}*`).split('\n').filter(item => item && item !== tag);
+assert(process.env.PUBLISHED_RELEASE_TAGS_FILE, 'Published release inventory is required before publication');
+tags.push(...readFileSync(process.env.PUBLISHED_RELEASE_TAGS_FILE, 'utf8').split('\n').filter(item => item.startsWith(pkg.prefix)));
+validateVersion(manifest.version, tags.map(item => item.slice(pkg.prefix.length)));
+const entry = parseChangelog(readFileSync('CHANGELOG.md', 'utf8')).get(tag);
+assert(entry && entry.date !== 'Unreleased', 'Finalise the real release date in the release PR before tagging');
+assert(entry.date <= new Date().toISOString().slice(0, 10), 'Release date is in the future');
+upgradeDecision(readFileSync('UPGRADING.md', 'utf8'), pkg.name, manifest.version);
+process.stdout.write(`Verified merged main SHA, tag, version, changelog, and upgrade decision for ${tag}\n`);

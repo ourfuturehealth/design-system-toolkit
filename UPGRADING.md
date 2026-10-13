@@ -6,32 +6,95 @@ This guide provides detailed migration instructions for upgrading between versio
 
 ## Breaking Changes by Version
 
-| Version                                                 | Date          | Breaking Changes           | Migration Complexity                     |
-| ------------------------------------------------------- | ------------- | -------------------------- | ---------------------------------------- |
-| [v4.24.0 / React v0.23.0](#upgrading-to-v4240--react-v0230) | July 2026     | No breaking changes        | 🟢 Low - use the Light Hero theme where it pairs with a Light Header |
-| [v4.23.0 / React v0.22.0](#upgrading-to-v4230--react-v0220) | July 2026     | Hero macro API update      | 🟡 Medium - update old Hero `text` / `imageURL` usages before adopting the new Hero |
-| [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026     | No breaking changes        | 🟢 Low - adopt the new public Header surfaces where needed |
-| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | April 2026    | No breaking changes        | 🟢 Low - adopt the new public Search surfaces where needed |
-| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
-| [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
-| [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
-| [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
-| [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React InsetText if needed and use the refreshed toolkit inset-text APIs when relevant |
-| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
-| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React pagination if needed |
-| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React footer if needed |
-| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React summary list if needed |
-| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026    | No breaking changes        | 🟢 Low - adopt the public React details family if needed |
-| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026    | No breaking changes        | 🟢 Low - Adopt the public link family and canonical names for new usage |
-| [React v0.8.0](#upgrading-to-react-v080)                | April 2026    | React `spritePath` removal | 🟢 Low - Remove the deprecated prop      |
-| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026    | Icon naming sync           | 🟡 Medium - Search/replace icon names    |
-| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026    | No breaking changes | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
-| [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026    | Card family realignment | 🟡 Medium - API migration recommended |
-| [v4.6.0 / React v0.4.0](#upgrading-to-v460--react-v040) | March 2026    | Tag default + naming  | 🟡 Medium - Search/replace recommended |
-| [v4.5.0](#upgrading-to-v450)                            | March 2026    | Spacing and typography API changes | 🟡 Medium - Replace legacy APIs and recheck overrides |
-| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026    | Button variant naming      | 🟡 Medium - Find/replace required        |
-| [v4.1.0](#upgrading-to-v410)                            | February 2026 | Spacing scale indices      | 🟡 Medium - Index updates required       |
-| [v4.0.0](#upgrading-to-v400-monorepo-restructure)       | 2025          | Monorepo restructure       | 🔴 High - Installation & paths change    |
+This index covers migration guidance for toolkit (`v...`) and React (`React v...`).
+Each package release needs an explicit consumer-action decision. Releases share
+a row when their guidance is the same; package-only releases have separate rows.
+The version links lead to the migration sections below. Test your application
+when updating dependencies, even when no migration is required.
+
+| Version | Date | Breaking Changes | Consumer action | Migration Complexity |
+| ------- | ---- | ---------------- | --------------- | -------------------- |
+| [v4.26.1 / React v0.26.1](#release-recovery) | October 2026 | ProgressIndicator zero-progress and accessible-value corrections | Action required | 🟢 Low - replace defective package URLs and check ProgressIndicator usages |
+| [v4.26.0 / React v0.26.0](#release-recovery) | October 2026 | **DO NOT USE: defective release identities and accessible values** | Action required | 🟢 Low - replace with v4.26.1 / React v0.26.1 |
+| `v4.25.1 / React v0.24.2` | September 2026 | No breaking changes | No consumer action required | 🟢 Low - mobile Header fixes and Welsh partner logos; public APIs unchanged |
+| `React v0.24.1` | August 2026 | No breaking changes | No consumer action required | 🟢 Low - direct Next.js App Router imports and the public CommonJS entrypoint are fixed |
+| `v4.25.0 / React v0.24.0` | August 2026 | No breaking changes | No consumer action required | 🟢 Low - Cookie Banner is an opt-in addition |
+| `v4.24.2 / React v0.23.2` | July 2026 | No breaking changes | No consumer action required | 🟢 Low - selected mobile Header links retain dark text after visiting; public APIs unchanged |
+| [v4.24.1](#form-group-spacing-4241) | July 2026 | Form-group spacing correction | Action required | 🟢 Low - check form-group spacing overrides |
+| `React v0.23.1` | July 2026 | No breaking changes | No consumer action required | 🟢 Low - Header-only props are no longer forwarded to desktop anchors |
+| [v4.24.0 / React v0.23.0](#upgrading-to-v4240--react-v0230) | July 2026 | No breaking API changes | Action required | 🟢 Low - check boxed Hero media overlap; the Light Hero theme is opt-in for Light Headers |
+| [v4.23.0](#upgrading-to-v4230--react-v0220) | July 2026 | Hero macro API update | Action required | 🟡 Medium - update old Hero `text` / `imageURL` usages before adopting the new Hero |
+| [React v0.22.0](#upgrading-to-v4230--react-v0220) | July 2026 | No breaking changes | No consumer action required | 🟢 Low - public Hero and TilePattern components are opt-in additions |
+| [v4.22.0 / React v0.21.0](#upgrading-to-v4220--react-v0210) | June 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the new public Header surfaces where needed |
+| [v4.21.0 / React v0.20.0](#upgrading-to-v4210--react-v0200) | May 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the new public Search surfaces where needed |
+| [v4.20.0 / React v0.19.0](#upgrading-to-v4200--react-v0190) | May 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React ContentsList if needed and use the refreshed toolkit contents-list APIs when relevant |
+| [v4.19.0 / React v0.18.0](#upgrading-to-v4190--react-v0180) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React Breadcrumb if needed and use the refreshed toolkit breadcrumb APIs when relevant |
+| [v4.18.0 / React v0.17.0](#upgrading-to-v4180--react-v0170) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React Table if needed and use the refreshed toolkit table APIs when relevant |
+| [v4.17.0 / React v0.16.0](#upgrading-to-v4170--react-v0160) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React Image if needed and use the refreshed toolkit image APIs when relevant |
+| [v4.16.0 / React v0.15.0](#upgrading-to-v4160--react-v0150) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React InsetText if needed and use the refreshed toolkit inset-text APIs when relevant |
+| [v4.15.0 / React v0.14.0](#upgrading-to-v4150--react-v0140) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React TaskList if needed and use the refreshed toolkit task-list APIs when relevant |
+| [v4.14.0 / React v0.13.0](#upgrading-to-v4140--react-v0130) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React pagination if needed |
+| [v4.13.0 / React v0.12.0](#upgrading-to-v4130--react-v0120) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React footer if needed |
+| [v4.12.0 / React v0.11.0](#upgrading-to-v4120--react-v0110) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React summary list if needed |
+| [v4.11.0 / React v0.10.0](#upgrading-to-v4110--react-v0100) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public React details family if needed |
+| [v4.10.0 / React v0.9.0](#upgrading-to-v4100--react-v090) | April 2026 | No breaking changes | No consumer action required | 🟢 Low - adopt the public link family and canonical names for new usage |
+| [React v0.8.0](#upgrading-to-react-v080) | April 2026 | React `spritePath` removal | Action required | 🟢 Low - remove the deprecated prop |
+| [v4.9.0 / React v0.7.0](#upgrading-to-v490--react-v070) | April 2026 | Icon naming sync | Action required | 🟡 Medium - search/replace icon names |
+| [v4.8.0 / React v0.6.0](#upgrading-to-v480--react-v060) | March 2026 | No breaking changes | No consumer action required | 🟢 Low - only relevant if you adopted the earlier TextInput prototype |
+| [v4.7.0 / React v0.5.0](#upgrading-to-v470--react-v050) | March 2026 | Card family realignment (compatibility retained) | No consumer action required | 🟡 Medium - API migration recommended for new work |
+| [v4.6.0](#upgrading-to-v460--react-v040) | March 2026 | Tag default and naming changes | Action required | 🟡 Medium - check variants and migrate toolkit naming |
+| [React v0.4.0](#upgrading-to-v460--react-v040) | March 2026 | No breaking changes | No consumer action required | 🟢 Low - public Tag component is an opt-in addition |
+| [v4.5.0](#upgrading-to-v450) | March 2026 | Spacing and typography API changes | Action required | 🟡 Medium - replace legacy APIs and recheck overrides |
+| [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026 | Button variant naming | Action required | 🟡 Medium - find/replace required |
+| [v4.1.0](#upgrading-to-v410) | February 2026 | Spacing scale indices | Action required | 🟡 Medium - index updates required |
+| [v4.0.0](#upgrading-to-v400-monorepo-restructure) | 2025 | Monorepo restructure | Action required | 🔴 High - installation and paths change |
+
+React `0.25.0` was never published. Do not use it as a release baseline.
+
+<a id="release-recovery"></a>
+## Recovery from toolkit 4.26.0 / React 0.26.0
+
+**DO NOT USE toolkit 4.26.0 or React 0.26.0.** Their release artifacts cannot be
+reproduced from the current tags. Their ProgressIndicator accessible values also
+disagree with the rendered track for some inputs. The historical assets and tags
+are retained; a direct download URL remains installable despite the warning.
+
+Toolkit `4.25.1` and React `0.24.2` are earlier baselines without ProgressIndicator.
+
+To replace the defective releases with toolkit `4.26.1` and React `0.26.1`:
+
+1. Replace the defective tarball URL in your dependency manifest with the matching
+   recovery release URL. Toolkit compiled-file consumers should replace the ZIP.
+2. Regenerate your consumer lockfile with your existing package manager and verify
+   it resolves the new URL and integrity. Do not overwrite the old release asset.
+3. Build and test the consuming application, including its theme styles.
+4. Check ProgressIndicator usages. `currentStep` counts filled segments and is
+   clamped from zero to the rounded total. Zero and negative progress now show an
+   empty track with `Page 1` as the page label. Partial progress adds a fraction
+   of a segment; for example, step 2 of 8 plus 50% fills 2.5 segments and exposes
+   31.25%. Accessible values use a 0-to-100 percentage range and cap at completion.
+   Screen readers may round the spoken percentage.
+5. Recheck any custom code that reads numeric ARIA attributes or assumes the first
+   segment is filled for zero progress. Component prop names remain unchanged.
+
+Recovery tarball URLs:
+
+```json
+{
+  "dependencies": {
+    "@ourfuturehealth/toolkit": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/toolkit-v4.26.1/ourfuturehealth-toolkit-4.26.1.tgz",
+    "@ourfuturehealth/react-components": "https://github.com/ourfuturehealth/design-system-toolkit/releases/download/react-v0.26.1/ourfuturehealth-react-components-0.26.1.tgz"
+  }
+}
+```
+
+<a id="form-group-spacing-4241"></a>
+## Form-group spacing in toolkit 4.24.1
+
+Generic form groups use bottom margins of `16px` on mobile/tablet and `24px` on
+desktop. Form-group wrappers use `24px` on mobile/tablet and `32px` on desktop.
+Check layouts and remove compensating margin overrides added for the earlier
+spacing. There is no template API change.
 
 ---
 
@@ -199,7 +262,7 @@ import { Header } from '@ourfuturehealth/react-components';
 
 ## Upgrading to v4.21.0 / React v0.20.0
 
-**Released:** April 2026
+**Released:** May 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.21.0+
@@ -256,7 +319,7 @@ import { SearchInput } from '@ourfuturehealth/react-components';
 
 ## Upgrading to v4.20.0 / React v0.19.0
 
-**Released:** April 2026
+**Released:** May 2026
 **Affected packages:**
 
 - `@ourfuturehealth/toolkit` v4.20.0+

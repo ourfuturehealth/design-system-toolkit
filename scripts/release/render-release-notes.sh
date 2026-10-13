@@ -20,7 +20,7 @@ trap on_error ERR
 
 usage() {
   cat <<'EOF' >&2
-Usage: render-release-notes.sh --package <toolkit|react-components> --tag <tag> --version <version> --tarball <asset-name> [--zip <asset-name>]
+Usage: render-release-notes.sh --package <toolkit|react-components> --tag <tag> --version <version> --tarball <asset-name> [--zip <asset-name>] [--source-ref <sha>]
 EOF
 }
 
@@ -29,6 +29,7 @@ tag=''
 version=''
 tarball=''
 zip_asset=''
+source_ref=''
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -52,6 +53,10 @@ while [[ $# -gt 0 ]]; do
       zip_asset="$2"
       shift 2
       ;;
+    --source-ref)
+      source_ref="$2"
+      shift 2
+      ;;
     *)
       usage
       exit 1
@@ -69,7 +74,8 @@ log_step "Rendering release notes for ${package} ${version} (${tag})"
 log_success 'Arguments validated'
 
 repo_url='https://github.com/ourfuturehealth/design-system-toolkit'
-upgrade_guide_url="${repo_url}/blob/main/UPGRADING.md"
+source_ref=${source_ref:-$tag}
+upgrade_guide_url="${repo_url}/blob/${source_ref}/UPGRADING.md"
 react_package_manifest='packages/react-components/package.json'
 
 render_react_peer_dependencies() {
@@ -162,3 +168,5 @@ EOF
     exit 1
     ;;
 esac
+
+node scripts/release/render-release-summary.mjs "${tag}" "${source_ref}" "${package}" "${version}" "${tarball}"

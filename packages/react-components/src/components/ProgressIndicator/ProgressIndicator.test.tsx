@@ -13,13 +13,17 @@ describe('ProgressIndicator', () => {
   it.each([
     [11, 12, 11, 12],
     [10, 5, 5, 5],
-    [0, 5, 1, 5],
-    [-2, 5, 1, 5],
+    [0, 5, 0, 5],
+    [-2, 5, 0, 5],
     [1, 1, 1, 1],
     [2, 0, 1, 1],
     [2, -3, 1, 1],
     [2, 4.4, 2, 4],
     [2, 4.6, 2, 5],
+    [2, Number.NaN, 1, 1],
+    [2, Number.POSITIVE_INFINITY, 1, 1],
+    [Number.NaN, 5, 0, 5],
+    [Number.POSITIVE_INFINITY, 5, 0, 5],
   ])('derives page text, fill, and ARIA from currentStep=%s and totalSteps=%s', (
     currentStep,
     totalSteps,
@@ -30,7 +34,7 @@ describe('ProgressIndicator', () => {
       <ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} label="Personal details" />,
     );
 
-    const pageText = `Page ${expectedStep} of ${expectedTotal}`;
+    const pageText = `Page ${Math.max(expectedStep, 1)} of ${expectedTotal}`;
     const progressbar = screen.getByRole('progressbar', { name: `Personal details, ${pageText}` });
     const segments = progressbar.querySelectorAll('.ofh-progress-indicator__segment');
     const partialSegment = progressbar.querySelector('.ofh-progress-indicator__segment-progress');
@@ -39,6 +43,7 @@ describe('ProgressIndicator', () => {
     expect(screen.getAllByRole('progressbar')).toHaveLength(1);
     expect(progressbar.querySelector('.ofh-progress-indicator__header')).toHaveAttribute('aria-hidden', 'true');
     expect(segments).toHaveLength(expectedTotal);
+    expect(Number(progressbar.getAttribute('aria-valuenow'))).toBeCloseTo(expectedStep / expectedTotal * 100);
     expect(progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled')).toHaveLength(expectedStep);
     segments.forEach((segment, index) => {
       expect(segment.classList.contains('ofh-progress-indicator__segment--filled')).toBe(index < expectedStep);
@@ -86,10 +91,17 @@ describe('ProgressIndicator', () => {
     const progressbar = screen.getByRole('progressbar');
 
     expect(progressbar).toHaveAttribute('aria-valuenow', '40');
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+    expect(progressbar).toHaveAttribute('aria-valuemin', '0');
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar).toHaveAccessibleName('Progress, Page 2 of 5');
+  });
+
+  it.each([Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY])('ignores non-finite partial progress %s', (subSegmentProgress) => {
+    render(<ProgressIndicator currentStep={2} totalSteps={8} subSegmentProgress={subSegmentProgress} />);
+    const progressbar = screen.getByRole('progressbar');
+    expect(progressbar).toHaveAttribute('aria-valuenow', '25');
+    expect(progressbar.querySelector('.ofh-progress-indicator__segment-progress')).toHaveStyle({ width: '0%' });
   });
 
   it('maps the current step onto the total step count', () => {
@@ -136,7 +148,7 @@ describe('ProgressIndicator', () => {
       />,
     );
 
-    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '40.625');
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '37.5');
     expect(
       screen.getByRole('progressbar').querySelectorAll('.ofh-progress-indicator__segment--filled'),
     ).toHaveLength(3);
@@ -154,6 +166,7 @@ describe('ProgressIndicator', () => {
       />,
     );
 
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '25');
     expect(
       screen
         .getByRole('progressbar')
@@ -272,7 +285,7 @@ describe('ProgressIndicator', () => {
     expect(pageText.closest('[aria-hidden="true"]')).not.toBeNull();
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar).toHaveAttribute('aria-valuenow', '25');
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+    expect(progressbar).toHaveAttribute('aria-valuemin', '0');
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar.nextElementSibling).toBe(helper);
     expect(helper.closest('[aria-hidden="true"]')).toBeNull();
@@ -294,15 +307,15 @@ describe('ProgressIndicator', () => {
     expect(helperText.closest('[role="progressbar"], [aria-hidden="true"]')).toBeNull();
   });
 
-  it.each([-25, 0, 0.5, 1])(
-    'enforces the first step minimum for currentStep=%s',
-    (currentStep) => {
+  it.each([[-25, 0, 0], [0, 0, 0], [0.5, 6.25, 0], [1, 12.5, 1]])(
+    'supports zero and fractional progress for currentStep=%s',
+    (currentStep, percentage, filled) => {
       const totalSteps = 8;
       render(<ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />);
       const progressbar = screen.getByRole('progressbar');
 
-      expect(progressbar).toHaveAttribute('aria-valuenow', '12.5');
-      expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+      expect(progressbar).toHaveAttribute('aria-valuenow', String(percentage));
+      expect(progressbar).toHaveAttribute('aria-valuemin', '0');
       expect(progressbar).toHaveAttribute('aria-valuemax', '100');
       expect(progressbar).not.toHaveAttribute('aria-valuetext');
       expect(progressbar).toHaveAccessibleName('Progress, Page 1 of 8');
@@ -311,10 +324,10 @@ describe('ProgressIndicator', () => {
       ).toHaveLength(8);
       expect(
         progressbar.querySelectorAll('.ofh-progress-indicator__segment--filled'),
-      ).toHaveLength(1);
+      ).toHaveLength(filled);
       expect(
         progressbar.querySelector('.ofh-progress-indicator__segment-progress'),
-      ).toHaveStyle({ width: '0%' });
+      ).toHaveStyle({ width: currentStep === 0.5 ? '50%' : '0%' });
     },
   );
 
@@ -324,7 +337,7 @@ describe('ProgressIndicator', () => {
     const progressbar = screen.getByRole('progressbar');
 
     expect(progressbar).toHaveAttribute('aria-valuenow', '100');
-    expect(progressbar).toHaveAttribute('aria-valuemin', '1');
+    expect(progressbar).toHaveAttribute('aria-valuemin', '0');
     expect(progressbar).toHaveAttribute('aria-valuemax', '100');
     expect(progressbar).not.toHaveAttribute('aria-valuetext');
     expect(progressbar).toHaveAccessibleName('Progress, Page 8 of 8');
@@ -369,4 +382,3 @@ describe('ProgressIndicator', () => {
     expect(results.violations).toHaveLength(0);
   });
 });
-

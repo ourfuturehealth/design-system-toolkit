@@ -9,7 +9,10 @@ This app is intentionally configured as a standalone published-consumer example:
 - it does not use the monorepo workspace protocol
 - it exercises icon-bearing components such as `Icon`, `Select`, `Card`, and `Checkboxes`
 
-The dependency in `package.json` intentionally stays on the current published release tag. For unreleased branch validation, use the local tarball workflow below.
+The checked-in dependency is the historical React `0.7.0` teaching baseline.
+It does not establish compatibility with current releases. Release validation
+copies this app into an isolated directory, installs the staged React tarball,
+and runs lint and a production build without changing this app's manifest or lockfile.
 
 ## Install and run
 
@@ -44,6 +47,14 @@ This makes it useful as guidance for future React consumers outside the toolkit 
 For local library development, use Storybook or the React package directly.
 
 ## Testing against an unreleased local tarball
+
+Run `pnpm smoke:release-artifacts react-components --managers npm` from the
+repository root for the automated isolated consumer build. The same check runs
+before publication. To inspect a prepared tarball directly:
+
+```bash
+node scripts/release/smoke-react-consumer.mjs /absolute/path/to/ourfuturehealth-react-components-<version>.tgz
+```
 
 If you need to validate unreleased React package changes in this app:
 
