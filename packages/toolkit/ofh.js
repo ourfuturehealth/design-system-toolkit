@@ -8,11 +8,11 @@ import Radios from './components/radios/radios';
 import LinkSkip from './components/link-skip/link-skip';
 import AutoComplete from './components/auto-complete/auto-complete';
 import CharacterCount from './components/character-count/character-count';
+import CookieBanner from './components/cookie-banner/cookie-banner';
 
 import './polyfills';
 
-// Initialize components
-document.addEventListener('DOMContentLoaded', () => {
+const initialize = () => {
   Card();
   Checkboxes();
   Details();
@@ -22,4 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
   LinkSkip();
   AutoComplete();
   CharacterCount();
-});
+  CookieBanner();
+};
+
+// Initialize components
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initialize, { once: true });
+} else {
+  initialize();
+}

@@ -40,6 +40,7 @@
 <section
   class="ofh-cookie-banner{% if params.classes %} {{ params.classes }}{% endif %}"
   aria-labelledby="{{ headingId }}"
+  data-module="ofh-cookie-banner" hidden
   {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
   <h{{ headingLevel }} class="ofh-cookie-banner__heading" id="{{ headingId }}">{{ heading }}</h{{ headingLevel }}>
 

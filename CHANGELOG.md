@@ -10,6 +10,20 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-10-27
+
+#### @ourfuturehealth/toolkit 4.27.0 (`toolkit-v4.27.0`)
+
+##### Changed
+
+- Changed Cookie Banner to be hidden in the initial HTML and revealed by the toolkit JavaScript, preventing users without JavaScript from seeing controls that only work with JavaScript. The toolkit now initializes components immediately when its bundle loads after `DOMContentLoaded`.
+
+#### @ourfuturehealth/react-components 0.27.0 (`react-v0.27.0`)
+
+##### Changed
+
+- Changed `CookieBanner` to be hidden in server-rendered HTML and revealed after React initializes it, preventing users without JavaScript from seeing controls that cannot record a choice.
+
 ### 2026-10-22
 
 #### @ourfuturehealth/toolkit 4.26.3 (`toolkit-v4.26.3`)
