@@ -20,8 +20,8 @@ Before automatic publication, configure two active tag rulesets matching
 
 Keep those rules separate: an App bypass on one combined ruleset would also let
 it bypass mutation protection. During tag-triggered publication, maintainers
-still need creation permission; apply App-only creation at cutover, after the
-manual recovery releases. The workflow only creates missing references. It never
+still need creation permission; apply App-only creation at cutover. The workflow
+only creates missing references. It never
 updates or deletes tags, but its checks cannot prevent another actor moving a tag
 between checks. Administrator configuration and verification of these rulesets
 remain required; the workflow does not configure or audit them. See
@@ -78,8 +78,8 @@ against the configured slug and requests only this repository's token scope.
 PR CI selects release validation from the actual PR author's App identity and
 `main` base, not a label or a developer-chosen branch name.
 
-Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after both recovery baseline
-releases have been published and verified. The workflow otherwise stays disabled.
+Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after the current package releases
+have been published and verified. The workflow otherwise stays disabled.
 It runs on `main` pushes and can be dispatched manually on `main`; it refuses to
 prepare a new release while the current manifest versions remain unpublished.
 If new feature work merges before publication finishes, rerun preparation after
@@ -123,9 +123,8 @@ workflow uses a separate environment approval.
 
 ## Activate automatic publication
 
-1. Publish and verify the recovery baseline releases before enabling further
-   release preparation. Keep the defective releases, tags and assets with the
-   agreed warnings and replacement links.
+1. Verify the current package releases, tags, assets and version history form
+   a valid baseline before enabling release preparation.
 2. Merge the stacked implementation PRs in order. Configure the App and release
    PR variables above; keep publication disabled while setting up protections.
 3. Verify required `main` checks/up-to-date protection, App-only tag creation and
@@ -214,11 +213,7 @@ pnpm release:plan
 pnpm release:check-pr origin/main WORKTREE
 ```
 
-Use the actual parent branch instead of `origin/main` when testing a stacked
-feature PR. Its review diff must contain only the follow-up changes.
-If the parent is squash-merged, rebase
-the child-only commits onto the new `origin/main` before retargeting the PR;
-retargeting alone can leave the parent's commits in the child diff.
+For a stacked PR, use its actual base branch in place of `origin/main`.
 
 To rehearse generation without changing your feature branch, use a disposable
 checkout, add a sample changeset, run `pnpm release:version`, and inspect its
