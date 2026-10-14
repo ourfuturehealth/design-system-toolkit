@@ -25,6 +25,12 @@ when packages need different instructions. Avoid placeholders and empty changese
 Review this text as part of the feature PR: it supplies the root changelog,
 upgrade index and release notes. Do not bump package versions or add future
 release entries to `CHANGELOG.md` / `UPGRADING.md` in a feature PR.
+Include packages affected indirectly by shared styles or assets, not only the
+package containing the edited source file.
+
+The generator writes `.changeset/release.json` with the exact reviewed base SHA,
+consumed changesets and intended package versions/tags. Feature PRs must not
+change this record. It identifies the batch to publish after the release PR merges.
 
 Choose `patch` for compatible fixes, `minor` for compatible additions and `major`
 for breaking changes in stable packages. React is pre-1.0: use `minor` for breaking
