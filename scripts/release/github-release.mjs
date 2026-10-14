@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
+import { setTimeout } from 'node:timers/promises';
 
 export const gh = (...args) => execFileSync('gh', args, { encoding: 'utf8' });
 export const digest = path => createHash('sha256').update(readFileSync(path)).digest('hex');
@@ -41,14 +42,25 @@ export function githubReleaseClient(repository, sha) {
       rmSync(downloads, { recursive: true, force: true });
     }
   }
-  function stage(tag, notesPath, assets, allowPublic = false) {
+  async function stage(tag, notesPath, assets, allowPublic = false) {
     verifyRemoteTag(tag);
     let release = findRelease(tag);
     if (!release) {
       gh('release', 'create', tag, '--verify-tag', '--target', sha, '--draft', '--title', tag, '--notes-file', notesPath, '--repo', repository);
-      release = findRelease(tag);
+      // Successful draft creation can precede its visibility in the release list.
+      // Retry only successful reads with no match, never creation or publication.
+      try {
+        for (let attempt = 1; attempt <= 10; attempt += 1) {
+          release = findRelease(tag);
+          if (release) break;
+          if (attempt < 10) await setTimeout(1000);
+        }
+        assert(release, 'Release draft was not visible after 10 reads');
+      } catch (error) {
+        throw new Error(`Draft lookup failed after creation for ${tag}. The draft may already exist. `
+          + 'Inspect the existing release before resuming; do not delete, overwrite, or retag.', { cause: error });
+      }
     }
-    assert(release, 'Release draft was not found after creation');
     if (!release.draft) {
       assert(allowPublic, 'Published releases must not be overwritten');
       verifyAssets(release, assets, true);

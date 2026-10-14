@@ -8,7 +8,7 @@ import { validateBundle } from './release-bundle.mjs';
 import { resolvePublicationContext } from './resolve-publication-context.mjs';
 import { validateMergedRelease } from './validate-merged-release.mjs';
 
-export function publishReleaseBatch(plan, directory, resume, statePath) {
+export async function publishReleaseBatch(plan, directory, resume, statePath) {
   const client = githubReleaseClient(plan.repository, plan.sha);
   const state = { sha: plan.sha, repository: plan.repository, prNumber: plan.prNumber, completed: false,
     releases: plan.releases.map(release => ({ tag: release.tag, status: 'pending' })) };
@@ -58,7 +58,7 @@ export function publishReleaseBatch(plan, directory, resume, statePath) {
     const staged = [];
     for (const entry of entries) {
       active = state.releases.find(item => item.tag === entry.tag);
-      staged.push(client.stage(entry.tag, entry.notesPath, entry.assets, resume));
+      staged.push(await client.stage(entry.tag, entry.notesPath, entry.assets, resume));
       active.status = staged.at(-1).release.draft ? 'draft-verified' : 'already-public';
       save();
     }
@@ -111,5 +111,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const context = resolvePublicationContext(pull, plan.repository, process.env.RELEASE_APP_SLUG);
   assert.equal(context.sha, plan.sha, 'Batch SHA differs from the actual merged release PR');
   assert.deepEqual(validateMergedRelease(context), plan, 'Batch differs from the verified merged release plan');
-  publishReleaseBatch(plan, directory, flag === '--resume', process.env.RELEASE_BATCH_STATE);
+  await publishReleaseBatch(plan, directory, flag === '--resume', process.env.RELEASE_BATCH_STATE);
 }

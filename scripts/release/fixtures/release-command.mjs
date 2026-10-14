@@ -37,7 +37,14 @@ if (command === 'git' && args[0] === 'diff') {
   if (state.failApi) process.exit(1);
   const endpoint = args.at(-1);
   if (endpoint.endsWith('/releases')) {
-    process.stdout.write(JSON.stringify(args.includes('--slurp') ? [state.releases] : state.releases));
+    if (state.createdTag && state.failApiAfterCreate) process.exit(1);
+    let releases = state.releases;
+    if (state.remainingHiddenReads > 0) {
+      state.remainingHiddenReads -= 1;
+      save();
+      releases = releases.filter(release => release.tag_name !== state.createdTag);
+    }
+    process.stdout.write(JSON.stringify(args.includes('--slurp') ? [releases] : releases));
   } else if (endpoint.includes('/git/matching-refs/tags/')) {
     const prefix = endpoint.split('/').at(-1);
     process.stdout.write(JSON.stringify(Object.entries(state.tags || {}).filter(([tag]) => tag.startsWith(prefix))
@@ -65,6 +72,9 @@ if (command === 'git' && args[0] === 'diff') {
   switch (args[1]) {
     case 'create':
       state.releases.push({ tag_name: args[2], draft: true, assets: [] });
+      state.createdTag = args[2];
+      state.remainingHiddenReads = state.hiddenReadsAfterCreate || 0;
+      if (state.hiddenReadsTag && state.hiddenReadsTag !== args[2]) state.remainingHiddenReads = 0;
       break;
     case 'upload': {
       const content = state.corruptUpload || state.corruptTag === args[2] ? 'corrupt' : readFileSync(args[3], 'utf8');
