@@ -5,25 +5,19 @@ Packages are distributed through GitHub Releases. Toolkit supplies an installabl
 the tarball URL. Keep those filenames and the package-manager installation
 contract described in [release versioning](release-versioning-strategy.md).
 
-## Repository protections
+## Safeguards
 
-Protect `main` with reviewed PRs, required checks and the requirement for branches
-to be up to date before merging (or an equivalent merge queue). Release PR checks
-compare against their base SHA: an old green result must not authorise merging
-over newly added changesets. Do not give the release App a bypass of these rules.
+Release PR checks compare the generated files with their exact `main` base SHA.
+If `main` changes while a release PR is open, its checks must run against the new
+base before merge. The release App does not bypass normal PR review or checks.
 
-Before publishing, confirm an active GitHub tag ruleset protects `toolkit-v*` and
-`react-v*` against updates and deletion, without routine bypasses. Maintainers
-can create canonical tags for the tag-triggered workflow. The workflow's tag
-checks detect changes but cannot prevent a tag moving between a check and
-publication. These settings require administrator configuration and manual
-verification; the workflow does not configure or validate the ruleset.
-
-To protect published assets as well, an administrator can enable release
-immutability in repository Settings, under Releases. It applies to future
-releases, locks published assets and tags, and still allows edits to titles and
-notes. Attach every asset to the draft before publishing. See
-[GitHub's immutable releases guidance](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases).
+The tag-triggered publisher checks that each tag points to merged `main` and
+rechecks it during publication. These checks detect tag movement; they cannot
+prevent it. A GitHub tag ruleset is the separate preventive control for tag
+updates and deletion. Until that ruleset is active, maintainers can still move
+tags outside the workflow. [Immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases)
+protect published assets and their tags, but do not replace pre-publication tag
+protection. Titles and notes remain editable so defective releases can be warned.
 
 ## Prepare and review
 
@@ -35,7 +29,8 @@ notes. Attach every asset to the draft before publishing. See
    alongside the implementation. Complete human accessibility checks when
    changing accessible behaviour; markup checks do not prove the spoken result.
 3. Review and merge the feature PR under the repository's branch protections.
-   The release App creates or updates one release PR from the pending changesets.
+   When release PR automation is enabled, the release App creates or updates one
+   release PR from the pending changesets.
    Changesets calculates versions; `pnpm release:version` generates the root
    changelog and adds rows and migration sections to the existing upgrade index.
    It does not create per-package changelogs, tags, assets or releases.
@@ -49,35 +44,26 @@ notes. Attach every asset to the draft before publishing. See
 5. Merge the release PR normally. There is no separate environment approval.
    Before the publication workflow is automated, follow the tag steps below.
 
-## Configure the release PR App
+## Release PR automation
 
-An administrator installs a dedicated GitHub App on this repository with Contents
-and Pull requests write permissions. Do not grant it branch-protection bypass,
-administration access or permission to modify workflows. Its installation token
-allows the generated PR to trigger normal PR checks.
+The dedicated release App writes the generated files to `changeset-release/main`
+and creates or updates its PR. The App has Contents and Pull requests write
+permissions, but no branch-protection bypass or workflow administration access.
+Its short-lived installation token lets the PR trigger normal checks. PR CI
+recognises the App's author identity and `main` base, not a label or a chosen
+branch name.
 
-Configure repository variables `RELEASE_APP_CLIENT_ID`, `RELEASE_APP_SLUG`
-(without `[bot]`), and secret `RELEASE_APP_PRIVATE_KEY` through GitHub settings.
-Never commit the private key. The workflow checks the minted token's App slug
-against the configured slug and requests only this repository's token scope.
-PR CI selects release validation from the actual PR author's App identity and
-`main` base, not a label or a developer-chosen branch name.
+The repository variable `RELEASE_PR_AUTOMATION_ENABLED` controls whether this
+workflow runs. When it is not `true`, feature PRs can still record changesets,
+but no release PR is created automatically. When enabled, the workflow runs on
+`main` pushes or manual dispatch on `main`. It does not prepare another release
+while a current package version remains unpublished.
 
-Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after the current package releases
-have been published and verified. The workflow otherwise stays disabled.
-It runs on `main` pushes and can be dispatched manually on `main`; it refuses to
-prepare a new release while the current manifest versions remain unpublished.
-If new feature work merges before publication finishes, rerun preparation after
-verifying the published releases. There is no fallback to a personal token or
-the default Actions token for writing release PRs.
-
-Changesets calculates versions; a separate PR action commits the generated files
-as the App and creates or updates `changeset-release/main`. The standard
-Changesets PR action requires per-package changelogs, which this repository does
-not maintain. Our workflow keeps the root changelog and supplies a GitHub-asset
-focused PR body. It must not run Changesets' npm publication or default tag
-creation. App-owned canonical tag creation and publication from the merged
-release SHA are not enabled by this workflow.
+Changesets calculates versions; a repository script uses GitHub's API to make
+a signed App commit and create or update the PR. The standard Changesets PR
+action expects per-package changelogs, while this repository maintains one root
+changelog and an upgrade index. This workflow does not create tags, publish to
+npm, or publish GitHub releases. Those remain separate steps.
 
 ## Start publication
 
@@ -134,9 +120,8 @@ test commits and tags only inside those temporary repositories. Publication
 tests simulate GitHub commands; they do not contact GitHub or publish releases.
 
 Passing these tests does not prove GitHub permissions or live draft creation,
-upload, download, and publication. Rehearse that path in an explicitly authorised
-disposable repository before first use or after changing the publisher or its
-permissions. Never use a production release as a test.
+upload, download, and publication. That integration needs a separate rehearsal
+in an authorised disposable repository; a production release is not a test.
 
 The artifact smoke command:
 
@@ -161,13 +146,11 @@ pnpm release:check-pr origin/main WORKTREE
 
 For a stacked PR, use its actual base branch in place of `origin/main`.
 
-To rehearse generation without changing your feature branch, use a disposable
-checkout, add a sample changeset, run `pnpm release:version`, and inspect its
-manifest, changelog and upgrade index. `pnpm test:release` runs this path through
-the real Changesets CLI in temporary repositories, including checks that reject
-manual version skips and missing consumer guidance. It does not test live App
-authentication, branch commits or GitHub PR creation. Verify those in an
-authorised disposable repository before enabling the App here.
+`pnpm test:release` exercises generation through the real Changesets CLI and
+validates Git-aware rules in isolated temporary repositories. It checks manual
+version skips and missing consumer guidance. PR-creation tests replace only the
+GitHub CLI response; they do not prove live App authentication, commit signing
+or GitHub PR creation.
 
 PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
 Feature package changes need a new changeset; a previously pending changeset

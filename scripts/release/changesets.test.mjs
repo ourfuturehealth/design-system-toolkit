@@ -7,6 +7,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import semver from 'semver';
 import { parseConsumerGuidance, readChangesetPlan, releasePRBody } from './changeset-plan.mjs';
+import { generatedFileChanges } from './upsert-release-pr.mjs';
 
 test('a reviewed changeset records its summary and explicit consumer decision', () => {
   assert.deepEqual(parseConsumerGuidance('header-fix', `Fix the mobile Header link colour.
@@ -62,8 +63,19 @@ test('the real Changesets CLI generates independent versions and the existing ro
   assert(!existsSync(`${project.directory}/packages/toolkit/CHANGELOG.md`));
 });
 
+test('a breaking React changeset advances the pre-1.0 package to 1.0.0', t => {
+  const project = fixture(t);
+  project.write('.changeset/react-breaking.md', intent('@ourfuturehealth/react-components', 'major', 'Remove the old Header option.', 'Action required', 'Replace the old Header option with the new one.'));
+  execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  assert.equal(JSON.parse(project.read('packages/react-components/package.json')).version, '1.0.0');
+  assert.match(project.read('CHANGELOG.md'), /react-v1\.0\.0[\s\S]+Remove the old Header option/);
+  assert.match(project.read('UPGRADING.md'), /React v1\.0\.0[\s\S]+Replace the old Header option/);
+});
+
 const checkScript = fileURLToPath(new URL('./validate-changeset-pr.mjs', import.meta.url));
 function initialiseGit(project) {
+  // The validator reads real commits, diffs and tags, so keep each case in an
+  // isolated local repository rather than mocking Git output.
   const git = (...args) => execFileSync('git', args, { cwd: project.directory, encoding: 'utf8' }).trim();
   git('init', '-b', 'main');
   git('config', 'user.email', 'release-tests@example.invalid');
@@ -101,6 +113,19 @@ test('a release PR must contain exactly the calculated versions and generated gu
   assert.match(runCheck(project, base, true), /Changeset PR validation passed/);
   project.write('packages/toolkit/package.json', JSON.stringify({ name: '@ourfuturehealth/toolkit', version: '4.28.0' }));
   assert.throws(() => runCheck(project, base, true), /does not match the Changesets release plan/);
+});
+
+test('the App commit includes generated files and removes consumed changesets', t => {
+  const project = fixture(t);
+  project.write('pnpm-lock.yaml', 'lockfileVersion: 9.0\n');
+  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
+  initialiseGit(project);
+  execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  const changes = generatedFileChanges(project.directory);
+  assert.deepEqual(changes.deletions, [{ path: '.changeset/toolkit-fix.md' }]);
+  assert(changes.additions.some(file => file.path === 'packages/toolkit/package.json'));
+  const changelog = changes.additions.find(file => file.path === 'CHANGELOG.md');
+  assert.match(Buffer.from(changelog.contents, 'base64').toString(), /toolkit-v4\.26\.2/);
 });
 
 test('generation rejects incomplete migration guidance before changing any manifest', t => {
