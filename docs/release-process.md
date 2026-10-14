@@ -63,8 +63,8 @@ against the configured slug and requests only this repository's token scope.
 PR CI selects release validation from the actual PR author's App identity and
 `main` base, not a label or a developer-chosen branch name.
 
-Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after both recovery baseline
-releases have been published and verified. The workflow otherwise stays disabled.
+Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after the current package releases
+have been published and verified. The workflow otherwise stays disabled.
 It runs on `main` pushes and can be dispatched manually on `main`; it refuses to
 prepare a new release while the current manifest versions remain unpublished.
 If new feature work merges before publication finishes, rerun preparation after
@@ -159,12 +159,7 @@ pnpm release:plan
 pnpm release:check-pr origin/main WORKTREE
 ```
 
-Use the actual parent branch instead of `origin/main` when testing a stacked
-feature PR. For example, this Changesets branch targets
-`origin/feature/dse-447-release-recovery` until PR #289 merges. Its review diff
-must contain only the follow-up changes. If the parent is squash-merged, rebase
-the child-only commits onto the new `origin/main` before retargeting the PR;
-retargeting alone can leave the parent's commits in the child diff.
+For a stacked PR, use its actual base branch in place of `origin/main`.
 
 To rehearse generation without changing your feature branch, use a disposable
 checkout, add a sample changeset, run `pnpm release:version`, and inspect its

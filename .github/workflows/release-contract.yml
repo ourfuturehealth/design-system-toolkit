@@ -51,6 +51,9 @@ jobs:
       - name: Install Playwright browser for release-contract checks
         run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
 
+      - name: Install Playwright browser for release-contract checks
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
+
       - name: Prepare and smoke test current release artifacts
         env:
           NPM_CONFIG_REGISTRY: https://registry.npmjs.org # use default npm registry instead of cloudsmith to simulate package consumer
