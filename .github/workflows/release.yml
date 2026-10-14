@@ -6,10 +6,11 @@ on:
     tags:
       - "toolkit-v*"
       - "react-v*"
+  # Temporary recovery option. Remove when Changesets publication replaces this workflow.
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing canonical tag to publish or resume (never moved or recreated)
+        description: Existing canonical tag for temporary recovery (never moved or recreated)
         type: string
         required: true
       expected_sha:

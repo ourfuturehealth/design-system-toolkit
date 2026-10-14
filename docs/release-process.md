@@ -48,27 +48,22 @@ Pushing a canonical tag authorises automatic publication if all checks pass.
 The workflow has no separate environment approval. Changesets release PRs and
 automated tag creation are not configured.
 
-### Manual publication from an existing tag
+### Temporary manual publication
 
-Use manual publication when an existing tag needs a newer reviewed publisher.
-Rerunning the original tag-triggered run still uses the publisher from that tag.
-After merging the fix, select **Actions → Create release → Run workflow** with
-branch `main`. Supply the existing canonical tag and its exact 40-character
-merged commit SHA. Starting this workflow authorises publication; it is not a
-dry run.
+This option supports recovery publication until Changesets replaces the
+tag-triggered workflow. Remove the manual option and this section at that
+cutover; retain the draft-lookup fix in the replacement publisher.
 
-The manual path checks that the tag still points to the supplied SHA on `main`'s
-first-parent history. It checks out the original package source separately from
-the reviewed publisher. Package manifests, dependencies, builds, consumer tests,
-and release notes come from the original release commit. Only the publisher and
-source-selection logic come from the workflow commit on `main`. Both SHAs are
-recorded in the run. No tag is created, moved, or deleted.
+After merging a reviewed publisher fix, select **Actions → Create release → Run
+workflow** on `main`. Enter the existing canonical tag and its exact merged
+commit SHA. This starts real publication, not a dry run. Rerunning the original
+failed run still uses the old publisher.
 
-Before starting, confirm that the release is absent or still a draft. A draft
-must have no unexpected assets, and existing assets must match newly staged
-bytes. The workflow repeats all validation and artifact checks and refuses a
-public release. Use one run per package and verify the first release before
-starting the next.
+The workflow uses the publisher from `main` but builds and validates packages
+and release notes from the original tag's SHA. It never creates or moves tags.
+Inspect the release and assets first using [failure handling](#failure-handling).
+Published releases cannot be overwritten. Verify each package's publication
+before starting the next.
 
 ## Automated checks and publication
 
@@ -168,11 +163,10 @@ bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
 it does not replace the asset. Failures reading GitHub state stop the workflow
 rather than being interpreted as an absent release.
 
-After successful draft creation, the publisher retries an empty release-list
-lookup up to ten times, one second apart, to allow for GitHub replication lag.
-An API error stops immediately. Creation, uploads, and publication are not
-automatically retried. If lookup still fails, inspect the existing draft before
-resuming; a lookup failure does not mean creation failed.
+The publisher retries missing draft reads to allow for GitHub replication lag,
+but stops on API errors and never automatically retries creation or publication.
+If lookup still fails, inspect the draft before resuming: creation may have
+succeeded even though the lookup failed.
 
 `Publication outcome is unknown` means the publish request failed without a
 reliable result. The release may be public even though the command failed.
