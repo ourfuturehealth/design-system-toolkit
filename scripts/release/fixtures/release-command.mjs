@@ -34,7 +34,14 @@ if (command === 'git' && args[0] === 'diff') {
   if (state.failApi) process.exit(1);
   const endpoint = args.at(-1);
   if (endpoint.endsWith('/releases')) {
-    process.stdout.write(JSON.stringify(args.includes('--slurp') ? [state.releases] : state.releases));
+    if (state.created && state.failApiAfterCreate) process.exit(1);
+    let releases = state.releases;
+    if (state.created && state.hiddenReadsAfterCreate > 0) {
+      state.hiddenReadsAfterCreate -= 1;
+      save();
+      releases = [];
+    }
+    process.stdout.write(JSON.stringify(args.includes('--slurp') ? [releases] : releases));
   } else if (endpoint.includes('/releases/tags/')) {
     const tag = endpoint.split('/').at(-1);
     const release = state.releases.find(item => item.tag_name === tag && !item.draft);
@@ -50,6 +57,7 @@ if (command === 'git' && args[0] === 'diff') {
   switch (args[1]) {
     case 'create':
       state.releases.push({ tag_name: state.tag, draft: true, assets: [] });
+      state.created = true;
       break;
     case 'upload': {
       const content = state.corruptUpload ? 'corrupt' : readFileSync(args[3], 'utf8');

@@ -31,7 +31,8 @@ function runPublisher(overrides = {}) {
         PATH: `${bin}:${process.env.PATH}`,
         MOCK_RELEASE_STATE: statePath,
         GITHUB_REPOSITORY: 'example/design-system',
-        GITHUB_SHA: state.sha,
+        GITHUB_SHA: state.workflowSha || state.sha,
+        RELEASE_SHA: state.releaseSha || '',
       },
     });
     return { result, state: JSON.parse(readFileSync(statePath, 'utf8')) };
@@ -50,6 +51,20 @@ test('publisher uploads to a draft, verifies both assets, then publishes', () =>
   assert.equal(state.tagChecks, 3);
 });
 
+test('manual resume uses the original release SHA rather than the controller SHA', () => {
+  const { result, state } = runPublisher({ workflowSha: 'b'.repeat(40), releaseSha: 'a'.repeat(40) });
+  assert.equal(result.status, 0, result.stderr);
+  const creation = state.commands.find(command => command[2] === 'create');
+  assert.equal(creation[creation.indexOf('--target') + 1], state.sha);
+});
+
+test('a wrong package checkout cannot be published even when the remote tag matches', () => {
+  const { result, state } = runPublisher({ workflowSha: 'b'.repeat(40), releaseSha: 'b'.repeat(40) });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Package checkout differs from the release SHA/);
+  assert(!state.commands.some(command => command[0] === 'gh'));
+});
+
 test('new drafts are retrieved through the release list, not the published-tag endpoint', () => {
   const { result, state } = runPublisher();
   assert.equal(result.status, 0, result.stderr);
@@ -60,6 +75,37 @@ test('new drafts are retrieved through the release list, not the published-tag e
   const lookup = state.commands.findIndex((command, index) => index > creation && command[1] === 'api');
   const upload = state.commands.findIndex(command => command[2] === 'upload');
   assert(lookup > creation && lookup < upload, 'Reload the newly created draft before uploading');
+});
+
+test('a delayed draft listing retries reads without creating another release', () => {
+  const { result, state } = runPublisher({ hiddenReadsAfterCreate: 2 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(state.releases[0].draft, false);
+  assert.equal(state.commands.filter(command => command[2] === 'create').length, 1);
+  assert.equal(state.commands.filter(command => command[1] === 'api').length, 4);
+  assert.equal(state.commands.filter(command => command[2] === 'edit').length, 1);
+});
+
+test('a draft that remains invisible stops without uploading or publishing', () => {
+  const { result, state } = runPublisher({ hiddenReadsAfterCreate: 100 });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Draft lookup failed after creation/);
+  assert.match(result.stderr, /Inspect the existing release before resuming/);
+  assert.equal(state.commands.filter(command => command[1] === 'api').length, 11);
+  assert.equal(state.commands.filter(command => command[2] === 'create').length, 1);
+  assert.equal(state.releases[0].draft, true);
+  assert.equal(state.releases[0].assets.length, 0);
+  assert(!state.commands.some(command => command[2] === 'upload' || command[2] === 'edit'));
+});
+
+test('an API error after creation stops without retrying creation or publication', () => {
+  const { result, state } = runPublisher({ failApiAfterCreate: true });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Draft lookup failed after creation/);
+  assert.equal(state.commands.filter(command => command[1] === 'api').length, 2);
+  assert.equal(state.commands.filter(command => command[2] === 'create').length, 1);
+  assert.equal(state.releases[0].draft, true);
+  assert(!state.commands.some(command => command[2] === 'upload' || command[2] === 'edit'));
 });
 
 test('published releases are never overwritten', () => {
@@ -73,6 +119,14 @@ test('matching draft assets can resume without being overwritten', () => {
   const { result, state } = runPublisher({ releases: [{ tag_name: 'toolkit-v4.26.1', draft: true, assets: [{ name: 'ourfuturehealth-toolkit-4.26.1.tgz', content: 'tarball bytes' }] }] });
   assert.equal(result.status, 0, result.stderr);
   assert.equal(state.commands.filter(command => command[2] === 'upload').length, 1);
+});
+
+test('an existing empty draft resumes without recreating the release', () => {
+  const { result, state } = runPublisher({ releases: [{ tag_name: 'toolkit-v4.26.1', draft: true, assets: [] }] });
+  assert.equal(result.status, 0, result.stderr);
+  assert(!state.commands.some(command => command[2] === 'create'));
+  assert.equal(state.commands.filter(command => command[2] === 'upload').length, 2);
+  assert.equal(state.releases[0].draft, false);
 });
 
 test('corrupt assets remain unpublished', () => {

@@ -6,6 +6,16 @@ on:
     tags:
       - "toolkit-v*"
       - "react-v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing canonical tag to publish or resume (never moved or recreated)
+        type: string
+        required: true
+      expected_sha:
+        description: Exact 40-character merged commit SHA already referenced by the tag
+        type: string
+        required: true
 
 permissions:
   contents: write
@@ -17,7 +27,11 @@ concurrency:
 jobs:
   build:
     name: Create release
+    if: github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: release-source
     env:
       CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
 
@@ -27,6 +41,23 @@ jobs:
           ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
+          path: release-controller
+
+      - name: Select exact release source
+        id: release_source
+        working-directory: release-controller
+        env:
+          REQUESTED_TAG: ${{ inputs.tag }}
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: node scripts/release/resolve-release-source.mjs "$REQUESTED_TAG" "$EXPECTED_SHA"
+
+      - name: Check out original package source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.release_source.outputs.SHA }}
+          fetch-depth: 0
+          persist-credentials: false
+          path: release-source
 
       - uses: actions/setup-node@v4
         env:
@@ -51,7 +82,7 @@ jobs:
           gh auth setup-git
           git fetch origin main
           gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "${PUBLISHED_RELEASE_TAGS_FILE}"
-          node scripts/release/validate-tag-release.mjs "${GITHUB_REF_NAME}" "${GITHUB_SHA}"
+          node scripts/release/validate-tag-release.mjs "$RELEASE_TAG" "$RELEASE_SHA"
 
       - name: Run linting
         run: pnpm lint && pnpm lint:release
@@ -65,7 +96,7 @@ jobs:
       - name: Determine package from tag
         id: package_info
         run: |
-          if [[ "${GITHUB_REF_NAME}" == react-v* ]]; then
+          if [[ "$RELEASE_TAG" == react-v* ]]; then
             echo "PACKAGE=react-components" >> "$GITHUB_OUTPUT"
             echo "PACKAGE_DIR=packages/react-components" >> "$GITHUB_OUTPUT"
           else
@@ -111,7 +142,7 @@ jobs:
           TARBALL_NAME: ${{ steps.release_assets.outputs.TARBALL_NAME }}
           ZIP_NAME: ${{ steps.release_assets.outputs.ZIP_NAME }}
         run: |
-          args=(--package "$PACKAGE" --tag "$GITHUB_REF_NAME" --version "$VERSION" --tarball "$TARBALL_NAME" --source-ref "$GITHUB_SHA")
+          args=(--package "$PACKAGE" --tag "$RELEASE_TAG" --version "$VERSION" --tarball "$TARBALL_NAME" --source-ref "$RELEASE_SHA")
           if [[ "$PACKAGE" == toolkit ]]; then args+=(--zip "$ZIP_NAME"); fi
           ./scripts/release/render-release-notes.sh "${args[@]}" > "${RUNNER_TEMP}/release-notes.md"
           echo "NOTES_PATH=${RUNNER_TEMP}/release-notes.md" >> "$GITHUB_OUTPUT"
@@ -125,4 +156,4 @@ jobs:
         run: |
           assets=("$TARBALL")
           if [[ -n "$ZIP" ]]; then assets+=("$ZIP"); fi
-          node scripts/release/publish-staged-release.mjs "$GITHUB_REF_NAME" "$NOTES_PATH" "${assets[@]}"
+          node "$GITHUB_WORKSPACE/release-controller/scripts/release/publish-staged-release.mjs" "$RELEASE_TAG" "$NOTES_PATH" "${assets[@]}"
