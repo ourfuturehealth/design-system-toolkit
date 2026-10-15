@@ -19,9 +19,10 @@ This repository is organized as a monorepo containing:
 
 **Required:**
 
-- **Node.js 20.19.0+** (minimum required by Vite 7)
+- **Node.js 22.13+ (22.x), 24.x or 26+** (required by the development and
+  release tooling; Changesets and a locked dependency no longer support Node 20)
   - Recommended: **Node 24.13.1 LTS** (see [.nvmrc](.nvmrc) for nvm users)
-  - Any version >= 20.19.0 will work (e.g., 20.x, 22.x, 24.x)
+  - Node 20 and odd-numbered Node 23/25 are not supported for repository tooling.
 - **pnpm 10+** (This project uses pnpm workspaces - npm/yarn will not work correctly)
 
 **Install pnpm globally:**
@@ -111,29 +112,17 @@ You can also [install Our Future Health design system toolkit using our compiled
 This monorepo uses **independent versioning** for each package. See the detailed [Release Process documentation](/docs/release-process.md) for full instructions.
 For the background on tag naming and monorepo versioning, see [Release Versioning Strategy](/docs/release-versioning-strategy.md).
 
-**Quick summary:**
-
-1. **Update package version**: Edit the `version` field in the specific package's `package.json`:
-   - `packages/toolkit/package.json` for toolkit releases
-   - `packages/react-components/package.json` for React component releases
-
-2. **Update [CHANGELOG.md](CHANGELOG.md)**: Document what's being released
-
-3. **Commit and push**:
-
-   ```bash
-   git add packages/[package-name]/package.json CHANGELOG.md
-   git commit -m "chore([package]): bump version to X.X.X"
-   git push origin main
-   ```
-
-4. **Create and push tag**:
-   - Toolkit: `git tag -a toolkit-vX.X.X -m "Release toolkit vX.X.X" && git push origin toolkit-vX.X.X`
-   - React: `git tag -a react-vX.X.X -m "Release react vX.X.X" && git push origin react-vX.X.X`
-
-5. **Verify**: Check [GitHub Releases](https://github.com/ourfuturehealth/design-system-toolkit/releases) and test installation
-
-6. **Announce**: Post in #design-system Slack channel
+1. Run `pnpm changeset` in your feature branch. Record the affected packages,
+   bump type, reviewed summary and consumer guidance using
+   [the changeset format](.changeset/README.md). Keep package versions unchanged.
+2. Review and merge the feature PR. Once the release App is configured, it creates
+   or updates a release PR with calculated versions, the root changelog and the
+   existing upgrade index. Each package keeps its own version sequence.
+3. Review that release PR, confirm the release date and run the required checks
+   before merging it to `main`.
+4. Publication currently starts with canonical tags at that exact merged SHA;
+   follow [the publication steps](docs/release-process.md#start-publication).
+   Automatic App-owned publication and Slack announcements are separate work.
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 

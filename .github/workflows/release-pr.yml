@@ -1,0 +1,102 @@
+name: Prepare release PR
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: design-system-release-pr
+  cancel-in-progress: false
+
+jobs:
+  version:
+    name: Prepare reviewed package versions
+    if: github.ref == 'refs/heads/main' && vars.RELEASE_PR_AUTOMATION_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+        with:
+          node-version: "22.x"
+          registry-url: ${{ vars.CLOUDSMITH_NPM_URL }}
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Validate reviewed release intent
+        id: plan
+        env:
+          RELEASE_PR_BODY_FILE: ${{ runner.temp }}/release-pr-body.md
+        run: pnpm release:plan
+
+      - name: Require published baseline versions
+        if: steps.plan.outputs.has_changesets == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "${RUNNER_TEMP}/published-release-tags.txt"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          import { packages } from './scripts/release/release-metadata.mjs';
+          const published = readFileSync(`${process.env.RUNNER_TEMP}/published-release-tags.txt`, 'utf8').split('\n');
+          for (const pkg of packages) {
+            const { version } = JSON.parse(readFileSync(pkg.manifest, 'utf8'));
+            assert(published.includes(`${pkg.prefix}${version}`), `Publish and verify ${pkg.prefix}${version} before preparing another release`);
+          }
+          NODE
+
+      - name: Generate and validate release metadata
+        if: steps.plan.outputs.has_changesets == 'true'
+        env:
+          BASE_SHA: ${{ github.sha }}
+          PUBLISHED_RELEASE_TAGS_FILE: ${{ runner.temp }}/published-release-tags.txt
+        run: |
+          pnpm release:version
+          pnpm release:check-pr "$BASE_SHA" WORKTREE --release-pr
+          pnpm lint:release
+          pnpm test:release
+          pnpm docs:release-contract
+
+      - name: Create release App token
+        if: steps.plan.outputs.has_changesets == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Check release App identity
+        if: steps.plan.outputs.has_changesets == 'true'
+        env:
+          EXPECTED_SLUG: ${{ vars.RELEASE_APP_SLUG }}
+          TOKEN_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: test -n "$EXPECTED_SLUG" && test "$EXPECTED_SLUG" = "$TOKEN_SLUG"
+
+      - name: Create or update the release PR
+        if: steps.plan.outputs.has_changesets == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RELEASE_APP_SLUG: ${{ vars.RELEASE_APP_SLUG }}
+          RELEASE_PR_BODY_FILE: ${{ runner.temp }}/release-pr-body.md
+        run: node scripts/release/upsert-release-pr.mjs
