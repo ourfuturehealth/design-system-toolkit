@@ -127,10 +127,15 @@ test('publication can inspect its own existing batch versions but cannot resume 
 
 test('a release PR must contain exactly the calculated versions and generated guidance', t => {
   const project = fixture(t);
-  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
+  const changeset = intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.');
+  project.write('.changeset/toolkit-fix.md', changeset);
   const { base } = initialiseGit(project);
   execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  assert(!existsSync(`${project.directory}/.changeset/toolkit-fix.md`));
   assert.match(runCheck(project, base, true), /Changeset PR validation passed/);
+  project.write('.changeset/toolkit-fix.md', changeset);
+  assert.throws(() => runCheck(project, base, true), /must consume the pending changesets/);
+  rmSync(`${project.directory}/.changeset/toolkit-fix.md`);
   project.write('packages/toolkit/package.json', JSON.stringify({ name: '@ourfuturehealth/toolkit', version: '4.28.0' }));
   assert.throws(() => runCheck(project, base, true), /does not match the Changesets release plan/);
 });
