@@ -30,7 +30,9 @@ export function renderReleaseDocs(plan, changelog, guide, date) {
     const anchor = `release-${tag.replaceAll('.', '-')}`;
     const label = `${release.prefix === 'react-v' ? 'React ' : ''}v${release.newVersion}`;
     const action = release.guidance.some(item => item.action === 'Action required') ? 'Action required' : 'No consumer action required';
-    rows.push(`| [${label}](#${anchor}) | ${date} | See migration notes | ${action} | See linked guidance |`);
+    const breakingChanges = action === 'Action required' ? 'See migration notes' : 'No breaking changes';
+    const migration = action === 'Action required' ? 'Follow migration steps.' : 'No migration required.';
+    rows.push(`| [${label}](#${anchor}) | ${date} | ${breakingChanges} | ${action} | ${migration} |`);
     const notes = release.guidance.map(item => item.migration).join('\n\n');
     sections.push(`<a id="${anchor}"></a>\n## Upgrading to ${tag}\n\n${action}.\n\n${notes}\n`);
   }

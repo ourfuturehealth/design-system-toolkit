@@ -59,8 +59,8 @@ but no release PR is created automatically. When enabled, the workflow runs on
 `main` pushes or manual dispatch on `main`. It does not prepare another release
 while a current package version remains unpublished.
 
-Changesets calculates versions; a repository script uses GitHub's API to make
-a signed App commit and create or update the PR. The standard Changesets PR
+Changesets calculates versions; a pinned PR action uses the App token to create
+or update a signed release commit and PR. The standard Changesets PR
 action expects per-package changelogs, while this repository maintains one root
 changelog and an upgrade index. This workflow does not create tags, publish to
 npm, or publish GitHub releases. Those remain separate steps.

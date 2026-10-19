@@ -7,7 +7,6 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import semver from 'semver';
 import { parseConsumerGuidance, readChangesetPlan, releasePRBody } from './changeset-plan.mjs';
-import { generatedFileChanges } from './upsert-release-pr.mjs';
 
 test('a reviewed changeset records its summary and explicit consumer decision', () => {
   assert.deepEqual(parseConsumerGuidance('header-fix', `Fix the mobile Header link colour.
@@ -58,6 +57,8 @@ test('the real Changesets CLI generates independent versions and the existing ro
   assert.match(project.read('CHANGELOG.md'), /toolkit-v4\.26\.2[\s\S]+Fix Header colours/);
   assert.match(project.read('UPGRADING.md'), /React v0\.27\.0[\s\S]+Action required/);
   assert.match(project.read('UPGRADING.md'), /Replace the old Header option/);
+  assert.match(project.read('UPGRADING.md'), /\| \[v4\.26\.2\]\(#release-toolkit-v4-26-2\) \| 2026-10-13 \| No breaking changes \| No consumer action required \| No migration required\. \|/);
+  assert.match(project.read('UPGRADING.md'), /\| \[React v0\.27\.0\]\(#release-react-v0-27-0\) \| 2026-10-13 \| See migration notes \| Action required \| Follow migration steps\. \|/);
   assert.match(project.read('UPGRADING.md'), /Keep this guidance/);
   assert(!existsSync(`${project.directory}/.changeset/toolkit-fix.md`));
   assert(!existsSync(`${project.directory}/packages/toolkit/CHANGELOG.md`));
@@ -113,19 +114,6 @@ test('a release PR must contain exactly the calculated versions and generated gu
   assert.match(runCheck(project, base, true), /Changeset PR validation passed/);
   project.write('packages/toolkit/package.json', JSON.stringify({ name: '@ourfuturehealth/toolkit', version: '4.28.0' }));
   assert.throws(() => runCheck(project, base, true), /does not match the Changesets release plan/);
-});
-
-test('the App commit includes generated files and removes consumed changesets', t => {
-  const project = fixture(t);
-  project.write('pnpm-lock.yaml', 'lockfileVersion: 9.0\n');
-  project.write('.changeset/toolkit-fix.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix Header colours.'));
-  initialiseGit(project);
-  execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
-  const changes = generatedFileChanges(project.directory);
-  assert.deepEqual(changes.deletions, [{ path: '.changeset/toolkit-fix.md' }]);
-  assert(changes.additions.some(file => file.path === 'packages/toolkit/package.json'));
-  const changelog = changes.additions.find(file => file.path === 'CHANGELOG.md');
-  assert.match(Buffer.from(changelog.contents, 'base64').toString(), /toolkit-v4\.26\.2/);
 });
 
 test('generation rejects incomplete migration guidance before changing any manifest', t => {
