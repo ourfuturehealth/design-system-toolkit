@@ -5,221 +5,187 @@ Packages are distributed through GitHub Releases. Toolkit supplies an installabl
 the tarball URL. Keep those filenames and the package-manager installation
 contract described in [release versioning](release-versioning-strategy.md).
 
-## Safeguards
+Each public-package change begins in a feature PR with a changeset. After feature
+PRs merge, one App-owned release PR gathers their changesets, calculates independent
+package versions and updates the root `CHANGELOG.md` and `UPGRADING.md`. Those
+documents are reviewed before the release PR merges; publication does not write
+them afterward. Once automatic publication is enabled, the merge starts package
+validation, GitHub Releases and a Slack announcement for the completed batch.
 
-Release PR checks compare the generated files with their exact `main` base SHA.
-If `main` changes while a release PR is open, its checks must run against the new
-base before merge. The release App does not bypass normal PR review or checks.
+## Contributor path
 
-The tag-triggered publisher checks that each tag points to merged `main` and
-rechecks it during publication. These checks detect tag movement; they cannot
-prevent it. A GitHub tag ruleset is the separate preventive control for tag
-updates and deletion. Until that ruleset is active, maintainers can still move
-tags outside the workflow. [Immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases)
-protect published assets and their tags, but do not replace pre-publication tag
-protection. Titles and notes remain editable so defective releases can be warned.
+A contributor adds a changeset to a feature PR that changes a public package. It
+names every affected package, the intended `patch`, `minor` or `major` bump, a
+summary, a consumer-action decision and migration notes. The
+[changeset format](../.changeset/README.md) has an example and the bump rules.
+Package versions stay unchanged in feature PRs. Tests, stories, package README
+edits and repository tooling do not need a package release. A change to shared
+styles or assets may affect both packages even when only one package's files
+changed; the contributor and reviewer must account for that impact.
 
-## Prepare and review
+The `Pull request` workflow runs `release:check-pr` on feature PRs. For changes
+detected under a public package, it requires a new, valid changeset naming that
+package. An older pending changeset cannot cover new work. The check rejects
+missing or incomplete consumer guidance, direct version bumps and feature PRs
+that remove pending changesets. Its path check cannot infer indirect impact from
+files outside a package directory. CI failure blocks a merge only if repository
+rules require the check; that external setting is not established by this file.
 
-1. Include a changeset in each feature PR that changes a public package. Run
-   `pnpm changeset`, select the affected packages and bump types, then add the
-   explicit consumer decision and migration notes from
-   [the changeset format](../.changeset/README.md). Do not edit package versions.
-2. Run the validation commands below. Review the summary and consumer guidance
-   alongside the implementation. Complete human accessibility checks when
-   changing accessible behaviour; markup checks do not prove the spoken result.
-3. Review and merge the feature PR under the repository's branch protections.
-   When release PR automation is enabled, the release App creates or updates one
-   release PR from the pending changesets.
-   Changesets calculates versions; `pnpm release:version` generates the root
-   changelog and adds rows and migration sections to the existing upgrade index.
-   It does not create per-package changelogs, tags, assets or releases.
-4. Review the release PR's package versions, summaries, migration guidance and
-   planned publication date. CI requires the exact Changesets version plan and
-   reviewed guidance, plus versions above existing tags and published releases.
-   A release PR cannot include component code or unrelated changes. Update the
-   summaries in their feature changesets before generation, rather than editing
-   generated notes. If only the date changes, update all new changelog and upgrade
-   index dates together; CI regenerates the expected documents using that date.
-5. Merge the release PR normally. There is no separate environment approval.
-   Before the publication workflow is automated, follow the tag steps below.
+Reviewers check the changeset summary and consumer guidance with the code, plus
+human accessibility behaviour when it changes. The [contributor guide](../CONTRIBUTING.md)
+and PR template point to the changeset format.
 
-## Release PR automation
+## Release PR
 
-The dedicated release App writes the generated files to `changeset-release/main`
-and creates or updates its PR. The App has Contents and Pull requests write
-permissions, but no branch-protection bypass or workflow administration access.
-Its short-lived installation token lets the PR trigger normal checks. PR CI
-recognises the App's author identity and `main` base, not a label or a chosen
-branch name.
+After a feature PR merges, `Prepare release PR` runs on `main` when
+`RELEASE_PR_AUTOMATION_ENABLED=true`. It also supports manual dispatch. The
+workflow waits if either current package version has not yet been published.
+Changesets calculates the next versions and consumes the pending changesets. The
+repository generator writes dated entries in the root changelog and upgrade
+index; it does not create per-package changelogs. A SHA-pinned PR action commits
+the generated files as the dedicated release App to `changeset-release/main` and
+creates or updates one release PR. It does not publish packages or create tags.
 
-The repository variable `RELEASE_PR_AUTOMATION_ENABLED` controls whether this
-workflow runs. When it is not `true`, feature PRs can still record changesets,
-but no release PR is created automatically. When enabled, the workflow runs on
-`main` pushes or manual dispatch on `main`. It does not prepare another release
-while a current package version remains unpublished.
+The release PR contains the versioned manifests, lockfile when needed, generated
+docs and `.changeset/release.json`. That record identifies the reviewed `main`
+base SHA, consumed changesets and intended package versions and tags. CI checks
+the record, generated docs and versions against that exact base. It also checks
+versions against existing tags and published releases. Consumer code and unrelated
+changes are not allowed in the release PR. If new feature work reaches `main`
+while the release PR is open, its checks must run against the new base before
+merge. The release App has no review or branch-protection bypass.
 
-Changesets calculates versions; a pinned PR action uses the App token to create
-or update a signed release commit and PR. The standard Changesets PR
-action expects per-package changelogs, while this repository maintains one root
-changelog and an upgrade index. This workflow does not create tags, publish to
-npm, or publish GitHub releases. Those remain separate steps.
+Maintainers review the calculated versions, summaries, migration guidance and
+date before merging the release PR. A date correction changes all new changelog
+and upgrade-index entries together; CI regenerates the expected documents using
+that date. Summaries and migration steps come from feature changesets, not from
+manual edits to the generated release notes.
 
-## Start publication
+## Repository protections
 
-The release workflow runs when a maintainer pushes a canonical tag:
-`toolkit-v<version>` or `react-v<version>`. Legacy `v*` tags are historical
-references and do not trigger publication.
+The release flow depends on repository rules requiring reviewed, up-to-date PRs
+and the `Pull request` check on `main` (or an equivalent merge queue). Without
+those rules, a failing or stale check alone does not prevent a merge. The App is
+not intended to bypass these protections. GitHub rules, unlike the workflow code,
+must be verified in repository settings before activation.
 
-Check the merged commit SHA and each package manifest before creating its tag.
-Create each tag at that exact SHA, not an interior feature-branch commit. Never
-replace an existing tag or delete a tag to rerun a release. Packages released
-together use the same merged SHA, but each tag starts its own release job.
+The publisher checks that each tag points to the merged `main` commit and
+rechecks it during publication. These checks detect movement but cannot stop
+another actor moving a tag between checks. At cutover, separate admin-managed
+rulesets for `toolkit-v*` and `react-v*` provide the preventive control: one
+restricts creation to the release App; the other restricts updates and deletion
+without routine bypasses, including for the App. The rules stay separate because
+an App bypass on a combined ruleset would also permit tag mutation. Before
+cutover, maintainers need tag-creation access for the existing publisher. The
+workflows do not configure or audit the rulesets. See
+[GitHub tag rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets).
 
-Pushing a canonical tag authorises automatic publication if all checks pass.
-The workflow has no separate environment approval. The release PR App prepares
-versions but does not create or push tags; publication still uses this explicit
-maintainer action.
+GitHub release immutability is a separate repository setting. If enabled, it
+locks assets and tags of future published releases while leaving titles and
+notes editable. The publisher uploads and verifies all assets while each
+release is still a draft. See
+[GitHub's immutable releases guidance](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases).
+
+## App and activation state
+
+The dedicated release App has Contents and Pull requests write permissions on
+this repository. It has no branch-protection bypass or workflow administration
+access. Its client ID and slug come from `RELEASE_APP_CLIENT_ID` and
+`RELEASE_APP_SLUG`; its private key is held in the `RELEASE_APP_PRIVATE_KEY`
+Actions secret. The workflows check that the minted token belongs to the
+configured App and scope it to this repository. Release PR CI identifies the App
+by its author identity and `main` base, not by a label or branch name. The
+repository's normal review and checks still apply.
+
+The workflows start only when their repository variables are `true`. The intended
+cutover keeps those flags unset until the production App, branch and tag rules,
+published baseline, and Slack destination are ready; the flags do not verify
+those external settings. While `RELEASE_PR_AUTOMATION_ENABLED` is not `true`,
+feature PRs can collect changesets without an automatic release PR.
+`RELEASE_PUBLISH_AUTOMATION_ENABLED` separately controls publication after a
+release PR merges. The two workflows do not use Changesets' npm publishing or
+default tag commands; packages are distributed as
+GitHub release assets. The App credential is available to trusted workflows on
+`main`, so changes to those workflows and release scripts need normal PR review.
+
+## Publication before and after cutover
+
+Before automatic publication is enabled, merging the release PR leaves the
+generated changelog, upgrade index and versions on `main` but does not publish
+them. A maintainer checks the merged SHA and package manifests, then pushes a
+canonical `toolkit-v<version>` or `react-v<version>` tag at that SHA. Each tag
+starts the existing single-package publisher. Legacy `v*` tags are historical
+and do not trigger it. Packages released together use the same merged SHA, but
+each tag has its own publication run.
+
+With `RELEASE_PUBLISH_AUTOMATION_ENABLED=true`, the tag-triggered publisher is
+disabled. Merging a reviewed, App-owned `changeset-release/main` PR starts
+`Publish merged release` instead. It verifies the PR's author, repository, branch
+and actual merged SHA, including merge or squash commits, then checks out that
+commit. It revalidates the release record, manifests and generated docs from
+the recorded base through the merge. Only the packages in the record get tags
+and releases; unchanged package versions are not republished. Both publishers
+share a non-cancelling concurrency group. Neither has a separate environment
+approval. A reviewed release-PR merge is the publication decision after cutover.
+
+Production cutover depends on a published baseline, the dedicated App, required
+`main` checks, tag protections and the Slack webhook destination. The sandbox
+rehearsal exercised the App, paired and package-only releases, inspected resume
+and announcements, but production configuration still needs administrator
+verification. Local tests alone do not establish GitHub or Slack permissions.
 
 ## Automated checks and publication
 
-The workflow checks that the tag points to the checkout SHA, the commit is on
-merged `main`, the manifest agrees, and the version exceeds existing tags and
-published releases. It also requires a dated changelog entry and one explicit
-upgrade decision for that package version.
+The automatic workflow verifies the recorded Changesets plan and increasing
+versions against tags and published history, plus dated changelog entries and
+explicit upgrade decisions. It accepts its own batch's existing versions only
+for inspection; remote tags and assets still require an explicitly approved resume
+and must match the exact source and original bytes. A newer release blocks an
+older batch from resuming.
 
-It then runs lint, tests, docs checks, and staged artifact checks. It creates a
-draft GitHub release, uploads without overwriting assets, downloads the uploaded
-files and compares their SHA-256 digests with the staged files, and checks the
-remote tag again before publication. Release notes include the reviewed package
-summary and upgrade guidance, with source links pinned to the release SHA.
+It runs lint, tests and docs checks, then builds and smoke-tests every intended
+package. It saves a `release-bundle-<SHA>` Actions artifact containing canonical
+assets, SHA-pinned reviewed notes and their SHA-256 checksums. The saved bundle
+and publication-state artifacts expire after 30 days. Do not rebuild substitutes
+for an existing release if its original bundle has expired.
 
-The publisher records the SHA-256 digest of each verified uploaded asset in the
-job log. A final tag check after publication detects discrepancies; it is not a
-publication gate and cannot undo a published release.
+Only after these checks and bundle verification does it mint a short-lived App
+token. It inspects the entire remote batch, creates missing tags through the
+create-reference API, and checks each target SHA. It stages every GitHub release
+as draft, uploads without overwriting, and downloads and checks every asset before
+the first release becomes public. It verifies tags and public assets again afterward.
 
-## Validation
+GitHub publishes releases separately, so this is not an atomic transaction. A
+late failure can leave one package public and another in draft. Final verification
+detects discrepancies but cannot undo publication. The workflow records each
+package's status in `publication-state.json`; only a fully verified batch has
+`completed: true`.
 
-Install with the pinned package manager and run:
+## Slack announcement
 
-```bash
-pnpm install --frozen-lockfile
-pnpm lint
-pnpm lint:release
-pnpm test
-pnpm test:release
-pnpm build
-pnpm docs:release-contract
-pnpm --filter=@ourfuturehealth/react-components exec playwright install chromium
-NPM_CONFIG_REGISTRY=https://registry.npmjs.org pnpm smoke:release-artifacts
-```
+After a successful automatic publication run, `Announce verified release in
+Slack` reads its completed `publication-state.json` artifact. It rechecks the
+merged release SHA, package manifests, public tags and releases, then reads the
+summaries from that SHA's changelog. One message covers the verified batch, not
+each tag separately. The heading begins with 📣.
 
-`pnpm test:release` tests metadata failures and release-SHA eligibility using
-both command fixtures and real temporary Git repositories. It creates local
-test commits and tags only inside those temporary repositories. Publication
-tests simulate GitHub commands; they do not contact GitHub or publish releases.
+The message text is sent as `announcement`. Separate fields carry
+`release_type` (`toolkit`, `react` or `both`) and the changelog, upgrade-guide,
+toolkit-release and React-release URLs. The Slack workflow renders those URLs
+with short link labels. For a package-only release, the unused package URL points
+to the repository's releases page. The destination is set by the
+`SLACK_RELEASE_WORKFLOW_WEBHOOK_URL` Actions secret, not by a URL in the repo.
 
-Passing these tests does not prove GitHub permissions or live draft creation,
-upload, download, and publication. That integration needs a separate rehearsal
-in an authorised disposable repository; a production release is not a test.
+The announcement is downstream of publication: a Slack failure does not roll
+back a GitHub release. The workflow saves an acceptance, rejection or unknown
+submission state without recording the webhook URL or message. An uncertain
+outcome needs channel inspection before another attempt. Manual dispatch can
+announce an earlier verified publication run only with its run ID and an
+explicit inspection confirmation.
 
-The artifact smoke command:
+## Operational checks and recovery
 
-- Builds and packs each package into a temporary staging directory outside its tree.
-- Checks the name and version inside each tarball against its manifest.
-- Installs and exercises tarballs through Yarn 1, npm, and pnpm using the public registry.
-- Extracts the toolkit ZIP, checks CSS/JS/assets and local CSS references, and
-  tests compiled styles and clickable-card JavaScript in Chromium. The current
-  bundle uses a font stack and does not embed font files.
-- Copies the React consumer example into an isolated directory, substitutes the
-  staged tarball while preserving other locked dependencies, and runs lint and a
-  production application build.
-
-For faster local iteration:
-
-```bash
-./scripts/release/smoke-current-release-artifacts.sh toolkit --managers npm
-./scripts/release/smoke-current-release-artifacts.sh react-components --managers npm
-pnpm release:plan
-pnpm release:check-pr origin/main WORKTREE
-```
-
-For a stacked PR, use its actual base branch in place of `origin/main`.
-
-`pnpm test:release` exercises generation through the real Changesets CLI and
-validates Git-aware rules in isolated temporary repositories. It checks manual
-version skips and missing consumer guidance. PR-creation tests replace only the
-GitHub CLI response; they do not prove live App authentication, commit signing
-or GitHub PR creation.
-
-PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
-Feature package changes need a new changeset; a previously pending changeset
-cannot cover new work. Test, Storybook, and package README-only changes are
-excluded. Generated release PRs need the calculated versions, root changelog and
-upgrade guidance, without component-code changes.
-
-## Documentation requirements
-
-Keep one root changelog. Each release has a unique, nonempty package/version/tag
-section, ordered by decreasing semantic version. Dated sections must descend.
-Do not invent releases for intermediate manifest values that were never published.
-
-Every version being released must appear once in the version index in
-`UPGRADING.md`, with a `Consumer action` decision of `No consumer action required`
-or `Action required`. Toolkit and React can share a row when their guidance is
-the same. Use separate rows for package-only releases or different upgrade
-decisions. An actionable row must link to a migration section through its version
-or guidance cell. The target can be an explicit HTML anchor or a Markdown heading.
-
-`pnpm docs:release-contract` scans tracked and new non-ignored Markdown, shell, and workflow files for
-known invalid installation guidance, then renders the current release notes to
-check their tarball URLs. `CHANGELOG.md` is excluded from the install-string scan
-because it preserves historical entries; release metadata validates its structure
-separately. If consumer documentation moves to another file type, update the
-validator's file scan.
-
-## Failure handling
-
-Fix validation failures before attempting publication. Never retag or overwrite a
-published release. Prepare a new version for fixes discovered after publication.
-
-An interrupted draft can resume only when existing assets match the newly staged
-bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
-it does not replace the asset. Failures reading GitHub state stop the workflow
-rather than being interpreted as an absent release.
-
-`Publication outcome is unknown` means the publish request failed without a
-reliable result. The release may be public even though the command failed.
-`Publication completed ... final verification failed` means the publish command
-succeeded but the subsequent check failed. That failure may be a network problem
-or confirmed tag movement; it does not by itself prove that the assets are wrong.
-
-For either message:
-
-1. Stop automatic reruns and inspect the existing GitHub release's draft/public
-   state. Record the expected SHA from the error and the verified asset digests
-   from the job log.
-2. Check the remote tag against that SHA and download the existing assets to
-   compare their SHA-256 digests. If GitHub is unreachable, wait for access before
-   deciding whether publication completed.
-3. If the release is still draft and the tag and assets match, a maintainer can
-   resume the workflow after resolving the failure. If it is public and matches,
-   record the verification result in the PR; do not rerun publication. Published
-   releases fail both the version-reuse guard and the publisher's overwrite guard.
-4. If a public release is defective, retain its tag and assets, add a prominent
-   warning, and prepare a superseding version. Never automatically redraft,
-   delete, overwrite, or retag it.
-
-## Verify the published release
-
-Confirm each tag still resolves to the recorded merged SHA, the GitHub release
-contains the expected assets, and its notes link to the correct installation URL
-and SHA-pinned changelog and upgrade guidance. Install from the published tarball
-URL in a consumer application and build it; toolkit ZIP consumers should also
-check the published ZIP.
-
-For a release that replaces a defective version, retain the old tags and assets.
-Prepend a prominent `SUPERSEDED / DO NOT USE` warning to the old release's title
-and notes, with links to its published replacement and migration guidance.
-Before a replacement is published, use `DO NOT USE` without claiming it is
-available. A warning cannot prevent installation from a retained download URL.
+Local validation commands, the generated-document contract, inspected recovery,
+and post-publication checks are in [release operations](release-operations.md).
+The workflows perform the routine checks and asset verification; maintainers
+handle uncertain publication outcomes and consumer smoke checks.

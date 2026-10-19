@@ -73,7 +73,12 @@ current_step='validating render arguments'
 log_step "Rendering release notes for ${package} ${version} (${tag})"
 log_success 'Arguments validated'
 
-repo_url='https://github.com/ourfuturehealth/design-system-toolkit'
+repository=${GITHUB_REPOSITORY:-ourfuturehealth/design-system-toolkit}
+if [[ ! "$repository" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*$ ]]; then
+  echo 'Invalid release repository: expected owner/name.' >&2
+  exit 1
+fi
+repo_url="https://github.com/${repository}"
 source_ref=${source_ref:-$tag}
 upgrade_guide_url="${repo_url}/blob/${source_ref}/UPGRADING.md"
 react_package_manifest='packages/react-components/package.json'
