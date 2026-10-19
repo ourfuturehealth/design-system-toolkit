@@ -19,7 +19,8 @@ This repository is organized as a monorepo containing:
 
 **Required:**
 
-- **Node.js 22.13+ (22.x), 24.x or 26+** (required by the release tooling)
+- **Node.js 22.13+ (22.x), 24.x or 26+** (required by the development and
+  release tooling; Changesets and a locked dependency no longer support Node 20)
   - Recommended: **Node 24.13.1 LTS** (see [.nvmrc](.nvmrc) for nvm users)
   - Node 20 and odd-numbered Node 23/25 are not supported for repository tooling.
 - **pnpm 10+** (This project uses pnpm workspaces - npm/yarn will not work correctly)
@@ -123,7 +124,8 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
    starts tests, artifact checks, App-owned tag creation and GitHub publication
    from that exact merged SHA. Until cutover, use the documented tag-triggered
    workflow. See [publication and activation](docs/release-process.md#start-publication).
-   Slack announcements are separate work.
+   After a fully verified batch, the Slack announcement workflow posts one
+   combined message when its webhook secret and channel workflow are configured.
 
 For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
 

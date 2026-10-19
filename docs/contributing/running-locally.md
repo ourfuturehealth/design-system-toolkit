@@ -5,7 +5,8 @@
 To run Our Future Health design system toolkit locally you'll need to:
 
 - [Set up git](https://help.github.com/articles/set-up-git/)
-- **Node.js 22.13+ (22.x), 24.x or 26+** (recommended: Node 24.13.1 LTS - see [.nvmrc](../../.nvmrc))
+- **Node.js 22.13+ (22.x), 24.x or 26+** (required by Changesets release tooling;
+  recommended: Node 24.13.1 LTS - see [.nvmrc](../../.nvmrc))
 - **pnpm 10+** (required - this project uses pnpm workspaces)
 
 > Type `git --version` to check if git is installed. This should print a version number like "git version 2.39.0".

@@ -64,9 +64,20 @@ test('the real Changesets CLI generates independent versions and the existing ro
   assert.match(project.read('CHANGELOG.md'), /toolkit-v4\.26\.2[\s\S]+Fix Header colours/);
   assert.match(project.read('UPGRADING.md'), /React v0\.27\.0[\s\S]+Action required/);
   assert.match(project.read('UPGRADING.md'), /Replace the old Header option/);
+  assert.match(project.read('UPGRADING.md'), /\| \[v4\.26\.2\]\(#release-toolkit-v4-26-2\) \| 2026-10-13 \| No breaking changes \| No consumer action required \| No migration required\. \|/);
+  assert.match(project.read('UPGRADING.md'), /\| \[React v0\.27\.0\]\(#release-react-v0-27-0\) \| 2026-10-13 \| See migration notes \| Action required \| Follow migration steps\. \|/);
   assert.match(project.read('UPGRADING.md'), /Keep this guidance/);
   assert(!existsSync(`${project.directory}/.changeset/toolkit-fix.md`));
   assert(!existsSync(`${project.directory}/packages/toolkit/CHANGELOG.md`));
+});
+
+test('a breaking React changeset advances the pre-1.0 package to 1.0.0', t => {
+  const project = fixture(t);
+  project.write('.changeset/react-breaking.md', intent('@ourfuturehealth/react-components', 'major', 'Remove the old Header option.', 'Action required', 'Replace the old Header option with the new one.'));
+  execFileSync(process.execPath, [script, '--date', '2026-10-13'], { cwd: project.directory });
+  assert.equal(JSON.parse(project.read('packages/react-components/package.json')).version, '1.0.0');
+  assert.match(project.read('CHANGELOG.md'), /react-v1\.0\.0[\s\S]+Remove the old Header option/);
+  assert.match(project.read('UPGRADING.md'), /React v1\.0\.0[\s\S]+Replace the old Header option/);
 });
 
 const checkScript = fileURLToPath(new URL('./validate-changeset-pr.mjs', import.meta.url));

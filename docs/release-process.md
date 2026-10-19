@@ -5,12 +5,15 @@ Packages are distributed through GitHub Releases. Toolkit supplies an installabl
 the tarball URL. Keep those filenames and the package-manager installation
 contract described in [release versioning](release-versioning-strategy.md).
 
-## Repository protections
+## Safeguards
 
-Protect `main` with reviewed PRs, required checks and the requirement for branches
-to be up to date before merging (or an equivalent merge queue). Release PR checks
-compare against their base SHA: an old green result must not authorise merging
-over newly added changesets. Do not give the release App a bypass of these rules.
+Protect `main` with reviewed PRs, required checks and an up-to-date branch
+requirement (or an equivalent merge queue). An old green check must not authorise
+merging over newly added changesets. Do not give the release App a bypass.
+
+Release PR checks compare the generated files with their exact `main` base SHA.
+If `main` changes while a release PR is open, its checks must run against the new
+base before merge. The release App does not bypass normal PR review or checks.
 
 Before automatic publication, configure two active tag rulesets matching
 `toolkit-v*` and `react-v*`:
@@ -43,7 +46,8 @@ notes. Attach every asset to the draft before publishing. See
    alongside the implementation. Complete human accessibility checks when
    changing accessible behaviour; markup checks do not prove the spoken result.
 3. Review and merge the feature PR under the repository's branch protections.
-   The release App creates or updates one release PR from the pending changesets.
+   When release PR automation is enabled, the release App creates or updates one
+   release PR from the pending changesets.
    Changesets calculates versions; `pnpm release:version` generates the root
    changelog and adds rows and migration sections to the existing upgrade index.
    It does not create per-package changelogs, tags, assets or releases.
@@ -64,19 +68,25 @@ the calculated plan. Publication revalidates the source, manifests and docs from
 that recorded base to the exact merged commit; it does not publish from the PR
 head, current branch tip or a tag pushed by a developer.
 
-## Configure the release PR App
+## Release PR automation
 
-An administrator installs a dedicated GitHub App on this repository with Contents
-and Pull requests write permissions. Do not grant it branch-protection bypass,
-administration access or permission to modify workflows. Its installation token
-allows the generated PR to trigger normal PR checks.
+The dedicated release App writes the generated files to `changeset-release/main`
+and creates or updates its PR. The App has Contents and Pull requests write
+permissions, but no branch-protection bypass or workflow administration access.
+Its short-lived installation token lets the PR trigger normal checks. PR CI
+recognises the App's author identity and `main` base, not a label or a chosen
+branch name.
 
-Configure repository variables `RELEASE_APP_CLIENT_ID`, `RELEASE_APP_SLUG`
-(without `[bot]`), and secret `RELEASE_APP_PRIVATE_KEY` through GitHub settings.
+Configure repository variables `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_SLUG`
+(without `[bot]`), plus secret `RELEASE_APP_PRIVATE_KEY`, in GitHub settings.
 Never commit the private key. The workflow checks the minted token's App slug
-against the configured slug and requests only this repository's token scope.
-PR CI selects release validation from the actual PR author's App identity and
-`main` base, not a label or a developer-chosen branch name.
+and requests access only to this repository.
+
+The repository variable `RELEASE_PR_AUTOMATION_ENABLED` controls whether this
+workflow runs. When it is not `true`, feature PRs can still record changesets,
+but no release PR is created automatically. When enabled, the workflow runs on
+`main` pushes or manual dispatch on `main`. It does not prepare another release
+while a current package version remains unpublished.
 
 Set `RELEASE_PR_AUTOMATION_ENABLED=true` only after the current package releases
 have been published and verified. The workflow otherwise stays disabled.
@@ -86,7 +96,7 @@ If new feature work merges before publication finishes, rerun preparation after
 verifying the published releases. There is no fallback to a personal token or
 the default Actions token for writing release PRs.
 
-Changesets calculates versions; a separate PR action commits the generated files
+Changesets calculates versions; a SHA-pinned PR action commits the generated files
 as the App and creates or updates `changeset-release/main`. The standard
 Changesets PR action requires per-package changelogs, which this repository does
 not maintain. Our workflow keeps the root changelog and supplies a GitHub-asset
@@ -136,8 +146,22 @@ workflow uses a separate environment approval.
 5. Set `RELEASE_PUBLISH_AUTOMATION_ENABLED=true`. Subsequent merged release PRs
    start the automatic workflow; normal developers no longer push release tags.
 
-This setup does not send Slack announcements. That integration follows publication
-and must use a successfully verified complete batch, not an individual tag event.
+`Announce verified release in Slack` follows a successful automatic publication
+and sends one message for the verified batch. It reads the publisher's completed
+`publication-state.json` artifact, rechecks the merged release SHA and public
+tags, and uses that SHA's changelog. It does not announce individual tag events.
+The webhook URL stays in the `SLACK_RELEASE_WORKFLOW_WEBHOOK_URL` Actions secret.
+The Slack workflow trigger must define `announcement`, `release_type` (`toolkit`,
+`react`, or `both`), `changelog_url`, `upgrading_url`, `toolkit_release_url`, and
+`react_release_url`. All six fields are sent for every batch. For a package-only
+release, the unused release URL points to the repository's releases page. The
+announcement is plain text; the Slack workflow applies labels to the URL fields.
+The heading starts with 📣. Keep any `[TEST ONLY]` marker in deliberate test
+messages to a private channel, not in automatic production announcements.
+Slack failure does not change publication status. Do not blindly rerun the
+announcement: check the release channel and announcement-state artifact first.
+For an earlier verified publication, manually dispatch the announcement workflow
+with the publication run ID and the inspection confirmation.
 
 ## Automated checks and publication
 
@@ -188,9 +212,8 @@ test commits and tags only inside those temporary repositories. Publication
 tests simulate GitHub commands; they do not contact GitHub or publish releases.
 
 Passing these tests does not prove GitHub permissions or live draft creation,
-upload, download, and publication. Rehearse that path in an explicitly authorised
-disposable repository before first use or after changing the publisher or its
-permissions. Never use a production release as a test.
+upload, download, and publication. That integration needs a separate rehearsal
+in an authorised disposable repository; a production release is not a test.
 
 The artifact smoke command:
 
@@ -215,13 +238,11 @@ pnpm release:check-pr origin/main WORKTREE
 
 For a stacked PR, use its actual base branch in place of `origin/main`.
 
-To rehearse generation without changing your feature branch, use a disposable
-checkout, add a sample changeset, run `pnpm release:version`, and inspect its
-manifest, changelog and upgrade index. `pnpm test:release` runs this path through
-the real Changesets CLI in temporary repositories, including checks that reject
-manual version skips and missing consumer guidance. It does not test live App
-authentication, branch commits or GitHub PR creation. Verify those in an
-authorised disposable repository before enabling the App here.
+`pnpm test:release` exercises generation through the real Changesets CLI and
+validates Git-aware rules in isolated temporary repositories. It checks manual
+version skips and missing consumer guidance. Announcement tests use a synthetic
+webhook endpoint and do not deliver to Slack. Local tests do not prove live App
+authentication, commit signing, GitHub PR creation or webhook delivery.
 
 PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
 Feature package changes need a new changeset; a previously pending changeset

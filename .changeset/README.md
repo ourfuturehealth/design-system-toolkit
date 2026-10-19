@@ -33,9 +33,9 @@ consumed changesets and intended package versions/tags. Feature PRs must not
 change this record. It identifies the batch to publish after the release PR merges.
 
 Choose `patch` for compatible fixes, `minor` for compatible additions and `major`
-for breaking changes in stable packages. React is pre-1.0: use `minor` for breaking
-API changes and explain the migration. Changesets uses normal semver arithmetic,
-so a React minor changeset after `0.26.1` produces `0.27.0`, not `1.0.0`.
+for breaking API changes in either package. This applies while React is pre-1.0:
+a major changeset after `0.26.1` produces `1.0.0`. Describe the migration in the
+changeset before proposing a breaking release.
 
 Tests, stories and package README-only edits do not require a release. Public
 package source, styles, templates, assets and manifest changes do. Repository
