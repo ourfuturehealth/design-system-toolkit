@@ -10,6 +10,20 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-10-22
+
+#### @ourfuturehealth/toolkit 4.26.2 (`toolkit-v4.26.2`)
+
+##### Added
+
+- Added `openInNewWindow` boolean prop to the Card component to support opening links in a new tab, with `rel="noopener noreferrer"` applied automatically.
+
+#### @ourfuturehealth/react-components 0.26.2 (`react-v0.26.2`)
+
+##### Added
+
+- Added `openInNewWindow` boolean prop to the `Card` component to support opening links in a new tab, with `rel="noopener noreferrer"` applied automatically.
+
 ### 2026-10-13
 
 #### @ourfuturehealth/toolkit 4.26.1 (`toolkit-v4.26.1`)
