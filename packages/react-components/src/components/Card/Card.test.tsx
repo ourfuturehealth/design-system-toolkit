@@ -46,24 +46,75 @@ describe('Card', () => {
 
   it('proxies clicks from the card surface to the primary link', async () => {
     const user = userEvent.setup();
+    const cardClick = vi.fn();
+    const parentClick = vi.fn();
 
     render(
-      <Card
-        variant="clickable"
-        href="#card-surface"
-        heading="Clickable heading"
-        description="Clickable description"
-      />,
+      <div onClick={parentClick}>
+        <Card
+          variant="clickable"
+          href="#card-surface"
+          heading="Clickable heading"
+          description="Clickable description"
+          onClick={cardClick}
+        />
+      </div>,
     );
 
-    const card = document.querySelector('.ofh-card');
     const link = screen.getByRole('link', { name: 'Clickable heading' });
     const handleClick = vi.fn((event: Event) => event.preventDefault());
 
     link.addEventListener('click', handleClick);
-    await user.click(card as HTMLElement);
+    await user.click(screen.getByText('Clickable description'));
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(cardClick).toHaveBeenCalledTimes(1);
+    expect(parentClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClick once when the primary link is clicked directly', async () => {
+    const user = userEvent.setup();
+    const cardClick = vi.fn();
+
+    render(
+      <Card
+        variant="clickable"
+        href="#primary-link"
+        heading="Clickable heading"
+        onClick={cardClick}
+      />,
+    );
+
+    const link = screen.getByRole('link', { name: 'Clickable heading' });
+    link.addEventListener('click', (event) => event.preventDefault());
+    await user.click(link);
+
+    expect(cardClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not forward a surface click when onClick prevents default', async () => {
+    const user = userEvent.setup();
+    const cardClick = vi.fn((event: React.MouseEvent<HTMLDivElement>) =>
+      event.preventDefault(),
+    );
+
+    render(
+      <Card
+        variant="clickable"
+        href="#primary-link"
+        heading="Clickable heading"
+        description="Clickable description"
+        onClick={cardClick}
+      />,
+    );
+
+    const link = screen.getByRole('link', { name: 'Clickable heading' });
+    const linkClick = vi.fn((event: Event) => event.preventDefault());
+    link.addEventListener('click', linkClick);
+    await user.click(screen.getByText('Clickable description'));
+
+    expect(cardClick).toHaveBeenCalledTimes(1);
+    expect(linkClick).not.toHaveBeenCalled();
   });
 
   it('does not proxy clicks from nested interactive elements', async () => {
@@ -97,14 +148,18 @@ describe('Card', () => {
 
   it('uses the action link as the primary target when no href is provided', async () => {
     const user = userEvent.setup();
+    const cardClick = vi.fn();
+    const actionClick = vi.fn();
 
     render(
       <Card
         variant="clickable"
         number="12"
+        onClick={cardClick}
         actionLink={{
           text: 'Open tasks',
           href: '#open-tasks',
+          attributes: { onClick: actionClick },
         }}
       />,
     );
@@ -117,6 +172,8 @@ describe('Card', () => {
     await user.click(card as HTMLElement);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(actionClick).toHaveBeenCalledTimes(1);
+    expect(cardClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders icon, tag, metadata and helper text', () => {
