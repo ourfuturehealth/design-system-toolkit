@@ -16,13 +16,13 @@ release recorded below.
 
 ##### Fixed
 
-- Prevented clickable Card surface clicks from reaching card and ancestor click listeners twice when forwarding to the primary link.
+- Fixed duplicate click events when clicking the body of a clickable Card.
 
 #### @ourfuturehealth/react-components 0.26.2 (`react-v0.26.2`)
 
 ##### Fixed
 
-- Called Card and ancestor click handlers once when a clickable Card forwards a surface click to its primary link.
+- Fixed duplicate click events when clicking the body of a clickable Card.
 
 ### 2026-10-13
 
