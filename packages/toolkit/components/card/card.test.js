@@ -1,4 +1,9 @@
 import Card from './card';
+const { getHTMLCode } = require('../../../site/views/_data/helpers');
+
+const renderFixture = (fixturePath) => {
+  document.body.innerHTML = getHTMLCode(fixturePath);
+};
 
 describe('Our Future Health card()', () => {
   afterEach(() => {
@@ -95,55 +100,32 @@ describe('Our Future Health card()', () => {
     expect(primaryClick).not.toHaveBeenCalled();
   });
 
-  describe('openInNewWindow rendered HTML', () => {
+  describe('openInNewWindow rendered macro', () => {
     it('sets target="_blank" and rel="noopener noreferrer" on the heading link', () => {
-      document.body.innerHTML = `
-        <div class="ofh-card ofh-card--clickable">
-          <h2 class="ofh-card__heading">
-            <a class="ofh-card__link ofh-card__primary-link" href="#external" target="_blank" rel="noopener noreferrer" data-ofh-card-primary-link="true">
-              External link<span class="ofh-u-visually-hidden"> (opens in new window)</span>
-            </a>
-          </h2>
-        </div>
-      `;
+      renderFixture('tests/fixtures/card/open-in-new-window-href.njk');
 
       const link = document.querySelector('.ofh-card__primary-link');
       expect(link.getAttribute('target')).toBe('_blank');
       expect(link.getAttribute('rel')).toBe('noopener noreferrer');
-      expect(link.querySelector('.ofh-u-visually-hidden').textContent).toBe(' (opens in new window)');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent.trim()).toBe('(opens in new window)');
     });
 
     it('does not set target or rel on the heading link by default', () => {
-      document.body.innerHTML = `
-        <div class="ofh-card ofh-card--clickable">
-          <h2 class="ofh-card__heading">
-            <a class="ofh-card__link ofh-card__primary-link" href="#internal" data-ofh-card-primary-link="true">
-              Internal link
-            </a>
-          </h2>
-        </div>
-      `;
+      renderFixture('tests/fixtures/card/default.njk');
 
       const link = document.querySelector('.ofh-card__primary-link');
       expect(link.getAttribute('target')).toBeNull();
       expect(link.getAttribute('rel')).toBeNull();
+      expect(link.querySelector('.ofh-u-visually-hidden')).toBeNull();
     });
 
     it('sets target="_blank" and rel on the action link when it is the primary link', () => {
-      document.body.innerHTML = `
-        <div class="ofh-card ofh-card--clickable">
-          <p class="ofh-card__action">
-            <a class="ofh-card__action-link ofh-card__primary-link" href="#tasks" target="_blank" rel="noopener noreferrer" data-ofh-card-primary-link="true">
-              Open tasks<span class="ofh-u-visually-hidden"> (opens in new window)</span>
-            </a>
-          </p>
-        </div>
-      `;
+      renderFixture('tests/fixtures/card/open-in-new-window-action-link.njk');
 
       const link = document.querySelector('.ofh-card__primary-link');
       expect(link.getAttribute('target')).toBe('_blank');
       expect(link.getAttribute('rel')).toBe('noopener noreferrer');
-      expect(link.querySelector('.ofh-u-visually-hidden').textContent).toBe(' (opens in new window)');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent.trim()).toBe('(opens in new window)');
     });
   });
 

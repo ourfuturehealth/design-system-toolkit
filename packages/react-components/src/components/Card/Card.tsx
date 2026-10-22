@@ -264,8 +264,9 @@ export const Card = ({
                   actionLink.attributes?.className,
                 )}
                 href={actionLink.href}
-                target={isClickable && !href && openInNewWindow ? '_blank' : undefined}
-                rel={isClickable && !href && openInNewWindow ? 'noopener noreferrer' : undefined}
+                {...(isClickable && !href && openInNewWindow
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
                 data-ofh-card-primary-link={
                   isClickable && !href ? 'true' : undefined
                 }

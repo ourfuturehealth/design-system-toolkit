@@ -289,6 +289,41 @@ describe('Card', () => {
       const actionLink = screen.getByRole('link', { name: 'Open tasks' });
       expect(actionLink).not.toHaveAttribute('target');
     });
+
+    it('does not override target set via actionLink.attributes when openInNewWindow is false', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{
+            text: 'Open tasks',
+            href: '#tasks',
+            attributes: { target: '_blank', rel: 'noopener noreferrer' },
+          }}
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: 'Open tasks' });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('does not duplicate target or rel when openInNewWindow is true and actionLink.attributes also sets them', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{
+            text: 'Open tasks',
+            href: '#tasks',
+            attributes: { target: '_blank', rel: 'noopener noreferrer' },
+          }}
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /Open tasks/i });
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+    });
   });
 
   it('has no accessibility violations for a clickable card', async () => {
