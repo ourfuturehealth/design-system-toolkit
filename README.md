@@ -20,7 +20,7 @@ This repository is organized as a monorepo containing:
 **Required:**
 
 - **Node.js 20.19.0+** (minimum required by Vite 7)
-  - Recommended: **Node 24.13.1 LTS** (see [.nvmrc](.nvmrc) for nvm users)
+  - Recommended: **Node 24.22.1 LTS** (see [.nvmrc](.nvmrc) for nvm users)
   - Any version >= 20.19.0 will work (e.g., 20.x, 22.x, 24.x)
 - **pnpm 10+** (This project uses pnpm workspaces - npm/yarn will not work correctly)
 
