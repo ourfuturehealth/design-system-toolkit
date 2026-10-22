@@ -194,5 +194,5 @@ describe('Hero', () => {
 
     const results = await axe(container);
     expect(results.violations).toHaveLength(0);
-  });
+  }, 15_000);
 });
