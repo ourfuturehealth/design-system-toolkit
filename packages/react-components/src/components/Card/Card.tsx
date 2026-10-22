@@ -45,6 +45,7 @@ export interface CardProps
   headingClasses?: string;
   headingLevel?: HeadingLevel;
   href?: string;
+  openInNewWindow?: boolean;
   description?: React.ReactNode;
   descriptionHtml?: string;
   icon?: CardIcon;
@@ -68,6 +69,7 @@ export const Card = ({
   headingClasses = '',
   headingLevel,
   href,
+  openInNewWindow,
   description,
   descriptionHtml,
   icon,
@@ -177,9 +179,14 @@ export const Card = ({
             isClickable && 'ofh-card__primary-link',
           )}
           href={href}
+          target={openInNewWindow ? '_blank' : undefined}
+          rel={openInNewWindow ? 'noopener noreferrer' : undefined}
           data-ofh-card-primary-link={isClickable ? 'true' : undefined}
         >
           {heading}
+          {openInNewWindow && (
+            <span className="ofh-u-visually-hidden"> (opens in new window)</span>
+          )}
         </a>
       ) : (
         heading
@@ -257,11 +264,17 @@ export const Card = ({
                   actionLink.attributes?.className,
                 )}
                 href={actionLink.href}
+                {...(isClickable && !href && openInNewWindow
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
                 data-ofh-card-primary-link={
                   isClickable && !href ? 'true' : undefined
                 }
               >
                 {actionLink.text}
+                {isClickable && !href && openInNewWindow && (
+                  <span className="ofh-u-visually-hidden"> (opens in new window)</span>
+                )}
               </a>
             </p>
           ) : null}

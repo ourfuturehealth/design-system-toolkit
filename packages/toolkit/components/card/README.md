@@ -71,6 +71,7 @@ Find out more about the Card component and when to use it in the [design system 
 | `headingClasses` | string | No | Additional classes for the heading element, for example to change the visual heading size. |
 | `headingLevel` | integer | No | Semantic heading level. Default: `2`. This changes the HTML heading tag, not the visual styling. |
 | `href` | string | No | Primary card link URL. |
+| `openInNewWindow` | boolean | No | When `true`, the primary link opens in a new tab (`target="_blank"`). Sets `rel="noopener noreferrer"` automatically and appends a visually hidden "(opens in new window)" suffix inside the link for screen reader users. Applies to the heading link when `href` is set, or the action link when it is the primary target. |
 | `description` | string | No | Plain text body copy. |
 | `descriptionHtml` | string | No | HTML body content. |
 | `icon` | object | No | Trailing icon configuration. The card keeps the trailing icon slot at 32px; use `icon.color` to tint monochrome icons when needed. |

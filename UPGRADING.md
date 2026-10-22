@@ -14,7 +14,8 @@ when updating dependencies, even when no migration is required.
 
 | Version | Date | Breaking Changes | Consumer action | Migration Complexity |
 | ------- | ---- | ---------------- | --------------- | -------------------- |
-| `v4.26.2 / React v0.26.2` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - clickable Card click forwarding no longer duplicates consumer events |
+| `v4.26.3 / React v0.26.3` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - new `openInNewWindow` prop on Card is opt-in; duplicate click fix is transparent |
+| `v4.26.2 / React v0.26.2` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - duplicate click fix is transparent |
 | [v4.26.1 / React v0.26.1](#release-recovery) | October 2026 | ProgressIndicator zero-progress and accessible-value corrections | Action required | 🟢 Low - replace defective package URLs and check ProgressIndicator usages |
 | [v4.26.0 / React v0.26.0](#release-recovery) | October 2026 | **DO NOT USE: defective release identities and accessible values** | Action required | 🟢 Low - replace with v4.26.1 / React v0.26.1 |
 | `v4.25.1 / React v0.24.2` | September 2026 | No breaking changes | No consumer action required | 🟢 Low - mobile Header fixes and Welsh partner logos; public APIs unchanged |

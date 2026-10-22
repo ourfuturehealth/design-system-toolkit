@@ -67,8 +67,10 @@
               <a
                 class="ofh-card__link{% if isClickable %} ofh-card__primary-link{% endif %}"
                 href="{{ params.href }}"
+                {% if params.openInNewWindow %}target="_blank" rel="noopener noreferrer"{% endif %}
                 {% if isClickable %}data-ofh-card-primary-link="true"{% endif %}>
                 {{ params.heading | safe }}
+                {% if params.openInNewWindow %}<span class="ofh-u-visually-hidden"> (opens in new window)</span>{% endif %}
               </a>
             {%- else %}
               {{ params.heading }}
@@ -118,9 +120,11 @@
             <a
               class="ofh-card__action-link{% if isClickable and not params.href %} ofh-card__primary-link{% endif %}"
               href="{{ params.actionLink.href }}"
+              {%- if isClickable and not params.href and params.openInNewWindow %} target="_blank" rel="noopener noreferrer"{% endif %}
               {%- if isClickable and not params.href %} data-ofh-card-primary-link="true"{% endif %}
               {%- for attribute, value in params.actionLink.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
               {{ params.actionLink.text | safe }}
+              {%- if isClickable and not params.href and params.openInNewWindow %}<span class="ofh-u-visually-hidden"> (opens in new window)</span>{% endif %}
             </a>
           </p>
         {%- endif %}

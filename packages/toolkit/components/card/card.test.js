@@ -1,4 +1,9 @@
 import Card from './card';
+const { getHTMLCode } = require('../../../site/views/_data/helpers');
+
+const renderFixture = (fixturePath) => {
+  document.body.innerHTML = getHTMLCode(fixturePath);
+};
 
 describe('Our Future Health card()', () => {
   afterEach(() => {
@@ -93,6 +98,35 @@ describe('Our Future Health card()', () => {
 
     expect(dismissClick).toHaveBeenCalledTimes(1);
     expect(primaryClick).not.toHaveBeenCalled();
+  });
+
+  describe('openInNewWindow rendered macro', () => {
+    it('sets target="_blank" and rel="noopener noreferrer" on the heading link', () => {
+      renderFixture('tests/fixtures/card/open-in-new-window-href.njk');
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent.trim()).toBe('(opens in new window)');
+    });
+
+    it('does not set target or rel on the heading link by default', () => {
+      renderFixture('tests/fixtures/card/default.njk');
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBeNull();
+      expect(link.getAttribute('rel')).toBeNull();
+      expect(link.querySelector('.ofh-u-visually-hidden')).toBeNull();
+    });
+
+    it('sets target="_blank" and rel on the action link when it is the primary link', () => {
+      renderFixture('tests/fixtures/card/open-in-new-window-action-link.njk');
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent.trim()).toBe('(opens in new window)');
+    });
   });
 
   it('does not double fire when the primary link itself is clicked', () => {
