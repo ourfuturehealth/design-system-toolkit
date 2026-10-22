@@ -45,6 +45,7 @@ export interface CardProps
   headingClasses?: string;
   headingLevel?: HeadingLevel;
   href?: string;
+  openInNewWindow?: boolean;
   description?: React.ReactNode;
   descriptionHtml?: string;
   icon?: CardIcon;
@@ -68,6 +69,7 @@ export const Card = ({
   headingClasses = '',
   headingLevel,
   href,
+  openInNewWindow,
   description,
   descriptionHtml,
   icon,
@@ -166,6 +168,8 @@ export const Card = ({
             isClickable && 'ofh-card__primary-link',
           )}
           href={href}
+          target={openInNewWindow ? '_blank' : undefined}
+          rel={openInNewWindow ? 'noopener noreferrer' : undefined}
           data-ofh-card-primary-link={isClickable ? 'true' : undefined}
         >
           {heading}

@@ -67,6 +67,7 @@
               <a
                 class="ofh-card__link{% if isClickable %} ofh-card__primary-link{% endif %}"
                 href="{{ params.href }}"
+                {% if params.openInNewWindow %}target="_blank" rel="noopener noreferrer"{% endif %}
                 {% if isClickable %}data-ofh-card-primary-link="true"{% endif %}>
                 {{ params.heading | safe }}
               </a>
