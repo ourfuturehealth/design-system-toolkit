@@ -95,8 +95,14 @@ export const Card = ({
     dismissButtonAttributes.className,
   );
   const iconAttributes = icon?.attributes ?? {};
+  const forwardedLink = React.useRef<HTMLElement | null>(null);
 
   const handleCardClick: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    if (event.target === forwardedLink.current) {
+      event.stopPropagation();
+      return;
+    }
+
     onClick?.(event);
 
     if (!isClickable || event.defaultPrevented) {
@@ -125,7 +131,12 @@ export const Card = ({
       return;
     }
 
-    primaryLink.click();
+    forwardedLink.current = primaryLink;
+    try {
+      primaryLink.click();
+    } finally {
+      forwardedLink.current = null;
+    }
   };
 
   const cardClasses = joinClasses(
