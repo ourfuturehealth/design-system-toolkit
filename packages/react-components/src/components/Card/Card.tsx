@@ -173,6 +173,9 @@ export const Card = ({
           data-ofh-card-primary-link={isClickable ? 'true' : undefined}
         >
           {heading}
+          {openInNewWindow && (
+            <span className="ofh-u-visually-hidden"> (opens in new window)</span>
+          )}
         </a>
       ) : (
         heading

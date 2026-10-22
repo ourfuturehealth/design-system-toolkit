@@ -12,17 +12,21 @@ release recorded below.
 
 ### 2026-10-22
 
-#### @ourfuturehealth/toolkit 4.26.2 (`toolkit-v4.26.2`)
+#### @ourfuturehealth/toolkit 4.26.3 (`toolkit-v4.26.3`)
 
 ##### Added
 
-- Added `openInNewWindow` boolean prop to the Card component to support opening links in a new tab, with `rel="noopener noreferrer"` applied automatically.
+- Added `openInNewWindow` boolean prop to the Card component to support opening links in a new tab; sets `rel="noopener noreferrer"` and appends a visually hidden "(opens in new window)" suffix inside the link for screen reader users.
 
-#### @ourfuturehealth/react-components 0.26.2 (`react-v0.26.2`)
+#### @ourfuturehealth/react-components 0.26.3 (`react-v0.26.3`)
 
 ##### Added
 
-- Added `openInNewWindow` boolean prop to the `Card` component to support opening links in a new tab, with `rel="noopener noreferrer"` applied automatically.
+- Added `openInNewWindow` boolean prop to the `Card` component to support opening links in a new tab; sets `rel="noopener noreferrer"` and appends a visually hidden "(opens in new window)" suffix inside the link for screen reader users.
+
+##### Fixed
+
+- Fixed duplicate click events when clicking the body of a clickable Card.
 
 ### 2026-10-13
 

@@ -70,6 +70,7 @@
                 {% if params.openInNewWindow %}target="_blank" rel="noopener noreferrer"{% endif %}
                 {% if isClickable %}data-ofh-card-primary-link="true"{% endif %}>
                 {{ params.heading | safe }}
+                {% if params.openInNewWindow %}<span class="ofh-u-visually-hidden"> (opens in new window)</span>{% endif %}
               </a>
             {%- else %}
               {{ params.heading }}
