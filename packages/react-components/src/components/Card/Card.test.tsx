@@ -166,6 +166,74 @@ describe('Card', () => {
     expect(ref.current).toHaveClass('ofh-card');
   });
 
+  describe('openInNewWindow', () => {
+    it('sets target and rel on the heading link when href is provided', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#external"
+          heading="External link"
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /External link/i });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('includes a visually hidden new-window announcement in the heading link', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#external"
+          heading="External link"
+          openInNewWindow
+        />,
+      );
+
+      expect(screen.getByText('(opens in new window)')).toBeInTheDocument();
+    });
+
+    it('does not set target or rel on the heading link by default', () => {
+      render(
+        <Card variant="clickable" href="#internal" heading="Internal link" />,
+      );
+
+      const link = screen.getByRole('link', { name: 'Internal link' });
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+    });
+
+    it('sets target and rel on the action link when it is the primary link', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{ text: 'Open tasks', href: '#tasks' }}
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /Open tasks/i });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('does not set target on the action link when href is also provided', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#primary"
+          actionLink={{ text: 'Open tasks', href: '#tasks' }}
+          openInNewWindow
+        />,
+      );
+
+      const actionLink = screen.getByRole('link', { name: 'Open tasks' });
+      expect(actionLink).not.toHaveAttribute('target');
+    });
+  });
+
   it('has no accessibility violations for a clickable card', async () => {
     const { container } = render(
       <Card

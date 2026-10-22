@@ -253,11 +253,16 @@ export const Card = ({
                   actionLink.attributes?.className,
                 )}
                 href={actionLink.href}
+                target={isClickable && !href && openInNewWindow ? '_blank' : undefined}
+                rel={isClickable && !href && openInNewWindow ? 'noopener noreferrer' : undefined}
                 data-ofh-card-primary-link={
                   isClickable && !href ? 'true' : undefined
                 }
               >
                 {actionLink.text}
+                {isClickable && !href && openInNewWindow && (
+                  <span className="ofh-u-visually-hidden"> (opens in new window)</span>
+                )}
               </a>
             </p>
           ) : null}

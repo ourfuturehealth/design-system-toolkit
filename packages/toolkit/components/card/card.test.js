@@ -65,6 +65,58 @@ describe('Our Future Health card()', () => {
     expect(primaryClick).not.toHaveBeenCalled();
   });
 
+  describe('openInNewWindow rendered HTML', () => {
+    it('sets target="_blank" and rel="noopener noreferrer" on the heading link', () => {
+      document.body.innerHTML = `
+        <div class="ofh-card ofh-card--clickable">
+          <h2 class="ofh-card__heading">
+            <a class="ofh-card__link ofh-card__primary-link" href="#external" target="_blank" rel="noopener noreferrer" data-ofh-card-primary-link="true">
+              External link<span class="ofh-u-visually-hidden"> (opens in new window)</span>
+            </a>
+          </h2>
+        </div>
+      `;
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent).toBe(' (opens in new window)');
+    });
+
+    it('does not set target or rel on the heading link by default', () => {
+      document.body.innerHTML = `
+        <div class="ofh-card ofh-card--clickable">
+          <h2 class="ofh-card__heading">
+            <a class="ofh-card__link ofh-card__primary-link" href="#internal" data-ofh-card-primary-link="true">
+              Internal link
+            </a>
+          </h2>
+        </div>
+      `;
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBeNull();
+      expect(link.getAttribute('rel')).toBeNull();
+    });
+
+    it('sets target="_blank" and rel on the action link when it is the primary link', () => {
+      document.body.innerHTML = `
+        <div class="ofh-card ofh-card--clickable">
+          <p class="ofh-card__action">
+            <a class="ofh-card__action-link ofh-card__primary-link" href="#tasks" target="_blank" rel="noopener noreferrer" data-ofh-card-primary-link="true">
+              Open tasks<span class="ofh-u-visually-hidden"> (opens in new window)</span>
+            </a>
+          </p>
+        </div>
+      `;
+
+      const link = document.querySelector('.ofh-card__primary-link');
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+      expect(link.querySelector('.ofh-u-visually-hidden').textContent).toBe(' (opens in new window)');
+    });
+  });
+
   it('does not double fire when the primary link itself is clicked', () => {
     document.body.innerHTML = `
       <div class="ofh-card ofh-card--clickable">
