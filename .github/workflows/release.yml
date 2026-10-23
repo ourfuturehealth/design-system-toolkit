@@ -76,7 +76,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
         with:
-          node-version: "22.x"
+          node-version-file: .nvmrc
           registry-url: ${{ vars.CLOUDSMITH_NPM_URL }}
 
       - name: Enable Corepack and pnpm
@@ -184,7 +184,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version-file: .nvmrc
 
       - name: Download verified release assets
         uses: actions/download-artifact@v4
