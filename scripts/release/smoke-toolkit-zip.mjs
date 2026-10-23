@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
-import { existsSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, extname, join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const require = createRequire(resolve('packages/react-components/package.json'));
 const { chromium } = require('playwright');
@@ -15,7 +15,6 @@ const entries = execFileSync('unzip', ['-Z1', zip], { encoding: 'utf8' }).trim()
 assert(entries.every(entry => !entry.startsWith('/') && !entry.split('/').includes('..')), 'Unsafe ZIP paths');
 const extracted = mkdtempSync(join(tmpdir(), 'ofh-toolkit-zip-'));
 let browser;
-let server;
 try {
   execFileSync('unzip', ['-q', zip, '-d', extracted]);
   const css = `css/ofh-design-system-toolkit-${version}.min.css`;
@@ -35,36 +34,18 @@ try {
     }
   }
   const html = `<!doctype html><html lang="en"><title>ZIP consumer</title>
-    <link rel="stylesheet" href="/${css}"><script defer src="/${js}"></script>
+    <link rel="stylesheet" href="./${css}"><script defer src="./${js}"></script>
     <div class="ofh-card ofh-card--clickable"><a class="ofh-card__link" href="#clicked">Card link</a><p id="card-body">Card body</p></div>
     <button class="ofh-button ofh-button--contained">Continue</button></html>`;
-  const contentTypes = new Map([
-    ['.css', 'text/css'],
-    ['.js', 'application/javascript'],
-    ['.png', 'image/png'],
-    ['.jpg', 'image/jpeg'],
-    ['.jpeg', 'image/jpeg'],
-    ['.svg', 'image/svg+xml'],
-  ]);
-  server = createServer((request, response) => {
-    response.setHeader('X-Content-Type-Options', 'nosniff');
-    const path = new URL(request.url, 'http://localhost').pathname;
-    if (path === '/') { response.setHeader('Content-Type', 'text/html; charset=utf-8'); response.end(html); return; }
-    const file = resolve(extracted, `.${path}`);
-    if (!file.startsWith(`${extracted}/`) || !existsSync(file) || !statSync(file).isFile()) { response.writeHead(404); response.end(); return; }
-    // Assets must not become active documents when opened directly (including SVGs).
-    response.setHeader('Content-Security-Policy', "sandbox; default-src 'none'");
-    response.setHeader('Content-Type', contentTypes.get(extname(file)) || 'application/octet-stream');
-    response.end(readFileSync(file));
-  });
-  await new Promise(done => server.listen(0, '127.0.0.1', done));
+  const consumer = join(extracted, 'smoke-consumer.html');
+  writeFileSync(consumer, html);
   browser = await chromium.launch();
   const page = await browser.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('requestfailed', request => errors.push(request.url()));
   page.on('response', response => { if (response.status() >= 400) errors.push(response.url()); });
-  await page.goto(`http://127.0.0.1:${server.address().port}/`, { waitUntil: 'networkidle' });
+  await page.goto(pathToFileURL(consumer).href, { waitUntil: 'networkidle' });
   const display = await page.locator('.ofh-button').evaluate(element => getComputedStyle(element).display);
   assert.equal(display, 'inline-block', 'Compiled button styling did not load');
   const radius = await page.locator('.ofh-button').evaluate(element => getComputedStyle(element).borderRadius);
@@ -75,6 +56,5 @@ try {
   process.stdout.write('Extracted toolkit ZIP passed asset, CSS, and JavaScript consumer checks\n');
 } finally {
   if (browser) await browser.close();
-  if (server) await new Promise(done => server.close(done));
   rmSync(extracted, { recursive: true, force: true });
 }
