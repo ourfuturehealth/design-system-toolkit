@@ -26,7 +26,11 @@ function findRelease() {
 let release = findRelease();
 if (!release) {
   gh('release', 'create', tag, '--verify-tag', '--target', sha, '--draft', '--title', tag, '--notes-file', notesPath, '--repo', repository);
-  release = findRelease();
+  for (const delay of [0, 250, 500, 1000, 2000, 4000]) {
+    if (delay) await new Promise(resolve => setTimeout(resolve, delay));
+    release = findRelease();
+    if (release) break;
+  }
 }
 assert(release, 'Release draft was not found after creation');
 assert(release.draft, 'Published releases must not be overwritten');

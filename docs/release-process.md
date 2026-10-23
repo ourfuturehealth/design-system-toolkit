@@ -42,7 +42,7 @@ references and do not trigger publication.
 Check the merged commit SHA and each package manifest before creating its tag.
 Create each tag at that exact SHA, not an interior feature-branch commit. Never
 replace an existing tag or delete a tag to rerun a release. Packages released
-together use the same merged SHA, but each tag starts its own release job.
+together use the same merged SHA, but each tag starts its own release run.
 
 Pushing a canonical tag authorises automatic publication if all checks pass.
 The workflow has no separate environment approval. Changesets release PRs and
@@ -55,11 +55,15 @@ merged `main`, the manifest agrees, and the version exceeds existing tags and
 published releases. It also requires a dated changelog entry and one explicit
 upgrade decision for that package version.
 
-It then runs lint, tests, docs checks, and staged artifact checks. It creates a
-draft GitHub release, uploads without overwriting assets, downloads the uploaded
-files and compares their SHA-256 digests with the staged files, and checks the
-remote tag again before publication. Release notes include the reviewed package
-summary and upgrade guidance, with source links pinned to the release SHA.
+The validation job runs lint, tests, and docs checks. The build job checks the
+staged package in consumer installations, then saves the verified files, release
+notes, tag, SHA, and checksums as a workflow artifact. Only the toolkit ZIP check
+installs Playwright. The publication job checks the downloaded artifact against
+the tag, SHA, and checksums before creating a draft GitHub release. It uploads
+without overwriting assets, downloads the uploaded files and compares their
+SHA-256 digests with the staged files, and checks the remote tag again before
+publication. Release notes include the reviewed package summary and upgrade
+guidance, with source links pinned to the release SHA.
 
 The publisher records the SHA-256 digest of each verified uploaded asset in the
 job log. A final tag check after publication detects discrepancies; it is not a
@@ -86,10 +90,11 @@ both command fixtures and real temporary Git repositories. It creates local
 test commits and tags only inside those temporary repositories. Publication
 tests simulate GitHub commands; they do not contact GitHub or publish releases.
 
-Passing these tests does not prove GitHub permissions or live draft creation,
-upload, download, and publication. Rehearse that path in an explicitly authorised
-disposable repository before first use or after changing the publisher or its
-permissions. Never use a production release as a test.
+Passing these tests does not prove GitHub permissions, artifact handoff between
+jobs, or live draft creation, upload, download, and publication. Rehearse that
+path, including a publish-job rerun, in an explicitly authorised disposable
+repository before first use or after changing the release workflow. Never use a
+production release as a test.
 
 The artifact smoke command:
 
@@ -145,6 +150,11 @@ An interrupted draft can resume only when existing assets match the newly staged
 bytes. A mismatch or unexpected asset stops the job for maintainer inspection;
 it does not replace the asset. Failures reading GitHub state stop the workflow
 rather than being interpreted as an absent release.
+
+For a transient failure, use GitHub's **Re-run failed jobs** action. Successful
+validation and build jobs do not repeat when only publication fails; the
+publication job rechecks the saved artifact and remote tag before resuming.
+Inspect an existing release first when the publication outcome is uncertain.
 
 `Publication outcome is unknown` means the publish request failed without a
 reliable result. The release may be public even though the command failed.
