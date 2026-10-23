@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { createRequire } from 'node:module';
 import { existsSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, extname, join, resolve } from 'node:path';
 
 const require = createRequire(resolve('packages/react-components/package.json'));
 const { chromium } = require('playwright');
@@ -38,13 +38,23 @@ try {
     <link rel="stylesheet" href="/${css}"><script defer src="/${js}"></script>
     <div class="ofh-card ofh-card--clickable"><a class="ofh-card__link" href="#clicked">Card link</a><p id="card-body">Card body</p></div>
     <button class="ofh-button ofh-button--contained">Continue</button></html>`;
+  const contentTypes = new Map([
+    ['.css', 'text/css'],
+    ['.js', 'application/javascript'],
+    ['.png', 'image/png'],
+    ['.jpg', 'image/jpeg'],
+    ['.jpeg', 'image/jpeg'],
+    ['.svg', 'image/svg+xml'],
+  ]);
   server = createServer((request, response) => {
+    response.setHeader('X-Content-Type-Options', 'nosniff');
     const path = new URL(request.url, 'http://localhost').pathname;
-    if (path === '/') { response.setHeader('Content-Type', 'text/html'); response.end(html); return; }
+    if (path === '/') { response.setHeader('Content-Type', 'text/html; charset=utf-8'); response.end(html); return; }
     const file = resolve(extracted, `.${path}`);
-    if (!file.startsWith(`${extracted}/`) || !existsSync(file)) { response.writeHead(404); response.end(); return; }
-    if (file.endsWith('.css')) response.setHeader('Content-Type', 'text/css');
-    if (file.endsWith('.js')) response.setHeader('Content-Type', 'application/javascript');
+    if (!file.startsWith(`${extracted}/`) || !existsSync(file) || !statSync(file).isFile()) { response.writeHead(404); response.end(); return; }
+    // Assets must not become active documents when opened directly (including SVGs).
+    response.setHeader('Content-Security-Policy', "sandbox; default-src 'none'");
+    response.setHeader('Content-Type', contentTypes.get(extname(file)) || 'application/octet-stream');
     response.end(readFileSync(file));
   });
   await new Promise(done => server.listen(0, '127.0.0.1', done));
