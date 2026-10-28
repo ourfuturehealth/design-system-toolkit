@@ -14,6 +14,7 @@ when updating dependencies, even when no migration is required.
 
 | Version | Date | Breaking Changes | Consumer action | Migration Complexity |
 | ------- | ---- | ---------------- | --------------- | -------------------- |
+| [v4.27.0 / React v0.27.0](#cookie-banner-javascript-initialisation) | October 2026 | Cookie Banner is hidden until JavaScript initialises it | Action required | 🟢 Low - load the toolkit JavaScript and verify React hydration |
 | `v4.26.3 / React v0.26.3` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - new `openInNewWindow` prop on Card is opt-in; duplicate click fix is transparent |
 | `v4.26.2 / React v0.26.2` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - duplicate click fix is transparent |
 | [v4.26.1 / React v0.26.1](#release-recovery) | October 2026 | ProgressIndicator zero-progress and accessible-value corrections | Action required | 🟢 Low - replace defective package URLs and check ProgressIndicator usages |
@@ -52,6 +53,31 @@ when updating dependencies, even when no migration is required.
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure) | 2025 | Monorepo restructure | Action required | 🔴 High - installation and paths change |
 
 React `0.25.0` was never published. Do not use it as a release baseline.
+
+<a id="cookie-banner-javascript-initialisation"></a>
+## Cookie Banner JavaScript initialisation in toolkit 4.27.0 / React 0.27.0
+
+Cookie Banner is now always hidden in the initial HTML so that people
+without JavaScript do not see controls that cannot submit a choice. Existing
+consumers must make sure the banner is initialised before it can be used.
+
+### Toolkit consumers
+
+1. Include the compiled toolkit JavaScript. It reveals Cookie Banner when the
+   DOM becomes ready, or immediately if the bundle loads after
+   `DOMContentLoaded`.
+2. If importing component scripts individually, import and run the default
+   initializer from `components/cookie-banner/cookie-banner.js`.
+3. Continue to render the banner only while the product needs a cookie choice.
+
+### React consumers
+
+1. Confirm that server-rendered `CookieBanner` markup is hydrated by React. The
+   component reveals itself after React initialises it.
+2. Do not use server-rendered `CookieBanner` markup without hydration. Its
+   buttons use `type="button"` and require JavaScript handlers to record a
+   choice.
+3. Existing use of the `hidden` prop remains supported after initialisation.
 
 <a id="release-recovery"></a>
 ## Recovery from toolkit 4.26.0 / React 0.26.0

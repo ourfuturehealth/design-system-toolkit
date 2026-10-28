@@ -1,4 +1,5 @@
 const { getHTMLCode } = require('../../../site/views/_data/helpers');
+const CookieBanner = require('./cookie-banner').default;
 
 const renderFixture = (fixturePath) => {
   document.body.innerHTML = getHTMLCode(fixturePath);
@@ -17,6 +18,8 @@ describe('Our Future Health cookieBanner macro', () => {
     const buttons = banner.querySelectorAll('button');
 
     expect(banner.tagName).toBe('SECTION');
+    expect(banner.hidden).toBe(true);
+    expect(banner.getAttribute('data-module')).toBe('ofh-cookie-banner');
     expect(banner.getAttribute('aria-labelledby')).toBe('ofh-cookie-banner-heading');
     expect(heading.textContent).toBe('Cookies on Our Future Health');
     expect(links).toHaveLength(2);
@@ -34,6 +37,14 @@ describe('Our Future Health cookieBanner macro', () => {
     expect(buttons[0].getAttribute('type')).toBe('button');
     expect(buttons[0].getAttribute('data-cookie-choice')).toBe('accept');
     expect(buttons[1].getAttribute('data-cookie-choice')).toBe('reject');
+  });
+
+  it('reveals the banner when its JavaScript initializes', () => {
+    const banner = renderFixture('tests/fixtures/cookie-banner/default.njk');
+
+    CookieBanner();
+
+    expect(banner.hidden).toBe(false);
   });
 
   it('supports custom headings, body HTML, and action attributes', () => {

@@ -1,12 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { renderToStaticMarkup } from 'react-dom/server';
 import { axe } from 'vitest-axe';
 import { describe, expect, it, vi } from 'vitest';
 import { CookieBanner } from './CookieBanner';
 
 describe('CookieBanner', () => {
   it('renders the approved defaults with safe external links', () => {
-    render(<CookieBanner />);
+    const { container } = render(<CookieBanner />);
 
     const heading = screen.getByRole('heading', {
       level: 2,
@@ -31,6 +32,31 @@ describe('CookieBanner', () => {
       'type',
       'button',
     );
+    expect(container.querySelector('.ofh-cookie-banner')).not.toHaveAttribute('hidden');
+  });
+
+  it('is hidden in server-rendered HTML until JavaScript initializes it', () => {
+    const html = renderToStaticMarkup(<CookieBanner />);
+    const template = document.createElement('template');
+
+    template.innerHTML = html;
+
+    const banner = template.content.querySelector('.ofh-cookie-banner');
+
+    expect(banner?.hasAttribute('hidden')).toBe(true);
+  });
+
+  it('respects a consumer-controlled hidden state after initialization', () => {
+    const { container, rerender } = render(<CookieBanner />);
+    const banner = container.querySelector('.ofh-cookie-banner');
+
+    expect(banner).not.toHaveAttribute('hidden');
+
+    rerender(<CookieBanner hidden />);
+    expect(banner).toHaveAttribute('hidden');
+
+    rerender(<CookieBanner />);
+    expect(banner).not.toHaveAttribute('hidden');
   });
 
   it('calls the consent callbacks and forwards action attributes', async () => {
