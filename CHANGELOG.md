@@ -10,7 +10,7 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
-### 2026-10-27
+### 2026-10-29
 
 #### @ourfuturehealth/toolkit 4.27.0 (`toolkit-v4.27.0`)
 
