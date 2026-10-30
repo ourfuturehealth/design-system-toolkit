@@ -44,6 +44,11 @@ if (command === 'git' && args[0] === 'diff') {
       save();
       releases = releases.filter(release => release.tag_name !== state.createdTag);
     }
+    if (state.createdDraftTag && state.hiddenDraftReads > 0) {
+      state.hiddenDraftReads -= 1;
+      save();
+      releases = releases.filter(release => release.tag_name !== state.createdDraftTag);
+    }
     process.stdout.write(JSON.stringify(args.includes('--slurp') ? [releases] : releases));
   } else if (endpoint.includes('/git/matching-refs/tags/')) {
     const prefix = endpoint.split('/').at(-1);
@@ -73,6 +78,7 @@ if (command === 'git' && args[0] === 'diff') {
     case 'create':
       state.releases.push({ tag_name: args[2], draft: true, assets: [] });
       state.createdTag = args[2];
+      state.createdDraftTag = args[2];
       state.remainingHiddenReads = state.hiddenReadsAfterCreate || 0;
       if (state.hiddenReadsTag && state.hiddenReadsTag !== args[2]) state.remainingHiddenReads = 0;
       break;

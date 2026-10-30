@@ -115,20 +115,41 @@ export const CookieBanner = ({
   children,
   classes = '',
   className = '',
+  hidden: consumerHidden,
   ref,
   ...props
 }: CookieBannerProps) => {
+  const bannerRef = React.useRef<HTMLElement | null>(null);
   const generatedId = React.useId().replace(/:/g, '');
   const headingId = `ofh-cookie-banner-${generatedId}-heading`;
   const resolvedPrivacyNotice = resolveLink(privacyNotice, defaultPrivacyNotice);
   const resolvedCookiePolicy = resolveLink(cookiePolicy, defaultCookiePolicy);
+  const setBannerRef = React.useCallback(
+    (node: HTMLElement | null) => {
+      bannerRef.current = node;
+
+      if (typeof ref === 'function') {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref],
+  );
+
+  React.useEffect(() => {
+    if (bannerRef.current) {
+      bannerRef.current.hidden = Boolean(consumerHidden);
+    }
+  }, [consumerHidden]);
 
   return (
     <section
       {...props}
-      ref={ref}
+      ref={setBannerRef}
       aria-labelledby={headingId}
       className={joinClasses('ofh-cookie-banner', classes, className)}
+      hidden
     >
       {React.createElement(
         getHeadingTag(headingLevel, 2),

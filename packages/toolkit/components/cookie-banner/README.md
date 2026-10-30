@@ -4,6 +4,8 @@
 
 Use Cookie Banner to ask a user whether the product can use analytics cookies. Render it where the product needs it. The component does not control placement, store consent, or load analytics.
 
+The banner is hidden in the initial HTML and revealed when its JavaScript initializes. This prevents users without JavaScript from seeing controls that only work with JavaScript. Include the compiled toolkit JavaScript, which initializes components when the DOM becomes ready or immediately when loaded afterwards. Alternatively, import and run the initializer from the individual `cookie-banner.js` component script.
+
 The default copy and links match the OFH design. You can override the structured content when a product has approved content changes.
 
 ## Nunjucks macro

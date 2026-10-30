@@ -10,6 +10,48 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-10-29
+
+#### @ourfuturehealth/toolkit 4.27.0 (`toolkit-v4.27.0`)
+
+##### Changed
+
+- Changed Cookie Banner to be hidden in the initial HTML and revealed by the toolkit JavaScript, preventing users without JavaScript from seeing controls that only work with JavaScript. The toolkit now initializes components immediately when its bundle loads after `DOMContentLoaded`.
+
+#### @ourfuturehealth/react-components 0.27.0 (`react-v0.27.0`)
+
+##### Changed
+
+- Changed `CookieBanner` to be hidden in server-rendered HTML and revealed after React initializes it, preventing users without JavaScript from seeing controls that cannot record a choice.
+
+### 2026-10-22
+
+#### @ourfuturehealth/toolkit 4.26.3 (`toolkit-v4.26.3`)
+
+##### Added
+
+- Added `openInNewWindow` boolean prop to the Card component to support opening links in a new tab; sets `rel="noopener noreferrer"` and appends a visually hidden "(opens in new window)" suffix inside the link for screen reader users.
+
+#### @ourfuturehealth/react-components 0.26.3 (`react-v0.26.3`)
+
+##### Added
+
+- Added `openInNewWindow` boolean prop to the `Card` component to support opening links in a new tab; sets `rel="noopener noreferrer"` and appends a visually hidden "(opens in new window)" suffix inside the link for screen reader users.
+
+### 2026-10-22
+
+#### @ourfuturehealth/toolkit 4.26.2 (`toolkit-v4.26.2`)
+
+##### Fixed
+
+- Fixed duplicate click events when clicking the body of a clickable Card.
+
+#### @ourfuturehealth/react-components 0.26.2 (`react-v0.26.2`)
+
+##### Fixed
+
+- Fixed duplicate click events when clicking the body of a clickable Card.
+
 ### 2026-10-13
 
 #### @ourfuturehealth/toolkit 4.26.1 (`toolkit-v4.26.1`)
