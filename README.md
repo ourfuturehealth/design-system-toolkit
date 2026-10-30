@@ -107,24 +107,26 @@ We recommend that you [install Our Future Health design system toolkit using nod
 
 You can also [install Our Future Health design system toolkit using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
 
-## How to make a new release
+## How releases work
 
 This monorepo uses **independent versioning** for each package. See the detailed [Release Process documentation](/docs/release-process.md) for full instructions.
 For the background on tag naming and monorepo versioning, see [Release Versioning Strategy](/docs/release-versioning-strategy.md).
 
-1. Run `pnpm changeset` in your feature branch. Record the affected packages,
-   bump type, reviewed summary and consumer guidance using
-   [the changeset format](.changeset/README.md). Keep package versions unchanged.
-2. Review and merge the feature PR. Once the release App is configured, it creates
-   or updates a release PR with calculated versions, the root changelog and the
-   existing upgrade index. Each package keeps its own version sequence.
-3. Review that release PR, confirm the release date and run the required checks
-   before merging it to `main`.
-4. Publication currently starts with canonical tags at that exact merged SHA;
-   follow [the publication steps](docs/release-process.md#start-publication).
-   Automatic App-owned publication and Slack announcements are separate work.
+1. A contributor adds a [changeset](.changeset/README.md) to a feature PR that
+   changes a public package. It records the affected packages, bump type,
+   summary and consumer guidance; the contributor does not edit package versions.
+2. With release PR automation enabled, the release App gathers merged feature
+   PR changesets into a release PR. It calculates each package's next version
+   and updates the root changelog and upgrade guide for review.
+3. Maintainers review the release PR's versions, notes and date, then merge it
+   after its checks pass.
+4. After cutover, that merge starts GitHub release publication for the changed
+   packages. A verified batch triggers one Slack announcement. Releases are
+   paused until automatic publication is enabled because the active tag ruleset
+   prevents manual creation of release tags.
+   See [the publication flow](docs/release-process.md#publication-before-and-after-cutover).
 
-For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
+For validation commands and recovery steps, see [release operations](docs/release-operations.md).
 
 ## Browsers and assistive technology
 

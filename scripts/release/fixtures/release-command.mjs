@@ -29,18 +29,39 @@ if (command === 'git' && args[0] === 'diff') {
     process.exit(1);
   }
   const sha = state.moveAfter && state.tagChecks >= state.moveAfter ? 'b'.repeat(40) : state.sha;
-  process.stdout.write(`${'c'.repeat(40)}\trefs/tags/${state.tag}\n${sha}\trefs/tags/${state.tag}^{}\n`);
+  const tag = args[2].replace('refs/tags/', '');
+  if (state.tags) {
+    if (state.tags[tag]) process.stdout.write(`${state.moveAfter && state.tagChecks >= state.moveAfter ? sha : state.tags[tag]}\trefs/tags/${tag}\n`);
+  } else process.stdout.write(`${'c'.repeat(40)}\trefs/tags/${state.tag}\n${sha}\trefs/tags/${state.tag}^{}\n`);
 } else if (command === 'gh' && args[0] === 'api') {
   if (state.failApi) process.exit(1);
   const endpoint = args.at(-1);
   if (endpoint.endsWith('/releases')) {
+    if (state.createdTag && state.failApiAfterCreate) process.exit(1);
     let releases = state.releases;
+    if (state.remainingHiddenReads > 0) {
+      state.remainingHiddenReads -= 1;
+      save();
+      releases = releases.filter(release => release.tag_name !== state.createdTag);
+    }
     if (state.createdDraftTag && state.hiddenDraftReads > 0) {
       state.hiddenDraftReads -= 1;
-      releases = releases.filter(release => release.tag_name !== state.createdDraftTag);
       save();
+      releases = releases.filter(release => release.tag_name !== state.createdDraftTag);
     }
     process.stdout.write(JSON.stringify(args.includes('--slurp') ? [releases] : releases));
+  } else if (endpoint.includes('/git/matching-refs/tags/')) {
+    const prefix = endpoint.split('/').at(-1);
+    process.stdout.write(JSON.stringify(Object.entries(state.tags || {}).filter(([tag]) => tag.startsWith(prefix))
+      .map(([tag, sha]) => ({ ref: `refs/tags/${tag}`, object: { type: 'commit', sha } }))));
+  } else if (endpoint.endsWith('/git/refs') && args.includes('POST')) {
+    const tag = args.find(arg => arg.startsWith('ref=')).slice('ref=refs/tags/'.length);
+    const sha = args.find(arg => arg.startsWith('sha=')).slice(4);
+    if (state.tags[tag] || state.failTagBeforeCommit) process.exit(1);
+    state.tags[tag] = sha;
+    save();
+    if (state.failTagAfterCommit) process.exit(1);
+    process.stdout.write(JSON.stringify({ ref: `refs/tags/${tag}`, object: { type: 'commit', sha } }));
   } else if (endpoint.includes('/releases/tags/')) {
     const tag = endpoint.split('/').at(-1);
     const release = state.releases.find(item => item.tag_name === tag && !item.draft);
@@ -55,23 +76,26 @@ if (command === 'git' && args[0] === 'diff') {
 } else if (command === 'gh' && args[0] === 'release') {
   switch (args[1]) {
     case 'create':
-      state.releases.push({ tag_name: state.tag, draft: true, assets: [] });
-      state.createdDraftTag = state.tag;
+      state.releases.push({ tag_name: args[2], draft: true, assets: [] });
+      state.createdTag = args[2];
+      state.createdDraftTag = args[2];
+      state.remainingHiddenReads = state.hiddenReadsAfterCreate || 0;
+      if (state.hiddenReadsTag && state.hiddenReadsTag !== args[2]) state.remainingHiddenReads = 0;
       break;
     case 'upload': {
-      const content = state.corruptUpload ? 'corrupt' : readFileSync(args[3], 'utf8');
-      state.releases[0].assets.push({ name: basename(args[3]), content });
+      const content = state.corruptUpload || state.corruptTag === args[2] ? 'corrupt' : readFileSync(args[3], 'utf8');
+      state.releases.find(release => release.tag_name === args[2]).assets.push({ name: basename(args[3]), content });
       break;
     }
     case 'download': {
-      const asset = state.releases[0].assets.find(item => item.name === value('--pattern'));
+      const asset = state.releases.find(release => release.tag_name === args[2]).assets.find(item => item.name === value('--pattern'));
       writeFileSync(join(value('--dir'), asset.name), asset.content);
       break;
     }
     case 'edit':
-      if (state.failPublishBeforeCommit) process.exit(1);
-      state.releases[0].draft = false;
-      if (state.failPublishAfterCommit) {
+      if (state.failPublishBeforeCommit || state.failPublishTag === args[2]) process.exit(1);
+      state.releases.find(release => release.tag_name === args[2]).draft = false;
+      if (state.failPublishAfterCommit || state.failPublishAfterTag === args[2]) {
         save();
         process.exit(1);
       }

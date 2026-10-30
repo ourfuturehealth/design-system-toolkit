@@ -1,0 +1,73 @@
+name: Announce verified release in Slack
+
+on:
+  workflow_run:
+    workflows: [Publish merged release]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      publication_run_id:
+        description: Successful publication run to announce after checking the release channel
+        required: true
+        type: string
+      inspected_and_approved:
+        description: I checked for an existing announcement and approve one message
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
+
+jobs:
+  announce:
+    name: Announce the verified release batch
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      (github.event.workflow_run.head_branch == 'changeset-release/main' ||
+      github.event.workflow_run.event == 'workflow_dispatch'))
+    runs-on: ubuntu-latest
+    concurrency:
+      group: release-announcement-${{ github.event.workflow_run.id || inputs.publication_run_id }}
+      cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PUBLICATION_RUN_ID: ${{ github.event.workflow_run.id || inputs.publication_run_id }}
+      RELEASE_APP_SLUG: ${{ vars.RELEASE_APP_SLUG }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Verify the publisher and its completed batch
+        id: prepare
+        run: node scripts/release/announce-slack.mjs prepare
+
+      - name: Read reviewed summaries from the exact published SHA
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.prepare.outputs.release_sha }}
+          path: release-source
+          persist-credentials: false
+
+      - name: Announce one verified batch in Slack
+        env:
+          SLACK_RELEASE_WORKFLOW_WEBHOOK_URL: ${{ secrets.SLACK_RELEASE_WORKFLOW_WEBHOOK_URL }}
+          SLACK_ANNOUNCEMENT_STATE: ${{ runner.temp }}/slack-announcement-state.json
+        run: node scripts/release/announce-slack.mjs send "${{ steps.prepare.outputs.state_path }}" release-source
+
+      - name: Save the submission result for inspection
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: slack-announcement-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/slack-announcement-state.json
+          if-no-files-found: ignore
+          retention-days: 30

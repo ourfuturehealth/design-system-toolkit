@@ -1,0 +1,170 @@
+name: Publish merged release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_pr:
+        description: "Merged App-owned release PR number"
+        required: true
+        type: string
+      allow_resume:
+        description: "I inspected the previous run, tags and releases; resume using its original bundle"
+        default: false
+        type: boolean
+      bundle_run_id:
+        description: "Original publication run ID (required for resume)"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+
+concurrency:
+  group: design-system-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish the reviewed release batch
+    if: >-
+      vars.RELEASE_PUBLISH_AUTOMATION_ENABLED == 'true' && github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.pull_request.merged == true && vars.RELEASE_APP_SLUG != '' &&
+        github.event.pull_request.user.login == format('{0}[bot]', vars.RELEASE_APP_SLUG)))
+    runs-on: ubuntu-latest
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+      RELEASE_APP_SLUG: ${{ vars.RELEASE_APP_SLUG }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set publication file paths
+        run: |
+          {
+            echo "RELEASE_CONTEXT_FILE=${RUNNER_TEMP}/release-context.json"
+            echo "RELEASE_BATCH_STATE=${RUNNER_TEMP}/publication-state.json"
+            echo "PUBLISHED_RELEASE_TAGS_FILE=${RUNNER_TEMP}/published-release-tags.txt"
+          } >> "$GITHUB_ENV"
+
+      - name: Resolve the actual merged release PR
+        id: context
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_PR_NUMBER: ${{ inputs.release_pr }}
+          RESUME_PUBLICATION: ${{ inputs.allow_resume }}
+          BUNDLE_RUN_ID: ${{ inputs.bundle_run_id }}
+        run: node scripts/release/resolve-publication-context.mjs
+
+      - name: Check out only the exact merged release SHA
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.context.outputs.release_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+        with:
+          node-version: "22.x"
+          registry-url: ${{ vars.CLOUDSMITH_NPM_URL }}
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Validate the merged release plan and published version history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh auth setup-git
+          git fetch origin main --tags
+          gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "$PUBLISHED_RELEASE_TAGS_FILE"
+          node scripts/release/validate-merged-release.mjs "$RELEASE_CONTEXT_FILE" "${RUNNER_TEMP}/release-plan.json"
+
+      - name: Install Chromium for component and consumer checks
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
+
+      - name: Run source validation
+        run: pnpm lint && pnpm lint:release && pnpm test && pnpm test:release && pnpm docs:release-contract
+
+      - name: Build and test every intended package before any tag creation
+        if: inputs.allow_resume != true
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+        run: node scripts/release/prepare-release-batch.mjs "${RUNNER_TEMP}/release-plan.json" "${RUNNER_TEMP}/release-bundle"
+
+      - name: Save the original verified bytes for inspected recovery
+        if: inputs.allow_resume != true
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release-bundle-${{ steps.context.outputs.release_sha }}
+          path: ${{ runner.temp }}/release-bundle/
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+      - name: Verify the original bundle producer before downloading
+        if: inputs.allow_resume == true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUNDLE_RUN_ID: ${{ inputs.bundle_run_id }}
+        run: node scripts/release/verify-bundle-source.mjs "$BUNDLE_RUN_ID" "${RUNNER_TEMP}/release-plan.json"
+
+      - name: Download the original bytes without rebuilding
+        if: inputs.allow_resume == true
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release-bundle-${{ steps.context.outputs.release_sha }}
+          path: ${{ runner.temp }}/release-bundle/
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.bundle_run_id }}
+          digest-mismatch: error
+
+      - name: Verify saved artifact identities and all bundle checksums
+        run: node scripts/release/verify-release-bundle.mjs "${RUNNER_TEMP}/release-plan.json" "${RUNNER_TEMP}/release-bundle"
+
+      - name: Create a short-lived publication App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: read
+
+      - name: Verify publication App identity
+        env:
+          TOKEN_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: test -n "$RELEASE_APP_SLUG" && test "$RELEASE_APP_SLUG" = "$TOKEN_SLUG"
+
+      - name: Create tags, verify all drafts, then publish and verify the batch
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RESUME_PUBLICATION: ${{ inputs.allow_resume }}
+        run: |
+          gh auth setup-git
+          args=("${RUNNER_TEMP}/release-plan.json" "${RUNNER_TEMP}/release-bundle")
+          if [[ "$RESUME_PUBLICATION" == true ]]; then args+=(--resume); fi
+          node scripts/release/publish-release-batch.mjs "${args[@]}"
+
+      - name: Save publication outcome even when inspection is required
+        if: always() && steps.context.outputs.release_sha != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: publication-state-${{ steps.context.outputs.release_sha }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/publication-state.json
+          if-no-files-found: ignore
+          retention-days: 30
