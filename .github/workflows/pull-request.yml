@@ -37,12 +37,20 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: gh api --paginate "repos/${GITHUB_REPOSITORY}/releases" --jq '.[] | select(.draft == false) | .tag_name' > "${RUNNER_TEMP}/published-release-tags.txt"
 
-      - name: Validate package release metadata
+      - name: Validate feature intent or generated release metadata
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          RELEASE_APP_SLUG: ${{ vars.RELEASE_APP_SLUG }}
           PUBLISHED_RELEASE_TAGS_FILE: ${{ runner.temp }}/published-release-tags.txt
-        run: ./scripts/release/validate-package-release-metadata.sh "$BASE_SHA" "$HEAD_SHA"
+        run: |
+          if [ -n "$RELEASE_APP_SLUG" ] && [ "$PR_AUTHOR" = "${RELEASE_APP_SLUG}[bot]" ] && [ "$BASE_BRANCH" = "main" ]; then
+            pnpm release:check-pr "$BASE_SHA" "$HEAD_SHA" --release-pr
+          else
+            pnpm release:check-pr "$BASE_SHA" "$HEAD_SHA"
+          fi
 
       - name: Run linting
         run: pnpm run lint && pnpm lint:release

@@ -4,7 +4,7 @@
   "description": "Our Future Health design system toolkit monorepo. Individual packages have independent versioning - see packages/toolkit and packages/react-components for their versions.",
   "packageManager": "pnpm@10.29.2+sha512.bef43fa759d91fd2da4b319a5a0d13ef7a45bb985a3d7342058470f9d2051a3ba8674e629672654686ef9443ad13a82da2beb9eeb3e0221c87b8154fff9d74b8",
   "engines": {
-    "node": ">=20.19.0",
+    "node": "^22.13.0 || ^24.0.0 || >=26.0.0",
     "pnpm": ">=10.0.0"
   },
   "pnpm": {
@@ -69,6 +69,10 @@
     "lint:react-components": "pnpm --filter=@ourfuturehealth/react-components run lint",
     "lint:react-consumer": "npm --prefix packages/example-react-consumer-app run lint",
     "docs:release-contract": "./scripts/release/validate-release-docs.sh",
+    "changeset": "changeset",
+    "release:plan": "node scripts/release/changeset-plan.mjs",
+    "release:version": "node scripts/release/version-packages.mjs && pnpm install --lockfile-only --ignore-scripts",
+    "release:check-pr": "node scripts/release/validate-changeset-pr.mjs",
     "test:release": "node --test scripts/release/*.test.mjs",
     "lint:release": "eslint 'scripts/release/**/*.mjs' --max-warnings 0",
     "smoke:release-artifacts": "./scripts/release/smoke-current-release-artifacts.sh",
@@ -77,6 +81,8 @@
     "test:react-components": "pnpm --filter=@ourfuturehealth/react-components run test"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.3",
+    "@changesets/get-release-plan": "5.0.2",
     "@eslint/js": "^9.39.1",
     "concurrently": "^7.6.0",
     "eslint": "^9.39.1",
