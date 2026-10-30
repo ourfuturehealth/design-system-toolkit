@@ -113,9 +113,10 @@ For either message, cancellation, or any partially published batch:
    warning, and prepare a superseding version. Never automatically redraft,
    delete, overwrite, or retag it.
 
-Before cutover, the single-package tag-triggered publisher still refuses to adopt
-an existing public release. Its draft-only resume compares the staged bytes;
-inspect published outcomes manually rather than rerunning that publisher.
+The old single-package tag-triggered publisher remains in the repository but
+cannot start from manually created release tags under the active tag ruleset.
+It refuses to adopt an existing public release. Its draft-only resume compares
+the staged bytes; inspect published outcomes manually rather than rerunning it.
 
 ## Verify the published release
 

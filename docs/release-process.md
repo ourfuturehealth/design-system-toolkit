@@ -71,13 +71,12 @@ must be verified in repository settings before activation.
 
 The publisher checks that each tag points to the merged `main` commit and
 rechecks it during publication. These checks detect movement but cannot stop
-another actor moving a tag between checks. At cutover, separate admin-managed
-rulesets for `toolkit-v*` and `react-v*` provide the preventive control: one
-restricts creation to the release App; the other restricts updates and deletion
-without routine bypasses, including for the App. The rules stay separate because
-an App bypass on a combined ruleset would also permit tag mutation. Before
-cutover, maintainers need tag-creation access for the existing publisher. The
-workflows do not configure or audit the rulesets. See
+another actor moving a tag between checks. Active admin-managed rulesets for
+`toolkit-v*` and `react-v*` provide the preventive control: one restricts
+creation to the release App; the other restricts updates and deletion without
+routine bypasses, including for the App. The rules stay separate because an App
+bypass on a combined ruleset would also permit tag mutation. The workflows do
+not configure or audit the rulesets. See
 [GitHub tag rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets).
 
 GitHub release immutability is a separate repository setting. If enabled, it
@@ -112,11 +111,11 @@ GitHub release assets. The App credential is available to trusted workflows on
 
 Before automatic publication is enabled, merging the release PR leaves the
 generated changelog, upgrade index and versions on `main` but does not publish
-them. A maintainer checks the merged SHA and package manifests, then pushes a
-canonical `toolkit-v<version>` or `react-v<version>` tag at that SHA. Each tag
-starts the existing single-package publisher. Legacy `v*` tags are historical
-and do not trigger it. Packages released together use the same merged SHA, but
-each tag has its own publication run.
+them. The old single-package publisher remains in the repository, but the active
+tag ruleset prevents maintainers from starting it with manually created
+`toolkit-v*` or `react-v*` tags. Releases are paused until the App-owned
+publisher is enabled. Legacy `v*` tags are historical and do not trigger the
+publisher.
 
 With `RELEASE_PUBLISH_AUTOMATION_ENABLED=true`, the tag-triggered publisher is
 disabled. Merging a reviewed, App-owned `changeset-release/main` PR starts

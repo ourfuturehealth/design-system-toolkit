@@ -121,8 +121,9 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
 3. Maintainers review the release PR's versions, notes and date, then merge it
    after its checks pass.
 4. After cutover, that merge starts GitHub release publication for the changed
-   packages. A verified batch triggers one Slack announcement. Until automatic
-   publication is enabled, maintainers use the existing tag-triggered publisher.
+   packages. A verified batch triggers one Slack announcement. Releases are
+   paused until automatic publication is enabled because the active tag ruleset
+   prevents manual creation of release tags.
    See [the publication flow](docs/release-process.md#publication-before-and-after-cutover).
 
 For validation commands and recovery steps, see [release operations](docs/release-operations.md).
