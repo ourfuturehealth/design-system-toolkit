@@ -46,24 +46,75 @@ describe('Card', () => {
 
   it('proxies clicks from the card surface to the primary link', async () => {
     const user = userEvent.setup();
+    const cardClick = vi.fn();
+    const parentClick = vi.fn();
 
     render(
-      <Card
-        variant="clickable"
-        href="#card-surface"
-        heading="Clickable heading"
-        description="Clickable description"
-      />,
+      <div onClick={parentClick}>
+        <Card
+          variant="clickable"
+          href="#card-surface"
+          heading="Clickable heading"
+          description="Clickable description"
+          onClick={cardClick}
+        />
+      </div>,
     );
 
-    const card = document.querySelector('.ofh-card');
     const link = screen.getByRole('link', { name: 'Clickable heading' });
     const handleClick = vi.fn((event: Event) => event.preventDefault());
 
     link.addEventListener('click', handleClick);
-    await user.click(card as HTMLElement);
+    await user.click(screen.getByText('Clickable description'));
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(cardClick).toHaveBeenCalledTimes(1);
+    expect(parentClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClick once when the primary link is clicked directly', async () => {
+    const user = userEvent.setup();
+    const cardClick = vi.fn();
+
+    render(
+      <Card
+        variant="clickable"
+        href="#primary-link"
+        heading="Clickable heading"
+        onClick={cardClick}
+      />,
+    );
+
+    const link = screen.getByRole('link', { name: 'Clickable heading' });
+    link.addEventListener('click', (event) => event.preventDefault());
+    await user.click(link);
+
+    expect(cardClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not forward a surface click when onClick prevents default', async () => {
+    const user = userEvent.setup();
+    const cardClick = vi.fn((event: React.MouseEvent<HTMLDivElement>) =>
+      event.preventDefault(),
+    );
+
+    render(
+      <Card
+        variant="clickable"
+        href="#primary-link"
+        heading="Clickable heading"
+        description="Clickable description"
+        onClick={cardClick}
+      />,
+    );
+
+    const link = screen.getByRole('link', { name: 'Clickable heading' });
+    const linkClick = vi.fn((event: Event) => event.preventDefault());
+    link.addEventListener('click', linkClick);
+    await user.click(screen.getByText('Clickable description'));
+
+    expect(cardClick).toHaveBeenCalledTimes(1);
+    expect(linkClick).not.toHaveBeenCalled();
   });
 
   it('does not proxy clicks from nested interactive elements', async () => {
@@ -97,14 +148,18 @@ describe('Card', () => {
 
   it('uses the action link as the primary target when no href is provided', async () => {
     const user = userEvent.setup();
+    const cardClick = vi.fn();
+    const actionClick = vi.fn();
 
     render(
       <Card
         variant="clickable"
         number="12"
+        onClick={cardClick}
         actionLink={{
           text: 'Open tasks',
           href: '#open-tasks',
+          attributes: { onClick: actionClick },
         }}
       />,
     );
@@ -117,6 +172,8 @@ describe('Card', () => {
     await user.click(card as HTMLElement);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(actionClick).toHaveBeenCalledTimes(1);
+    expect(cardClick).toHaveBeenCalledTimes(1);
   });
 
   it('renders icon, tag, metadata and helper text', () => {
@@ -164,6 +221,109 @@ describe('Card', () => {
 
     expect(ref.current).toBeInstanceOf(HTMLDivElement);
     expect(ref.current).toHaveClass('ofh-card');
+  });
+
+  describe('openInNewWindow', () => {
+    it('sets target and rel on the heading link when href is provided', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#external"
+          heading="External link"
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /External link/i });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('includes a visually hidden new-window announcement in the heading link', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#external"
+          heading="External link"
+          openInNewWindow
+        />,
+      );
+
+      expect(screen.getByText('(opens in new window)')).toBeInTheDocument();
+    });
+
+    it('does not set target or rel on the heading link by default', () => {
+      render(
+        <Card variant="clickable" href="#internal" heading="Internal link" />,
+      );
+
+      const link = screen.getByRole('link', { name: 'Internal link' });
+      expect(link).not.toHaveAttribute('target');
+      expect(link).not.toHaveAttribute('rel');
+    });
+
+    it('sets target and rel on the action link when it is the primary link', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{ text: 'Open tasks', href: '#tasks' }}
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /Open tasks/i });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('does not set target on the action link when href is also provided', () => {
+      render(
+        <Card
+          variant="clickable"
+          href="#primary"
+          actionLink={{ text: 'Open tasks', href: '#tasks' }}
+          openInNewWindow
+        />,
+      );
+
+      const actionLink = screen.getByRole('link', { name: 'Open tasks' });
+      expect(actionLink).not.toHaveAttribute('target');
+    });
+
+    it('does not override target set via actionLink.attributes when openInNewWindow is false', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{
+            text: 'Open tasks',
+            href: '#tasks',
+            attributes: { target: '_blank', rel: 'noopener noreferrer' },
+          }}
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: 'Open tasks' });
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('does not duplicate target or rel when openInNewWindow is true and actionLink.attributes also sets them', () => {
+      render(
+        <Card
+          variant="clickable"
+          actionLink={{
+            text: 'Open tasks',
+            href: '#tasks',
+            attributes: { target: '_blank', rel: 'noopener noreferrer' },
+          }}
+          openInNewWindow
+        />,
+      );
+
+      const link = screen.getByRole('link', { name: /Open tasks/i });
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toBe('noopener noreferrer');
+    });
   });
 
   it('has no accessibility violations for a clickable card', async () => {

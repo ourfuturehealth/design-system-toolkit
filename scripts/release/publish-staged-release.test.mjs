@@ -62,6 +62,14 @@ test('new drafts are retrieved through the release list, not the published-tag e
   assert(lookup > creation && lookup < upload, 'Reload the newly created draft before uploading');
 });
 
+test('waits for a newly created draft to appear in the release list', () => {
+  const { result, state } = runPublisher({ hiddenDraftReads: 2 });
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(state.commands.filter(command => command[2] === 'create').length, 1);
+  assert.equal(state.commands.filter(command => command[0] === 'gh' && command[1] === 'api').length, 4);
+  assert.equal(state.releases[0].draft, false);
+});
+
 test('published releases are never overwritten', () => {
   const { result, state } = runPublisher({ releases: [{ tag_name: 'toolkit-v4.26.1', draft: false, assets: [] }] });
   assert.notEqual(result.status, 0);

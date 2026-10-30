@@ -8,15 +8,15 @@ on:
       - "react-v*"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: design-system-release
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Create release
+  validate:
+    name: Validate release
     runs-on: ubuntu-latest
     env:
       CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
         with:
-          node-version: "22.x"
+          node-version-file: .nvmrc
           registry-url: ${{ vars.CLOUDSMITH_NPM_URL }}
 
       - name: Enable Corepack and pnpm
@@ -56,11 +56,36 @@ jobs:
       - name: Run linting
         run: pnpm lint && pnpm lint:release
 
-      - name: Install Playwright browser for tests
-        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
-
       - name: Run tests and release documentation checks
         run: pnpm test && pnpm test:release && pnpm docs:release-contract
+
+  build:
+    name: Build and verify release assets
+    needs: validate
+    runs-on: ubuntu-latest
+    env:
+      CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
+        with:
+          node-version-file: .nvmrc
+          registry-url: ${{ vars.CLOUDSMITH_NPM_URL }}
+
+      - name: Enable Corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.29.2 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Determine package from tag
         id: package_info
@@ -91,6 +116,10 @@ jobs:
           node scripts/release/validate-artifact-identity.mjs "$PACKAGE_DIR/package.json" "$TARBALL"
           ./scripts/release/smoke-package-tarball.sh --package-dir "$PACKAGE_DIR" --tarball "$TARBALL" --managers yarn,npm,pnpm
 
+      - name: Install Playwright browser for toolkit ZIP check
+        if: steps.package_info.outputs.PACKAGE == 'toolkit'
+        run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
+
       - name: Test compiled toolkit ZIP
         if: steps.package_info.outputs.PACKAGE == 'toolkit'
         env:
@@ -116,13 +145,87 @@ jobs:
           ./scripts/release/render-release-notes.sh "${args[@]}" > "${RUNNER_TEMP}/release-notes.md"
           echo "NOTES_PATH=${RUNNER_TEMP}/release-notes.md" >> "$GITHUB_OUTPUT"
 
+      - name: Stage release notes and checksums
+        env:
+          STAGE_DIR: ${{ steps.release_assets.outputs.STAGE_DIR }}
+          NOTES_PATH: ${{ steps.release_notes.outputs.NOTES_PATH }}
+        run: |
+          cp "$NOTES_PATH" "$STAGE_DIR/release-notes.md"
+          printf '%s\n' "$GITHUB_REF_NAME" > "$STAGE_DIR/release-tag.txt"
+          printf '%s\n' "$GITHUB_SHA" > "$STAGE_DIR/source-sha.txt"
+          (
+            cd "$STAGE_DIR"
+            files=(release-notes.md *.tgz)
+            if [[ "$GITHUB_REF_NAME" == toolkit-v* ]]; then files+=( *.zip ); fi
+            sha256sum "${files[@]}" > SHA256SUMS
+          )
+
+      - name: Save verified release assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-assets-${{ github.run_id }}
+          path: ${{ steps.release_assets.outputs.STAGE_DIR }}/
+          if-no-files-found: error
+          overwrite: true
+          compression-level: 0
+
+  publish:
+    name: Publish release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Download verified release assets
+        uses: actions/download-artifact@v4
+        with:
+          name: release-assets-${{ github.run_id }}
+          path: ${{ runner.temp }}/release-assets
+
+      - name: Verify downloaded release assets
+        id: release_assets
+        env:
+          STAGE_DIR: ${{ runner.temp }}/release-assets
+        run: |
+          [[ "$(cat "$STAGE_DIR/release-tag.txt")" == "$GITHUB_REF_NAME" ]]
+          [[ "$(cat "$STAGE_DIR/source-sha.txt")" == "$GITHUB_SHA" ]]
+          (
+            cd "$STAGE_DIR"
+            sha256sum -c SHA256SUMS
+          )
+          if [[ "$GITHUB_REF_NAME" == toolkit-v* ]]; then
+            version="${GITHUB_REF_NAME#toolkit-v}"
+            tarball="$STAGE_DIR/ourfuturehealth-toolkit-${version}.tgz"
+            zip="$STAGE_DIR/ofh-design-system-toolkit-${version}.zip"
+            test -f "$zip"
+          else
+            version="${GITHUB_REF_NAME#react-v}"
+            tarball="$STAGE_DIR/ourfuturehealth-react-components-${version}.tgz"
+            zip=""
+          fi
+          test -f "$tarball"
+          test -f "$STAGE_DIR/release-notes.md"
+          echo "TARBALL_PATH=$tarball" >> "$GITHUB_OUTPUT"
+          echo "ZIP_PATH=$zip" >> "$GITHUB_OUTPUT"
+
       - name: Stage draft, verify uploaded assets, and publish
         env:
           GH_TOKEN: ${{ github.token }}
-          NOTES_PATH: ${{ steps.release_notes.outputs.NOTES_PATH }}
+          NOTES_PATH: ${{ runner.temp }}/release-assets/release-notes.md
           TARBALL: ${{ steps.release_assets.outputs.TARBALL_PATH }}
           ZIP: ${{ steps.release_assets.outputs.ZIP_PATH }}
         run: |
+          gh auth setup-git
           assets=("$TARBALL")
           if [[ -n "$ZIP" ]]; then assets+=("$ZIP"); fi
           node scripts/release/publish-staged-release.mjs "$GITHUB_REF_NAME" "$NOTES_PATH" "${assets[@]}"

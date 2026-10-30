@@ -27,7 +27,16 @@ export default () => {
           return;
         }
 
-        primaryLink.click();
+        const stopForwardedClick = (forwardedEvent) => {
+          forwardedEvent.stopPropagation();
+        };
+
+        primaryLink.addEventListener('click', stopForwardedClick);
+        try {
+          primaryLink.click();
+        } finally {
+          primaryLink.removeEventListener('click', stopForwardedClick);
+        }
       });
     }
   });

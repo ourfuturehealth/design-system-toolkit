@@ -85,7 +85,8 @@ const meta: Meta<CookieBannerStoryArgs> = {
           <p>
             Use the default copy unless your product has approved changes. Pass
             <code>onAccept</code> and <code>onReject</code> to handle the
-            choice in your application.
+            choice in your application. The banner is hidden in server-rendered
+            HTML and revealed when React initializes it.
           </p>
           <Source code={defaultSource} language="tsx" />
 

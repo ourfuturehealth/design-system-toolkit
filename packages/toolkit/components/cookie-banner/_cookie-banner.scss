@@ -14,6 +14,10 @@
   flex-direction: column;
 }
 
+.ofh-cookie-banner[hidden] {
+  display: none;
+}
+
 .ofh-cookie-banner__heading {
   @include ofh-font('heading-lg', $weight: bold);
 
