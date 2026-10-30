@@ -85,6 +85,14 @@ A mismatch or unexpected asset stops the job for maintainer inspection; it does
 not replace the asset. Failures reading GitHub state stop the workflow rather
 than being interpreted as an absent tag or release.
 
+Validation and build are separate jobs. A failed build can be retried through
+GitHub's failed-jobs rerun, which may repeat successful dependency jobs such as
+validation. The publish job saves a
+`publication-attempt-<run ID>` artifact before remote changes can start.
+A publish-job rerun is allowed only if that marker is absent. Once the marker
+exists, inspect the release state and use a new manual dispatch with the
+original bundle; rerunning the job or an inspected resume stops.
+
 `Publication outcome is unknown` means the publish request failed without a
 reliable result. The release may be public even though the command failed.
 `Publication completed ... final verification failed` means the publish command
@@ -95,7 +103,8 @@ For either message, cancellation, or any partially published batch:
 
 1. Inspect every intended release's draft/public state, its tag target, and the
    expected SHA/checksums in the original `release-bundle-<SHA>` artifact.
-   `publication-state.json` and job logs help identify where the run stopped;
+   `publication-state.json`, the publication-attempt marker and job logs help
+   identify where the run stopped;
    a false/missing completion marker does not prove nothing was published.
 2. Download existing assets and compare their SHA-256 digests against the bundle.
    If GitHub is unreachable, wait before deciding whether publication completed.
@@ -103,8 +112,8 @@ For either message, cancellation, or any partially published batch:
    the merged `release_pr` number, `allow_resume` checked, and `bundle_run_id`
    set to the original run containing the saved verified bytes. The workflow
    checks the producer, source identity and all checksums before minting the App
-   token. It does not rebuild the bundle. A normal rerun without explicit resume
-   stops; a missing/expired/mismatched bundle needs a reviewed recovery plan.
+   token. It reruns source validation but does not rebuild the bundle. A
+   missing, expired or mismatched bundle needs a reviewed recovery plan.
 4. Resume verifies already-public packages and skips them without editing notes,
    assets or tags. It fills only missing matching draft assets and publishes only
    the remaining drafts. If all intended releases are already public and match,

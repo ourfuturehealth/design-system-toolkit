@@ -142,17 +142,22 @@ for inspection; remote tags and assets still require an explicitly approved resu
 and must match the exact source and original bytes. A newer release blocks an
 older batch from resuming.
 
-It runs lint, tests and docs checks, then builds and smoke-tests every intended
-package. It saves a `release-bundle-<SHA>` Actions artifact containing canonical
-assets, SHA-pinned reviewed notes and their SHA-256 checksums. The saved bundle
-and publication-state artifacts expire after 30 days. Do not rebuild substitutes
+Validation, asset preparation and publication run as dependent jobs. Validation
+checks lint, tests and docs, then saves the release plan. The build job
+smoke-tests every intended package and saves a `release-bundle-<SHA>` Actions
+artifact containing canonical assets, SHA-pinned reviewed notes and their
+SHA-256 checksums. The saved plan, bundle, publication-attempt marker and
+publication-state artifacts expire after 30 days. Do not rebuild substitutes
 for an existing release if its original bundle has expired.
 
-Only after these checks and bundle verification does it mint a short-lived App
-token. It inspects the entire remote batch, creates missing tags through the
-create-reference API, and checks each target SHA. It stages every GitHub release
-as draft, uploads without overwriting, and downloads and checks every asset before
-the first release becomes public. It verifies tags and public assets again afterward.
+The publication job downloads and verifies the saved bundle before minting a
+short-lived App token. It saves a publication-attempt marker before any remote
+change, so an ordinary job rerun after that point requires inspection and an
+explicit resume. It inspects the entire remote batch, creates missing tags through
+the create-reference API, and checks each target SHA. It stages every GitHub
+release as draft, uploads without overwriting, and downloads and checks every
+asset before the first release becomes public. It verifies tags and public assets
+again afterward.
 
 GitHub publishes releases separately, so this is not an atomic transaction. A
 late failure can leave one package public and another in draft. Final verification
