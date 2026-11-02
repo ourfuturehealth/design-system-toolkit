@@ -45,6 +45,9 @@ repository generator writes dated entries in the root changelog and upgrade
 index; it does not create per-package changelogs. A SHA-pinned PR action commits
 the generated files as the dedicated release App to `changeset-release/main` and
 creates or updates one release PR. It does not publish packages or create tags.
+For each pending changeset, the workflow identifies its merged feature PR and
+requests its human author as a reviewer. If it cannot identify one merged PR or
+a human author, the workflow warns so a maintainer can assign a reviewer.
 
 The release PR contains the versioned manifests, lockfile when needed, generated
 docs and `.changeset/release.json`. That record identifies the reviewed `main`
