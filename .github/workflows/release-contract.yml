@@ -5,6 +5,9 @@ on:
     paths:
       - ".github/workflows/release.yml"
       - ".github/workflows/release-contract.yml"
+      - ".github/workflows/release-pr.yml"
+      - ".github/workflows/pull-request.yml"
+      - ".changeset/**"
       - "README.md"
       - "UPGRADING.md"
       - "docs/**"
@@ -43,7 +46,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Validate docs and release templates
-        run: pnpm docs:release-contract
+        run: pnpm test:release && pnpm docs:release-contract
 
       - name: Install Playwright browser for release-contract checks
         run: pnpm --filter=@ourfuturehealth/react-components exec playwright install --with-deps chromium
