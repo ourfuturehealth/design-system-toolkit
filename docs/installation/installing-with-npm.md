@@ -46,16 +46,21 @@ Use a specific tag for production upgrades. Replace `{version}` with the toolkit
 
 ### Unreleased maintainer testing
 
-Do not point consumers at `#main` or the old git-subdirectory install syntax.
-
-For unreleased testing:
+To test a branch in a consumer before release, check out that branch and run
+these commands from the monorepo root with dependencies installed:
 
 ```bash
 pnpm --filter=@ourfuturehealth/toolkit run zip
 npm pack ./packages/toolkit --ignore-scripts
 ```
 
-Install the resulting local `.tgz` file in the consumer application.
+`npm pack` writes `ourfuturehealth-toolkit-{version}.tgz` to the monorepo root.
+In the consumer application, temporarily replace the published
+`@ourfuturehealth/toolkit` dependency URL with a `file:` path to that tarball.
+Install with the application's usual package manager, then run its build and
+tests. Restore the published dependency URL and lockfile before committing
+consumer changes. Do not use `#main` or the old git-subdirectory install syntax
+as a release dependency.
 
 ### Compiled files only
 
