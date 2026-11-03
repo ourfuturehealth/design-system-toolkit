@@ -115,16 +115,14 @@ For the background on tag naming and monorepo versioning, see [Release Versionin
 1. A contributor adds a [changeset](.changeset/README.md) to a feature PR that
    changes a public package. It records the affected packages, bump type,
    summary and consumer guidance; the contributor does not edit package versions.
-2. With release PR automation enabled, the release App gathers merged feature
-   PR changesets into a release PR. It calculates each package's next version
-   and updates the root changelog and upgrade guide for review.
-3. Maintainers review the release PR's versions, notes and date, then merge it
-   after its checks pass.
-4. After cutover, that merge starts GitHub release publication for the changed
-   packages. A verified batch triggers one Slack announcement. Releases are
-   paused until automatic publication is enabled because the active tag ruleset
-   prevents manual creation of release tags.
-   See [the publication flow](docs/release-process.md#publication-before-and-after-cutover).
+2. After feature PRs merge, the release App collects their changesets in one
+   release PR. It calculates each package's next version and updates the root
+   changelog and upgrading guide for review.
+3. Reviewers check the release PR's versions, guidance and date, then merge it
+   after approval and the required checks.
+4. That merge publishes GitHub Releases for the affected packages. A verified
+   release batch triggers one Slack announcement. See
+   [the publication flow](docs/release-process.md#publication).
 
 For validation commands and recovery steps, see [release operations](docs/release-operations.md).
 

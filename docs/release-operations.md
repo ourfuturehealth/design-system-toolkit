@@ -1,6 +1,31 @@
 # Release operations
 
-Validation and recovery procedures for the [release process](release-process.md).
+Preparation, validation and recovery procedures for the
+[release process](release-process.md).
+
+## Release PR preparation
+
+`Prepare release PR` normally runs after a merge to `main`. If that run fails or
+is missed, a maintainer can dispatch it manually from `main` to process the
+pending changesets. The workflow fails if either package's current version has
+no published GitHub Release; resolve the missing baseline before retrying.
+
+## Pause and resume automation
+
+Set the `RELEASE_PR_AUTOMATION_ENABLED` repository variable to `false` to stop
+new or updated release PRs. Set `RELEASE_PUBLISH_AUTOMATION_ENABLED` to `false`
+to stop automatic publication when a release PR merges. Check running workflows
+and release state before relying on either switch; changing a variable does not
+undo work already started.
+
+Do not merge a release PR while publication is paused. Re-enabling publication
+does not retroactively start a run for a PR merged during the pause. After
+checking the App, required checks, tags, releases and Slack destination, set
+`RELEASE_PUBLISH_AUTOMATION_ENABLED` to `true` first, then
+`RELEASE_PR_AUTOMATION_ENABLED` to `true`. If a release PR was merged during the
+pause and no publication began, dispatch `Publish merged release` from `main`
+with its `release_pr` number and `allow_resume` left off. If publication may have
+started, inspect it and follow [Recovery](#recovery) instead.
 
 ## Local validation
 
@@ -126,6 +151,19 @@ The old single-package tag-triggered publisher remains in the repository but
 cannot start from manually created release tags under the active tag ruleset.
 It refuses to adopt an existing public release. Its draft-only resume compares
 the staged bytes; inspect published outcomes manually rather than rerunning it.
+
+## Slack announcement recovery
+
+After a verified publication, `Announce verified release in Slack` sends one
+message through the `DS Release Announcement` Slack workflow. If the job fails
+or its result is uncertain, inspect `#design-system`, the Slack workflow activity
+and the `slack-announcement-<run ID>-<attempt>` Actions artifact before sending
+again. A GitHub release remains published even if its announcement fails.
+
+To send an announcement for an earlier verified publication, dispatch
+`Announce verified release in Slack` with that publication's run ID and the
+inspection confirmation. Do not rerun an uncertain submission without checking
+whether the message already appeared.
 
 ## Verify the published release
 
