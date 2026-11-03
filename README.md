@@ -107,24 +107,24 @@ We recommend that you [install Our Future Health design system toolkit using nod
 
 You can also [install Our Future Health design system toolkit using our compiled files](/docs/installation/installing-compiled.md), if you are not currently using a package manager.
 
-## How to make a new release
+## How releases work
 
 This monorepo uses **independent versioning** for each package. See the detailed [Release Process documentation](/docs/release-process.md) for full instructions.
 For the background on tag naming and monorepo versioning, see [Release Versioning Strategy](/docs/release-versioning-strategy.md).
 
-1. Run `pnpm changeset` in your feature branch. Record the affected packages,
-   bump type, reviewed summary and consumer guidance using
-   [the changeset format](.changeset/README.md). Keep package versions unchanged.
-2. Review and merge the feature PR. Once the release App is configured, it creates
-   or updates a release PR with calculated versions, the root changelog and the
-   existing upgrade index. Each package keeps its own version sequence.
-3. Review that release PR, confirm the release date and run the required checks
-   before merging it to `main`.
-4. Publication currently starts with canonical tags at that exact merged SHA;
-   follow [the publication steps](docs/release-process.md#start-publication).
-   Automatic App-owned publication and Slack announcements are separate work.
+1. A contributor adds a [changeset](.changeset/README.md) to a feature PR that
+   changes a public package. It records the affected packages, bump type,
+   summary and consumer guidance; the contributor does not edit package versions.
+2. After feature PRs merge, the release App collects their changesets in one
+   release PR. It calculates each package's next version and updates the root
+   changelog and upgrading guide for review.
+3. Reviewers check the release PR's versions, guidance and date, then merge it
+   after approval and the required checks.
+4. That merge publishes GitHub Releases for the affected packages. A verified
+   release batch triggers one Slack announcement. See
+   [the publication flow](docs/release-process.md#publication).
 
-For detailed instructions, release types, and troubleshooting, see the [Release Process documentation](/docs/release-process.md).
+For validation commands and recovery steps, see [release operations](docs/release-operations.md).
 
 ## Browsers and assistive technology
 

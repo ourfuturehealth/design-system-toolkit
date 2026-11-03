@@ -23,13 +23,19 @@ behaviour. Write the actual steps in `Migration notes`. Use separate changesets
 when packages need different instructions. Avoid placeholders and empty changesets.
 
 Review this text as part of the feature PR: it supplies the root changelog,
-upgrade index and release notes. Do not bump package versions or add future
+upgrading guide and release notes. Do not bump package versions or add future
 release entries to `CHANGELOG.md` / `UPGRADING.md` in a feature PR.
+Include packages affected indirectly by shared styles or assets, not only the
+package containing the edited source file.
+
+The generator writes `.changeset/release.json` with the exact reviewed base SHA,
+consumed changesets and intended package versions/tags. Feature PRs must not
+change this record. It identifies the batch to publish after the release PR merges.
 
 Choose `patch` for compatible fixes, `minor` for compatible additions and `major`
-for breaking API changes in either package. This applies while React is pre-1.0:
-a major changeset after `0.26.1` produces `1.0.0`. Describe the migration in the
-changeset before proposing a breaking release.
+for breaking API changes in either package. This also applies while React is
+pre-1.0: a major changeset moves a `0.x` version to `1.0.0`. Describe the
+migration in the changeset before proposing a breaking release.
 
 Tests, stories and package README-only edits do not require a release. Public
 package source, styles, templates, assets and manifest changes do. Repository

@@ -3,13 +3,13 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { readChangesetPlan } from './changeset-plan.mjs';
-import { packages, parseChangelog } from './release-metadata.mjs';
+import { createReleaseRecord, readChangesetPlan } from './changeset-plan.mjs';
+import { packages, parseChangelog, validateVersion } from './release-metadata.mjs';
 import { renderReleaseDocs } from './version-packages.mjs';
 
 const [baseRef, headRef, mode] = process.argv.slice(2);
-assert(baseRef && headRef && (!mode || mode === '--release-pr') && process.argv.length <= 5,
-  'Usage: validate-changeset-pr.mjs <base-ref> <head-ref> [--release-pr]');
+assert(baseRef && headRef && (!mode || ['--release-pr', '--publication'].includes(mode)) && process.argv.length <= 5,
+  'Usage: validate-changeset-pr.mjs <base-ref> <head-ref> [--release-pr|--publication]');
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
 git('rev-parse', '--verify', `${baseRef}^{commit}`);
 if (headRef !== 'WORKTREE') git('rev-parse', '--verify', `${headRef}^{commit}`);
@@ -40,9 +40,11 @@ async function planAt(ref, generateManifests = false) {
   }
 }
 
-if (mode === '--release-pr') {
+if (mode) {
   const plan = await planAt(baseRef, true);
   assert(plan.releases.length, 'Release PR has no pending changesets on its base');
+  assert.deepEqual(JSON.parse(readAt(headRef, '.changeset/release.json')), createReleaseRecord(plan, git('rev-parse', baseRef)),
+    'Release record must match the exact reviewed base, consumed changesets and package versions');
   for (const pkg of packages) {
     const release = plan.releases.find(item => item.name === pkg.name);
     const expected = release?.newVersion || JSON.parse(readAt(baseRef, pkg.manifest)).version;
@@ -52,7 +54,7 @@ if (mode === '--release-pr') {
       `${pkg.name}: manifest does not match Changesets output; keep API and dependency edits in feature PRs`);
   }
   assert.equal((await planAt(headRef)).changesets.length, 0, 'Release PR must consume the pending changesets');
-  const allowed = ['CHANGELOG.md', 'UPGRADING.md', 'pnpm-lock.yaml', ...packages.map(pkg => pkg.manifest),
+  const allowed = ['CHANGELOG.md', 'UPGRADING.md', 'pnpm-lock.yaml', '.changeset/release.json', ...packages.map(pkg => pkg.manifest),
     ...plan.changesets.map(item => `.changeset/${item.id}.md`)];
   assert(files.filter(Boolean).every(path => allowed.includes(path)), 'Release PR must not include consumer code or unrelated changes');
   const headChangelog = readAt(headRef, 'CHANGELOG.md');
@@ -61,8 +63,20 @@ if (mode === '--release-pr') {
   const expectedDocs = renderReleaseDocs(plan, readAt(baseRef, 'CHANGELOG.md'), readAt(baseRef, 'UPGRADING.md'), dates[0]);
   assert.equal(headChangelog, expectedDocs.changelog, 'Changelog must match the reviewed changeset summaries');
   assert.equal(readAt(headRef, 'UPGRADING.md'), expectedDocs.guide, 'Upgrade guidance must match the reviewed changesets');
-  execFileSync(process.execPath, [fileURLToPath(new URL('./validate-package-release-metadata.mjs', import.meta.url)), baseRef, headRef], { stdio: 'inherit' });
+  if (mode === '--publication') {
+    assert(process.env.PUBLISHED_RELEASE_TAGS_FILE, 'Publication requires published version history');
+    const tags = [...git('tag', '--list').split('\n'), ...readFileSync(process.env.PUBLISHED_RELEASE_TAGS_FILE, 'utf8').split('\n')];
+    assert(dates[0] <= new Date().toISOString().slice(0, 10), 'Publication date cannot be in the future');
+    for (const release of plan.releases) {
+      const ownTag = `${release.prefix}${release.newVersion}`;
+      const versions = tags.filter(tag => tag.startsWith(release.prefix) && tag !== ownTag).map(tag => tag.slice(release.prefix.length));
+      validateVersion(release.newVersion, [release.oldVersion, ...versions]);
+    }
+  } else {
+    execFileSync(process.execPath, [fileURLToPath(new URL('./validate-package-release-metadata.mjs', import.meta.url)), baseRef, headRef], { stdio: 'inherit' });
+  }
 } else {
+  assert(!files.includes('.changeset/release.json'), 'Only a generated release PR may change the release record');
   for (const pkg of packages) {
     assert.equal(JSON.parse(readAt(headRef, pkg.manifest)).version, JSON.parse(readAt(baseRef, pkg.manifest)).version,
       `${pkg.name}: do not change package versions in feature PRs; add a changeset`);

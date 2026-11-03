@@ -15,7 +15,6 @@ We've compiled a list of contributing guidance to make it easier for you to cont
 - [Application architecture](docs/contributing/application-architecture.md)
 - [Material icons workflow](docs/contributing/material-icons.md)
 - [Coding standards and style guide](docs/contributing/coding-standards.md)
-- [Tooling](docs/contributing/tooling.md)
 - [Linting](docs/contributing/linting.md)
 - [Manual testing](docs/contributing/testing.md)
 - [Automated testing](docs/contributing/testing.md#automated-testing)
@@ -23,3 +22,7 @@ We've compiled a list of contributing guidance to make it easier for you to cont
 - [Git style guide](docs/contributing/git-style-guide.md)
 - [Changesets and consumer upgrade guidance](.changeset/README.md)
 - [Release process](docs/release-process.md)
+
+For a feature PR that changes a public package, run `pnpm changeset` and commit
+the generated file with your code. The changeset guide above explains the
+required release summary and consumer guidance.

@@ -75,6 +75,7 @@ jobs:
           pnpm lint:release
           pnpm test:release
           pnpm docs:release-contract
+          cp .changeset/release.json "${RUNNER_TEMP}/release-reviewer-record.json"
 
       - name: Create release App token
         if: steps.plan.outputs.has_changesets == 'true'
@@ -95,6 +96,7 @@ jobs:
 
       - name: Create or update the release PR
         if: steps.plan.outputs.has_changesets == 'true'
+        id: release-pr
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -113,3 +115,11 @@ jobs:
             pnpm-lock.yaml
             CHANGELOG.md
             UPGRADING.md
+
+      - name: Request reviews from feature PR authors
+        if: steps.plan.outputs.has_changesets == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RELEASE_PR_NUMBER: ${{ steps.release-pr.outputs.pull-request-number }}
+          RELEASE_RECORD_FILE: ${{ runner.temp }}/release-reviewer-record.json
+        run: node scripts/release/request-release-reviewers.mjs

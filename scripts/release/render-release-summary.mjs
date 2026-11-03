@@ -14,7 +14,9 @@ if (tarball) assert.equal(tarball, `${pkg.name.replace('@', '').replace('/', '-'
 const entry = parseChangelog(readFileSync('CHANGELOG.md', 'utf8')).get(tag);
 assert(entry, `Missing release summary: ${tag}`);
 const decision = upgradeDecision(readFileSync('UPGRADING.md', 'utf8'), pkg.name, version);
-const repo = 'https://github.com/ourfuturehealth/design-system-toolkit';
+const repository = process.env.GITHUB_REPOSITORY || 'ourfuturehealth/design-system-toolkit';
+assert(/^[A-Za-z0-9][A-Za-z0-9._-]*\/[A-Za-z0-9][A-Za-z0-9._-]*$/.test(repository), 'Invalid release repository: expected owner/name');
+const repo = `https://github.com/${repository}`;
 const guidance = decision.guidance.replace(/\]\(#([^)]*)\)/g, `](${repo}/blob/${sourceRef}/UPGRADING.md#$1)`);
 const summary = entry.summary.join('\n').replace(/\]\((UPGRADING|CHANGELOG)\.md(#[^)]*)?\)/g, `](${repo}/blob/${sourceRef}/$1.md$2)`);
 process.stdout.write(`\n## Changes\n\n${summary}\n\n## Upgrade decision\n\n${decision.status}. ${guidance}\n\n[Full changelog](${repo}/blob/${sourceRef}/CHANGELOG.md)\n`);

@@ -17,6 +17,7 @@ concurrency:
 jobs:
   validate:
     name: Validate release
+    if: vars.RELEASE_PUBLISH_AUTOMATION_ENABLED != 'true'
     runs-on: ubuntu-latest
     env:
       CLOUDSMITH_NPM_REGISTRY_TOKEN: ${{ secrets.CLOUDSMITH_NPM_RO_TOKEN }}
