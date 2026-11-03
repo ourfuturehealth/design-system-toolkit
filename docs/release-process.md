@@ -40,8 +40,8 @@ changesets. It checks that the current versions of both packages have published
 GitHub Releases before planning the next versions. If either baseline release is
 missing, preparation fails and the Actions run shows which version needs attention.
 The workflow calculates the next version of each affected package and writes
-dated entries in the root changelog (`CHANGELOG.md`) and upgrading guide
-(`UPGRADING.md`).
+dated entries in the root [changelog](../CHANGELOG.md) and
+[upgrading guide](../UPGRADING.md).
 
 The release App creates or updates a single release PR. Feature PRs merged while
 it is open are added to that PR, so one release can contain several features.
