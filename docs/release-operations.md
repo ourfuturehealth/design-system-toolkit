@@ -1,156 +1,111 @@
 # Release operations
 
-Preparation, validation and recovery procedures for the
-[release process](release-process.md).
+Checks and recovery steps for the [release process](release-process.md).
 
 ## Release PR preparation
 
-`Prepare release PR` normally runs after a merge to `main`. If that run fails or
-is missed, a maintainer can dispatch it manually from `main` to process the
-pending changesets. The workflow fails if either package's current version has
-no published GitHub Release; resolve the missing baseline before retrying.
+`Prepare release PR` runs after a merge to `main`. If it fails or misses a merge,
+open its Actions run to find the cause. After fixing it, run the workflow manually
+from `main` to collect pending changesets.
+
+If the run says `Publish and verify <tag> before preparing another release`, a
+package manifest names a version that has no matching public GitHub Release.
+Check the release for that tag and the preceding release PR. If its publication
+was paused, follow [missed publication](#release-pr-merged-while-publication-was-off).
+If publication started but did not finish, follow [Recovery](#recovery). Correct
+an incorrect manifest through a reviewed PR. Do not create a replacement tag by
+hand. Once the manifest and published release agree, run `Prepare release PR`
+again. If none of these cases explains the mismatch, stop for a reviewed
+recovery plan.
 
 ## Pause and resume automation
 
-Set the `RELEASE_PR_AUTOMATION_ENABLED` repository variable to `false` to stop
-new or updated release PRs. Set `RELEASE_PUBLISH_AUTOMATION_ENABLED` to `false`
-to stop automatic publication when a release PR merges. Check running workflows
-and release state before relying on either switch; changing a variable does not
-undo work already started.
+Both repository variables are normally `true`:
 
-Do not merge a release PR while publication is paused. Re-enabling publication
-does not retroactively start a run for a PR merged during the pause. After
-checking the App, required checks, tags, releases and Slack destination, set
-`RELEASE_PUBLISH_AUTOMATION_ENABLED` to `true` first, then
-`RELEASE_PR_AUTOMATION_ENABLED` to `true`. If a release PR was merged during the
-pause and no publication began, dispatch `Publish merged release` from `main`
-with its `release_pr` number and `allow_resume` left off. If publication may have
-started, inspect it and follow [Recovery](#recovery) instead.
+| Variable | When set to `false` |
+| --- | --- |
+| `RELEASE_PR_AUTOMATION_ENABLED` | `Prepare release PR` skips new or updated release PRs. Pending changesets remain on `main`. |
+| `RELEASE_PUBLISH_AUTOMATION_ENABLED` | `Publish merged release` skips publication when a release PR merges. The older tag-triggered workflow becomes eligible if a matching tag is created, so this variable alone is not a complete stop for every publisher. |
 
-## Local validation
+Changing a variable does not cancel a run already in progress. To resume the
+normal flow, set the publication variable to `true`, then the release-PR variable
+to `true`. If changesets accumulated while preparation was off, run
+`Prepare release PR` manually from `main`.
 
-Install with the pinned package manager and run:
+### Release PR merged while publication was off
 
-```bash
-pnpm install --frozen-lockfile
-pnpm lint
-pnpm lint:release
-pnpm test
-pnpm test:release
-pnpm build
-pnpm docs:release-contract
-pnpm --filter=@ourfuturehealth/react-components exec playwright install chromium
-NPM_CONFIG_REGISTRY=https://registry.npmjs.org pnpm smoke:release-artifacts
-```
+Turning publication back on does not publish an already merged release PR.
 
-The artifact smoke command:
+1. Set `RELEASE_PUBLISH_AUTOMATION_ENABLED` to `true`.
+2. Find the merged release PR number. Check that no publication started for it
+   and that its intended tags and releases do not already exist. If publication
+   may have started, follow [Recovery](#recovery) instead.
+3. In Actions, run `Publish merged release` from `main` with that `release_pr`
+   number. Leave `allow_resume` off and `bundle_run_id` empty.
+4. [Verify the published release](#verify-the-published-release). If several
+   release PRs were missed, handle them in merge order, checking each result
+   before starting the next.
 
-- Builds and packs each package into a temporary staging directory outside its tree.
-- Checks the name and version inside each tarball against its manifest.
-- Installs and exercises tarballs through Yarn 1, npm, and pnpm using the public registry.
-- Extracts the toolkit ZIP, checks CSS/JS/assets and local CSS references, and
-  tests compiled styles and clickable-card JavaScript in Chromium. The current
-  bundle uses a font stack and does not embed font files.
-- Copies the React consumer example into an isolated directory, substitutes the
-  staged tarball while preserving other locked dependencies, and runs lint and a
-  production application build.
+## Local checks
 
-For faster local iteration:
+The [Pull request workflow](../.github/workflows/pull-request.yml) runs the
+complete lint, test, documentation and package-artifact checks. These commands
+are useful for checking a change locally or reproducing a failed CI step. Run
+them from the repository root after installing dependencies.
 
-```bash
-./scripts/release/smoke-current-release-artifacts.sh toolkit --managers npm
-./scripts/release/smoke-current-release-artifacts.sh react-components --managers npm
-pnpm release:plan
-pnpm release:check-pr origin/main WORKTREE
-```
+| To check | Command |
+| --- | --- |
+| A feature PR's changeset and package versions | `pnpm release:check-pr origin/main WORKTREE` |
+| Release-tooling behaviour | `pnpm test:release` |
+| Installable tarballs and the toolkit ZIP | `NPM_CONFIG_REGISTRY=https://registry.npmjs.org pnpm smoke:release-artifacts` |
 
-For a stacked PR, use its actual base branch in place of `origin/main`.
+Fetch the current base before checking a feature PR. For a stacked PR, use its
+actual base branch in place of `origin/main`. The artifact smoke check uses
+Chromium; follow the browser setup in the PR workflow if it is not installed
+locally.
 
-`pnpm test:release` exercises generation through the real Changesets CLI and
-validates Git-aware rules in isolated temporary repositories. It creates local
-test commits and tags, and checks manual version skips and missing consumer
-guidance. Publication tests simulate GitHub commands; announcement tests use a
-synthetic webhook endpoint. Local tests do not prove App authentication, signed
-commits, live releases or Slack delivery. Those operations need a rehearsal in
-an authorised disposable repository; a production release is not a test.
+## Generated release documents
 
-PR CI runs metadata, lint, tests, docs, and external-consumer artifact checks.
-Feature package changes need a new changeset; a previously pending changeset
-cannot cover new work. Test, Storybook, and package README-only changes are
-excluded. Generated release PRs need the calculated versions, root changelog and
-upgrade guidance, without component-code changes.
-
-## Documentation requirements
-
-Keep one root changelog. Each release has a unique, nonempty package/version/tag
-section, ordered by decreasing semantic version. Dated sections must descend.
-Do not invent releases for intermediate manifest values that were never published.
-
-Every version being released must appear once in the version index in
-`UPGRADING.md`, with a `Consumer action` decision of `No consumer action required`
-or `Action required`. Toolkit and React can share a row when their guidance is
-the same. Use separate rows for package-only releases or different upgrade
-decisions. An actionable row must link to a migration section through its version
-or guidance cell. The target can be an explicit HTML anchor or a Markdown heading.
-
-`pnpm docs:release-contract` scans tracked and new non-ignored Markdown, shell, and workflow files for
-known invalid installation guidance, then renders the current release notes to
-check their tarball URLs. `CHANGELOG.md` is excluded from the install-string scan
-because it preserves historical entries; release metadata validates its structure
-separately. If consumer documentation moves to another file type, update the
-validator's file scan.
+One root [changelog](../CHANGELOG.md) records the changes in each package
+release. The [upgrading guide](../UPGRADING.md) says `No consumer action required`
+or `Action required`, with migration steps for the latter. The release PR
+generates both from reviewed changesets. CI checks that their entries and
+package versions match those changesets and that installation links use the
+expected tarball URL format.
 
 ## Recovery
 
-Fix validation failures before attempting publication. Never retag or overwrite a
-published release. Prepare a new version for fixes discovered after publication.
+### Validation or build failed before publication
 
-An interrupted automatic batch can resume only with its original saved bundle.
-A mismatch or unexpected asset stops the job for maintainer inspection; it does
-not replace the asset. Failures reading GitHub state stop the workflow rather
-than being interpreted as an absent tag or release.
+If a new publication run failed before its `publish` job started, that run has
+not created tags or releases. Fix the failing check or build and rerun the failed
+jobs. If an earlier run for the same release PR may have started publication,
+inspect that run and use the procedure below.
 
-Validation and build are separate jobs. A failed build can be retried through
-GitHub's failed-jobs rerun, which may repeat successful dependency jobs such as
-validation. The publish job saves a
-`publication-attempt-<run ID>` artifact before remote changes can start.
-A publish-job rerun is allowed only if that marker is absent. Once the marker
-exists, inspect the release state and use a new manual dispatch with the
-original bundle; rerunning the job or an inspected resume stops.
+### Publication started or its outcome is uncertain
 
-`Publication outcome is unknown` means the publish request failed without a
-reliable result. The release may be public even though the command failed.
-`Publication completed ... final verification failed` means the publish command
-succeeded but the subsequent check failed. That failure may be a network problem
-or confirmed tag movement; it does not by itself prove that the assets are wrong.
+GitHub may have created some tags or releases even if the job failed or was
+cancelled. A batch with both packages can have one public release and one draft.
+Do not rerun the publish job without inspection.
 
-For either message, cancellation, or any partially published batch:
+1. Check every intended tag and GitHub Release, including drafts. Compare their
+   commit and downloaded assets with the original `release-bundle-<SHA>` artifact
+   from the publication run. If GitHub is unavailable, wait until its state can
+   be checked.
+2. If the existing tags and assets match, run `Publish merged release` from
+   `main` with the merged `release_pr` number, `allow_resume` on and
+   `bundle_run_id` set to the run that saved the original bundle. The workflow
+   checks existing releases and publishes only what is still missing.
+3. If the original bundle is missing or expired, or a tag or asset differs,
+   stop and arrange a reviewed recovery plan. Do not rebuild substitute assets,
+   move a tag or overwrite a published release.
 
-1. Inspect every intended release's draft/public state, its tag target, and the
-   expected SHA/checksums in the original `release-bundle-<SHA>` artifact.
-   `publication-state.json`, the publication-attempt marker and job logs help
-   identify where the run stopped;
-   a false/missing completion marker does not prove nothing was published.
-2. Download existing assets and compare their SHA-256 digests against the bundle.
-   If GitHub is unreachable, wait before deciding whether publication completed.
-3. Resolve the failure, then dispatch `Publish merged release` from `main` with
-   the merged `release_pr` number, `allow_resume` checked, and `bundle_run_id`
-   set to the original run containing the saved verified bytes. The workflow
-   checks the producer, source identity and all checksums before minting the App
-   token. It reruns source validation but does not rebuild the bundle. A
-   missing, expired or mismatched bundle needs a reviewed recovery plan.
-4. Resume verifies already-public packages and skips them without editing notes,
-   assets or tags. It fills only missing matching draft assets and publishes only
-   the remaining drafts. If all intended releases are already public and match,
-   verification can complete without another publication request.
-5. If a public release is defective, retain its tag and assets, add a prominent
-   warning, and prepare a superseding version. Never automatically redraft,
-   delete, overwrite, or retag it.
+### A public release is defective
 
-The old single-package tag-triggered publisher remains in the repository but
-cannot start from manually created release tags under the active tag ruleset.
-It refuses to adopt an existing public release. Its draft-only resume compares
-the staged bytes; inspect published outcomes manually rather than rerunning it.
+Keep its tag and assets. Add a prominent `DO NOT USE` warning to its title and
+notes, then prepare a corrected version through a new feature and release PR.
+Once the replacement is public, link it from the old release and mark the old
+one `SUPERSEDED / DO NOT USE`.
 
 ## Slack announcement recovery
 
@@ -167,14 +122,8 @@ whether the message already appeared.
 
 ## Verify the published release
 
-Confirm each tag still resolves to the recorded merged SHA, the GitHub release
-contains the expected assets, and its notes link to the correct installation URL
-and SHA-pinned changelog and upgrade guidance. Install from the published tarball
-URL in a consumer application and build it; toolkit ZIP consumers should also
-check the published ZIP.
-
-For a release that replaces a defective version, retain the old tags and assets.
-Prepend a prominent `SUPERSEDED / DO NOT USE` warning to the old release's title
-and notes, with links to its published replacement and migration guidance.
-Before a replacement is published, use `DO NOT USE` without claiming it is
-available. A warning cannot prevent installation from a retained download URL.
+For each affected package, check that its tag resolves to the merged release
+commit and its public GitHub Release uses that tag. Check its downloads: a
+tarball for either package and a ZIP for toolkit. Check the notes' installation
+and documentation links. Install the published tarball in a consumer application
+and build it; ZIP consumers should check the published ZIP too.

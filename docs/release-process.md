@@ -87,7 +87,7 @@ and workflow result before requesting another announcement; see
 
 ## Pausing the automation
 
-Repository variables provide separate stop switches for release-PR preparation
-and publication. They are for pausing the flow when needed, rather than normal
-release steps. See [release operations](release-operations.md#pause-and-resume-automation)
-for their names and the effect of each switch.
+Repository variables separately control release-PR preparation and
+merged-release publication. See
+[release operations](release-operations.md#pause-and-resume-automation) for the
+effect of changing each one.
