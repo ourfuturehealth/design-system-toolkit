@@ -267,8 +267,33 @@ test('the bot PR body describes the actual version plan and GitHub publication c
   assert.match(body, /@ourfuturehealth\/toolkit 4\.26\.2/);
   assert.match(body, /Fix Header colours/);
   assert.match(body, /No consumer action required/);
-  assert.match(body, /Merging this PR starts automatic GitHub publication when enabled/);
+  assert.match(body, /Merging this PR starts automated GitHub publication/);
+  assert(!body.includes('tag-triggered workflow'));
   assert(!body.includes('publish to npm'));
+});
+
+test('the bot PR body groups shared changesets instead of repeating them for each package', async t => {
+  const project = fixture(t);
+  const shared = (summary, migration) => `---\n"@ourfuturehealth/toolkit": patch\n"@ourfuturehealth/react-components": patch\n---\n\n${summary}\n\n## Consumer action\nNo consumer action required\n\n## Migration notes\n${migration}\n`;
+  project.write('.changeset/shared-colour.md', shared('Change shared colour.', 'No API changes.'));
+  project.write('.changeset/shared-spacing.md', shared('Change shared spacing.', 'No usage changes.'));
+  const body = releasePRBody(await readChangesetPlan(project.directory));
+  assert.match(body, /@ourfuturehealth\/toolkit 4\.26\.2/);
+  assert.match(body, /@ourfuturehealth\/react-components 0\.26\.2/);
+  assert.equal(body.split('Change shared colour.').length - 1, 1);
+  assert.equal(body.split('Change shared spacing.').length - 1, 1);
+  assert.match(body, /### Changeset 1[\s\S]+\*\*Packages:\*\* .*toolkit.*react-components/);
+  assert.match(body, /### Changeset 2[\s\S]+\*\*Consumer action:\*\* No consumer action required/);
+});
+
+test('the bot PR body keeps required migration steps with their changeset', async t => {
+  const project = fixture(t);
+  project.write('.changeset/react-breaking.md', intent('@ourfuturehealth/react-components', 'major',
+    'Rename a React prop.', 'Action required', 'Replace the old prop with the new name.'));
+  const body = releasePRBody(await readChangesetPlan(project.directory));
+  assert.match(body, /### Changeset 1[\s\S]+Rename a React prop\./);
+  assert.match(body, /\*\*Consumer action:\*\* Action required\./);
+  assert.match(body, /\*\*Migration steps:\*\* Replace the old prop with the new name\./);
 });
 
 test('feature checks use the exact PR head rather than unrelated checkout changes', t => {
