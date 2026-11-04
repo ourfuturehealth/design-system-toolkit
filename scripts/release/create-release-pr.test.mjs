@@ -19,12 +19,12 @@ const fileChanges = {
   deletions: [{ path: '.changeset/example.md' }],
 };
 
-function fixture({ branch = null, pull = null, signed = true, main = baseSha } = {}) {
+function fixture({ branch = null, pull = null, signed = true, main = baseSha, branchTree = oldTree, branchVerified = true } = {}) {
   const calls = [];
   const refs = new Map([['main', main]]);
   if (branch) refs.set('changeset-release/main', branch);
   const commits = new Map([
-    [oldSha, { author: { login: appLogin }, commit: { tree: { sha: oldTree }, verification: { verified: true } } }],
+    [oldSha, { author: { login: appLogin }, commit: { tree: { sha: branchTree }, verification: { verified: branchVerified } } }],
     [baseSha, { author: { login: 'maintainer' }, commit: { tree: { sha: oldTree }, verification: { verified: true } } }],
   ]);
   const pulls = pull ? [pull] : [];
@@ -149,17 +149,18 @@ test('updates the App-owned release branch and PR for another feature', async ()
 });
 
 test('reuses a matching App commit without resetting the release branch', async () => {
-  const { client, calls } = fixture({ branch: oldSha });
-  const originalRequest = client.request;
-  client.request = async (method, path, body) => {
-    if (method === 'GET' && path.endsWith(`/commits/${oldSha}`)) {
-      return { author: { login: appLogin }, commit: { tree: { sha: treeOid } } };
-    }
-    return originalRequest(method, path, body);
-  };
+  const { client, calls } = fixture({ branch: oldSha, branchTree: treeOid });
   assert.equal(await createOrUpdateReleasePr(options(client)), 21);
   assert(!calls.some(call => call.method === 'GRAPHQL'));
   assert(!calls.some(call => call.method === 'PATCH' && call.path.includes('/git/refs/')));
+});
+
+test('replaces a matching release commit when its signature is unverified', async () => {
+  const { client, calls, refs } = fixture({ branch: oldSha, branchTree: treeOid, branchVerified: false });
+  assert.equal(await createOrUpdateReleasePr(options(client)), 21);
+  assert(calls.some(call => call.method === 'GRAPHQL'));
+  assert.equal(refs.get('changeset-release/main'), signedSha);
+  assert(!refs.has('changeset-release/staging-123-1'));
 });
 
 test('does not replace a branch or PR owned by someone else', async () => {

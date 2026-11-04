@@ -116,8 +116,9 @@ export async function createOrUpdateReleasePr({ client, repository, baseSha, app
       'Release branch contains a commit outside the configured App');
   }
 
-  // 3. Make a signed commit only when the generated files have changed.
-  if (currentCommit?.commit.tree.sha !== treeOid) {
+  // 3. Reuse only a matching, verified commit; otherwise create a signed one.
+  const reusableCommit = currentCommit?.commit.tree.sha === treeOid && currentCommit.commit.verification?.verified === true;
+  if (!reusableCommit) {
     // Keep the open PR intact if GitHub cannot create or verify the new commit.
     const stagingBranch = `changeset-release/staging-${runId}-${runAttempt}`;
     const stagingRef = `refs/heads/${stagingBranch}`;
