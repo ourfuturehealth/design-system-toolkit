@@ -35,11 +35,18 @@ export async function readChangesetPlan(directory) {
 }
 
 export function releasePRBody(plan) {
-  const scope = plan.releases.map(release => {
-    const details = release.guidance.map(item => `${item.summary}\n\nConsumer action: ${item.action}.\n\n${item.migration}`).join('\n\n');
-    return `### ${release.name} ${release.newVersion}\n\n${details}`;
+  const scope = plan.releases.map(release => `- **${release.name} ${release.newVersion}**`).join('\n');
+  const changes = plan.changesets.map((changeset, index) => {
+    const { summary, action, migration } = parseConsumerGuidance(changeset.id, changeset.summary);
+    const affected = changeset.releases.map(item => {
+      const release = plan.releases.find(entry => entry.name === item.name);
+      assert(release, `${changeset.id}: missing release for ${item.name}`);
+      return `${item.name} ${release.newVersion}`;
+    }).join(', ');
+    const notesLabel = action === 'Action required' ? 'Migration steps' : 'Impact';
+    return `### Changeset ${index + 1}\n\n${summary}\n\n**Packages:** ${affected}\n\n**Consumer action:** ${action}.\n\n**${notesLabel}:** ${migration}`;
   }).join('\n\n');
-  return `## Description\n\nPrepare the next package releases from reviewed changesets. Check the versions, summaries, upgrade guidance and publication date before merging. Merging this PR starts automatic GitHub publication when enabled. Otherwise use the documented tag-triggered workflow.\n\n## Release scope\n\n${scope}\n\n## Validation\n\n- Changesets release plan and generated metadata checked.\n- Release-tooling lint, tests and documentation checks passed.\n- Required PR checks must pass before merge, including the staged external-consumer artifacts.\n`;
+  return `## Description\n\nPrepare the next package releases from reviewed changesets. Check the versions, summaries, upgrade guidance and publication date before merging. Merging this PR starts automated GitHub publication. A successful publication triggers one Slack announcement for the batch.\n\n## Release scope\n\n${scope}\n\n${changes}\n\n## Validation\n\n- Changesets release plan and generated metadata checked.\n- Release-tooling lint, tests and documentation checks passed.\n- Required PR checks must pass before merge, including the staged external-consumer artifacts.\n`;
 }
 
 export function createReleaseRecord(plan, baseSha) {
