@@ -29,6 +29,11 @@ describe('Footer', () => {
       openInNewWindow: true,
     },
     {
+      platform: 'bluesky',
+      href: 'https://bsky.app/profile/ourfuturehealthuk.bsky.social',
+      openInNewWindow: true,
+    },
+    {
       platform: 'x',
       href: 'https://x.com/',
       openInNewWindow: true,
@@ -54,6 +59,17 @@ describe('Footer', () => {
     expect(screen.getByText('© Our Future Health 2026')).toBeInTheDocument();
     expect(screen.getByText('Organisation legal text.')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument();
+    const bluesky = screen.getByRole('link', { name: 'Bluesky' });
+    expect(bluesky).toHaveAttribute('href', 'https://bsky.app/profile/ourfuturehealthuk.bsky.social');
+    expect(bluesky).toHaveAttribute('target', '_blank');
+    expect(bluesky).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(bluesky.querySelector('.ofh-footer__social-icon--default .ofh-icon--Bluesky')).toBeInTheDocument();
+    expect(bluesky.querySelector('.ofh-footer__social-icon--hover .ofh-icon--BlueskyHover')).toBeInTheDocument();
+    expect(bluesky.querySelector('.ofh-icon--Bluesky path')).toHaveAttribute('fill', '#011D4B');
+    expect(bluesky.querySelector('.ofh-icon--BlueskyHover path')).toHaveAttribute('fill', '#FFC62C');
+    const x = screen.getByRole('link', { name: 'X' });
+    expect(x.querySelector('.ofh-icon--X')).toBeInTheDocument();
+    expect(x.querySelector('.ofh-icon--XHover')).toBeInTheDocument();
     expect(container.querySelector('.ofh-icon--ChevronLeft')).toBeNull();
     expect(container.querySelector('.ofh-icon--Linkedin')).toBeInTheDocument();
     expect(container.querySelector('.ofh-icon--Launch')).toBeInTheDocument();

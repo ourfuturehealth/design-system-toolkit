@@ -87,7 +87,12 @@ Find out more about the footer component and when to use it in the [design syste
   "socialLinks": [
     {
       "platform": "linkedin",
-      "href": "https://www.linkedin.com/company/our-future-health/",
+      "href": "https://www.linkedin.com/company/our-future-health-uk/",
+      "openInNewWindow": true
+    },
+    {
+      "platform": "bluesky",
+      "href": "https://bsky.app/profile/ourfuturehealthuk.bsky.social",
       "openInNewWindow": true
     }
   ]
@@ -118,7 +123,7 @@ Find out more about the footer component and when to use it in the [design syste
 | `legalHtml` | string | No | Trusted HTML alternative for the legal copy. |
 | `socialLabel` | string | No | Label shown before the social links on tablet and desktop. Defaults to `Follow us`. |
 | `socialLinks` | array | No | Array of social link items. |
-| `socialLinks[].platform` | string | Yes | One of `linkedin`, `x`, `facebook`, `youtube`, `instagram`, or `tiktok`. |
+| `socialLinks[].platform` | string | Yes | One of `linkedin`, `bluesky`, `x`, `facebook`, `youtube`, `instagram`, or `tiktok`. |
 | `socialLinks[].href` | string | Yes | Href for the social link. |
 | `socialLinks[].label` | string | No | Accessible label override for the social link. |
 | `socialLinks[].openInNewWindow` | boolean | No | Opens the social link in a new window. |

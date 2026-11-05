@@ -112,6 +112,7 @@ const externalLinks: FooterLinkItem[] = [
 
 const socialPlatformOptions: FooterSocialPlatform[] = [
   'linkedin',
+  'bluesky',
   'x',
   'facebook',
   'youtube',
@@ -122,7 +123,12 @@ const socialPlatformOptions: FooterSocialPlatform[] = [
 const socialLinkMap: Record<FooterSocialPlatform, FooterSocialLinkItem> = {
   linkedin: {
     platform: 'linkedin',
-    href: 'https://www.linkedin.com/company/our-future-health/',
+    href: 'https://www.linkedin.com/company/our-future-health-uk/',
+    openInNewWindow: true,
+  },
+  bluesky: {
+    platform: 'bluesky',
+    href: 'https://bsky.app/profile/ourfuturehealthuk.bsky.social',
     openInNewWindow: true,
   },
   x: {
@@ -132,22 +138,22 @@ const socialLinkMap: Record<FooterSocialPlatform, FooterSocialLinkItem> = {
   },
   facebook: {
     platform: 'facebook',
-    href: 'https://facebook.com/',
+    href: 'https://www.facebook.com/ourfuturehealthuk/',
     openInNewWindow: true,
   },
   youtube: {
     platform: 'youtube',
-    href: 'https://youtube.com/',
+    href: 'https://www.youtube.com/channel/UCJUEct7MOPjAGN5jP55CFjQ',
     openInNewWindow: true,
   },
   instagram: {
     platform: 'instagram',
-    href: 'https://instagram.com/',
+    href: 'https://www.instagram.com/ourfuturehealthuk/',
     openInNewWindow: true,
   },
   tiktok: {
     platform: 'tiktok',
-    href: 'https://tiktok.com/',
+    href: 'https://www.tiktok.com/@ourfuturehealthuk',
     openInNewWindow: true,
   },
 };
@@ -167,17 +173,17 @@ const supportLinks = [
 const socialLinks = [
   {
     platform: 'linkedin',
-    href: 'https://www.linkedin.com/company/our-future-health/',
+    href: 'https://www.linkedin.com/company/our-future-health-uk/',
     openInNewWindow: true,
   },
   {
-    platform: 'x',
-    href: 'https://x.com/',
+    platform: 'bluesky',
+    href: 'https://bsky.app/profile/ourfuturehealthuk.bsky.social',
     openInNewWindow: true,
   },
   {
     platform: 'facebook',
-    href: 'https://facebook.com/',
+    href: 'https://www.facebook.com/ourfuturehealthuk/',
     openInNewWindow: true,
   },
 ];
@@ -236,17 +242,17 @@ const legalAndSocialOnlySource = `import { Footer } from '@ourfuturehealth/react
 const socialLinks = [
   {
     platform: 'linkedin',
-    href: 'https://www.linkedin.com/company/our-future-health/',
+    href: 'https://www.linkedin.com/company/our-future-health-uk/',
     openInNewWindow: true,
   },
   {
-    platform: 'x',
-    href: 'https://x.com/',
+    platform: 'bluesky',
+    href: 'https://bsky.app/profile/ourfuturehealthuk.bsky.social',
     openInNewWindow: true,
   },
   {
     platform: 'facebook',
-    href: 'https://facebook.com/',
+    href: 'https://www.facebook.com/ourfuturehealthuk/',
     openInNewWindow: true,
   },
 ];
@@ -288,7 +294,7 @@ const renderFooterStory = ({
   showSmallPrint = true,
   showLegalText = true,
   showSocialLinks = true,
-  socialPlatforms = socialPlatformOptions,
+  socialPlatforms = ['linkedin', 'bluesky', 'facebook'],
   smallPrint,
   legalText: legalCopy,
   socialLabel = 'Follow us',
@@ -368,7 +374,7 @@ const meta: Meta<FooterStoryArgs> = {
     showSmallPrint: true,
     showLegalText: true,
     showSocialLinks: true,
-    socialPlatforms: socialPlatformOptions,
+    socialPlatforms: ['linkedin', 'bluesky', 'facebook'],
     smallPrint: '© Our Future Health 2026',
     legalText,
     socialLabel: 'Follow us',
@@ -498,7 +504,7 @@ export const Builder: Story = {
     },
   },
   args: {
-    socialPlatforms: ['linkedin', 'x', 'facebook'],
+    socialPlatforms: ['linkedin', 'bluesky', 'facebook'],
   },
 };
 
@@ -511,7 +517,7 @@ export const Default: Story = {
       socialLabel="Follow us"
       socialLinks={[
         socialLinkMap.linkedin,
-        socialLinkMap.x,
+        socialLinkMap.bluesky,
         socialLinkMap.facebook,
       ]}
     />
@@ -579,7 +585,7 @@ export const LegalAndSocialOnly: Story = {
       socialLabel="Follow us"
       socialLinks={[
         socialLinkMap.linkedin,
-        socialLinkMap.x,
+        socialLinkMap.bluesky,
         socialLinkMap.facebook,
       ]}
     />

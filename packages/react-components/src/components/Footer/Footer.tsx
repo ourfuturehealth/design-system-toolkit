@@ -30,6 +30,7 @@ export interface FooterLinkItem
 
 export type FooterSocialPlatform =
   | 'linkedin'
+  | 'bluesky'
   | 'x'
   | 'facebook'
   | 'youtube'
@@ -70,6 +71,11 @@ const socialIcons: Record<
     defaultIcon: 'Linkedin',
     hoverIcon: 'LinkedinHover',
     label: 'LinkedIn',
+  },
+  bluesky: {
+    defaultIcon: 'Bluesky',
+    hoverIcon: 'BlueskyHover',
+    label: 'Bluesky',
   },
   x: {
     defaultIcon: 'X',
