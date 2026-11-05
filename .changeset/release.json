@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "baseSha": "8488cbf891e23b0c2fae5fbafc80c3de129b169c",
+  "changesets": [
+    "bluesky-footer-icons"
+  ],
+  "releases": [
+    {
+      "name": "@ourfuturehealth/react-components",
+      "version": "0.28.0",
+      "tag": "react-v0.28.0"
+    },
+    {
+      "name": "@ourfuturehealth/toolkit",
+      "version": "4.28.0",
+      "tag": "toolkit-v4.28.0"
+    }
+  ]
+}
