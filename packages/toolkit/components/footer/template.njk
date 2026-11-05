@@ -1,6 +1,6 @@
 {% from '../icon/macro.njk' import icon %}
 {% from '../link-icon/macro.njk' import linkIcon %}
-{% set supportedSocialPlatforms = ['linkedin', 'x', 'facebook', 'youtube', 'instagram', 'tiktok'] %}
+{% set supportedSocialPlatforms = ['linkedin', 'bluesky', 'x', 'facebook', 'youtube', 'instagram', 'tiktok'] %}
 
 {%- macro _footerLink(item) -%}
   {% set href = item.url if item.url else item.URL %}
@@ -34,6 +34,10 @@
     {% set iconName = 'Linkedin' %}
     {% set hoverIconName = 'LinkedinHover' %}
     {% set label = item.label if item.label else 'LinkedIn' %}
+  {%- elif platform == 'bluesky' -%}
+    {% set iconName = 'Bluesky' %}
+    {% set hoverIconName = 'BlueskyHover' %}
+    {% set label = item.label if item.label else 'Bluesky' %}
   {%- elif platform == 'x' -%}
     {% set iconName = 'X' %}
     {% set hoverIconName = 'XHover' %}

@@ -56,6 +56,8 @@
     { "name": "ListNine", "category": "Stepper", "defaultSize": 16 },
     { "name": "Linkedin", "category": "Socials", "defaultSize": 24 },
     { "name": "LinkedinHover", "category": "Socials", "defaultSize": 24 },
+    { "name": "Bluesky", "category": "Socials", "defaultSize": 24 },
+    { "name": "BlueskyHover", "category": "Socials", "defaultSize": 24 },
     { "name": "X", "category": "Socials", "defaultSize": 24 },
     { "name": "XHover", "category": "Socials", "defaultSize": 24 },
     { "name": "Facebook", "category": "Socials", "defaultSize": 24 },

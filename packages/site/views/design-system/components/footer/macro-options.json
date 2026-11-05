@@ -114,7 +114,7 @@
           "name": "platform",
           "type": "string",
           "required": true,
-          "description": "One of `linkedin`, `x`, `facebook`, `youtube`, `instagram`, or `tiktok`."
+          "description": "One of `linkedin`, `bluesky`, `x`, `facebook`, `youtube`, `instagram`, or `tiktok`."
         },
         {
           "name": "href",
