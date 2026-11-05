@@ -14,6 +14,8 @@ when updating dependencies, even when no migration is required.
 
 | Version | Date | Breaking Changes | Consumer action | Migration Complexity |
 | ------- | ---- | ---------------- | --------------- | -------------------- |
+| [v4.28.0](#release-toolkit-v4-28-0) | 2026-11-05 | No breaking changes | No consumer action required | No migration required. |
+| [React v0.28.0](#release-react-v0-28-0) | 2026-11-05 | No breaking changes | No consumer action required | No migration required. |
 | [v4.27.0 / React v0.27.0](#cookie-banner-javascript-initialisation) | October 2026 | Cookie Banner is hidden until JavaScript initialises it | Action required | 🟢 Low - load the toolkit JavaScript and verify React hydration |
 | `v4.26.3 / React v0.26.3` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - new `openInNewWindow` prop on Card is opt-in; duplicate click fix is transparent |
 | `v4.26.2 / React v0.26.2` | October 2026 | No breaking changes | No consumer action required | 🟢 Low - duplicate click fix is transparent |
@@ -51,6 +53,21 @@ when updating dependencies, even when no migration is required.
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026 | Button variant naming | Action required | 🟡 Medium - find/replace required |
 | [v4.1.0](#upgrading-to-v410) | February 2026 | Spacing scale indices | Action required | 🟡 Medium - index updates required |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure) | 2025 | Monorepo restructure | Action required | 🔴 High - installation and paths change |
+
+<a id="release-toolkit-v4-28-0"></a>
+## Upgrading to toolkit-v4.28.0
+
+No consumer action required.
+
+To show Bluesky in an existing footer, change the social link `platform` to `bluesky` and set its `href` to your Bluesky profile. Existing `x` links and icons continue to work.
+
+<a id="release-react-v0-28-0"></a>
+## Upgrading to react-v0.28.0
+
+No consumer action required.
+
+To show Bluesky in an existing footer, change the social link `platform` to `bluesky` and set its `href` to your Bluesky profile. Existing `x` links and icons continue to work.
+
 
 React `0.25.0` was never published. Do not use it as a release baseline.
 

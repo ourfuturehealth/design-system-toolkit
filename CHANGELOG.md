@@ -10,6 +10,20 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-11-05
+
+#### @ourfuturehealth/toolkit 4.28.0 (`toolkit-v4.28.0`)
+
+##### Changes
+
+- Add Bluesky social icons and footer links to both packages. The standard footer examples now link to Our Future Health social accounts; X remains supported.
+
+#### @ourfuturehealth/react-components 0.28.0 (`react-v0.28.0`)
+
+##### Changes
+
+- Add Bluesky social icons and footer links to both packages. The standard footer examples now link to Our Future Health social accounts; X remains supported.
+
 ### 2026-10-29
 
 #### @ourfuturehealth/toolkit 4.27.0 (`toolkit-v4.27.0`)
