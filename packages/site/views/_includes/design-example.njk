@@ -52,8 +52,22 @@
   {% set exampleItem = (params.itemTitle or params.item)|lower|replace("-", " ") %}
   {% set exampleId = params.type + "-example" %}
   {% set exampleTitle = exampleType + " " + exampleItem %}
+  {# An explicit ID distinguishes repeated examples on the same page. #}
+  {% set permalinkId = params.id or ("example-" + params.group + "-" + params.item + "-" + params.type) %}
 
-  <div class="design-example">
+  <div class="design-example" id="{{ permalinkId }}">
+    <span class="design-example__actions">
+      <button class="design-example__copy-link" type="button" hidden>
+        <svg class="design-example__link-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"></path>
+        </svg>
+        <svg class="design-example__check-icon" width="20" height="20" aria-hidden="true" focusable="false">
+          <use href="/assets/icons/icon-sprite.svg#ofh-icon-Check"></use>
+        </svg>
+        <span class="ofh-u-visually-hidden">Copy link to {{ exampleTitle }}</span>
+      </button>
+      <span class="design-example__copy-link-status ofh-u-visually-hidden" role="status"></span>
+    </span>
 
     {% if showExample %}
       <a href="{{ standaloneURL }}" class="design-example__pop-out" target="_blank" rel="noopener noreferrer">

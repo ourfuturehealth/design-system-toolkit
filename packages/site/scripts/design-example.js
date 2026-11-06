@@ -8,7 +8,7 @@ class DesignExample {
         return '.design-example';
     }
 
-    constructor(node) {
+    constructor(node, onPreviewResized = () => {}) {
         this.node = node;
         this.tabClass = 'app-tabs__item';
         this.currentTabClass = this.tabClass + '--current';
@@ -17,12 +17,16 @@ class DesignExample {
         this.examples = Array.prototype.slice.call(this.node.querySelectorAll('.code-snippet__preformatted'));
         this.closeButtons = Array.prototype.slice.call(this.node.querySelectorAll('.app-link--close'));
         this.copyButtons = Array.prototype.slice.call(this.node.querySelectorAll('.app-link--copy'));
+        this.copyLinkButton = this.node.querySelector('.design-example__copy-link');
+        this.copyLinkStatus = this.node.querySelector('.design-example__copy-link-status');
+        this.heading = null;
         this.iframe = this.node.querySelector('iframe');
 
         this.bindEvents();
 
         if (this.iframe) {
-            iFrameResize([{ heightCalculationMethod: 'max' }], this.iframe)
+            // Default sizing avoids page-position resets during smooth navigation.
+            iFrameResize({ onResized: onPreviewResized }, this.iframe);
         }
     }
 
@@ -35,6 +39,51 @@ class DesignExample {
 
         this.copyButtons.forEach(copyButton => copyButton.addEventListener('click', e => this.handleCopyClick(e)));
 
+        if (this.copyLinkButton) {
+            this.attachCopyLinkToHeading();
+            this.copyLinkButton.hidden = false;
+            this.copyLinkButton.addEventListener('click', () => this.handleCopyLinkClick());
+        }
+    }
+
+    attachCopyLinkToHeading() {
+        let sibling = this.node.previousElementSibling;
+
+        // Descriptions may sit between a variant title and its example.
+        // Stop at another example so repeated previews do not share a title.
+        while (sibling && !sibling.classList.contains('design-example')) {
+            if (/^H[2-6]$/.test(sibling.tagName)) {
+                this.heading = sibling;
+                const title = sibling.textContent.trim();
+                sibling.classList.add('design-example__heading');
+                sibling.append(this.copyLinkButton.parentElement);
+                this.copyLinkButton.querySelector('.ofh-u-visually-hidden').textContent = `Copy link to ${title}`;
+                return;
+            }
+            sibling = sibling.previousElementSibling;
+        }
+    }
+
+    async handleCopyLinkClick() {
+        const url = new URL(window.location.href);
+        url.hash = this.node.id;
+        const status = this.copyLinkStatus;
+        clearTimeout(this.copyLinkStatusTimeout);
+        this.copyLinkButton.classList.remove('design-example__copy-link--copied');
+        status.textContent = '';
+
+        try {
+            await this.copyToClipboard(url.href, this.copyLinkButton);
+            this.copyLinkButton.classList.add('design-example__copy-link--copied');
+            status.textContent = 'Link copied';
+        } catch {
+            status.textContent = 'Unable to copy link. Please try again.';
+        }
+
+        this.copyLinkStatusTimeout = setTimeout(() => {
+            this.copyLinkButton.classList.remove('design-example__copy-link--copied');
+            status.textContent = '';
+        }, 2000);
     }
 
     handleTabClick(e) {
@@ -73,38 +122,40 @@ class DesignExample {
         setTimeout(() => el.innerHTML = originalInnerHtml, 2500);
     }
 
-    // If clipboard API isn't available fallback to deprecated execCommand method
-    fallbackCopyToClipboard(e, str) {
-        const el = document.createElement('textarea');
-        el.value = str;
-        document.body.appendChild(el);
-        el.select();
+    // Keep clipboard behavior shared while callers provide their own feedback.
+    async copyToClipboard(str, trigger) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(str);
+            return;
+        }
+
+        const textarea = document.createElement('textarea');
+        textarea.value = str;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
 
         try {
-            document.execCommand('copy');
-            this.inlineNotify(e.target,'Copied');
-        } catch {
-            this.inlineNotify(e.target, 'Error');
+            textarea.select();
+            if (!document.execCommand('copy')) {
+                throw new Error('Copy failed');
+            }
+        } finally {
+            textarea.remove();
+            trigger.focus({ preventScroll: true });
         }
-
-        // Set focus back onto the clicked button
-        e.target.focus();
-
-        document.body.removeChild(el);
     }
 
-    // Use clipboard API to copy text to clipboard, if not available fallback to execCommand
-    handleCopyClick(e) {
+    async handleCopyClick(e) {
         e.preventDefault();
+        const trigger = e.currentTarget;
         const str = this.node.querySelector('.code-snippet__preformatted:not(.js-hidden) code').innerText;
-        if(!navigator.clipboard) {
-            this.fallbackCopyToClipboard(e, str);
+        try {
+            await this.copyToClipboard(str, trigger);
+            this.inlineNotify(trigger, 'Copied');
+        } catch {
+            this.inlineNotify(trigger, 'Error');
         }
-        navigator.clipboard.writeText(`${str}`).then(() => {
-            this.inlineNotify(e.target, 'Copied');
-          }, (err) => {
-            this.inlineNotify(e.target, 'Error');
-          });        
     }
 
     showEl(el) {
