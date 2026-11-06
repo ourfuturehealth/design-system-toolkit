@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const designExamples = document.querySelectorAll(DesignExample.selector());
   const fragment = window.location.hash;
   const target = document.getElementById(fragment.slice(1));
+  let scrollTarget = target;
   let loaded = false;
   let corrected = false;
   let resizeTimeout;
@@ -19,12 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeTimeout = setTimeout(() => {
       corrected = true;
       if (window.location.hash === fragment) {
-        target.scrollIntoView({ block: 'start', behavior: 'instant' });
+        scrollTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
       }
     }, 150);
   }
 
-  designExamples.forEach(example => new DesignExample(example, scheduleCorrection));
+  designExamples.forEach(node => {
+    const example = new DesignExample(node, scheduleCorrection);
+    if (node === target) scrollTarget = example.heading || node;
+  });
   if (!target || !target.matches('.design-example')) return;
 
   const pageLoaded = document.readyState === 'complete' ? Promise.resolve() :

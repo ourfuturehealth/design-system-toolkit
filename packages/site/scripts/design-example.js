@@ -19,6 +19,7 @@ class DesignExample {
         this.copyButtons = Array.prototype.slice.call(this.node.querySelectorAll('.app-link--copy'));
         this.copyLinkButton = this.node.querySelector('.design-example__copy-link');
         this.copyLinkStatus = this.node.querySelector('.design-example__copy-link-status');
+        this.heading = null;
         this.iframe = this.node.querySelector('iframe');
 
         this.bindEvents();
@@ -52,6 +53,7 @@ class DesignExample {
         // Stop at another example so repeated previews do not share a title.
         while (sibling && !sibling.classList.contains('design-example')) {
             if (/^H[2-6]$/.test(sibling.tagName)) {
+                this.heading = sibling;
                 const title = sibling.textContent.trim();
                 sibling.classList.add('design-example__heading');
                 sibling.append(this.copyLinkButton.parentElement);
