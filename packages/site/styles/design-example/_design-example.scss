@@ -2,11 +2,17 @@
 @import 'code-embed';
 @import 'code-snippet';
 
+// Use the same instant behavior for native variant navigation and its correction.
+html:has(.design-example:target) {
+  scroll-behavior: auto;
+}
+
 .design-example {
   $root: &;
 
   margin-bottom: $ofh-size-40;
   position: relative;
+  scroll-margin-top: $ofh-size-80;
   width: 100%;
 
   @include mq($until: tablet) {
@@ -38,6 +44,73 @@
       }
     }
 
+  }
+}
+
+.design-example__heading {
+  align-items: center;
+  display: flex;
+  position: relative;
+  scroll-margin-top: $ofh-size-24;
+}
+
+.design-example__actions {
+  display: inline-flex;
+  flex-shrink: 0;
+  position: relative;
+  vertical-align: middle;
+}
+
+.design-example__heading > .design-example__actions {
+  margin-left: $ofh-size-8;
+}
+
+.design-example__copy-link {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: $ofh-color-foreground-link-default;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  justify-content: center;
+  min-height: 1em;
+  min-width: 1em;
+  padding: 0;
+  vertical-align: middle;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  &:hover {
+    color: $ofh-color-foreground-link-hover;
+  }
+
+  &:focus {
+    @include ofh-focused-text;
+  }
+
+}
+
+.design-example__check-icon {
+  display: none;
+}
+
+.design-example__copy-link--copied {
+  color: $ofh-color-foreground-feedback-success-2;
+
+  .design-example__link-icon {
+    display: none;
+  }
+
+  .design-example__check-icon {
+    display: block;
   }
 }
 
