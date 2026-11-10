@@ -73,7 +73,7 @@ class DesignExample {
         status.textContent = '';
 
         try {
-            await this.copyToClipboard(url.href, this.copyLinkButton);
+            await this.copyToClipboard(url.href);
             this.copyLinkButton.classList.add('design-example__copy-link--copied');
             status.textContent = 'Link copied';
         } catch {
@@ -122,28 +122,13 @@ class DesignExample {
         setTimeout(() => el.innerHTML = originalInnerHtml, 2500);
     }
 
-    // Keep clipboard behavior shared while callers provide their own feedback.
-    async copyToClipboard(str, trigger) {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(str);
-            return;
+    // Copy text directly so URL and snippet content never enters the DOM.
+    async copyToClipboard(str) {
+        if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') {
+            throw new Error('Clipboard access is unavailable');
         }
 
-        const textarea = document.createElement('textarea');
-        textarea.value = str;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-
-        try {
-            textarea.select();
-            if (!document.execCommand('copy')) {
-                throw new Error('Copy failed');
-            }
-        } finally {
-            textarea.remove();
-            trigger.focus({ preventScroll: true });
-        }
+        await navigator.clipboard.writeText(str);
     }
 
     async handleCopyClick(e) {
@@ -151,7 +136,7 @@ class DesignExample {
         const trigger = e.currentTarget;
         const str = this.node.querySelector('.code-snippet__preformatted:not(.js-hidden) code').innerText;
         try {
-            await this.copyToClipboard(str, trigger);
+            await this.copyToClipboard(str);
             this.inlineNotify(trigger, 'Copied');
         } catch {
             this.inlineNotify(trigger, 'Error');
