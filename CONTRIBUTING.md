@@ -12,6 +12,8 @@ We've compiled a list of contributing guidance to make it easier for you to cont
 
 ### Contributors
 - [Running the application locally](docs/contributing/running-locally.md)
+- [Prerequisites for AI-assisted contributions](docs/contributing/ai-contribution-prerequisites.md)
+- [AI-assisted component contributions](docs/contributing/ai-assisted-contributions.md)
 - [Application architecture](docs/contributing/application-architecture.md)
 - [Material icons workflow](docs/contributing/material-icons.md)
 - [Coding standards and style guide](docs/contributing/coding-standards.md)

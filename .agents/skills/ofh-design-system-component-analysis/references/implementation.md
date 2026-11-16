@@ -1,0 +1,24 @@
+# Component implementation and self-review
+
+Apply this after analysis has agreed the review unit. Inspect nearby component patterns before editing. Before creating an implementation branch, check for unrelated working-tree changes, fetch the intended remote base, and branch from the latest remote commit rather than a stale local tracking ref. Do not overwrite an existing branch or unrelated changes. Keep changes small and explicit. A new shared component normally needs toolkit and React capability parity; a scoped shared fix must update every affected surface. React may use a clearer semantic API than the Nunjucks macro. Ask before choosing among materially different public API shapes or adding production dependencies. Do not add speculative compatibility props for a new React API.
+
+## Implementation surfaces
+
+- Toolkit: inspect and update the Nunjucks template/macro, SCSS, JavaScript where interactive, package exports/registration, README and integration tests as relevant. Use existing `ofh-` naming, themes, responsive helpers and tokens. Test the generated markup and real behavior.
+- React: create or update component, types, exports, styles, tests and stories where relevant. Cover the toolkit's supported user-facing capabilities, states and element selection. Use semantic props for common choices, keep `className` as the normal escape hatch, and use React state for React behavior rather than toolkit `.js-enabled` progressive-enhancement gates. Check docs-page examples for duplicate effective IDs or form names.
+- Test public behavior, keyboard interaction, focus, ARIA/semantics and meaningful accessibility states. Include error, disabled, inverted/reverse and theme behavior when the component supports them. Avoid tests that merely mirror private branches.
+- Compare actual rendered mobile, tablet and desktop output with the [Figma evidence](../../ofh-design-system-contribution/references/figma-evidence.md). Preserve responsive token identity, not only a matching desktop number. Use explicit breakpoints only when existing helpers cannot express the required values, and explain why. Check shared primitives and semantic element inheritance in computed styles.
+
+## Teaching surfaces
+
+Update component README, site examples, macro options and Storybook together where the change affects consumers. Match their teaching coverage for default usage, meaningful variants, error/validation, layout and interaction; equivalent teaching matters more than identical story counts. Explain deliberate omissions.
+
+Storybook `Docs` should teach the actual React API in plain language; `Default` should be realistic; use `Builder` when interactive controls help; fixed comparison or behavior showcases should have controls disabled if controls would mislead. For structured props, expose friendly story-only text/select/boolean controls and map them to the real prop when that teaches the example better than raw JSON. Mark those helpers as Storybook-only. Never show controls for values a component ignores or overrides. Describe what each prop changes visually or semantically, which HTML override wins, and which styling/ref props are advanced integration hooks. Copyable source must show meaningful object shapes, not an undeclared `defaultItems` variable.
+
+## Verification and release intent
+
+Run relevant tests after JavaScript/TypeScript changes and inspect failures. Before human QA, build affected surfaces and run lint; see package scripts rather than assuming one build covers all. React library `build` and `build:storybook` are separate. A site lint needs generated HTML: run `pnpm --filter=site run build` first if needed. Mechanical checks do not prove visual or token alignment.
+
+For public package source, styles, templates, assets or manifest changes, add a new `.changeset/*.md` with **every directly or indirectly affected package**, bump type, user-facing summary, `## Consumer action` and `## Migration notes`. Choose `patch` for compatible fixes, `minor` for compatible additions, `major` for breaking changes; decide breaking and migration details with the contributor. See the [Changesets format](../../../../.changeset/README.md). Tests, stories, README-only changes and repository tooling/docs alone need no package changeset. Do not edit package versions, future `CHANGELOG.md`/`UPGRADING.md` entries or generated `.changeset/release.json` in a feature branch.
+
+Before human QA, inspect your own diff for unused imports, misleading examples, drift between toolkit/React/docs, hidden inherited styles, and unnecessary abstraction. Check rendered behavior and the relevant test, build and lint results; fix findings and recheck. Tell the contributor what changed, what was verified, and which design decisions remain open. This agent self-review does not replace human code review.
