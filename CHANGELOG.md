@@ -12,6 +12,12 @@ release recorded below.
 
 ### 2026-11-24
 
+#### @ourfuturehealth/react-components 0.28.1 (`react-v0.28.1`)
+
+##### Changes
+
+- Fix squashed radio inputs.
+
 #### @ourfuturehealth/toolkit 4.28.1 (`toolkit-v4.28.1`)
 
 ##### Changes
