@@ -55,6 +55,7 @@ $ofh-radios-focus-width: $ofh-stroke-weight-4 + 1px;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
+  flex-shrink: 0;
   height: $ofh-radios-size;
   justify-content: center;
   pointer-events: none;
