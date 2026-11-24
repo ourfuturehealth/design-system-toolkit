@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { affectedPackages, changedFiles } from './affected-packages.mjs';
 import { createReleaseRecord, readChangesetPlan } from './changeset-plan.mjs';
 import { packages, parseChangelog, validateVersion } from './release-metadata.mjs';
 import { renderReleaseDocs } from './version-packages.mjs';
@@ -15,8 +16,7 @@ git('rev-parse', '--verify', `${baseRef}^{commit}`);
 if (headRef !== 'WORKTREE') git('rev-parse', '--verify', `${headRef}^{commit}`);
 const readAt = (ref, path) => ref === 'WORKTREE' ? readFileSync(path, 'utf8')
   : execFileSync('git', ['show', `${ref}:${path}`], { encoding: 'utf8' });
-const files = git('diff', '--name-only', baseRef, ...(headRef === 'WORKTREE' ? [] : [headRef])).split('\n');
-if (headRef === 'WORKTREE') files.push(...git('ls-files', '--others', '--exclude-standard').split('\n'));
+const files = changedFiles(baseRef, headRef);
 const baseFiles = git('ls-tree', '-r', '--name-only', baseRef).split('\n');
 const isIntent = path => /^\.changeset\/[^/]+\.md$/.test(path) && path !== '.changeset/README.md';
 
@@ -86,11 +86,9 @@ if (mode) {
     assert(plan.changesets.some(item => `.changeset/${item.id}.md` === path), `${path}: only a release PR may consume pending changesets`);
   }
   const newIntents = plan.changesets.filter(item => !baseFiles.includes(`.changeset/${item.id}.md`));
-  for (const pkg of packages) {
-    const directory = pkg.manifest.replace('/package.json', '/');
-    const changed = files.some(path => path.startsWith(directory) && !/\.(test|spec|stories)\.[^.]+$|\/README\.md$/.test(path));
-    if (changed) assert(newIntents.some(item => item.releases.some(release => release.name === pkg.name)),
-      `${pkg.name}: add a new changeset describing this PR's release intent`);
+  for (const [name, paths] of affectedPackages(files)) {
+    if (paths.length) assert(newIntents.some(item => item.releases.some(release => release.name === name)),
+      `${name}: add a new changeset describing this PR's release intent. Affected by: ${paths.join(', ')}`);
   }
 }
 process.stdout.write('Changeset PR validation passed.\n');

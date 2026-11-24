@@ -69,7 +69,7 @@
     "lint:react-components": "pnpm --filter=@ourfuturehealth/react-components run lint",
     "lint:react-consumer": "npm --prefix packages/example-react-consumer-app run lint",
     "docs:release-contract": "./scripts/release/validate-release-docs.sh",
-    "changeset": "changeset",
+    "changeset": "node scripts/release/changeset.mjs",
     "release:plan": "node scripts/release/changeset-plan.mjs",
     "release:version": "node scripts/release/version-packages.mjs && pnpm install --lockfile-only --ignore-scripts",
     "release:check-pr": "node scripts/release/validate-changeset-pr.mjs",

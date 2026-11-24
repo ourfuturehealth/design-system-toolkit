@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import semver from 'semver';
+import { affectedPackages } from './affected-packages.mjs';
 import { parseConsumerGuidance, readChangesetPlan, releasePRBody } from './changeset-plan.mjs';
 
 test('a reviewed changeset records its summary and explicit consumer decision', () => {
@@ -81,6 +82,7 @@ test('a breaking React changeset advances the pre-1.0 package to 1.0.0', t => {
 });
 
 const checkScript = fileURLToPath(new URL('./validate-changeset-pr.mjs', import.meta.url));
+const changesetScript = fileURLToPath(new URL('./changeset.mjs', import.meta.url));
 function initialiseGit(project) {
   const git = (...args) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-c', 'commit.gpgsign=false', ...args], { cwd: project.directory, encoding: 'utf8' }).trim();
   if (!existsSync(`${project.directory}/.git`)) git('init', '-b', 'main');
@@ -174,6 +176,106 @@ test('a source change in both packages requires release intent for both', t => {
   project.write('packages/react-components/component.tsx', '// React change\n');
   project.write('.changeset/toolkit-only.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix toolkit colours.'));
   assert.throws(() => runCheck(project, base), /react-components: add a new changeset/);
+});
+
+test('shared toolkit inputs require a new React changeset as well', t => {
+  const project = fixture(t);
+  project.write('.changeset/previous-react.md', intent('@ourfuturehealth/react-components', 'patch', 'Previous React change.'));
+  const { base } = initialiseGit(project);
+  const path = 'packages/toolkit/components/radios/_radios.scss';
+  project.write(path, '.ofh-radios { width: auto; }\n');
+  project.write('.changeset/toolkit-only.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix radio width.'));
+  assert.throws(() => runCheck(project, base), /react-components: add a new changeset.*radios\/_radios\.scss/);
+  project.write('.changeset/react-fix.md', intent('@ourfuturehealth/react-components', 'patch', 'Fix radio width.'));
+  assert.match(runCheck(project, base), /validation passed/);
+});
+
+test('shared styles, assets and generated sprite inputs affect both packages', () => {
+  for (const path of [
+    'packages/toolkit/components/radios/_radios.scss',
+    'packages/toolkit/core/settings/_colours.scss',
+    'packages/toolkit/ofh.scss',
+    'packages/toolkit/assets/icons/Search.svg',
+    'packages/toolkit/assets/icons/icon-sprite.svg',
+    'packages/toolkit/assets/tile-pattern/tile-pattern-sprite.svg',
+    'packages/toolkit/assets/logos/ofh-logo-default.svg',
+    'packages/toolkit/scripts/build-icon-sprite.js',
+  ]) {
+    const affected = affectedPackages([path]);
+    assert.deepEqual(affected.get('@ourfuturehealth/toolkit'), [path]);
+    assert.deepEqual(affected.get('@ourfuturehealth/react-components'), [path]);
+  }
+});
+
+test('the contributor command reports shared untracked inputs before calling Changesets', t => {
+  const project = fixture(t);
+  const { base, git } = initialiseGit(project);
+  git('update-ref', 'refs/remotes/origin/main', base);
+  const path = 'packages/toolkit/components/radios/_radios.scss';
+  project.write(path, '.ofh-radios {}\n');
+  const output = execFileSync(process.execPath, [changesetScript, '--empty'], {
+    cwd: project.directory, encoding: 'utf8', env: { ...process.env, NO_COLOR: '1' },
+  });
+  assert.match(output, /Potentially affected packages/);
+  assert.match(output, /@ourfuturehealth\/toolkit/);
+  assert.match(output, /@ourfuturehealth\/react-components/);
+  assert(output.includes(path));
+  assert.match(output, /empty changeset/i);
+});
+
+test('the contributor command detects staged changes even if the working file is restored', t => {
+  const project = fixture(t);
+  const path = 'packages/toolkit/components/radios/_radios.scss';
+  project.write(path, 'original\n');
+  const { base, git } = initialiseGit(project);
+  git('update-ref', 'refs/remotes/origin/main', base);
+  project.write(path, 'staged change\n');
+  git('add', path);
+  project.write(path, 'original\n');
+  const output = execFileSync(process.execPath, [changesetScript, '--empty'], {
+    cwd: project.directory, encoding: 'utf8', env: { ...process.env, NO_COLOR: '1' },
+  });
+  assert.match(output, /@ourfuturehealth\/react-components/);
+  assert(output.includes(path));
+});
+
+test('toolkit-only templates and JavaScript do not require a React changeset', t => {
+  const project = fixture(t);
+  const { base } = initialiseGit(project);
+  project.write('packages/toolkit/components/radios/template.njk', 'Template change');
+  project.write('packages/toolkit/components/radios/radios.js', '// Toolkit JavaScript');
+  project.write('.changeset/toolkit-only.md', intent('@ourfuturehealth/toolkit', 'patch', 'Fix toolkit radios.'));
+  assert.match(runCheck(project, base), /validation passed/);
+});
+
+test('shared input moves retain the old path in PR and worktree detection', t => {
+  const project = fixture(t);
+  const oldPath = 'packages/toolkit/components/radios/_radios.scss';
+  const newPath = 'packages/toolkit/archive/radios.txt';
+  project.write(oldPath, '.ofh-radios {}\n');
+  const { base, git } = initialiseGit(project);
+  mkdirSync(`${project.directory}/packages/toolkit/archive`, { recursive: true });
+  git('mv', oldPath, newPath);
+  project.write('.changeset/toolkit-only.md', intent('@ourfuturehealth/toolkit', 'patch', 'Move radio styles.'));
+  assert.throws(() => runCheck(project, base), /react-components: add a new changeset.*radios\/_radios\.scss/);
+  const paths = execFileSync(process.execPath, ['--input-type=module', '-e',
+    `import { changedFiles } from ${JSON.stringify(new URL('./affected-packages.mjs', import.meta.url).href)}; console.log(JSON.stringify(changedFiles(process.argv[1], 'WORKTREE')));`, base],
+  { cwd: project.directory, encoding: 'utf8' });
+  assert(JSON.parse(paths).includes(oldPath));
+  git('add', '.');
+  git('commit', '-m', 'Move shared input');
+  assert.throws(() => execFileSync(process.execPath, [checkScript, base, git('rev-parse', 'HEAD')], { cwd: project.directory, stdio: 'pipe' }),
+    /react-components: add a new changeset.*radios\/_radios\.scss/);
+});
+
+test('shared test and story paths do not require releases', () => {
+  const affected = affectedPackages([
+    'packages/toolkit/components/radios/radios.test.scss',
+    'packages/toolkit/assets/icons/icons.stories.svg',
+    'packages/toolkit/core/README.md',
+    'packages/site/index.md',
+  ]);
+  assert([...affected.values()].every(paths => paths.length === 0));
 });
 
 test('a none changeset cannot hide public source changes from release preparation', t => {
