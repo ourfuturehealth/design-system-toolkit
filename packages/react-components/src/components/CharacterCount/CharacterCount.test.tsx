@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { describe, expect, it } from 'vitest';
 import { CharacterCount } from './CharacterCount';
+import '../../styles/main.scss';
 
 function getVisibleStatusMessage() {
   return document.querySelector('.ofh-character-count__status');
@@ -36,6 +37,38 @@ describe('CharacterCount', () => {
     expect(getVisibleStatusMessage()).toHaveTextContent(
       'You have 5 characters remaining',
     );
+  });
+
+  it('keeps the static limit visible and hides the live count until edited', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <CharacterCount
+        label="Summary"
+        maxLength={10}
+        name="summary"
+        showCountOnEdit
+      />,
+    );
+
+    const textarea = screen.getByRole('textbox');
+    const staticLimit = screen.getByText('You can enter up to 10 characters');
+    const visibleStatus = getVisibleStatusMessage();
+    const screenReaderStatus = document.querySelector(
+      '.ofh-character-count__sr-status',
+    );
+
+    expect(staticLimit).not.toHaveClass('ofh-u-visually-hidden');
+    expect(visibleStatus).toHaveAttribute('hidden');
+    expect(window.getComputedStyle(visibleStatus as Element).display).toBe('none');
+    expect(screenReaderStatus).toHaveAttribute('aria-hidden', 'true');
+
+    await user.type(textarea, 'abc');
+
+    expect(visibleStatus).not.toHaveAttribute('hidden');
+    expect(window.getComputedStyle(visibleStatus as Element).display).toBe('block');
+    expect(visibleStatus).toHaveTextContent('You have 7 characters remaining');
+    expect(screenReaderStatus).not.toHaveAttribute('aria-hidden');
   });
 
   it('shows error styling when the value goes over the limit', async () => {

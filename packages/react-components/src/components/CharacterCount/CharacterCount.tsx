@@ -7,6 +7,7 @@ export interface CharacterCountProps
   extends Omit<TextareaProps, 'className' | 'defaultValue' | 'describedBy' | 'value'> {
   maxLength?: number;
   maxWords?: number;
+  showCountOnEdit?: boolean;
   threshold?: number;
   countMessageClassName?: string;
   className?: string;
@@ -62,6 +63,7 @@ export const CharacterCount = ({
   onChange,
   ref,
   rows = 4,
+  showCountOnEdit = false,
   threshold = 0,
   value,
   'aria-describedby': ariaDescribedBy,
@@ -73,6 +75,7 @@ export const CharacterCount = ({
     defaultValue,
     value,
   });
+  const [hasEdited, setHasEdited] = React.useState(false);
   const generatedId = React.useId().replace(/:/g, '');
   const limit = maxWords ?? maxLength;
   const hasLimit = limit !== undefined;
@@ -102,6 +105,7 @@ export const CharacterCount = ({
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setHasEdited(true);
     setCurrentValue(event.target.value);
     onChange?.(event);
   };
@@ -193,7 +197,7 @@ export const CharacterCount = ({
               className={joinClassNames(
                 'ofh-hint',
                 'ofh-character-count__message',
-                'ofh-u-visually-hidden',
+                showCountOnEdit ? undefined : 'ofh-u-visually-hidden',
                 countMessageClassName,
               )}
               id={countMessageId}
@@ -202,6 +206,7 @@ export const CharacterCount = ({
             </div>
             <div
               aria-hidden="true"
+              hidden={showCountOnEdit && !hasEdited}
               className={joinClassNames(
                 'ofh-character-count__message',
                 'ofh-character-count__status',
@@ -219,7 +224,11 @@ export const CharacterCount = ({
       </div>
       {hasLimit ? (
         <div
-          aria-hidden={thresholdReached ? undefined : true}
+          aria-hidden={
+            thresholdReached && (!showCountOnEdit || hasEdited)
+              ? undefined
+              : true
+          }
           aria-live="polite"
           className="ofh-character-count__sr-status ofh-u-visually-hidden"
         >

@@ -19,7 +19,7 @@ describe('CharacterCount module', () => {
     const visibleStatus = document.querySelector('.ofh-character-count__status');
 
     textarea.value = 'abcdefghijkl';
-    textarea.dispatchEvent(new KeyboardEvent('keyup'));
+    textarea.dispatchEvent(new InputEvent('input'));
 
     expect(visibleStatus.textContent).toBe('You have 2 characters too many');
     expect(textarea.classList.contains('ofh-textarea--error')).toBe(true);
@@ -49,11 +49,49 @@ describe('CharacterCount module', () => {
     ).toBe(true);
 
     textarea.value = 'abcdefgh';
-    textarea.dispatchEvent(new KeyboardEvent('keyup'));
+    textarea.dispatchEvent(new InputEvent('input'));
 
     expect(
       visibleStatus.classList.contains('ofh-character-count__message--disabled'),
     ).toBe(false);
     expect(visibleStatus.textContent).toBe('You have 2 characters remaining');
+  });
+
+  it('keeps the static limit visible and hides the live count until edited', () => {
+    jest.useFakeTimers();
+
+    document.body.innerHTML = `
+      <div class="ofh-character-count" data-module="ofh-character-count" data-maxlength="10" data-show-count-on-edit="true">
+        <div class="ofh-form-group">
+          <textarea class="ofh-js-character-count ofh-textarea" id="details"></textarea>
+          <div class="ofh-hint ofh-character-count__message" id="details-info">
+            You can enter up to 10 characters
+          </div>
+        </div>
+      </div>
+    `;
+
+    CharacterCount();
+
+    const textarea = document.getElementById('details');
+    const staticLimit = document.getElementById('details-info');
+    const visibleStatus = document.querySelector('.ofh-character-count__status');
+    const screenReaderStatus = document.querySelector('.ofh-character-count__sr-status');
+
+    expect(staticLimit.classList.contains('ofh-u-visually-hidden')).toBe(false);
+    expect(visibleStatus.hidden).toBe(true);
+    expect(screenReaderStatus.getAttribute('aria-hidden')).toBe('true');
+
+    textarea.dispatchEvent(new FocusEvent('focus'));
+    textarea.value = 'abc';
+    textarea.dispatchEvent(new InputEvent('input'));
+    jest.advanceTimersByTime(1000);
+
+    expect(visibleStatus.hidden).toBe(false);
+    expect(visibleStatus.textContent).toBe('You have 7 characters remaining');
+    expect(screenReaderStatus.hasAttribute('aria-hidden')).toBe(false);
+
+    textarea.dispatchEvent(new FocusEvent('blur'));
+    jest.useRealTimers();
   });
 });

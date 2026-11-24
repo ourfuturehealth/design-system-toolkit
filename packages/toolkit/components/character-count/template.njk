@@ -26,6 +26,7 @@
 <div class="ofh-character-count" data-module="ofh-character-count"
 {%- if params.maxlength %} data-maxlength="{{ params.maxlength }}"{% endif %}
 {%- if params.threshold %} data-threshold="{{ params.threshold }}"{% endif %}
+{%- if params.showCountOnEdit %} data-show-count-on-edit="true"{% endif %}
 {%- if params.maxwords %} data-maxwords="{{ params.maxwords }}"{% endif %}>
   <div class="ofh-form-group {%- if params.errorMessage %} ofh-form-group--error{% endif %} {%- if params.formGroup.classes %} {{ params.formGroup.classes }}{% endif %}">
     <div class="ofh-input__header">
