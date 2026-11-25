@@ -16,22 +16,28 @@ for the general model and our [changeset format](../.changeset/README.md) for th
 required consumer guidance.
 
 For a change to a public package, run `pnpm changeset` from the repository root
-in the feature branch. Select every affected package and bump type, then edit the
+in the feature branch. Before the Changesets prompt, the command lists potentially
+affected packages and the paths that triggered them, comparing the working tree
+and branch against the local `origin/main` merge base. Fetch `origin/main` first
+if it is missing or stale. Select every affected package and bump type, then edit the
 generated `.changeset/*.md` file to add the required `Consumer action` and
 `Migration notes` sections. Commit it with the feature. Do not change package
 versions, `CHANGELOG.md` or `UPGRADING.md` in a feature PR. Tests, stories,
 package README edits and repository tooling alone do not need a changeset.
-Shared styles or assets can affect both packages; include both when both change
-for consumers, even if the edited files sit under only one package.
+Shared toolkit Sass, icons, tile patterns, logos and the icon sprite generator
+can affect both packages, even if the edited files sit under toolkit alone.
 
 The required `Pull request` check validates changesets and package versions,
 then runs lint, tests, documentation checks and packaged-artifact checks. For a
-public-package file change, it requires a new changeset naming that package.
+public-package file change, it requires a new changeset naming each affected
+package. The same shared-input rules used by the command also require a React
+changeset for toolkit inputs bundled into React.
 It rejects missing summaries or migration notes, invalid consumer-action values,
 placeholder guidance, direct version bumps and removal of pending changesets.
-The file-path check cannot detect every indirect effect on another package, so
-reviewers must also check the release summary, consumer guidance and any changed
-accessibility behaviour against the code.
+These conservative path rules can flag changes that do not alter the built
+artifact and cannot detect every indirect effect. Reviewers must also check the
+release summary, consumer guidance and any changed accessibility behaviour
+against the code. Update the rules if React starts consuming other toolkit inputs.
 
 ## Release PR
 

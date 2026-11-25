@@ -1,7 +1,9 @@
 # Release intent
 
 Run `pnpm changeset` in a feature branch. Select each affected public package and
-its bump type, then edit the generated Markdown file to include these sections:
+its bump type, then edit the generated Markdown file to include these sections.
+The command lists potentially affected packages and the paths that triggered them
+before the prompt; fetch `origin/main` first if the local reference is stale.
 
 ```md
 ---
