@@ -34,6 +34,7 @@ class CharacterCount {
       maxlength: undefined,
       maxwords: undefined,
       threshold: 0,
+      showCountOnEdit: false,
     };
 
     this.i18n = new I18n(this.config.i18n, {
@@ -41,6 +42,7 @@ class CharacterCount {
     });
 
     this.maxLength = Infinity;
+    this.hasEdited = false;
     this.lastInputTimestamp = null;
     this.lastInputValue = '';
     this.valueChecker = null;
@@ -68,11 +70,15 @@ class CharacterCount {
     if ('threshold' in datasetConfig) {
       this.config.threshold = datasetConfig.threshold;
     }
+    if ('showCountOnEdit' in datasetConfig) {
+      this.config.showCountOnEdit = datasetConfig.showCountOnEdit;
+    }
 
     // Determine the limit attribute (characters or words)
     this.maxLength = this.config.maxwords || this.config.maxlength;
     this.$textarea = $textarea;
     this.$module = $module;
+    this.lastInputValue = $textarea.value;
 
     // Move the textarea description to be immediately after the textarea
     // Kept for backwards compatibility
@@ -100,9 +106,12 @@ class CharacterCount {
     $textareaDescription.insertAdjacentElement('afterend', $visibleCountMessage);
 
     // Hide the textarea description
-    $textareaDescription.classList.add('ofh-u-visually-hidden');
-
-    this.bindChangeEvents();
+    if (this.config.showCountOnEdit) {
+      $visibleCountMessage.hidden = true;
+      $screenReaderCountMessage.setAttribute('aria-hidden', 'true');
+    } else {
+      $textareaDescription.classList.add('ofh-u-visually-hidden');
+    }
 
     // Remove hard limit if set
     this.$textarea.removeAttribute('maxlength');
@@ -124,12 +133,12 @@ class CharacterCount {
    * Bind change events
    *
    * Set up event listeners on the $textarea so that the count messages update
-   * when the user types.
+   * when the user edits it.
    *
    * @private
    */
   bindChangeEvents() {
-    this.$textarea.addEventListener('keyup', () => this.handleKeyUp());
+    this.$textarea.addEventListener('input', () => this.handleInput());
 
     // Bind focus/blur events to start/stop polling
     this.$textarea.addEventListener('focus', () => this.handleFocus());
@@ -137,14 +146,16 @@ class CharacterCount {
   }
 
   /**
-   * Handle key up event
+   * Handle input event
    *
    * Update the visible character counter and keep track of when the last update
-   * happened for each keypress
+   * happened for each edit.
    *
    * @private
    */
-  handleKeyUp() {
+  handleInput() {
+    this.hasEdited = true;
+    this.$visibleCountMessage.hidden = false;
     this.updateVisibleCountMessage();
     this.lastInputTimestamp = Date.now();
   }
@@ -156,11 +167,11 @@ class CharacterCount {
    * fields by directly changing its `value`. These changes don't trigger events
    * in JavaScript, so we need to poll to handle when and if they occur.
    *
-   * Once the keyup event hasn't been detected for at least 1000 ms (1s), check if
+   * Once an input event hasn't been detected for at least 500 ms, check if
    * the textarea value has changed and update the count message if it has.
    *
    * This is so that the update triggered by the manual comparison doesn't
-   * conflict with debounced KeyboardEvent updates.
+   * conflict with debounced input event updates.
    *
    * @private
    */
@@ -195,6 +206,8 @@ class CharacterCount {
   updateIfValueChanged() {
     if (this.$textarea.value !== this.lastInputValue) {
       this.lastInputValue = this.$textarea.value;
+      this.hasEdited = true;
+      this.$visibleCountMessage.hidden = false;
       this.updateCountMessage();
     }
   }
@@ -255,7 +268,10 @@ class CharacterCount {
   updateScreenReaderCountMessage() {
     // If over the threshold, remove the aria-hidden attribute, allowing screen
     // readers to announce the content of the element.
-    if (this.isOverThreshold()) {
+    if (
+      this.isOverThreshold()
+      && (!this.config.showCountOnEdit || this.hasEdited)
+    ) {
       this.$screenReaderCountMessage.removeAttribute('aria-hidden');
     } else {
       this.$screenReaderCountMessage.setAttribute('aria-hidden', 'true');

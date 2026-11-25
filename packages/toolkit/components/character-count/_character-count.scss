@@ -12,6 +12,10 @@
   margin-top: 0;
 }
 
+.ofh-character-count__status[hidden] {
+  display: none;
+}
+
 .ofh-character-count__message--disabled {
   visibility: hidden;
 }

@@ -56,6 +56,7 @@ Find out more about the character count component and when to use it in the [des
 - `maxlength`: maximum number of characters allowed.
 - `maxwords`: word-count mode instead of character-count mode.
 - `threshold`: percentage at which the visible status message appears.
+- `showCountOnEdit`: keep the static limit visible and show the live count after the first edit.
 - `countMessage.classes`: classes added to the static count message that seeds the enhanced UI.
 - `label`, `hint`, `errorMessage`, `describedBy`, `rows`, `classes`, and `attributes`: passed through to the textarea pattern.
 

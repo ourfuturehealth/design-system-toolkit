@@ -14,6 +14,7 @@ const characterCountUsageExample = `import { CharacterCount } from '@ourfuturehe
   label="Summary"
   maxLength={200}
   name="summary"
+  showCountOnEdit
 />;
 `;
 
@@ -76,6 +77,10 @@ const meta = {
             to stay hidden until the user gets close to the limit, and use{' '}
             <code>rows</code> to control the initial textarea height.
           </p>
+          <p>
+            Use <code>showCountOnEdit</code> to keep the static limit visible
+            and wait until the first edit before showing the live count.
+          </p>
           <Source code={characterCountUsageExample} language="tsx" />
 
           <h2>Component props</h2>
@@ -88,6 +93,7 @@ const meta = {
               'name',
               'maxLength',
               'maxWords',
+              'showCountOnEdit',
               'threshold',
               'rows',
               'describedBy',
@@ -182,6 +188,14 @@ const meta = {
         category: 'CharacterCountProps',
       },
     },
+    showCountOnEdit: {
+      control: 'boolean',
+      description:
+        'Keeps the static limit visible and shows the live count after the first edit.',
+      table: {
+        category: 'CharacterCountProps',
+      },
+    },
     rows: {
       control: 'number',
       description: 'Visible row count for the underlying textarea.',
@@ -256,6 +270,7 @@ export const Builder: Story = {
         'name',
         'countMode',
         'limit',
+        'showCountOnEdit',
         'threshold',
         'rows',
         'describedBy',
@@ -283,6 +298,24 @@ export const WithThreshold: Story = {
       description: {
         story:
           'The visible count message stays hidden until the user reaches 75% of the limit.',
+      },
+    },
+  },
+};
+
+export const ShowCountOnEdit: Story = {
+  args: {
+    hint: 'Do not include personal details.',
+    showCountOnEdit: true,
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+    docs: {
+      description: {
+        story:
+          'Keeps the static limit visible and waits until the user edits the textarea before showing the live count.',
       },
     },
   },

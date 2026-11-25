@@ -1,0 +1,11 @@
+{% from 'character-count/macro.njk' import characterCount %}
+
+{{ characterCount({
+  id: 'details',
+  name: 'details',
+  maxlength: 500,
+  showCountOnEdit: true,
+  label: {
+    text: 'Details'
+  }
+}) }}

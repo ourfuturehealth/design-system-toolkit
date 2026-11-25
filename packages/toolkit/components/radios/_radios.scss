@@ -210,3 +210,13 @@ $conditional-padding-left: $ofh-radios-size + $ofh-radios-gap;
 .js-enabled .ofh-radios__conditional--hidden {
   display: none;
 }
+
+@supports selector(:has(input:checked)) {
+  .ofh-radios__item:not(:has(.ofh-radios__input:checked)) + .ofh-radios__conditional {
+    display: none;
+  }
+
+  .ofh-radios__item:has(.ofh-radios__input:checked) + .ofh-radios__conditional {
+    display: block;
+  }
+}
