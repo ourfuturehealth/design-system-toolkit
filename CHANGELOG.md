@@ -10,6 +10,20 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-11-25
+
+#### @ourfuturehealth/toolkit 4.29.0 (`toolkit-v4.29.0`)
+
+##### Changes
+
+- Add a `showCountOnEdit` character-count option to the toolkit and React component, and prevent conditional radio content, including textareas, from flashing before JavaScript initialises.
+
+#### @ourfuturehealth/react-components 0.29.0 (`react-v0.29.0`)
+
+##### Changes
+
+- Add a `showCountOnEdit` character-count option to the toolkit and React component, and prevent conditional radio content, including textareas, from flashing before JavaScript initialises.
+
 ### 2026-11-24
 
 #### @ourfuturehealth/react-components 0.28.1 (`react-v0.28.1`)
