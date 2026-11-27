@@ -78,8 +78,9 @@ const meta = {
             <code>rows</code> to control the initial textarea height.
           </p>
           <p>
-            Use <code>showCountOnEdit</code> to keep the static limit visible
-            and wait until the first edit before showing the live count.
+            Use <code>showCountOnEdit</code> to show the static limit until the
+            live count becomes visible after editing and reaching any configured
+            threshold, then replace it with the live count.
           </p>
           <Source code={characterCountUsageExample} language="tsx" />
 
@@ -191,7 +192,7 @@ const meta = {
     showCountOnEdit: {
       control: 'boolean',
       description:
-        'Keeps the static limit visible and shows the live count after the first edit.',
+        'Shows the static limit until the live count becomes visible after editing and reaching any configured threshold, then replaces it.',
       table: {
         category: 'CharacterCountProps',
       },
@@ -315,7 +316,7 @@ export const ShowCountOnEdit: Story = {
     docs: {
       description: {
         story:
-          'Keeps the static limit visible and waits until the user edits the textarea before showing the live count.',
+          'Shows the static limit until the live count becomes visible after editing, then replaces it.',
       },
     },
   },
