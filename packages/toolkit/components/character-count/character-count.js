@@ -77,6 +77,7 @@ class CharacterCount {
     // Determine the limit attribute (characters or words)
     this.maxLength = this.config.maxwords || this.config.maxlength;
     this.$textarea = $textarea;
+    this.$textareaDescription = $textareaDescription;
     this.$module = $module;
     this.lastInputValue = $textarea.value;
 
@@ -154,10 +155,23 @@ class CharacterCount {
    * @private
    */
   handleInput() {
-    this.hasEdited = true;
-    this.$visibleCountMessage.hidden = false;
+    this.showLiveCount();
     this.updateVisibleCountMessage();
     this.lastInputTimestamp = Date.now();
+  }
+
+  /**
+   * Replace the static limit with the live count after the first edit
+   *
+   * @private
+   */
+  showLiveCount() {
+    if (this.hasEdited) {
+      return;
+    }
+
+    this.hasEdited = true;
+    this.$visibleCountMessage.hidden = false;
   }
 
   /**
@@ -206,8 +220,7 @@ class CharacterCount {
   updateIfValueChanged() {
     if (this.$textarea.value !== this.lastInputValue) {
       this.lastInputValue = this.$textarea.value;
-      this.hasEdited = true;
-      this.$visibleCountMessage.hidden = false;
+      this.showLiveCount();
       this.updateCountMessage();
     }
   }
@@ -232,6 +245,12 @@ class CharacterCount {
    */
   updateVisibleCountMessage() {
     const remainingNumber = this.maxLength - this.count(this.$textarea.value);
+    const showLiveCount = this.hasEdited && this.isOverThreshold();
+
+    this.$textareaDescription.classList.toggle(
+      'ofh-u-visually-hidden',
+      !this.config.showCountOnEdit || showLiveCount,
+    );
 
     // If input is over the threshold, remove the disabled class which renders the
     // counter invisible.

@@ -39,7 +39,7 @@ describe('CharacterCount', () => {
     );
   });
 
-  it('keeps the static limit visible and hides the live count until edited', async () => {
+  it('replaces the static limit with the live count after the first edit', async () => {
     const user = userEvent.setup();
 
     render(
@@ -65,10 +65,44 @@ describe('CharacterCount', () => {
 
     await user.type(textarea, 'abc');
 
+    expect(staticLimit).toHaveClass('ofh-u-visually-hidden');
     expect(visibleStatus).not.toHaveAttribute('hidden');
     expect(window.getComputedStyle(visibleStatus as Element).display).toBe('block');
     expect(visibleStatus).toHaveTextContent('You have 7 characters remaining');
     expect(screenReaderStatus).not.toHaveAttribute('aria-hidden');
+  });
+
+  it('keeps the static limit visible until the live count passes the threshold', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <CharacterCount
+        label="Summary"
+        maxLength={10}
+        name="summary"
+        showCountOnEdit
+        threshold={50}
+      />,
+    );
+
+    const textarea = screen.getByRole('textbox');
+    const staticLimit = screen.getByText('You can enter up to 10 characters');
+    const visibleStatus = getVisibleStatusMessage();
+
+    await user.type(textarea, 'ab');
+
+    expect(staticLimit).not.toHaveClass('ofh-u-visually-hidden');
+    expect(visibleStatus).toHaveClass(
+      'ofh-character-count__message--disabled',
+    );
+
+    await user.type(textarea, 'cdef');
+
+    expect(staticLimit).toHaveClass('ofh-u-visually-hidden');
+    expect(visibleStatus).not.toHaveClass(
+      'ofh-character-count__message--disabled',
+    );
+    expect(visibleStatus).toHaveTextContent('You have 4 characters remaining');
   });
 
   it('shows error styling when the value goes over the limit', async () => {

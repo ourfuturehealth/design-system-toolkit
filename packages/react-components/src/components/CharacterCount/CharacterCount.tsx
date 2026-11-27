@@ -197,7 +197,9 @@ export const CharacterCount = ({
               className={joinClassNames(
                 'ofh-hint',
                 'ofh-character-count__message',
-                showCountOnEdit ? undefined : 'ofh-u-visually-hidden',
+                showCountOnEdit && (!hasEdited || !thresholdReached)
+                  ? undefined
+                  : 'ofh-u-visually-hidden',
                 countMessageClassName,
               )}
               id={countMessageId}
