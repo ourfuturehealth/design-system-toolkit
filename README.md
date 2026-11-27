@@ -75,7 +75,7 @@ For step-by-step local setup (including fork/clone options and workflow selectio
 
 For shared component work, start with the repository [`ofh-design-system-contribution`](.agents/skills/ofh-design-system-contribution/SKILL.md) skill. It routes [analysis](.agents/skills/ofh-design-system-component-analysis/SKILL.md), [human QA](.agents/skills/ofh-component-qa/SKILL.md) and [merge readiness](.agents/skills/ofh-component-merge-readiness/SKILL.md). See the [AI-assisted contribution guide](docs/contributing/ai-assisted-contributions.md) and [prerequisites](docs/contributing/ai-contribution-prerequisites.md) for the Codex CLI route.
 
-For dependency vulnerability alerts, use [`fix-dependency-vulnerability`](.agents/skills/fix-dependency-vulnerability/SKILL.md). It helps assess affected lockfiles, select a remediation and verify the resulting dependency versions.
+This repo includes a Codex skill for fixing dependency vulnerability alerts: [`fix-dependency-vulnerability`](.agents/skills/fix-dependency-vulnerability/SKILL.md). It finds affected lockfiles, works out the package manager, updates the relevant package override or resolution, and guides the lockfile regeneration steps.
 
 Example:
 
