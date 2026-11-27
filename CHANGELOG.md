@@ -10,6 +10,20 @@ React `0.25.0` was an unreleased manifest version merged in PR #279. It has no
 published tag or release; ProgressIndicator shipped in the defective `0.26.0`
 release recorded below.
 
+### 2026-11-27
+
+#### @ourfuturehealth/toolkit 4.29.1 (`toolkit-v4.29.1`)
+
+##### Changes
+
+- Replace the static character limit once the live count becomes visible after editing when `showCountOnEdit` is enabled.
+
+#### @ourfuturehealth/react-components 0.29.1 (`react-v0.29.1`)
+
+##### Changes
+
+- Replace the static character limit once the live count becomes visible after editing when `showCountOnEdit` is enabled.
+
 ### 2026-11-25
 
 #### @ourfuturehealth/toolkit 4.29.0 (`toolkit-v4.29.0`)

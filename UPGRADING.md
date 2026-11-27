@@ -14,6 +14,8 @@ when updating dependencies, even when no migration is required.
 
 | Version | Date | Breaking Changes | Consumer action | Migration Complexity |
 | ------- | ---- | ---------------- | --------------- | -------------------- |
+| [v4.29.1](#release-toolkit-v4-29-1) | 2026-11-27 | No breaking changes | No consumer action required | No migration required. |
+| [React v0.29.1](#release-react-v0-29-1) | 2026-11-27 | No breaking changes | No consumer action required | No migration required. |
 | [v4.29.0](#release-toolkit-v4-29-0) | 2026-11-25 | See migration notes | Action required | Follow migration steps. |
 | [React v0.29.0](#release-react-v0-29-0) | 2026-11-25 | See migration notes | Action required | Follow migration steps. |
 | [React v0.28.1](#release-react-v0-28-1) | 2026-11-24 | No breaking changes | No consumer action required | No migration required. |
@@ -57,6 +59,21 @@ when updating dependencies, even when no migration is required.
 | [v4.3.0 / React v0.2.0](#upgrading-to-v430--react-v020) | March 2026 | Button variant naming | Action required | 🟡 Medium - find/replace required |
 | [v4.1.0](#upgrading-to-v410) | February 2026 | Spacing scale indices | Action required | 🟡 Medium - index updates required |
 | [v4.0.0](#upgrading-to-v400-monorepo-restructure) | 2025 | Monorepo restructure | Action required | 🔴 High - installation and paths change |
+
+<a id="release-toolkit-v4-29-1"></a>
+## Upgrading to toolkit-v4.29.1
+
+No consumer action required.
+
+Consumers using `showCountOnEdit` will now see the static limit until the live count becomes visible after editing and reaching defined threshold.
+
+<a id="release-react-v0-29-1"></a>
+## Upgrading to react-v0.29.1
+
+No consumer action required.
+
+Consumers using `showCountOnEdit` will now see the static limit until the live count becomes visible after editing and reaching defined threshold.
+
 
 <a id="release-toolkit-v4-29-0"></a>
 ## Upgrading to toolkit-v4.29.0
